@@ -16,7 +16,7 @@ public class cadastroImovel extends javax.swing.JFrame {
      * Creates new form cadastroImovel
      */
     public cadastroImovel() {
-        initComponents();tete
+        initComponents();
     }
 
     /**
