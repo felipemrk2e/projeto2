@@ -119,6 +119,26 @@ public class cadastroImovel extends javax.swing.JFrame {
         jTextField30 = new javax.swing.JTextField();
         jTextField31 = new javax.swing.JTextField();
         jTextField32 = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jTextField33 = new javax.swing.JTextField();
+        jTextField34 = new javax.swing.JTextField();
+        jTextField35 = new javax.swing.JTextField();
+        jTextField36 = new javax.swing.JTextField();
+        jTextField37 = new javax.swing.JTextField();
+        jTextField38 = new javax.swing.JTextField();
+        jTextField39 = new javax.swing.JTextField();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea6 = new javax.swing.JTextArea();
+        jLabel46 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextArea7 = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -458,35 +478,113 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         jLabel34.setText("Area construida M");
         getContentPane().add(jLabel34);
-        jLabel34.setBounds(250, 750, 100, 14);
+        jLabel34.setBounds(170, 690, 100, 14);
 
         jLabel35.setText("Medidas terreno");
         getContentPane().add(jLabel35);
-        jLabel35.setBounds(390, 750, 90, 14);
+        jLabel35.setBounds(60, 690, 90, 20);
 
         jLabel36.setText("Tamanho terreno em M");
         getContentPane().add(jLabel36);
-        jLabel36.setBounds(500, 750, 130, 14);
+        jLabel36.setBounds(290, 690, 130, 14);
 
         jLabel37.setText("Situação Escritura");
         getContentPane().add(jLabel37);
-        jLabel37.setBounds(660, 750, 90, 14);
+        jLabel37.setBounds(450, 690, 90, 14);
 
         jTextField29.setText("jTextField29");
         getContentPane().add(jTextField29);
-        jTextField29.setBounds(250, 780, 65, 20);
+        jTextField29.setBounds(180, 710, 65, 20);
 
         jTextField30.setText("jTextField30");
         getContentPane().add(jTextField30);
-        jTextField30.setBounds(390, 790, 65, 20);
+        jTextField30.setBounds(70, 710, 65, 20);
 
         jTextField31.setText("jTextField31");
         getContentPane().add(jTextField31);
-        jTextField31.setBounds(500, 790, 65, 20);
+        jTextField31.setBounds(320, 720, 65, 20);
 
         jTextField32.setText("jTextField32");
         getContentPane().add(jTextField32);
-        jTextField32.setBounds(660, 790, 65, 20);
+        jTextField32.setBounds(460, 720, 65, 20);
+
+        jLabel38.setText("valor locação mes");
+        getContentPane().add(jLabel38);
+        jLabel38.setBounds(30, 800, 100, 14);
+
+        jLabel39.setText("valor  iptu");
+        getContentPane().add(jLabel39);
+        jLabel39.setBounds(30, 890, 48, 14);
+
+        jLabel40.setText("Chaves");
+        getContentPane().add(jLabel40);
+        jLabel40.setBounds(610, 870, 36, 14);
+
+        jLabel41.setText("valor condominio");
+        getContentPane().add(jLabel41);
+        jLabel41.setBounds(30, 920, 90, 14);
+
+        jLabel42.setText("Status");
+        getContentPane().add(jLabel42);
+        jLabel42.setBounds(610, 790, 31, 14);
+
+        jLabel43.setText("valor venda");
+        getContentPane().add(jLabel43);
+        jLabel43.setBounds(30, 830, 57, 14);
+
+        jLabel44.setText("valor temporada");
+        getContentPane().add(jLabel44);
+        jLabel44.setBounds(30, 860, 79, 14);
+
+        jLabel45.setText("valor diaria");
+        getContentPane().add(jLabel45);
+        jLabel45.setBounds(250, 820, 60, 14);
+
+        jTextField33.setText("jTextField33");
+        getContentPane().add(jTextField33);
+        jTextField33.setBounds(150, 800, 65, 20);
+
+        jTextField34.setText("jTextField34");
+        getContentPane().add(jTextField34);
+        jTextField34.setBounds(150, 830, 65, 20);
+
+        jTextField35.setText("jTextField35");
+        getContentPane().add(jTextField35);
+        jTextField35.setBounds(150, 920, 65, 20);
+
+        jTextField36.setText("jTextField36");
+        getContentPane().add(jTextField36);
+        jTextField36.setBounds(150, 860, 65, 20);
+
+        jTextField37.setText("jTextField37");
+        getContentPane().add(jTextField37);
+        jTextField37.setBounds(150, 890, 65, 20);
+
+        jTextField38.setText("jTextField38");
+        getContentPane().add(jTextField38);
+        jTextField38.setBounds(320, 820, 65, 20);
+
+        jTextField39.setText("jTextField39");
+        getContentPane().add(jTextField39);
+        jTextField39.setBounds(670, 790, 65, 20);
+
+        jTextArea6.setColumns(20);
+        jTextArea6.setRows(5);
+        jScrollPane6.setViewportView(jTextArea6);
+
+        getContentPane().add(jScrollPane6);
+        jScrollPane6.setBounds(680, 870, 166, 70);
+
+        jLabel46.setText("observaçoes gerais");
+        getContentPane().add(jLabel46);
+        jLabel46.setBounds(250, 880, 110, 14);
+
+        jTextArea7.setColumns(20);
+        jTextArea7.setRows(5);
+        jScrollPane7.setViewportView(jTextArea7);
+
+        getContentPane().add(jScrollPane7);
+        jScrollPane7.setBounds(360, 880, 166, 96);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -578,7 +676,16 @@ public class cadastroImovel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -592,11 +699,15 @@ public class cadastroImovel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextArea jTextArea5;
+    private javax.swing.JTextArea jTextArea6;
+    private javax.swing.JTextArea jTextArea7;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
@@ -623,6 +734,13 @@ public class cadastroImovel extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField30;
     private javax.swing.JTextField jTextField31;
     private javax.swing.JTextField jTextField32;
+    private javax.swing.JTextField jTextField33;
+    private javax.swing.JTextField jTextField34;
+    private javax.swing.JTextField jTextField35;
+    private javax.swing.JTextField jTextField36;
+    private javax.swing.JTextField jTextField37;
+    private javax.swing.JTextField jTextField38;
+    private javax.swing.JTextField jTextField39;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
