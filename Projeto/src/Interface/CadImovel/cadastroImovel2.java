@@ -16,6 +16,7 @@ public class cadastroImovel2 extends javax.swing.JFrame {
      */
     public cadastroImovel2() {
         initComponents();
+        //teste aqui
     }
 
     /**
