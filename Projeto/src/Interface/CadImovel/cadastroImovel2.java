@@ -27,28 +27,28 @@ public class cadastroImovel2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jInternalFrame2 = new javax.swing.JInternalFrame();
+        jtpCadastro = new javax.swing.JTabbedPane();
+        jifEndereco = new javax.swing.JInternalFrame();
+        jlComplemento = new javax.swing.JLabel();
+        jlZona = new javax.swing.JLabel();
+        jlReferencia = new javax.swing.JLabel();
+        jlCondominio = new javax.swing.JLabel();
+        jlUF = new javax.swing.JLabel();
+        jlNumero = new javax.swing.JLabel();
+        jlBairro = new javax.swing.JLabel();
+        jlCidade = new javax.swing.JLabel();
+        jlLogradouro = new javax.swing.JLabel();
+        jtfUF = new javax.swing.JTextField();
+        jtfBairro = new javax.swing.JTextField();
+        jtfCidade = new javax.swing.JTextField();
+        jtfLogradouro = new javax.swing.JTextField();
+        jtfNumero = new javax.swing.JTextField();
+        jtfCondominio = new javax.swing.JTextField();
+        jtfZona = new javax.swing.JTextField();
+        jtfComplemento = new javax.swing.JTextField();
+        jtfReferencia = new javax.swing.JTextField();
+        jbAdd = new javax.swing.JButton();
+        jifDescricao = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -85,7 +85,7 @@ public class cadastroImovel2 extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jTextField14 = new javax.swing.JTextField();
-        jInternalFrame4 = new javax.swing.JInternalFrame();
+        jifOutros = new javax.swing.JInternalFrame();
         jLabel35 = new javax.swing.JLabel();
         jTextField30 = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
@@ -117,7 +117,7 @@ public class cadastroImovel2 extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTextArea8 = new javax.swing.JTextArea();
-        jInternalFrame3 = new javax.swing.JInternalFrame();
+        jtfValores = new javax.swing.JInternalFrame();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
@@ -130,24 +130,24 @@ public class cadastroImovel2 extends javax.swing.JFrame {
         jTextField36 = new javax.swing.JTextField();
         jTextField37 = new javax.swing.JTextField();
         jTextField38 = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jTextField16 = new javax.swing.JTextField();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jLabel22 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jLabel42 = new javax.swing.JLabel();
-        jTextField39 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jlCodigo = new javax.swing.JLabel();
+        jcbLocacao = new javax.swing.JCheckBox();
+        jtCodigo = new javax.swing.JTextField();
+        jcbVenda = new javax.swing.JCheckBox();
+        jcbTemporada = new javax.swing.JCheckBox();
+        jcbFesta = new javax.swing.JCheckBox();
+        jlTipo = new javax.swing.JLabel();
+        jrbCasa = new javax.swing.JRadioButton();
+        jrbApartamento = new javax.swing.JRadioButton();
+        jrbSalao = new javax.swing.JRadioButton();
+        jrbComercio = new javax.swing.JRadioButton();
+        jrbCondominio = new javax.swing.JRadioButton();
+        jlStatus = new javax.swing.JLabel();
+        jtfStatus = new javax.swing.JTextField();
+        jbConfirmar = new javax.swing.JButton();
+        jbCancelar = new javax.swing.JButton();
+        jbEditar = new javax.swing.JButton();
+        jmenuCadastro = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
@@ -156,140 +156,143 @@ public class cadastroImovel2 extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jInternalFrame1.setVisible(true);
+        jifEndereco.setVisible(true);
 
-        jLabel5.setText("Complemento");
+        jlComplemento.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlComplemento.setText("Complemento");
 
-        jLabel6.setText("Zona");
+        jlZona.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlZona.setText("Zona");
 
-        jLabel7.setText("Referencia");
+        jlReferencia.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlReferencia.setText("Referência");
 
-        jLabel8.setText("Condominio");
+        jlCondominio.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlCondominio.setText("Condomínio");
 
-        jLabel9.setText("UF");
+        jlUF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlUF.setText("UF");
 
-        jLabel10.setText("Nº");
+        jlNumero.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlNumero.setText("Nº");
 
-        jLabel11.setText("Bairro");
+        jlBairro.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlBairro.setText("Bairro");
 
-        jLabel12.setText("Cidade");
+        jlCidade.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlCidade.setText("Cidade");
 
-        jLabel13.setText("Rua");
+        jlLogradouro.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlLogradouro.setText("Logradouro");
 
-        jTextField1.setText("jTextField1");
+        jtfUF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfUFActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setText("jTextField2");
+        jtfNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfNumeroActionPerformed(evt);
+            }
+        });
 
-        jTextField3.setText("jTextField3");
+        jbAdd.setText("Add");
 
-        jTextField4.setText("jTextField4");
-
-        jTextField5.setText("jTextField5");
-
-        jTextField6.setText("jTextField6");
-
-        jTextField7.setText("jTextField7");
-
-        jTextField8.setText("jTextField8");
-
-        jTextField9.setText("jTextField9");
-
-        jButton4.setText("add");
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jifEnderecoLayout = new javax.swing.GroupLayout(jifEndereco.getContentPane());
+        jifEndereco.getContentPane().setLayout(jifEnderecoLayout);
+        jifEnderecoLayout.setHorizontalGroup(
+            jifEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jifEnderecoLayout.createSequentialGroup()
                 .addContainerGap(253, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jifEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(66, 66, 66)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jifEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlUF)
+                    .addComponent(jtfUF, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(114, 114, 114))
-            .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jInternalFrame1Layout.createSequentialGroup()
+            .addGroup(jifEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jifEnderecoLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                            .addComponent(jLabel13)
+                    .addGroup(jifEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jifEnderecoLayout.createSequentialGroup()
+                            .addComponent(jlLogradouro)
                             .addGap(371, 371, 371)
-                            .addComponent(jLabel10)
+                            .addComponent(jlNumero)
                             .addGap(58, 58, 58)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jifEnderecoLayout.createSequentialGroup()
+                            .addComponent(jtfLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(20, 20, 20)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(20, 20, 20)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel12)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                            .addComponent(jtfComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jlCidade)
+                        .addComponent(jtfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jifEnderecoLayout.createSequentialGroup()
                             .addGap(10, 10, 10)
-                            .addComponent(jLabel7)
+                            .addComponent(jlReferencia)
                             .addGap(418, 418, 418)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlZona, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jifEnderecoLayout.createSequentialGroup()
+                            .addComponent(jtfReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(20, 20, 20)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel8)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfZona, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jlCondominio)
+                        .addComponent(jtfCondominio, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+        jifEnderecoLayout.setVerticalGroup(
+            jifEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jifEnderecoLayout.createSequentialGroup()
                 .addGap(107, 107, 107)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel11))
+                .addGroup(jifEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlUF)
+                    .addComponent(jlBairro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
-                .addContainerGap(151, Short.MAX_VALUE))
-            .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addGroup(jifEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbAdd))
+                .addContainerGap(144, Short.MAX_VALUE))
+            .addGroup(jifEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jifEnderecoLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel13)
-                        .addComponent(jLabel10)
-                        .addComponent(jLabel5))
+                    .addGroup(jifEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jlLogradouro)
+                        .addComponent(jlNumero)
+                        .addComponent(jlComplemento))
                     .addGap(6, 6, 6)
-                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jifEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jtfLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(20, 20, 20)
-                    .addComponent(jLabel12)
+                    .addComponent(jlCidade)
                     .addGap(6, 6, 6)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(20, 20, 20)
-                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel6))
+                    .addGroup(jifEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jlReferencia)
+                        .addComponent(jlZona))
                     .addGap(6, 6, 6)
-                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jifEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jtfReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfZona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(10, 10, 10)
-                    .addComponent(jLabel8)
+                    .addComponent(jlCondominio)
                     .addGap(6, 6, 6)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfCondominio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jTabbedPane1.addTab("Endereço", jInternalFrame1);
+        jtpCadastro.addTab("Endereço", jifEndereco);
 
-        jInternalFrame2.setVisible(true);
+        jifDescricao.setVisible(true);
 
         jLabel1.setText("Quartos");
 
@@ -363,114 +366,114 @@ public class cadastroImovel2 extends javax.swing.JFrame {
 
         jTextField14.setText("jTextField14");
 
-        javax.swing.GroupLayout jInternalFrame2Layout = new javax.swing.GroupLayout(jInternalFrame2.getContentPane());
-        jInternalFrame2.getContentPane().setLayout(jInternalFrame2Layout);
-        jInternalFrame2Layout.setHorizontalGroup(
-            jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jifDescricaoLayout = new javax.swing.GroupLayout(jifDescricao.getContentPane());
+        jifDescricao.getContentPane().setLayout(jifDescricaoLayout);
+        jifDescricaoLayout.setHorizontalGroup(
+            jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jifDescricaoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
-                        .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
+                        .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
-                        .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel26)
                             .addComponent(jLabel24)))
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                         .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                         .addGap(127, 127, 127)
-                        .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                        .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jifDescricaoLayout.createSequentialGroup()
                                 .addGap(184, 184, 184)
-                                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
-                                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jInternalFrame2Layout.createSequentialGroup()
-                                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jifDescricaoLayout.createSequentialGroup()
+                                .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(20, 20, 20)
-                                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel23))
                                 .addGap(20, 20, 20)
-                                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(30, 30, 30)
-                                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                                .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addComponent(jLabel25))
                                     .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
-                        .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
+                        .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jifDescricaoLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel31))
                         .addGap(10, 10, 10)
-                        .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel32)
                         .addGap(27, 27, 27)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(186, 186, 186))
-            .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jInternalFrame2Layout.createSequentialGroup()
+            .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jifDescricaoLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jInternalFrame2Layout.createSequentialGroup()
-                            .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jifDescricaoLayout.createSequentialGroup()
+                            .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(10, 10, 10)
-                            .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                        .addGroup(jifDescricaoLayout.createSequentialGroup()
                             .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(10, 10, 10)
                             .addComponent(jLabel27)))
                     .addGap(0, 828, Short.MAX_VALUE)))
         );
-        jInternalFrame2Layout.setVerticalGroup(
-            jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame2Layout.createSequentialGroup()
+        jifDescricaoLayout.setVerticalGroup(
+            jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jifDescricaoLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                         .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                         .addComponent(jLabel29)
                         .addGap(26, 26, 26)
                         .addComponent(jLabel23))
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                         .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                         .addComponent(jLabel25)
                         .addGap(26, 26, 26)
                         .addComponent(jLabel28)))
@@ -479,71 +482,71 @@ public class cadastroImovel2 extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame2Layout.createSequentialGroup()
+                .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jifDescricaoLayout.createSequentialGroup()
                         .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jifDescricaoLayout.createSequentialGroup()
                         .addComponent(jLabel26)
                         .addGap(36, 36, 36)
                         .addComponent(jLabel24)))
-                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32))
-            .addGroup(jInternalFrame2Layout.createSequentialGroup()
+            .addGroup(jifDescricaoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel30)
                         .addGap(56, 56, 56)
                         .addComponent(jLabel31))
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20)
-                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel33))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jifDescricaoLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel32))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jInternalFrame2Layout.createSequentialGroup()
+            .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jifDescricaoLayout.createSequentialGroup()
                     .addGap(20, 37, Short.MAX_VALUE)
-                    .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame2Layout.createSequentialGroup()
+                    .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jifDescricaoLayout.createSequentialGroup()
                             .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(10, 10, 10)
                             .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(20, 20, 20)
                             .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame2Layout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jifDescricaoLayout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addGap(16, 16, 16)
                             .addComponent(jLabel2)
                             .addGap(26, 26, 26)
                             .addComponent(jLabel3)))
-                    .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jifDescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel27))
                     .addGap(0, 159, Short.MAX_VALUE)))
         );
 
-        jTabbedPane1.addTab("Descrição", jInternalFrame2);
+        jtpCadastro.addTab("Descrição", jifDescricao);
 
-        jInternalFrame4.setVisible(true);
+        jifOutros.setVisible(true);
 
         jLabel35.setText("Medidas terreno");
 
@@ -607,24 +610,24 @@ public class cadastroImovel2 extends javax.swing.JFrame {
         jTextArea8.setRows(5);
         jScrollPane8.setViewportView(jTextArea8);
 
-        javax.swing.GroupLayout jInternalFrame4Layout = new javax.swing.GroupLayout(jInternalFrame4.getContentPane());
-        jInternalFrame4.getContentPane().setLayout(jInternalFrame4Layout);
-        jInternalFrame4Layout.setHorizontalGroup(
-            jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame4Layout.createSequentialGroup()
+        javax.swing.GroupLayout jifOutrosLayout = new javax.swing.GroupLayout(jifOutros.getContentPane());
+        jifOutros.getContentPane().setLayout(jifOutrosLayout);
+        jifOutrosLayout.setHorizontalGroup(
+            jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jifOutrosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame4Layout.createSequentialGroup()
+                .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jifOutrosLayout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50))
-            .addGroup(jInternalFrame4Layout.createSequentialGroup()
+            .addGroup(jifOutrosLayout.createSequentialGroup()
                 .addGap(71, 71, 71)
-                .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jInternalFrame4Layout.createSequentialGroup()
-                        .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jInternalFrame4Layout.createSequentialGroup()
+                .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jifOutrosLayout.createSequentialGroup()
+                        .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jifOutrosLayout.createSequentialGroup()
                                 .addGap(50, 50, 50)
                                 .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(45, 45, 45)
@@ -633,25 +636,25 @@ public class cadastroImovel2 extends javax.swing.JFrame {
                                 .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(75, 75, 75)
                                 .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jInternalFrame4Layout.createSequentialGroup()
+                            .addGroup(jifOutrosLayout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jInternalFrame4Layout.createSequentialGroup()
+                                .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jifOutrosLayout.createSequentialGroup()
                                         .addGap(20, 20, 20)
                                         .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(20, 20, 20)
                                         .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(30, 30, 30)
                                         .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jInternalFrame4Layout.createSequentialGroup()
+                                    .addGroup(jifOutrosLayout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame4Layout.createSequentialGroup()
-                        .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jifOutrosLayout.createSequentialGroup()
+                        .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckBox10)
                             .addComponent(jCheckBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox12))
@@ -661,11 +664,11 @@ public class cadastroImovel2 extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33))))
-            .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jInternalFrame4Layout.createSequentialGroup()
+            .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jifOutrosLayout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame4Layout.createSequentialGroup()
+                    .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jifOutrosLayout.createSequentialGroup()
                             .addComponent(jLabel15)
                             .addGap(42, 42, 42)
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -675,7 +678,7 @@ public class cadastroImovel2 extends javax.swing.JFrame {
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(20, 20, 20)
                             .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame4Layout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jifOutrosLayout.createSequentialGroup()
                             .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(20, 20, 20)
                             .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -687,65 +690,65 @@ public class cadastroImovel2 extends javax.swing.JFrame {
                             .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGap(0, 252, Short.MAX_VALUE)))
         );
-        jInternalFrame4Layout.setVerticalGroup(
-            jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame4Layout.createSequentialGroup()
+        jifOutrosLayout.setVerticalGroup(
+            jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jifOutrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel20)
                 .addGap(6, 6, 6)
                 .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame4Layout.createSequentialGroup()
+                .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jifOutrosLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jInternalFrame4Layout.createSequentialGroup()
-                                .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jInternalFrame4Layout.createSequentialGroup()
+                        .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jifOutrosLayout.createSequentialGroup()
+                                .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jifOutrosLayout.createSequentialGroup()
                                         .addComponent(jCheckBox10)
                                         .addGap(7, 7, 7)
-                                        .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jCheckBox11)
-                                            .addGroup(jInternalFrame4Layout.createSequentialGroup()
+                                            .addGroup(jifOutrosLayout.createSequentialGroup()
                                                 .addGap(20, 20, 20)
                                                 .addComponent(jCheckBox12))))
-                                    .addGroup(jInternalFrame4Layout.createSequentialGroup()
+                                    .addGroup(jifOutrosLayout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(17, 17, 17))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame4Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jifOutrosLayout.createSequentialGroup()
                                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)))
-                        .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel34)
                             .addComponent(jLabel36)
                             .addComponent(jLabel37))
-                        .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jInternalFrame4Layout.createSequentialGroup()
+                            .addGroup(jifOutrosLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
-                        .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel46)
                             .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jInternalFrame4Layout.createSequentialGroup()
+                    .addGroup(jifOutrosLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jInternalFrame4Layout.createSequentialGroup()
+            .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jifOutrosLayout.createSequentialGroup()
                     .addGap(0, 4, Short.MAX_VALUE)
-                    .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel16)
                         .addComponent(jLabel17)
                         .addComponent(jLabel18)
                         .addComponent(jLabel19))
-                    .addGroup(jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jifOutrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -754,9 +757,9 @@ public class cadastroImovel2 extends javax.swing.JFrame {
                     .addGap(0, 264, Short.MAX_VALUE)))
         );
 
-        jTabbedPane1.addTab("outros", jInternalFrame4);
+        jtpCadastro.addTab("Outros", jifOutros);
 
-        jInternalFrame3.setVisible(true);
+        jtfValores.setVisible(true);
 
         jLabel38.setText("valor locação mes");
 
@@ -782,18 +785,18 @@ public class cadastroImovel2 extends javax.swing.JFrame {
 
         jTextField38.setText("jTextField38");
 
-        javax.swing.GroupLayout jInternalFrame3Layout = new javax.swing.GroupLayout(jInternalFrame3.getContentPane());
-        jInternalFrame3.getContentPane().setLayout(jInternalFrame3Layout);
-        jInternalFrame3Layout.setHorizontalGroup(
-            jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jtfValoresLayout = new javax.swing.GroupLayout(jtfValores.getContentPane());
+        jtfValores.getContentPane().setLayout(jtfValoresLayout);
+        jtfValoresLayout.setHorizontalGroup(
+            jtfValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jtfValoresLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame3Layout.createSequentialGroup()
+                .addGroup(jtfValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jtfValoresLayout.createSequentialGroup()
                         .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jInternalFrame3Layout.createSequentialGroup()
+                    .addGroup(jtfValoresLayout.createSequentialGroup()
                         .addComponent(jLabel43)
                         .addGap(63, 63, 63)
                         .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -801,142 +804,167 @@ public class cadastroImovel2 extends javax.swing.JFrame {
                         .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(jTextField38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jInternalFrame3Layout.createSequentialGroup()
+                    .addGroup(jtfValoresLayout.createSequentialGroup()
                         .addComponent(jLabel44)
                         .addGap(41, 41, 41)
                         .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jInternalFrame3Layout.createSequentialGroup()
+                    .addGroup(jtfValoresLayout.createSequentialGroup()
                         .addComponent(jLabel39)
                         .addGap(72, 72, 72)
                         .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jInternalFrame3Layout.createSequentialGroup()
+                    .addGroup(jtfValoresLayout.createSequentialGroup()
                         .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(jTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(375, Short.MAX_VALUE))
         );
-        jInternalFrame3Layout.setVerticalGroup(
-            jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame3Layout.createSequentialGroup()
+        jtfValoresLayout.setVerticalGroup(
+            jtfValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jtfValoresLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addGroup(jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jtfValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel38)
                     .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jtfValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel45)
                     .addComponent(jTextField38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jInternalFrame3Layout.createSequentialGroup()
+                    .addGroup(jtfValoresLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addGroup(jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jtfValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel43)
                             .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(10, 10, 10)
-                .addGroup(jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jtfValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel44)
                     .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jtfValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel39)
                     .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jtfValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel41)
                     .addComponent(jTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(117, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Valores", jInternalFrame3);
+        jtpCadastro.addTab("Valores", jtfValores);
 
-        getContentPane().add(jTabbedPane1);
-        jTabbedPane1.setBounds(130, 110, 773, 352);
+        getContentPane().add(jtpCadastro);
+        jtpCadastro.setBounds(130, 110, 773, 352);
 
-        jLabel21.setText("Codigo Interno");
-        getContentPane().add(jLabel21);
-        jLabel21.setBounds(20, 20, 72, 14);
+        jlCodigo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlCodigo.setText("Código Interno");
+        getContentPane().add(jlCodigo);
+        jlCodigo.setBounds(20, 20, 100, 15);
 
-        jCheckBox1.setText("Locação");
-        getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(20, 80, 100, 23);
+        jcbLocacao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jcbLocacao.setText("Locação");
+        getContentPane().add(jcbLocacao);
+        jcbLocacao.setBounds(20, 80, 100, 23);
+        getContentPane().add(jtCodigo);
+        jtCodigo.setBounds(20, 40, 110, 20);
 
-        jTextField16.setText("jTextField16");
-        getContentPane().add(jTextField16);
-        jTextField16.setBounds(20, 40, 110, 20);
+        jcbVenda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jcbVenda.setText("Venda");
+        getContentPane().add(jcbVenda);
+        jcbVenda.setBounds(20, 110, 90, 23);
 
-        jCheckBox2.setText("Venda");
-        getContentPane().add(jCheckBox2);
-        jCheckBox2.setBounds(20, 110, 90, 23);
+        jcbTemporada.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jcbTemporada.setText("Temporada");
+        getContentPane().add(jcbTemporada);
+        jcbTemporada.setBounds(20, 140, 90, 23);
 
-        jCheckBox3.setText("Temporada");
-        getContentPane().add(jCheckBox3);
-        jCheckBox3.setBounds(20, 140, 90, 23);
-
-        jCheckBox4.setText("Festa");
-        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+        jcbFesta.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jcbFesta.setText("Festa");
+        jcbFesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox4ActionPerformed(evt);
+                jcbFestaActionPerformed(evt);
             }
         });
-        getContentPane().add(jCheckBox4);
-        jCheckBox4.setBounds(20, 170, 60, 23);
+        getContentPane().add(jcbFesta);
+        jcbFesta.setBounds(20, 170, 60, 23);
 
-        jLabel22.setText("Tipo");
-        getContentPane().add(jLabel22);
-        jLabel22.setBounds(180, 30, 40, 14);
+        jlTipo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlTipo.setText("Tipo");
+        getContentPane().add(jlTipo);
+        jlTipo.setBounds(180, 30, 40, 15);
 
-        jRadioButton1.setText("Casa");
-        getContentPane().add(jRadioButton1);
-        jRadioButton1.setBounds(230, 30, 49, 23);
+        jrbCasa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jrbCasa.setText("Casa");
+        getContentPane().add(jrbCasa);
+        jrbCasa.setBounds(230, 30, 55, 23);
 
-        jRadioButton2.setText("Apartamento");
-        getContentPane().add(jRadioButton2);
-        jRadioButton2.setBounds(290, 30, 89, 23);
+        jrbApartamento.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jrbApartamento.setText("Apartamento");
+        getContentPane().add(jrbApartamento);
+        jrbApartamento.setBounds(290, 30, 95, 23);
 
-        jRadioButton3.setText("Salao");
-        getContentPane().add(jRadioButton3);
-        jRadioButton3.setBounds(410, 30, 51, 23);
+        jrbSalao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jrbSalao.setText("Salão");
+        getContentPane().add(jrbSalao);
+        jrbSalao.setBounds(410, 30, 57, 23);
 
-        jRadioButton4.setText("Comercio");
-        getContentPane().add(jRadioButton4);
-        jRadioButton4.setBounds(470, 30, 69, 23);
+        jrbComercio.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jrbComercio.setText("Comércio");
+        jrbComercio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbComercioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jrbComercio);
+        jrbComercio.setBounds(470, 30, 79, 23);
 
-        jRadioButton5.setText("Condominio");
-        getContentPane().add(jRadioButton5);
-        jRadioButton5.setBounds(550, 30, 81, 23);
+        jrbCondominio.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jrbCondominio.setText("Condomínio");
+        getContentPane().add(jrbCondominio);
+        jrbCondominio.setBounds(550, 30, 93, 23);
 
-        jLabel42.setText("Status");
-        getContentPane().add(jLabel42);
-        jLabel42.setBounds(670, 40, 31, 14);
+        jlStatus.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlStatus.setText("Status");
+        getContentPane().add(jlStatus);
+        jlStatus.setBounds(670, 40, 35, 15);
+        getContentPane().add(jtfStatus);
+        jtfStatus.setBounds(740, 40, 6, 20);
 
-        jTextField39.setText("jTextField39");
-        getContentPane().add(jTextField39);
-        jTextField39.setBounds(740, 40, 65, 20);
+        jbConfirmar.setText("Confirmar");
+        getContentPane().add(jbConfirmar);
+        jbConfirmar.setBounds(280, 550, 110, 23);
 
-        jButton1.setText("Confirmar");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(280, 550, 110, 23);
+        jbCancelar.setText("Cancelar");
+        getContentPane().add(jbCancelar);
+        jbCancelar.setBounds(400, 550, 90, 23);
 
-        jButton2.setText("Cancelar");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(400, 550, 90, 23);
-
-        jButton3.setText("Editar");
-        getContentPane().add(jButton3);
-        jButton3.setBounds(530, 550, 63, 23);
+        jbEditar.setText("Editar");
+        getContentPane().add(jbEditar);
+        jbEditar.setBounds(530, 550, 61, 23);
 
         jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jmenuCadastro.add(jMenu1);
 
         jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jmenuCadastro.add(jMenu2);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jmenuCadastro);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
+    private void jcbFestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbFestaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox4ActionPerformed
+    }//GEN-LAST:event_jcbFestaActionPerformed
+
+    private void jtfNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNumeroActionPerformed
+
+    private void jtfUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfUFActionPerformed
+
+    private void jrbComercioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbComercioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbComercioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -974,26 +1002,10 @@ public class cadastroImovel2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
     private javax.swing.JCheckBox jCheckBox12;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JInternalFrame jInternalFrame2;
-    private javax.swing.JInternalFrame jInternalFrame3;
-    private javax.swing.JInternalFrame jInternalFrame4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1002,8 +1014,6 @@ public class cadastroImovel2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1025,24 +1035,12 @@ public class cadastroImovel2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1050,7 +1048,6 @@ public class cadastroImovel2 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
@@ -1058,18 +1055,15 @@ public class cadastroImovel2 extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextArea jTextArea6;
     private javax.swing.JTextArea jTextArea8;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField22;
@@ -1080,7 +1074,6 @@ public class cadastroImovel2 extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField27;
     private javax.swing.JTextField jTextField28;
     private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField30;
     private javax.swing.JTextField jTextField31;
     private javax.swing.JTextField jTextField32;
@@ -1090,12 +1083,47 @@ public class cadastroImovel2 extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField36;
     private javax.swing.JTextField jTextField37;
     private javax.swing.JTextField jTextField38;
-    private javax.swing.JTextField jTextField39;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JButton jbAdd;
+    private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbConfirmar;
+    private javax.swing.JButton jbEditar;
+    private javax.swing.JCheckBox jcbFesta;
+    private javax.swing.JCheckBox jcbLocacao;
+    private javax.swing.JCheckBox jcbTemporada;
+    private javax.swing.JCheckBox jcbVenda;
+    private javax.swing.JInternalFrame jifDescricao;
+    private javax.swing.JInternalFrame jifEndereco;
+    private javax.swing.JInternalFrame jifOutros;
+    private javax.swing.JLabel jlBairro;
+    private javax.swing.JLabel jlCidade;
+    private javax.swing.JLabel jlCodigo;
+    private javax.swing.JLabel jlComplemento;
+    private javax.swing.JLabel jlCondominio;
+    private javax.swing.JLabel jlLogradouro;
+    private javax.swing.JLabel jlNumero;
+    private javax.swing.JLabel jlReferencia;
+    private javax.swing.JLabel jlStatus;
+    private javax.swing.JLabel jlTipo;
+    private javax.swing.JLabel jlUF;
+    private javax.swing.JLabel jlZona;
+    private javax.swing.JMenuBar jmenuCadastro;
+    private javax.swing.JRadioButton jrbApartamento;
+    private javax.swing.JRadioButton jrbCasa;
+    private javax.swing.JRadioButton jrbComercio;
+    private javax.swing.JRadioButton jrbCondominio;
+    private javax.swing.JRadioButton jrbSalao;
+    private javax.swing.JTextField jtCodigo;
+    private javax.swing.JTextField jtfBairro;
+    private javax.swing.JTextField jtfCidade;
+    private javax.swing.JTextField jtfComplemento;
+    private javax.swing.JTextField jtfCondominio;
+    private javax.swing.JTextField jtfLogradouro;
+    private javax.swing.JTextField jtfNumero;
+    private javax.swing.JTextField jtfReferencia;
+    private javax.swing.JTextField jtfStatus;
+    private javax.swing.JTextField jtfUF;
+    private javax.swing.JInternalFrame jtfValores;
+    private javax.swing.JTextField jtfZona;
+    private javax.swing.JTabbedPane jtpCadastro;
     // End of variables declaration//GEN-END:variables
 }
