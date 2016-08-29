@@ -5,6 +5,11 @@
  */
 package Interface.CadImovel;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author user
@@ -16,7 +21,11 @@ public class cadastroImovel extends javax.swing.JFrame {
      */
     public cadastroImovel() {
         initComponents();
-        
+        fecharCadastro();
+        removerTitleBar();
+     
+    }
+ public void removerTitleBar(){
      
                 ((javax.swing.plaf.basic.BasicInternalFrameUI) 
        jifEndereco.getUI()).setNorthPane(null);
@@ -26,8 +35,43 @@ public class cadastroImovel extends javax.swing.JFrame {
        jifDescricao.getUI()).setNorthPane(null);
                 ((javax.swing.plaf.basic.BasicInternalFrameUI) 
        jifValores.getUI()).setNorthPane(null);
-    }
+     
+ }
+ 
+ public void fecharCadastro(){
+     this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+    addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
 
+//                if (COLOCAR VERIFICACAO) {
+//                    int resposta = JOptionPane.showConfirmDialog(null,
+//                            "Cadastro não salvo, Deseja salvar antes de sair?",
+//                            "Segurança",
+//                            JOptionPane.YES_NO_OPTION);
+//                    if (resposta == 1) {
+//
+//                        System.exit(0);
+//
+//                    } else {
+//
+//                    }
+//
+//                } else {
+
+                    String ObjButtons[] = {"Sim", "Não"};
+                    int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+                    if (PromptResult == JOptionPane.YES_OPTION) {
+                        System.exit(0);
+                    }
+//                }
+
+            }
+        });  
+    
+    
+    
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -686,6 +730,11 @@ public class cadastroImovel extends javax.swing.JFrame {
         jbConfirmar.setBounds(320, 500, 140, 70);
 
         jbCancelar.setText("Cancelar");
+        jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbCancelarMouseClicked(evt);
+            }
+        });
         getContentPane().add(jbCancelar);
         jbCancelar.setBounds(490, 500, 140, 70);
 
@@ -729,6 +778,11 @@ public class cadastroImovel extends javax.swing.JFrame {
     private void jrbComercioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbComercioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jrbComercioActionPerformed
+
+    private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
+           new cadastroImovelHome().setVisible(true);
+           dispose();    // TODO add your handling code here:
+    }//GEN-LAST:event_jbCancelarMouseClicked
 
     /**
      * @param args the command line arguments

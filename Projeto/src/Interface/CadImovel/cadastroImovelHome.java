@@ -5,6 +5,12 @@
  */
 package Interface.CadImovel;
 
+import Interface.CadImovel.backEnd.imoveis;
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author user
@@ -16,7 +22,27 @@ public class cadastroImovelHome extends javax.swing.JFrame {
      */
     public cadastroImovelHome() {
         initComponents();
+        fechar();
     }
+    
+    public void fechar (){
+         this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+              addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+
+
+                    String ObjButtons[] = {"Sim", "Não"};
+                    int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+                    if (PromptResult == JOptionPane.YES_OPTION) {
+                        System.exit(0);
+                    }
+               
+            }
+        });  
+    
+    
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,6 +73,11 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         setResizable(false);
 
         jButton1.setText("Cadastrar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton2.setText("Visualizar");
 
@@ -146,7 +177,13 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+   new cadastroImovel().setVisible(true);     // TODO add your handling code here:
+   dispose();
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -159,7 +196,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

@@ -5,10 +5,29 @@
  */
 package Interface.CadImovel.backEnd;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author user
  */
 public class imoveis {
+    
+    
+    
+ public void cadastrar(){
+    
+    
+    
+}
+ 
+
+ 
+
+
+
     
 }
