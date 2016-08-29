@@ -5,10 +5,48 @@
  */
 package validacao;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  *
  * @author user
  */
 public class validacao {
+    
+    
+    
+    
+    
+    
+    
+    
+
+    public boolean validaNumeros(String numero) {
+
+        try {
+
+            int teste = Integer.valueOf(numero);
+
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        
+        return true;
+
+    }
+
+    public boolean validaLetras(String Nome) {
+       String regex = "^([a-zA-ZáéíóúàâêôãõüçÁÉÍÓÚÀÂÊÔÃÕÜÇ ]+)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(Nome);
+        if (matcher.find() && matcher.group().equals(Nome)) {
+            return true;
+        } else {
+           return false;
+        }
+    }
+    
+    
     
 }

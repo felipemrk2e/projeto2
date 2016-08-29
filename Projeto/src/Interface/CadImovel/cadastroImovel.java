@@ -1,24 +1,33 @@
-package Interface.CadImovel;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Interface.CadImovel;
 
 /**
  *
- * @author Master
+ * @author user
  */
 public class cadastroImovel extends javax.swing.JFrame {
 
     /**
-     * Creates new form cadastroImovel
+     * Creates new form cadastroImovel2
      */
     public cadastroImovel() {
         initComponents();
+        
+     
+                ((javax.swing.plaf.basic.BasicInternalFrameUI) 
+       jifEndereco.getUI()).setNorthPane(null);
+                ((javax.swing.plaf.basic.BasicInternalFrameUI) 
+       jifOutros.getUI()).setNorthPane(null);
+                ((javax.swing.plaf.basic.BasicInternalFrameUI) 
+       jifDescricao.getUI()).setNorthPane(null);
+                ((javax.swing.plaf.basic.BasicInternalFrameUI) 
+       jifValores.getUI()).setNorthPane(null);
     }
-    // novo comentario
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,50 +37,78 @@ public class cadastroImovel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        jtpCadastro = new javax.swing.JTabbedPane();
+        jifEndereco = new javax.swing.JInternalFrame();
+        jlComplemento = new javax.swing.JLabel();
+        jlZona = new javax.swing.JLabel();
+        jlReferencia = new javax.swing.JLabel();
+        jlCondominio = new javax.swing.JLabel();
+        jlUF = new javax.swing.JLabel();
+        jlNumero = new javax.swing.JLabel();
+        jlBairro = new javax.swing.JLabel();
+        jlCidade = new javax.swing.JLabel();
+        jlLogradouro = new javax.swing.JLabel();
+        jtfUF = new javax.swing.JTextField();
+        jtfBairro = new javax.swing.JTextField();
+        jtfCidade = new javax.swing.JTextField();
+        jtfLogradouro = new javax.swing.JTextField();
+        jtfNumero = new javax.swing.JTextField();
+        jtfCondominio = new javax.swing.JTextField();
+        jtfZona = new javax.swing.JTextField();
+        jtfComplemento = new javax.swing.JTextField();
+        jtfReferencia = new javax.swing.JTextField();
+        jbAdd = new javax.swing.JButton();
+        jifValores = new javax.swing.JInternalFrame();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jtValorLocacaoMes = new javax.swing.JTextField();
+        jtValorVenda = new javax.swing.JTextField();
+        jtValorCondominio = new javax.swing.JTextField();
+        jtValorTemporada = new javax.swing.JTextField();
+        jtValorIptu = new javax.swing.JTextField();
+        jtValorDiaria = new javax.swing.JTextField();
+        jifOutros = new javax.swing.JInternalFrame();
+        jLabel35 = new javax.swing.JLabel();
+        jtMedidasTerreno = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
+        jtAreaConstruida = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        jtSituacaoEscritura = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        jtTamanhoTerreno = new javax.swing.JTextField();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jtChaves = new javax.swing.JTextArea();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jtMobilia = new javax.swing.JTextArea();
+        jtMatriculo = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jtContrato = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
+        jtContaAgua = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
+        jtIptu = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
+        jtContaLuz = new javax.swing.JTextField();
+        jtCartorio = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        jTextField17 = new javax.swing.JTextField();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jLabel22 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jtObservacao = new javax.swing.JTextArea();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jrbMobiliada = new javax.swing.JRadioButton();
+        jrbSemiMobiliada = new javax.swing.JRadioButton();
+        jrbSemMobilia = new javax.swing.JRadioButton();
+        jifDescricao = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -83,519 +120,615 @@ public class cadastroImovel extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        jTextField19 = new javax.swing.JTextField();
-        jTextField20 = new javax.swing.JTextField();
-        jTextField26 = new javax.swing.JTextField();
-        jTextField27 = new javax.swing.JTextField();
-        jTextField21 = new javax.swing.JTextField();
-        jTextField22 = new javax.swing.JTextField();
-        jTextField23 = new javax.swing.JTextField();
-        jTextField24 = new javax.swing.JTextField();
-        jTextField25 = new javax.swing.JTextField();
-        jTextField18 = new javax.swing.JTextField();
-        jTextField28 = new javax.swing.JTextField();
-        jCheckBox10 = new javax.swing.JCheckBox();
-        jCheckBox11 = new javax.swing.JCheckBox();
-        jCheckBox12 = new javax.swing.JCheckBox();
+        jtSalas = new javax.swing.JTextField();
+        jtBanheiros = new javax.swing.JTextField();
+        jtLavanderia = new javax.swing.JTextField();
+        jtSuites = new javax.swing.JTextField();
+        jtQuartos = new javax.swing.JTextField();
+        jtLavados = new javax.swing.JTextField();
+        jtAreaServico = new javax.swing.JTextField();
+        jtPscina = new javax.swing.JTextField();
+        jtDepEmpregada = new javax.swing.JTextField();
+        jtPisos = new javax.swing.JTextField();
+        jtVagasGaragem = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jtTipoImovel = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        jtAreaExterna = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
+        jtAcabamento = new javax.swing.JTextArea();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jtOutros = new javax.swing.JTextArea();
         jLabel33 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea5 = new javax.swing.JTextArea();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jTextField29 = new javax.swing.JTextField();
-        jTextField30 = new javax.swing.JTextField();
-        jTextField31 = new javax.swing.JTextField();
-        jTextField32 = new javax.swing.JTextField();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
-        jTextField33 = new javax.swing.JTextField();
-        jTextField34 = new javax.swing.JTextField();
-        jTextField35 = new javax.swing.JTextField();
-        jTextField36 = new javax.swing.JTextField();
-        jTextField37 = new javax.swing.JTextField();
-        jTextField38 = new javax.swing.JTextField();
-        jTextField39 = new javax.swing.JTextField();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea6 = new javax.swing.JTextArea();
-        jLabel46 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTextArea7 = new javax.swing.JTextArea();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jtIdadeImovel = new javax.swing.JTextField();
+        jlCodigo = new javax.swing.JLabel();
+        jcbLocacao = new javax.swing.JCheckBox();
+        jtCodigo = new javax.swing.JTextField();
+        jcbVenda = new javax.swing.JCheckBox();
+        jcbTemporada = new javax.swing.JCheckBox();
+        jcbFesta = new javax.swing.JCheckBox();
+        jlTipo = new javax.swing.JLabel();
+        jrbCasa = new javax.swing.JRadioButton();
+        jrbApartamento = new javax.swing.JRadioButton();
+        jrbSalao = new javax.swing.JRadioButton();
+        jrbComercio = new javax.swing.JRadioButton();
+        jrbCondominio = new javax.swing.JRadioButton();
+        jlStatus = new javax.swing.JLabel();
+        jtfStatus = new javax.swing.JTextField();
+        jbConfirmar = new javax.swing.JButton();
+        jbCancelar = new javax.swing.JButton();
+        jbEditar = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
+        jmenuCadastro = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1024, 768));
-        setPreferredSize(new java.awt.Dimension(1024, 768));
+        setMinimumSize(new java.awt.Dimension(1024, 640));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jCheckBox1.setText("Locação");
-        getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(20, 80, 100, 23);
-
-        jCheckBox2.setText("Venda");
-        getContentPane().add(jCheckBox2);
-        jCheckBox2.setBounds(20, 110, 90, 23);
-
-        jCheckBox3.setText("Temporada");
-        getContentPane().add(jCheckBox3);
-        jCheckBox3.setBounds(20, 140, 90, 23);
-
-        jCheckBox4.setText("Festa");
-        getContentPane().add(jCheckBox4);
-        jCheckBox4.setBounds(20, 170, 60, 23);
-
-        jLabel5.setText("Complemento");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(660, 100, 110, 14);
-
-        jLabel6.setText("Zona");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(680, 220, 34, 14);
-
-        jLabel7.setText("Referencia");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(210, 220, 52, 14);
-
-        jLabel8.setText("Condominio");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(200, 270, 55, 14);
-
-        jLabel9.setText("UF");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(580, 160, 13, 14);
-
-        jLabel10.setText("Nº");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(590, 100, 12, 14);
-
-        jLabel11.setText("Bairro");
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(370, 160, 80, 14);
-
-        jLabel12.setText("Cidade");
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(200, 160, 33, 14);
-
-        jLabel13.setText("Rua");
-        getContentPane().add(jLabel13);
-        jLabel13.setBounds(200, 100, 19, 14);
-
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(570, 180, 70, 20);
-
-        jTextField2.setText("jTextField2");
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(360, 180, 190, 20);
-
-        jTextField3.setText("jTextField3");
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(200, 180, 150, 20);
-
-        jTextField4.setText("jTextField4");
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(200, 120, 370, 20);
-
-        jTextField5.setText("jTextField5");
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(590, 120, 50, 20);
-
-        jTextField6.setText("jTextField6");
-        getContentPane().add(jTextField6);
-        jTextField6.setBounds(200, 290, 230, 20);
-
-        jTextField7.setText("jTextField7");
-        getContentPane().add(jTextField7);
-        jTextField7.setBounds(670, 240, 90, 20);
-
-        jTextField8.setText("jTextField8");
-        getContentPane().add(jTextField8);
-        jTextField8.setBounds(660, 120, 100, 20);
-
-        jTextField9.setText("jTextField9");
-        getContentPane().add(jTextField9);
-        jTextField9.setBounds(200, 240, 450, 20);
-
-        jLabel14.setText("Idade Imovel");
-        getContentPane().add(jLabel14);
-        jLabel14.setBounds(700, 320, 63, 20);
-
-        jLabel15.setText("Nº Matricula");
-        getContentPane().add(jLabel15);
-        jLabel15.setBounds(200, 330, 58, 20);
-
-        jLabel16.setText("Nº Conta Agua");
-        getContentPane().add(jLabel16);
-        jLabel16.setBounds(300, 330, 90, 14);
-
-        jLabel17.setText("Nº Conta de luz");
-        getContentPane().add(jLabel17);
-        jLabel17.setBounds(410, 330, 75, 14);
-
-        jLabel18.setText("Nº Iptu");
-        getContentPane().add(jLabel18);
-        jLabel18.setBounds(510, 330, 80, 14);
-
-        jLabel19.setText("Cartorio");
-        getContentPane().add(jLabel19);
-        jLabel19.setBounds(610, 330, 40, 14);
-
-        jTextField10.setText("jTextField10");
-        getContentPane().add(jTextField10);
-        jTextField10.setBounds(200, 350, 80, 20);
-
-        jTextField11.setText("jTextField11");
-        getContentPane().add(jTextField11);
-        jTextField11.setBounds(300, 350, 90, 20);
-
-        jTextField12.setText("jTextField12");
-        getContentPane().add(jTextField12);
-        jTextField12.setBounds(410, 350, 80, 20);
-
-        jTextField13.setText("jTextField13");
-        getContentPane().add(jTextField13);
-        jTextField13.setBounds(510, 350, 80, 20);
-
-        jTextField14.setText("jTextField14");
-        getContentPane().add(jTextField14);
-        jTextField14.setBounds(710, 350, 30, 20);
-
-        jTextField15.setText("jTextField15");
-        getContentPane().add(jTextField15);
-        jTextField15.setBounds(600, 350, 100, 20);
-
-        jTextField16.setText("jTextField16");
-        getContentPane().add(jTextField16);
-        jTextField16.setBounds(20, 40, 110, 20);
-
-        jLabel21.setText("Codigo Interno");
-        getContentPane().add(jLabel21);
-        jLabel21.setBounds(20, 20, 72, 14);
-
-        jLabel20.setText("Nº Contrato");
-        getContentPane().add(jLabel20);
-        jLabel20.setBounds(200, 380, 80, 14);
-
-        jTextField17.setText("jTextField17");
-        getContentPane().add(jTextField17);
-        jTextField17.setBounds(200, 400, 170, 20);
-
-        jCheckBox5.setText("Casa");
-        getContentPane().add(jCheckBox5);
-        jCheckBox5.setBounds(300, 40, 49, 23);
-
-        jCheckBox6.setText("Condominio");
-        getContentPane().add(jCheckBox6);
-        jCheckBox6.setBounds(380, 40, 81, 23);
-
-        jCheckBox7.setText("Apartamento");
-        getContentPane().add(jCheckBox7);
-        jCheckBox7.setBounds(480, 40, 90, 23);
-
-        jCheckBox8.setText("Salão");
-        getContentPane().add(jCheckBox8);
-        jCheckBox8.setBounds(580, 40, 51, 23);
-
-        jCheckBox9.setText("Ponto Comercial");
-        getContentPane().add(jCheckBox9);
-        jCheckBox9.setBounds(640, 40, 110, 23);
-
-        jLabel22.setText("Tipo");
-        getContentPane().add(jLabel22);
-        jLabel22.setBounds(240, 40, 40, 14);
-
-        jLabel1.setText("Quartos");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(70, 440, 39, 14);
-
-        jLabel2.setText("Suites");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(70, 470, 60, 14);
-
-        jLabel3.setText("Salas");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(70, 510, 50, 14);
-
-        jLabel4.setText("Lavanderia");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(190, 550, 60, 14);
-
-        jLabel23.setText("Vagas Garagem");
-        getContentPane().add(jLabel23);
-        jLabel23.setBounds(360, 480, 75, 14);
-
-        jLabel24.setText("Area de serviço");
-        getContentPane().add(jLabel24);
-        jLabel24.setBounds(210, 490, 75, 14);
-
-        jLabel25.setText("Pscina");
-        getContentPane().add(jLabel25);
-        jLabel25.setBounds(530, 440, 30, 14);
-
-        jLabel26.setText("Lavabos");
-        getContentPane().add(jLabel26);
-        jLabel26.setBounds(210, 440, 40, 14);
-
-        jLabel27.setText("Banheiros");
-        getContentPane().add(jLabel27);
-        jLabel27.setBounds(70, 550, 47, 14);
-
-        jLabel28.setText("Dep. Empregada");
-        getContentPane().add(jLabel28);
-        jLabel28.setBounds(520, 480, 90, 14);
-
-        jLabel29.setText("Pisos (Andares)");
-        getContentPane().add(jLabel29);
-        jLabel29.setBounds(360, 440, 80, 14);
-
-        jTextField19.setText("jTextField18");
-        getContentPane().add(jTextField19);
-        jTextField19.setBounds(30, 510, 30, 20);
-
-        jTextField20.setText("jTextField18");
-        getContentPane().add(jTextField20);
-        jTextField20.setBounds(30, 550, 30, 20);
-
-        jTextField26.setText("jTextField18");
-        getContentPane().add(jTextField26);
-        jTextField26.setBounds(150, 550, 30, 20);
-
-        jTextField27.setText("jTextField18");
-        getContentPane().add(jTextField27);
-        jTextField27.setBounds(30, 470, 30, 20);
-
-        jTextField21.setText("jTextField18");
-        getContentPane().add(jTextField21);
-        jTextField21.setBounds(30, 440, 30, 20);
-
-        jTextField22.setText("jTextField18");
-        getContentPane().add(jTextField22);
-        jTextField22.setBounds(150, 450, 30, 20);
-
-        jTextField23.setText("jTextField18");
-        getContentPane().add(jTextField23);
-        jTextField23.setBounds(150, 490, 30, 20);
-
-        jTextField24.setText("jTextField18");
-        getContentPane().add(jTextField24);
-        jTextField24.setBounds(460, 440, 30, 20);
-
-        jTextField25.setText("jTextField18");
-        getContentPane().add(jTextField25);
-        jTextField25.setBounds(460, 480, 30, 20);
-
-        jTextField18.setText("jTextField18");
-        getContentPane().add(jTextField18);
-        jTextField18.setBounds(310, 440, 30, 20);
-
-        jTextField28.setText("jTextField18");
-        getContentPane().add(jTextField28);
-        jTextField28.setBounds(310, 480, 30, 20);
-
-        jCheckBox10.setText("Mobiliado");
-        getContentPane().add(jCheckBox10);
-        jCheckBox10.setBounds(20, 600, 69, 23);
-
-        jCheckBox11.setText("Semi-Mobiliado");
-        getContentPane().add(jCheckBox11);
-        jCheckBox11.setBounds(20, 630, 100, 23);
-
-        jCheckBox12.setText("Sem mobilia");
-        getContentPane().add(jCheckBox12);
-        jCheckBox12.setBounds(20, 650, 81, 23);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(720, 420, 210, 60);
-
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
-
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(720, 490, 210, 60);
-
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane3.setViewportView(jTextArea3);
-
-        getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(720, 570, 210, 60);
-
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane4.setViewportView(jTextArea4);
-
-        getContentPane().add(jScrollPane4);
-        jScrollPane4.setBounds(720, 640, 210, 60);
-
-        jLabel30.setText("Tipo de imovel");
-        getContentPane().add(jLabel30);
-        jLabel30.setBounds(640, 450, 70, 14);
-
-        jLabel31.setText("Area Externa");
-        getContentPane().add(jLabel31);
-        jLabel31.setBounds(630, 520, 64, 14);
-
-        jLabel32.setText("Outros");
-        getContentPane().add(jLabel32);
-        jLabel32.setBounds(660, 670, 33, 14);
-
-        jLabel33.setText("Acabamento");
-        getContentPane().add(jLabel33);
-        jLabel33.setBounds(640, 600, 70, 14);
-
-        jTextArea5.setColumns(20);
-        jTextArea5.setRows(5);
-        jScrollPane5.setViewportView(jTextArea5);
-
-        getContentPane().add(jScrollPane5);
-        jScrollPane5.setBounds(120, 610, 166, 60);
-
-        jLabel34.setText("Area construida M");
-        getContentPane().add(jLabel34);
-        jLabel34.setBounds(170, 690, 100, 14);
-
-        jLabel35.setText("Medidas terreno");
-        getContentPane().add(jLabel35);
-        jLabel35.setBounds(60, 690, 90, 20);
-
-        jLabel36.setText("Tamanho terreno em M");
-        getContentPane().add(jLabel36);
-        jLabel36.setBounds(290, 690, 130, 14);
-
-        jLabel37.setText("Situação Escritura");
-        getContentPane().add(jLabel37);
-        jLabel37.setBounds(450, 690, 90, 14);
-
-        jTextField29.setText("jTextField29");
-        getContentPane().add(jTextField29);
-        jTextField29.setBounds(180, 710, 65, 20);
-
-        jTextField30.setText("jTextField30");
-        getContentPane().add(jTextField30);
-        jTextField30.setBounds(70, 710, 65, 20);
-
-        jTextField31.setText("jTextField31");
-        getContentPane().add(jTextField31);
-        jTextField31.setBounds(320, 720, 65, 20);
-
-        jTextField32.setText("jTextField32");
-        getContentPane().add(jTextField32);
-        jTextField32.setBounds(460, 720, 65, 20);
+        jifEndereco.setVisible(true);
+        jifEndereco.getContentPane().setLayout(null);
+
+        jlComplemento.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlComplemento.setText("Complemento");
+        jifEndereco.getContentPane().add(jlComplemento);
+        jlComplemento.setBounds(530, 40, 110, 15);
+
+        jlZona.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlZona.setText("Zona");
+        jifEndereco.getContentPane().add(jlZona);
+        jlZona.setBounds(540, 160, 34, 15);
+
+        jlReferencia.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlReferencia.setText("Referência");
+        jifEndereco.getContentPane().add(jlReferencia);
+        jlReferencia.setBounds(70, 160, 60, 15);
+
+        jlCondominio.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlCondominio.setText("Condomínio");
+        jifEndereco.getContentPane().add(jlCondominio);
+        jlCondominio.setBounds(68, 213, 68, 15);
+
+        jlUF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlUF.setText("UF");
+        jifEndereco.getContentPane().add(jlUF);
+        jlUF.setBounds(540, 100, 16, 15);
+
+        jlNumero.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlNumero.setText("Nº");
+        jifEndereco.getContentPane().add(jlNumero);
+        jlNumero.setBounds(460, 40, 13, 15);
+
+        jlBairro.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlBairro.setText("Bairro");
+        jifEndereco.getContentPane().add(jlBairro);
+        jlBairro.setBounds(312, 100, 80, 15);
+
+        jlCidade.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlCidade.setText("Cidade");
+        jifEndereco.getContentPane().add(jlCidade);
+        jlCidade.setBounds(68, 100, 40, 15);
+
+        jlLogradouro.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlLogradouro.setText("Logradouro");
+        jifEndereco.getContentPane().add(jlLogradouro);
+        jlLogradouro.setBounds(68, 40, 64, 15);
+
+        jtfUF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfUFActionPerformed(evt);
+            }
+        });
+        jifEndereco.getContentPane().add(jtfUF);
+        jtfUF.setBounds(540, 120, 70, 20);
+        jifEndereco.getContentPane().add(jtfBairro);
+        jtfBairro.setBounds(312, 120, 190, 20);
+        jifEndereco.getContentPane().add(jtfCidade);
+        jtfCidade.setBounds(68, 120, 150, 20);
+        jifEndereco.getContentPane().add(jtfLogradouro);
+        jtfLogradouro.setBounds(68, 60, 370, 20);
+
+        jtfNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfNumeroActionPerformed(evt);
+            }
+        });
+        jifEndereco.getContentPane().add(jtfNumero);
+        jtfNumero.setBounds(458, 60, 50, 20);
+        jifEndereco.getContentPane().add(jtfCondominio);
+        jtfCondominio.setBounds(68, 234, 230, 20);
+        jifEndereco.getContentPane().add(jtfZona);
+        jtfZona.setBounds(538, 183, 90, 20);
+        jifEndereco.getContentPane().add(jtfComplemento);
+        jtfComplemento.setBounds(528, 60, 100, 20);
+        jifEndereco.getContentPane().add(jtfReferencia);
+        jtfReferencia.setBounds(68, 183, 450, 20);
+
+        jbAdd.setText("Add");
+        jifEndereco.getContentPane().add(jbAdd);
+        jbAdd.setBounds(230, 120, 59, 23);
+
+        jtpCadastro.addTab("Endereço", jifEndereco);
+
+        jifValores.setVisible(true);
+        jifValores.getContentPane().setLayout(null);
 
         jLabel38.setText("valor locação mes");
-        getContentPane().add(jLabel38);
-        jLabel38.setBounds(30, 800, 100, 14);
+        jifValores.getContentPane().add(jLabel38);
+        jLabel38.setBounds(10, 20, 120, 14);
 
         jLabel39.setText("valor  iptu");
-        getContentPane().add(jLabel39);
-        jLabel39.setBounds(30, 890, 48, 14);
-
-        jLabel40.setText("Chaves");
-        getContentPane().add(jLabel40);
-        jLabel40.setBounds(610, 870, 36, 14);
+        jifValores.getContentPane().add(jLabel39);
+        jLabel39.setBounds(10, 110, 100, 14);
 
         jLabel41.setText("valor condominio");
-        getContentPane().add(jLabel41);
-        jLabel41.setBounds(30, 920, 90, 14);
-
-        jLabel42.setText("Status");
-        getContentPane().add(jLabel42);
-        jLabel42.setBounds(610, 790, 31, 14);
+        jifValores.getContentPane().add(jLabel41);
+        jLabel41.setBounds(10, 140, 120, 14);
 
         jLabel43.setText("valor venda");
-        getContentPane().add(jLabel43);
-        jLabel43.setBounds(30, 830, 57, 14);
+        jifValores.getContentPane().add(jLabel43);
+        jLabel43.setBounds(10, 50, 100, 14);
 
         jLabel44.setText("valor temporada");
-        getContentPane().add(jLabel44);
-        jLabel44.setBounds(30, 860, 79, 14);
+        jifValores.getContentPane().add(jLabel44);
+        jLabel44.setBounds(10, 80, 110, 14);
 
         jLabel45.setText("valor diaria");
-        getContentPane().add(jLabel45);
-        jLabel45.setBounds(250, 820, 60, 14);
+        jifValores.getContentPane().add(jLabel45);
+        jLabel45.setBounds(10, 170, 110, 14);
 
-        jTextField33.setText("jTextField33");
-        getContentPane().add(jTextField33);
-        jTextField33.setBounds(150, 800, 65, 20);
+        jtValorLocacaoMes.setText("jTextField33");
+        jifValores.getContentPane().add(jtValorLocacaoMes);
+        jtValorLocacaoMes.setBounds(130, 20, 65, 20);
 
-        jTextField34.setText("jTextField34");
-        getContentPane().add(jTextField34);
-        jTextField34.setBounds(150, 830, 65, 20);
+        jtValorVenda.setText("jTextField34");
+        jifValores.getContentPane().add(jtValorVenda);
+        jtValorVenda.setBounds(130, 50, 65, 20);
 
-        jTextField35.setText("jTextField35");
-        getContentPane().add(jTextField35);
-        jTextField35.setBounds(150, 920, 65, 20);
+        jtValorCondominio.setText("jTextField35");
+        jifValores.getContentPane().add(jtValorCondominio);
+        jtValorCondominio.setBounds(130, 140, 65, 20);
 
-        jTextField36.setText("jTextField36");
-        getContentPane().add(jTextField36);
-        jTextField36.setBounds(150, 860, 65, 20);
+        jtValorTemporada.setText("jTextField36");
+        jifValores.getContentPane().add(jtValorTemporada);
+        jtValorTemporada.setBounds(130, 80, 65, 20);
 
-        jTextField37.setText("jTextField37");
-        getContentPane().add(jTextField37);
-        jTextField37.setBounds(150, 890, 65, 20);
+        jtValorIptu.setText("jTextField37");
+        jifValores.getContentPane().add(jtValorIptu);
+        jtValorIptu.setBounds(130, 110, 65, 20);
 
-        jTextField38.setText("jTextField38");
-        getContentPane().add(jTextField38);
-        jTextField38.setBounds(320, 820, 65, 20);
+        jtValorDiaria.setText("jTextField38");
+        jifValores.getContentPane().add(jtValorDiaria);
+        jtValorDiaria.setBounds(130, 170, 65, 20);
 
-        jTextField39.setText("jTextField39");
-        getContentPane().add(jTextField39);
-        jTextField39.setBounds(670, 790, 65, 20);
+        jtpCadastro.addTab("Valores", jifValores);
 
-        jTextArea6.setColumns(20);
-        jTextArea6.setRows(5);
-        jScrollPane6.setViewportView(jTextArea6);
+        jifOutros.setVisible(true);
+        jifOutros.getContentPane().setLayout(null);
 
-        getContentPane().add(jScrollPane6);
-        jScrollPane6.setBounds(680, 870, 166, 70);
+        jLabel35.setText("Medidas terreno");
+        jifOutros.getContentPane().add(jLabel35);
+        jLabel35.setBounds(235, 10, 100, 20);
+
+        jtMedidasTerreno.setText("jTextField30");
+        jifOutros.getContentPane().add(jtMedidasTerreno);
+        jtMedidasTerreno.setBounds(360, 10, 65, 20);
+
+        jLabel34.setText("Area construida");
+        jifOutros.getContentPane().add(jLabel34);
+        jLabel34.setBounds(235, 40, 100, 14);
+
+        jtAreaConstruida.setText("jTextField29");
+        jifOutros.getContentPane().add(jtAreaConstruida);
+        jtAreaConstruida.setBounds(360, 40, 65, 20);
+
+        jLabel36.setText("Tamanho terreno");
+        jifOutros.getContentPane().add(jLabel36);
+        jLabel36.setBounds(235, 70, 110, 20);
+
+        jtSituacaoEscritura.setText("jTextField31");
+        jifOutros.getContentPane().add(jtSituacaoEscritura);
+        jtSituacaoEscritura.setBounds(40, 240, 130, 20);
+
+        jLabel37.setText("Situação Escritura");
+        jifOutros.getContentPane().add(jLabel37);
+        jLabel37.setBounds(50, 210, 140, 20);
+
+        jtTamanhoTerreno.setText("jTextField32");
+        jifOutros.getContentPane().add(jtTamanhoTerreno);
+        jtTamanhoTerreno.setBounds(360, 70, 65, 20);
+
+        jtChaves.setColumns(20);
+        jtChaves.setRows(5);
+        jScrollPane6.setViewportView(jtChaves);
+
+        jifOutros.getContentPane().add(jScrollPane6);
+        jScrollPane6.setBounds(570, 120, 190, 90);
+
+        jLabel40.setText("Chaves");
+        jifOutros.getContentPane().add(jLabel40);
+        jLabel40.setBounds(500, 130, 80, 22);
 
         jLabel46.setText("observaçoes gerais");
-        getContentPane().add(jLabel46);
-        jLabel46.setBounds(250, 880, 110, 14);
+        jifOutros.getContentPane().add(jLabel46);
+        jLabel46.setBounds(440, 240, 120, 20);
 
-        jTextArea7.setColumns(20);
-        jTextArea7.setRows(5);
-        jScrollPane7.setViewportView(jTextArea7);
+        jtMobilia.setColumns(20);
+        jtMobilia.setRows(5);
+        jScrollPane5.setViewportView(jtMobilia);
 
-        getContentPane().add(jScrollPane7);
-        jScrollPane7.setBounds(360, 880, 166, 96);
+        jifOutros.getContentPane().add(jScrollPane5);
+        jScrollPane5.setBounds(580, 20, 180, 80);
+
+        jtMatriculo.setText("jTextField10");
+        jifOutros.getContentPane().add(jtMatriculo);
+        jtMatriculo.setBounds(100, 10, 110, 20);
+
+        jLabel15.setText("Nº Matricula");
+        jifOutros.getContentPane().add(jLabel15);
+        jLabel15.setBounds(10, 10, 80, 20);
+
+        jLabel16.setText("Nº Conta Agua");
+        jifOutros.getContentPane().add(jLabel16);
+        jLabel16.setBounds(10, 40, 90, 14);
+
+        jtContrato.setText("jTextField11");
+        jifOutros.getContentPane().add(jtContrato);
+        jtContrato.setBounds(100, 130, 110, 20);
+
+        jLabel17.setText("Nº Conta de luz");
+        jifOutros.getContentPane().add(jLabel17);
+        jLabel17.setBounds(10, 70, 90, 14);
+
+        jtContaAgua.setText("jTextField12");
+        jifOutros.getContentPane().add(jtContaAgua);
+        jtContaAgua.setBounds(100, 40, 110, 20);
+
+        jLabel18.setText("Nº Iptu");
+        jifOutros.getContentPane().add(jLabel18);
+        jLabel18.setBounds(10, 100, 80, 20);
+
+        jtIptu.setText("jTextField13");
+        jifOutros.getContentPane().add(jtIptu);
+        jtIptu.setBounds(100, 100, 110, 20);
+
+        jLabel19.setText("Cartorio");
+        jifOutros.getContentPane().add(jLabel19);
+        jLabel19.setBounds(10, 160, 70, 14);
+
+        jtContaLuz.setText("jTextField15");
+        jifOutros.getContentPane().add(jtContaLuz);
+        jtContaLuz.setBounds(100, 70, 110, 20);
+
+        jtCartorio.setText("jTextField17");
+        jifOutros.getContentPane().add(jtCartorio);
+        jtCartorio.setBounds(100, 160, 110, 20);
+
+        jLabel20.setText("Nº Contrato");
+        jifOutros.getContentPane().add(jLabel20);
+        jLabel20.setBounds(10, 130, 80, 14);
+
+        jtObservacao.setColumns(20);
+        jtObservacao.setRows(5);
+        jScrollPane8.setViewportView(jtObservacao);
+
+        jifOutros.getContentPane().add(jScrollPane8);
+        jScrollPane8.setBounds(570, 220, 190, 90);
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator1.setAlignmentX(2.0F);
+        jSeparator1.setAlignmentY(2.0F);
+        jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jifOutros.getContentPane().add(jSeparator1);
+        jSeparator1.setBounds(0, 0, 220, 290);
+
+        jSeparator2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jifOutros.getContentPane().add(jSeparator2);
+        jSeparator2.setBounds(230, 0, 210, 160);
+
+        jSeparator3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jifOutros.getContentPane().add(jSeparator3);
+        jSeparator3.setBounds(450, 10, 330, 100);
+
+        buttonGroup1.add(jrbMobiliada);
+        jrbMobiliada.setText("Mobiliada");
+        jifOutros.getContentPane().add(jrbMobiliada);
+        jrbMobiliada.setBounds(460, 20, 90, 23);
+
+        buttonGroup1.add(jrbSemiMobiliada);
+        jrbSemiMobiliada.setText("Semi Mobiliada");
+        jifOutros.getContentPane().add(jrbSemiMobiliada);
+        jrbSemiMobiliada.setBounds(460, 50, 120, 23);
+
+        buttonGroup1.add(jrbSemMobilia);
+        jrbSemMobilia.setText("Sem Mobilia");
+        jifOutros.getContentPane().add(jrbSemMobilia);
+        jrbSemMobilia.setBounds(460, 80, 110, 23);
+
+        jtpCadastro.addTab("Outros", jifOutros);
+
+        jifDescricao.setVisible(true);
+        jifDescricao.getContentPane().setLayout(null);
+
+        jLabel1.setText("Quartos");
+        jifDescricao.getContentPane().add(jLabel1);
+        jLabel1.setBounds(60, 20, 60, 14);
+
+        jLabel2.setText("Suites");
+        jifDescricao.getContentPane().add(jLabel2);
+        jLabel2.setBounds(60, 50, 60, 14);
+
+        jLabel3.setText("Salas");
+        jifDescricao.getContentPane().add(jLabel3);
+        jLabel3.setBounds(60, 80, 50, 14);
+
+        jLabel4.setText("Lavanderia");
+        jifDescricao.getContentPane().add(jLabel4);
+        jLabel4.setBounds(60, 200, 80, 14);
+
+        jLabel23.setText("Vagas Garagem");
+        jifDescricao.getContentPane().add(jLabel23);
+        jLabel23.setBounds(200, 50, 100, 14);
+
+        jLabel24.setText("Area de serviço");
+        jifDescricao.getContentPane().add(jLabel24);
+        jLabel24.setBounds(60, 170, 100, 14);
+
+        jLabel25.setText("Pscina");
+        jifDescricao.getContentPane().add(jLabel25);
+        jLabel25.setBounds(200, 20, 50, 14);
+
+        jLabel26.setText("Lavabos");
+        jifDescricao.getContentPane().add(jLabel26);
+        jLabel26.setBounds(60, 140, 60, 14);
+
+        jLabel27.setText("Banheiros");
+        jifDescricao.getContentPane().add(jLabel27);
+        jLabel27.setBounds(60, 110, 70, 14);
+
+        jLabel28.setText("Dep. Empregada");
+        jifDescricao.getContentPane().add(jLabel28);
+        jLabel28.setBounds(200, 80, 100, 14);
+
+        jLabel29.setText("Pisos (Andares)");
+        jifDescricao.getContentPane().add(jLabel29);
+        jLabel29.setBounds(60, 230, 100, 14);
+
+        jtSalas.setText("jTextField18");
+        jifDescricao.getContentPane().add(jtSalas);
+        jtSalas.setBounds(15, 80, 30, 20);
+
+        jtBanheiros.setText("jTextField18");
+        jifDescricao.getContentPane().add(jtBanheiros);
+        jtBanheiros.setBounds(15, 110, 30, 20);
+
+        jtLavanderia.setText("jTextField18");
+        jifDescricao.getContentPane().add(jtLavanderia);
+        jtLavanderia.setBounds(15, 200, 30, 20);
+
+        jtSuites.setText("jTextField18");
+        jifDescricao.getContentPane().add(jtSuites);
+        jtSuites.setBounds(15, 50, 30, 20);
+
+        jtQuartos.setText("jTextField18");
+        jifDescricao.getContentPane().add(jtQuartos);
+        jtQuartos.setBounds(15, 20, 30, 20);
+
+        jtLavados.setText("jTextField18");
+        jifDescricao.getContentPane().add(jtLavados);
+        jtLavados.setBounds(15, 140, 30, 20);
+
+        jtAreaServico.setText("jTextField18");
+        jifDescricao.getContentPane().add(jtAreaServico);
+        jtAreaServico.setBounds(15, 170, 30, 20);
+
+        jtPscina.setText("jTextField18");
+        jifDescricao.getContentPane().add(jtPscina);
+        jtPscina.setBounds(150, 20, 30, 20);
+
+        jtDepEmpregada.setText("jTextField18");
+        jifDescricao.getContentPane().add(jtDepEmpregada);
+        jtDepEmpregada.setBounds(150, 80, 30, 20);
+
+        jtPisos.setText("jTextField18");
+        jifDescricao.getContentPane().add(jtPisos);
+        jtPisos.setBounds(15, 230, 30, 20);
+
+        jtVagasGaragem.setText("jTextField18");
+        jifDescricao.getContentPane().add(jtVagasGaragem);
+        jtVagasGaragem.setBounds(150, 50, 30, 20);
+
+        jtTipoImovel.setColumns(20);
+        jtTipoImovel.setRows(5);
+        jScrollPane1.setViewportView(jtTipoImovel);
+
+        jifDescricao.getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(500, 20, 200, 70);
+
+        jtAreaExterna.setColumns(20);
+        jtAreaExterna.setRows(5);
+        jScrollPane2.setViewportView(jtAreaExterna);
+
+        jifDescricao.getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(500, 100, 200, 60);
+
+        jtAcabamento.setColumns(20);
+        jtAcabamento.setRows(5);
+        jScrollPane3.setViewportView(jtAcabamento);
+
+        jifDescricao.getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(500, 170, 200, 60);
+
+        jLabel30.setText("Tipo de imovel");
+        jifDescricao.getContentPane().add(jLabel30);
+        jLabel30.setBounds(400, 60, 90, 14);
+
+        jLabel31.setText("Area Externa");
+        jifDescricao.getContentPane().add(jLabel31);
+        jLabel31.setBounds(410, 110, 80, 14);
+
+        jtOutros.setColumns(20);
+        jtOutros.setRows(5);
+        jScrollPane4.setViewportView(jtOutros);
+
+        jifDescricao.getContentPane().add(jScrollPane4);
+        jScrollPane4.setBounds(500, 240, 200, 60);
+
+        jLabel33.setText("Acabamento");
+        jifDescricao.getContentPane().add(jLabel33);
+        jLabel33.setBounds(410, 180, 80, 14);
+
+        jLabel32.setText("Outros");
+        jifDescricao.getContentPane().add(jLabel32);
+        jLabel32.setBounds(430, 240, 50, 14);
+
+        jLabel14.setText("Idade Imovel");
+        jifDescricao.getContentPane().add(jLabel14);
+        jLabel14.setBounds(60, 260, 100, 20);
+
+        jtIdadeImovel.setText("jTextField14");
+        jifDescricao.getContentPane().add(jtIdadeImovel);
+        jtIdadeImovel.setBounds(15, 260, 30, 20);
+
+        jtpCadastro.addTab("Descrição", jifDescricao);
+
+        getContentPane().add(jtpCadastro);
+        jtpCadastro.setBounds(160, 100, 820, 380);
+
+        jlCodigo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlCodigo.setText("Código Interno");
+        getContentPane().add(jlCodigo);
+        jlCodigo.setBounds(40, 10, 100, 15);
+
+        jcbLocacao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jcbLocacao.setText("Locação");
+        getContentPane().add(jcbLocacao);
+        jcbLocacao.setBounds(40, 110, 90, 23);
+        getContentPane().add(jtCodigo);
+        jtCodigo.setBounds(30, 30, 110, 20);
+
+        jcbVenda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jcbVenda.setText("Venda");
+        getContentPane().add(jcbVenda);
+        jcbVenda.setBounds(40, 140, 90, 23);
+
+        jcbTemporada.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jcbTemporada.setText("Temporada");
+        getContentPane().add(jcbTemporada);
+        jcbTemporada.setBounds(40, 170, 90, 23);
+
+        jcbFesta.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jcbFesta.setText("Festa");
+        jcbFesta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbFestaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jcbFesta);
+        jcbFesta.setBounds(40, 200, 60, 23);
+
+        jlTipo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlTipo.setText("Tipo");
+        getContentPane().add(jlTipo);
+        jlTipo.setBounds(470, 10, 40, 15);
+
+        buttonGroup2.add(jrbCasa);
+        jrbCasa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jrbCasa.setText("Casa");
+        getContentPane().add(jrbCasa);
+        jrbCasa.setBounds(230, 30, 55, 23);
+
+        buttonGroup2.add(jrbApartamento);
+        jrbApartamento.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jrbApartamento.setText("Apartamento");
+        getContentPane().add(jrbApartamento);
+        jrbApartamento.setBounds(310, 30, 95, 23);
+
+        buttonGroup2.add(jrbSalao);
+        jrbSalao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jrbSalao.setText("Salão");
+        getContentPane().add(jrbSalao);
+        jrbSalao.setBounds(430, 30, 57, 23);
+
+        buttonGroup2.add(jrbComercio);
+        jrbComercio.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jrbComercio.setText("Comércio");
+        jrbComercio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbComercioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jrbComercio);
+        jrbComercio.setBounds(520, 30, 79, 23);
+
+        buttonGroup2.add(jrbCondominio);
+        jrbCondominio.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jrbCondominio.setText("Condomínio");
+        getContentPane().add(jrbCondominio);
+        jrbCondominio.setBounds(630, 30, 93, 23);
+
+        jlStatus.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlStatus.setText("Status");
+        getContentPane().add(jlStatus);
+        jlStatus.setBounds(880, 10, 35, 15);
+        getContentPane().add(jtfStatus);
+        jtfStatus.setBounds(860, 30, 90, 20);
+
+        jbConfirmar.setText("Confirmar");
+        getContentPane().add(jbConfirmar);
+        jbConfirmar.setBounds(320, 500, 140, 70);
+
+        jbCancelar.setText("Cancelar");
+        getContentPane().add(jbCancelar);
+        jbCancelar.setBounds(490, 500, 140, 70);
+
+        jbEditar.setText("Editar");
+        getContentPane().add(jbEditar);
+        jbEditar.setBounds(660, 500, 140, 70);
+
+        jSeparator4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(jSeparator4);
+        jSeparator4.setBounds(30, 100, 110, 140);
+
+        jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(jSeparator5);
+        jSeparator5.setBounds(10, 0, 980, 70);
 
         jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jmenuCadastro.add(jMenu1);
 
         jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jmenuCadastro.add(jMenu2);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jmenuCadastro);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jcbFestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbFestaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbFestaActionPerformed
+
+    private void jtfNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNumeroActionPerformed
+
+    private void jtfUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfUFActionPerformed
+
+    private void jrbComercioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbComercioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbComercioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -608,7 +741,7 @@ public class cadastroImovel extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -623,6 +756,7 @@ public class cadastroImovel extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(cadastroImovel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -633,23 +767,9 @@ public class cadastroImovel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox10;
-    private javax.swing.JCheckBox jCheckBox11;
-    private javax.swing.JCheckBox jCheckBox12;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -658,8 +778,6 @@ public class cadastroImovel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -681,71 +799,103 @@ public class cadastroImovel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextArea jTextArea5;
-    private javax.swing.JTextArea jTextArea6;
-    private javax.swing.JTextArea jTextArea7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField23;
-    private javax.swing.JTextField jTextField24;
-    private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField26;
-    private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField28;
-    private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField30;
-    private javax.swing.JTextField jTextField31;
-    private javax.swing.JTextField jTextField32;
-    private javax.swing.JTextField jTextField33;
-    private javax.swing.JTextField jTextField34;
-    private javax.swing.JTextField jTextField35;
-    private javax.swing.JTextField jTextField36;
-    private javax.swing.JTextField jTextField37;
-    private javax.swing.JTextField jTextField38;
-    private javax.swing.JTextField jTextField39;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JButton jbAdd;
+    private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbConfirmar;
+    private javax.swing.JButton jbEditar;
+    private javax.swing.JCheckBox jcbFesta;
+    private javax.swing.JCheckBox jcbLocacao;
+    private javax.swing.JCheckBox jcbTemporada;
+    private javax.swing.JCheckBox jcbVenda;
+    private javax.swing.JInternalFrame jifDescricao;
+    private javax.swing.JInternalFrame jifEndereco;
+    private javax.swing.JInternalFrame jifOutros;
+    private javax.swing.JInternalFrame jifValores;
+    private javax.swing.JLabel jlBairro;
+    private javax.swing.JLabel jlCidade;
+    private javax.swing.JLabel jlCodigo;
+    private javax.swing.JLabel jlComplemento;
+    private javax.swing.JLabel jlCondominio;
+    private javax.swing.JLabel jlLogradouro;
+    private javax.swing.JLabel jlNumero;
+    private javax.swing.JLabel jlReferencia;
+    private javax.swing.JLabel jlStatus;
+    private javax.swing.JLabel jlTipo;
+    private javax.swing.JLabel jlUF;
+    private javax.swing.JLabel jlZona;
+    private javax.swing.JMenuBar jmenuCadastro;
+    private javax.swing.JRadioButton jrbApartamento;
+    private javax.swing.JRadioButton jrbCasa;
+    private javax.swing.JRadioButton jrbComercio;
+    private javax.swing.JRadioButton jrbCondominio;
+    private javax.swing.JRadioButton jrbMobiliada;
+    private javax.swing.JRadioButton jrbSalao;
+    private javax.swing.JRadioButton jrbSemMobilia;
+    private javax.swing.JRadioButton jrbSemiMobiliada;
+    private javax.swing.JTextArea jtAcabamento;
+    private javax.swing.JTextField jtAreaConstruida;
+    private javax.swing.JTextArea jtAreaExterna;
+    private javax.swing.JTextField jtAreaServico;
+    private javax.swing.JTextField jtBanheiros;
+    private javax.swing.JTextField jtCartorio;
+    private javax.swing.JTextArea jtChaves;
+    private javax.swing.JTextField jtCodigo;
+    private javax.swing.JTextField jtContaAgua;
+    private javax.swing.JTextField jtContaLuz;
+    private javax.swing.JTextField jtContrato;
+    private javax.swing.JTextField jtDepEmpregada;
+    private javax.swing.JTextField jtIdadeImovel;
+    private javax.swing.JTextField jtIptu;
+    private javax.swing.JTextField jtLavados;
+    private javax.swing.JTextField jtLavanderia;
+    private javax.swing.JTextField jtMatriculo;
+    private javax.swing.JTextField jtMedidasTerreno;
+    private javax.swing.JTextArea jtMobilia;
+    private javax.swing.JTextArea jtObservacao;
+    private javax.swing.JTextArea jtOutros;
+    private javax.swing.JTextField jtPisos;
+    private javax.swing.JTextField jtPscina;
+    private javax.swing.JTextField jtQuartos;
+    private javax.swing.JTextField jtSalas;
+    private javax.swing.JTextField jtSituacaoEscritura;
+    private javax.swing.JTextField jtSuites;
+    private javax.swing.JTextField jtTamanhoTerreno;
+    private javax.swing.JTextArea jtTipoImovel;
+    private javax.swing.JTextField jtVagasGaragem;
+    private javax.swing.JTextField jtValorCondominio;
+    private javax.swing.JTextField jtValorDiaria;
+    private javax.swing.JTextField jtValorIptu;
+    private javax.swing.JTextField jtValorLocacaoMes;
+    private javax.swing.JTextField jtValorTemporada;
+    private javax.swing.JTextField jtValorVenda;
+    private javax.swing.JTextField jtfBairro;
+    private javax.swing.JTextField jtfCidade;
+    private javax.swing.JTextField jtfComplemento;
+    private javax.swing.JTextField jtfCondominio;
+    private javax.swing.JTextField jtfLogradouro;
+    private javax.swing.JTextField jtfNumero;
+    private javax.swing.JTextField jtfReferencia;
+    private javax.swing.JTextField jtfStatus;
+    private javax.swing.JTextField jtfUF;
+    private javax.swing.JTextField jtfZona;
+    private javax.swing.JTabbedPane jtpCadastro;
     // End of variables declaration//GEN-END:variables
 }
