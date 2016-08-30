@@ -102,7 +102,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
         jCheckBox3.setText("Salão");
 
-        jCheckBox4.setText("Condominio");
+        jCheckBox4.setText("Temporario");
 
         jCheckBox5.setText("Comercio");
 

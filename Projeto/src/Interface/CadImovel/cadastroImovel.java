@@ -324,33 +324,41 @@ public class cadastroImovel extends javax.swing.JFrame {
         jifValores.getContentPane().add(jLabel44);
         jLabel44.setBounds(10, 80, 110, 14);
 
-        jLabel45.setText("valor diaria");
+        jLabel45.setText("valor Festa");
         jifValores.getContentPane().add(jLabel45);
         jLabel45.setBounds(10, 170, 110, 14);
 
+        jtValorLocacaoMes.setEditable(false);
         jtValorLocacaoMes.setText("jTextField33");
+        jtValorLocacaoMes.setEnabled(false);
         jifValores.getContentPane().add(jtValorLocacaoMes);
-        jtValorLocacaoMes.setBounds(130, 20, 65, 20);
+        jtValorLocacaoMes.setBounds(130, 20, 60, 20);
 
+        jtValorVenda.setEditable(false);
         jtValorVenda.setText("jTextField34");
+        jtValorVenda.setEnabled(false);
         jifValores.getContentPane().add(jtValorVenda);
-        jtValorVenda.setBounds(130, 50, 65, 20);
+        jtValorVenda.setBounds(130, 50, 60, 20);
 
         jtValorCondominio.setText("jTextField35");
         jifValores.getContentPane().add(jtValorCondominio);
         jtValorCondominio.setBounds(130, 140, 65, 20);
 
+        jtValorTemporada.setEditable(false);
         jtValorTemporada.setText("jTextField36");
+        jtValorTemporada.setEnabled(false);
         jifValores.getContentPane().add(jtValorTemporada);
-        jtValorTemporada.setBounds(130, 80, 65, 20);
+        jtValorTemporada.setBounds(130, 80, 60, 20);
 
         jtValorIptu.setText("jTextField37");
         jifValores.getContentPane().add(jtValorIptu);
         jtValorIptu.setBounds(130, 110, 65, 20);
 
+        jtValorDiaria.setEditable(false);
         jtValorDiaria.setText("jTextField38");
+        jtValorDiaria.setEnabled(false);
         jifValores.getContentPane().add(jtValorDiaria);
-        jtValorDiaria.setBounds(130, 170, 65, 20);
+        jtValorDiaria.setBounds(130, 170, 60, 20);
 
         jtpCadastro.addTab("Valores", jifValores);
 
@@ -610,9 +618,9 @@ public class cadastroImovel extends javax.swing.JFrame {
         jifDescricao.getContentPane().add(jScrollPane3);
         jScrollPane3.setBounds(500, 170, 200, 60);
 
-        jLabel30.setText("Tipo de imovel");
+        jLabel30.setText("Descrição Imovel");
         jifDescricao.getContentPane().add(jLabel30);
-        jLabel30.setBounds(400, 60, 90, 14);
+        jLabel30.setBounds(380, 50, 110, 14);
 
         jLabel31.setText("Area Externa");
         jifDescricao.getContentPane().add(jLabel31);
@@ -653,6 +661,11 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         jcbLocacao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jcbLocacao.setText("Locação");
+        jcbLocacao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbLocacaoMouseClicked(evt);
+            }
+        });
         getContentPane().add(jcbLocacao);
         jcbLocacao.setBounds(40, 110, 90, 23);
         getContentPane().add(jtCodigo);
@@ -660,16 +673,31 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         jcbVenda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jcbVenda.setText("Venda");
+        jcbVenda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbVendaMouseClicked(evt);
+            }
+        });
         getContentPane().add(jcbVenda);
         jcbVenda.setBounds(40, 140, 90, 23);
 
         jcbTemporada.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jcbTemporada.setText("Temporada");
+        jcbTemporada.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbTemporadaMouseClicked(evt);
+            }
+        });
         getContentPane().add(jcbTemporada);
         jcbTemporada.setBounds(40, 170, 90, 23);
 
         jcbFesta.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jcbFesta.setText("Festa");
+        jcbFesta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbFestaMouseClicked(evt);
+            }
+        });
         jcbFesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbFestaActionPerformed(evt);
@@ -714,9 +742,9 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         buttonGroup2.add(jrbCondominio);
         jrbCondominio.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jrbCondominio.setText("Condomínio");
+        jrbCondominio.setText("Temporario");
         getContentPane().add(jrbCondominio);
-        jrbCondominio.setBounds(630, 30, 93, 23);
+        jrbCondominio.setBounds(630, 30, 89, 23);
 
         jlStatus.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jlStatus.setText("Status");
@@ -783,6 +811,53 @@ public class cadastroImovel extends javax.swing.JFrame {
            new cadastroImovelHome().setVisible(true);
            dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
+
+    private void jcbFestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbFestaMouseClicked
+                                  
+        if (jcbFesta.isSelected()) {
+            jtValorDiaria.setEditable(true);
+            jtValorDiaria.setEnabled(true);
+
+        } else {
+            jtValorDiaria.setEditable(false);
+            jtValorDiaria.setEnabled(false);
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_jcbFestaMouseClicked
+
+    private void jcbTemporadaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbTemporadaMouseClicked
+                                
+                 if (jcbTemporada.isSelected()) {
+            jtValorTemporada.setEditable(true);
+            jtValorTemporada.setEnabled(true);
+
+        } else {
+            jtValorTemporada.setEditable(false);
+            jtValorTemporada.setEnabled(false);
+        }  // TODO add your handling code here:
+    }//GEN-LAST:event_jcbTemporadaMouseClicked
+
+    private void jcbVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbVendaMouseClicked
+                           
+            if (jcbVenda.isSelected()) {
+            jtValorVenda.setEditable(true);
+            jtValorVenda.setEnabled(true);
+
+        } else {
+            jtValorVenda.setEditable(false);
+            jtValorVenda.setEnabled(false);
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_jcbVendaMouseClicked
+
+    private void jcbLocacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbLocacaoMouseClicked
+          if (jcbLocacao.isSelected()) {
+            jtValorLocacaoMes.setEditable(true);
+            jtValorLocacaoMes.setEnabled(true);
+
+        } else {
+            jtValorLocacaoMes.setEditable(false);
+            jtValorLocacaoMes.setEnabled(false);
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_jcbLocacaoMouseClicked
 
     /**
      * @param args the command line arguments
