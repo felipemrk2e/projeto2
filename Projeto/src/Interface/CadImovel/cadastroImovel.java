@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author user
+ * Japones Viado
  */
 public class cadastroImovel extends javax.swing.JFrame {
 
