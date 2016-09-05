@@ -119,29 +119,30 @@ public class ImovelDao extends DAO<Imovel>{
                 Imovel i = new Imovel();
                 
                 i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdSuites(rs.getInt("qtdQuartos"));
-                i.setQtdSalas(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
-                i.setQtdQuartos(rs.getInt("qtdQuartos"));
+                i.setQtdSuites(rs.getInt("qtdSuites"));
+                i.setQtdSalas(rs.getInt("qtdSalas"));
+                i.setQtdBanheiros(rs.getInt("qtdBanheiros"));
+                i.setQtdPisos(rs.getInt("qtdPisos"));
+                i.setLavanderia(rs.getInt("lavanderia"));
+                i.setVagasGaragem(rs.getInt("vagasGaragem"));
+                i.setAreaServico(rs.getInt("areaServico"));
+                i.setPiscina(rs.getInt("piscina"));
+                i.setLavabos(rs.getInt("lavabos"));
+                i.setDepEmpregados(rs.getInt("depEmpregados"));
+                i.setAreaExterna(rs.getString("areaExterna"));
+                i.setDataConstrucao(rs.getDate("dataConstucao"));
+                i.setAcabamento(rs.getString("acabamento"));
+                i.setOutrosItens(rs.getString("outrosItens"));
+                i.setDescricaoImovel(rs.getString("descricaoImovel"));
+                i.setObservacoes(rs.getString("observacoes"));
+                i.setChaves(rs.getString("chaves"));
+                i.setValorIptu(rs.getFloat("valorIptu"));
                 
-		
-                
+                /*
+                i.setMobilia(rs.getInt("qtdQuartos"));
+                i.setTipoImovel(rs.getInt("qtdQuartos"));
+                */
+
                 list.add(i);
             }
         }
