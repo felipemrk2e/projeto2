@@ -27,7 +27,78 @@ public class cadastroImovel extends javax.swing.JFrame {
         removerTitleBar();
 
     }
-
+public cadastroImovel(String idImovel){
+        initComponents();
+        fecharCadastro();
+        removerTitleBar();
+        //Falta fazer a consulta no banco e mudar o popular para receber o objeto com os dados do banco e setar dentro dele
+        
+        popular();
+    }
+    
+    public void popular() {
+    //falta o tipo de imovel,tipo de locacao e tipo mobilia
+       
+        jtCodigo.setText("");
+        jtfStatus.setText("");
+        
+       //Endereço
+        jtfLogradouro.setText("");
+        jtfNumero.setText("");
+        jtfComplemento.setText("");
+        jtfBairro.setText("");
+        jtfUF.setText("");
+        jtfReferencia.setText("");
+        jtfZona.setText("");
+        jtfCondominio.setText("");
+        
+       //valores
+        jtValorLocacaoMes.setText("");
+        jtValorVenda.setText("");
+        jtValorTemporada.setText("");
+        jtValorIptu.setText("");
+        jtValorCondominio.setText("");
+        jtValorDiaria.setText("");
+        
+      //Outros 
+        jtMatriculo.setText("");
+        jtContaAgua.setText("");
+        jtContaLuz.setText("");
+        jtIptu.setText("");
+        jtContrato.setText("");
+        jtCartorio.setText("");
+        jtSituacaoEscritura.setText("");
+        //Precisa adicionar as medidas do terreno
+        jtAreaConstruida.setText("");
+        //não esquecer
+        jtMobilia.setText("");
+        jtChaves.setText("");
+        jtObservacao.setText("");
+        
+      //Descrição  
+        jtQuartos.setText("");
+        jtSuites.setText("");
+        jtSalas.setText("");
+        jtBanheiros.setText("");
+        jtLavados.setText("");
+        jtAreaServico.setText("");
+        jtLavanderia.setText("");
+        jtPisos.setText("");
+        jtIdadeImovel.setText("");
+        jtPscina.setText("");
+        jtVagasGaragem.setText("");
+        jtDepEmpregada.setText("");
+        jtTipoImovel.setText("");
+        jtAreaExterna.setText("");
+        jtAcabamento.setText("");
+        jtOutros.setText("");
+        
+        
+        
+        
+        
+    }
+    
     public void removerTitleBar() {
 
         ((javax.swing.plaf.basic.BasicInternalFrameUI) jifEndereco.getUI()).setNorthPane(null);
