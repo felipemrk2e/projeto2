@@ -1,5 +1,5 @@
 
-package Interface.Model;
+package Interface.CadImovel.backEnd;
 
 public class Terreno {
     
