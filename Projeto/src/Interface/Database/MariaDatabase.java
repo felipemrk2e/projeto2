@@ -1,4 +1,4 @@
-package Interface.Database;
+package Interface.CadImovel.conexao;
 
 import java.sql.*;
 
