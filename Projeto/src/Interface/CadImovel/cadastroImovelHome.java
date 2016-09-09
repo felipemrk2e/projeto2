@@ -5,7 +5,7 @@
  */
 package Interface.CadImovel;
 
-import Interface.Model.imoveis;
+import Interface.CadImovel.backEnd.imoveis;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
