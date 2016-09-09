@@ -5,6 +5,7 @@
  */
 package validacao;
 
+import Interface.CadImovel.cadastroImovel;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class validacao {
     
-    
+
     
     
     
@@ -22,7 +23,7 @@ public class validacao {
     
     
 
-    public boolean validaNumeros(String numero) {
+    public static boolean validaNumeros(String numero) {
 
         try {
 
@@ -36,7 +37,7 @@ public class validacao {
 
     }
 
-    public boolean validaLetras(String Nome) {
+    public static boolean validaLetras(String Nome) {
        String regex = "^([a-zA-ZáéíóúàâêôãõüçÁÉÍÓÚÀÂÊÔÃÕÜÇ ]+)";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(Nome);
@@ -47,6 +48,12 @@ public class validacao {
         }
     }
     
+    public static void Verificar(String [] textField) {
+        
+        
+    }
+   
+        
     
     
 }
