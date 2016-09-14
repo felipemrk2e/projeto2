@@ -2,7 +2,7 @@ CREATE DATABASE ProjetoDois;
 USE ProjetoDois;
 
 
--- V 1.5 do SQL NULL --
+-- V 1.6 do SQL NULL --
 
 CREATE TABLE TipoImovel(
     idTipoImovel INT AUTO_INCREMENT NOT NULL,
@@ -99,19 +99,20 @@ CREATE TABLE Imovel_has_TipoLocacao(
 
 
 CREATE TABLE Estado(
-    siglaEstado CHAR(2) NOT NULL,
-    nomeEstado VARCHAR(85) NOT NULL,
-    CONSTRAINT PRIMARY KEY(siglaEstado)
+    id int(11) NOT NULL,
+    nome varchar(45) NOT NULL,
+    sigla varchar(2) NOT NULL,
+    PRIMARY KEY (id, sigla)
 );
 
 
 CREATE TABLE Cidade(
     idCidade INT NOT NULL AUTO_INCREMENT,
     nomeCidade VARCHAR(255) NOT NULL,
-    siglaEstado CHAR(2) NOT NULL,
+    idEstado INT NOT NULL,
     CONSTRAINT PRIMARY KEY(idCidade),
-    CONSTRAINT FOREIGN KEY (siglaEstado)
-    REFERENCES Estado(siglaEstado)
+    CONSTRAINT FOREIGN KEY (idEstado)
+    REFERENCES Estado(id)
 );
 
 
