@@ -3,7 +3,7 @@ USE ProjetoDois;
 
 
 -- V 1.6 do SQL --
-
+-- Estrutura das entidades Estado e Cidade foram alteradas --
 
 
 

@@ -3,6 +3,7 @@ USE ProjetoDois;
 
 
 -- V 1.6 do SQL NULL --
+-- Estrutura das entidades Estado e Cidade foram alteradas --
 
 CREATE TABLE TipoImovel(
     idTipoImovel INT AUTO_INCREMENT NOT NULL,

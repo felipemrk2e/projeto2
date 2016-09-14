@@ -1,3 +1,5 @@
+-- Inserts para o banco de dados. --
+
 INSERT INTO TipoLocacao (idTipoLocacao, tipoContrato) VALUES(0, 'Festa'), (0, 'Locacao'), (0, 'Temporada'), (0, 'Venda');
 INSERT INTO Mobilia VALUES(0, 'Mobiliada'), (0, 'Semi Mobiliada'), (0, 'Sem Mobilia');
 INSERT INTO TipoImovel (idTipoImovel, tipo) VALUES(0, 'Apartamento'), (0, 'Casa'), (0, 'Comercio'), (0, 'Salão'), (0, 'Temporário');
