@@ -1,7 +1,8 @@
 
-package Interface.CadImovel.backEnd;
+package Interface.Model;
 
 public class Mobilia {
+    
     private int idMobilia;
     private String tipoMobilia;
     private Imovel imovel;

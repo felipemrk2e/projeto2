@@ -1,10 +1,10 @@
 
-package Interface.CadImovel.backEnd;
+package Interface.Model;
 
 public class TipoImovel {
     
     private int idTipoImovel;
-    private String tipo;
+    private String tipoLocacao;
     private String descricao;
     
     public int getIdTipoImovel() {
@@ -15,12 +15,12 @@ public class TipoImovel {
         this.idTipoImovel = idTipoImovel;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getTipoLocacao() {
+        return tipoLocacao;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTipoLocacao(String tipoLocacao) {
+        this.tipoLocacao = tipoLocacao;
     }
 
     public String getDescricao() {

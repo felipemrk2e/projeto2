@@ -1,13 +1,13 @@
 
-package Interface.CadImovel.backEnd;
+package Interface.Model;
 
 public class Terreno {
     
     private int idTerreno;
-    private String metrosConstruidos;
-    private String medidasTerreno;
-    private String metrosQuadrados;
+    private Double comprimento;
+    private Double largura;
     private String situacaoEscritura;
+    
     private Imovel imovel;
     
     public int getIdTerreno() {
@@ -18,30 +18,27 @@ public class Terreno {
         this.idTerreno = idTerreno;
     }
 
-    public String getMetrosConstruidos() {
-        return metrosConstruidos;
+    public Double getComprimento() {
+        return comprimento;
     }
 
-    public void setMetrosConstruidos(String metrosConstruidos) {
-        this.metrosConstruidos = metrosConstruidos;
+    public void setComprimento(Double comprimento) {
+        this.comprimento = comprimento;
     }
 
-    public String getMedidasTerreno() {
-        return medidasTerreno;
+    public Double getLargura() {
+        return largura;
     }
 
-    public void setMedidasTerreno(String medidasTerreno) {
-        this.medidasTerreno = medidasTerreno;
+    public void setLargura(Double largura) {
+        this.largura = largura;
     }
-
-    public String getMetrosQuadrados() {
+    
+    public double metrosQuadrados(){
+        double metrosQuadrados = largura * comprimento;
         return metrosQuadrados;
     }
-
-    public void setMetrosQuadrados(String metrosQuadrados) {
-        this.metrosQuadrados = metrosQuadrados;
-    }
-
+    
     public String getSituacaoEscritura() {
         return situacaoEscritura;
     }

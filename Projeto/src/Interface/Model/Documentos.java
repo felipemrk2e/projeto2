@@ -1,5 +1,5 @@
 
-package Interface.CadImovel.backEnd;
+package Interface.Model;
 
 public class Documentos {
     
@@ -8,7 +8,9 @@ public class Documentos {
     private String numIptu;
     private String numContrato;
     private String cartorio;
-
+   
+    private Imovel imovel;
+    
     public String getNumContaAgua() {
         return numContaAgua;
     }
@@ -49,5 +51,12 @@ public class Documentos {
         this.cartorio = cartorio;
     }
     
+    public Imovel getImovel() {
+        return imovel;
+    }
+
+    public void setImovel(Imovel imovel) {
+        this.imovel = imovel;
+    }
     
 }

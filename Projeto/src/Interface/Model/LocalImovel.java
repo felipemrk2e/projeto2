@@ -1,5 +1,5 @@
 
-package Interface.CadImovel.backEnd;
+package Interface.Model;
 
 
 public class LocalImovel {
@@ -9,6 +9,10 @@ public class LocalImovel {
     private String zona;
     private String referencia;
     private String nomeCondominio;
+
+    private Imovel imovel;
+    
+    //private Bairro bairro;
 
     public String getRua() {
         return rua;
@@ -48,6 +52,14 @@ public class LocalImovel {
 
     public void setNomeCondominio(String nomeCondominio) {
         this.nomeCondominio = nomeCondominio;
+    }
+    
+    public Imovel getImovel() {
+        return imovel;
+    }
+
+    public void setImovel(Imovel imovel) {
+        this.imovel = imovel;
     }
     
 }

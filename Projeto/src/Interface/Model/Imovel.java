@@ -1,4 +1,4 @@
-package Interface.CadImovel.backEnd;
+package Interface.Model;
 
 import java.util.*;
 
