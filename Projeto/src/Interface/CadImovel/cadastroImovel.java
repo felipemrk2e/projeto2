@@ -12,10 +12,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import validacao.validacao;
 
-/**
- *
- * Japones Viado
- */
+
 public class cadastroImovel extends javax.swing.JFrame {
 
     /**
