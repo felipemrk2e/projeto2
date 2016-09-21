@@ -937,6 +937,7 @@ public class cadastroImovel extends javax.swing.JFrame {
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
         int control = 0;
         boolean control2 = true;
+        
 // Fora das tabs..
 
         if (jcbLocacao.isSelected()) {
@@ -1362,7 +1363,8 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         //Descrição End
         if ((control == 6) && control2 == true) {
-
+            
+            JOptionPane.showMessageDialog(null, "Cadastro Efetuado com Sucesso !");
             System.out.println("Cadastro Efetuado");
 //        conexao banco;    
 
@@ -1373,6 +1375,7 @@ public class cadastroImovel extends javax.swing.JFrame {
             bgTipo.clearSelection();
             control = 0;
             control2 = true;
+            JOptionPane.showMessageDialog(null, "Erro Verifique os campos !");
             System.out.println("Erro Verifique os campos");
         }
 // TODO add your handling code here:
@@ -1404,7 +1407,21 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtfReferencia.setText("");
         jtfZona.setText("");
         jtfCondominio.setText("");
+        
+       
+        jtfLogradouro.setBackground(Color.white);
+        jtfNumero.setBackground(Color.white);
+        jtfComplemento.setBackground(Color.white);
+        jtfCidade.setBackground(Color.white);
+        jtfBairro.setBackground(Color.white);
+        jtfUF.setBackground(Color.white);
+        jtfReferencia.setBackground(Color.white);
+        jtfZona.setBackground(Color.white);
+        jtfCondominio.setBackground(Color.white);
+        
 
+        
+        
         //valores
         jtValorLocacaoMes.setText("");
         jtValorVenda.setText("");
@@ -1412,6 +1429,17 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtValorIptu.setText("");
         jtValorCondominio.setText("");
         jtValorDiaria.setText("");
+        
+        
+        jtValorLocacaoMes.setBackground(Color.white);
+        jtValorVenda.setBackground(Color.white);
+        jtValorTemporada.setBackground(Color.white);
+        jtValorIptu.setBackground(Color.white);
+        jtValorCondominio.setBackground(Color.white);
+        jtValorDiaria.setBackground(Color.white);
+        
+        
+        
 
         //Outros 
         jtMatriculo.setText("");
@@ -1427,6 +1455,21 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtMobilia.setText("");
         jtChaves.setText("");
         jtObservacao.setText("");
+        
+        jtMatriculo.setBackground(Color.white);
+        jtContaAgua.setBackground(Color.white);
+        jtContaLuz.setBackground(Color.white);
+        jtIptu.setBackground(Color.white);
+        jtContrato.setBackground(Color.white);
+        jtCartorio.setBackground(Color.white);
+        jtSituacaoEscritura.setBackground(Color.white);
+        //Precisa adicionar as medidas do terreno
+        jtAreaConstruida.setBackground(Color.white);
+        //não esquecer
+        jtMobilia.setBackground(Color.white);
+        jtChaves.setBackground(Color.white);
+        jtObservacao.setBackground(Color.white);
+        
 
         //Descrição  
         jtQuartos.setText("");
@@ -1445,6 +1488,25 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtAreaExterna.setText("");
         jtAcabamento.setText("");
         jtOutros.setText("");
+        
+        jtQuartos.setBackground(Color.white);
+        jtSuites.setBackground(Color.white);
+        jtSalas.setBackground(Color.white);
+        jtBanheiros.setBackground(Color.white);
+        jtLavados.setBackground(Color.white);
+        jtAreaServico.setBackground(Color.white);
+        jtLavanderia.setBackground(Color.white);
+        jtPisos.setBackground(Color.white);
+        jtIdadeImovel.setBackground(Color.white);
+        jtPscina.setBackground(Color.white);
+        jtVagasGaragem.setBackground(Color.white);
+        jtDepEmpregada.setBackground(Color.white);
+        jtTipoImovel.setBackground(Color.white);
+        jtAreaExterna.setBackground(Color.white);
+        jtAcabamento.setBackground(Color.white);
+        jtOutros.setBackground(Color.white);
+        
+        
     }
 
 
@@ -1458,6 +1520,10 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtValorVenda.setEnabled(false);
         jtValorTemporada.setEnabled(false);
         jtValorDiaria.setEnabled(false);
+        
+        JOptionPane.showMessageDialog(null," Campos Zerados com Sucesso ");
+        
+        
 // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1MousePressed
 
