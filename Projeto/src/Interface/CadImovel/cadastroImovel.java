@@ -101,7 +101,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtValorCondominio.setText("");
         jtValorDiaria.setText("");
 
-        //Outros 
+        //Outros  // adicionar largura e comprimento e apagar o campo adicional
         jtMatriculo.setText("");
         jtContaAgua.setText("");
         jtContaLuz.setText("");
@@ -256,6 +256,10 @@ public class cadastroImovel extends javax.swing.JFrame {
         jrbMobiliada = new javax.swing.JRadioButton();
         jrbSemiMobiliada = new javax.swing.JRadioButton();
         jrbSemMobilia = new javax.swing.JRadioButton();
+        jtComprimento = new javax.swing.JTextField();
+        jtLargura = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jifDescricao = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -460,19 +464,19 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         jLabel35.setText("Medidas terreno");
         jifOutros.getContentPane().add(jLabel35);
-        jLabel35.setBounds(235, 10, 100, 20);
+        jLabel35.setBounds(240, 110, 100, 20);
         jifOutros.getContentPane().add(jtMedidasTerreno);
-        jtMedidasTerreno.setBounds(360, 10, 60, 20);
+        jtMedidasTerreno.setBounds(360, 110, 60, 20);
 
         jLabel34.setText("Area construida");
         jifOutros.getContentPane().add(jLabel34);
-        jLabel34.setBounds(235, 40, 100, 14);
+        jLabel34.setBounds(240, 80, 100, 14);
         jifOutros.getContentPane().add(jtAreaConstruida);
-        jtAreaConstruida.setBounds(360, 40, 60, 20);
+        jtAreaConstruida.setBounds(360, 80, 60, 20);
 
         jLabel36.setText("Tamanho terreno");
         jifOutros.getContentPane().add(jLabel36);
-        jLabel36.setBounds(235, 70, 110, 20);
+        jLabel36.setBounds(240, 150, 110, 20);
         jifOutros.getContentPane().add(jtSituacaoEscritura);
         jtSituacaoEscritura.setBounds(40, 240, 130, 20);
 
@@ -480,7 +484,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jifOutros.getContentPane().add(jLabel37);
         jLabel37.setBounds(50, 210, 140, 20);
         jifOutros.getContentPane().add(jtTamanhoTerreno);
-        jtTamanhoTerreno.setBounds(360, 70, 60, 20);
+        jtTamanhoTerreno.setBounds(360, 150, 60, 20);
 
         jtChaves.setColumns(20);
         jtChaves.setRows(5);
@@ -562,7 +566,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         jSeparator2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jifOutros.getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(230, 0, 210, 160);
+        jSeparator2.setBounds(240, 200, 210, 180);
 
         jSeparator3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jifOutros.getContentPane().add(jSeparator3);
@@ -582,6 +586,18 @@ public class cadastroImovel extends javax.swing.JFrame {
         jrbSemMobilia.setText("Sem Mobilia");
         jifOutros.getContentPane().add(jrbSemMobilia);
         jrbSemMobilia.setBounds(460, 80, 110, 23);
+        jifOutros.getContentPane().add(jtComprimento);
+        jtComprimento.setBounds(360, 50, 6, 20);
+        jifOutros.getContentPane().add(jtLargura);
+        jtLargura.setBounds(360, 20, 6, 20);
+
+        jLabel5.setText("Comprimento");
+        jifOutros.getContentPane().add(jLabel5);
+        jLabel5.setBounds(240, 50, 90, 20);
+
+        jLabel6.setText("Largura");
+        jifOutros.getContentPane().add(jLabel6);
+        jLabel6.setBounds(240, 20, 80, 14);
 
         jtpCadastro.addTab("Outros", jifOutros);
 
@@ -1115,7 +1131,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         }
         //Valores End
         //Outros    
-        // Ficou de fora o medidas terreno,tamanho terreno
+        // Ficou de fora o medidas terreno,tamanho terreno // adicionar largura e comprimento e apagar o campo adicional
 
         if (jrbMobiliada.isSelected()) {
 
@@ -1449,7 +1465,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtContrato.setText("");
         jtCartorio.setText("");
         jtSituacaoEscritura.setText("");
-        //Precisa adicionar as medidas do terreno
+        //Precisa adicionar as medidas do terreno // adicionar largura e comprimento e apagar o campo adicional
         jtAreaConstruida.setText("");
         //não esquecer
         jtMobilia.setText("");
@@ -1463,7 +1479,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtContrato.setBackground(Color.white);
         jtCartorio.setBackground(Color.white);
         jtSituacaoEscritura.setBackground(Color.white);
-        //Precisa adicionar as medidas do terreno
+        //Precisa adicionar as medidas do terreno // adicionar largura e comprimento e apagar o campo adicional
         jtAreaConstruida.setBackground(Color.white);
         //não esquecer
         jtMobilia.setBackground(Color.white);
@@ -1600,6 +1616,8 @@ public class cadastroImovel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
@@ -1655,12 +1673,14 @@ public class cadastroImovel extends javax.swing.JFrame {
     private javax.swing.JTextField jtCartorio;
     private javax.swing.JTextArea jtChaves;
     private javax.swing.JTextField jtCodigo;
+    private javax.swing.JTextField jtComprimento;
     private javax.swing.JTextField jtContaAgua;
     private javax.swing.JTextField jtContaLuz;
     private javax.swing.JTextField jtContrato;
     private javax.swing.JTextField jtDepEmpregada;
     private javax.swing.JTextField jtIdadeImovel;
     private javax.swing.JTextField jtIptu;
+    private javax.swing.JTextField jtLargura;
     private javax.swing.JTextField jtLavados;
     private javax.swing.JTextField jtLavanderia;
     private javax.swing.JTextField jtMatriculo;
