@@ -6,7 +6,11 @@
 package Interface.CadCliente;
 
 import java.awt.Insets;
+import java.text.ParseException;
+import javax.swing.JFormattedTextField;
 import javax.swing.UIManager;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -19,12 +23,13 @@ public class cadastroCliente extends javax.swing.JFrame {
      */
     public cadastroCliente() {
         initComponents();
-        
+        configuraMascaras();
+
         UIManager.getDefaults().put("jtpCadastroCliente.contentBorderInsets", new Insets(0, 0, 0, 0));
         UIManager.getDefaults().put("jtpCadastroCliente.tabsOverlapBorder", true);
         jrbPessoaFisica.setSelected(true);
         ativaPessoa(true);
-        
+
     }
 
     /**
@@ -80,6 +85,10 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftCPFResponsavel = new javax.swing.JFormattedTextField();
         jspObs = new javax.swing.JScrollPane();
         jtaObs = new javax.swing.JTextArea();
+        jlInteresses = new javax.swing.JLabel();
+        jcbCompra = new javax.swing.JCheckBox();
+        jcbTroca = new javax.swing.JCheckBox();
+        jcbLocacao = new javax.swing.JCheckBox();
         jSeparator1 = new javax.swing.JSeparator();
         jtfNumero = new javax.swing.JTextField();
         jlCEP = new javax.swing.JLabel();
@@ -151,12 +160,12 @@ public class cadastroCliente extends javax.swing.JFrame {
         bgSexo.add(jrbMasculino);
         jrbMasculino.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jrbMasculino.setText("Masculino");
-        getContentPane().add(jrbMasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 25, -1, -1));
+        getContentPane().add(jrbMasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 28, -1, -1));
 
         bgSexo.add(jrbFeminino);
         jrbFeminino.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jrbFeminino.setText("Feminino");
-        getContentPane().add(jrbFeminino, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 25, -1, -1));
+        getContentPane().add(jrbFeminino, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 28, -1, -1));
         getContentPane().add(jftCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 150, -1));
 
         jlEndereco.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -243,6 +252,22 @@ public class cadastroCliente extends javax.swing.JFrame {
         jspObs.setViewportView(jtaObs);
 
         getContentPane().add(jspObs, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, 380, 65));
+
+        jlInteresses.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlInteresses.setText("Interesses");
+        getContentPane().add(jlInteresses, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, -1, -1));
+
+        jcbCompra.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jcbCompra.setText("Compra");
+        getContentPane().add(jcbCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 50, -1, -1));
+
+        jcbTroca.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jcbTroca.setText("Troca");
+        getContentPane().add(jcbTroca, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, -1, -1));
+
+        jcbLocacao.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jcbLocacao.setText("Locação");
+        getContentPane().add(jcbLocacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 90, -1, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 830, 140));
         getContentPane().add(jtfNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, 50, -1));
 
@@ -750,18 +775,20 @@ public class cadastroCliente extends javax.swing.JFrame {
     private void jrbPessoaFisicaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbPessoaFisicaMousePressed
         ativaPessoa(true);
     }//GEN-LAST:event_jrbPessoaFisicaMousePressed
-    
-    public void ativaPessoa(boolean ativo) {
+
+    public void ativaPessoa(boolean ativo) {        
         if (ativo == false) {
             jlCPF_CNPJ.setText("CNPJ");
             jlRG_Incricao.setText("Inscrição Estadual");
             jlNome.setText("Razão Social");
             jlEndereco.setText("Logradouro");
+            jlDataNascimento.setText("Data Fundação");
         } else {
             jlCPF_CNPJ.setText("CPF");
             jlRG_Incricao.setText("RG");
             jlNome.setText("Nome");
             jlEndereco.setText("Endereço");
+            jlDataNascimento.setText("Data Nascimento");
         }
         //Passando True Ativa Pessoa Fisica, False Pessoa Juridica
         jlCargo.setVisible(ativo);
@@ -783,7 +810,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jrbMasculino.setVisible(ativo);
         jrbFeminino.setEnabled(ativo);
         jrbMasculino.setEnabled(ativo);
-        
+
         //Passando False Pessoa Juridica
         jlNomeFantasia.setVisible(!ativo);
         jlNomeFantasia.setEnabled(!ativo);
@@ -797,6 +824,79 @@ public class cadastroCliente extends javax.swing.JFrame {
         jcbAtivo.setEnabled(!ativo);
         jlSituacao.setVisible(!ativo);
         jlSituacao.setEnabled(!ativo);
+    }
+
+    public boolean pessoaSelecionada() {
+        if (jrbPessoaFisica.isSelected()) {
+            return true;
+        }
+        return false;
+    }
+
+    public void mascaraCPF_CNPJ() {
+        try {
+            if (!pessoaSelecionada()) {
+                jftCPF.setFormatterFactory(new DefaultFormatterFactory(
+                        new MaskFormatter("###.###.###-##")));
+            } else {
+                jftCPF.setFormatterFactory(new DefaultFormatterFactory(
+                        new MaskFormatter("##.###.###/####-##")));
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void mascaraData() {
+        try {
+        jftDataNascimento.setFormatterFactory(new DefaultFormatterFactory(
+                new MaskFormatter("##/##/####")));
+        
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    public void mascaraCEP() {
+        try {
+        jftCEP.setFormatterFactory(new DefaultFormatterFactory(
+                new MaskFormatter("##.###-####")));
+        
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void mascaraTelefone() {
+        try {
+        jftTelefone.setFormatterFactory(new DefaultFormatterFactory(
+                new MaskFormatter("(##)####-####")));
+        jftComercial.setFormatterFactory(new DefaultFormatterFactory(
+                new MaskFormatter("(##)####-####")));
+        
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void mascaraCelular() {
+        try {
+        jftCelular.setFormatterFactory(new DefaultFormatterFactory(
+                new MaskFormatter("(##)#####-####")));        
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void configuraMascaras(){
+        mascaraCPF_CNPJ();
+        mascaraCelular();
+        mascaraTelefone();
+        mascaraCEP();
+        mascaraData();
     }
 
     /**
@@ -844,8 +944,11 @@ public class cadastroCliente extends javax.swing.JFrame {
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JButton jbEditar;
     private javax.swing.JCheckBox jcbAtivo;
+    private javax.swing.JCheckBox jcbCompra;
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JComboBox jcbEstadoCivil;
+    private javax.swing.JCheckBox jcbLocacao;
+    private javax.swing.JCheckBox jcbTroca;
     private javax.swing.JFormattedTextField jftCEP;
     private javax.swing.JFormattedTextField jftCPF;
     private javax.swing.JFormattedTextField jftCPFResponsavel;
@@ -869,6 +972,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jlEstado;
     private javax.swing.JLabel jlEstadoCivil;
     private javax.swing.JLabel jlFiador;
+    private javax.swing.JLabel jlInteresses;
     private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlNomeFantasia;
     private javax.swing.JLabel jlNumero;
