@@ -7,7 +7,15 @@ package Interface.CadCliente;
 
 import java.awt.Color;
 import java.awt.Insets;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
@@ -322,7 +330,10 @@ public class cadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
-        validaCampos();
+        if (!validaCampos(true)) {
+            JOptionPane.showMessageDialog(null, "Verifique os campos obrigatórios!");
+        }
+
         //        int control = 0;
         //        boolean control2 = true;
         //        // Fora das tabs..
@@ -774,11 +785,13 @@ public class cadastroCliente extends javax.swing.JFrame {
     private void jrbPessoaJuridicaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbPessoaJuridicaMousePressed
         ativaPessoa(false);
         mascaraCPF_CNPJ(false);
+        limpaCampos();
     }//GEN-LAST:event_jrbPessoaJuridicaMousePressed
 
     private void jrbPessoaFisicaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbPessoaFisicaMousePressed
         ativaPessoa(true);
         mascaraCPF_CNPJ(true);
+        limpaCampos();
     }//GEN-LAST:event_jrbPessoaFisicaMousePressed
 
     public void ativaPessoa(boolean ativo) {
@@ -803,8 +816,6 @@ public class cadastroCliente extends javax.swing.JFrame {
         jlFiador.setVisible(ativo);
         jtfFiador.setVisible(ativo);
         jtfFiador.setEnabled(ativo);
-        jlEstado.setVisible(ativo);
-        jlEstado.setEnabled(ativo);
         jlEstadoCivil.setVisible(ativo);
         jlEstadoCivil.setEnabled(ativo);
         jcbEstadoCivil.setVisible(ativo);
@@ -872,11 +883,9 @@ public class cadastroCliente extends javax.swing.JFrame {
                     new MaskFormatter("(##)####-####")));
             jftComercial.setFormatterFactory(new DefaultFormatterFactory(
                     new MaskFormatter("(##)####-####")));
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
 
     public void mascaraCelular() {
@@ -895,68 +904,58 @@ public class cadastroCliente extends javax.swing.JFrame {
         mascaraData();
     }
 
-    public void validaCampos() {
+    public boolean validaCampos(boolean valida) {
         if (jrbPessoaFisica.isSelected()) {
-
             if (!jtfNome.getText().equals("") && validacao.validaLetras(jtfNome.getText())) {
                 jtfNome.setBackground(Color.white);
-//            control++;
             } else {
                 jtfNome.setBackground(Color.red);
-
+                valida = false;
             }
-
-            if (!jftCPF.isEditValid()) {
+            if (jftCPF.getText().trim().length() == 14) {
                 jftCPF.setBackground(Color.white);
-//            control++;
             } else {
-                System.out.println("Pintou");
                 jftCPF.setBackground(Color.red);
+                valida = false;
             }
-
             if (!jtfEndereco.getText().equals("") && validacao.validaLetras(jtfEndereco.getText())) {
                 jtfEndereco.setBackground(Color.white);
-//            control++;
             } else {
                 jtfEndereco.setBackground(Color.red);
+                valida = false;
             }
-
             if (!jtfBairro.getText().equals("") && validacao.validaLetras(jtfBairro.getText())) {
                 jtfBairro.setBackground(Color.white);
-//            control++;
             } else {
                 jtfBairro.setBackground(Color.red);
+                valida = false;
             }
-
             if (!jtfCidade.getText().equals("") && validacao.validaLetras(jtfCidade.getText())) {
-                jtfBairro.setBackground(Color.white);
-//            control++;
+                jtfCidade.setBackground(Color.white);
             } else {
                 jtfCidade.setBackground(Color.red);
+                valida = false;
             }
-
-            if (!jftDataNascimento.getText().equals("")) {
-                jtfBairro.setBackground(Color.white);
-//            control++;
+            if (jftDataNascimento.getText().trim().length() == 10) {
+                jftDataNascimento.setBackground(Color.white);
             } else {
-                jtfCidade.setBackground(Color.red);
+                jftDataNascimento.setBackground(Color.red);
+                valida = false;
             }
-
             if (!jtfNumero.getText().equals("") && validacao.validaNumeros(jtfNumero.getText())) {
                 jtfNumero.setBackground(Color.white);
-//            control++;
             } else {
                 jtfNumero.setBackground(Color.red);
-
+                valida = false;
             }
-
-            if (jcbEstado.isValid()) {
+            if (jcbEstado.getSelectedItem() == "") {
                 jcbEstado.setBackground(Color.white);
             } else {
                 jcbEstado.setBackground(Color.red);
+                valida = false;
             }
-
-            if (!jftTelefone.getText().equals("") || jftCelular.getText().equals("") || jftComercial.getText().equals("")) {
+            System.out.println(jftTelefone.getText().trim().length());
+            if (jftTelefone.getText().trim().length() == 13 || jftCelular.getText().trim().length() == 14 || jftComercial.getText().trim().length() == 13) {
                 jftTelefone.setBackground(Color.white);
                 jftCelular.setBackground(Color.white);
                 jftComercial.setBackground(Color.white);
@@ -964,23 +963,152 @@ public class cadastroCliente extends javax.swing.JFrame {
                 jftTelefone.setBackground(Color.red);
                 jftCelular.setBackground(Color.red);
                 jftComercial.setBackground(Color.red);
+                valida = false;
+            }
+            if (jrbMasculino.isSelected() || jrbFeminino.isSelected()) {
+                jrbMasculino.setBackground(Color.white);
+                jrbFeminino.setBackground(Color.white);
+            } else {
+                jrbMasculino.setBackground(Color.red);
+                jrbFeminino.setBackground(Color.red);
+                valida = false;
+            }
+            if (jcbEstadoCivil.getSelectedItem() == "") {
+                jcbEstadoCivil.setBackground(Color.white);
+            } else {
+                jcbEstadoCivil.setBackground(Color.red);
+                valida = false;
+            }
+        } else if (jrbPessoaJuridica.isSelected()) {
+            if (!jtfNome.getText().equals("") && validacao.validaLetras(jtfNome.getText())) {
+                jtfNome.setBackground(Color.white);
+            } else {
+                jtfNome.setBackground(Color.red);
+                valida = false;
+            }
+            if (jftCPF.getText().trim().length() == 18) {
+                jftCPF.setBackground(Color.white);
+            } else {
+                jftCPF.setBackground(Color.red);
+                valida = false;
+            }
+            if (!jtfEndereco.getText().equals("") && validacao.validaLetras(jtfEndereco.getText())) {
+                jtfEndereco.setBackground(Color.white);
+            } else {
+                jtfEndereco.setBackground(Color.red);
+                valida = false;
+            }
+            if (!jtfBairro.getText().equals("") && validacao.validaLetras(jtfBairro.getText())) {
+                jtfBairro.setBackground(Color.white);
+            } else {
+                jtfBairro.setBackground(Color.red);
+                valida = false;
+            }
+            if (!jtfCidade.getText().equals("") && validacao.validaLetras(jtfCidade.getText())) {
+                jtfCidade.setBackground(Color.white);
+            } else {
+                jtfCidade.setBackground(Color.red);
+                valida = false;
+            }
+            if (jftDataNascimento.getText().trim().length() == 10) {
+                jftDataNascimento.setBackground(Color.white);
+            } else {
+                jftDataNascimento.setBackground(Color.red);
+                valida = false;
+            }
+            if (!jtfNumero.getText().equals("") && validacao.validaNumeros(jtfNumero.getText())) {
+                jtfNumero.setBackground(Color.white);
+            } else {
+                jtfNumero.setBackground(Color.red);
+                valida = false;
             }
 
-            // xor jftTelefone jftCelular jftComercial
-            //bgSexo
-            //jcbEstadoCivil
-        } else if (jrbPessoaJuridica.isSelected()) {
-            //jtfNome
-            //jftCPF
-            //jftDataNascimento
-            //jtfEndereco
-            //jtfNumero
-            //jtfBairro
-            //jtfCidade
-            //jcbEstado
-            // xor jftTelefone jftCelular jftComercial
+            if (jcbEstado.getSelectedItem() == "") {
+                jcbEstado.setBackground(Color.white);
+            } else {
+                jcbEstado.setBackground(Color.red);
+                valida = false;
+            }
+            System.out.println(jftTelefone.getText().trim().length());
+            if (jftTelefone.getText().trim().length() == 13 || jftCelular.getText().trim().length() == 14 || jftComercial.getText().trim().length() == 13) {
+                jftTelefone.setBackground(Color.white);
+                jftCelular.setBackground(Color.white);
+                jftComercial.setBackground(Color.white);
+            } else {
+                jftTelefone.setBackground(Color.red);
+                jftCelular.setBackground(Color.red);
+                jftComercial.setBackground(Color.red);
+                valida = false;
+            }
         }
+        return valida;
+    }
 
+    public void limpaCampos() {
+        jtfNome.setText("");
+        jtfNome.setBackground(Color.white);
+        jftCPF.setText("");
+        jftCPF.setBackground(Color.white);
+        jtfEndereco.setText("");
+        jtfEndereco.setBackground(Color.white);
+        jtfBairro.setText("");
+        jtfBairro.setBackground(Color.white);
+        jtfCidade.setText("");
+        jtfCidade.setBackground(Color.white);
+        jftDataNascimento.setText("");
+        jftDataNascimento.setBackground(Color.white);
+        jtfNumero.setText("");
+        jtfNumero.setBackground(Color.white);
+        jcbEstado.setBackground(Color.white);
+        jftTelefone.setText("");
+        jftTelefone.setBackground(Color.white);
+        jftCelular.setText("");
+        jftCelular.setBackground(Color.white);
+        jftComercial.setText("");
+        jftComercial.setBackground(Color.white);
+        jcbEstadoCivil.setBackground(Color.white);
+        jtfCargo.setText("");
+        jtfCargo.setBackground(Color.white);
+        jtfFiador.setText("");
+        jtfFiador.setBackground(Color.white);
+        jtfNomeFantasia.setText("");
+        jtfNomeFantasia.setBackground(Color.white);
+        jftCPFResponsavel.setText("");
+        jftCPFResponsavel.setBackground(Color.white);
+        jtfComplemento.setText("");
+        jtfComplemento.setBackground(Color.white);
+        jtfEmail.setText("");
+        jtfEmail.setBackground(Color.white);
+    }
+
+    public void setJcbEstado() throws SQLException {
+//        List<String> strList = new ArrayList<String>();
+//        String query = "SELECT UF FROM Estado";
+//        Connection con = Conexao.getConnection();
+//        PreparedStatement ps = con.prepareStatement(query);
+//        ResultSet rs = ps.executeQuery();
+//        while (rs.next) {
+//            strList.add(rs.getString("UF"));
+//        }
+//        ps.close();
+//
+//        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(strList.toArray());
+//        jcbEstado.setModel(defaultComboBox);
+    }
+    
+    public void setJcbEstadoCivil() throws SQLException{
+//        List<String> strList = new ArrayList<String>();
+//        String query = "SELECT nomeEstadoCivil FROM EstadoCivil";
+//        Connection con = Conexao.getConnection();
+//        PreparedStatement ps = con.prepareStatement(query);
+//        ResultSet rs = ps.executeQuery();
+//        while (rs.next) {
+//            strList.add(rs.getString("nomeEstadoCivil"));
+//        }
+//        ps.close();
+//
+//        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(strList.toArray());
+//        jcbEstadoCivil.setModel(defaultComboBox);
     }
 
     /**
