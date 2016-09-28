@@ -5,15 +5,23 @@
  */
 package Interface.CadImovel;
 
+import global.model.Estado;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
+import global.model.Bairro;
+import global.model.Cidade;
+import global.model.Endereco;
+import imovel.model.Documentacao;
+import imovel.model.Imovel;
+import imovel.model.Terreno;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import validacao.validacao;
 
-
 public class cadastroImovel extends javax.swing.JFrame {
+
+    int user = 1;
 
     /**
      * Creates new form cadastroImovel2
@@ -32,6 +40,92 @@ public class cadastroImovel extends javax.swing.JFrame {
         //Falta fazer a consulta no banco e mudar o popular para receber o objeto com os dados do banco e setar dentro dele
 
         popular();
+
+        if (user <= 2) {
+            DisableEnable(false);
+            jbEditar.setEnabled(true);
+            jbConfirmar.setEnabled(false);
+
+        } else {
+            DisableEnable(false);
+            jbConfirmar.setEnabled(false);
+
+        }
+
+    }
+
+    public void DisableEnable(Boolean b) {
+
+        jrbCasa.setEnabled(b);
+        jrbApartamento.setEnabled(b);
+        jrbSalao.setEnabled(b);
+        jrbComercio.setEnabled(b);
+        jrbCondominio.setEnabled(b);
+
+        jrbMobiliada.setEnabled(b);
+        jrbSemMobilia.setEnabled(b);
+        jrbSemiMobiliada.setEnabled(b);
+
+        jcbLocacao.setEnabled(b);
+        jcbTemporada.setEnabled(b);
+        jcbVenda.setEnabled(b);
+        jcbFesta.setEnabled(b);
+        jtfStatus.setEnabled(b);
+
+        //Endereço
+        jtfLogradouro.setEnabled(b);
+        jtfNumero.setEnabled(b);
+        jtfComplemento.setEnabled(b);
+        jtfCidade.setEnabled(b);
+        jtfBairro.setEnabled(b);
+        jtfUF.setEnabled(b);
+        jtfReferencia.setEnabled(b);
+        jtfZona.setEnabled(b);
+        jtfCondominio.setEnabled(b);
+
+        //valores
+        jtValorLocacaoMes.setEnabled(b);
+        jtValorVenda.setEnabled(b);
+        jtValorTemporada.setEnabled(b);
+        jtValorIptu.setEnabled(b);
+        jtValorCondominio.setEnabled(b);
+        jtValorDiaria.setEnabled(b);
+
+        //Outros 
+        jtMatriculo.setEnabled(b);
+        jtContaAgua.setEnabled(b);
+        jtContaLuz.setEnabled(b);
+        jtIptu.setEnabled(b);
+        jtContrato.setEnabled(b);
+        jtCartorio.setEnabled(b);
+        jtSituacaoEscritura.setEnabled(b);
+
+        jtLargura.setEnabled(b);
+        jtComprimento.setEnabled(b);
+        jtAreaConstruida.setEnabled(b);
+
+        jtMobilia.setEnabled(b);
+        jtChaves.setEnabled(b);
+        jtObservacao.setEnabled(b);
+
+        //Descrição  
+        jtQuartos.setEnabled(b);
+        jtSuites.setEnabled(b);
+        jtSalas.setEnabled(b);
+        jtBanheiros.setEnabled(b);
+        jtLavados.setEnabled(b);
+        jtAreaServico.setEnabled(b);
+        jtLavanderia.setEnabled(b);
+        jtPisos.setEnabled(b);
+        jtIdadeImovel.setEnabled(b);
+        jtPscina.setEnabled(b);
+        jtVagasGaragem.setEnabled(b);
+        jtDepEmpregada.setEnabled(b);
+        jtTipoImovel.setEnabled(b);
+        jtAreaExterna.setEnabled(b);
+        jtAcabamento.setEnabled(b);
+        jtOutros.setEnabled(b);
+
     }
 
     public void popular() {
@@ -109,9 +203,18 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtContrato.setText("");
         jtCartorio.setText("");
         jtSituacaoEscritura.setText("");
-        //Precisa adicionar as medidas do terreno
+        //Precisa adicionar as Tamanho do terreno
+
+        jtLargura.setText("");
+        jtComprimento.setText("");
         jtAreaConstruida.setText("");
-        //não esquecer
+
+        if (!jtLargura.getText().equals("") && !jtComprimento.getText().equals("")) {
+
+            jtTamanhoTerreno.setText(Integer.valueOf(jtLargura.getName()) + "x" + Integer.valueOf(jtComprimento.getName()));
+
+        }
+
         jtMobilia.setText("");
         jtChaves.setText("");
         jtObservacao.setText("");
@@ -222,8 +325,6 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtValorIptu = new javax.swing.JTextField();
         jtValorDiaria = new javax.swing.JTextField();
         jifOutros = new javax.swing.JInternalFrame();
-        jLabel35 = new javax.swing.JLabel();
-        jtMedidasTerreno = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
         jtAreaConstruida = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
@@ -256,6 +357,10 @@ public class cadastroImovel extends javax.swing.JFrame {
         jrbMobiliada = new javax.swing.JRadioButton();
         jrbSemiMobiliada = new javax.swing.JRadioButton();
         jrbSemMobilia = new javax.swing.JRadioButton();
+        jtComprimento = new javax.swing.JTextField();
+        jtLargura = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jifDescricao = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -458,29 +563,26 @@ public class cadastroImovel extends javax.swing.JFrame {
         jifOutros.setVisible(true);
         jifOutros.getContentPane().setLayout(null);
 
-        jLabel35.setText("Medidas terreno");
-        jifOutros.getContentPane().add(jLabel35);
-        jLabel35.setBounds(235, 10, 100, 20);
-        jifOutros.getContentPane().add(jtMedidasTerreno);
-        jtMedidasTerreno.setBounds(360, 10, 60, 20);
-
         jLabel34.setText("Area construida");
         jifOutros.getContentPane().add(jLabel34);
-        jLabel34.setBounds(235, 40, 100, 14);
+        jLabel34.setBounds(240, 80, 100, 14);
         jifOutros.getContentPane().add(jtAreaConstruida);
-        jtAreaConstruida.setBounds(360, 40, 60, 20);
+        jtAreaConstruida.setBounds(360, 80, 60, 20);
 
         jLabel36.setText("Tamanho terreno");
         jifOutros.getContentPane().add(jLabel36);
-        jLabel36.setBounds(235, 70, 110, 20);
+        jLabel36.setBounds(240, 110, 110, 20);
         jifOutros.getContentPane().add(jtSituacaoEscritura);
         jtSituacaoEscritura.setBounds(40, 240, 130, 20);
 
         jLabel37.setText("Situação Escritura");
         jifOutros.getContentPane().add(jLabel37);
         jLabel37.setBounds(50, 210, 140, 20);
+
+        jtTamanhoTerreno.setEditable(false);
+        jtTamanhoTerreno.setEnabled(false);
         jifOutros.getContentPane().add(jtTamanhoTerreno);
-        jtTamanhoTerreno.setBounds(360, 70, 60, 20);
+        jtTamanhoTerreno.setBounds(360, 110, 60, 20);
 
         jtChaves.setColumns(20);
         jtChaves.setRows(5);
@@ -562,7 +664,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         jSeparator2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jifOutros.getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(230, 0, 210, 160);
+        jSeparator2.setBounds(230, 0, 210, 180);
 
         jSeparator3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jifOutros.getContentPane().add(jSeparator3);
@@ -582,6 +684,18 @@ public class cadastroImovel extends javax.swing.JFrame {
         jrbSemMobilia.setText("Sem Mobilia");
         jifOutros.getContentPane().add(jrbSemMobilia);
         jrbSemMobilia.setBounds(460, 80, 110, 23);
+        jifOutros.getContentPane().add(jtComprimento);
+        jtComprimento.setBounds(360, 50, 60, 20);
+        jifOutros.getContentPane().add(jtLargura);
+        jtLargura.setBounds(360, 20, 60, 20);
+
+        jLabel5.setText("Comprimento");
+        jifOutros.getContentPane().add(jLabel5);
+        jLabel5.setBounds(240, 50, 90, 20);
+
+        jLabel6.setText("Largura");
+        jifOutros.getContentPane().add(jLabel6);
+        jLabel6.setBounds(240, 20, 80, 14);
 
         jtpCadastro.addTab("Outros", jifOutros);
 
@@ -829,6 +943,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jbCancelar.setBounds(490, 500, 140, 70);
 
         jbEditar.setText("Editar");
+        jbEditar.setEnabled(false);
         getContentPane().add(jbEditar);
         jbEditar.setBounds(660, 500, 140, 70);
 
@@ -937,9 +1052,15 @@ public class cadastroImovel extends javax.swing.JFrame {
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
         int control = 0;
         boolean control2 = true;
-        
-// Fora das tabs..
+        Imovel imovel = new Imovel();
+        Endereco endereco = new Endereco();
+        Bairro bairro = new Bairro();
+        Cidade cidade = new Cidade();
+        Estado uf = new Estado();
+        Documentacao documentacao = new Documentacao();
+        Terreno terreno = new Terreno();
 
+// Fora das tabs..
         if (jcbLocacao.isSelected()) {
 
         } else {
@@ -964,22 +1085,27 @@ public class cadastroImovel extends javax.swing.JFrame {
         }
 
         //Endereço
-// Principal
+// Principal         // falta os botoes 
         if (jrbCasa.isSelected()) {
             control++;
+            jlTipo.setForeground(Color.black);
         }
+
         if (jrbSalao.isSelected()) {
             control++;
+            jlTipo.setForeground(Color.black);
         }
         if (jrbComercio.isSelected()) {
             control++;
+            jlTipo.setForeground(Color.black);
         }
         if (jrbCondominio.isSelected()) {
             control++;
+            jlTipo.setForeground(Color.black);
         }
 
         if (!jtfLogradouro.getText().equals("") && validacao.validaLetras(jtfLogradouro.getText())) {
-            System.out.println("x");
+            endereco.setNomeEndereco(jtfLogradouro.getText());
             jtfLogradouro.setBackground(Color.white);
             control++;
         } else {
@@ -988,7 +1114,9 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         }
         if (!jtfNumero.getText().equals("") && validacao.validaNumeros(jtfNumero.getText())) {
-            System.out.println("x");
+
+            endereco.setNumero(Integer.valueOf(jtfNumero.getText()));
+
             jtfNumero.setBackground(Color.white);
             control++;
         } else {
@@ -997,7 +1125,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         }
 
         if (!jtfCidade.getText().equals("") && validacao.validaLetras(jtfCidade.getText())) {
-            System.out.println("x");
+            cidade.setNomeCidade(jtfCidade.getText());
             jtfCidade.setBackground(Color.white);
             control++;
         } else {
@@ -1005,7 +1133,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         }
         if (!jtfBairro.getText().equals("") && validacao.validaLetras(jtfBairro.getText())) {
-            System.out.println("x");
+            bairro.setNomeBairro(jtfBairro.getText());
             jtfBairro.setBackground(Color.white);
             control++;
         } else {
@@ -1014,7 +1142,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         }
 
         if (!jtfUF.getText().equals("") && validacao.validaLetras(jtfUF.getText())) {
-            System.out.println("x");
+            uf.setNome(jtfUF.getText());
             jtfUF.setBackground(Color.white);
             control++;
         } else {
@@ -1024,21 +1152,22 @@ public class cadastroImovel extends javax.swing.JFrame {
 // Pricipal End
 
         if (!jtfComplemento.getText().equals("")) {
-            System.out.println("x");
+            endereco.setComplemento(jtfComplemento.getText());
         }
 
         if (!jtfReferencia.getText().equals("")) {
-            System.out.println("x");
+
+            endereco.setReferencia(jtfReferencia.getText());
         }
         if (!jtfCondominio.getText().equals("")) {
-            System.out.println("x");
+            endereco.setNomeCondominio(jtfCondominio.getText());
 
         }
 
         if (jtfZona.getText().equals("")) {
             jtfZona.setBackground(Color.white);
         } else if (!jtfZona.getText().equals("") && validacao.validaLetras(jtfZona.getText())) {
-            System.out.println("x");
+            endereco.setZona(jtfZona.getText());
             jtfZona.setBackground(Color.white);
         } else {
             control2 = false;
@@ -1047,7 +1176,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         }
         //Fim Endereço
 
-        //Valores 
+        //Valores // falta os valores locaçoes
         if (jtValorLocacaoMes.getText().equals("")) {
             jtValorLocacaoMes.setBackground(Color.white);
         } else if (!jtValorLocacaoMes.getText().equals("") && validacao.validaNumeros(jtValorLocacaoMes.getText())) {
@@ -1082,7 +1211,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         if (jtValorIptu.getText().equals("")) {
             jtValorIptu.setBackground(Color.white);
         } else if (!jtValorIptu.getText().equals("") && validacao.validaNumeros(jtValorIptu.getText())) {
-            System.out.println("x");
+            imovel.setValorIptu(Double.valueOf(jtValorIptu.getText()));
             jtValorIptu.setBackground(Color.white);
         } else {
             control2 = false;
@@ -1093,7 +1222,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         if (jtValorCondominio.getText().equals("")) {
             jtValorCondominio.setBackground(Color.white);
         } else if (!jtValorCondominio.getText().equals("") && validacao.validaNumeros(jtValorCondominio.getText())) {
-            System.out.println("x");
+            imovel.setValorCondominio(Double.valueOf(jtValorCondominio.getText()));
             jtValorCondominio.setBackground(Color.white);
         } else {
             control2 = false;
@@ -1114,8 +1243,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         }
         //Valores End
-        //Outros    
-        // Ficou de fora o medidas terreno,tamanho terreno
+        //Outros   // falta os botoes da mobilia
 
         if (jrbMobiliada.isSelected()) {
 
@@ -1132,7 +1260,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         if (jtMatriculo.getText().equals("")) {
             jtMatriculo.setBackground(Color.white);
         } else if (!jtMatriculo.getText().equals("") && validacao.validaNumeros(jtMatriculo.getText())) {
-            System.out.println("x");
+            documentacao.setNumMatricula(jtMatriculo.getText());
             jtMatriculo.setBackground(Color.white);
         } else {
             control2 = false;
@@ -1142,7 +1270,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         if (jtContaAgua.getText().equals("")) {
             jtContaAgua.setBackground(Color.white);
         } else if (!jtContaAgua.getText().equals("") && validacao.validaNumeros(jtContaAgua.getText())) {
-            System.out.println("x");
+            documentacao.setNumContaAgua(jtContaAgua.getText());
             jtContaAgua.setBackground(Color.white);
         } else {
             control2 = false;
@@ -1152,7 +1280,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         if (jtContaLuz.getText().equals("")) {
             jtContaLuz.setBackground(Color.white);
         } else if (!jtContaLuz.getText().equals("") && validacao.validaNumeros(jtContaLuz.getText())) {
-            System.out.println("x");
+            documentacao.setNumContaLuz(jtContaLuz.getText());
             jtContaLuz.setBackground(Color.white);
         } else {
             control2 = false;
@@ -1162,7 +1290,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         if (jtIptu.getText().equals("")) {
             jtIptu.setBackground(Color.white);
         } else if (!jtIptu.getText().equals("") && validacao.validaNumeros(jtIptu.getText())) {
-            System.out.println("x");
+            imovel.setValorIptu(Double.valueOf(jtIptu.getText()));
             jtIptu.setBackground(Color.white);
         } else {
             control2 = false;
@@ -1173,7 +1301,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         if (jtContrato.getText().equals("")) {
             jtContrato.setBackground(Color.white);
         } else if (!jtContrato.getText().equals("") && validacao.validaNumeros(jtContrato.getText())) {
-            System.out.println("x");
+            documentacao.setNumContrato(jtContrato.getText());
             jtContrato.setBackground(Color.white);
         } else {
             control2 = false;
@@ -1181,13 +1309,13 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         }
         if (!jtCartorio.getText().equals("")) {
-            System.out.println("x");
+            documentacao.setCartorio(jtCartorio.getText());
         }
 
         if (jtSituacaoEscritura.getText().equals("")) {
             jtSituacaoEscritura.setBackground(Color.white);
         } else if (!jtSituacaoEscritura.getText().equals("") && validacao.validaLetras(jtSituacaoEscritura.getText())) {
-            System.out.println("x");
+            terreno.setSituacaoEscritura(jtSituacaoEscritura.getText());
             jtSituacaoEscritura.setBackground(Color.white);
         } else {
             control2 = false;
@@ -1195,10 +1323,32 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         }
 
+        if (jtLargura.getText().equals("")) {
+            jtLargura.setBackground(Color.white);
+        } else if (!jtLargura.getText().equals("") && validacao.validaNumeros(jtLargura.getText())) {
+            terreno.setLargura(Double.valueOf(jtLargura.getText()));
+            jtLargura.setBackground(Color.white);
+        } else {
+            control2 = false;
+            jtLargura.setBackground(Color.red);
+
+        }
+
+        if (jtComprimento.getText().equals("")) {
+            jtComprimento.setBackground(Color.white);
+        } else if (!jtComprimento.getText().equals("") && validacao.validaNumeros(jtComprimento.getText())) {
+            terreno.setComprimento(Double.valueOf(jtComprimento.getText()));
+            jtComprimento.setBackground(Color.white);
+        } else {
+            control2 = false;
+            jtComprimento.setBackground(Color.red);
+
+        }
+
         if (jtAreaConstruida.getText().equals("")) {
             jtAreaConstruida.setBackground(Color.white);
         } else if (!jtAreaConstruida.getText().equals("") && validacao.validaNumeros(jtAreaConstruida.getText())) {
-            System.out.println("x");
+            terreno.setAreaConstruida(Double.valueOf(jtAreaConstruida.getText()));
             jtAreaConstruida.setBackground(Color.white);
         } else {
             control2 = false;
@@ -1206,13 +1356,13 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         }
         if (!jtMobilia.getText().equals("")) {
-            System.out.println("x");
+            imovel.setDescMobilia(jtMobilia.getText());
         }
         if (!jtChaves.getText().equals("")) {
-            System.out.println("x");
+            imovel.setChaves(jtChaves.getText());
         }
         if (!jtObservacao.getText().equals("")) {
-            System.out.println("x");
+            imovel.setObservacoes(jtObservacao.getText());
         }
         //Outros End
         //Descrição
@@ -1363,7 +1513,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         //Descrição End
         if ((control == 6) && control2 == true) {
-            
+
             JOptionPane.showMessageDialog(null, "Cadastro Efetuado com Sucesso !");
             System.out.println("Cadastro Efetuado");
 //        conexao banco;    
@@ -1371,8 +1521,16 @@ public class cadastroImovel extends javax.swing.JFrame {
             new cadastroImovelHome().setVisible(true);
             dispose();
         } else {
-            bgMobilia.clearSelection();
-            bgTipo.clearSelection();
+
+            if (jrbCasa.isSelected() || jrbSalao.isSelected() || jrbComercio.isSelected() || jrbCondominio.isSelected()) {
+
+            } else {
+
+                jlTipo.setForeground(Color.red);
+            };
+
+            //bgMobilia.clearSelection();
+            //bgTipo.clearSelection();
             control = 0;
             control2 = true;
             JOptionPane.showMessageDialog(null, "Erro Verifique os campos !");
@@ -1382,7 +1540,7 @@ public class cadastroImovel extends javax.swing.JFrame {
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     public void zerarCampos() {
-
+        jlTipo.setForeground(Color.black);
         bgTipo.clearSelection();
         bgMobilia.clearSelection();
 
@@ -1407,8 +1565,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtfReferencia.setText("");
         jtfZona.setText("");
         jtfCondominio.setText("");
-        
-       
+
         jtfLogradouro.setBackground(Color.white);
         jtfNumero.setBackground(Color.white);
         jtfComplemento.setBackground(Color.white);
@@ -1418,10 +1575,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtfReferencia.setBackground(Color.white);
         jtfZona.setBackground(Color.white);
         jtfCondominio.setBackground(Color.white);
-        
 
-        
-        
         //valores
         jtValorLocacaoMes.setText("");
         jtValorVenda.setText("");
@@ -1429,17 +1583,13 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtValorIptu.setText("");
         jtValorCondominio.setText("");
         jtValorDiaria.setText("");
-        
-        
+
         jtValorLocacaoMes.setBackground(Color.white);
         jtValorVenda.setBackground(Color.white);
         jtValorTemporada.setBackground(Color.white);
         jtValorIptu.setBackground(Color.white);
         jtValorCondominio.setBackground(Color.white);
         jtValorDiaria.setBackground(Color.white);
-        
-        
-        
 
         //Outros 
         jtMatriculo.setText("");
@@ -1449,13 +1599,16 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtContrato.setText("");
         jtCartorio.setText("");
         jtSituacaoEscritura.setText("");
-        //Precisa adicionar as medidas do terreno
+
+        jtLargura.setText("");
+        jtComprimento.setText("");
+        jtTamanhoTerreno.setText("");
         jtAreaConstruida.setText("");
-        //não esquecer
+
         jtMobilia.setText("");
         jtChaves.setText("");
         jtObservacao.setText("");
-        
+
         jtMatriculo.setBackground(Color.white);
         jtContaAgua.setBackground(Color.white);
         jtContaLuz.setBackground(Color.white);
@@ -1463,13 +1616,14 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtContrato.setBackground(Color.white);
         jtCartorio.setBackground(Color.white);
         jtSituacaoEscritura.setBackground(Color.white);
-        //Precisa adicionar as medidas do terreno
+
+        jtLargura.setBackground(Color.white);
+        jtComprimento.setBackground(Color.white);
         jtAreaConstruida.setBackground(Color.white);
         //não esquecer
         jtMobilia.setBackground(Color.white);
         jtChaves.setBackground(Color.white);
         jtObservacao.setBackground(Color.white);
-        
 
         //Descrição  
         jtQuartos.setText("");
@@ -1488,7 +1642,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtAreaExterna.setText("");
         jtAcabamento.setText("");
         jtOutros.setText("");
-        
+
         jtQuartos.setBackground(Color.white);
         jtSuites.setBackground(Color.white);
         jtSalas.setBackground(Color.white);
@@ -1505,8 +1659,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtAreaExterna.setBackground(Color.white);
         jtAcabamento.setBackground(Color.white);
         jtOutros.setBackground(Color.white);
-        
-        
+
     }
 
 
@@ -1520,10 +1673,9 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtValorVenda.setEnabled(false);
         jtValorTemporada.setEnabled(false);
         jtValorDiaria.setEnabled(false);
-        
-        JOptionPane.showMessageDialog(null," Campos Zerados com Sucesso ");
-        
-        
+
+        JOptionPane.showMessageDialog(null, " Campos Zerados com Sucesso ");
+
 // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1MousePressed
 
@@ -1588,7 +1740,6 @@ public class cadastroImovel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
@@ -1600,6 +1751,8 @@ public class cadastroImovel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
@@ -1655,16 +1808,17 @@ public class cadastroImovel extends javax.swing.JFrame {
     private javax.swing.JTextField jtCartorio;
     private javax.swing.JTextArea jtChaves;
     private javax.swing.JTextField jtCodigo;
+    private javax.swing.JTextField jtComprimento;
     private javax.swing.JTextField jtContaAgua;
     private javax.swing.JTextField jtContaLuz;
     private javax.swing.JTextField jtContrato;
     private javax.swing.JTextField jtDepEmpregada;
     private javax.swing.JTextField jtIdadeImovel;
     private javax.swing.JTextField jtIptu;
+    private javax.swing.JTextField jtLargura;
     private javax.swing.JTextField jtLavados;
     private javax.swing.JTextField jtLavanderia;
     private javax.swing.JTextField jtMatriculo;
-    private javax.swing.JTextField jtMedidasTerreno;
     private javax.swing.JTextArea jtMobilia;
     private javax.swing.JTextArea jtObservacao;
     private javax.swing.JTextArea jtOutros;
