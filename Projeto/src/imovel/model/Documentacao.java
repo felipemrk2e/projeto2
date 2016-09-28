@@ -9,76 +9,88 @@ import javax.persistence.Id;
 @Entity
 
 public class Documentacao {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
-	private long idDocumentacao;
-	
-	@Column
-	private String numContaAgua;
-	
-	@Column
-	private String numContaLuz;
-	@Column
-	private String numIptu;
-	
-	@Column
-	private String numContrato;
-	
-	@Column
-	private String cartorio;
 
-	public Documentacao(String numContaAgua, String numContaLuz, String numIptu, String numContrato, String cartorio) {
-		this.numContaAgua = numContaAgua;
-		this.numContaLuz = numContaLuz;
-		this.numIptu = numIptu;
-		this.numContrato = numContrato;
-		this.cartorio = cartorio;
-	}
-	
-	public Documentacao(){
-		
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    private long idDocumentacao;
 
-	public String getNumContaAgua() {
-		return numContaAgua;
-	}
+    @Column
+    private String numMatricula;
 
-	public void setNumContaAgua(String numContaAgua) {
-		this.numContaAgua = numContaAgua;
-	}
+    @Column
+    private String numContaAgua;
 
-	public String getNumContaLuz() {
-		return numContaLuz;
-	}
+    @Column
+    private String numContaLuz;
+    @Column
+    private String numIptu;
 
-	public void setNumContaLuz(String numContaLuz) {
-		this.numContaLuz = numContaLuz;
-	}
+    @Column
+    private String numContrato;
 
-	public String getNumIptu() {
-		return numIptu;
-	}
+    @Column
+    private String cartorio;
 
-	public void setNumIptu(String numIptu) {
-		this.numIptu = numIptu;
-	}
+    public Documentacao(String numMatricula, String numContaAgua, String numContaLuz, String numIptu, String numContrato, String cartorio) {
+        this.numMatricula = numMatricula;
+        this.numContaAgua = numContaAgua;
+        this.numContaLuz = numContaLuz;
+        this.numIptu = numIptu;
+        this.numContrato = numContrato;
+        this.cartorio = cartorio;
+    }
 
-	public String getNumContrato() {
-		return numContrato;
-	}
+    public Documentacao() {
 
-	public void setNumContrato(String numContrato) {
-		this.numContrato = numContrato;
-	}
+    }
 
-	public String getCartorio() {
-		return cartorio;
-	}
+    public String getNumMatricula() {
+        return numMatricula;
+    }
 
-	public void setCartorio(String cartorio) {
-		this.cartorio = cartorio;
-	}
-	
+    public void setNumMatricula(String numMatricula) {
+        this.numMatricula = numMatricula;
+    }
+
+    public String getNumContaAgua() {
+        return numContaAgua;
+    }
+
+    public void setNumContaAgua(String numContaAgua) {
+        this.numContaAgua = numContaAgua;
+    }
+
+    public String getNumContaLuz() {
+        return numContaLuz;
+    }
+
+    public void setNumContaLuz(String numContaLuz) {
+        this.numContaLuz = numContaLuz;
+    }
+
+    public String getNumIptu() {
+        return numIptu;
+    }
+
+    public void setNumIptu(String numIptu) {
+        this.numIptu = numIptu;
+    }
+
+    public String getNumContrato() {
+        return numContrato;
+    }
+
+    public void setNumContrato(String numContrato) {
+        this.numContrato = numContrato;
+    }
+
+    public String getCartorio() {
+        return cartorio;
+    }
+
+    public void setCartorio(String cartorio) {
+        this.cartorio = cartorio;
+    }
+
 }

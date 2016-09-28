@@ -81,7 +81,7 @@ public class Imovel {
 	private String chaves;
 	
 	@Column
-	private String tipoMobilia;
+	private int tipoMobilia;
 	
 	@Column
 	private String descMobilia;
@@ -119,7 +119,7 @@ public class Imovel {
 	public Imovel(int qtdQuartos, int qtdSuites, int qtdSalas, int qtdBanheiros, int qtdPisos,
 			int lavanderia, int vagasGaragem, int areaServico, int piscina, int lavabos, int depEmpregados,
 			String areaExterna, Date dataConstrucao, String acabamento, String outrosItens, String descImovel,
-			String observacoes, String chaves, String tipoMobilia, String descMobilia, double valorIptu,
+			String observacoes, String chaves, int tipoMobilia, String descMobilia, double valorIptu,
 			double valorCondominio, imovel.model.TipoImovel tipoImovel, imovel.model.Documentacao documentacao,
 			imovel.model.Terreno terreno, global.model.Endereco endereco) {
 		this.qtdQuartos = qtdQuartos;
@@ -306,11 +306,11 @@ public class Imovel {
 		this.chaves = chaves;
 	}
 
-	public String getTipoMobilia() {
+	public int getTipoMobilia() {
 		return tipoMobilia;
 	}
 
-	public void setTipoMobilia(String tipoMobilia) {
+	public void setTipoMobilia(int tipoMobilia) {
 		this.tipoMobilia = tipoMobilia;
 	}
 
