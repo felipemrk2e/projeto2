@@ -1,6 +1,7 @@
 package dao;
 
 import imovel.model.Imovel;
+import java.util.List;
 
 public class ImovelDAO extends DAO<Imovel>{
 
@@ -17,8 +18,23 @@ public class ImovelDAO extends DAO<Imovel>{
 
 	@Override
 	public boolean removeById(Long id) {
-		
+		Imovel imovel = null;
+                try{
+                    imovel = this.getById(id);
+                    entityManager.getTransaction().begin();
+                    entityManager.remove(imovel);
+                    entityManager.getTransaction().commit();
+                    return true;
+                }catch(Exception e){
+                    entityManager.getTransaction().rollback();
+                    System.out.println("Erro na exclusão do Imovel: "+e);
+                }
 		return false;
 	}
+
+//    @Override
+//    public List<Imovel> getAll() {
+//        
+//    }
 
 }

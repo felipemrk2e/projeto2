@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -77,5 +78,7 @@ public abstract class DAO<E> {
     public abstract E getById(final Long id);
     
     public abstract boolean removeById(final Long id);
-	
+    
+//    public abstract List<E> getAll();
+
 }
