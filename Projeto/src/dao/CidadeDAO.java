@@ -32,9 +32,9 @@ public class CidadeDAO extends DAO<Cidade> {
 		return false;
 	}
 
-//    @Override
-//    public List<Cidade> getAll() {
-//        
-//    }
+    @Override
+    public List<Cidade> getAll() {
+        return entityManager.createQuery("FROM Cidade").getResultList();
+    }
 
 }

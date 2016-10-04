@@ -92,9 +92,9 @@ public class Imovel {
 	@Column
 	private double valorCondominio;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name="idTipoImovel", nullable = false)
-    private TipoImovel tipoImovel;
+        private TipoImovel tipoImovel;
 	
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="idDocumentacao", nullable = true)

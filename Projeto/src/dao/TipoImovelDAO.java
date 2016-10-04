@@ -32,9 +32,9 @@ public class TipoImovelDAO extends DAO<TipoImovel> {
 		return false;
 	}
 
-//    @Override
-//    public List<TipoImovel> getAll() {
-//        
-//    }
+    @Override
+    public List<TipoImovel> getAll() {
+        return entityManager.createQuery("FROM TipoImovel").getResultList();
+    }   
 
 }

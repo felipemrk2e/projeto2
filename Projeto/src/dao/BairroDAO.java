@@ -32,9 +32,9 @@ public class BairroDAO extends DAO<Bairro> {
 		return false;
 	}
 
-//    @Override
-//    public List<Bairro> getAll() {
-//        
-//    }
+    @Override
+    public List<Bairro> getAll() {
+        return entityManager.createQuery("FROM Bairro").getResultList();
+    }
 
 }

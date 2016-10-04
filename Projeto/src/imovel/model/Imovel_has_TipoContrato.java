@@ -1,5 +1,6 @@
 package imovel.model;
 
+import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Imovel_has_TipoContrato {
+public class Imovel_has_TipoContrato implements Serializable{
     
         @Id
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)

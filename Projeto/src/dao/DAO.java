@@ -79,6 +79,6 @@ public abstract class DAO<E> {
     
     public abstract boolean removeById(final Long id);
     
-//    public abstract List<E> getAll();
+    public abstract List<E> getAll();
 
 }

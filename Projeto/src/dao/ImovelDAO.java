@@ -32,9 +32,9 @@ public class ImovelDAO extends DAO<Imovel>{
 		return false;
 	}
 
-//    @Override
-//    public List<Imovel> getAll() {
-//        
-//    }
+    @Override
+    public List<Imovel> getAll() {
+        return entityManager.createQuery("FROM Imovel").getResultList();
+    }
 
 }
