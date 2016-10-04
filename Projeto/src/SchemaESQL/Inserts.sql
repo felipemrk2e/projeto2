@@ -1,8 +1,8 @@
--- Inserts para o banco de dados. --
+-- Inserts BASE para o banco --
 
-INSERT INTO TipoLocacao (idTipoLocacao, tipoContrato) VALUES(0, 'Festa'), (0, 'Locacao'), (0, 'Temporada'), (0, 'Venda');
-INSERT INTO Mobilia VALUES(0, 'Mobiliada'), (0, 'Semi Mobiliada'), (0, 'Sem Mobilia');
-INSERT INTO TipoImovel (idTipoImovel, tipo) VALUES(0, 'Apartamento'), (0, 'Casa'), (0, 'Comercio'), (0, 'Salão'), (0, 'Temporário');
+INSERT INTO TipoImove(idTipoImove, tipo) VALUES (0, 'Casa'),(0, 'Apartamento'), (0, 'Salão'), (0, 'Comércio'), (0, 'Temporário');
+
+INSERT INTO TipoContrato(idTipoContrato, tipoContrato) VALUES(0, 'Locação'), (0, 'Venda'), (0, 'Temporada'), (0, 'Festa');
 
 INSERT INTO Estado VALUES(1, 'Acre', 'AC');
 INSERT INTO Estado VALUES(2, 'Alagoas', 'AL');
