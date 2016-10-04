@@ -1,6 +1,6 @@
 -- Inserts BASE para o banco --
 
-INSERT INTO TipoImove(idTipoImove, tipo) VALUES (0, 'Casa'),(0, 'Apartamento'), (0, 'Salão'), (0, 'Comércio'), (0, 'Temporário');
+INSERT INTO TipoImovel(idTipoImovel, tipo) VALUES (0, 'Casa'),(0, 'Apartamento'), (0, 'Salão'), (0, 'Comércio'), (0, 'Temporário');
 
 INSERT INTO TipoContrato(idTipoContrato, tipoContrato) VALUES(0, 'Locação'), (0, 'Venda'), (0, 'Temporada'), (0, 'Festa');
 
