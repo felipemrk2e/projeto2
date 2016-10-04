@@ -27,6 +27,7 @@ import validacao.*;
  */
 public class cadastroCliente extends javax.swing.JFrame {
 
+    private boolean fiador;
     /**
      * Creates new form cadastroCliente
      */
@@ -144,6 +145,8 @@ public class cadastroCliente extends javax.swing.JFrame {
         jlCodigoInterno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCodigoInterno.setText("Código Interno");
         getContentPane().add(jlCodigoInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jtfCodigoInterno.setEditable(false);
         getContentPane().add(jtfCodigoInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 100, -1));
 
         jlNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -1110,6 +1113,8 @@ public class cadastroCliente extends javax.swing.JFrame {
 //        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(strList.toArray());
 //        jcbEstadoCivil.setModel(defaultComboBox);
     }
+    
+    
 
     /**
      * @param args the command line arguments

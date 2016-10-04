@@ -33,6 +33,8 @@ public class cadastroImovel extends javax.swing.JFrame {
     public cadastroImovel() {
         initComponents();
         fecharCadastro();
+        //Alterado system.exit(), para dispose()
+        
         removerTitleBar();
 
     }
@@ -414,7 +416,7 @@ public class cadastroImovel extends javax.swing.JFrame {
     }
 
     public void fecharCadastro() {
-        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
@@ -436,7 +438,7 @@ public class cadastroImovel extends javax.swing.JFrame {
                 String ObjButtons[] = {"Sim", "Não"};
                 int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
                 if (PromptResult == JOptionPane.YES_OPTION) {
-                    System.exit(0);
+                    dispose();
                 }
 //                }
 
@@ -588,7 +590,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jmLogin = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
         setResizable(false);
         getContentPane().setLayout(null);
