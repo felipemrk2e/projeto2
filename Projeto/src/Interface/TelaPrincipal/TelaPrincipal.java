@@ -5,6 +5,11 @@
  */
 package Interface.TelaPrincipal;
 
+import Interface.CadCliente.cadastroCliente;
+import Interface.CadCliente.cadastroClienteHome;
+import Interface.CadFuncionario.cadastroFuncionario;
+import Interface.CadImovel.cadastroImovel;
+import Interface.CadImovel.cadastroImovelHome;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,6 +21,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private int tentativas = 0;
     private boolean logado = false;
     TelaLogin telaLogin = new TelaLogin(new javax.swing.JFrame(), true);
+    
 
     /**
      * Creates new form TelaPrincipal
@@ -91,8 +97,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     public void Login() {
-        telaLogin.setLocationRelativeTo(this);
-        telaLogin.setBounds(630, 290, 770, 520);
+        telaLogin.setLocationRelativeTo(jSeparator2);
+//        telaLogin.setBounds(630, 290, 770, 520);
         telaLogin.setVisible(true);
         if (telaLogin.verificaLogin()) {
             JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
@@ -103,8 +109,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Acesso negado!\nUsuário ou Senha Incorretos");
             limpaCampos();
             while (!telaLogin.verificaLogin() && tentativas < 5) {
-                telaLogin.setLocationRelativeTo(this);
-                telaLogin.setBounds(630, 290, 770, 520);
+                telaLogin.setLocationRelativeTo(jSeparator2);
+//                telaLogin.setBounds(630, 290, 770, 520);
                 telaLogin.setVisible(true);
                 tentativas++;
 
@@ -158,53 +164,69 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1024, 640));
         setResizable(false);
         getContentPane().setLayout(null);
-
-        jbConsultarFuncionario.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sala\\Desktop\\Nova pasta\\funcionarios.png")); // NOI18N
         getContentPane().add(jbConsultarFuncionario);
         jbConsultarFuncionario.setBounds(20, 490, 140, 70);
 
         jbCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jbCliente.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sala\\Desktop\\Nova pasta\\usuarioadd.png")); // NOI18N
+        jbCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbClienteMousePressed(evt);
+            }
+        });
         getContentPane().add(jbCliente);
         jbCliente.setBounds(20, 40, 140, 70);
 
         jbImovel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jbImovel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sala\\Desktop\\Nova pasta\\imovel.png")); // NOI18N
+        jbImovel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbImovelMousePressed(evt);
+            }
+        });
         getContentPane().add(jbImovel);
         jbImovel.setBounds(20, 130, 140, 70);
 
         jbFuncionario.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jbFuncionario.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sala\\Desktop\\Nova pasta\\funcionario2.png")); // NOI18N
+        jbFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbFuncionarioMousePressed(evt);
+            }
+        });
         getContentPane().add(jbFuncionario);
         jbFuncionario.setBounds(20, 220, 140, 70);
 
         jbConsultarCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jbConsultarCliente.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sala\\Desktop\\Nova pasta\\search_user.png")); // NOI18N
+        jbConsultarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbConsultarClienteMousePressed(evt);
+            }
+        });
         getContentPane().add(jbConsultarCliente);
         jbConsultarCliente.setBounds(20, 310, 140, 70);
 
         jbConsultarImovel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jbConsultarImovel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sala\\Desktop\\Nova pasta\\imovels.png")); // NOI18N
+        jbConsultarImovel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbConsultarImovelMousePressed(evt);
+            }
+        });
         getContentPane().add(jbConsultarImovel);
         jbConsultarImovel.setBounds(20, 400, 140, 70);
 
-        jlSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sala\\Desktop\\Nova pasta\\exit.png")); // NOI18N
         jlSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jlSairMousePressed(evt);
             }
         });
         getContentPane().add(jlSair);
-        jlSair.setBounds(970, 540, 40, 32);
+        jlSair.setBounds(970, 540, 40, 0);
 
-        jlLogoff.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sala\\Desktop\\Nova pasta\\logoff.png")); // NOI18N
         jlLogoff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jlLogoffMousePressed(evt);
             }
         });
         getContentPane().add(jlLogoff);
-        jlLogoff.setBounds(970, 490, 40, 32);
+        jlLogoff.setBounds(970, 490, 40, 0);
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(jSeparator1);
@@ -264,6 +286,33 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jlLogoffMousePressed
 
+    private void jbClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbClienteMousePressed
+       cadastroCliente cliente = new cadastroCliente();
+       cliente.setVisible(true);
+        
+        
+    }//GEN-LAST:event_jbClienteMousePressed
+
+    private void jbImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbImovelMousePressed
+        cadastroImovel imovel = new cadastroImovel();
+        imovel.setVisible(true);
+    }//GEN-LAST:event_jbImovelMousePressed
+
+    private void jbFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbFuncionarioMousePressed
+        cadastroFuncionario funcionario = new cadastroFuncionario();
+        funcionario.setVisible(true);
+    }//GEN-LAST:event_jbFuncionarioMousePressed
+
+    private void jbConsultarClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarClienteMousePressed
+        cadastroClienteHome clienteHome = new cadastroClienteHome();
+        clienteHome.setVisible(true);
+    }//GEN-LAST:event_jbConsultarClienteMousePressed
+
+    private void jbConsultarImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarImovelMousePressed
+       cadastroImovelHome imovelHome = new cadastroImovelHome();
+       imovelHome.setVisible(true);
+    }//GEN-LAST:event_jbConsultarImovelMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -275,7 +324,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
