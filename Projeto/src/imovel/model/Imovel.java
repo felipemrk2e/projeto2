@@ -158,9 +158,9 @@ public class Imovel {
 		return idImovel;
 	}
 
-	//public void setIdImovel(long idImovel) {
-	//	this.idImovel = idImovel;
-	//}
+	public void setIdImovel(long idImovel) {
+		this.idImovel = idImovel;
+	}
 
 	public int getQtdQuartos() {
 		return qtdQuartos;
