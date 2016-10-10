@@ -1,12 +1,10 @@
 CREATE DATABASE projetodois;
 USE projetodois;
 
--- V 2.1 do SQL NULL --
+-- V 2.3 do SQL null--
 -- edicoes --
 /*
-    A tabela Endereco recebeu o atributo Complemento
-	Imovel:TipoImovel agora é do tipo INT
-	Documentacao recebeu o atributo numMatricula
+	Correção de Erros de digitação
 */
 
 CREATE TABLE TipoImovel(
@@ -122,7 +120,6 @@ CREATE TABLE TipoContrato(
     descricao VARCHAR(255),
     CONSTRAINT PRIMARY KEY(idTipoContrato)
 );
-
 
 CREATE TABLE Imovel_has_TipoContrato(
     idImovel INT NOT NULL,

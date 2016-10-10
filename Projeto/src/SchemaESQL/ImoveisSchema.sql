@@ -1,13 +1,10 @@
 CREATE DATABASE projetodois;
 USE projetodois;
 
-
--- V 2.1 do SQL --
+-- V 2.3 do SQL --
 -- edicoes --
 /*
-	A tabela Endereco recebeu o atributo Complemento
-	Imovel:TipoImovel agora é do tipo INT
-	Documentacao recebeu o atributo numMatricula
+	Correção de Erros de digitação
 */
 
 CREATE TABLE TipoImovel(
@@ -45,7 +42,7 @@ CREATE TABLE Bairro(
 );
 
 CREATE TABLE Documentacao(
-    idDocumentacao INT NOT NULL,
+    idDocumentacao INT AUTO_INCREMENT NOT NULL,
 	numMatricula VARCHAR(255),
     numContaAgua VARCHAR(255) NOT NULL,
     numContaLuz VARCHAR(255) NOT NULL,
@@ -115,19 +112,6 @@ CREATE TABLE Imovel(
     REFERENCES Documentacao(idDocumentacao),
     CONSTRAINT fk_idTerreno FOREIGN KEY(idTerreno)
     REFERENCES Terreno(idTerreno)
-);
-
-
-CREATE TABLE Documentos(
-    idImovel INT NOT NULL,
-    numContaAgua VARCHAR(255) NOT NULL,
-    numContaLuz VARCHAR(255) NOT NULL,
-    numIptu VARCHAR(255) NOT NULL,
-    numContrato VARCHAR(255) NOT NULL,
-    cartorio VARCHAR(255) NOT NULL,
-    CONSTRAINT PRIMARY KEY(idImovel),
-    CONSTRAINT FOREIGN KEY (idImovel)
-    REFERENCES Imovel(idImovel)
 );
 
 CREATE TABLE TipoContrato(
