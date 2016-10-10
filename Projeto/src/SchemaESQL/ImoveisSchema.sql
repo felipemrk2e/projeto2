@@ -1,5 +1,5 @@
-CREATE DATABASE projetodois2;
-USE projetodois2;
+CREATE DATABASE projetodois;
+USE projetodois;
 
 
 -- V 2.1 do SQL --

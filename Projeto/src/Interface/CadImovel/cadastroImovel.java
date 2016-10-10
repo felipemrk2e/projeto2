@@ -1248,10 +1248,7 @@ public class cadastroImovel extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbLocacaoMouseClicked
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
-    
- 
-    
-        
+   
         if (jbConfirmar.isEnabled()) {
             int control = 0;
             boolean control2 = true;
@@ -1836,8 +1833,8 @@ public class cadastroImovel extends javax.swing.JFrame {
 //                documentacao.setNumIptu(" ");
 //                documentacao.setNumContrato(" ");
 //                documentacao.setCartorio(" ");
-             documentacao = new Documentacao("a","b","c","d","e","f");
-                     imovel.setDocumentacao(documentacao);
+//             documentacao = new Documentacao("a","b","c","d","e","f");
+//                     imovel.setDocumentacao(documentacao);
                 imovel.setTerreno(terreno);
                 imovel.setTipoImovel(tipoImovel);
 

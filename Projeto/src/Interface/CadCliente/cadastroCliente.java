@@ -28,6 +28,7 @@ import validacao.*;
 public class cadastroCliente extends javax.swing.JFrame {
 
     private boolean fiador;
+
     /**
      * Creates new form cadastroCliente
      */
@@ -41,6 +42,210 @@ public class cadastroCliente extends javax.swing.JFrame {
         UIManager.getDefaults().put("jtpCadastroCliente.contentBorderInsets", new Insets(0, 0, 0, 0));
         UIManager.getDefaults().put("jtpCadastroCliente.tabsOverlapBorder", true);
 
+    }
+
+    public cadastroCliente(int user, long idCliente) {
+        initComponents();
+        ativaPessoa(true);
+        mascaraCPF_CNPJ(true);
+        jrbPessoaFisica.setSelected(true);
+        configuraMascaras();
+
+        UIManager.getDefaults().put("jtpCadastroCliente.contentBorderInsets", new Insets(0, 0, 0, 0));
+        UIManager.getDefaults().put("jtpCadastroCliente.tabsOverlapBorder", true);
+
+        popular();
+        DisableEnable(false);
+
+    }
+
+    public void DisableEnable(Boolean b) {
+
+        //cad
+        jtfNome.setEnabled(b);
+        jftCPF.setEnabled(b);
+        jtfRG.setEnabled(b);
+        jftDataNascimento.setEnabled(b);
+        jtfCargo.setEnabled(b);
+        jtfNomeFantasia.setEnabled(b);
+        jtfFiador.setEnabled(b);
+        jtfEndereco.setEnabled(b);
+        jtfNumero.setEnabled(b);
+        jtfBairro.setEnabled(b);
+        jftCEP.setEnabled(b);
+        jtfCidade.setEnabled(b);
+        jtfComplemento.setEnabled(b);
+        jftTelefone.setEnabled(b);
+        jftCelular.setEnabled(b);
+        jftComercial.setEnabled(b);
+        jtfEmail.setEnabled(b);
+        jtaObs.setEnabled(b);
+
+        //cad Fim 
+        // JRB
+        jrbPessoaFisica.setEnabled(b);
+        jrbPessoaJuridica.setEnabled(b);
+        jrbMasculino.setEnabled(b);
+        jrbFeminino.setEnabled(b);
+
+        // jrb fim
+        // jcb     
+        jcbAtivo.setEnabled(b);
+        jcbCompra.setEnabled(b);
+        jcbTroca.setEnabled(b);
+        jcbLocacao.setEnabled(b);
+        jcbEstadoCivil.setEnabled(b);
+        jcbEstado.setEnabled(b);
+    }
+
+    public void ZerarCampos() {
+        jtfCodigoInterno.setText("");
+        //cad
+        jtfNome.setText("");
+        jftCPF.setText("");
+        jtfRG.setText("");
+        jftDataNascimento.setText("");
+        jtfCargo.setText("");
+        jtfNomeFantasia.setText("");
+        jtfFiador.setText("");
+        jtfEndereco.setText("");
+        jtfNumero.setText("");
+        jtfBairro.setText("");
+        jftCEP.setText("");
+        jtfCidade.setText("");
+        jtfComplemento.setText("");
+        jftTelefone.setText("");
+        jftCelular.setText("");
+        jftComercial.setText("");
+        jtfEmail.setText("");
+        jtaObs.setText("");
+
+        //cad Fim 
+        // JRB
+        jrbPessoaFisica.setSelected(false);
+        jrbPessoaJuridica.setSelected(false);
+        jrbMasculino.setSelected(false);
+        jrbFeminino.setSelected(false);
+
+        // jrb fim
+        // jcb     
+        jcbAtivo.setSelected(false);
+        jcbCompra.setSelected(false);
+        jcbTroca.setSelected(false);
+        jcbLocacao.setSelected(false);
+        jcbEstadoCivil.setSelectedIndex(-1);
+        jcbEstado.setSelectedIndex(-1);
+
+        // jcb fim
+        
+        //Tirando os alertas
+        jtfNome.setBackground(Color.white);
+        jftCPF.setBackground(Color.white);
+        jtfEndereco.setBackground(Color.white);
+        jtfBairro.setBackground(Color.white);
+        jtfCidade.setBackground(Color.white);
+        jftDataNascimento.setBackground(Color.white);
+        jtfNumero.setBackground(Color.white);
+        jcbEstado.setBackground(Color.white);
+        jftTelefone.setBackground(Color.white);
+        jftCelular.setBackground(Color.white);
+        jftComercial.setBackground(Color.white);
+        jcbEstadoCivil.setBackground(Color.white);
+        jtfCargo.setBackground(Color.white);
+        jtfFiador.setBackground(Color.white);
+        jtfNomeFantasia.setBackground(Color.white);
+        jftCPFResponsavel.setBackground(Color.white);
+        jtfComplemento.setBackground(Color.white);
+        jtfEmail.setBackground(Color.white);
+       // Fim
+    }
+
+    public void popular() {
+        //nivel usuario
+        if (true) {
+            jbConfirmar.setEnabled(true);
+            jbEditar.setEnabled(true);
+        } else {
+            jbConfirmar.setEnabled(false);
+            jbEditar.setEnabled(false);
+        }
+
+        jtfCodigoInterno.setText(null);
+        //cad
+
+        jtfNome.setText(null);
+        jftCPF.setText(null);
+        jtfRG.setText(null);
+        jftDataNascimento.setText(null);
+        jtfCargo.setText(null);
+        jtfNomeFantasia.setText(null);
+        jtfFiador.setText(null);
+        jtfEndereco.setText(null);
+        jtfNumero.setText(null);
+        jtfBairro.setText(null);
+        jftCEP.setText(null);
+        jtfCidade.setText(null);
+        jtfComplemento.setText(null);
+        jftTelefone.setText(null);
+        jftCelular.setText(null);
+        jftComercial.setText(null);
+        jtfEmail.setText(null);
+        jtaObs.setText(null);
+
+        //cad Fim 
+        // JRB
+        if (true) {
+            jrbPessoaFisica.setSelected(true);
+            ativaPessoa(true);
+            mascaraCPF_CNPJ(true);
+        } else if (true) {
+            jrbPessoaJuridica.setSelected(true);
+            ativaPessoa(false);
+            mascaraCPF_CNPJ(false);
+        }
+
+        if (true) {
+            jrbMasculino.setSelected(true);
+
+        } else if (true) {
+            jrbFeminino.setSelected(true);
+        }
+        // jrb fim
+
+        // jcb     // falta arrumar o estado pois muda bem a logica..
+        if (true) {
+            jcbAtivo.setSelected(true);
+
+        }
+
+        if (true) {
+            jcbCompra.setSelected(true);
+        }
+
+        if (true) {
+            jcbTroca.setSelected(true);
+        }
+
+        if (true) {
+            jcbLocacao.setSelected(true);
+        }
+
+        if (true) {
+            jcbEstadoCivil.setSelectedIndex(0);
+        } else if (true) {
+            jcbEstadoCivil.setSelectedIndex(1);
+        } else if (true) {
+            jcbEstadoCivil.setSelectedIndex(2);
+        } else if (true) {
+            jcbEstadoCivil.setSelectedIndex(3);
+        }
+
+        // Estado vai ser necessario elaborar mais isso..
+        if (true) {
+            jcbEstado.setSelectedIndex(WIDTH);
+        }
+
+        // jcb fim
     }
 
     /**
@@ -140,6 +345,11 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         jbEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbEditar.setText("Editar");
+        jbEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbEditarMouseClicked(evt);
+            }
+        });
         getContentPane().add(jbEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, 140, 70));
 
         jlCodigoInterno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -240,6 +450,11 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         jcbEstadoCivil.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEstadoCivilActionPerformed(evt);
+            }
+        });
         getContentPane().add(jcbEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 100, -1, -1));
 
         jlFiador.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -333,451 +548,15 @@ public class cadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
-        if (!validaCampos(true)) {
-            JOptionPane.showMessageDialog(null, "Verifique os campos obrigatórios!");
+        if (jbConfirmar.isEnabled()) {
+
+            if (!validaCampos(true)) {
+                JOptionPane.showMessageDialog(null, "Verifique os campos obrigatórios!");
+            }
+
         }
 
-        //        int control = 0;
-        //        boolean control2 = true;
-        //        // Fora das tabs..
-        //
-        //        if (jcbLocacao.isSelected()) {
-        //
-        //        } else {
-        //
-        //        }
-        //        if (jcbVenda.isSelected()) {
-        //
-        //        } else {
-        //
-        //        }
-        //
-        //        if (jcbTemporada.isSelected()) {
-        //
-        //        } else {
-        //
-        //        }
-        //
-        //        if (jcbFesta.isSelected()) {
-        //
-        //        } else {
-        //
-        //        }
-        //
-        //        //Endereço
-        //        // Principal
-        //        if (jrbCasa.isSelected()) {
-        //            control++;
-        //        }
-        //        if (jrbSalao.isSelected()) {
-        //            control++;
-        //        }
-        //        if (jrbComercio.isSelected()) {
-        //            control++;
-        //        }
-        //        if (jrbCondominio.isSelected()) {
-        //            control++;
-        //        }
-        //
-        //        if (!jtfLogradouro.getText().equals("") && validacao.validaLetras(jtfLogradouro.getText())) {
-        //            System.out.println("x");
-        //            jtfLogradouro.setBackground(Color.white);
-        //            control++;
-        //        } else {
-        //
-        //            jtfLogradouro.setBackground(Color.red);
-        //
-        //        }
-        //        if (!jtfNumero.getText().equals("") && validacao.validaNumeros(jtfNumero.getText())) {
-        //            System.out.println("x");
-        //            jtfNumero.setBackground(Color.white);
-        //            control++;
-        //        } else {
-        //            jtfNumero.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (!jtfCidade.getText().equals("") && validacao.validaLetras(jtfCidade.getText())) {
-        //            System.out.println("x");
-        //            jtfCidade.setBackground(Color.white);
-        //            control++;
-        //        } else {
-        //            jtfCidade.setBackground(Color.red);
-        //
-        //        }
-        //        if (!jtfBairro.getText().equals("") && validacao.validaLetras(jtfBairro.getText())) {
-        //            System.out.println("x");
-        //            jtfBairro.setBackground(Color.white);
-        //            control++;
-        //        } else {
-        //            jtfBairro.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (!jtfUF.getText().equals("") && validacao.validaLetras(jtfUF.getText())) {
-        //            System.out.println("x");
-        //            jtfUF.setBackground(Color.white);
-        //            control++;
-        //        } else {
-        //            jtfUF.setBackground(Color.red);
-        //
-        //        }
-        //        // Pricipal End
-        //
-        //        if (!jtfComplemento.getText().equals("")) {
-        //            System.out.println("x");
-        //        }
-        //
-        //        if (!jtfReferencia.getText().equals("")) {
-        //            System.out.println("x");
-        //        }
-        //        if (!jtfCondominio.getText().equals("")) {
-        //            System.out.println("x");
-        //
-        //        }
-        //
-        //        if (jtfZona.getText().equals("")) {
-        //            jtfZona.setBackground(Color.white);
-        //        } else if (!jtfZona.getText().equals("") && validacao.validaLetras(jtfZona.getText())) {
-        //            System.out.println("x");
-        //            jtfZona.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtfZona.setBackground(Color.red);
-        //
-        //        }
-        //        //Fim Endereço
-        //
-        //        //Valores
-        //        if (jtValorLocacaoMes.getText().equals("")) {
-        //            jtValorLocacaoMes.setBackground(Color.white);
-        //        } else if (!jtValorLocacaoMes.getText().equals("") && validacao.validaNumeros(jtValorLocacaoMes.getText())) {
-        //            System.out.println("x");
-        //            jtValorLocacaoMes.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtValorLocacaoMes.setBackground(Color.red);
-        //
-        //        }
-        //        if (jtValorVenda.getText().equals("")) {
-        //            jtValorVenda.setBackground(Color.white);
-        //        } else if (!jtValorVenda.getText().equals("") && validacao.validaNumeros(jtValorVenda.getText())) {
-        //            System.out.println("x");
-        //            jtValorVenda.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtValorVenda.setBackground(Color.red);
-        //
-        //        }
-        //        if (jtValorTemporada.getText().equals("")) {
-        //            jtValorTemporada.setBackground(Color.white);
-        //        } else if (!jtValorTemporada.getText().equals("") && validacao.validaNumeros(jtValorTemporada.getText())) {
-        //            System.out.println("x");
-        //            jtValorTemporada.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtValorTemporada.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (jtValorIptu.getText().equals("")) {
-        //            jtValorIptu.setBackground(Color.white);
-        //        } else if (!jtValorIptu.getText().equals("") && validacao.validaNumeros(jtValorIptu.getText())) {
-        //            System.out.println("x");
-        //            jtValorIptu.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtValorIptu.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (jtValorCondominio.getText().equals("")) {
-        //            jtValorCondominio.setBackground(Color.white);
-        //        } else if (!jtValorCondominio.getText().equals("") && validacao.validaNumeros(jtValorCondominio.getText())) {
-        //            System.out.println("x");
-        //            jtValorCondominio.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtValorCondominio.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (jtValorDiaria.getText().equals("")) {
-        //
-        //            jtValorDiaria.setBackground(Color.white);
-        //
-        //        } else if (!jtValorDiaria.getText().equals("") && validacao.validaNumeros(jtValorDiaria.getText())) {
-        //            System.out.println("x");
-        //            jtValorDiaria.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtValorDiaria.setBackground(Color.red);
-        //
-        //        }
-        //        //Valores End
-        //        //Outros
-        //        // Ficou de fora o medidas terreno,tamanho terreno
-        //
-        //        if (jrbMobiliada.isSelected()) {
-        //
-        //        }
-        //
-        //        if (jrbSemiMobiliada.isSelected()) {
-        //
-        //        }
-        //
-        //        if (jrbSemMobilia.isSelected()) {
-        //
-        //        }
-        //
-        //        if (jtMatriculo.getText().equals("")) {
-        //            jtMatriculo.setBackground(Color.white);
-        //        } else if (!jtMatriculo.getText().equals("") && validacao.validaNumeros(jtMatriculo.getText())) {
-        //            System.out.println("x");
-        //            jtMatriculo.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtMatriculo.setBackground(Color.red);
-        //
-        //        }
-        //        if (jtContaAgua.getText().equals("")) {
-        //            jtContaAgua.setBackground(Color.white);
-        //        } else if (!jtContaAgua.getText().equals("") && validacao.validaNumeros(jtContaAgua.getText())) {
-        //            System.out.println("x");
-        //            jtContaAgua.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtContaAgua.setBackground(Color.red);
-        //
-        //        }
-        //        if (jtContaLuz.getText().equals("")) {
-        //            jtContaLuz.setBackground(Color.white);
-        //        } else if (!jtContaLuz.getText().equals("") && validacao.validaNumeros(jtContaLuz.getText())) {
-        //            System.out.println("x");
-        //            jtContaLuz.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtContaLuz.setBackground(Color.red);
-        //
-        //        }
-        //        if (jtIptu.getText().equals("")) {
-        //            jtIptu.setBackground(Color.white);
-        //        } else if (!jtIptu.getText().equals("") && validacao.validaNumeros(jtIptu.getText())) {
-        //            System.out.println("x");
-        //            jtIptu.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtIptu.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (jtContrato.getText().equals("")) {
-        //            jtContrato.setBackground(Color.white);
-        //        } else if (!jtContrato.getText().equals("") && validacao.validaNumeros(jtContrato.getText())) {
-        //            System.out.println("x");
-        //            jtContrato.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtContrato.setBackground(Color.red);
-        //
-        //        }
-        //        if (!jtCartorio.getText().equals("")) {
-        //            System.out.println("x");
-        //        }
-        //
-        //        if (jtSituacaoEscritura.getText().equals("")) {
-        //            jtSituacaoEscritura.setBackground(Color.white);
-        //        } else if (!jtSituacaoEscritura.getText().equals("") && validacao.validaLetras(jtSituacaoEscritura.getText())) {
-        //            System.out.println("x");
-        //            jtSituacaoEscritura.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtSituacaoEscritura.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (jtAreaConstruida.getText().equals("")) {
-        //            jtAreaConstruida.setBackground(Color.white);
-        //        } else if (!jtAreaConstruida.getText().equals("") && validacao.validaNumeros(jtAreaConstruida.getText())) {
-        //            System.out.println("x");
-        //            jtAreaConstruida.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtAreaConstruida.setBackground(Color.red);
-        //
-        //        }
-        //        if (!jtMobilia.getText().equals("")) {
-        //            System.out.println("x");
-        //        }
-        //        if (!jtChaves.getText().equals("")) {
-        //            System.out.println("x");
-        //        }
-        //        if (!jtObservacao.getText().equals("")) {
-        //            System.out.println("x");
-        //        }
-        //        //Outros End
-        //        //Descrição
-        //
-        //        if (jtQuartos.getText().equals("")) {
-        //
-        //            jtQuartos.setBackground(Color.white);
-        //        } else if (!jtQuartos.getText().equals("") && validacao.validaNumeros(jtQuartos.getText())) {
-        //            System.out.println("x");
-        //            jtQuartos.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtQuartos.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (jtSuites.getText().equals("")) {
-        //            jtSuites.setBackground(Color.white);
-        //        } else if (!jtSuites.getText().equals("") && validacao.validaNumeros(jtSuites.getText())) {
-        //            System.out.println("x");
-        //            jtSuites.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtSuites.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (jtSalas.getText().equals("")) {
-        //            jtSalas.setBackground(Color.white);
-        //        } else if (!jtSalas.getText().equals("") && validacao.validaNumeros(jtSalas.getText())) {
-        //            System.out.println("x");
-        //            jtSalas.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtSalas.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (jtBanheiros.getText().equals("")) {
-        //            jtBanheiros.setBackground(Color.white);
-        //        } else if (!jtBanheiros.getText().equals("") && validacao.validaNumeros(jtBanheiros.getText())) {
-        //            System.out.println("x");
-        //            jtBanheiros.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtBanheiros.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (jtLavados.getText().equals("")) {
-        //            jtLavados.setBackground(Color.white);
-        //        } else if (!jtLavados.getText().equals("") && validacao.validaNumeros(jtLavados.getText())) {
-        //            System.out.println("x");
-        //            jtLavados.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtLavados.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (jtAreaServico.getText().equals("")) {
-        //            jtAreaServico.setBackground(Color.white);
-        //        } else if (!jtAreaServico.getText().equals("") && validacao.validaNumeros(jtAreaServico.getText())) {
-        //            System.out.println("x");
-        //            jtAreaServico.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtAreaServico.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (jtLavanderia.getText().equals("")) {
-        //            jtLavanderia.setBackground(Color.white);
-        //        } else if (!jtLavanderia.getText().equals("") && validacao.validaNumeros(jtLavanderia.getText())) {
-        //            System.out.println("x");
-        //            jtLavanderia.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtLavanderia.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (jtPisos.getText().equals("")) {
-        //            jtPisos.setBackground(Color.white);
-        //        } else if (!jtPisos.getText().equals("") && validacao.validaNumeros(jtPisos.getText())) {
-        //            System.out.println("x");
-        //            jtPisos.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtPisos.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (jtIdadeImovel.getText().equals("")) {
-        //            jtIdadeImovel.setBackground(Color.white);
-        //        } else if (!jtIdadeImovel.getText().equals("") && validacao.validaNumeros(jtIdadeImovel.getText())) {
-        //            //  System.out.println("x");
-        //            jtIdadeImovel.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtIdadeImovel.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (jtPscina.getText().equals("")) {
-        //            jtPscina.setBackground(Color.white);
-        //        } else if (!jtPscina.getText().equals("") && validacao.validaNumeros(jtPscina.getText())) {
-        //            System.out.println("x");
-        //            jtPscina.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtPscina.setBackground(Color.red);
-        //
-        //        }
-        //        if (jtVagasGaragem.getText().equals("")) {
-        //            jtVagasGaragem.setBackground(Color.white);
-        //        } else if (!jtVagasGaragem.getText().equals("") && validacao.validaNumeros(jtVagasGaragem.getText())) {
-        //            System.out.println("x");
-        //            jtVagasGaragem.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtVagasGaragem.setBackground(Color.red);
-        //
-        //        }
-        //        if (jtDepEmpregada.getText().equals("")) {
-        //            jtDepEmpregada.setBackground(Color.white);
-        //        } else if (!jtDepEmpregada.getText().equals("") && validacao.validaNumeros(jtDepEmpregada.getText())) {
-        //            System.out.println("x");
-        //            jtDepEmpregada.setBackground(Color.white);
-        //        } else {
-        //            control2 = false;
-        //            jtDepEmpregada.setBackground(Color.red);
-        //
-        //        }
-        //
-        //        if (!jtTipoImovel.getText().equals("")) {
-        //            System.out.println("x");
-        //        }
-        //        if (!jtAreaExterna.getText().equals("")) {
-        //            System.out.println("x");
-        //        }
-        //        if (!jtAcabamento.getText().equals("")) {
-        //            System.out.println("x");
-        //        }
-        //        if (!jtOutros.getText().equals("")) {
-        //            System.out.println("x");
-        //        }
-        //
-        //        //Descrição End
-        //        if ((control == 6) && control2 == true) {
-        //
-        //            System.out.println("Cadastro Efetuado");
-        //            //        conexao banco;
-        //
-        //            new cadastroImovelHome().setVisible(true);
-        //            dispose();
-        //        } else {
-        //            bgMobilia.clearSelection();
-        //            bgTipo.clearSelection();
-        //            control = 0;
-        //            control2 = true;
-        //            System.out.println("Erro Verifique os campos");
-        //        }
-        //        // TODO add your handling code here:
+
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
@@ -796,6 +575,17 @@ public class cadastroCliente extends javax.swing.JFrame {
         mascaraCPF_CNPJ(true);
         limpaCampos();
     }//GEN-LAST:event_jrbPessoaFisicaMousePressed
+
+    private void jcbEstadoCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoCivilActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbEstadoCivilActionPerformed
+
+    private void jbEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseClicked
+        if (jbEditar.isEnabled()) {
+
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_jbEditarMouseClicked
 
     public void ativaPessoa(boolean ativo) {
         if (ativo == false) {
@@ -1098,8 +888,8 @@ public class cadastroCliente extends javax.swing.JFrame {
 //        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(strList.toArray());
 //        jcbEstado.setModel(defaultComboBox);
     }
-    
-    public void setJcbEstadoCivil() throws SQLException{
+
+    public void setJcbEstadoCivil() throws SQLException {
 //        List<String> strList = new ArrayList<String>();
 //        String query = "SELECT nomeEstadoCivil FROM EstadoCivil";
 //        Connection con = Conexao.getConnection();
@@ -1113,8 +903,6 @@ public class cadastroCliente extends javax.swing.JFrame {
 //        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(strList.toArray());
 //        jcbEstadoCivil.setModel(defaultComboBox);
     }
-    
-    
 
     /**
      * @param args the command line arguments
