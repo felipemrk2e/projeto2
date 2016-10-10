@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/urielcaire/NetBeansProjects/projeto2/Projeto/src/dao/ImovelDAO.java</file>
+            <file>file:/home/urielcaire/NetBeansProjects/projeto2/Projeto/src/dao/DAO.java</file>
+            <file>file:/home/urielcaire/NetBeansProjects/projeto2/Projeto/src/dao/CidadeDAO.java</file>
+            <file>file:/home/urielcaire/NetBeansProjects/projeto2/Projeto/src/dao/TipoImovelDAO.java</file>
+            <file>file:/home/urielcaire/NetBeansProjects/projeto2/Projeto/src/imovel/model/Imovel_has_TipoContrato.java</file>
+            <file>file:/home/urielcaire/NetBeansProjects/projeto2/Projeto/src/principal/Main.java</file>
+            <file>file:/home/urielcaire/NetBeansProjects/projeto2/Projeto/src/dao/BairroDAO.java</file>
+        </group>
     </open-files>
 </project-private>

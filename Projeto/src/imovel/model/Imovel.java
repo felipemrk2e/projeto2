@@ -63,7 +63,7 @@ public class Imovel {
 	private String areaExterna;
 	
 	@Column
-	private Date dataConstrucao;
+	private int dataConstrucao;
 	
 	@Column
 	private String acabamento;
@@ -92,9 +92,9 @@ public class Imovel {
 	@Column
 	private double valorCondominio;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name="idTipoImovel", nullable = false)
-    private TipoImovel tipoImovel;
+        private TipoImovel tipoImovel;
 	
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="idDocumentacao", nullable = true)
@@ -110,7 +110,7 @@ public class Imovel {
 	
 	//+addTipo
 	@OneToMany(
-			mappedBy = "imoveL", 
+			mappedBy = "imovel", 
 			targetEntity = Imovel_has_TipoContrato.class, 
 			fetch = FetchType.LAZY,
 			cascade = CascadeType.PERSIST)
@@ -118,7 +118,7 @@ public class Imovel {
 
 	public Imovel(int qtdQuartos, int qtdSuites, int qtdSalas, int qtdBanheiros, int qtdPisos,
 			int lavanderia, int vagasGaragem, int areaServico, int piscina, int lavabos, int depEmpregados,
-			String areaExterna, Date dataConstrucao, String acabamento, String outrosItens, String descImovel,
+			String areaExterna, int dataConstrucao, String acabamento, String outrosItens, String descImovel,
 			String observacoes, String chaves, int tipoMobilia, String descMobilia, double valorIptu,
 			double valorCondominio, imovel.model.TipoImovel tipoImovel, imovel.model.Documentacao documentacao,
 			imovel.model.Terreno terreno, global.model.Endereco endereco) {
@@ -158,9 +158,9 @@ public class Imovel {
 		return idImovel;
 	}
 
-	//public void setIdImovel(long idImovel) {
-	//	this.idImovel = idImovel;
-	//}
+	public void setIdImovel(long idImovel) {
+		this.idImovel = idImovel;
+	}
 
 	public int getQtdQuartos() {
 		return qtdQuartos;
@@ -258,11 +258,11 @@ public class Imovel {
 		this.areaExterna = areaExterna;
 	}
 
-	public Date getDataConstrucao() {
+	public int getDataConstrucao() {
 		return dataConstrucao;
 	}
 
-	public void setDataConstrucao(Date dataConstrucao) {
+	public void setDataConstrucao(int dataConstrucao) {
 		this.dataConstrucao = dataConstrucao;
 	}
 

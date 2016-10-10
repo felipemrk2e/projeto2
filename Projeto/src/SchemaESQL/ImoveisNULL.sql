@@ -1,9 +1,13 @@
-CREATE DATABASE ProjetoDois;
-USE ProjetoDois;
+CREATE DATABASE projetodois;
+USE projetodois;
 
-
--- V 1.6 do SQL NULL --
--- Estrutura das entidades Estado e Cidade foram alteradas --
+-- V 2.1 do SQL NULL --
+-- edicoes --
+/*
+    A tabela Endereco recebeu o atributo Complemento
+	Imovel:TipoImovel agora é do tipo INT
+	Documentacao recebeu o atributo numMatricula
+*/
 
 CREATE TABLE TipoImovel(
     idTipoImovel INT AUTO_INCREMENT NOT NULL,
@@ -11,93 +15,6 @@ CREATE TABLE TipoImovel(
     descricao VARCHAR(255),
     CONSTRAINT pk_idTipoImovel PRIMARY KEY(idTipoImovel)
 );
-
-
-CREATE TABLE Mobilia(
-    idMobilia INT NOT NULL AUTO_INCREMENT,
-    tipoMobilia VARCHAR(65) NOT NULL,
-    CONSTRAINT PRIMARY KEY(idMobilia)
-);
-
-
-CREATE TABLE Imovel(
-    idImovel INT AUTO_INCREMENT NOT NULL,
-    qtdQuartos INT,
-    qtdSuites INT,
-    qtdSalas INT,
-    qtdBanheiros INT,
-    qtdPisos INT,
-    lavanderia INT,
-    vagasGaragem INT,
-    areaServico INT,
-    piscina INT,
-    lavabos INT,
-    depEmpregrados INT,
-    areaExterna VARCHAR(255),
-    dataConstrucao DATE,
-    acabamento TEXT,
-    outrosItens TEXT,
-    descricaoImovel VARCHAR(255),
-    observacoes VARCHAR(255),
-    chaves VARCHAR(125),
-    valorIptu DECIMAL(10,2),
-    valorCondominio DECIMAL(10,2),
-    idTipoImovel INT,
-    idMobilia INT,
-    CONSTRAINT pk_idImovel PRIMARY KEY (idImovel),
-    CONSTRAINT fk_tipoImovel FOREIGN KEY (idTipoImovel)
-    REFERENCES TipoImovel(idTipoImovel),
-    CONSTRAINT fk_mobilia FOREIGN KEY (idMobilia)
-    REFERENCES Mobilia(idMobilia)
-);
-
-
-CREATE TABLE Documentos(
-    idImovel INT NOT NULL,
-    numContaAgua VARCHAR(255),
-    numContaLuz VARCHAR(255),
-    numIptu VARCHAR(255),
-    numContrato VARCHAR(255),
-    cartorio VARCHAR(255),
-    CONSTRAINT PRIMARY KEY(idImovel),
-    CONSTRAINT FOREIGN KEY (idImovel)
-    REFERENCES Imovel(idImovel)
-);
-
-
--- 1.5 cumprimento-> comprimento -- 
-CREATE TABLE Terreno(
-    idTerreno INT NOT NULL AUTO_INCREMENT,
-    idImovel INT,
-    comprimento DOUBLE,
-    largura DOUBLE,
-    situacaoEscritura VARCHAR(255),
-    CONSTRAINT PRIMARY KEY (idTerreno),
-    CONSTRAINT FOREIGN KEY (idImovel)
-    REFERENCES Imovel(idImovel)
-);
-
-
-
-CREATE TABLE TipoLocacao(
-    idTipoLocacao INT NOT NULL AUTO_INCREMENT,
-    tipoContrato VARCHAR(255) NOT NULL,
-    descricao VARCHAR(255),
-    CONSTRAINT PRIMARY KEY(idTipoLocacao)
-);
-
-
-CREATE TABLE Imovel_has_TipoLocacao(
-    idImovel INT NOT NULL,
-    idTipoLocacao INT NOT NULL,
-    valor DECIMAL(10, 2) NOT NULL,
-    CONSTRAINT PRIMARY KEY(idImovel, idTipoLocacao),
-    CONSTRAINT FOREIGN KEY(idImovel)
-    REFERENCES Imovel(idImovel),
-    CONSTRAINT FOREIGN KEY(idTipoLocacao)
-    REFERENCES TipoLocacao(idTipoLocacao)
-);
-
 
 CREATE TABLE Estado(
     id int(11) NOT NULL,
@@ -126,23 +43,94 @@ CREATE TABLE Bairro(
     REFERENCES Cidade(idCidade)
 );
 
-
-
-CREATE TABLE LocalImovel(
-    idImovel INT NOT NULL AUTO_INCREMENT,
-    rua VARCHAR(255),
+CREATE TABLE Endereco(
+    idEndereco INT NOT NULL AUTO_INCREMENT,
+    nomeEndereco VARCHAR(255),
     numero INT,
-    zona VARCHAR(255) NOT NULL,
+    zona VARCHAR(255),
     referencia VARCHAR(255),
+	complemento VARCHAR(255),
     nomeCondominio VARCHAR(255),
     idBairro INT,
-    CONSTRAINT pk_LocalImovel_idImovel PRIMARY KEY(idImovel),
-    CONSTRAINT fk_Imovel_idImovel FOREIGN KEY (idImovel)
-    REFERENCES Imovel(idImovel),
+    CONSTRAINT PRIMARY KEY(idEndereco),
     CONSTRAINT FOREIGN KEY (idBairro)
     REFERENCES Bairro(idBairro)
 );
 
+CREATE TABLE Documentacao(
+    idDocumentacao INT NOT NULL AUTO_INCREMENT,
+	numMatricula VARCHAR(255),
+    numContaAgua VARCHAR(255),
+    numContaLuz VARCHAR(255),
+    numIptu VARCHAR(255),
+    numContrato VARCHAR(255),
+    cartorio VARCHAR(255),
+    CONSTRAINT PRIMARY KEY(idDocumentacao)
+);
+
+CREATE TABLE Terreno(
+    idTerreno INT NOT NULL AUTO_INCREMENT,
+    comprimento DOUBLE,
+    largura DOUBLE,
+    areaConstruida DOUBLE,
+    situacaoEscritura VARCHAR(255),
+    CONSTRAINT PRIMARY KEY (idTerreno)
+);
+
+CREATE TABLE Imovel(
+    idImovel INT AUTO_INCREMENT NOT NULL,
+    qtdQuartos INT,
+    qtdSuites INT,
+    qtdSalas INT,
+    qtdBanheiros INT,
+    qtdPisos INT,
+    lavanderia INT,
+    vagasGaragem INT,
+    areaServico INT,
+    piscina INT,
+    lavabos INT,
+    depEmpregados INT,
+    areaExterna VARCHAR(255),
+    dataConstrucao DATE,
+    acabamento TEXT,
+    outrosItens TEXT,
+    descImovel VARCHAR(255),
+    observacoes VARCHAR(255),
+    chaves VARCHAR(125),
+    tipoMobilia INT,
+    descMobilia VARCHAR(255),   
+    valorIptu DECIMAL(10,2),
+    valorCondominio DECIMAL(10,2),
+    idTipoImovel INT,
+    idEndereco INT,
+    idDocumentacao INT,
+    idTerreno INT,
+    CONSTRAINT pk_idImovel PRIMARY KEY (idImovel),
+    CONSTRAINT fk_tipoImovel FOREIGN KEY (idTipoImovel)
+    REFERENCES TipoImovel(idTipoImovel),
+    CONSTRAINT fk_idEndereco FOREIGN KEY (idEndereco)
+    REFERENCES Endereco(idEndereco),
+    CONSTRAINT fk_idDocumentacao FOREIGN KEY(idDocumentacao)
+    REFERENCES Documentacao(idDocumentacao),
+    CONSTRAINT fk_idTerreno FOREIGN KEY(idTerreno)
+    REFERENCES Terreno(idTerreno)
+);
+
+CREATE TABLE TipoContrato(
+    idTipoContrato INT NOT NULL AUTO_INCREMENT,
+    tipoContrato VARCHAR(255) NOT NULL,
+    descricao VARCHAR(255),
+    CONSTRAINT PRIMARY KEY(idTipoContrato)
+);
 
 
-
+CREATE TABLE Imovel_has_TipoContrato(
+    idImovel INT NOT NULL,
+    idTipoContrato INT NOT NULL,
+    valor DECIMAL(10, 2) NOT NULL,
+    CONSTRAINT PRIMARY KEY(idImovel, idTipoContrato),
+    CONSTRAINT FOREIGN KEY(idImovel)
+    REFERENCES Imovel(idImovel),
+    CONSTRAINT FOREIGN KEY(idTipoContrato)
+    REFERENCES TipoContrato(idTipoContrato)
+);

@@ -5,7 +5,6 @@
  */
 package Interface.CadImovel;
 
-
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -17,32 +16,46 @@ import javax.swing.JOptionPane;
  */
 public class cadastroImovelHome extends javax.swing.JFrame {
 
+    int user;
+
     /**
      * Creates new form cadastroImovelHome
      */
     public cadastroImovelHome() {
         initComponents();
         fechar();
+
     }
-    
-    public void fechar (){
-         this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
-              addWindowListener(new WindowAdapter() {
+
+    public cadastroImovelHome(int user) {
+        initComponents();
+        fechar();
+        if (user <= 2) {
+            jbRemover.setEnabled(true);
+            jbCadastrar.setEnabled(true);
+        } else {
+            jbRemover.setEnabled(false);
+            jbCadastrar.setEnabled(false);
+        }
+
+    }
+
+    public void fechar() {
+        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
 
+                String ObjButtons[] = {"Sim", "Não"};
+                int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
 
-                    String ObjButtons[] = {"Sim", "Não"};
-                    int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
-                    if (PromptResult == JOptionPane.YES_OPTION) {
-                        System.exit(0);
-                    }
-               
             }
-        });  
-    
-    
-}
+        });
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,9 +66,9 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbCadastrar = new javax.swing.JButton();
+        jbVisualisar = new javax.swing.JButton();
+        jbRemover = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -64,24 +77,37 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jCheckBox4 = new javax.swing.JCheckBox();
         jCheckBox5 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jbPesquisar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jmLogin = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jButton1.setText("Cadastrar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbCadastrar.setText("Cadastrar");
+        jbCadastrar.setEnabled(false);
+        jbCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                jbCadastrarMouseClicked(evt);
             }
         });
 
-        jButton2.setText("Visualizar");
+        jbVisualisar.setText("Visualizar");
+        jbVisualisar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbVisualisarMouseClicked(evt);
+            }
+        });
 
-        jButton3.setText("Remover");
+        jbRemover.setText("Remover");
+        jbRemover.setEnabled(false);
+        jbRemover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbRemoverMouseClicked(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,9 +134,18 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
         jLabel1.setText("Filtros");
 
-        jButton4.setText("Pesquisar");
+        jbPesquisar.setText("Pesquisar");
 
         jMenu1.setText("File");
+
+        jmLogin.setText("Login");
+        jmLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmLoginMousePressed(evt);
+            }
+        });
+        jMenu1.add(jmLogin);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -127,10 +162,10 @@ public class cadastroImovelHome extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbCadastrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbVisualisar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
             .addGroup(layout.createSequentialGroup()
                 .addGap(208, 208, 208)
@@ -165,13 +200,13 @@ public class cadastroImovelHome extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbVisualisar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(124, Short.MAX_VALUE))
         );
@@ -180,10 +215,35 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-   new cadastroImovel().setVisible(true);     // TODO add your handling code here:
-   dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
+    private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
+        if (jbCadastrar.isEnabled()) {
+            new cadastroImovel().setVisible(true);     // TODO add your handling code here:
+            dispose();
+        }
+
+
+    }//GEN-LAST:event_jbCadastrarMouseClicked
+
+    private void jbRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemoverMouseClicked
+
+        if (jbRemover.isEnabled()) {
+
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_jbRemoverMouseClicked
+
+    private void jmLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmLoginMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmLoginMousePressed
+
+    private void jbVisualisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualisarMouseClicked
+       
+        String idImovel = "vazio no momento";
+        new cadastroImovel(idImovel,user).setVisible(true);
+        dispose();
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_jbVisualisarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -221,10 +281,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -236,5 +292,10 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbCadastrar;
+    private javax.swing.JButton jbPesquisar;
+    private javax.swing.JButton jbRemover;
+    private javax.swing.JButton jbVisualisar;
+    private javax.swing.JMenuItem jmLogin;
     // End of variables declaration//GEN-END:variables
 }

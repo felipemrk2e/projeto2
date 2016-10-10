@@ -57,23 +57,21 @@ public class TelaLogin extends javax.swing.JDialog {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jlImagem.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jlImagem.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sala\\Desktop\\Nova pasta\\corretagem_imob3.png")); // NOI18N
         getContentPane().add(jlImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 200, 350));
 
         jlUsuario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jlUsuario.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sala\\Desktop\\Nova pasta\\usuario.png")); // NOI18N
         jlUsuario.setText("Usuário:");
         getContentPane().add(jlUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, -1, -1));
 
         jlSenha.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jlSenha.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sala\\Desktop\\Nova pasta\\password3.png")); // NOI18N
         jlSenha.setText("  Senha:");
         getContentPane().add(jlSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, -1, -1));
+
+        jtfUsuario.setText("teste");
         getContentPane().add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 190, -1));
         getContentPane().add(jpfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 190, -1));
 
         jbAcessar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jbAcessar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sala\\Desktop\\Nova pasta\\Ok.png")); // NOI18N
         jbAcessar.setText("Acessar");
         jbAcessar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -83,7 +81,6 @@ public class TelaLogin extends javax.swing.JDialog {
         getContentPane().add(jbAcessar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, -1, -1));
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jbCancelar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sala\\Desktop\\Nova pasta\\Cancel.png")); // NOI18N
         jbCancelar.setText("Cancelar");
         jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {

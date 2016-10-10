@@ -1,6 +1,7 @@
 package dao;
 
 import global.model.Bairro;
+import java.util.List;
 
 public class BairroDAO extends DAO<Bairro> {
 
@@ -10,15 +11,30 @@ public class BairroDAO extends DAO<Bairro> {
 		try{
 			bairro = entityManager.find(Bairro.class, id);
 		}catch(Exception e){
-			System.out.println("Erro na consulta do TipoImovel: "+e);
+			System.out.println("Erro na consulta do Bairro: "+e);
 		}
 		return bairro;
 	}
 
 	@Override
 	public boolean removeById(Long id) {
-		// TODO Auto-generated method stub
+		Bairro bairro = null;
+                try{
+                    bairro = this.getById(id);
+                    entityManager.getTransaction().begin();
+                    entityManager.remove(bairro);
+                    entityManager.getTransaction().commit();
+                    return true;
+                }catch(Exception e){
+                    entityManager.getTransaction().rollback();
+                    System.out.println("Erro na exclusão do Bairro: "+e);
+                }
 		return false;
 	}
+
+    @Override
+    public List<Bairro> getAll() {
+        return entityManager.createQuery("FROM Bairro").getResultList();
+    }
 
 }
