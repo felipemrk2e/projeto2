@@ -78,13 +78,28 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jCheckBox5 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         jbPesquisar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jtBairro = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmLogin = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1024, 640));
         setResizable(false);
+        getContentPane().setLayout(null);
 
         jbCadastrar.setText("Cadastrar");
         jbCadastrar.setEnabled(false);
@@ -93,6 +108,8 @@ public class cadastroImovelHome extends javax.swing.JFrame {
                 jbCadastrarMouseClicked(evt);
             }
         });
+        getContentPane().add(jbCadastrar);
+        jbCadastrar.setBounds(780, 30, 199, 87);
 
         jbVisualisar.setText("Visualizar");
         jbVisualisar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -100,6 +117,8 @@ public class cadastroImovelHome extends javax.swing.JFrame {
                 jbVisualisarMouseClicked(evt);
             }
         });
+        getContentPane().add(jbVisualisar);
+        jbVisualisar.setBounds(780, 130, 195, 88);
 
         jbRemover.setText("Remover");
         jbRemover.setEnabled(false);
@@ -108,6 +127,8 @@ public class cadastroImovelHome extends javax.swing.JFrame {
                 jbRemoverMouseClicked(evt);
             }
         });
+        getContentPane().add(jbRemover);
+        jbRemover.setBounds(780, 230, 199, 94);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,19 +143,91 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(60, 30, 698, 300);
+
         jCheckBox1.setText("casa");
+        getContentPane().add(jCheckBox1);
+        jCheckBox1.setBounds(230, 380, 47, 30);
 
         jCheckBox2.setText("apartamento");
+        getContentPane().add(jCheckBox2);
+        jCheckBox2.setBounds(310, 380, 87, 30);
 
         jCheckBox3.setText("Salão");
+        getContentPane().add(jCheckBox3);
+        jCheckBox3.setBounds(430, 380, 51, 30);
 
         jCheckBox4.setText("Temporario");
+        getContentPane().add(jCheckBox4);
+        jCheckBox4.setBounds(520, 380, 79, 30);
 
         jCheckBox5.setText("Comercio");
+        getContentPane().add(jCheckBox5);
+        jCheckBox5.setBounds(640, 380, 69, 30);
 
         jLabel1.setText("Filtros");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(170, 380, 29, 20);
 
         jbPesquisar.setText("Pesquisar");
+        getContentPane().add(jbPesquisar);
+        jbPesquisar.setBounds(820, 430, 199, 91);
+
+        jLabel2.setText("Nome do Proprietario");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(100, 420, 101, 14);
+
+        jTextField1.setText("Proprietario");
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(100, 440, 290, 20);
+
+        jLabel3.setText("Bairro");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(480, 480, 28, 14);
+
+        jtBairro.setText("bairro");
+        getContentPane().add(jtBairro);
+        jtBairro.setBounds(480, 500, 100, 20);
+
+        jLabel4.setText("Estado");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(600, 480, 33, 14);
+
+        jTextField2.setText("estado");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField2);
+        jTextField2.setBounds(600, 500, 39, 20);
+
+        jTextField3.setText("Rua");
+        getContentPane().add(jTextField3);
+        jTextField3.setBounds(100, 500, 360, 20);
+
+        jTextField4.setText("qtd quarto");
+        getContentPane().add(jTextField4);
+        jTextField4.setBounds(480, 440, 30, 20);
+
+        jTextField5.setText("qtd garagem");
+        getContentPane().add(jTextField5);
+        jTextField5.setBounds(580, 440, 30, 20);
+
+        jLabel5.setText("Rua");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(110, 480, 19, 14);
+
+        jLabel6.setText("Qtd de quarto");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(480, 420, 68, 14);
+
+        jLabel7.setText("Vagas Garagem");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(580, 420, 100, 14);
+        getContentPane().add(jSeparator1);
+        jSeparator1.setBounds(20, 410, 780, 10);
 
         jMenu1.setText("File");
 
@@ -152,64 +245,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbCadastrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbVisualisar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(208, 208, 208)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
-                        .addGap(30, 30, 30)
-                        .addComponent(jCheckBox2)
-                        .addGap(36, 36, 36)
-                        .addComponent(jCheckBox3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(jLabel1)))
-                .addGap(43, 43, 43)
-                .addComponent(jCheckBox4)
-                .addGap(38, 38, 38)
-                .addComponent(jCheckBox5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox5))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)
-                        .addComponent(jbVisualisar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(124, Short.MAX_VALUE))
-        );
 
         pack();
         setLocationRelativeTo(null);
@@ -244,6 +279,10 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jbVisualisarMouseClicked
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,15 +326,28 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbPesquisar;
     private javax.swing.JButton jbRemover;
     private javax.swing.JButton jbVisualisar;
     private javax.swing.JMenuItem jmLogin;
+    private javax.swing.JTextField jtBairro;
     // End of variables declaration//GEN-END:variables
 }
