@@ -1,10 +1,10 @@
 CREATE DATABASE projetodois;
 USE projetodois;
 
--- V 2.3 do SQL --
+-- V 2.4 do SQL --
 -- edicoes --
 /*
-	Correção de Erros de digitação
+	Acréscimo do atributo booleano 'ativo' à tabela Imovel
 */
 
 CREATE TABLE TipoImovel(
@@ -77,6 +77,7 @@ CREATE TABLE Terreno(
 
 CREATE TABLE Imovel(
     idImovel INT AUTO_INCREMENT NOT NULL,
+    ativo BOOLEAN DEFAULT 1 NOT NULL,
     qtdQuartos INT NOT NULL,
     qtdSuites INT NOT NULL,
     qtdSalas INT NOT NULL,
