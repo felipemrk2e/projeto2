@@ -7,6 +7,7 @@ package Interface.CadImovel;
 
 import global.model.Estado;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
+import dao.EstadoDAO;
 import dao.ImovelDAO;
 import dao.TipoContratoDAO;
 import dao.TipoImovelDAO;
@@ -26,6 +27,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import validacao.validacao;
 
@@ -42,7 +44,19 @@ public class cadastroImovel extends javax.swing.JFrame {
         //Alterado system.exit(), para dispose()
 
         removerTitleBar();
-
+        EstadoDAO estadoDao = new EstadoDAO();
+        List<Estado> estadoTemp = new ArrayList<>();
+        List<String> listaSigla = new ArrayList<String>();
+        estadoTemp = estadoDao.getAll();
+        for (int i = 0; i < estadoTemp.size(); i++) {
+            listaSigla.add(estadoTemp.get(i).getSigla());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
+        jcbEstado.setModel(defaultComboBox);
+        ImovelDAO imovelDao = new ImovelDAO();
+        Imovel imovel = new Imovel();
+        imovel = imovelDao.getById(Long.parseLong("1"));
+popular(imovel);
     }
 
     public cadastroImovel(String idImovel, int user) {
@@ -159,7 +173,6 @@ public class cadastroImovel extends javax.swing.JFrame {
             jrbCondominio.setSelected(true);
         }
 
-     
         for (int i = 0; i < imovel.getTiposContratos().size(); i++) {
 
             Imovel_has_TipoContrato Imovel_tipoContrato = imovel.getTiposContratos().get(i);
@@ -237,8 +250,6 @@ public class cadastroImovel extends javax.swing.JFrame {
 // fim endereços
 
         //valores 
-        
-        
         jtValorIptu.setText(String.valueOf(imovel.getValorIptu()));
         jtValorCondominio.setText(String.valueOf(imovel.getValorCondominio()));
 
@@ -286,135 +297,135 @@ public class cadastroImovel extends javax.swing.JFrame {
         } else {
             jtSituacaoEscritura.setText(imovel.getTerreno().getSituacaoEscritura());
         }
-        if (imovel.getTerreno().getLargura() == 0) {
-            jtLargura.setText("");
-        } else {
-
-            jtLargura.setText(String.valueOf(imovel.getTerreno().getLargura()));
-        }
-        if (imovel.getTerreno().getComprimento() == 0) {
-            jtComprimento.setText("");
-        } else {
-            jtComprimento.setText(String.valueOf(imovel.getTerreno().getComprimento()));
-        }
-        if (imovel.getTerreno().getAreaConstruida() == 0) {
-            jtAreaConstruida.setText("");
-        } else {
-            jtAreaConstruida.setText(String.valueOf(imovel.getTerreno().getAreaConstruida()));
-        }
-
-        if (!jtLargura.getText().equals(0) && !jtComprimento.getText().equals(0)) {
-            int tamanho = Integer.valueOf(jtLargura.getText()) * Integer.valueOf(jtComprimento.getText());
-            jtTamanhoTerreno.setText(String.valueOf(tamanho));
-
-        } else {
-
-            jtTamanhoTerreno.setText("");
-        }
-
-        if (imovel.getDescMobilia().equals(" ")) {
-            jtMobilia.setText("");
-        } else {
-            jtMobilia.setText(imovel.getDescMobilia());
-        }
-        if (imovel.getChaves().equals(" ")) {
-            jtChaves.setText("");
-        } else {
-            jtChaves.setText(imovel.getChaves());
-        }
-        if (imovel.getObservacoes().equals(" ")) {
-            jtObservacao.setText("");
-        } else {
-            jtObservacao.setText(imovel.getObservacoes());
-        }
-
-        //Descrição  
-        if (imovel.getQtdQuartos() == 0) {
-            jtQuartos.setText("");
-        } else {
-            jtQuartos.setText(String.valueOf(imovel.getQtdQuartos()));
-        }
-        if (imovel.getQtdSuites() == 0) {
-            jtSuites.setText("");
-        } else {
-            jtSuites.setText(String.valueOf(imovel.getQtdSuites()));
-        }
-        if (imovel.getQtdSalas() == 0) {
-            jtSalas.setText("");
-        } else {
-            jtSalas.setText(String.valueOf(imovel.getQtdSalas()));
-        }
-        if (imovel.getQtdBanheiros() == 0) {
-            jtBanheiros.setText("");
-        } else {
-            jtBanheiros.setText(String.valueOf(imovel.getQtdBanheiros()));
-        }
-        if (imovel.getLavabos() == 0) {
-            jtLavados.setText("");
-        } else {
-            jtLavados.setText(String.valueOf(imovel.getLavabos()));
-        }
-
-        if (imovel.getAreaServico() == 0) {
-            jtAreaServico.setText("");
-        } else {
-            jtAreaServico.setText(String.valueOf(imovel.getAreaServico()));
-        }
-
-        if (imovel.getLavanderia() == 0) {
-            jtLavanderia.setText("");
-        } else {
-            jtLavanderia.setText(String.valueOf(imovel.getLavanderia()));
-        }
-
-        if (imovel.getQtdPisos() == 0) {
-            jtPisos.setText("");
-        } else {
-            jtPisos.setText(String.valueOf(imovel.getQtdPisos()));
-        }
-
-        if (imovel.getDataConstrucao() == 0) {
-            jtIdadeImovel.setText("");
-        } else {
-            jtIdadeImovel.setText(String.valueOf(imovel.getDataConstrucao()));
-        }
-
-        if (imovel.getPiscina() == 0) {
-            jtPscina.setText("");
-        } else {
-            jtPscina.setText(String.valueOf(imovel.getPiscina()));
-        }
-        if (imovel.getVagasGaragem() == 0) {
-            jtVagasGaragem.setText("");
-        } else {
-            jtVagasGaragem.setText(String.valueOf(imovel.getVagasGaragem()));
-        }
-        if (imovel.getDepEmpregados() == 0) {
-            jtDepEmpregada.setText("");
-        } else {
-            jtDepEmpregada.setText(String.valueOf(imovel.getDepEmpregados()));
-        }
-
-        if (imovel.getDescImovel().equals(" ")) {
-            jtTipoImovel.setText("");
-        } else {
-            jtTipoImovel.setText(imovel.getDescImovel());
-        }
-        if (imovel.getAreaExterna().equals(" ")) {
-            jtAreaExterna.setText("");
-        } else {
-            jtAreaExterna.setText(imovel.getAreaExterna());
-        }
-        if (imovel.getAcabamento().equals(" ")) {
-            jtAcabamento.setText("");
-        } else {
-            jtAcabamento.setText(imovel.getAcabamento());
-        }
-        if (imovel.getOutrosItens().equals(" ")) {
-            jtOutros.setText("");
-        } else {
-            jtOutros.setText(imovel.getOutrosItens());
-        }
+//        if (imovel.getTerreno().getLargura() == 0) {
+//            jtLargura.setText("");
+//        } else {
+//
+//            jtLargura.setText(String.valueOf(imovel.getTerreno().getLargura()));
+//        }
+//        if (imovel.getTerreno().getComprimento() == 0) {
+//            jtComprimento.setText("");
+//        } else {
+//            jtComprimento.setText(String.valueOf(imovel.getTerreno().getComprimento()));
+//        }
+//        if (imovel.getTerreno().getAreaConstruida() == 0) {
+//            jtAreaConstruida.setText("");
+//        } else {
+//            jtAreaConstruida.setText(String.valueOf(imovel.getTerreno().getAreaConstruida()));
+//        }
+//
+//        if (!jtLargura.getText().equals(0) && !jtComprimento.getText().equals(0)) {
+//            int tamanho = Integer.valueOf(jtLargura.getText()) * Integer.valueOf(jtComprimento.getText());
+//            jtTamanhoTerreno.setText(String.valueOf(tamanho));
+//
+//        } else {
+//
+//            jtTamanhoTerreno.setText("");
+//        }
+//
+//        if (imovel.getDescMobilia().equals(" ")) {
+//            jtMobilia.setText("");
+//        } else {
+//            jtMobilia.setText(imovel.getDescMobilia());
+//        }
+//        if (imovel.getChaves().equals(" ")) {
+//            jtChaves.setText("");
+//        } else {
+//            jtChaves.setText(imovel.getChaves());
+//        }
+//        if (imovel.getObservacoes().equals(" ")) {
+//            jtObservacao.setText("");
+//        } else {
+//            jtObservacao.setText(imovel.getObservacoes());
+//        }
+//
+//        //Descrição  
+//        if (imovel.getQtdQuartos() == 0) {
+//            jtQuartos.setText("");
+//        } else {
+//            jtQuartos.setText(String.valueOf(imovel.getQtdQuartos()));
+//        }
+//        if (imovel.getQtdSuites() == 0) {
+//            jtSuites.setText("");
+//        } else {
+//            jtSuites.setText(String.valueOf(imovel.getQtdSuites()));
+//        }
+//        if (imovel.getQtdSalas() == 0) {
+//            jtSalas.setText("");
+//        } else {
+//            jtSalas.setText(String.valueOf(imovel.getQtdSalas()));
+//        }
+//        if (imovel.getQtdBanheiros() == 0) {
+//            jtBanheiros.setText("");
+//        } else {
+//            jtBanheiros.setText(String.valueOf(imovel.getQtdBanheiros()));
+//        }
+//        if (imovel.getLavabos() == 0) {
+//            jtLavados.setText("");
+//        } else {
+//            jtLavados.setText(String.valueOf(imovel.getLavabos()));
+//        }
+//
+//        if (imovel.getAreaServico() == 0) {
+//            jtAreaServico.setText("");
+//        } else {
+//            jtAreaServico.setText(String.valueOf(imovel.getAreaServico()));
+//        }
+//
+//        if (imovel.getLavanderia() == 0) {
+//            jtLavanderia.setText("");
+//        } else {
+//            jtLavanderia.setText(String.valueOf(imovel.getLavanderia()));
+//        }
+//
+//        if (imovel.getQtdPisos() == 0) {
+//            jtPisos.setText("");
+//        } else {
+//            jtPisos.setText(String.valueOf(imovel.getQtdPisos()));
+//        }
+//
+//        if (imovel.getDataConstrucao() == 0) {
+//            jtIdadeImovel.setText("");
+//        } else {
+//            jtIdadeImovel.setText(String.valueOf(imovel.getDataConstrucao()));
+//        }
+//
+//        if (imovel.getPiscina() == 0) {
+//            jtPscina.setText("");
+//        } else {
+//            jtPscina.setText(String.valueOf(imovel.getPiscina()));
+//        }
+//        if (imovel.getVagasGaragem() == 0) {
+//            jtVagasGaragem.setText("");
+//        } else {
+//            jtVagasGaragem.setText(String.valueOf(imovel.getVagasGaragem()));
+//        }
+//        if (imovel.getDepEmpregados() == 0) {
+//            jtDepEmpregada.setText("");
+//        } else {
+//            jtDepEmpregada.setText(String.valueOf(imovel.getDepEmpregados()));
+//        }
+//
+//        if (imovel.getDescImovel().equals(" ")) {
+//            jtTipoImovel.setText("");
+//        } else {
+//            jtTipoImovel.setText(imovel.getDescImovel());
+//        }
+//        if (imovel.getAreaExterna().equals(" ")) {
+//            jtAreaExterna.setText("");
+//        } else {
+//            jtAreaExterna.setText(imovel.getAreaExterna());
+//        }
+//        if (imovel.getAcabamento().equals(" ")) {
+//            jtAcabamento.setText("");
+//        } else {
+//            jtAcabamento.setText(imovel.getAcabamento());
+//        }
+//        if (imovel.getOutrosItens().equals(" ")) {
+//            jtOutros.setText("");
+//        } else {
+//            jtOutros.setText(imovel.getOutrosItens());
+//        }
 
     }
 
@@ -1254,7 +1265,7 @@ public class cadastroImovel extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbLocacaoMouseClicked
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
-   
+
         if (jbConfirmar.isEnabled()) {
             int control = 0;
             boolean control2 = true;
@@ -1274,6 +1285,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
             TipoContratoDAO tipoContratoDao = new TipoContratoDAO();
             List<TipoContrato> tipoContrato = new ArrayList<>();
+
 
 // Fora das tabs..
             if (jcbLocacao.isSelected()) {
@@ -1343,7 +1355,7 @@ public class cadastroImovel extends javax.swing.JFrame {
             }
 
             //Endereço
- //Principal        
+            //Principal        
             if (jrbCasa.isSelected()) {
                 tipoImovel = tipoImovelTemp.get(0);
                 control++;
@@ -1415,14 +1427,15 @@ public class cadastroImovel extends javax.swing.JFrame {
             }
 
             if (jcbEstado.getSelectedIndex() != -1) {
-              
+                uf.setId(jcbEstado.getSelectedIndex()+1);
+               
+
                 control++;
             } else {
                 System.out.println("xxxxxxxxxxxxxxxx");
 
             }
-            
-            
+
 //            if (!jtfUF.getText().equals("") && validacao.validaLetras(jtfUF.getText())) {
 //                uf.setNome(jtfUF.getText());
 //                jtfUF.setBackground(Color.white);
@@ -1432,7 +1445,6 @@ public class cadastroImovel extends javax.swing.JFrame {
 //
 //            }
 // Pricipal End
-
             if (jtfComplemento.getText().equals("")) {
                 endereco.setComplemento(" ");
             } else if (!jtfComplemento.getText().equals("")) {
@@ -1542,7 +1554,17 @@ public class cadastroImovel extends javax.swing.JFrame {
                 jtContaLuz.setBackground(Color.red);
 
             }
+            if (jtIptu.getText().equals("")) {
+                documentacao.setNumIptu(" ");
+                jtIptu.setBackground(Color.white);
+            } else if (!jtIptu.getText().equals("") && validacao.validaNumeros(jtIptu.getText())) {
+                documentacao.setNumIptu(jtIptu.getText());
+                jtIptu.setBackground(Color.white);
+            } else {
+                control2 = false;
+                jtIptu.setBackground(Color.red);
 
+            }
 
             if (jtContrato.getText().equals("")) {
                 documentacao.setNumContrato(" ");
@@ -1562,19 +1584,6 @@ public class cadastroImovel extends javax.swing.JFrame {
                 documentacao.setCartorio(jtCartorio.getText());
             }
 
-            
-            
-               if (jtIptu.getText().equals("")) {
-                imovel.setValorIptu(0);
-                jtIptu.setBackground(Color.white);
-            } else if (!jtIptu.getText().equals("") && validacao.validaNumeros(jtIptu.getText())) {
-                imovel.setValorIptu(Double.valueOf(jtIptu.getText()));
-                jtIptu.setBackground(Color.white);
-            } else {
-                control2 = false;
-                jtIptu.setBackground(Color.red);
-
-            }
             if (jtSituacaoEscritura.getText().equals("")) {
                 terreno.setSituacaoEscritura(" ");
                 jtSituacaoEscritura.setBackground(Color.white);
@@ -1821,7 +1830,7 @@ public class cadastroImovel extends javax.swing.JFrame {
                 imovel.setEndereco(endereco);
                 imovel.setDocumentacao(documentacao);
                 imovel.setTerreno(terreno);
-               imovel.setTipoImovel(tipoImovel);
+                imovel.setTipoImovel(tipoImovel);
 
                 //        conexao banco;  
                 ImovelDAO daoImovel = new ImovelDAO();
@@ -1841,15 +1850,7 @@ public class cadastroImovel extends javax.swing.JFrame {
                 bairro.setCidade(cidade);
                 endereco.setBairro(bairro);
                 imovel.setEndereco(endereco);
-                
-//                documentacao.setNumMatricula(" ");
-//                documentacao.setNumContaAgua(" ");
-//                documentacao.setNumContaLuz(" ");
-//                documentacao.setNumIptu(" ");
-//                documentacao.setNumContrato(" ");
-//                documentacao.setCartorio(" ");
-//             documentacao = new Documentacao("a","b","c","d","e","f");
-                     imovel.setDocumentacao(documentacao);
+                imovel.setDocumentacao(documentacao);
                 imovel.setTerreno(terreno);
                 imovel.setTipoImovel(tipoImovel);
 
