@@ -5,6 +5,8 @@
  */
 package Interface.CadCliente;
 
+import dao.EstadoDAO;
+import global.model.Estado;
 import java.awt.Color;
 import java.awt.Insets;
 import java.sql.Connection;
@@ -38,6 +40,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         mascaraCPF_CNPJ(true);
         jrbPessoaFisica.setSelected(true);
         configuraMascaras();
+        carregaEstados();
 
         UIManager.getDefaults().put("jtpCadastroCliente.contentBorderInsets", new Insets(0, 0, 0, 0));
         UIManager.getDefaults().put("jtpCadastroCliente.tabsOverlapBorder", true);
@@ -875,6 +878,21 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfEmail.setBackground(Color.white);
     }
 
+    public void carregaEstados(){
+        EstadoDAO estadoDAO = new EstadoDAO();
+        Estado estado = new Estado();
+        List<Estado> listaEstados = new ArrayList<Estado>();
+        List<String> listaSigla = new ArrayList<String>();
+        listaEstados = estadoDAO.getAll();
+        for (int i = 0; i < listaEstados.size(); i++) {
+            listaSigla.add(listaEstados.get(i).getSigla());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
+        jcbEstado.setModel(defaultComboBox);
+        
+    }
+    
+    
     public void setJcbEstado() throws SQLException {
 //        List<String> strList = new ArrayList<String>();
 //        String query = "SELECT UF FROM Estado";
