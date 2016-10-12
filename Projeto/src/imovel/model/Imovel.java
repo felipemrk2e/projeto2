@@ -25,6 +25,9 @@ public class Imovel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private long idImovel;
+        
+        @Column
+        private boolean ativo;
 	
 	@Column
 	private int qtdQuartos;
@@ -116,12 +119,13 @@ public class Imovel {
 			cascade = CascadeType.PERSIST)
 	private List<Imovel_has_TipoContrato> tiposContratos =  new ArrayList<>();
 
-	public Imovel(int qtdQuartos, int qtdSuites, int qtdSalas, int qtdBanheiros, int qtdPisos,
+	public Imovel(boolean ativo, int qtdQuartos, int qtdSuites, int qtdSalas, int qtdBanheiros, int qtdPisos,
 			int lavanderia, int vagasGaragem, int areaServico, int piscina, int lavabos, int depEmpregados,
 			String areaExterna, int dataConstrucao, String acabamento, String outrosItens, String descImovel,
 			String observacoes, String chaves, int tipoMobilia, String descMobilia, double valorIptu,
 			double valorCondominio, imovel.model.TipoImovel tipoImovel, imovel.model.Documentacao documentacao,
 			imovel.model.Terreno terreno, global.model.Endereco endereco) {
+                this.ativo = ativo;
 		this.qtdQuartos = qtdQuartos;
 		this.qtdSuites = qtdSuites;
 		this.qtdSalas = qtdSalas;
@@ -161,6 +165,14 @@ public class Imovel {
 	public void setIdImovel(long idImovel) {
 		this.idImovel = idImovel;
 	}
+        
+        public boolean getAtivo(){
+            return this.ativo;
+        }
+        
+        public void setAtivo(boolean ativo){
+            this.ativo = ativo;
+        }
 
 	public int getQtdQuartos() {
 		return qtdQuartos;
