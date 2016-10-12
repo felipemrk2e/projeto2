@@ -43,7 +43,7 @@ CREATE TABLE Bairro(
 
 CREATE TABLE Documentacao(
     idDocumentacao INT AUTO_INCREMENT NOT NULL,
-	numMatricula VARCHAR(255),
+    numMatricula VARCHAR(255),
     numContaAgua VARCHAR(255) NOT NULL,
     numContaLuz VARCHAR(255) NOT NULL,
     numIptu VARCHAR(255) NOT NULL,
@@ -58,8 +58,9 @@ CREATE TABLE Endereco(
     numero INT NOT NULL,
     zona VARCHAR(255),
     referencia VARCHAR(255),
-	complemento VARCHAR(255),
+    complemento VARCHAR(255),
     nomeCondominio VARCHAR(255),
+    cep VARCHAR(10) NOT NULL,
     idBairro INT NOT NULL,
     CONSTRAINT PRIMARY KEY(idEndereco),
     CONSTRAINT FOREIGN KEY (idBairro)
