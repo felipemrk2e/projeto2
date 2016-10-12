@@ -5,11 +5,66 @@
  */
 package Interface.Pessoa;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 /**
  *
  * @author Sala
  */
+@Entity
 public class EstadoCivil {
-    private int idEstadoCivil;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    private long idEstadoCivil;
+    
+    @Column
     private String nomeEstadoCivil;
+
+    @OneToMany(
+            mappedBy = "estadoCivil",
+            targetEntity = PessoaFisica.class,
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST)
+    private List<PessoaFisica> pessoasFisicas = new ArrayList<>();
+
+    public EstadoCivil(String nomeEstadoCivil) {       
+        this.nomeEstadoCivil = nomeEstadoCivil;
+    }
+
+    
+    public long getIdEstadoCivil() {
+        return idEstadoCivil;
+    }
+
+    public void setIdEstadoCivil(long idEstadoCivil) {
+        this.idEstadoCivil = idEstadoCivil;
+    }
+
+    public String getNomeEstadoCivil() {
+        return nomeEstadoCivil;
+    }
+
+    public void setNomeEstadoCivil(String nomeEstadoCivil) {
+        this.nomeEstadoCivil = nomeEstadoCivil;
+    }
+
+    public List<PessoaFisica> getPessoasFisicas() {
+        return pessoasFisicas;
+    }
+    
+    public void addEstadoCivil(PessoaFisica pessoaFisica) {
+	this.pessoasFisicas.add(pessoaFisica);
+    }
+    
 }

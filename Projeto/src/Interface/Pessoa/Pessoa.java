@@ -45,25 +45,23 @@ public class Pessoa {
 
     @Column
     private Date dataNascimento;
-    
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idEndereco", nullable = true)
     private Endereco endereco;
-    
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idBairro", nullable = true)
-    private Bairro bairro;
-    
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idCidade", nullable = true)
-    private Cidade cidade;
-    
+
+    @OneToMany(
+            mappedBy = "pessoa",
+            targetEntity = Pessoa_has_Interesse.class,
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST)
+    private List<Pessoa_has_Interesse> interesses = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "telefone",
             targetEntity = Telefone.class,
             fetch = FetchType.LAZY)
-    private List<Telefone> telefone = new ArrayList<Telefone>();    
+    private List<Telefone> telefone = new ArrayList<Telefone>();
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idPessoaFisica", nullable = true)
@@ -73,20 +71,34 @@ public class Pessoa {
     @JoinColumn(name = "idPessoaJuridica", nullable = true)
     private PessoaJuridica pessoaJuridica;
 
-   
     public Pessoa() {
 
     }
 
-    public Pessoa(int idPessoa, String nomePessoa, String email, List<Telefone> telefone, String observacoes, Date dataNascimento, Endereco endereco) {
-        this.idPessoa = idPessoa;
+    public Pessoa(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, PessoaFisica pessoaFisica, Telefone telefone, Interesse interesse) {
         this.nomePessoa = nomePessoa;
         this.email = email;
-        this.telefone = telefone;
         this.observacoes = observacoes;
         this.dataNascimento = dataNascimento;
-        this.endereco = endereco;       
+        this.endereco = endereco;
+        this.pessoaFisica = pessoaFisica;
+        this.telefone = (List<Telefone>) telefone;
+        this.interesses = (List<Pessoa_has_Interesse>) interesse;
     }
+    
+    public Pessoa(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, PessoaJuridica pessoaJuridica, Telefone telefone, Interesse interesse) {
+        this.nomePessoa = nomePessoa;
+        this.email = email;
+        this.observacoes = observacoes;
+        this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
+        this.pessoaJuridica = pessoaJuridica;
+        this.telefone = (List<Telefone>) telefone;
+        this.interesses = (List<Pessoa_has_Interesse>) interesse;
+    }
+    
+    
+   
 
     public long getIdPessoa() {
         return idPessoa;
@@ -151,12 +163,27 @@ public class Pessoa {
     public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
         this.pessoaJuridica = pessoaJuridica;
     }
-    
-    public void addTelefone(Telefone telefone){
+
+    public void addTelefone(Telefone telefone) {
         this.telefone.add(telefone);
+    }
+
+    public List<Pessoa_has_Interesse> getInteresses() {
+        return interesses;
+    }
+
+    public void setInteresses(List<Pessoa_has_Interesse> interesses) {
+        this.interesses = interesses;
+    }
+
+    public List<Telefone> getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(List<Telefone> telefone) {
+        this.telefone = telefone;
     }
     
     
 
-  
 }
