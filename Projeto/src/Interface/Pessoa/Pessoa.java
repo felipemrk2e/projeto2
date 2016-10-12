@@ -44,7 +44,7 @@ public class Pessoa {
     private String observacoes;
 
     @Column
-    private String dataNascimento;
+    private Date dataNascimento;
     
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idEndereco", nullable = true)
@@ -84,7 +84,7 @@ public class Pessoa {
         this.email = email;
         this.telefone = telefone;
         this.observacoes = observacoes;
-        this.dataNascimento = this.dataNascimento;
+        this.dataNascimento = dataNascimento;
         this.endereco = endereco;
         this.bairro = bairro;
         this.cidade = cidade;
@@ -122,11 +122,11 @@ public class Pessoa {
         this.observacoes = observacoes;
     }
 
-    public String getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
