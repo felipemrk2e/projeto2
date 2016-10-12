@@ -5,45 +5,45 @@
  */
 package dao;
 
-import Interface.Pessoa.Telefone;
+import Interface.Pessoa.Login;
 import java.util.List;
 
 /**
  *
- * @author a1502735
+ * @author Sala
  */
-public class TelefoneDAO extends DAO<Telefone>{
+public class LoginDAO extends DAO<Login> {
 
     @Override
-    public Telefone getById(Long id) {
-        Telefone telefone = null;
+    public Login getById(Long id) {
+        Login login = null;
 		try{
-			telefone = entityManager.find(Telefone.class, id);
+			login = entityManager.find(Login.class, id);
 		}catch(Exception e){
-			System.out.println("Erro na consulta de Telefone: "+e);
+			System.out.println("Erro na consulta de Login: "+e);
 		}
-		return telefone;       
+		return login;  
     }
 
     @Override
     public boolean removeById(Long id) {
-        Telefone telefone = null;
+       Login login = null;
                 try{
-                    telefone = this.getById(id);
+                    login = this.getById(id);
                     entityManager.getTransaction().begin();
-                    entityManager.remove(telefone);
+                    entityManager.remove(login);
                     entityManager.getTransaction().commit();
                     return true;
                 }catch(Exception e){
                     entityManager.getTransaction().rollback();
-                    System.out.println("Erro na exclusão de Telefone: "+e);
+                    System.out.println("Erro na exclusão de Login: "+e);
                 }
 		return false;
     }
 
     @Override
-    public List<Telefone> getAll() {
-        return entityManager.createQuery("FROM Telefone").getResultList();
+    public List<Login> getAll() {
+        return entityManager.createQuery("FROM Login").getResultList();
     }
     
 }

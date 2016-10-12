@@ -78,16 +78,14 @@ public class Pessoa {
 
     }
 
-    public Pessoa(int idPessoa, String nomePessoa, String email, List<Telefone> telefone, String observacoes, Date dataNascimento, Endereco endereco, Bairro bairro, Cidade cidade) {
+    public Pessoa(int idPessoa, String nomePessoa, String email, List<Telefone> telefone, String observacoes, Date dataNascimento, Endereco endereco) {
         this.idPessoa = idPessoa;
         this.nomePessoa = nomePessoa;
         this.email = email;
         this.telefone = telefone;
         this.observacoes = observacoes;
         this.dataNascimento = dataNascimento;
-        this.endereco = endereco;
-        this.bairro = bairro;
-        this.cidade = cidade;
+        this.endereco = endereco;       
     }
 
     public long getIdPessoa() {
