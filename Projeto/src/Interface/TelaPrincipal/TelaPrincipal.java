@@ -164,10 +164,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1024, 640));
         setResizable(false);
         getContentPane().setLayout(null);
+
+        jbConsultarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/funcionarios.png"))); // NOI18N
         getContentPane().add(jbConsultarFuncionario);
         jbConsultarFuncionario.setBounds(20, 490, 140, 70);
 
         jbCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/usuarioadd.png"))); // NOI18N
         jbCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbClienteMousePressed(evt);
@@ -177,6 +180,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbCliente.setBounds(20, 40, 140, 70);
 
         jbImovel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbImovel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/imovel.png"))); // NOI18N
         jbImovel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbImovelMousePressed(evt);
@@ -186,6 +190,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbImovel.setBounds(20, 130, 140, 70);
 
         jbFuncionario.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/funcionario2.png"))); // NOI18N
         jbFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbFuncionarioMousePressed(evt);
@@ -195,6 +200,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbFuncionario.setBounds(20, 220, 140, 70);
 
         jbConsultarCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbConsultarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search_user.png"))); // NOI18N
         jbConsultarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbConsultarClienteMousePressed(evt);
@@ -204,6 +210,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbConsultarCliente.setBounds(20, 310, 140, 70);
 
         jbConsultarImovel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbConsultarImovel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/imovels.png"))); // NOI18N
         jbConsultarImovel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbConsultarImovelMousePressed(evt);
@@ -212,21 +219,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jbConsultarImovel);
         jbConsultarImovel.setBounds(20, 400, 140, 70);
 
+        jlSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit.png"))); // NOI18N
         jlSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jlSairMousePressed(evt);
             }
         });
         getContentPane().add(jlSair);
-        jlSair.setBounds(970, 540, 40, 0);
+        jlSair.setBounds(970, 540, 40, 40);
 
+        jlLogoff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logoff.png"))); // NOI18N
         jlLogoff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jlLogoffMousePressed(evt);
             }
         });
         getContentPane().add(jlLogoff);
-        jlLogoff.setBounds(970, 490, 40, 0);
+        jlLogoff.setBounds(970, 490, 40, 40);
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(jSeparator1);
