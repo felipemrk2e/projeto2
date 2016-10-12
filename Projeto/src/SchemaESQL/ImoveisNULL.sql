@@ -47,8 +47,9 @@ CREATE TABLE Endereco(
     numero INT,
     zona VARCHAR(255),
     referencia VARCHAR(255),
-	complemento VARCHAR(255),
+    complemento VARCHAR(255),
     nomeCondominio VARCHAR(255),
+    cep VARCHAR(10),
     idBairro INT,
     CONSTRAINT PRIMARY KEY(idEndereco),
     CONSTRAINT FOREIGN KEY (idBairro)
@@ -57,7 +58,7 @@ CREATE TABLE Endereco(
 
 CREATE TABLE Documentacao(
     idDocumentacao INT NOT NULL AUTO_INCREMENT,
-	numMatricula VARCHAR(255),
+    numMatricula VARCHAR(255),
     numContaAgua VARCHAR(255),
     numContaLuz VARCHAR(255),
     numIptu VARCHAR(255),
