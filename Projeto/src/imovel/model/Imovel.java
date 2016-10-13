@@ -153,6 +153,40 @@ public class Imovel {
 		this.terreno = terreno;
 		this.endereco = endereco;
 	}
+        
+        public Imovel(int qtdQuartos, int qtdSuites, int qtdSalas, int qtdBanheiros, int qtdPisos,
+			int lavanderia, int vagasGaragem, int areaServico, int piscina, int lavabos, int depEmpregados,
+			String areaExterna, int dataConstrucao, String acabamento, String outrosItens, String descImovel,
+			String observacoes, String chaves, int tipoMobilia, String descMobilia, double valorIptu,
+			double valorCondominio, imovel.model.TipoImovel tipoImovel, imovel.model.Documentacao documentacao,
+			imovel.model.Terreno terreno, global.model.Endereco endereco) {
+		this.qtdQuartos = qtdQuartos;
+		this.qtdSuites = qtdSuites;
+		this.qtdSalas = qtdSalas;
+		this.qtdBanheiros = qtdBanheiros;
+		this.qtdPisos = qtdPisos;
+		this.lavanderia = lavanderia;
+		this.vagasGaragem = vagasGaragem;
+		this.areaServico = areaServico;
+		this.piscina = piscina;
+		this.lavabos = lavabos;
+		this.depEmpregados = depEmpregados;
+		this.areaExterna = areaExterna;
+		this.dataConstrucao = dataConstrucao;
+		this.acabamento = acabamento;
+		this.outrosItens = outrosItens;
+		this.descImovel = descImovel;
+		this.observacoes = observacoes;
+		this.chaves = chaves;
+		this.tipoMobilia = tipoMobilia;
+		this.descMobilia = descMobilia;
+		this.valorIptu = valorIptu;
+		this.valorCondominio = valorCondominio;
+		this.tipoImovel = tipoImovel;
+		this.documentacao = documentacao;
+		this.terreno = terreno;
+		this.endereco = endereco;
+	}
 
 	public Imovel(){
 		
