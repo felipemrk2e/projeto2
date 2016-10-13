@@ -435,4 +435,13 @@ public class Imovel {
         imovelTipoContrato.setTipoContrato(null);
         imovelTipoContrato.setValor(0);
     }
+    
+    public boolean mudaAtivo(){
+        if(this.ativo==true)
+            this.ativo = false;
+        else
+            this.ativo = true;
+        
+        return true;
+    }
 }
