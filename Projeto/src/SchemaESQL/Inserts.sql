@@ -31,3 +31,7 @@ INSERT INTO Estado VALUES(24, 'Santa Catarina', 'SC');
 INSERT INTO Estado VALUES(25, 'Sergipe', 'SE');
 INSERT INTO Estado VALUES(26, 'São Paulo', 'SP');
 INSERT INTO Estado VALUES(27, 'Tocantins', 'TO');
+
+INSERT INTO EstadoCivil(nomeEstadoCivil) VALUES("Solteiro");
+INSERT INTO EstadoCivil(nomeEstadoCivil) VALUES("Casado");
+INSERT INTO EstadoCivil(nomeEstadoCivil) VALUES("Viuvo");
