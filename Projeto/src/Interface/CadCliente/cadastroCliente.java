@@ -40,7 +40,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         mascaraCPF_CNPJ(true);
         jrbPessoaFisica.setSelected(true);
         configuraMascaras();
-        carregaEstados();
+//        carregaEstados();
 
         UIManager.getDefaults().put("jtpCadastroCliente.contentBorderInsets", new Insets(0, 0, 0, 0));
         UIManager.getDefaults().put("jtpCadastroCliente.tabsOverlapBorder", true);
@@ -327,6 +327,7 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jbConfirmar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -548,7 +549,6 @@ public class cadastroCliente extends javax.swing.JFrame {
         getContentPane().add(jlSituacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, -1, -1));
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked

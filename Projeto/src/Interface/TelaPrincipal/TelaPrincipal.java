@@ -11,6 +11,7 @@ import Interface.CadFuncionario.cadastroFuncionario;
 import Interface.CadImovel.cadastroImovel;
 import Interface.CadImovel.cadastroImovelHome;
 import javax.swing.JOptionPane;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
 /**
  *
@@ -28,6 +29,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
+        jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         iniciarPrincipal();
         this.setVisible(true);
         Login();
@@ -48,6 +50,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbConsultarCliente.setText("<html><center>Consultar<br/>Cliente</html>");
         jbConsultarImovel.setText("<html><center>Consultar<br/>Imovel</html>");
         jbConsultarFuncionario.setText("<html><center>Consultar<br/>Funcionario</html>");
+        jbControleFuncionario.setText("<html><center>Controle<br/>Funcionario</html>");
+        jbControleLocacao.setText("<html><center>Controle<br/>Locação</html>");
+        jbLocacao.setText("<html><center>Cadastrar<br/>Locação</html>");
+        jlLogoff.setText("<html><center><br/>Logout</html>");
+        jlSair.setText("<html><center><br/>Sair</html>");
         ocultaFuncoes(false);
     }
 
@@ -64,7 +71,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbFuncionario.setEnabled(ativo);
         jbConsultarCliente.setEnabled(ativo);
         jbConsultarImovel.setEnabled(ativo);
-        jbConsultarFuncionario.setEnabled(ativo);
+        jbControleFuncionario.setEnabled(ativo);
         jlLogoff.setEnabled(ativo);
 
     }
@@ -97,7 +104,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     public void Login() {
-        telaLogin.setLocationRelativeTo(jSeparator2);
+        telaLogin.setLocationRelativeTo(jSeparador2);
 //        telaLogin.setBounds(630, 290, 770, 520);
         telaLogin.setVisible(true);
         if (telaLogin.verificaLogin()) {
@@ -109,7 +116,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Acesso negado!\nUsuário ou Senha Incorretos");
             limpaCampos();
             while (!telaLogin.verificaLogin() && tentativas < 5) {
-                telaLogin.setLocationRelativeTo(jSeparator2);
+                telaLogin.setLocationRelativeTo(jSeparador2);
 //                telaLogin.setBounds(630, 290, 770, 520);
                 telaLogin.setVisible(true);
                 tentativas++;
@@ -140,16 +147,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jbConsultarFuncionario = new javax.swing.JButton();
+        jlSair = new javax.swing.JLabel();
+        jlLogoff = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
         jbCliente = new javax.swing.JButton();
         jbImovel = new javax.swing.JButton();
         jbFuncionario = new javax.swing.JButton();
         jbConsultarCliente = new javax.swing.JButton();
         jbConsultarImovel = new javax.swing.JButton();
-        jlSair = new javax.swing.JLabel();
-        jlLogoff = new javax.swing.JLabel();
+        jbControleFuncionario = new javax.swing.JButton();
+        jbLocacao = new javax.swing.JButton();
+        jbControleLocacao = new javax.swing.JButton();
+        jbControleLocacao1 = new javax.swing.JButton();
+        jbConsultarFuncionario = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
+        jSeparador2 = new javax.swing.JSeparator();
         jmBarraMenu = new javax.swing.JMenuBar();
         jmCadastrar = new javax.swing.JMenu();
         jmiCadastrarCliente = new javax.swing.JMenuItem();
@@ -165,60 +178,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jbConsultarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/funcionarios.png"))); // NOI18N
-        getContentPane().add(jbConsultarFuncionario);
-        jbConsultarFuncionario.setBounds(20, 490, 140, 70);
-
-        jbCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jbCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/usuarioadd.png"))); // NOI18N
-        jbCliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jbClienteMousePressed(evt);
-            }
-        });
-        getContentPane().add(jbCliente);
-        jbCliente.setBounds(20, 40, 140, 70);
-
-        jbImovel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jbImovel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/imovel.png"))); // NOI18N
-        jbImovel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jbImovelMousePressed(evt);
-            }
-        });
-        getContentPane().add(jbImovel);
-        jbImovel.setBounds(20, 130, 140, 70);
-
-        jbFuncionario.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jbFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/funcionario2.png"))); // NOI18N
-        jbFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jbFuncionarioMousePressed(evt);
-            }
-        });
-        getContentPane().add(jbFuncionario);
-        jbFuncionario.setBounds(20, 220, 140, 70);
-
-        jbConsultarCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jbConsultarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search_user.png"))); // NOI18N
-        jbConsultarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jbConsultarClienteMousePressed(evt);
-            }
-        });
-        getContentPane().add(jbConsultarCliente);
-        jbConsultarCliente.setBounds(20, 310, 140, 70);
-
-        jbConsultarImovel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jbConsultarImovel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/imovels.png"))); // NOI18N
-        jbConsultarImovel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jbConsultarImovelMousePressed(evt);
-            }
-        });
-        getContentPane().add(jbConsultarImovel);
-        jbConsultarImovel.setBounds(20, 400, 140, 70);
-
         jlSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit.png"))); // NOI18N
         jlSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -226,7 +185,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jlSair);
-        jlSair.setBounds(970, 540, 40, 40);
+        jlSair.setBounds(930, 530, 120, 40);
 
         jlLogoff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logoff.png"))); // NOI18N
         jlLogoff.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -235,15 +194,126 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jlLogoff);
-        jlLogoff.setBounds(970, 490, 40, 40);
+        jlLogoff.setBounds(920, 0, 120, 40);
+
+        jbCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/usuarioadd.png"))); // NOI18N
+        jbCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbClienteMousePressed(evt);
+            }
+        });
+
+        jbImovel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbImovel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/imovel.png"))); // NOI18N
+        jbImovel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbImovelMousePressed(evt);
+            }
+        });
+
+        jbFuncionario.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/funcionario2.png"))); // NOI18N
+        jbFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbFuncionarioMousePressed(evt);
+            }
+        });
+
+        jbConsultarCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbConsultarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search_user.png"))); // NOI18N
+        jbConsultarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbConsultarClienteMousePressed(evt);
+            }
+        });
+
+        jbConsultarImovel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbConsultarImovel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/imovels.png"))); // NOI18N
+        jbConsultarImovel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbConsultarImovelMousePressed(evt);
+            }
+        });
+
+        jbControleFuncionario.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbControleFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/login-icon2.png"))); // NOI18N
+
+        jbLocacao.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbLocacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Partnership-icon.png"))); // NOI18N
+
+        jbControleLocacao.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbControleLocacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/House-Rent.png"))); // NOI18N
+
+        jbControleLocacao1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbControleLocacao1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/House-Rent.png"))); // NOI18N
+
+        jbConsultarFuncionario.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbConsultarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/funcionarios.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbConsultarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbConsultarImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jbControleLocacao1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                .addComponent(jbControleLocacao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbControleFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbConsultarFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(jbFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbConsultarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbConsultarImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbConsultarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbControleFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbControleLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbControleLocacao1, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
+        );
+
+        jScrollPane1.setViewportView(jPanel1);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(0, 20, 180, 550);
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(0, 0, 180, 640);
+        jSeparator1.setBounds(0, 0, 180, 750);
 
-        jSeparator2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(180, 40, 770, 520);
+        jSeparador2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(jSeparador2);
+        jSeparador2.setBounds(180, 0, 840, 620);
 
         jmCadastrar.setText("Cadastrar");
 
@@ -297,9 +367,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jbClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbClienteMousePressed
        cadastroCliente cliente = new cadastroCliente();
-       cliente.setVisible(true);
-        
-        
+       cliente.setLocationRelativeTo(jSeparador2);
+       cliente.setVisible(true);      
     }//GEN-LAST:event_jbClienteMousePressed
 
     private void jbImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbImovelMousePressed
@@ -358,14 +427,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparador2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbCliente;
     private javax.swing.JButton jbConsultarCliente;
     private javax.swing.JButton jbConsultarFuncionario;
     private javax.swing.JButton jbConsultarImovel;
+    private javax.swing.JButton jbControleFuncionario;
+    private javax.swing.JButton jbControleLocacao;
+    private javax.swing.JButton jbControleLocacao1;
     private javax.swing.JButton jbFuncionario;
     private javax.swing.JButton jbImovel;
+    private javax.swing.JButton jbLocacao;
     private javax.swing.JLabel jlLogoff;
     private javax.swing.JLabel jlSair;
     private javax.swing.JMenuBar jmBarraMenu;
