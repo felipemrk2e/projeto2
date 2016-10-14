@@ -46,6 +46,7 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jcbEstado = new javax.swing.JComboBox();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -68,76 +69,80 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(50, 30, 910, 90);
+        jScrollPane1.setBounds(50, 30, 910, 210);
 
         jButton1.setText("visualizar");
         getContentPane().add(jButton1);
-        jButton1.setBounds(340, 250, 77, 23);
+        jButton1.setBounds(420, 250, 180, 70);
 
-        jButton2.setText("Nova locacao");
+        jButton2.setText("Cadastro de locação");
         getContentPane().add(jButton2);
-        jButton2.setBounds(110, 250, 97, 23);
+        jButton2.setBounds(190, 250, 170, 70);
 
-        jButton3.setText("controle");
+        jButton3.setText("Pesquisar");
         getContentPane().add(jButton3);
-        jButton3.setBounds(560, 250, 71, 23);
+        jButton3.setBounds(850, 440, 150, 70);
 
-        jLabel1.setText("Inquilino");
+        jLabel1.setText("Nome do Inquilino");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(500, 390, 40, 14);
+        jLabel1.setBounds(250, 410, 200, 14);
 
-        jLabel2.setText("Proprietario");
+        jLabel2.setText("Nome do Proprietario");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(350, 380, 56, 14);
+        jLabel2.setBounds(250, 350, 140, 14);
 
         jLabel3.setText("idImovel");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(210, 380, 40, 14);
+        jLabel3.setBounds(120, 350, 80, 14);
 
         jTextField1.setText("jTextField1");
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(500, 410, 59, 20);
+        jTextField1.setBounds(250, 430, 280, 20);
 
         jTextField2.setText("jTextField2");
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(350, 410, 59, 20);
+        jTextField2.setBounds(250, 380, 220, 20);
 
         jTextField3.setText("jTextField3");
         getContentPane().add(jTextField3);
-        jTextField3.setBounds(200, 410, 59, 20);
+        jTextField3.setBounds(120, 380, 90, 20);
 
         jTextField4.setText("jTextField4");
         getContentPane().add(jTextField4);
-        jTextField4.setBounds(190, 510, 59, 20);
+        jTextField4.setBounds(110, 500, 260, 20);
 
         jLabel4.setText("Rua");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(200, 480, 34, 14);
+        jLabel4.setBounds(110, 470, 34, 14);
 
         jLabel5.setText("bairro");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(460, 480, 28, 14);
+        jLabel5.setBounds(430, 470, 28, 14);
 
         jTextField5.setText("jTextField5");
         getContentPane().add(jTextField5);
-        jTextField5.setBounds(450, 510, 59, 20);
+        jTextField5.setBounds(430, 500, 160, 20);
 
         jLabel6.setText("estado");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(680, 480, 33, 14);
+        jLabel6.setBounds(620, 470, 33, 14);
 
         jTextField7.setText("jTextField7");
         getContentPane().add(jTextField7);
-        jTextField7.setBounds(320, 510, 59, 20);
+        jTextField7.setBounds(710, 500, 90, 20);
 
         jLabel7.setText("Cep");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(330, 480, 50, 14);
+        jLabel7.setBounds(720, 470, 50, 14);
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbEstado);
-        jcbEstado.setBounds(670, 510, 66, 23);
+        jcbEstado.setBounds(610, 500, 66, 23);
+
+        jButton4.setText("controle de locação");
+        getContentPane().add(jButton4);
+        jButton4.setBounds(640, 250, 190, 70);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -189,6 +194,7 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
