@@ -91,7 +91,7 @@ CREATE TABLE Imovel(
     lavabos INT NOT NULL,
     depEmpregados INT NOT NULL,
     areaExterna VARCHAR(255),
-    dataConstrucao DATE NOT NULL,
+    anoConstrucao DATE NOT NULL,
     acabamento TEXT,
     outrosItens TEXT,
     descImovel VARCHAR(255) NOT NULL,

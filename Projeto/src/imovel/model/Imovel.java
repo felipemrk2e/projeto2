@@ -66,7 +66,7 @@ public class Imovel {
 	private String areaExterna;
 	
 	@Column
-	private int dataConstrucao;
+	private int anoConstrucao;
 	
 	@Column
 	private String acabamento;
@@ -121,7 +121,7 @@ public class Imovel {
 
 	public Imovel(boolean ativo, int qtdQuartos, int qtdSuites, int qtdSalas, int qtdBanheiros, int qtdPisos,
 			int lavanderia, int vagasGaragem, int areaServico, int piscina, int lavabos, int depEmpregados,
-			String areaExterna, int dataConstrucao, String acabamento, String outrosItens, String descImovel,
+			String areaExterna, int anoConstrucao, String acabamento, String outrosItens, String descImovel,
 			String observacoes, String chaves, int tipoMobilia, String descMobilia, double valorIptu,
 			double valorCondominio, imovel.model.TipoImovel tipoImovel, imovel.model.Documentacao documentacao,
 			imovel.model.Terreno terreno, global.model.Endereco endereco) {
@@ -138,7 +138,7 @@ public class Imovel {
 		this.lavabos = lavabos;
 		this.depEmpregados = depEmpregados;
 		this.areaExterna = areaExterna;
-		this.dataConstrucao = dataConstrucao;
+		this.anoConstrucao = anoConstrucao;
 		this.acabamento = acabamento;
 		this.outrosItens = outrosItens;
 		this.descImovel = descImovel;
@@ -156,7 +156,7 @@ public class Imovel {
         
         public Imovel(int qtdQuartos, int qtdSuites, int qtdSalas, int qtdBanheiros, int qtdPisos,
 			int lavanderia, int vagasGaragem, int areaServico, int piscina, int lavabos, int depEmpregados,
-			String areaExterna, int dataConstrucao, String acabamento, String outrosItens, String descImovel,
+			String areaExterna, int anoConstrucao, String acabamento, String outrosItens, String descImovel,
 			String observacoes, String chaves, int tipoMobilia, String descMobilia, double valorIptu,
 			double valorCondominio, imovel.model.TipoImovel tipoImovel, imovel.model.Documentacao documentacao,
 			imovel.model.Terreno terreno, global.model.Endereco endereco) {
@@ -172,7 +172,7 @@ public class Imovel {
 		this.lavabos = lavabos;
 		this.depEmpregados = depEmpregados;
 		this.areaExterna = areaExterna;
-		this.dataConstrucao = dataConstrucao;
+		this.anoConstrucao = anoConstrucao;
 		this.acabamento = acabamento;
 		this.outrosItens = outrosItens;
 		this.descImovel = descImovel;
@@ -304,12 +304,12 @@ public class Imovel {
 		this.areaExterna = areaExterna;
 	}
 
-	public int getDataConstrucao() {
-		return dataConstrucao;
+	public int getAnoConstrucao() {
+		return anoConstrucao;
 	}
 
-	public void setDataConstrucao(int dataConstrucao) {
-		this.dataConstrucao = dataConstrucao;
+	public void setAnoConstrucao(int anoConstrucao) {
+		this.anoConstrucao = anoConstrucao;
 	}
 
 	public String getAcabamento() {
