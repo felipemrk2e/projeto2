@@ -127,29 +127,20 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jbCliente" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="jbFuncionario" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                  <Component id="jbConsultarCliente" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                  <Component id="jbConsultarImovel" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                  <Component id="jbLocacao" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                  <Component id="jbImovel" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jbControleLocacao1" alignment="0" pref="140" max="32767" attributes="0"/>
-                                      <Component id="jbControleLocacao" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jbControleFuncionario" alignment="1" min="-2" pref="141" max="-2" attributes="0"/>
-                                  <Component id="jbConsultarFuncionario" alignment="1" min="-2" pref="141" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="jbCliente" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                          <Component id="jbConsultarCliente" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="jbConsultarImovel" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="jbLocacao" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="jbImovel" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="jbControleLocacao" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                          <Component id="jbControleFuncionario" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="jbConsultarFuncionario" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jbControleLocacao1" min="-2" pref="140" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -159,24 +150,23 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jbCliente" min="-2" pref="62" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jbImovel" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                      <Component id="jbFuncionario" min="-2" pref="70" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jbConsultarCliente" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jbConsultarImovel" min="-2" pref="70" max="-2" attributes="0"/>
+                      <Component id="jbImovel" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jbConsultarFuncionario" min="-2" pref="70" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="jbControleFuncionario" min="-2" pref="70" max="-2" attributes="0"/>
+                      <Component id="jbConsultarImovel" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jbLocacao" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jbControleLocacao" min="-2" pref="70" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="jbConsultarFuncionario" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jbControleLocacao1" pref="70" max="32767" attributes="0"/>
+                      <Component id="jbControleFuncionario" min="-2" pref="70" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jbControleLocacao1" min="-2" pref="70" max="-2" attributes="0"/>
+                      <EmptySpace pref="35" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -206,19 +196,6 @@
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbImovelMousePressed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="jbFuncionario">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="16" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/image/funcionario2.png"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbFuncionarioMousePressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbConsultarCliente">
@@ -293,7 +270,7 @@
                   <Font name="Arial" size="16" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/image/funcionarios.png"/>
+                  <Image iconType="3" name="/image/funcionario2.png"/>
                 </Property>
               </Properties>
             </Component>
