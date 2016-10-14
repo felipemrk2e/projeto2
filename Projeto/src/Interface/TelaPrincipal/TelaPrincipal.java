@@ -7,9 +7,12 @@ package Interface.TelaPrincipal;
 
 import Interface.CadCliente.cadastroCliente;
 import Interface.CadCliente.cadastroClienteHome;
+import Interface.CadFuncionario.ControleFuncionario;
 import Interface.CadFuncionario.cadastroFuncionario;
 import Interface.CadImovel.cadastroImovel;
 import Interface.CadImovel.cadastroImovelHome;
+import Interface.Locacao.CadLocacao;
+import Interface.Locacao.ControleLocacao;
 import javax.swing.JOptionPane;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
@@ -22,7 +25,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private int tentativas = 0;
     private boolean logado = false;
     TelaLogin telaLogin = new TelaLogin(new javax.swing.JFrame(), true);
-    
 
     /**
      * Creates new form TelaPrincipal
@@ -46,9 +48,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public void iniciarPrincipal() {
         jbCliente.setText("<html><center>Cadastrar<br/>Cliente</html>");
         jbImovel.setText("<html><center>Cadastrar<br/>Imovel</html>");
-        jbConsultarCliente.setText("<html><center>Controle<br/>Cliente</html>");
-        jbConsultarImovel.setText("<html><center>Controle<br/>Imovel</html>");
-        jbConsultarFuncionario.setText("<html><center>Cadastrar<br/>Funcionario</html>");
+        jbControleCliente.setText("<html><center>Controle<br/>Cliente</html>");
+        jbControleImovel.setText("<html><center>Controle<br/>Imovel</html>");
+        jbFuncionario.setText("<html><center>Cadastrar<br/>Funcionario</html>");
         jbControleFuncionario.setText("<html><center>Controle<br/>Funcionario</html>");
         jbControleLocacao.setText("<html><center>Controle<br/>Locação</html>");
         jbLocacao.setText("<html><center>Cadastrar<br/>Locação</html>");
@@ -61,16 +63,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmBarraMenu.setEnabled(ativo);
         jmiCadastrarCliente.setEnabled(ativo);
         jmiCadastrarImovel.setEnabled(ativo);
-        jmiCadastrarFuncionario.setEnabled(ativo);        
+        jmiCadastrarFuncionario.setEnabled(ativo);
         jmiConsultarCliente.setEnabled(ativo);
         jmiConsultarImovel.setEnabled(ativo);
         jmiConsultarFuncionario.setEnabled(ativo);
         jbCliente.setEnabled(ativo);
         jbImovel.setEnabled(ativo);
-//        jbFuncionario.setEnabled(ativo);
-        jbConsultarCliente.setEnabled(ativo);
-        jbConsultarImovel.setEnabled(ativo);
+        jbFuncionario.setEnabled(ativo);
+        jbControleCliente.setEnabled(ativo);
+        jbControleImovel.setEnabled(ativo);
         jbControleFuncionario.setEnabled(ativo);
+        jbControleLocacao.setEnabled(ativo);
+        jbLocacao.setEnabled(ativo);
+        jbControleLocacao1.setEnabled(ativo);
         jlLogoff.setEnabled(ativo);
 
     }
@@ -88,14 +93,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
             jmiConsultarImovel.setEnabled(true);
             jbCliente.setEnabled(true);
             jbImovel.setEnabled(true);
-            jbConsultarCliente.setEnabled(true);
-            jbConsultarImovel.setEnabled(true);
+            jbControleCliente.setEnabled(true);
+            jbControleImovel.setEnabled(true);
+            jbControleLocacao.setEnabled(true);
+            jbLocacao.setEnabled(true);
+            jbControleLocacao1.setEnabled(true);
         } else if (nivelAcesso == 3) {
             System.out.println("Reduzido");
-            jmiConsultarCliente.setEnabled(true);
-            jmiConsultarImovel.setEnabled(true);
-            jbConsultarCliente.setEnabled(true);
-            jbConsultarImovel.setEnabled(true);
+            jbCliente.setEnabled(true);
+            jbImovel.setEnabled(true);
+            jbLocacao.setEnabled(true);
         } else {
             JOptionPane.showMessageDialog(null, "Nível de acesso não encontrado");
             ocultaFuncoes(false);
@@ -152,13 +159,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jbCliente = new javax.swing.JButton();
         jbImovel = new javax.swing.JButton();
-        jbConsultarCliente = new javax.swing.JButton();
-        jbConsultarImovel = new javax.swing.JButton();
+        jbControleCliente = new javax.swing.JButton();
+        jbControleImovel = new javax.swing.JButton();
         jbControleFuncionario = new javax.swing.JButton();
         jbLocacao = new javax.swing.JButton();
         jbControleLocacao = new javax.swing.JButton();
         jbControleLocacao1 = new javax.swing.JButton();
-        jbConsultarFuncionario = new javax.swing.JButton();
+        jbFuncionario = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparador2 = new javax.swing.JSeparator();
         jmBarraMenu = new javax.swing.JMenuBar();
@@ -210,36 +217,61 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jbConsultarCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jbConsultarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search_user.png"))); // NOI18N
-        jbConsultarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbControleCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbControleCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search_user.png"))); // NOI18N
+        jbControleCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jbConsultarClienteMousePressed(evt);
+                jbControleClienteMousePressed(evt);
             }
         });
 
-        jbConsultarImovel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jbConsultarImovel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/imovels.png"))); // NOI18N
-        jbConsultarImovel.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbControleImovel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbControleImovel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/imovels.png"))); // NOI18N
+        jbControleImovel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jbConsultarImovelMousePressed(evt);
+                jbControleImovelMousePressed(evt);
             }
         });
 
         jbControleFuncionario.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbControleFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/login-icon2.png"))); // NOI18N
+        jbControleFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbControleFuncionarioMousePressed(evt);
+            }
+        });
 
         jbLocacao.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbLocacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Partnership-icon.png"))); // NOI18N
+        jbLocacao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbLocacaoMousePressed(evt);
+            }
+        });
 
         jbControleLocacao.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbControleLocacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/House-Rent.png"))); // NOI18N
+        jbControleLocacao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbControleLocacaoMousePressed(evt);
+            }
+        });
 
         jbControleLocacao1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbControleLocacao1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/House-Rent.png"))); // NOI18N
+        jbControleLocacao1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbControleLocacao1MousePressed(evt);
+            }
+        });
 
-        jbConsultarFuncionario.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jbConsultarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/funcionario2.png"))); // NOI18N
+        jbFuncionario.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/funcionario2.png"))); // NOI18N
+        jbFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbFuncionarioMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -249,13 +281,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbConsultarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbConsultarImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbControleCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbControleImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbControleLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbControleFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbConsultarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -268,17 +300,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17)
-                .addComponent(jbConsultarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbControleCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jbConsultarImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbControleImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbControleLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jbConsultarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbControleFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -338,7 +370,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jlLogoffMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlLogoffMousePressed
         if (!isLogado()) {
             jlLogoff.setEnabled(false);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Logoff efetuado com sucesso!");
             limpaCampos();
             ocultaFuncoes(false);
@@ -350,9 +382,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jlLogoffMousePressed
 
     private void jbClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbClienteMousePressed
-       cadastroCliente cliente = new cadastroCliente();
-       cliente.setLocationRelativeTo(jSeparador2);
-       cliente.setVisible(true);      
+        cadastroCliente cliente = new cadastroCliente();
+        cliente.setLocationRelativeTo(jSeparador2);
+        cliente.setVisible(true);
     }//GEN-LAST:event_jbClienteMousePressed
 
     private void jbImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbImovelMousePressed
@@ -360,15 +392,39 @@ public class TelaPrincipal extends javax.swing.JFrame {
         imovel.setVisible(true);
     }//GEN-LAST:event_jbImovelMousePressed
 
-    private void jbConsultarClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarClienteMousePressed
+    private void jbControleClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleClienteMousePressed
         cadastroClienteHome clienteHome = new cadastroClienteHome();
         clienteHome.setVisible(true);
-    }//GEN-LAST:event_jbConsultarClienteMousePressed
+    }//GEN-LAST:event_jbControleClienteMousePressed
 
-    private void jbConsultarImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarImovelMousePressed
-       cadastroImovelHome imovelHome = new cadastroImovelHome();
-       imovelHome.setVisible(true);
-    }//GEN-LAST:event_jbConsultarImovelMousePressed
+    private void jbControleImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleImovelMousePressed
+        cadastroImovelHome imovelHome = new cadastroImovelHome();
+        imovelHome.setVisible(true);
+    }//GEN-LAST:event_jbControleImovelMousePressed
+
+    private void jbLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLocacaoMousePressed
+       CadLocacao locacao = new CadLocacao();
+       locacao.setVisible(true);
+    }//GEN-LAST:event_jbLocacaoMousePressed
+
+    private void jbControleLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleLocacaoMousePressed
+      ControleLocacao controleLocacao = new ControleLocacao();
+      controleLocacao.setVisible(true);
+    }//GEN-LAST:event_jbControleLocacaoMousePressed
+
+    private void jbFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbFuncionarioMousePressed
+        cadastroFuncionario funcionario = new cadastroFuncionario();
+        funcionario.setVisible(true);
+    }//GEN-LAST:event_jbFuncionarioMousePressed
+
+    private void jbControleFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleFuncionarioMousePressed
+        ControleFuncionario controleFuncionario = new ControleFuncionario();
+        controleFuncionario.setVisible(true);
+    }//GEN-LAST:event_jbControleFuncionarioMousePressed
+
+    private void jbControleLocacao1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleLocacao1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbControleLocacao1MousePressed
 
     /**
      * @param args the command line arguments
@@ -411,12 +467,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparador2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbCliente;
-    private javax.swing.JButton jbConsultarCliente;
-    private javax.swing.JButton jbConsultarFuncionario;
-    private javax.swing.JButton jbConsultarImovel;
+    private javax.swing.JButton jbControleCliente;
     private javax.swing.JButton jbControleFuncionario;
+    private javax.swing.JButton jbControleImovel;
     private javax.swing.JButton jbControleLocacao;
     private javax.swing.JButton jbControleLocacao1;
+    private javax.swing.JButton jbFuncionario;
     private javax.swing.JButton jbImovel;
     private javax.swing.JButton jbLocacao;
     private javax.swing.JLabel jlLogoff;

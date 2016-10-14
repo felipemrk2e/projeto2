@@ -128,13 +128,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jbCliente" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                          <Component id="jbConsultarCliente" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                          <Component id="jbConsultarImovel" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="jbControleCliente" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="jbControleImovel" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
                           <Component id="jbLocacao" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
                           <Component id="jbImovel" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
                           <Component id="jbControleLocacao" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                           <Component id="jbControleFuncionario" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                          <Component id="jbConsultarFuncionario" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="jbFuncionario" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -151,17 +151,17 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jbCliente" min="-2" pref="62" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                      <Component id="jbConsultarCliente" min="-2" pref="70" max="-2" attributes="0"/>
+                      <Component id="jbControleCliente" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jbImovel" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jbConsultarImovel" min="-2" pref="70" max="-2" attributes="0"/>
+                      <Component id="jbControleImovel" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jbLocacao" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jbControleLocacao" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="jbConsultarFuncionario" min="-2" pref="70" max="-2" attributes="0"/>
+                      <Component id="jbFuncionario" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jbControleFuncionario" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -198,7 +198,7 @@
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbImovelMousePressed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jbConsultarCliente">
+            <Component class="javax.swing.JButton" name="jbControleCliente">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="16" style="0"/>
@@ -208,10 +208,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbConsultarClienteMousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbControleClienteMousePressed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jbConsultarImovel">
+            <Component class="javax.swing.JButton" name="jbControleImovel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="16" style="0"/>
@@ -221,7 +221,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbConsultarImovelMousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbControleImovelMousePressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbControleFuncionario">
@@ -233,6 +233,9 @@
                   <Image iconType="3" name="/image/login-icon2.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbControleFuncionarioMousePressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbLocacao">
               <Properties>
@@ -243,6 +246,9 @@
                   <Image iconType="3" name="/image/Partnership-icon.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbLocacaoMousePressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbControleLocacao">
               <Properties>
@@ -253,6 +259,9 @@
                   <Image iconType="3" name="/image/House-Rent.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbControleLocacaoMousePressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbControleLocacao1">
               <Properties>
@@ -263,8 +272,11 @@
                   <Image iconType="3" name="/image/House-Rent.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbControleLocacao1MousePressed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jbConsultarFuncionario">
+            <Component class="javax.swing.JButton" name="jbFuncionario">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="16" style="0"/>
@@ -273,6 +285,9 @@
                   <Image iconType="3" name="/image/funcionario2.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbFuncionarioMousePressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
