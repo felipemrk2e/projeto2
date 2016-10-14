@@ -83,7 +83,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jtBairro = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
@@ -91,6 +90,11 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jcbEstado = new javax.swing.JComboBox();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmLogin = new javax.swing.JMenuItem();
@@ -109,7 +113,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbCadastrar);
-        jbCadastrar.setBounds(780, 30, 199, 87);
+        jbCadastrar.setBounds(110, 250, 199, 87);
 
         jbVisualisar.setText("Visualizar");
         jbVisualisar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -118,7 +122,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbVisualisar);
-        jbVisualisar.setBounds(780, 130, 195, 88);
+        jbVisualisar.setBounds(400, 250, 195, 88);
 
         jbRemover.setText("Remover");
         jbRemover.setEnabled(false);
@@ -128,7 +132,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbRemover);
-        jbRemover.setBounds(780, 230, 199, 94);
+        jbRemover.setBounds(690, 250, 199, 94);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,90 +148,89 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(60, 30, 698, 300);
+        jScrollPane1.setBounds(30, 30, 970, 200);
 
         jCheckBox1.setText("casa");
         getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(230, 380, 47, 30);
+        jCheckBox1.setBounds(270, 380, 60, 30);
 
         jCheckBox2.setText("apartamento");
         getContentPane().add(jCheckBox2);
-        jCheckBox2.setBounds(310, 380, 87, 30);
+        jCheckBox2.setBounds(350, 380, 100, 30);
 
         jCheckBox3.setText("Salão");
         getContentPane().add(jCheckBox3);
-        jCheckBox3.setBounds(430, 380, 51, 30);
+        jCheckBox3.setBounds(470, 380, 60, 30);
 
         jCheckBox4.setText("Temporario");
         getContentPane().add(jCheckBox4);
-        jCheckBox4.setBounds(520, 380, 79, 30);
+        jCheckBox4.setBounds(560, 380, 100, 30);
 
         jCheckBox5.setText("Comercio");
         getContentPane().add(jCheckBox5);
-        jCheckBox5.setBounds(640, 380, 69, 30);
+        jCheckBox5.setBounds(680, 380, 80, 30);
 
         jLabel1.setText("Filtros");
+        jLabel1.setMinimumSize(new java.awt.Dimension(35, 18));
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(170, 380, 29, 20);
+        jLabel1.setBounds(210, 380, 40, 20);
 
         jbPesquisar.setText("Pesquisar");
         getContentPane().add(jbPesquisar);
-        jbPesquisar.setBounds(820, 430, 199, 91);
+        jbPesquisar.setBounds(740, 430, 199, 91);
 
         jLabel2.setText("Nome do Proprietario");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(100, 420, 101, 14);
-
-        jTextField1.setText("Proprietario");
+        jLabel2.setBounds(110, 420, 140, 14);
         getContentPane().add(jTextField1);
         jTextField1.setBounds(100, 440, 290, 20);
 
         jLabel3.setText("Bairro");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(480, 480, 28, 14);
-
-        jtBairro.setText("bairro");
+        jLabel3.setBounds(490, 480, 60, 14);
         getContentPane().add(jtBairro);
         jtBairro.setBounds(480, 500, 100, 20);
 
         jLabel4.setText("Estado");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(600, 480, 33, 14);
-
-        jTextField2.setText("estado");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(600, 500, 39, 20);
-
-        jTextField3.setText("Rua");
+        jLabel4.setBounds(610, 480, 60, 14);
         getContentPane().add(jTextField3);
         jTextField3.setBounds(100, 500, 360, 20);
-
-        jTextField4.setText("qtd quarto");
         getContentPane().add(jTextField4);
-        jTextField4.setBounds(480, 440, 30, 20);
-
-        jTextField5.setText("qtd garagem");
+        jTextField4.setBounds(450, 440, 30, 20);
         getContentPane().add(jTextField5);
-        jTextField5.setBounds(580, 440, 30, 20);
+        jTextField5.setBounds(550, 440, 30, 20);
 
         jLabel5.setText("Rua");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(110, 480, 19, 14);
+        jLabel5.setBounds(110, 480, 40, 14);
 
         jLabel6.setText("Qtd de quarto");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(480, 420, 68, 14);
+        jLabel6.setBounds(430, 420, 80, 14);
 
-        jLabel7.setText("Vagas Garagem");
+        jLabel7.setText("Vagas de Garagem");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(580, 420, 100, 14);
+        jLabel7.setBounds(520, 420, 140, 14);
         getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(20, 410, 780, 10);
+        jSeparator1.setBounds(-10, 550, 1040, 10);
+
+        jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbEstado);
+        jcbEstado.setBounds(600, 500, 66, 23);
+        getContentPane().add(jSeparator2);
+        jSeparator2.setBounds(180, 410, 580, 10);
+        getContentPane().add(jSeparator3);
+        jSeparator3.setBounds(0, 360, 1030, 10);
+
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator4);
+        jSeparator4.setBounds(180, 360, 10, 50);
+
+        jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator5);
+        jSeparator5.setBounds(760, 360, 10, 50);
 
         jMenu1.setText("File");
 
@@ -279,10 +282,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jbVisualisarMouseClicked
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -337,9 +336,12 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
@@ -347,6 +349,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JButton jbPesquisar;
     private javax.swing.JButton jbRemover;
     private javax.swing.JButton jbVisualisar;
+    private javax.swing.JComboBox jcbEstado;
     private javax.swing.JMenuItem jmLogin;
     private javax.swing.JTextField jtBairro;
     // End of variables declaration//GEN-END:variables

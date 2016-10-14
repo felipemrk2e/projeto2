@@ -53,10 +53,10 @@ public class cadastroImovel extends javax.swing.JFrame {
         }
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
         jcbEstado.setModel(defaultComboBox);
-        ImovelDAO imovelDao = new ImovelDAO();
-        Imovel imovel = new Imovel();
-        imovel = imovelDao.getById(Long.parseLong("1"));
-popular(imovel);
+//        ImovelDAO imovelDao = new ImovelDAO();
+//        Imovel imovel = new Imovel();
+//        imovel = imovelDao.getById(Long.parseLong("1"));
+//popular(imovel);
     }
 
     public cadastroImovel(String idImovel, int user) {
@@ -502,6 +502,9 @@ popular(imovel);
         jtfComplemento = new javax.swing.JTextField();
         jtfReferencia = new javax.swing.JTextField();
         jcbEstado = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
+        jtCep = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         jifValores = new javax.swing.JInternalFrame();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
@@ -645,7 +648,7 @@ popular(imovel);
         jlUF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jlUF.setText("UF");
         jifEndereco.getContentPane().add(jlUF);
-        jlUF.setBounds(540, 100, 16, 15);
+        jlUF.setBounds(510, 250, 16, 15);
 
         jlNumero.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jlNumero.setText("Nº");
@@ -655,7 +658,7 @@ popular(imovel);
         jlBairro.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jlBairro.setText("Bairro");
         jifEndereco.getContentPane().add(jlBairro);
-        jlBairro.setBounds(312, 100, 80, 15);
+        jlBairro.setBounds(260, 100, 80, 15);
 
         jlCidade.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jlCidade.setText("Cidade");
@@ -673,9 +676,9 @@ popular(imovel);
             }
         });
         jifEndereco.getContentPane().add(jtfUF);
-        jtfUF.setBounds(540, 120, 70, 20);
+        jtfUF.setBounds(560, 240, 70, 20);
         jifEndereco.getContentPane().add(jtfBairro);
-        jtfBairro.setBounds(312, 120, 190, 20);
+        jtfBairro.setBounds(260, 120, 190, 20);
         jifEndereco.getContentPane().add(jtfCidade);
         jtfCidade.setBounds(68, 120, 150, 20);
         jifEndereco.getContentPane().add(jtfLogradouro);
@@ -700,7 +703,18 @@ popular(imovel);
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jifEndereco.getContentPane().add(jcbEstado);
-        jcbEstado.setBounds(640, 120, 66, 23);
+        jcbEstado.setBounds(480, 120, 66, 23);
+
+        jLabel7.setText("Estado");
+        jifEndereco.getContentPane().add(jLabel7);
+        jLabel7.setBounds(490, 100, 34, 14);
+        jifEndereco.getContentPane().add(jtCep);
+        jtCep.setBounds(590, 120, 80, 20);
+
+        jLabel8.setText("CEP");
+        jLabel8.setMinimumSize(new java.awt.Dimension(22, 16));
+        jifEndereco.getContentPane().add(jLabel8);
+        jLabel8.setBounds(600, 100, 30, 14);
 
         jtpCadastro.addTab("Endereço", jifEndereco);
 
@@ -2113,6 +2127,8 @@ popular(imovel);
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -2168,6 +2184,7 @@ popular(imovel);
     private javax.swing.JTextField jtAreaServico;
     private javax.swing.JTextField jtBanheiros;
     private javax.swing.JTextField jtCartorio;
+    private javax.swing.JTextField jtCep;
     private javax.swing.JTextArea jtChaves;
     private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtComprimento;

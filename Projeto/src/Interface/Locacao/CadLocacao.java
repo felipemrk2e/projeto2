@@ -59,7 +59,7 @@ public class CadLocacao extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        jcbEstado = new javax.swing.JComboBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -83,7 +83,7 @@ public class CadLocacao extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(130, 50, 454, 110);
+        jScrollPane1.setBounds(160, 60, 452, 110);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -99,7 +99,7 @@ public class CadLocacao extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(130, 330, 454, 110);
+        jScrollPane2.setBounds(130, 330, 452, 110);
 
         jLabel1.setText("Cliente");
         getContentPane().add(jLabel1);
@@ -243,9 +243,10 @@ public class CadLocacao extends javax.swing.JFrame {
         getContentPane().add(jTextField10);
         jTextField10.setBounds(440, 530, 65, 20);
 
-        jTextField11.setText("jTextField11");
-        getContentPane().add(jTextField11);
-        jTextField11.setBounds(580, 530, 65, 20);
+        jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbEstado);
+        jcbEstado.setBounds(610, 520, 66, 23);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -344,7 +345,6 @@ public class CadLocacao extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
@@ -358,5 +358,6 @@ public class CadLocacao extends javax.swing.JFrame {
     private javax.swing.JButton jbRemover2;
     private javax.swing.JButton jbRemover3;
     private javax.swing.JButton jbRemover4;
+    private javax.swing.JComboBox jcbEstado;
     // End of variables declaration//GEN-END:variables
 }
