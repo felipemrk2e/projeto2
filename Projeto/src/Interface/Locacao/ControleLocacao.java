@@ -42,6 +42,11 @@ public class ControleLocacao extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jtCancelar = new javax.swing.JButton();
+        jtEditar = new javax.swing.JButton();
+        jtFinalizarContrato = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -52,27 +57,27 @@ public class ControleLocacao extends javax.swing.JFrame {
 
         jTextField1.setText("jTextField1");
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(158, 93, 59, 20);
+        jTextField1.setBounds(40, 70, 230, 20);
 
         jTextField2.setText("jTextField2");
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(320, 90, 59, 20);
+        jTextField2.setBounds(40, 130, 270, 20);
 
         jTextField3.setText("jTextField3");
         getContentPane().add(jTextField3);
-        jTextField3.setBounds(524, 93, 59, 20);
+        jTextField3.setBounds(350, 60, 59, 20);
 
         jTextField4.setText("jTextField4");
         getContentPane().add(jTextField4);
-        jTextField4.setBounds(675, 93, 59, 20);
+        jTextField4.setBounds(480, 60, 59, 20);
 
         jTextField5.setText("jTextField5");
         getContentPane().add(jTextField5);
-        jTextField5.setBounds(140, 220, 59, 20);
+        jTextField5.setBounds(630, 60, 59, 20);
 
         jTextField6.setText("jTextField6");
         getContentPane().add(jTextField6);
-        jTextField6.setBounds(300, 180, 59, 20);
+        jTextField6.setBounds(40, 190, 200, 20);
 
         jTextField7.setText("jTextField7");
         getContentPane().add(jTextField7);
@@ -84,29 +89,49 @@ public class ControleLocacao extends javax.swing.JFrame {
 
         jLabel1.setText("Nome do locatario");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(148, 50, 86, 14);
+        jLabel1.setBounds(30, 40, 86, 14);
 
         jLabel2.setText("Nome do Proprietario");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(315, 50, 101, 14);
+        jLabel2.setBounds(40, 110, 101, 14);
 
         jLabel3.setText("Valor");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(540, 50, 24, 14);
+        jLabel3.setBounds(370, 30, 24, 14);
 
         jLabel4.setText("Inicio do contrato");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(694, 50, 40, 14);
+        jLabel4.setBounds(480, 30, 110, 20);
 
         jLabel5.setText("DAta de termino do contrato");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(150, 180, 90, 14);
+        jLabel5.setBounds(630, 30, 90, 14);
         getContentPane().add(jLabel6);
         jLabel6.setBounds(310, 160, 0, 0);
 
         jLabel7.setText("Nome do fiador");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(300, 150, 80, 14);
+        jLabel7.setBounds(50, 160, 80, 14);
+
+        jButton1.setText("Confirmar");
+        getContentPane().add(jButton1);
+        jButton1.setBounds(210, 290, 81, 23);
+
+        jtCancelar.setText("Cancelar");
+        getContentPane().add(jtCancelar);
+        jtCancelar.setBounds(350, 290, 77, 23);
+
+        jtEditar.setText("Editar");
+        getContentPane().add(jtEditar);
+        jtEditar.setBounds(490, 290, 63, 23);
+
+        jtFinalizarContrato.setText("Finalizar Contrato");
+        getContentPane().add(jtFinalizarContrato);
+        jtFinalizarContrato.setBounds(570, 230, 120, 23);
+
+        jLabel8.setText("IdImovel");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(420, 160, 90, 20);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -155,6 +180,7 @@ public class ControleLocacao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -162,6 +188,7 @@ public class ControleLocacao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -173,5 +200,8 @@ public class ControleLocacao extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JButton jtCancelar;
+    private javax.swing.JButton jtEditar;
+    private javax.swing.JButton jtFinalizarContrato;
     // End of variables declaration//GEN-END:variables
 }

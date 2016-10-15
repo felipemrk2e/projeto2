@@ -43,10 +43,12 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        jtCep = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jcbEstado = new javax.swing.JComboBox();
         jButton4 = new javax.swing.JButton();
+        jtCidade = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -127,9 +129,9 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         getContentPane().add(jLabel6);
         jLabel6.setBounds(620, 470, 33, 14);
 
-        jTextField7.setText("jTextField7");
-        getContentPane().add(jTextField7);
-        jTextField7.setBounds(710, 500, 90, 20);
+        jtCep.setText("jTextField7");
+        getContentPane().add(jtCep);
+        jtCep.setBounds(710, 500, 90, 20);
 
         jLabel7.setText("Cep");
         getContentPane().add(jLabel7);
@@ -138,11 +140,17 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbEstado);
-        jcbEstado.setBounds(610, 500, 66, 23);
+        jcbEstado.setBounds(610, 500, 67, 25);
 
         jButton4.setText("controle de locação");
         getContentPane().add(jButton4);
         jButton4.setBounds(640, 250, 190, 70);
+        getContentPane().add(jtCidade);
+        jtCidade.setBounds(550, 570, 6, 20);
+
+        jLabel8.setText("Cidade");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(550, 540, 50, 14);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -202,6 +210,7 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -212,7 +221,8 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JComboBox jcbEstado;
+    private javax.swing.JTextField jtCep;
+    private javax.swing.JTextField jtCidade;
     // End of variables declaration//GEN-END:variables
 }
