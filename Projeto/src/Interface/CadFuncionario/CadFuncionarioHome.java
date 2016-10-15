@@ -5,6 +5,8 @@
  */
 package Interface.CadFuncionario;
 
+import java.awt.Color;
+
 /**
  *
  * @author user
@@ -35,9 +37,13 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtNomeFuncionario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jtCpf = new javax.swing.JTextField();
+        jtCargo = new javax.swing.JTextField();
+        jtDepartamento = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -60,43 +66,56 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(150, 80, 454, 239);
+        jScrollPane1.setBounds(70, 30, 860, 239);
 
         jButton1.setText("Cadastrar");
         getContentPane().add(jButton1);
-        jButton1.setBounds(650, 90, 120, 23);
+        jButton1.setBounds(110, 310, 120, 23);
 
         jButton2.setText("Visualisar");
         getContentPane().add(jButton2);
-        jButton2.setBounds(650, 160, 90, 23);
+        jButton2.setBounds(370, 310, 90, 23);
 
         jButton3.setText("Excluir");
         getContentPane().add(jButton3);
-        jButton3.setBounds(650, 210, 65, 23);
+        jButton3.setBounds(770, 310, 63, 23);
 
         jButton4.setText("Nivel de acesso");
         getContentPane().add(jButton4);
-        jButton4.setBounds(650, 270, 120, 23);
+        jButton4.setBounds(540, 310, 120, 23);
 
         jButton5.setText("Pesquisar");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
         getContentPane().add(jButton5);
-        jButton5.setBounds(640, 340, 120, 23);
+        jButton5.setBounds(810, 420, 120, 23);
 
-        jLabel1.setText("Nome");
+        jLabel1.setText("Nome do Funcionario");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(170, 360, 27, 14);
-
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(160, 400, 59, 20);
+        jLabel1.setBounds(110, 410, 130, 14);
+        getContentPane().add(jtNomeFuncionario);
+        jtNomeFuncionario.setBounds(100, 440, 150, 20);
 
         jLabel2.setText("Cpf");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(370, 370, 17, 14);
+        jLabel2.setBounds(330, 410, 17, 14);
+        getContentPane().add(jtCpf);
+        jtCpf.setBounds(300, 440, 110, 20);
+        getContentPane().add(jtCargo);
+        jtCargo.setBounds(480, 440, 90, 20);
+        getContentPane().add(jtDepartamento);
+        jtDepartamento.setBounds(610, 440, 110, 20);
 
-        jTextField2.setText("jTextField2");
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(350, 400, 59, 20);
+        jLabel3.setText("Cargo");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(490, 410, 29, 14);
+
+        jLabel4.setText("Departamento");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(610, 410, 90, 14);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -108,6 +127,54 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        //Verificar Pesquisar //Falta tudo
+        boolean control = true;
+
+        if (true) {
+
+        } else if (true) {
+
+        } else {
+            jtNomeFuncionario.setBackground(Color.red);
+        }
+
+        if (true) {
+
+        } else if (true) {
+
+        } else {
+            jtCpf.setBackground(Color.red);
+        }
+
+        if (true) {
+
+        } else if (true) {
+
+        } else {
+            jtCargo.setBackground(Color.red);
+        }
+        if (true) {
+
+        } else if (true) {
+
+        } else {
+            jtDepartamento.setBackground(Color.red);
+        }
+// Querry
+
+        if (control) {
+
+        } else {
+
+            control = true;
+
+        }
+
+        //Fim Pesquisar Verificar 
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -152,12 +219,16 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jtCargo;
+    private javax.swing.JTextField jtCpf;
+    private javax.swing.JTextField jtDepartamento;
+    private javax.swing.JTextField jtNomeFuncionario;
     // End of variables declaration//GEN-END:variables
 }

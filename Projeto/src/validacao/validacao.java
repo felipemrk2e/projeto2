@@ -27,7 +27,7 @@ public class validacao {
 
         try {
 
-            int teste = Integer.valueOf(numero);
+            double teste = Double.valueOf(numero);
 
         } catch (NumberFormatException e) {
             return false;

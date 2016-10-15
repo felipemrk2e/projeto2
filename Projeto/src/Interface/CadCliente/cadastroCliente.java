@@ -492,15 +492,15 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         jcbCompra.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbCompra.setText("Compra");
-        getContentPane().add(jcbCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 50, -1, -1));
+        getContentPane().add(jcbCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, -1, -1));
 
         jcbTroca.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jcbTroca.setText("Troca");
-        getContentPane().add(jcbTroca, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, -1, -1));
+        jcbTroca.setText("Temporada");
+        getContentPane().add(jcbTroca, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 100, 120, -1));
 
         jcbLocacao.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbLocacao.setText("Locação");
-        getContentPane().add(jcbLocacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 90, -1, -1));
+        getContentPane().add(jcbLocacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 50, -1, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 830, 140));
         getContentPane().add(jtfNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, 50, -1));
 
