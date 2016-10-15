@@ -25,6 +25,9 @@ public class Imovel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private long idImovel;
+        
+        @Column
+        private boolean ativo;
 	
 	@Column
 	private int qtdQuartos;
@@ -63,7 +66,7 @@ public class Imovel {
 	private String areaExterna;
 	
 	@Column
-	private int dataConstrucao;
+	private int anoConstrucao;
 	
 	@Column
 	private String acabamento;
@@ -116,9 +119,44 @@ public class Imovel {
 			cascade = CascadeType.PERSIST)
 	private List<Imovel_has_TipoContrato> tiposContratos =  new ArrayList<>();
 
-	public Imovel(int qtdQuartos, int qtdSuites, int qtdSalas, int qtdBanheiros, int qtdPisos,
+	public Imovel(boolean ativo, int qtdQuartos, int qtdSuites, int qtdSalas, int qtdBanheiros, int qtdPisos,
 			int lavanderia, int vagasGaragem, int areaServico, int piscina, int lavabos, int depEmpregados,
-			String areaExterna, int dataConstrucao, String acabamento, String outrosItens, String descImovel,
+			String areaExterna, int anoConstrucao, String acabamento, String outrosItens, String descImovel,
+			String observacoes, String chaves, int tipoMobilia, String descMobilia, double valorIptu,
+			double valorCondominio, imovel.model.TipoImovel tipoImovel, imovel.model.Documentacao documentacao,
+			imovel.model.Terreno terreno, global.model.Endereco endereco) {
+                this.ativo = ativo;
+		this.qtdQuartos = qtdQuartos;
+		this.qtdSuites = qtdSuites;
+		this.qtdSalas = qtdSalas;
+		this.qtdBanheiros = qtdBanheiros;
+		this.qtdPisos = qtdPisos;
+		this.lavanderia = lavanderia;
+		this.vagasGaragem = vagasGaragem;
+		this.areaServico = areaServico;
+		this.piscina = piscina;
+		this.lavabos = lavabos;
+		this.depEmpregados = depEmpregados;
+		this.areaExterna = areaExterna;
+		this.anoConstrucao = anoConstrucao;
+		this.acabamento = acabamento;
+		this.outrosItens = outrosItens;
+		this.descImovel = descImovel;
+		this.observacoes = observacoes;
+		this.chaves = chaves;
+		this.tipoMobilia = tipoMobilia;
+		this.descMobilia = descMobilia;
+		this.valorIptu = valorIptu;
+		this.valorCondominio = valorCondominio;
+		this.tipoImovel = tipoImovel;
+		this.documentacao = documentacao;
+		this.terreno = terreno;
+		this.endereco = endereco;
+	}
+        
+        public Imovel(int qtdQuartos, int qtdSuites, int qtdSalas, int qtdBanheiros, int qtdPisos,
+			int lavanderia, int vagasGaragem, int areaServico, int piscina, int lavabos, int depEmpregados,
+			String areaExterna, int anoConstrucao, String acabamento, String outrosItens, String descImovel,
 			String observacoes, String chaves, int tipoMobilia, String descMobilia, double valorIptu,
 			double valorCondominio, imovel.model.TipoImovel tipoImovel, imovel.model.Documentacao documentacao,
 			imovel.model.Terreno terreno, global.model.Endereco endereco) {
@@ -134,7 +172,7 @@ public class Imovel {
 		this.lavabos = lavabos;
 		this.depEmpregados = depEmpregados;
 		this.areaExterna = areaExterna;
-		this.dataConstrucao = dataConstrucao;
+		this.anoConstrucao = anoConstrucao;
 		this.acabamento = acabamento;
 		this.outrosItens = outrosItens;
 		this.descImovel = descImovel;
@@ -161,6 +199,14 @@ public class Imovel {
 	public void setIdImovel(long idImovel) {
 		this.idImovel = idImovel;
 	}
+        
+        public boolean getAtivo(){
+            return this.ativo;
+        }
+        
+        public void setAtivo(boolean ativo){
+            this.ativo = ativo;
+        }
 
 	public int getQtdQuartos() {
 		return qtdQuartos;
@@ -258,12 +304,12 @@ public class Imovel {
 		this.areaExterna = areaExterna;
 	}
 
-	public int getDataConstrucao() {
-		return dataConstrucao;
+	public int getAnoConstrucao() {
+		return anoConstrucao;
 	}
 
-	public void setDataConstrucao(int dataConstrucao) {
-		this.dataConstrucao = dataConstrucao;
+	public void setAnoConstrucao(int anoConstrucao) {
+		this.anoConstrucao = anoConstrucao;
 	}
 
 	public String getAcabamento() {
@@ -388,5 +434,14 @@ public class Imovel {
         imovelTipoContrato.setImovel(null);
         imovelTipoContrato.setTipoContrato(null);
         imovelTipoContrato.setValor(0);
+    }
+    
+    public boolean mudaAtivo(){
+        if(this.ativo==true)
+            this.ativo = false;
+        else
+            this.ativo = true;
+        
+        return true;
     }
 }

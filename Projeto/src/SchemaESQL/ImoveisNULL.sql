@@ -1,12 +1,10 @@
 CREATE DATABASE projetodois;
 USE projetodois;
 
--- V 2.1 do SQL NULL --
+-- V 2.4 do SQL null--
 -- edicoes --
 /*
-    A tabela Endereco recebeu o atributo Complemento
-	Imovel:TipoImovel agora é do tipo INT
-	Documentacao recebeu o atributo numMatricula
+	Acréscimo do atributo booleano 'ativo' à tabela Imovel
 */
 
 CREATE TABLE TipoImovel(
@@ -49,8 +47,9 @@ CREATE TABLE Endereco(
     numero INT,
     zona VARCHAR(255),
     referencia VARCHAR(255),
-	complemento VARCHAR(255),
+    complemento VARCHAR(255),
     nomeCondominio VARCHAR(255),
+    cep VARCHAR(10),
     idBairro INT,
     CONSTRAINT PRIMARY KEY(idEndereco),
     CONSTRAINT FOREIGN KEY (idBairro)
@@ -59,7 +58,7 @@ CREATE TABLE Endereco(
 
 CREATE TABLE Documentacao(
     idDocumentacao INT NOT NULL AUTO_INCREMENT,
-	numMatricula VARCHAR(255),
+    numMatricula VARCHAR(255),
     numContaAgua VARCHAR(255),
     numContaLuz VARCHAR(255),
     numIptu VARCHAR(255),
@@ -79,6 +78,7 @@ CREATE TABLE Terreno(
 
 CREATE TABLE Imovel(
     idImovel INT AUTO_INCREMENT NOT NULL,
+    ativo BOOLEAN DEFAULT 1,
     qtdQuartos INT,
     qtdSuites INT,
     qtdSalas INT,
@@ -91,7 +91,7 @@ CREATE TABLE Imovel(
     lavabos INT,
     depEmpregados INT,
     areaExterna VARCHAR(255),
-    dataConstrucao DATE,
+    anoConstrucao INT,
     acabamento TEXT,
     outrosItens TEXT,
     descImovel VARCHAR(255),
@@ -122,7 +122,6 @@ CREATE TABLE TipoContrato(
     descricao VARCHAR(255),
     CONSTRAINT PRIMARY KEY(idTipoContrato)
 );
-
 
 CREATE TABLE Imovel_has_TipoContrato(
     idImovel INT NOT NULL,

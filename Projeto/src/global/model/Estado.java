@@ -14,7 +14,7 @@ public class Estado {
 	
 	@Id
 	@Column
-	private int id;
+	private long id;
 	
 	@Column
 	private String nome;
@@ -32,7 +32,7 @@ public class Estado {
 		
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

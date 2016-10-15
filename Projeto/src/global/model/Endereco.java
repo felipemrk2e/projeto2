@@ -35,19 +35,23 @@ public class Endereco {
 
     @Column
     private String nomeCondominio;
+    
+    @Column
+    private String cep;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idBairro", nullable = false)
     private Bairro bairro;
 
     public Endereco(String nomeEndereco, int numero, String zona, String referencia, String complemento, String nomeCondominio,
-            Bairro bairro) {
+            String cep, Bairro bairro) {
         this.nomeEndereco = nomeEndereco;
         this.numero = numero;
         this.zona = zona;
         this.referencia = referencia;
         this.complemento = complemento;
         this.nomeCondominio = nomeCondominio;
+        this.cep = cep;
         this.bairro = bairro;
     }
 
@@ -105,6 +109,14 @@ public class Endereco {
 
     public void setNomeCondominio(String nomeCondominio) {
         this.nomeCondominio = nomeCondominio;
+    }
+    
+    public void setCep(String cep){
+        this.cep = cep;
+    }
+    
+    public String getCep(){
+        return this.cep;
     }
 
     public Bairro getBairro() {

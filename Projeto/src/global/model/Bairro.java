@@ -25,7 +25,7 @@ public class Bairro {
 	@Column
 	private String nomeBairro;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
 	@JoinColumn(name="idCidade", nullable = false)
 	private Cidade cidade;
 	

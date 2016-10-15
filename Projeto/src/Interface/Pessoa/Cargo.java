@@ -5,11 +5,29 @@
  */
 package Interface.Pessoa;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author Sala
  */
+@Entity
 public class Cargo {
-    private int idCargo;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    private long idCargo;
+    
+    @Column
     private String nomeCargo;
+    
+    @Column
+    private String descricaoCargo;
+    
+    
 }

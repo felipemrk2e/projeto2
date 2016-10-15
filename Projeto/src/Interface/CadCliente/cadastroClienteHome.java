@@ -5,6 +5,8 @@
  */
 package Interface.CadCliente;
 
+import java.awt.Color;
+
 /**
  *
  * @author Sala
@@ -32,15 +34,20 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbPesquisar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        jcbPessoaFisica = new javax.swing.JCheckBox();
+        jcbPessoaJuridica = new javax.swing.JCheckBox();
+        jtNome = new javax.swing.JTextField();
+        jtTelefone = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1024, 640));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -57,7 +64,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 116, 698, 402));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 46, 920, 240));
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton1.setText("Cadastrar");
@@ -66,31 +73,44 @@ public class cadastroClienteHome extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 116, 140, 70));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 140, 70));
 
         jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton2.setText("Visualizar");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 216, 140, 70));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 140, 70));
 
         jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton3.setText("Remover");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 320, 140, 70));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, 140, 70));
 
-        jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton4.setText("Pesquisar");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 432, 140, 70));
+        jbPesquisar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbPesquisar.setText("Pesquisar");
+        jbPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbPesquisarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 440, 140, 70));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Filtros");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, 50, -1));
 
-        jCheckBox1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jCheckBox1.setText("Pessoa Física");
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, -1, -1));
+        jcbPessoaFisica.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jcbPessoaFisica.setText("Pessoa Física");
+        getContentPane().add(jcbPessoaFisica, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, 130, 20));
 
-        jCheckBox2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jCheckBox2.setText("Pessoa Júridica");
-        getContentPane().add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, -1, -1));
+        jcbPessoaJuridica.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jcbPessoaJuridica.setText("Pessoa Júridica");
+        getContentPane().add(jcbPessoaJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 140, -1));
+        getContentPane().add(jtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 270, -1));
+        getContentPane().add(jtTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 490, 120, -1));
+
+        jLabel2.setText("Nome");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, -1, -1));
+
+        jLabel3.setText("Telefone");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 470, -1, -1));
 
         jMenu1.setText("File");
         jMenu1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -111,6 +131,56 @@ public class cadastroClienteHome extends javax.swing.JFrame {
 //        dispose();
     }//GEN-LAST:event_jButton1MouseClicked
 
+    private void jbPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarMouseClicked
+        // Verificação do pesquisar   // falta tudo !
+
+        boolean control = true;
+
+        if (true) {
+
+        } else if (true) {
+
+        } else {
+            jtNome.setBackground(Color.red);
+            control = false;
+        }
+
+        if (true) {
+
+        } else if (true) {
+            jtTelefone.setBackground(Color.white);
+        } else {
+            jtTelefone.setBackground(Color.red);
+            control = false;
+        }
+        if (true) {
+
+        } else if (true) {
+            jcbPessoaFisica.setBackground(Color.white);
+        } else {
+            jcbPessoaFisica.setBackground(Color.red);
+            control = false;
+        }
+
+        if (true) {
+
+        } else if (true) {
+            jcbPessoaJuridica.setBackground(Color.white);
+        } else {
+            jcbPessoaJuridica.setBackground(Color.red);
+            control = false;
+        }
+
+        // Pesquisa Querry
+        if (control) {
+   
+            // querry
+        } else {
+          control = true;   
+        }
+  /// fim pesquisa
+    }//GEN-LAST:event_jbPesquisarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -122,7 +192,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -150,14 +220,18 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbPesquisar;
+    private javax.swing.JCheckBox jcbPessoaFisica;
+    private javax.swing.JCheckBox jcbPessoaJuridica;
+    private javax.swing.JTextField jtNome;
+    private javax.swing.JTextField jtTelefone;
     // End of variables declaration//GEN-END:variables
 }

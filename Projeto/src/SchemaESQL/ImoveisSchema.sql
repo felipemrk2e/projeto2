@@ -1,13 +1,10 @@
 CREATE DATABASE projetodois;
 USE projetodois;
 
-
--- V 2.1 do SQL --
+-- V 2.4 do SQL --
 -- edicoes --
 /*
-	A tabela Endereco recebeu o atributo Complemento
-	Imovel:TipoImovel agora é do tipo INT
-	Documentacao recebeu o atributo numMatricula
+	Acréscimo do atributo booleano 'ativo' à tabela Imovel
 */
 
 CREATE TABLE TipoImovel(
@@ -45,8 +42,8 @@ CREATE TABLE Bairro(
 );
 
 CREATE TABLE Documentacao(
-    idDocumentacao INT NOT NULL,
-	numMatricula VARCHAR(255),
+    idDocumentacao INT AUTO_INCREMENT NOT NULL,
+    numMatricula VARCHAR(255),
     numContaAgua VARCHAR(255) NOT NULL,
     numContaLuz VARCHAR(255) NOT NULL,
     numIptu VARCHAR(255) NOT NULL,
@@ -61,8 +58,9 @@ CREATE TABLE Endereco(
     numero INT NOT NULL,
     zona VARCHAR(255),
     referencia VARCHAR(255),
-	complemento VARCHAR(255),
+    complemento VARCHAR(255),
     nomeCondominio VARCHAR(255),
+    cep VARCHAR(10) NOT NULL,
     idBairro INT NOT NULL,
     CONSTRAINT PRIMARY KEY(idEndereco),
     CONSTRAINT FOREIGN KEY (idBairro)
@@ -80,6 +78,7 @@ CREATE TABLE Terreno(
 
 CREATE TABLE Imovel(
     idImovel INT AUTO_INCREMENT NOT NULL,
+    ativo BOOLEAN DEFAULT 1 NOT NULL,
     qtdQuartos INT NOT NULL,
     qtdSuites INT NOT NULL,
     qtdSalas INT NOT NULL,
@@ -92,7 +91,7 @@ CREATE TABLE Imovel(
     lavabos INT NOT NULL,
     depEmpregados INT NOT NULL,
     areaExterna VARCHAR(255),
-    dataConstrucao DATE NOT NULL,
+    anoConstrucao DATE NOT NULL,
     acabamento TEXT,
     outrosItens TEXT,
     descImovel VARCHAR(255) NOT NULL,
@@ -115,19 +114,6 @@ CREATE TABLE Imovel(
     REFERENCES Documentacao(idDocumentacao),
     CONSTRAINT fk_idTerreno FOREIGN KEY(idTerreno)
     REFERENCES Terreno(idTerreno)
-);
-
-
-CREATE TABLE Documentos(
-    idImovel INT NOT NULL,
-    numContaAgua VARCHAR(255) NOT NULL,
-    numContaLuz VARCHAR(255) NOT NULL,
-    numIptu VARCHAR(255) NOT NULL,
-    numContrato VARCHAR(255) NOT NULL,
-    cartorio VARCHAR(255) NOT NULL,
-    CONSTRAINT PRIMARY KEY(idImovel),
-    CONSTRAINT FOREIGN KEY (idImovel)
-    REFERENCES Imovel(idImovel)
 );
 
 CREATE TABLE TipoContrato(
