@@ -47,6 +47,9 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jtDepartamento = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jbEditar = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -85,39 +88,33 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         jLabel1.setText("Nova Senha");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(430, 140, 90, 14);
+        jLabel1.setBounds(490, 250, 90, 14);
 
         jLabel2.setText("Repetir Nova Senha");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(430, 190, 110, 14);
+        jLabel2.setBounds(490, 300, 110, 14);
 
         jLabel3.setText("Nivel de acesso");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(120, 150, 90, 14);
-
-        jtNivelAcesso.setText("jTextField1");
+        jLabel3.setBounds(180, 260, 90, 14);
         getContentPane().add(jtNivelAcesso);
-        jtNivelAcesso.setBounds(120, 170, 59, 20);
-
-        jtNovaSenha.setText("jTextField2");
+        jtNivelAcesso.setBounds(180, 280, 60, 20);
         getContentPane().add(jtNovaSenha);
-        jtNovaSenha.setBounds(430, 160, 59, 20);
-
-        jtRepetirNovaSenha.setText("jTextField3");
+        jtNovaSenha.setBounds(490, 270, 120, 20);
         getContentPane().add(jtRepetirNovaSenha);
-        jtRepetirNovaSenha.setBounds(430, 210, 59, 20);
+        jtRepetirNovaSenha.setBounds(490, 320, 120, 20);
 
         jbConfirmar.setText("Confirmar");
         getContentPane().add(jbConfirmar);
-        jbConfirmar.setBounds(240, 270, 81, 23);
+        jbConfirmar.setBounds(180, 470, 195, 88);
 
         jbCancelar.setText("Cancelar");
         getContentPane().add(jbCancelar);
-        jbCancelar.setBounds(360, 270, 77, 23);
+        jbCancelar.setBounds(420, 470, 195, 88);
         getContentPane().add(jtCargo);
-        jtCargo.setBounds(520, 90, 6, 20);
+        jtCargo.setBounds(520, 90, 60, 20);
         getContentPane().add(jtDepartamento);
-        jtDepartamento.setBounds(650, 90, 6, 20);
+        jtDepartamento.setBounds(650, 90, 60, 20);
 
         jLabel4.setText("Cargo");
         getContentPane().add(jLabel4);
@@ -126,6 +123,14 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jLabel5.setText("Departamento");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(650, 70, 120, 14);
+
+        jbEditar.setText("Editar");
+        getContentPane().add(jbEditar);
+        jbEditar.setBounds(650, 470, 195, 88);
+        getContentPane().add(jSeparator3);
+        jSeparator3.setBounds(0, 450, 1030, 10);
+        getContentPane().add(jSeparator4);
+        jSeparator4.setBounds(0, 190, 1030, 10);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -182,8 +187,11 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbConfirmar;
+    private javax.swing.JButton jbEditar;
     private javax.swing.JFormattedTextField jftCPF;
     private javax.swing.JLabel jlCPF;
     private javax.swing.JLabel jlCodigoInterno;

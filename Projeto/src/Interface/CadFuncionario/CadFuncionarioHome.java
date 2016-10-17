@@ -6,6 +6,7 @@
 package Interface.CadFuncionario;
 
 import java.awt.Color;
+import validacao.validacao;
 
 /**
  *
@@ -35,7 +36,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jbPesquisar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jtNomeFuncionario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -44,6 +45,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         jtDepartamento = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -66,32 +68,32 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(70, 30, 860, 239);
+        jScrollPane1.setBounds(70, 30, 880, 239);
 
         jButton1.setText("Cadastrar");
         getContentPane().add(jButton1);
-        jButton1.setBounds(110, 310, 120, 23);
+        jButton1.setBounds(90, 290, 195, 88);
 
         jButton2.setText("Visualisar");
         getContentPane().add(jButton2);
-        jButton2.setBounds(370, 310, 90, 23);
+        jButton2.setBounds(320, 290, 195, 88);
 
         jButton3.setText("Excluir");
         getContentPane().add(jButton3);
-        jButton3.setBounds(770, 310, 63, 23);
+        jButton3.setBounds(760, 290, 195, 88);
 
         jButton4.setText("Nivel de acesso");
         getContentPane().add(jButton4);
-        jButton4.setBounds(540, 310, 120, 23);
+        jButton4.setBounds(540, 290, 195, 88);
 
-        jButton5.setText("Pesquisar");
-        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbPesquisar.setText("Pesquisar");
+        jbPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton5MouseClicked(evt);
+                jbPesquisarMouseClicked(evt);
             }
         });
-        getContentPane().add(jButton5);
-        jButton5.setBounds(810, 420, 120, 23);
+        getContentPane().add(jbPesquisar);
+        jbPesquisar.setBounds(780, 430, 195, 88);
 
         jLabel1.setText("Nome do Funcionario");
         getContentPane().add(jLabel1);
@@ -116,6 +118,8 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         jLabel4.setText("Departamento");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(610, 410, 90, 14);
+        getContentPane().add(jSeparator3);
+        jSeparator3.setBounds(0, 390, 1020, 10);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -128,16 +132,17 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+    private void jbPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarMouseClicked
         //Verificar Pesquisar //Falta tudo
         boolean control = true;
 
-        if (true) {
+        if (jtNomeFuncionario.equals("")) {
 
-        } else if (true) {
+        } else if (!jtNomeFuncionario.equals("") && validacao.validaLetras(jtNomeFuncionario.getText())) {
 
         } else {
             jtNomeFuncionario.setBackground(Color.red);
+            control = false;
         }
 
         if (true) {
@@ -146,6 +151,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
 
         } else {
             jtCpf.setBackground(Color.red);
+            control = false;
         }
 
         if (true) {
@@ -154,6 +160,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
 
         } else {
             jtCargo.setBackground(Color.red);
+            control = false;
         }
         if (true) {
 
@@ -161,6 +168,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
 
         } else {
             jtDepartamento.setBackground(Color.red);
+            control = false;
         }
 // Querry
 
@@ -174,7 +182,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
 
         //Fim Pesquisar Verificar 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5MouseClicked
+    }//GEN-LAST:event_jbPesquisarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -216,7 +224,6 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -225,7 +232,9 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbPesquisar;
     private javax.swing.JTextField jtCargo;
     private javax.swing.JTextField jtCpf;
     private javax.swing.JTextField jtDepartamento;

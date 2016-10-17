@@ -292,7 +292,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jmLoginMousePressed
 
     private void jbVisualisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualisarMouseClicked
-
+        //Falta pegar a id da table;
         String idImovel = "vazio no momento";
         new cadastroImovel(idImovel, user).setVisible(true);
         dispose();
