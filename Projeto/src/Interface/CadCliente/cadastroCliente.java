@@ -28,7 +28,7 @@ import validacao.*;
  * @author Sala
  */
 public class cadastroCliente extends javax.swing.JFrame {
-
+    int user;
     private boolean fiador;
 
     /**
@@ -58,8 +58,22 @@ public class cadastroCliente extends javax.swing.JFrame {
         UIManager.getDefaults().put("jtpCadastroCliente.tabsOverlapBorder", true);
 
         popular();
-        DisableEnable(false);
+        verificaNivel();
 
+    }
+    
+        
+    public void verificaNivel(){
+        if (user <= 2) {
+            DisableEnable(false);
+            jbEditar.setEnabled(true);
+            jbConfirmar.setEnabled(false);
+
+        } else {
+            DisableEnable(false);
+            jbConfirmar.setEnabled(false);
+
+        }
     }
 
     public void DisableEnable(Boolean b) {

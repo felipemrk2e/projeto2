@@ -13,7 +13,7 @@ import static java.awt.image.ImageObserver.WIDTH;
  * @author Sala
  */
 public class cadastroFuncionario extends javax.swing.JFrame {
-
+int user;
     /**
      * Creates new form cadastroFuncionario
      */
@@ -24,10 +24,23 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     public cadastroFuncionario(int user, long idFuncionario) {
         initComponents();
         popular();
-        DisableEnable(false);
-
+        verificaNivel();
+          
     }
 
+        
+    public void verificaNivel(){
+        if (user <= 2) {
+            DisableEnable(false);
+            jbEditar.setEnabled(true);
+            jbConfirmar.setEnabled(false);
+
+        } else {
+            DisableEnable(false);
+            jbConfirmar.setEnabled(false);
+
+        }
+    }
     public void DisableEnable(Boolean b) {
 
         //cad

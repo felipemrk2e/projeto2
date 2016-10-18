@@ -11,11 +11,50 @@ package Interface.CadFuncionario;
  */
 public class ControleFuncionario extends javax.swing.JFrame {
 
+    int user;
+
     /**
      * Creates new form ControleFuncionario
      */
     public ControleFuncionario() {
         initComponents();
+    }
+
+    public ControleFuncionario(int user, Long idFuncionario) {
+        initComponents();
+        verificaNivel();
+        popular();
+
+    }
+    
+    public void popular(){
+        //Falta Cargo e departamento..
+        
+        jtfNome.setText("");
+        jtfCodigoInterno.setText("");  
+        jftCPF.setText("");
+        jtfRG.setText("");
+    }
+    
+    public void DisableEnable(boolean b){
+        
+        //falta nivel de acesso;
+        jtUser.setEnabled(b);
+        jtNovaSenha1.setEnabled(b);
+        jtNovaSenha2.setEnabled(b);
+    }
+
+    public void verificaNivel() {
+        if (user <= 2) {
+             DisableEnable(false);
+            jbEditar.setEnabled(true);
+            jbConfirmar.setEnabled(false);
+
+        } else {
+            DisableEnable(false);
+            jbConfirmar.setEnabled(false);
+
+        }
     }
 
     /**
@@ -39,8 +78,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jtNivelAcesso = new javax.swing.JTextField();
-        jtNovaSenha = new javax.swing.JTextField();
-        jtRepetirNovaSenha = new javax.swing.JTextField();
+        jtUser = new javax.swing.JTextField();
+        jtNovaSenha2 = new javax.swing.JTextField();
         jbConfirmar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
         jtCargo = new javax.swing.JTextField();
@@ -50,6 +89,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jbEditar = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
+        jtNovaSenha1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -62,6 +103,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jlCodigoInterno.setText("Código Interno");
         getContentPane().add(jlCodigoInterno);
         jlCodigoInterno.setBounds(20, 10, 101, 17);
+
+        jtfCodigoInterno.setEnabled(false);
         getContentPane().add(jtfCodigoInterno);
         jtfCodigoInterno.setBounds(20, 30, 100, 20);
 
@@ -69,6 +112,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jlNome.setText("Nome");
         getContentPane().add(jlNome);
         jlNome.setBounds(150, 20, 36, 17);
+
+        jtfNome.setEnabled(false);
         getContentPane().add(jtfNome);
         jtfNome.setBounds(150, 40, 400, 20);
 
@@ -76,6 +121,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jlCPF.setText("CPF");
         getContentPane().add(jlCPF);
         jlCPF.setBounds(150, 70, 28, 17);
+
+        jftCPF.setEnabled(false);
         getContentPane().add(jftCPF);
         jftCPF.setBounds(150, 90, 150, 20);
 
@@ -83,26 +130,28 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jlRG.setText("RG");
         getContentPane().add(jlRG);
         jlRG.setBounds(320, 70, 21, 17);
+
+        jtfRG.setEnabled(false);
         getContentPane().add(jtfRG);
         jtfRG.setBounds(320, 90, 150, 20);
 
         jLabel1.setText("Nova Senha");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(490, 250, 90, 14);
+        jLabel1.setBounds(340, 260, 90, 14);
 
         jLabel2.setText("Repetir Nova Senha");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(490, 300, 110, 14);
+        jLabel2.setBounds(340, 310, 110, 14);
 
         jLabel3.setText("Nivel de acesso");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(180, 260, 90, 14);
+        jLabel3.setBounds(180, 210, 90, 14);
         getContentPane().add(jtNivelAcesso);
-        jtNivelAcesso.setBounds(180, 280, 60, 20);
-        getContentPane().add(jtNovaSenha);
-        jtNovaSenha.setBounds(490, 270, 120, 20);
-        getContentPane().add(jtRepetirNovaSenha);
-        jtRepetirNovaSenha.setBounds(490, 320, 120, 20);
+        jtNivelAcesso.setBounds(180, 230, 60, 20);
+        getContentPane().add(jtUser);
+        jtUser.setBounds(340, 230, 120, 20);
+        getContentPane().add(jtNovaSenha2);
+        jtNovaSenha2.setBounds(340, 330, 120, 20);
 
         jbConfirmar.setText("Confirmar");
         getContentPane().add(jbConfirmar);
@@ -131,6 +180,12 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jSeparator3.setBounds(0, 450, 1030, 10);
         getContentPane().add(jSeparator4);
         jSeparator4.setBounds(0, 190, 1030, 10);
+        getContentPane().add(jtNovaSenha1);
+        jtNovaSenha1.setBounds(340, 280, 120, 20);
+
+        jLabel6.setText("Nome de Usuario");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(340, 210, 110, 14);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -184,6 +239,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -200,8 +256,9 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField jtCargo;
     private javax.swing.JTextField jtDepartamento;
     private javax.swing.JTextField jtNivelAcesso;
-    private javax.swing.JTextField jtNovaSenha;
-    private javax.swing.JTextField jtRepetirNovaSenha;
+    private javax.swing.JTextField jtNovaSenha1;
+    private javax.swing.JTextField jtNovaSenha2;
+    private javax.swing.JTextField jtUser;
     private javax.swing.JTextField jtfCodigoInterno;
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfRG;
