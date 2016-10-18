@@ -55,8 +55,8 @@ public class CadLocacao extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jtDataInicio = new javax.swing.JTextField();
         jtDataFim = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        jtIdImovel = new javax.swing.JTextField();
+        jtNomeProprietario = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
         jcbEstado = new javax.swing.JComboBox();
@@ -225,10 +225,10 @@ public class CadLocacao extends javax.swing.JFrame {
         jtDataInicio.setBounds(560, 290, 80, 20);
         getContentPane().add(jtDataFim);
         jtDataFim.setBounds(680, 290, 80, 20);
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(70, 500, 80, 20);
-        getContentPane().add(jTextField6);
-        jTextField6.setBounds(190, 500, 300, 20);
+        getContentPane().add(jtIdImovel);
+        jtIdImovel.setBounds(70, 500, 80, 20);
+        getContentPane().add(jtNomeProprietario);
+        jtNomeProprietario.setBounds(190, 500, 300, 20);
         getContentPane().add(jTextField7);
         jTextField7.setBounds(70, 540, 280, 20);
         getContentPane().add(jTextField10);
@@ -380,8 +380,6 @@ public class CadLocacao extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
@@ -395,5 +393,7 @@ public class CadLocacao extends javax.swing.JFrame {
     private javax.swing.JTextField jtCidade;
     private javax.swing.JTextField jtDataFim;
     private javax.swing.JTextField jtDataInicio;
+    private javax.swing.JTextField jtIdImovel;
+    private javax.swing.JTextField jtNomeProprietario;
     // End of variables declaration//GEN-END:variables
 }
