@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 /**
  *
@@ -44,11 +45,8 @@ public class PessoaFisica extends Pessoa {
         private EstadoCivil estadoCivil;
 
     public PessoaFisica() {
-    }
-
-    public PessoaFisica(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco) {
-        super(nomePessoa, email, observacoes, dataNascimento, endereco);
-    }
+        
+    }   
 
     public PessoaFisica(String CPF, String RG, char sexo, Funcionario funcionario, EstadoCivil estadoCivil, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco) {
         super(nomePessoa, email, observacoes, dataNascimento, endereco);

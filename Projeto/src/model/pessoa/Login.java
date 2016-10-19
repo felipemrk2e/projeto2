@@ -23,8 +23,7 @@ import javax.persistence.OneToOne;
 public class Login {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column
     private long idLogin;
     
@@ -35,11 +34,20 @@ public class Login {
     private String senhaUsuario;
         
     @Column
-    private int nivelAcesso; 
+    private int nivelAcesso;    
     
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPessoa", nullable = true)
-    private Funcionario funcionario;
+    public Login() {
+    }
+
+    public Login(long idLogin, String nomeUsuario, String senhaUsuario, int nivelAcesso) {
+        this.idLogin = idLogin;
+        this.nomeUsuario = nomeUsuario;
+        this.senhaUsuario = senhaUsuario;
+        this.nivelAcesso = nivelAcesso;
+        
+    }
+    
+    
 
     public long getIdLogin() {
         return idLogin;
@@ -73,13 +81,6 @@ public class Login {
         this.nivelAcesso = nivelAcesso;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
     
     
     

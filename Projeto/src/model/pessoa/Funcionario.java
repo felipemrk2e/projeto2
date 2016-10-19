@@ -16,64 +16,87 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 /**
  *
  * @author Rafael Brock
  */
 @Entity
+@PrimaryKeyJoinColumn(name = "idPessoa")
 public class Funcionario extends PessoaFisica {
-    
-    @Column 
+
+    @Column
     private double salario;
-    
-    @Column 
+
+    @Column
     private String banco;
-    
-    @Column 
+
+    @Column
     private String tipoConta;
-    
-    @Column 
+
+    @Column
     private String conta;
-    
-    @Column 
+
+    @Column
     private String agencia;
-        
-    @Column 
+
+    @Column
     private String ctps;
-    
-    @Column 
+
+    @Column
     private String serieCtps;
-    
-    @Column 
-    private int PIS;
-    
-    @Column 
+
+//    @Column
+//    private int PIS;
+
+    @Column
     private Date dataAdmissao;
-    
-    @Column 
+
+    @Column
     private String cargaHoraria;
-    
-    @Column 
+
+    @Column
     private String escolaridade;
-    
-    @Column 
+
+    @Column
     private int dependentes;
-    
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idPessoa",  nullable = false)
+    private PessoaFisica pessoaFisica;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="idPessoa", nullable = false)
-        private PessoaFisica pessoaFisica;
-    
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name="idCargo", nullable = false)
-        private Cargo cargo;
-    
+    @JoinColumn(name = "idCargo", nullable = false)
+    private Cargo cargo;
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idLogin", nullable = true)
     private Login login;
 
-    public Funcionario(double salario, String banco, String tipoConta, String conta, String agencia, String ctps, String serieCtps, int PIS, Date dataAdmissao, String cargaHoraria, String escolaridade, int dependentes, Cargo cargo, Login login, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco) {
-        super(nomePessoa, email, observacoes, dataNascimento, endereco);
+    public Funcionario() {
+
+    }
+
+//    public Funcionario(double salario, String banco, String tipoConta, String conta, String agencia, String ctps, String serieCtps, int PIS, Date dataAdmissao, String cargaHoraria, String escolaridade, int dependentes, PessoaFisica pessoaFisica, Cargo cargo, Login login) {
+//        this.salario = salario;
+//        this.banco = banco;
+//        this.tipoConta = tipoConta;
+//        this.conta = conta;
+//        this.agencia = agencia;
+//        this.ctps = ctps;
+//        this.serieCtps = serieCtps;
+//        this.PIS = PIS;
+//        this.dataAdmissao = dataAdmissao;
+//        this.cargaHoraria = cargaHoraria;
+//        this.escolaridade = escolaridade;
+//        this.dependentes = dependentes;
+//        this.pessoaFisica = pessoaFisica;
+//        this.cargo = cargo;
+//        this.login = login;
+//    }
+    public Funcionario(double salario, String banco, String tipoConta, String conta, String agencia, String ctps, String serieCtps, Date dataAdmissao, String cargaHoraria, String escolaridade, int dependentes, PessoaFisica pessoaFisica, Cargo cargo, Login login, String CPF, String RG, char sexo, Funcionario funcionario, EstadoCivil estadoCivil, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco) {
+        super(CPF, RG, sexo, funcionario, estadoCivil, nomePessoa, email, observacoes, dataNascimento, endereco);
         this.salario = salario;
         this.banco = banco;
         this.tipoConta = tipoConta;
@@ -81,16 +104,15 @@ public class Funcionario extends PessoaFisica {
         this.agencia = agencia;
         this.ctps = ctps;
         this.serieCtps = serieCtps;
-        this.PIS = PIS;
+//        this.PIS = PIS;
         this.dataAdmissao = dataAdmissao;
         this.cargaHoraria = cargaHoraria;
         this.escolaridade = escolaridade;
         this.dependentes = dependentes;
+        this.pessoaFisica = pessoaFisica;
         this.cargo = cargo;
         this.login = login;
     }
-
-    
 
     public double getSalario() {
         return salario;
@@ -148,13 +170,13 @@ public class Funcionario extends PessoaFisica {
         this.serieCtps = serieCtps;
     }
 
-    public int getPIS() {
-        return PIS;
-    }
-
-    public void setPIS(int PIS) {
-        this.PIS = PIS;
-    }
+//    public int getPIS() {
+//        return PIS;
+//    }
+//
+//    public void setPIS(int PIS) {
+//        this.PIS = PIS;
+//    }
 
     public Date getDataAdmissao() {
         return dataAdmissao;
@@ -203,7 +225,5 @@ public class Funcionario extends PessoaFisica {
     public void setLogin(Login login) {
         this.login = login;
     }
-    
-    
-    
+
 }
