@@ -5,7 +5,7 @@
  */
 package dao;
 
-import Interface.Pessoa.Login;
+import model.pessoa.Login;
 import java.util.List;
 
 /**

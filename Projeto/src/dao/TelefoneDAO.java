@@ -5,7 +5,7 @@
  */
 package dao;
 
-import Interface.Pessoa.Telefone;
+import model.pessoa.Telefone;
 import java.util.List;
 
 /**

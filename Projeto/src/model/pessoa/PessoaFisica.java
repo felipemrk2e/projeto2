@@ -3,35 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interface.Pessoa;
+package model.pessoa;
+
 
 import global.model.Endereco;
-import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
- * @author Sala
+ * @author Rafael Brock
  */
 @Entity
-public class PessoaFisica extends Pessoa implements Serializable {
+@PrimaryKeyJoinColumn(name="idPessoa")
+public class PessoaFisica extends Pessoa {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private long idPessoaFisica;
-    
+        
     @Column
     private String CPF;
     
@@ -42,7 +36,7 @@ public class PessoaFisica extends Pessoa implements Serializable {
     private char sexo;
     
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idFuncionario", nullable = true)
+    @JoinColumn(name = "idPessoa", nullable = true)
     private Funcionario funcionario;
           
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -52,21 +46,22 @@ public class PessoaFisica extends Pessoa implements Serializable {
     public PessoaFisica() {
     }
 
-    public PessoaFisica(String CPF, String RG, char sexo, EstadoCivil estadoCivil, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, PessoaFisica pessoaFisica, Telefone telefone, Interesse interesse) {
-        super(nomePessoa, email, observacoes, dataNascimento, endereco, pessoaFisica, telefone, interesse);
+    public PessoaFisica(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco) {
+        super(nomePessoa, email, observacoes, dataNascimento, endereco);
+    }
+
+    public PessoaFisica(String CPF, String RG, char sexo, Funcionario funcionario, EstadoCivil estadoCivil, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco) {
+        super(nomePessoa, email, observacoes, dataNascimento, endereco);
         this.CPF = CPF;
         this.RG = RG;
         this.sexo = sexo;
+        this.funcionario = funcionario;
         this.estadoCivil = estadoCivil;
-    }    
+    }
     
-    public long getIdPessoaFisica() {
-        return idPessoaFisica;
-    }
-
-    public void setIdPessoaFisica(long idPessoaFisica) {
-        this.idPessoaFisica = idPessoaFisica;
-    }
+    
+    
+    
 
     public String getCPF() {
         return CPF;
@@ -106,9 +101,15 @@ public class PessoaFisica extends Pessoa implements Serializable {
     }
 
     public void setFuncionario(Funcionario funcionario) {
-//        funcionario.
         this.funcionario = funcionario;
     }
+    
+    
+
+    
+    
+    
+    
     
     
 }

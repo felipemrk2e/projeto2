@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interface.Pessoa;
+package model.pessoa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,20 +11,17 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
  *
- * @author Sala
+ * @author Rafael Brock
  */
 @Entity
 public class EstadoCivil {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id    
     @Column
     private long idEstadoCivil;
     
@@ -38,11 +35,6 @@ public class EstadoCivil {
             cascade = CascadeType.PERSIST)
     private List<PessoaFisica> pessoasFisicas = new ArrayList<>();
 
-    public EstadoCivil(String nomeEstadoCivil) {       
-        this.nomeEstadoCivil = nomeEstadoCivil;
-    }
-
-    
     public long getIdEstadoCivil() {
         return idEstadoCivil;
     }
@@ -62,9 +54,14 @@ public class EstadoCivil {
     public List<PessoaFisica> getPessoasFisicas() {
         return pessoasFisicas;
     }
+
+    public void setPessoasFisicas(List<PessoaFisica> pessoasFisicas) {
+        this.pessoasFisicas = pessoasFisicas;
+    }
     
     public void addEstadoCivil(PessoaFisica pessoaFisica) {
 	this.pessoasFisicas.add(pessoaFisica);
     }
+    
     
 }
