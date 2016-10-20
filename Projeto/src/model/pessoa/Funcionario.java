@@ -7,6 +7,7 @@ package model.pessoa;
 
 import global.model.Endereco;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -113,6 +114,45 @@ public class Funcionario extends PessoaFisica {
         this.cargo = cargo;
         this.login = login;
     }
+
+    public Funcionario(double salario, String banco, String tipoConta, String conta, String agencia, String ctps, String serieCtps, Date dataAdmissao, String cargaHoraria, String escolaridade, int dependentes, PessoaFisica pessoaFisica, Cargo cargo, Login login) {
+        this.salario = salario;
+        this.banco = banco;
+        this.tipoConta = tipoConta;
+        this.conta = conta;
+        this.agencia = agencia;
+        this.ctps = ctps;
+        this.serieCtps = serieCtps;
+        this.dataAdmissao = dataAdmissao;
+        this.cargaHoraria = cargaHoraria;
+        this.escolaridade = escolaridade;
+        this.dependentes = dependentes;
+        this.pessoaFisica = pessoaFisica;
+        this.cargo = cargo;
+        this.login = login;
+    }
+
+    public Funcionario(double salario, String banco, String tipoConta, String conta, String agencia, String ctps, String serieCtps, Date dataAdmissao, String cargaHoraria, String escolaridade, int dependentes, PessoaFisica pessoaFisica, Cargo cargo, Login login, String CPF, String RG, char sexo, Funcionario funcionario, EstadoCivil estadoCivil, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, List<Interesse> interesses) {
+        super(CPF, RG, sexo, funcionario, estadoCivil, nomePessoa, email, observacoes, dataNascimento, endereco, interesses);
+        this.salario = salario;
+        this.banco = banco;
+        this.tipoConta = tipoConta;
+        this.conta = conta;
+        this.agencia = agencia;
+        this.ctps = ctps;
+        this.serieCtps = serieCtps;
+        this.dataAdmissao = dataAdmissao;
+        this.cargaHoraria = cargaHoraria;
+        this.escolaridade = escolaridade;
+        this.dependentes = dependentes;
+        this.pessoaFisica = pessoaFisica;
+        this.cargo = cargo;
+        this.login = login;
+    }
+    
+    
+    
+    
 
     public double getSalario() {
         return salario;

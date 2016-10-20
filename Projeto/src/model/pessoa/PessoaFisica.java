@@ -8,6 +8,7 @@ package model.pessoa;
 
 import global.model.Endereco;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -56,6 +57,20 @@ public class PessoaFisica extends Pessoa {
         this.funcionario = funcionario;
         this.estadoCivil = estadoCivil;
     }
+
+    public PessoaFisica(String CPF, String RG, char sexo, Funcionario funcionario, EstadoCivil estadoCivil, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, List<Interesse> interesses) {
+        super(nomePessoa, email, observacoes, dataNascimento, endereco, interesses);
+        this.CPF = CPF;
+        this.RG = RG;
+        this.sexo = sexo;
+        this.funcionario = funcionario;
+        this.estadoCivil = estadoCivil;
+    }
+
+    
+    
+    
+    
     
     
     

@@ -19,9 +19,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 /**
  *
@@ -47,9 +48,9 @@ public class Pessoa {
 
     @Column
     private Date dataNascimento;
-    
+
     public Pessoa() {
-        
+
     }
 
     public Pessoa(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco) {
@@ -58,26 +59,42 @@ public class Pessoa {
         this.observacoes = observacoes;
         this.dataNascimento = dataNascimento;
         this.endereco = endereco;
-    } 
-    
+    }
 
+    public Pessoa(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, List<Interesse> interesses) {
+        this.nomePessoa = nomePessoa;
+        this.email = email;
+        this.observacoes = observacoes;
+        this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
+        this.interesses = interesses;
+    }
+
+    
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idEndereco", nullable = true)
     private Endereco endereco;
-    
+
     @OneToMany(
             mappedBy = "pessoa",
             targetEntity = Telefone.class,
             fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Telefone> telefone = new ArrayList<Telefone>();
-    
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idPessoa", nullable = true)
     private PessoaJuridica pessoaJuridica;
-    
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idPessoa", nullable = true)
     private PessoaFisica pessoaFisica;
+
+    @ManyToMany
+    @JoinTable(name = "Pessoa_has_Interesse", joinColumns = {
+        @JoinColumn(name = "idPessoa")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "idInteresse")})
+    private List<Interesse> interesses;
 
     public long getIdPessoa() {
         return idPessoa;
@@ -134,14 +151,22 @@ public class Pessoa {
     public void setTelefone(List<Telefone> telefone) {
         this.telefone = telefone;
     }
-    
+
     public void addTelefone(Telefone telefone) {
         this.telefone.add(telefone);
-    }    
-    
-    
-    
+    }
 
+    public List<Interesse> getInteresses() {
+        return interesses;
+    }
+
+    public void setInteresses(List<Interesse> interesses) {
+        this.interesses = interesses;
+    }
+       
+        public void addInteresse(Interesse interesse) {
+        this.interesses.add(interesse);
+    }
     
 
 }

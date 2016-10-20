@@ -8,6 +8,7 @@ package model.pessoa;
 
 import global.model.Endereco;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -45,6 +46,27 @@ public class PessoaJuridica extends Pessoa {
     public PessoaJuridica(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco) {
         super(nomePessoa, email, observacoes, dataNascimento, endereco);
     }
+
+    public PessoaJuridica(String cnpj, String inscricaoEstadual, boolean cadastroAtivo, String nomeFantasia, String nomeResponsavel, String cpfResponsavel) {
+        this.cnpj = cnpj;
+        this.inscricaoEstadual = inscricaoEstadual;
+        this.cadastroAtivo = cadastroAtivo;
+        this.nomeFantasia = nomeFantasia;
+        this.nomeResponsavel = nomeResponsavel;
+        this.cpfResponsavel = cpfResponsavel;
+    }
+
+    public PessoaJuridica(String cnpj, String inscricaoEstadual, boolean cadastroAtivo, String nomeFantasia, String nomeResponsavel, String cpfResponsavel, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, List<Interesse> interesses) {
+        super(nomePessoa, email, observacoes, dataNascimento, endereco, interesses);
+        this.cnpj = cnpj;
+        this.inscricaoEstadual = inscricaoEstadual;
+        this.cadastroAtivo = cadastroAtivo;
+        this.nomeFantasia = nomeFantasia;
+        this.nomeResponsavel = nomeResponsavel;
+        this.cpfResponsavel = cpfResponsavel;
+    }
+    
+    
     
     
     public String getCnpj() {
