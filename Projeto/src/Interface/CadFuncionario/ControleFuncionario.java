@@ -20,24 +20,25 @@ public class ControleFuncionario extends javax.swing.JFrame {
         initComponents();
     }
 
-    public ControleFuncionario(int user, Long idFuncionario) {
+    public ControleFuncionario(int user, String idFuncionario) {
+         this.user = user;
         initComponents();
         verificaNivel();
         popular();
 
     }
-    
-    public void popular(){
+
+    public void popular() {
         //Falta Cargo e departamento..
-        
+
         jtfNome.setText("");
-        jtfCodigoInterno.setText("");  
+        jtfCodigoInterno.setText("");
         jftCPF.setText("");
         jtfRG.setText("");
     }
-    
-    public void DisableEnable(boolean b){
-        
+
+    public void DisableEnable(boolean b) {
+
         //falta nivel de acesso;
         jtUser.setEnabled(b);
         jtNovaSenha1.setEnabled(b);
@@ -46,14 +47,14 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
     public void verificaNivel() {
         if (user <= 2) {
-             DisableEnable(false);
+            DisableEnable(false);
             jbEditar.setEnabled(true);
             jbConfirmar.setEnabled(false);
 
         } else {
             DisableEnable(false);
             jbConfirmar.setEnabled(false);
-
+            jbEditar.setEnabled(false);
         }
     }
 
@@ -159,7 +160,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         jbCancelar.setText("Cancelar");
         getContentPane().add(jbCancelar);
-        jbCancelar.setBounds(420, 470, 195, 88);
+        jbCancelar.setBounds(630, 470, 195, 88);
         getContentPane().add(jtCargo);
         jtCargo.setBounds(520, 90, 60, 20);
         getContentPane().add(jtDepartamento);
@@ -175,7 +176,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         jbEditar.setText("Editar");
         getContentPane().add(jbEditar);
-        jbEditar.setBounds(650, 470, 195, 88);
+        jbEditar.setBounds(410, 470, 195, 88);
         getContentPane().add(jSeparator3);
         jSeparator3.setBounds(0, 450, 1030, 10);
         getContentPane().add(jSeparator4);

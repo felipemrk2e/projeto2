@@ -53,6 +53,31 @@ public class cadastroImovel extends javax.swing.JFrame {
 //popular(imovel);
     }
     
+        public cadastroImovel(int user) {
+             this.user = user;
+        initComponents();
+        fecharCadastro();
+        removerTitleBar();
+        verificaNivel0(); 
+        
+
+    }
+    
+    public cadastroImovel(String idImovel, int user) {
+                 this.user = user;
+
+        initComponents();
+        fecharCadastro();
+        removerTitleBar();
+        ImovelDAO imovelDao = new ImovelDAO();
+        Imovel imovel = imovelDao.getById(Long.valueOf(idImovel));
+        popular(imovel);
+        verificaNivel(); 
+        
+
+    }
+
+    
     public void ComboBox(){
         // Falta o Status
         
@@ -66,7 +91,19 @@ public class cadastroImovel extends javax.swing.JFrame {
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
         jcbEstado.setModel(defaultComboBox);
     }
-    
+        public void verificaNivel0(){
+        if (user <= 2) {
+            DisableEnable(true);
+            jbEditar.setEnabled(false);
+            jbConfirmar.setEnabled(true);
+
+        } else {
+            DisableEnable(false);
+            jbConfirmar.setEnabled(false);
+            jbEditar.setEnabled(false);
+
+        }
+    }
     public void verificaNivel(){
         if (user <= 2) {
             DisableEnable(false);
@@ -90,18 +127,6 @@ public class cadastroImovel extends javax.swing.JFrame {
     public Imovel getImovel(){
         
         return imovelTemp;
-    }
-
-    public cadastroImovel(String idImovel, int user) {
-        initComponents();
-        fecharCadastro();
-        removerTitleBar();
-        ImovelDAO imovelDao = new ImovelDAO();
-        Imovel imovel = imovelDao.getById(Long.valueOf(idImovel));
-        popular(imovel);
-        verificaNivel(); 
-        
-
     }
 
     public void DisableEnable(Boolean b) {

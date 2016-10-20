@@ -14,11 +14,34 @@ import validacao.validacao;
  */
 public class CadLocacaoHome extends javax.swing.JFrame {
 
+    int user;
+
     /**
      * Creates new form CadLocacaoHome
      */
     public CadLocacaoHome() {
         initComponents();
+    }
+
+    public CadLocacaoHome(int user) {
+                 this.user = user;
+
+        initComponents();
+
+        verificaNivel();
+    }
+
+    public void verificaNivel() {
+        if (user <= 2) {
+
+            jbCadastrar.setEnabled(true);
+            jbControle.setEnabled(true);
+
+        } else {
+            jbCadastrar.setEnabled(false);
+            jbControle.setEnabled(false);
+
+        }
     }
 
     /**
@@ -32,8 +55,8 @@ public class CadLocacaoHome extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbVisualizar = new javax.swing.JButton();
+        jbCadastrar = new javax.swing.JButton();
         jbPesquisar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -49,7 +72,7 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         jtCep = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jcbEstado = new javax.swing.JComboBox();
-        jButton4 = new javax.swing.JButton();
+        jbControle = new javax.swing.JButton();
         jtCidade = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
@@ -77,13 +100,23 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(50, 30, 910, 210);
 
-        jButton1.setText("visualizar");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(420, 250, 195, 88);
+        jbVisualizar.setText("visualizar");
+        jbVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbVisualizarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbVisualizar);
+        jbVisualizar.setBounds(420, 250, 195, 88);
 
-        jButton2.setText("Cadastro de locação");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(190, 250, 195, 88);
+        jbCadastrar.setText("Cadastro de locação");
+        jbCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbCadastrarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbCadastrar);
+        jbCadastrar.setBounds(190, 250, 195, 88);
 
         jbPesquisar.setText("Pesquisar");
         jbPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -139,9 +172,14 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         getContentPane().add(jcbEstado);
         jcbEstado.setBounds(690, 540, 66, 23);
 
-        jButton4.setText("controle de locação");
-        getContentPane().add(jButton4);
-        jButton4.setBounds(640, 250, 195, 88);
+        jbControle.setText("controle de locação");
+        jbControle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbControleMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbControle);
+        jbControle.setBounds(640, 250, 195, 88);
         getContentPane().add(jtCidade);
         jtCidade.setBounds(490, 540, 160, 20);
 
@@ -252,6 +290,30 @@ public class CadLocacaoHome extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_jbPesquisarMouseClicked
 
+    private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
+        String idLocacao = "vazio no momento";
+
+        new CadLocacao(user, idLocacao).setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jbVisualizarMouseClicked
+
+    private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
+        if (jbCadastrar.isEnabled()) {
+
+            new CadLocacao(user).setVisible(true);
+
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbCadastrarMouseClicked
+
+    private void jbControleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleMouseClicked
+        if (jbControle.isEnabled()) {
+            String idLocacao = "vazio no momento";
+            new ControleLocacao(user, idLocacao).setVisible(true);
+
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbControleMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -288,9 +350,6 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -305,7 +364,10 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbCadastrar;
+    private javax.swing.JButton jbControle;
     private javax.swing.JButton jbPesquisar;
+    private javax.swing.JButton jbVisualizar;
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JTextField jtBairro;
     private javax.swing.JTextField jtCep;

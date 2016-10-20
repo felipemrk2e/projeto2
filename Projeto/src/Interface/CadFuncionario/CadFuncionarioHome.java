@@ -13,14 +13,18 @@ import validacao.validacao;
  * @author user
  */
 public class CadFuncionarioHome extends javax.swing.JFrame {
-
+int user;
     /**
      * Creates new form CadFuncionarioHome
      */
     public CadFuncionarioHome() {
         initComponents();
     }
-
+    public CadFuncionarioHome(int user) {
+        
+        this.user = user;
+        initComponents();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,10 +36,10 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbCadastrar = new javax.swing.JButton();
+        jbVisualizar = new javax.swing.JButton();
+        jbExcluir = new javax.swing.JButton();
+        jbNivel = new javax.swing.JButton();
         jbPesquisar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jtNomeFuncionario = new javax.swing.JTextField();
@@ -70,21 +74,41 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(70, 30, 880, 239);
 
-        jButton1.setText("Cadastrar");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(90, 290, 195, 88);
+        jbCadastrar.setText("Cadastrar");
+        jbCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbCadastrarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbCadastrar);
+        jbCadastrar.setBounds(90, 290, 195, 88);
 
-        jButton2.setText("Visualisar");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(320, 290, 195, 88);
+        jbVisualizar.setText("Visualisar");
+        jbVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbVisualizarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbVisualizar);
+        jbVisualizar.setBounds(320, 290, 195, 88);
 
-        jButton3.setText("Excluir");
-        getContentPane().add(jButton3);
-        jButton3.setBounds(760, 290, 195, 88);
+        jbExcluir.setText("Excluir");
+        jbExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbExcluirMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbExcluir);
+        jbExcluir.setBounds(760, 290, 195, 88);
 
-        jButton4.setText("Nivel de acesso");
-        getContentPane().add(jButton4);
-        jButton4.setBounds(540, 290, 195, 88);
+        jbNivel.setText("Nivel de acesso");
+        jbNivel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbNivelMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbNivel);
+        jbNivel.setBounds(540, 290, 195, 88);
 
         jbPesquisar.setText("Pesquisar");
         jbPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,6 +208,35 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbPesquisarMouseClicked
 
+    private void jbExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbExcluirMouseClicked
+if(jbExcluir.isEnabled()){
+} // TODO add your handling code here:
+    }//GEN-LAST:event_jbExcluirMouseClicked
+
+    private void jbNivelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbNivelMouseClicked
+if(jbNivel.isEnabled()){
+    String idFuncionario = "vazio no momento";
+            new ControleFuncionario(user, idFuncionario).setVisible(true);
+dispose();  
+
+}
+// TODO add your handling code here:
+    }//GEN-LAST:event_jbNivelMouseClicked
+
+    private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
+      String idFuncionario = "vazio no momento";
+            new cadastroFuncionario(user, idFuncionario).setVisible(true);
+            dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_jbVisualizarMouseClicked
+
+    private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
+       
+        if(jbCadastrar.isEnabled()) {
+            new cadastroFuncionario(user).setVisible(true);
+dispose();        }  
+       // TODO add your handling code here:
+    }//GEN-LAST:event_jbCadastrarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -220,10 +273,6 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -234,7 +283,11 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbCadastrar;
+    private javax.swing.JButton jbExcluir;
+    private javax.swing.JButton jbNivel;
     private javax.swing.JButton jbPesquisar;
+    private javax.swing.JButton jbVisualizar;
     private javax.swing.JTextField jtCargo;
     private javax.swing.JTextField jtCpf;
     private javax.swing.JTextField jtDepartamento;

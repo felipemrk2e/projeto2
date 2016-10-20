@@ -123,7 +123,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+    <Component class="javax.swing.JCheckBox" name="jcbCasa">
       <Properties>
         <Property name="text" type="java.lang.String" value="casa"/>
       </Properties>
@@ -133,7 +133,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+    <Component class="javax.swing.JCheckBox" name="jcbApartamento">
       <Properties>
         <Property name="text" type="java.lang.String" value="apartamento"/>
       </Properties>
@@ -143,7 +143,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox3">
+    <Component class="javax.swing.JCheckBox" name="jcbSalao">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sal&#xe3;o"/>
       </Properties>
@@ -153,7 +153,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox4">
+    <Component class="javax.swing.JCheckBox" name="jcbTemporario">
       <Properties>
         <Property name="text" type="java.lang.String" value="Temporario"/>
       </Properties>
@@ -163,7 +163,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox5">
+    <Component class="javax.swing.JCheckBox" name="jcbComercio">
       <Properties>
         <Property name="text" type="java.lang.String" value="Comercio"/>
       </Properties>

@@ -13,7 +13,9 @@ import static java.awt.image.ImageObserver.WIDTH;
  * @author Sala
  */
 public class cadastroFuncionario extends javax.swing.JFrame {
-int user;
+
+    int user;
+
     /**
      * Creates new form cadastroFuncionario
      */
@@ -21,15 +23,36 @@ int user;
         initComponents();
     }
 
-    public cadastroFuncionario(int user, long idFuncionario) {
+    public cadastroFuncionario(int user) {
+         this.user = user;
+        initComponents();
+        verificaNivel0();
+
+    }
+
+    public cadastroFuncionario(int user, String idFuncionario) {
+         this.user = user;
         initComponents();
         popular();
         verificaNivel();
-          
+
     }
 
-        
-    public void verificaNivel(){
+    public void verificaNivel0() {
+        if (user <= 2) {
+            DisableEnable(true);
+            jbEditar.setEnabled(false);
+            jbConfirmar.setEnabled(true);
+
+        } else {
+            DisableEnable(false);
+            jbEditar.setEnabled(false);
+            jbConfirmar.setEnabled(false);
+
+        }
+    }
+
+    public void verificaNivel() {
         if (user <= 2) {
             DisableEnable(false);
             jbEditar.setEnabled(true);
@@ -41,6 +64,7 @@ int user;
 
         }
     }
+
     public void DisableEnable(Boolean b) {
 
         //cad
@@ -527,8 +551,8 @@ int user;
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-        //        new cadastroImovelHome().setVisible(true);
-        //        dispose();    // TODO add your handling code here:
+                new CadFuncionarioHome(user).setVisible(true);
+                dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
 
     /**
