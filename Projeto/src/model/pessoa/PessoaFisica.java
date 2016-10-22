@@ -5,49 +5,65 @@
  */
 package model.pessoa;
 
-
 import global.model.Endereco;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
  * @author Rafael Brock
  */
 @Entity
-@PrimaryKeyJoinColumn(name="idPessoa")
+@PrimaryKeyJoinColumn(name = "idPessoa")
 public class PessoaFisica extends Pessoa {
-    
-        
+
     @Column
     private String CPF;
-    
+
     @Column
     private String RG;
-    
+
     @Column
     private char sexo;
-    
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idPessoa", nullable = true)
     private Funcionario funcionario;
-          
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name="idEstadoCivil", nullable = false)
-        private EstadoCivil estadoCivil;
+    @JoinColumn(name = "idEstadoCivil", nullable = false)
+    private EstadoCivil estadoCivil;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "fiadorDe",
+            joinColumns = {
+                @JoinColumn(name = "idPessoa")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "idFiador")})
+    private List<PessoaFisica> pessoas;
+
+    @ManyToMany(mappedBy = "pessoas")
+    private List<PessoaFisica> fiadores;
 
     public PessoaFisica() {
-        
-    }   
+
+    }
 
     public PessoaFisica(String CPF, String RG, char sexo, Funcionario funcionario, EstadoCivil estadoCivil, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco) {
         super(nomePessoa, email, observacoes, dataNascimento, endereco);
@@ -66,15 +82,6 @@ public class PessoaFisica extends Pessoa {
         this.funcionario = funcionario;
         this.estadoCivil = estadoCivil;
     }
-
-    
-    
-    
-    
-    
-    
-    
-    
 
     public String getCPF() {
         return CPF;
@@ -116,13 +123,25 @@ public class PessoaFisica extends Pessoa {
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
-    
-    
 
+    public List<PessoaFisica> getPessoas() {
+        return pessoas;
+    }
+
+    public void setPessoas(List<PessoaFisica> pessoas) {
+        this.pessoas = pessoas;
+    }
+
+    public List<PessoaFisica> getFiadores() {
+        return fiadores;
+    }
+
+    public void setFiadores(List<PessoaFisica> fiadores) {
+        this.fiadores = fiadores;
+    }
     
-    
-    
-    
-    
-    
+    public void addFiador(PessoaFisica pessoaFisica){
+        this.fiadores.add(pessoaFisica);
+    }
+
 }
