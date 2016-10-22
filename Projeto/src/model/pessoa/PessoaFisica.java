@@ -49,17 +49,23 @@ public class PessoaFisica extends Pessoa {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "idEstadoCivil", nullable = false)
     private EstadoCivil estadoCivil;
-
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "fiadorDe",
-            joinColumns = {
-                @JoinColumn(name = "idPessoa")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "idFiador")})
-    private List<PessoaFisica> pessoas;
-
-    @ManyToMany(mappedBy = "pessoas")
-    private List<PessoaFisica> fiadores;
+    
+    
+//    Outro exemplo autorelacionamento
+//    @ManyToMany(cascade = {CascadeType.ALL})
+//    @JoinTable(name = "fiadorDe",
+//            joinColumns = {
+//                @JoinColumn(name = "idPessoa")},
+//            inverseJoinColumns = {
+//                @JoinColumn(name = "idFiador")})
+//    private List<PessoaFisica> pessoas;
+    
+//    @ManyToMany(mappedBy = "pessoas")
+//    private List<PessoaFisica> fiadores;
+    
+    @ManyToMany
+    @JoinTable(name = "fiadorDe", joinColumns = @JoinColumn(name = "idPessoa"), inverseJoinColumns = @JoinColumn(name = "idFiador"))
+    private List<PessoaFisica> listaFiadores;
 
     public PessoaFisica() {
 
@@ -124,24 +130,12 @@ public class PessoaFisica extends Pessoa {
         this.funcionario = funcionario;
     }
 
-    public List<PessoaFisica> getPessoas() {
-        return pessoas;
+    public List<PessoaFisica> getListaFiadores() {
+        return listaFiadores;
     }
 
-    public void setPessoas(List<PessoaFisica> pessoas) {
-        this.pessoas = pessoas;
-    }
-
-    public List<PessoaFisica> getFiadores() {
-        return fiadores;
-    }
-
-    public void setFiadores(List<PessoaFisica> fiadores) {
-        this.fiadores = fiadores;
-    }
-    
-    public void addFiador(PessoaFisica pessoaFisica){
-        this.fiadores.add(pessoaFisica);
+    public void setListaFiadores(List<PessoaFisica> listaFiadores) {
+        this.listaFiadores = listaFiadores;
     }
 
 }

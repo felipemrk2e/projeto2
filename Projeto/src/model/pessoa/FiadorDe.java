@@ -33,35 +33,7 @@ public class FiadorDe{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private long idFiador;
-
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "fiadorDe", joinColumns = {
-//        @JoinColumn(name = "idPessoa")},
-//            inverseJoinColumns = {
-//                @JoinColumn(name = "idFiador")})
-//    @Fetch(FetchMode.SUBSELECT)
-//    private Collection<PessoaFisica> fiadores;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "idPessoa", insertable = true, updatable = true, nullable = true)
-//    private PessoaFisica pessoaFisica;
-    
-//    @OneToMany(mappedBy = "FiadorDe", fetch = FetchType.LAZY)
-//    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-//    private List<PessoaFisica> fiadores;   
-//    
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "idPessoa", insertable = true, updatable = true)
-//    @Fetch(FetchMode.JOIN)
-//    @Cascade(CascadeType.SAVE_UPDATE)
-//    private PessoaFisica pessoas;   
-    
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "idPessoa", referencedColumnName = "idFiador", updatable = false, insertable = false)
-//    private PessoaFisica pessoaFisica;
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pessoaFisica")
-//    private List<PessoaFisica> fiadores;
-    
+    private long idFiador;    
 
     public FiadorDe() {
 
