@@ -5,8 +5,7 @@
  */
 package dao;
 
-import Interface.Pessoa.Pessoa;
-import Interface.Pessoa.PessoaFisica;
+import model.pessoa.PessoaFisica;
 import java.util.List;
 
 /**

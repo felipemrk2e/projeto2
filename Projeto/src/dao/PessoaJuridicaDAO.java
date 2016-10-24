@@ -6,7 +6,7 @@
 package dao;
 
 
-import Interface.Pessoa.PessoaJuridica;
+import model.pessoa.PessoaJuridica;
 import java.util.List;
 
 /**

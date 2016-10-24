@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interface.Pessoa;
+package model.pessoa;
 
-import global.model.Bairro;
-import global.model.Cidade;
 import global.model.Endereco;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,15 +16,20 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
  *
- * @author Sala
+ * @author Rafael Brock
  */
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Pessoa {
 
     @Id
@@ -46,59 +49,52 @@ public class Pessoa {
     @Column
     private Date dataNascimento;
 
+    public Pessoa() {
+
+    }
+
+    public Pessoa(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco) {
+        this.nomePessoa = nomePessoa;
+        this.email = email;
+        this.observacoes = observacoes;
+        this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
+    }
+
+    public Pessoa(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, List<Interesse> interesses) {
+        this.nomePessoa = nomePessoa;
+        this.email = email;
+        this.observacoes = observacoes;
+        this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
+        this.interesses = interesses;
+    }
+
+    
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idEndereco", nullable = true)
     private Endereco endereco;
 
     @OneToMany(
             mappedBy = "pessoa",
-            targetEntity = Pessoa_has_Interesse.class,
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST)
-    private List<Pessoa_has_Interesse> interesses = new ArrayList<>();
-
-    @OneToMany(
-            mappedBy = "telefone",
             targetEntity = Telefone.class,
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Telefone> telefone = new ArrayList<Telefone>();
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPessoaFisica", nullable = true)
-    private PessoaFisica pessoaFisica;
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPessoaJuridica", nullable = true)
+    @JoinColumn(name = "idPessoa", nullable = true)
     private PessoaJuridica pessoaJuridica;
 
-    public Pessoa() {
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idPessoa", nullable = true)
+    private PessoaFisica pessoaFisica;
 
-    }
-
-    public Pessoa(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, PessoaFisica pessoaFisica, Telefone telefone, Interesse interesse) {
-        this.nomePessoa = nomePessoa;
-        this.email = email;
-        this.observacoes = observacoes;
-        this.dataNascimento = dataNascimento;
-        this.endereco = endereco;
-        this.pessoaFisica = pessoaFisica;
-        this.telefone = (List<Telefone>) telefone;
-        this.interesses = (List<Pessoa_has_Interesse>) interesse;
-    }
-    
-    public Pessoa(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, PessoaJuridica pessoaJuridica, Telefone telefone, Interesse interesse) {
-        this.nomePessoa = nomePessoa;
-        this.email = email;
-        this.observacoes = observacoes;
-        this.dataNascimento = dataNascimento;
-        this.endereco = endereco;
-        this.pessoaJuridica = pessoaJuridica;
-        this.telefone = (List<Telefone>) telefone;
-        this.interesses = (List<Pessoa_has_Interesse>) interesse;
-    }
-    
-    
-   
+    @ManyToMany
+    @JoinTable(name = "Pessoa_has_Interesse", joinColumns = {
+        @JoinColumn(name = "idPessoa")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "idInteresse")})
+    private List<Interesse> interesses;
 
     public long getIdPessoa() {
         return idPessoa;
@@ -148,34 +144,6 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
-    public PessoaFisica getPessoaFisica() {
-        return pessoaFisica;
-    }
-
-    public void setPessoaFisica(PessoaFisica pessoaFisica) {
-        this.pessoaFisica = pessoaFisica;
-    }
-
-    public PessoaJuridica getPessoaJuridica() {
-        return pessoaJuridica;
-    }
-
-    public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
-        this.pessoaJuridica = pessoaJuridica;
-    }
-
-    public void addTelefone(Telefone telefone) {
-        this.telefone.add(telefone);
-    }
-
-    public List<Pessoa_has_Interesse> getInteresses() {
-        return interesses;
-    }
-
-    public void setInteresses(List<Pessoa_has_Interesse> interesses) {
-        this.interesses = interesses;
-    }
-
     public List<Telefone> getTelefone() {
         return telefone;
     }
@@ -183,7 +151,22 @@ public class Pessoa {
     public void setTelefone(List<Telefone> telefone) {
         this.telefone = telefone;
     }
-    
+
+    public void addTelefone(Telefone telefone) {
+        this.telefone.add(telefone);
+    }
+
+    public List<Interesse> getInteresses() {
+        return interesses;
+    }
+
+    public void setInteresses(List<Interesse> interesses) {
+        this.interesses = interesses;
+    }
+       
+        public void addInteresse(Interesse interesse) {
+        this.interesses.add(interesse);
+    }
     
 
 }

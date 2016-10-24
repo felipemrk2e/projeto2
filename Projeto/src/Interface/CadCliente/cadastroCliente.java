@@ -29,6 +29,7 @@ import validacao.*;
  */
 public class cadastroCliente extends javax.swing.JFrame {
 
+    int user;
     private boolean fiador;
 
     /**
@@ -47,7 +48,23 @@ public class cadastroCliente extends javax.swing.JFrame {
 
     }
 
-    public cadastroCliente(int user, long idCliente) {
+    public cadastroCliente(int user) {
+         this.user = user;
+        initComponents();
+        ativaPessoa(true);
+        mascaraCPF_CNPJ(true);
+        jrbPessoaFisica.setSelected(true);
+        configuraMascaras();
+//        carregaEstados();
+
+        UIManager.getDefaults().put("jtpCadastroCliente.contentBorderInsets", new Insets(0, 0, 0, 0));
+        UIManager.getDefaults().put("jtpCadastroCliente.tabsOverlapBorder", true);
+        verificaNivel0();
+
+    }
+
+    public cadastroCliente(int user, String idCliente) {
+         this.user = user;
         initComponents();
         ativaPessoa(true);
         mascaraCPF_CNPJ(true);
@@ -58,8 +75,36 @@ public class cadastroCliente extends javax.swing.JFrame {
         UIManager.getDefaults().put("jtpCadastroCliente.tabsOverlapBorder", true);
 
         popular();
-        DisableEnable(false);
+        verificaNivel();
+     
 
+    }
+
+    public void verificaNivel0() {
+        if (user <= 2) {
+            DisableEnable(true);
+            jbConfirmar.setEnabled(true);
+            jbEditar.setEnabled(false);
+
+        } else {
+            DisableEnable(false);
+            jbConfirmar.setEnabled(false);
+            jbEditar.setEnabled(false);
+        }
+    }
+
+    public void verificaNivel() {
+        if (user <= 2) {
+            DisableEnable(false);
+            jbConfirmar.setEnabled(false);
+            jbEditar.setEnabled(true);
+
+        } else {
+            DisableEnable(false);
+            jbConfirmar.setEnabled(false);
+            jbEditar.setEnabled(false);
+
+        }
     }
 
     public void DisableEnable(Boolean b) {
@@ -140,7 +185,6 @@ public class cadastroCliente extends javax.swing.JFrame {
         jcbEstado.setSelectedIndex(-1);
 
         // jcb fim
-        
         //Tirando os alertas
         jtfNome.setBackground(Color.white);
         jftCPF.setBackground(Color.white);
@@ -160,7 +204,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftCPFResponsavel.setBackground(Color.white);
         jtfComplemento.setBackground(Color.white);
         jtfEmail.setBackground(Color.white);
-       // Fim
+        // Fim
     }
 
     public void popular() {
@@ -564,8 +608,8 @@ public class cadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-//        new cadastroImovelHome().setVisible(true);
-//        dispose();    // TODO add your handling code here:
+        new cadastroClienteHome(user).setVisible(true);
+        dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
 
     private void jrbPessoaJuridicaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbPessoaJuridicaMousePressed
@@ -586,7 +630,8 @@ public class cadastroCliente extends javax.swing.JFrame {
 
     private void jbEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseClicked
         if (jbEditar.isEnabled()) {
-
+            DisableEnable(true);
+            jbConfirmar.setEnabled(true);
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_jbEditarMouseClicked
@@ -878,7 +923,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfEmail.setBackground(Color.white);
     }
 
-    public void carregaEstados(){
+    public void carregaEstados() {
         EstadoDAO estadoDAO = new EstadoDAO();
         Estado estado = new Estado();
         List<Estado> listaEstados = new ArrayList<Estado>();
@@ -889,10 +934,9 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
         jcbEstado.setModel(defaultComboBox);
-        
+
     }
-    
-    
+
     public void setJcbEstado() throws SQLException {
 //        List<String> strList = new ArrayList<String>();
 //        String query = "SELECT UF FROM Estado";

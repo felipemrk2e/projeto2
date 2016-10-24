@@ -5,17 +5,53 @@
  */
 package Interface.Locacao;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author user
  */
 public class ControleLocacao extends javax.swing.JFrame {
 
+    int user;
+
     /**
      * Creates new form ControleLocacao
      */
     public ControleLocacao() {
         initComponents();
+    }
+
+    public ControleLocacao(int user, String IdLoccao) {
+                 this.user = user;
+          initComponents();
+        popular();
+    }
+
+    public void verificaNivel() {
+        if (user <= 2) {
+
+            jbEditar.setEnabled(true);
+            jbConfirmar.setEnabled(false);
+
+        } else {
+            jbEditar.setEnabled(false);
+            jbConfirmar.setEnabled(false);
+
+        }
+    }
+
+    public void popular() {
+
+        jtIdImovel.setText("");
+        jtNomeProprietario.setText("");
+        jtNomeLocatario.setText("");
+        jtNomeFiador.setText("");
+        jtValor.setText("");
+        jtInicioContrato.setText("");
+        jtFimContrato.setText("");
+
     }
 
     /**
@@ -27,14 +63,13 @@ public class ControleLocacao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        jtNomeLocatario = new javax.swing.JTextField();
+        jtNomeProprietario = new javax.swing.JTextField();
+        jtValor = new javax.swing.JTextField();
+        jtInicioContrato = new javax.swing.JTextField();
+        jtFimContrato = new javax.swing.JTextField();
+        jtNomeFiador = new javax.swing.JTextField();
+        jtIdImovel = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -42,96 +77,127 @@ public class ControleLocacao extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jtCancelar = new javax.swing.JButton();
-        jtEditar = new javax.swing.JButton();
-        jtFinalizarContrato = new javax.swing.JButton();
+        jbConfirmar = new javax.swing.JButton();
+        jbCancelar = new javax.swing.JButton();
+        jbEditar = new javax.swing.JButton();
+        jbFinalizarContrato = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setEnabled(false);
         setMinimumSize(new java.awt.Dimension(1024, 640));
         getContentPane().setLayout(null);
 
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(40, 70, 230, 20);
+        jtNomeLocatario.setEnabled(false);
+        getContentPane().add(jtNomeLocatario);
+        jtNomeLocatario.setBounds(50, 110, 350, 20);
 
-        jTextField2.setText("jTextField2");
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(40, 130, 270, 20);
+        jtNomeProprietario.setEnabled(false);
+        jtNomeProprietario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtNomeProprietarioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jtNomeProprietario);
+        jtNomeProprietario.setBounds(50, 160, 350, 20);
 
-        jTextField3.setText("jTextField3");
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(350, 60, 59, 20);
+        jtValor.setEnabled(false);
+        getContentPane().add(jtValor);
+        jtValor.setBounds(570, 160, 80, 20);
 
-        jTextField4.setText("jTextField4");
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(480, 60, 59, 20);
+        jtInicioContrato.setEnabled(false);
+        jtInicioContrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtInicioContratoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jtInicioContrato);
+        jtInicioContrato.setBounds(570, 210, 80, 20);
 
-        jTextField5.setText("jTextField5");
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(630, 60, 59, 20);
+        jtFimContrato.setEnabled(false);
+        getContentPane().add(jtFimContrato);
+        jtFimContrato.setBounds(720, 210, 80, 20);
 
-        jTextField6.setText("jTextField6");
-        getContentPane().add(jTextField6);
-        jTextField6.setBounds(40, 190, 200, 20);
+        jtNomeFiador.setEnabled(false);
+        getContentPane().add(jtNomeFiador);
+        jtNomeFiador.setBounds(50, 210, 350, 20);
 
-        jTextField7.setText("jTextField7");
-        getContentPane().add(jTextField7);
-        jTextField7.setBounds(410, 180, 59, 20);
-
-        jTextField8.setText("jTextField8");
-        getContentPane().add(jTextField8);
-        jTextField8.setBounds(510, 180, 59, 20);
+        jtIdImovel.setEnabled(false);
+        getContentPane().add(jtIdImovel);
+        jtIdImovel.setBounds(50, 40, 60, 20);
 
         jLabel1.setText("Nome do locatario");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(30, 40, 86, 14);
+        jLabel1.setBounds(50, 90, 86, 14);
 
         jLabel2.setText("Nome do Proprietario");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(40, 110, 101, 14);
+        jLabel2.setBounds(50, 140, 101, 14);
 
         jLabel3.setText("Valor");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(370, 30, 24, 14);
+        jLabel3.setBounds(590, 140, 24, 14);
 
         jLabel4.setText("Inicio do contrato");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(480, 30, 110, 20);
+        jLabel4.setBounds(570, 190, 110, 20);
 
-        jLabel5.setText("DAta de termino do contrato");
+        jLabel5.setText("Fim do Contrato");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(630, 30, 90, 14);
+        jLabel5.setBounds(720, 190, 90, 14);
         getContentPane().add(jLabel6);
         jLabel6.setBounds(310, 160, 0, 0);
 
         jLabel7.setText("Nome do fiador");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(50, 160, 80, 14);
+        jLabel7.setBounds(50, 190, 80, 14);
 
-        jButton1.setText("Confirmar");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(210, 290, 81, 23);
+        jbConfirmar.setText("Confirmar");
+        jbConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbConfirmarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbConfirmar);
+        jbConfirmar.setBounds(150, 460, 195, 88);
 
-        jtCancelar.setText("Cancelar");
-        getContentPane().add(jtCancelar);
-        jtCancelar.setBounds(350, 290, 77, 23);
+        jbCancelar.setText("Cancelar");
+        jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbCancelarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbCancelar);
+        jbCancelar.setBounds(680, 460, 195, 88);
 
-        jtEditar.setText("Editar");
-        getContentPane().add(jtEditar);
-        jtEditar.setBounds(490, 290, 63, 23);
+        jbEditar.setText("Editar");
+        jbEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbEditarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbEditar);
+        jbEditar.setBounds(420, 460, 195, 88);
 
-        jtFinalizarContrato.setText("Finalizar Contrato");
-        getContentPane().add(jtFinalizarContrato);
-        jtFinalizarContrato.setBounds(570, 230, 120, 23);
+        jbFinalizarContrato.setText("Finalizar Contrato");
+        jbFinalizarContrato.setEnabled(false);
+        jbFinalizarContrato.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbFinalizarContratoMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbFinalizarContrato);
+        jbFinalizarContrato.setBounds(780, 40, 195, 88);
 
         jLabel8.setText("IdImovel");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(420, 160, 90, 20);
+        jLabel8.setBounds(60, 20, 90, 20);
+        getContentPane().add(jSeparator4);
+        jSeparator4.setBounds(0, 450, 1030, 10);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -143,6 +209,48 @@ public class ControleLocacao extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtInicioContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtInicioContratoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtInicioContratoActionPerformed
+
+    private void jtNomeProprietarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNomeProprietarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtNomeProprietarioActionPerformed
+
+    private void jbEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseClicked
+        if (jbEditar.isEnabled()) {
+            jbFinalizarContrato.setEnabled(true);
+            jtFimContrato.setEnabled(true);
+            jbConfirmar.setEnabled(true);
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_jbEditarMouseClicked
+
+    private void jbFinalizarContratoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbFinalizarContratoMouseClicked
+       if(jbFinalizarContrato.isEnabled()) {
+      // Finaliza...
+       }     
+// TODO add your handling code here:
+    }//GEN-LAST:event_jbFinalizarContratoMouseClicked
+
+    private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
+      if(jbConfirmar.isEnabled()){
+      
+      //Pegao IdLocacao e faz com isso
+       jtFimContrato.getText();
+      
+       // Depois volta para a home..
+       new CadLocacaoHome(user).setVisible(true);
+       dispose();
+      }
+// TODO add your handling code here:
+    }//GEN-LAST:event_jbConfirmarMouseClicked
+
+    private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
+          new CadLocacaoHome(user).setVisible(true);
+       dispose();  // TODO add your handling code here:
+    }//GEN-LAST:event_jbCancelarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -180,7 +288,6 @@ public class ControleLocacao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -192,16 +299,17 @@ public class ControleLocacao extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JButton jtCancelar;
-    private javax.swing.JButton jtEditar;
-    private javax.swing.JButton jtFinalizarContrato;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbConfirmar;
+    private javax.swing.JButton jbEditar;
+    private javax.swing.JButton jbFinalizarContrato;
+    private javax.swing.JTextField jtFimContrato;
+    private javax.swing.JTextField jtIdImovel;
+    private javax.swing.JTextField jtInicioContrato;
+    private javax.swing.JTextField jtNomeFiador;
+    private javax.swing.JTextField jtNomeLocatario;
+    private javax.swing.JTextField jtNomeProprietario;
+    private javax.swing.JTextField jtValor;
     // End of variables declaration//GEN-END:variables
 }

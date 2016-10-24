@@ -5,45 +5,44 @@
  */
 package dao;
 
-import model.pessoa.Telefone;
 import java.util.List;
+import model.pessoa.FiadorDe;
 
 /**
  *
- * @author a1502735
+ * @author Rafael Brock
  */
-public class TelefoneDAO extends DAO<Telefone>{
+public class FiadorDeDAO extends DAO<FiadorDe>{
 
     @Override
-    public Telefone getById(Long id) {
-        Telefone telefone = null;
+    public FiadorDe getById(Long id) {
+        FiadorDe fiador = null;
 		try{
-			telefone = entityManager.find(Telefone.class, id);
+			fiador = entityManager.find(FiadorDe.class, id);
 		}catch(Exception e){
-			System.out.println("Erro na consulta de Telefone: "+e);
+			System.out.println("Erro na consulta de Fiador: "+e);
 		}
-		return telefone;       
+		return fiador;       
     }
 
     @Override
     public boolean removeById(Long id) {
-        Telefone telefone = null;
+        FiadorDe fiador = null;
                 try{
-                    telefone = this.getById(id);
+                    fiador = this.getById(id);
                     entityManager.getTransaction().begin();
-                    entityManager.remove(telefone);
+                    entityManager.remove(fiador);
                     entityManager.getTransaction().commit();
                     return true;
                 }catch(Exception e){
                     entityManager.getTransaction().rollback();
-                    System.out.println("Erro na exclusão de Telefone: "+e);
+                    System.out.println("Erro na exclusão de Fiador: "+e);
                 }
 		return false;
     }
 
     @Override
-    public List<Telefone> getAll() {
-        return entityManager.createQuery("FROM Telefone").getResultList();
-    }
-    
+    public List<FiadorDe> getAll() {
+        return entityManager.createQuery("FROM FiadorDe").getResultList();
+    }     
 }

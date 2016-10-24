@@ -6,19 +6,26 @@
 package Interface.CadCliente;
 
 import java.awt.Color;
+import validacao.validacao;
 
 /**
  *
  * @author Sala
  */
 public class cadastroClienteHome extends javax.swing.JFrame {
-
+int user;
     /**
      * Creates new form cadastroClienteHome
      */
     public cadastroClienteHome() {
         initComponents();
     }
+     public cadastroClienteHome(int user) {
+          this.user = user;
+        initComponents();
+    }
+     
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,9 +38,9 @@ public class cadastroClienteHome extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbCadastrar = new javax.swing.JButton();
+        jbVisualizar = new javax.swing.JButton();
+        jbRemover = new javax.swing.JButton();
         jbPesquisar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jcbPessoaFisica = new javax.swing.JCheckBox();
@@ -66,22 +73,32 @@ public class cadastroClienteHome extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 46, 920, 240));
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setText("Cadastrar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbCadastrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCadastrar.setText("Cadastrar");
+        jbCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                jbCadastrarMouseClicked(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 140, 70));
+        getContentPane().add(jbCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 140, 70));
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton2.setText("Visualizar");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 140, 70));
+        jbVisualizar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbVisualizar.setText("Visualizar");
+        jbVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbVisualizarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 140, 70));
 
-        jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton3.setText("Remover");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, 140, 70));
+        jbRemover.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbRemover.setText("Remover");
+        jbRemover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbRemoverMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, 140, 70));
 
         jbPesquisar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbPesquisar.setText("Pesquisar");
@@ -126,60 +143,68 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-//        new cadastroImovel().setVisible(true);     // TODO add your handling code here:
-//        dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
+    private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
+
+ if(jbCadastrar.isEnabled()){
+             new cadastroCliente(user).setVisible(true);     // TODO add your handling code here:
+        dispose();
+ }
+
+
+    }//GEN-LAST:event_jbCadastrarMouseClicked
 
     private void jbPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarMouseClicked
         // Verificação do pesquisar   // falta tudo !
 
         boolean control = true;
 
-        if (true) {
-
-        } else if (true) {
-
+        if (jtNome.getText().equals("")) {
+            jtNome.setBackground(Color.white);
+        } else if (!jtNome.getText().equals("") && validacao.validaLetras(jtNome.getText())) {
+            jtNome.setBackground(Color.white);
         } else {
             jtNome.setBackground(Color.red);
             control = false;
         }
+// arrumar a validacao...
+        
+        
+//        if (jtTelefone.getText().equals("")) {
+//            jtTelefone.setBackground(Color.white);
+//        } else if (!jtTelefone.getText().equals("") && validaAlgo......) {
+//            jtTelefone.setBackground(Color.white);
+//        } else {
+//            jtTelefone.setBackground(Color.red);
+//            control = false;
+//        }
 
-        if (true) {
+        if (jcbPessoaFisica.isSelected()) {
 
-        } else if (true) {
-            jtTelefone.setBackground(Color.white);
-        } else {
-            jtTelefone.setBackground(Color.red);
-            control = false;
         }
-        if (true) {
+        if (jcbPessoaJuridica.isSelected()) {
 
-        } else if (true) {
-            jcbPessoaFisica.setBackground(Color.white);
-        } else {
-            jcbPessoaFisica.setBackground(Color.red);
-            control = false;
-        }
-
-        if (true) {
-
-        } else if (true) {
-            jcbPessoaJuridica.setBackground(Color.white);
-        } else {
-            jcbPessoaJuridica.setBackground(Color.red);
-            control = false;
         }
 
         // Pesquisa Querry
         if (control) {
-   
+
             // querry
         } else {
-          control = true;   
+            control = true;
         }
-  /// fim pesquisa
+        /// fim pesquisa
     }//GEN-LAST:event_jbPesquisarMouseClicked
+
+    private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
+       String idcliente = "vazio no momento";
+            new cadastroCliente(user, idcliente).setVisible(true); 
+            dispose();  // TODO add your handling code here:
+    }//GEN-LAST:event_jbVisualizarMouseClicked
+
+    private void jbRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemoverMouseClicked
+if(jbRemover.isEnabled()){
+}// TODO add your handling code here:
+    }//GEN-LAST:event_jbRemoverMouseClicked
 
     /**
      * @param args the command line arguments
@@ -217,9 +242,6 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -228,7 +250,10 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbPesquisar;
+    private javax.swing.JButton jbRemover;
+    private javax.swing.JButton jbVisualizar;
     private javax.swing.JCheckBox jcbPessoaFisica;
     private javax.swing.JCheckBox jcbPessoaJuridica;
     private javax.swing.JTextField jtNome;

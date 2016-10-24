@@ -14,6 +14,8 @@ import static java.awt.image.ImageObserver.WIDTH;
  */
 public class cadastroFuncionario extends javax.swing.JFrame {
 
+    int user;
+
     /**
      * Creates new form cadastroFuncionario
      */
@@ -21,11 +23,46 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         initComponents();
     }
 
-    public cadastroFuncionario(int user, long idFuncionario) {
+    public cadastroFuncionario(int user) {
+         this.user = user;
+        initComponents();
+        verificaNivel0();
+
+    }
+
+    public cadastroFuncionario(int user, String idFuncionario) {
+         this.user = user;
         initComponents();
         popular();
-        DisableEnable(false);
+        verificaNivel();
 
+    }
+
+    public void verificaNivel0() {
+        if (user <= 2) {
+            DisableEnable(true);
+            jbEditar.setEnabled(false);
+            jbConfirmar.setEnabled(true);
+
+        } else {
+            DisableEnable(false);
+            jbEditar.setEnabled(false);
+            jbConfirmar.setEnabled(false);
+
+        }
+    }
+
+    public void verificaNivel() {
+        if (user <= 2) {
+            DisableEnable(false);
+            jbEditar.setEnabled(true);
+            jbConfirmar.setEnabled(false);
+
+        } else {
+            DisableEnable(false);
+            jbConfirmar.setEnabled(false);
+
+        }
     }
 
     public void DisableEnable(Boolean b) {
@@ -514,8 +551,8 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-        //        new cadastroImovelHome().setVisible(true);
-        //        dispose();    // TODO add your handling code here:
+                new CadFuncionarioHome(user).setVisible(true);
+                dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
 
     /**

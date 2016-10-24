@@ -5,7 +5,7 @@
  */
 package dao;
 
-import Interface.Pessoa.EstadoCivil;
+import model.pessoa.EstadoCivil;
 import java.util.List;
 
 /**

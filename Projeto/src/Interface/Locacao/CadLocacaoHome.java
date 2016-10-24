@@ -5,17 +5,43 @@
  */
 package Interface.Locacao;
 
+import java.awt.Color;
+import validacao.validacao;
+
 /**
  *
  * @author user
  */
 public class CadLocacaoHome extends javax.swing.JFrame {
 
+    int user;
+
     /**
      * Creates new form CadLocacaoHome
      */
     public CadLocacaoHome() {
         initComponents();
+    }
+
+    public CadLocacaoHome(int user) {
+                 this.user = user;
+
+        initComponents();
+
+        verificaNivel();
+    }
+
+    public void verificaNivel() {
+        if (user <= 2) {
+
+            jbCadastrar.setEnabled(true);
+            jbControle.setEnabled(true);
+
+        } else {
+            jbCadastrar.setEnabled(false);
+            jbControle.setEnabled(false);
+
+        }
     }
 
     /**
@@ -29,26 +55,27 @@ public class CadLocacaoHome extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbVisualizar = new javax.swing.JButton();
+        jbCadastrar = new javax.swing.JButton();
+        jbPesquisar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        jtNomeInquilino = new javax.swing.JTextField();
+        jtNomeProprietario = new javax.swing.JTextField();
+        jtIdImovel = new javax.swing.JTextField();
+        jtRua = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jtBairro = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jtCep = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jcbEstado = new javax.swing.JComboBox();
-        jButton4 = new javax.swing.JButton();
+        jbControle = new javax.swing.JButton();
         jtCidade = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -73,84 +100,94 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(50, 30, 910, 210);
 
-        jButton1.setText("visualizar");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(420, 250, 180, 70);
+        jbVisualizar.setText("visualizar");
+        jbVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbVisualizarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbVisualizar);
+        jbVisualizar.setBounds(420, 250, 195, 88);
 
-        jButton2.setText("Cadastro de locação");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(190, 250, 170, 70);
+        jbCadastrar.setText("Cadastro de locação");
+        jbCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbCadastrarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbCadastrar);
+        jbCadastrar.setBounds(190, 250, 195, 88);
 
-        jButton3.setText("Pesquisar");
-        getContentPane().add(jButton3);
-        jButton3.setBounds(850, 440, 150, 70);
+        jbPesquisar.setText("Pesquisar");
+        jbPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbPesquisarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbPesquisar);
+        jbPesquisar.setBounds(800, 410, 195, 88);
 
         jLabel1.setText("Nome do Inquilino");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(250, 410, 200, 14);
+        jLabel1.setBounds(130, 440, 200, 14);
 
         jLabel2.setText("Nome do Proprietario");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(250, 350, 140, 14);
+        jLabel2.setBounds(130, 380, 140, 14);
 
         jLabel3.setText("idImovel");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(120, 350, 80, 14);
-
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(250, 430, 280, 20);
-
-        jTextField2.setText("jTextField2");
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(250, 380, 220, 20);
-
-        jTextField3.setText("jTextField3");
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(120, 380, 90, 20);
-
-        jTextField4.setText("jTextField4");
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(110, 500, 260, 20);
+        jLabel3.setBounds(30, 380, 80, 14);
+        getContentPane().add(jtNomeInquilino);
+        jtNomeInquilino.setBounds(130, 460, 350, 20);
+        getContentPane().add(jtNomeProprietario);
+        jtNomeProprietario.setBounds(130, 400, 350, 20);
+        getContentPane().add(jtIdImovel);
+        jtIdImovel.setBounds(30, 400, 90, 20);
+        getContentPane().add(jtRua);
+        jtRua.setBounds(20, 540, 260, 20);
 
         jLabel4.setText("Rua");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(110, 470, 34, 14);
+        jLabel4.setBounds(20, 520, 34, 20);
 
         jLabel5.setText("bairro");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(430, 470, 28, 14);
-
-        jTextField5.setText("jTextField5");
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(430, 500, 160, 20);
+        jLabel5.setBounds(310, 520, 28, 20);
+        getContentPane().add(jtBairro);
+        jtBairro.setBounds(310, 540, 160, 20);
 
         jLabel6.setText("estado");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(620, 470, 33, 14);
-
-        jtCep.setText("jTextField7");
+        jLabel6.setBounds(690, 520, 33, 20);
         getContentPane().add(jtCep);
-        jtCep.setBounds(710, 500, 90, 20);
+        jtCep.setBounds(580, 400, 90, 20);
 
-        jLabel7.setText("Cep");
+        jLabel7.setText("Cep do imóvel");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(720, 470, 50, 14);
+        jLabel7.setBounds(580, 380, 100, 14);
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbEstado);
-        jcbEstado.setBounds(610, 500, 67, 25);
+        jcbEstado.setBounds(690, 540, 66, 23);
 
-        jButton4.setText("controle de locação");
-        getContentPane().add(jButton4);
-        jButton4.setBounds(640, 250, 190, 70);
+        jbControle.setText("controle de locação");
+        jbControle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbControleMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbControle);
+        jbControle.setBounds(640, 250, 195, 88);
         getContentPane().add(jtCidade);
-        jtCidade.setBounds(550, 570, 6, 20);
+        jtCidade.setBounds(490, 540, 160, 20);
 
         jLabel8.setText("Cidade");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(550, 540, 50, 14);
+        jLabel8.setBounds(500, 520, 50, 20);
+        getContentPane().add(jSeparator4);
+        jSeparator4.setBounds(0, 350, 1030, 10);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -162,6 +199,120 @@ public class CadLocacaoHome extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarMouseClicked
+        boolean control = true;
+        // falta o cep;
+        if (jtIdImovel.getText().equals("")) {
+            jtIdImovel.setForeground(Color.white);
+
+        } else if (!jtIdImovel.getText().equals("") && validacao.validaNumeros(jtIdImovel.getText())) {
+            jtIdImovel.setForeground(Color.white);
+        } else {
+            jtIdImovel.setForeground(Color.red);
+            control = false;
+        }
+
+        if (jtIdImovel.getText().equals("")) {
+            jtIdImovel.setForeground(Color.white);
+
+        } else if (!jtIdImovel.getText().equals("") && validacao.validaLetras(jtIdImovel.getText())) {
+            jtIdImovel.setForeground(Color.white);
+        } else {
+            jtIdImovel.setForeground(Color.red);
+            control = false;
+        }
+
+        if (jtNomeProprietario.getText().equals("")) {
+            jtNomeProprietario.setForeground(Color.white);
+
+        } else if (!jtNomeProprietario.getText().equals("") && validacao.validaLetras(jtNomeProprietario.getText())) {
+            jtIdImovel.setForeground(Color.white);
+        } else {
+            jtNomeProprietario.setForeground(Color.red);
+            control = false;
+        }
+
+        if (jtNomeProprietario.getText().equals("")) {
+            jtNomeProprietario.setForeground(Color.white);
+
+        } else if (!jtNomeProprietario.getText().equals("") && validacao.validaLetras(jtNomeProprietario.getText())) {
+            jtNomeProprietario.setForeground(Color.white);
+        } else {
+            jtNomeProprietario.setForeground(Color.red);
+            control = false;
+        }
+
+        if (jtNomeInquilino.getText().equals("")) {
+            jtNomeInquilino.setForeground(Color.white);
+
+        } else if (!jtNomeInquilino.getText().equals("") && validacao.validaLetras(jtNomeInquilino.getText())) {
+            jtNomeInquilino.setForeground(Color.white);
+        } else {
+            jtNomeInquilino.setForeground(Color.red);
+            control = false;
+        }
+        if (jtRua.getText().equals("")) {
+            jtRua.setForeground(Color.white);
+
+        } else if (!jtRua.getText().equals("") && validacao.validaLetras(jtRua.getText())) {
+            jtRua.setForeground(Color.white);
+        } else {
+            jtRua.setForeground(Color.red);
+            control = false;
+        }
+
+        if (jtBairro.getText().equals("")) {
+            jtBairro.setForeground(Color.white);
+
+        } else if (!jtBairro.getText().equals("") && validacao.validaLetras(jtBairro.getText())) {
+            jtBairro.setForeground(Color.white);
+        } else {
+            jtBairro.setForeground(Color.red);
+            control = false;
+        }
+        if (jtCidade.getText().equals("")) {
+            jtCidade.setForeground(Color.white);
+
+        } else if (!jtCidade.getText().equals("") && validacao.validaLetras(jtCidade.getText())) {
+            jtCidade.setForeground(Color.white);
+        } else {
+            jtCidade.setForeground(Color.red);
+            control = false;
+        }
+
+        if (control) {
+// faz algo..
+        } else {
+            control = true;
+        }
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_jbPesquisarMouseClicked
+
+    private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
+        String idLocacao = "vazio no momento";
+
+        new CadLocacao(user, idLocacao).setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jbVisualizarMouseClicked
+
+    private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
+        if (jbCadastrar.isEnabled()) {
+
+            new CadLocacao(user).setVisible(true);
+
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbCadastrarMouseClicked
+
+    private void jbControleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleMouseClicked
+        if (jbControle.isEnabled()) {
+            String idLocacao = "vazio no momento";
+            new ControleLocacao(user, idLocacao).setVisible(true);
+
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbControleMouseClicked
 
     /**
      * @param args the command line arguments
@@ -199,10 +350,6 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -215,14 +362,19 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton jbCadastrar;
+    private javax.swing.JButton jbControle;
+    private javax.swing.JButton jbPesquisar;
+    private javax.swing.JButton jbVisualizar;
     private javax.swing.JComboBox jcbEstado;
+    private javax.swing.JTextField jtBairro;
     private javax.swing.JTextField jtCep;
     private javax.swing.JTextField jtCidade;
+    private javax.swing.JTextField jtIdImovel;
+    private javax.swing.JTextField jtNomeInquilino;
+    private javax.swing.JTextField jtNomeProprietario;
+    private javax.swing.JTextField jtRua;
     // End of variables declaration//GEN-END:variables
 }

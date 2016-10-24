@@ -5,7 +5,7 @@
  */
 package dao;
 
-import Interface.Pessoa.Funcionario;
+import model.pessoa.Funcionario;
 import java.util.List;
 
 /**

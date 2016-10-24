@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
+import validacao.validacao;
 
 /**
  *
@@ -29,6 +30,8 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     }
 
     public cadastroImovelHome(int user) {
+                 this.user = user;
+
         initComponents();
         fechar();
         if (user <= 2) {
@@ -72,11 +75,11 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jbRemover = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
+        jcbCasa = new javax.swing.JCheckBox();
+        jcbApartamento = new javax.swing.JCheckBox();
+        jcbSalao = new javax.swing.JCheckBox();
+        jcbTemporario = new javax.swing.JCheckBox();
+        jcbComercio = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         jbPesquisar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -153,25 +156,25 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(30, 30, 970, 200);
 
-        jCheckBox1.setText("casa");
-        getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(270, 380, 60, 30);
+        jcbCasa.setText("casa");
+        getContentPane().add(jcbCasa);
+        jcbCasa.setBounds(270, 380, 60, 30);
 
-        jCheckBox2.setText("apartamento");
-        getContentPane().add(jCheckBox2);
-        jCheckBox2.setBounds(350, 380, 100, 30);
+        jcbApartamento.setText("apartamento");
+        getContentPane().add(jcbApartamento);
+        jcbApartamento.setBounds(350, 380, 100, 30);
 
-        jCheckBox3.setText("Salão");
-        getContentPane().add(jCheckBox3);
-        jCheckBox3.setBounds(470, 380, 60, 30);
+        jcbSalao.setText("Salão");
+        getContentPane().add(jcbSalao);
+        jcbSalao.setBounds(470, 380, 60, 30);
 
-        jCheckBox4.setText("Temporario");
-        getContentPane().add(jCheckBox4);
-        jCheckBox4.setBounds(560, 380, 100, 30);
+        jcbTemporario.setText("Temporario");
+        getContentPane().add(jcbTemporario);
+        jcbTemporario.setBounds(560, 380, 100, 30);
 
-        jCheckBox5.setText("Comercio");
-        getContentPane().add(jCheckBox5);
-        jCheckBox5.setBounds(680, 380, 80, 30);
+        jcbComercio.setText("Comercio");
+        getContentPane().add(jcbComercio);
+        jcbComercio.setBounds(680, 380, 80, 30);
 
         jLabel1.setText("Filtros");
         jLabel1.setMinimumSize(new java.awt.Dimension(35, 18));
@@ -272,7 +275,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
     private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
         if (jbCadastrar.isEnabled()) {
-            new cadastroImovel().setVisible(true);     // TODO add your handling code here:
+            new cadastroImovel(user).setVisible(true);     // TODO add your handling code here:
             dispose();
         }
 
@@ -292,7 +295,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jmLoginMousePressed
 
     private void jbVisualisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualisarMouseClicked
-
+        //Falta pegar a id da table;
         String idImovel = "vazio no momento";
         new cadastroImovel(idImovel, user).setVisible(true);
         dispose();
@@ -308,19 +311,41 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private void jbPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarMouseClicked
         // Verificar campos antes de pesquisar 
         boolean control = true;
-        // Falta Querry 
-        if (true) {
+        // Falta Querry
+        
+        if(jcbCasa.isSelected()) {
+     
+        }
+          
+        if(jcbApartamento.isSelected()) {
+     
+        }
+          
+        if(jcbSalao.isSelected()) {
+     
+        }
+          
+        if(jcbTemporario.isSelected()) {
+     
+        }
+          
+        if(jcbComercio.isSelected()) {
+     
+        }
+        
 
-        } else if (true) {
+        if (jtNomeProprietario.getText().equals("")) {
+            jtNomeProprietario.setBackground(Color.white);
+        } else if (!jtNomeProprietario.getText().equals("") && validacao.validaLetras(jtNomeProprietario.getText())) {
             jtNomeProprietario.setBackground(Color.white);
         } else {
             jtNomeProprietario.setBackground(Color.red);
             control = false;
         }
 
-        if (true) {
-
-        } else if (true) {
+        if (jtQtdQuarto.getText().equals("")) {
+            jtQtdQuarto.setBackground(Color.white);
+        } else if (!jtQtdQuarto.getText().equals("") && validacao.validaNumeros(jtQtdQuarto.getText())) {
 
             jtQtdQuarto.setBackground(Color.white);
         } else {
@@ -328,9 +353,9 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             control = false;
         }
 
-        if (true) {
-
-        } else if (true) {
+        if (jtVagasGaragem.getText().equals("")) {
+            jtVagasGaragem.setBackground(Color.white);
+        } else if (!jtVagasGaragem.getText().equals("") && validacao.validaNumeros(jtVagasGaragem.getText())) {
 
             jtVagasGaragem.setBackground(Color.white);
         } else {
@@ -338,35 +363,34 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             control = false;
         }
 
-        if (true) {
-
-        } else if (true) {
+        if (jtRua.getText().equals("")) {
+            jtRua.setBackground(Color.white);
+        } else if (!jtRua.getText().equals("") && validacao.validaLetras(jtRua.getText())) {
             jtRua.setBackground(Color.white);
         } else {
             jtRua.setBackground(Color.red);
             control = false;
         }
-        if (true) {
-
-        } else if (true) {
+        if (jtBairro.getText().equals("")) {
+            jtBairro.setBackground(Color.white);
+        } else if (!jtBairro.getText().equals("") && validacao.validaLetras(jtBairro.getText())) {
 
             jtBairro.setBackground(Color.white);
         } else {
             jtBairro.setBackground(Color.red);
             control = false;
         }
-        if (true) {
+        if (jtCidade.getText().equals("")) {
 
-        } else if (true) {
+        } else if (!jtCidade.getText().equals("") && validacao.validaLetras(jtCidade.getText())) {
 
             jtCidade.setBackground(Color.white);
         } else {
             jtCidade.setBackground(Color.red);
             control = false;
         }
-       
-        // Mandar Estado na querry
 
+        // Mandar Estado na querry
         // inserir pesquisa no banco // falta coisas..
         if (control) {
 
@@ -414,11 +438,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -441,7 +460,12 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JButton jbPesquisar;
     private javax.swing.JButton jbRemover;
     private javax.swing.JButton jbVisualisar;
+    private javax.swing.JCheckBox jcbApartamento;
+    private javax.swing.JCheckBox jcbCasa;
+    private javax.swing.JCheckBox jcbComercio;
     private javax.swing.JComboBox jcbEstado;
+    private javax.swing.JCheckBox jcbSalao;
+    private javax.swing.JCheckBox jcbTemporario;
     private javax.swing.JMenuItem jmLogin;
     private javax.swing.JTextField jtBairro;
     private javax.swing.JTextField jtCidade;

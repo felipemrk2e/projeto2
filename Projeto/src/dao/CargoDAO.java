@@ -5,7 +5,7 @@
  */
 package dao;
 
-import Interface.Pessoa.Cargo;
+import model.pessoa.Cargo;
 import java.util.List;
 
 /**

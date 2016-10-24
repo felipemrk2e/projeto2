@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interface.Pessoa;
+package model.pessoa;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author Sala
+ * @author Rafael Brock
  */
 @Entity
 public class Telefone {
@@ -28,7 +28,7 @@ public class Telefone {
     private long idTelefone;
     
     @Column
-    private String numeroTelefone;
+    private String numero;
     
     @Column
     private String operadora;    
@@ -36,4 +36,38 @@ public class Telefone {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="idPessoa", nullable = false)
         private Pessoa pessoa;
+
+    public long getIdTelefone() {
+        return idTelefone;
+    }
+
+    public void setIdTelefone(long idTelefone) {
+        this.idTelefone = idTelefone;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getOperadora() {
+        return operadora;
+    }
+
+    public void setOperadora(String operadora) {
+        this.operadora = operadora;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+    
+    
 }

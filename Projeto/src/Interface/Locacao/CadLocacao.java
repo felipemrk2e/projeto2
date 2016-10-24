@@ -5,16 +5,33 @@
  */
 package Interface.Locacao;
 
+import java.awt.Color;
+import validacao.validacao;
+
 /**
  *
  * @author user
  */
 public class CadLocacao extends javax.swing.JFrame {
 
+    int user;
+
     /**
      * Creates new form CadLocacao
      */
     public CadLocacao() {
+        initComponents();
+    }
+
+    public CadLocacao(int user) {
+                 this.user = user;
+
+        initComponents();
+    }
+
+    public CadLocacao(int user, String idlocacao) {
+                 this.user = user;
+
         initComponents();
     }
 
@@ -33,17 +50,17 @@ public class CadLocacao extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jbRemover = new javax.swing.JButton();
-        jbRemover1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jbRemover2 = new javax.swing.JButton();
+        jbCancelar = new javax.swing.JButton();
+        jbPesquisarImovel = new javax.swing.JButton();
+        jtImovelSelecionado = new javax.swing.JTextField();
+        jtClienteSelecionado = new javax.swing.JTextField();
+        jbSelecionarImovel = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jbRemover3 = new javax.swing.JButton();
-        jbRemover4 = new javax.swing.JButton();
+        jtIdCliente = new javax.swing.JTextField();
+        jtNomeCliente = new javax.swing.JTextField();
+        jbPesquisarCliente = new javax.swing.JButton();
+        jbSelecionarCliente = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -53,13 +70,20 @@ public class CadLocacao extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
+        jtDataInicio = new javax.swing.JTextField();
+        jtDataFim = new javax.swing.JTextField();
+        jtIdImovel = new javax.swing.JTextField();
+        jtNomeProprietario = new javax.swing.JTextField();
+        jtRua = new javax.swing.JTextField();
+        jtBairro = new javax.swing.JTextField();
         jcbEstado = new javax.swing.JComboBox();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jtCidade = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
+        jbEfetuarLocacao = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -83,7 +107,7 @@ public class CadLocacao extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(160, 60, 452, 110);
+        jScrollPane1.setBounds(32, 80, 810, 110);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -99,154 +123,168 @@ public class CadLocacao extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(130, 330, 452, 110);
+        jScrollPane2.setBounds(30, 360, 810, 110);
 
         jLabel1.setText("Cliente");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(40, 110, 33, 14);
+        jLabel1.setBounds(400, 60, 33, 14);
 
         jLabel2.setText("Imovel");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 420, 32, 14);
+        jLabel2.setBounds(390, 340, 32, 14);
 
-        jbRemover.setText("Efetuar Locação");
-        jbRemover.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbCancelar.setText("Cancelar");
+        jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbRemoverMouseClicked(evt);
+                jbCancelarMouseClicked(evt);
             }
         });
-        getContentPane().add(jbRemover);
-        jbRemover.setBounds(850, 210, 150, 30);
+        getContentPane().add(jbCancelar);
+        jbCancelar.setBounds(860, 260, 150, 40);
 
-        jbRemover1.setText("Pesquisar");
-        jbRemover1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbPesquisarImovel.setText("Pesquisar");
+        jbPesquisarImovel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbRemover1MouseClicked(evt);
+                jbPesquisarImovelMouseClicked(evt);
             }
         });
-        getContentPane().add(jbRemover1);
-        jbRemover1.setBounds(730, 520, 199, 30);
+        getContentPane().add(jbPesquisarImovel);
+        jbPesquisarImovel.setBounds(860, 530, 150, 40);
 
-        jTextField1.setText("Id Imovel , Endereço e Nome  Proprietario");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(130, 230, 450, 30);
+        jtImovelSelecionado.setText("Id Imovel , Endereço e Nome  Proprietario");
+        getContentPane().add(jtImovelSelecionado);
+        jtImovelSelecionado.setBounds(50, 280, 450, 30);
 
-        jTextField2.setText("Id Cliente, Nome ");
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(130, 190, 450, 30);
+        jtClienteSelecionado.setText("Id Cliente, Nome ");
+        getContentPane().add(jtClienteSelecionado);
+        jtClienteSelecionado.setBounds(50, 220, 450, 30);
 
-        jbRemover2.setText("Selecionar Imovel");
-        jbRemover2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbSelecionarImovel.setText("Selecionar Imovel");
+        jbSelecionarImovel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbRemover2MouseClicked(evt);
+                jbSelecionarImovelMouseClicked(evt);
             }
         });
-        getContentPane().add(jbRemover2);
-        jbRemover2.setBounds(650, 360, 199, 50);
+        getContentPane().add(jbSelecionarImovel);
+        jbSelecionarImovel.setBounds(860, 390, 150, 40);
 
         jLabel3.setText("Id cliente");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 20, 90, 14);
+        jLabel3.setBounds(70, 10, 90, 20);
 
         jLabel4.setText("Nome Cliente");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(220, 20, 80, 14);
+        jLabel4.setBounds(190, 10, 80, 20);
+        getContentPane().add(jtIdCliente);
+        jtIdCliente.setBounds(70, 30, 100, 20);
+        getContentPane().add(jtNomeCliente);
+        jtNomeCliente.setBounds(190, 30, 310, 20);
 
-        jTextField8.setText("jTextField8");
-        getContentPane().add(jTextField8);
-        jTextField8.setBounds(90, 20, 100, 20);
-
-        jTextField9.setText("jTextField9");
-        getContentPane().add(jTextField9);
-        jTextField9.setBounds(300, 20, 310, 20);
-
-        jbRemover3.setText("Pesquisar");
-        jbRemover3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbPesquisarCliente.setText("Pesquisar");
+        jbPesquisarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbRemover3MouseClicked(evt);
+                jbPesquisarClienteMouseClicked(evt);
             }
         });
-        jbRemover3.addActionListener(new java.awt.event.ActionListener() {
+        jbPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbRemover3ActionPerformed(evt);
+                jbPesquisarClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(jbRemover3);
-        jbRemover3.setBounds(630, 20, 199, 30);
+        getContentPane().add(jbPesquisarCliente);
+        jbPesquisarCliente.setBounds(860, 10, 150, 40);
 
-        jbRemover4.setText("Selecionar Cliente");
-        jbRemover4.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbSelecionarCliente.setText("Selecionar Cliente");
+        jbSelecionarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbRemover4MouseClicked(evt);
+                jbSelecionarClienteMouseClicked(evt);
             }
         });
-        getContentPane().add(jbRemover4);
-        jbRemover4.setBounds(650, 90, 199, 50);
+        getContentPane().add(jbSelecionarCliente);
+        jbSelecionarCliente.setBounds(860, 100, 150, 40);
 
         jLabel12.setText("IdImovel");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(40, 480, 70, 30);
+        jLabel12.setBounds(70, 470, 70, 30);
 
         jLabel13.setText("Nome Proprietario");
         getContentPane().add(jLabel13);
-        jLabel13.setBounds(200, 480, 110, 14);
+        jLabel13.setBounds(190, 480, 110, 14);
 
         jLabel14.setText("Rua");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(40, 530, 19, 20);
+        jLabel14.setBounds(70, 520, 19, 20);
 
         jLabel15.setText("Bairro");
         getContentPane().add(jLabel15);
-        jLabel15.setBounds(400, 530, 28, 14);
+        jLabel15.setBounds(390, 520, 28, 14);
 
         jLabel16.setText("Estado");
         getContentPane().add(jLabel16);
-        jLabel16.setBounds(530, 530, 33, 14);
+        jLabel16.setBounds(730, 520, 33, 14);
 
-        jLabel5.setText("Data do inicio do contrato");
+        jLabel5.setText("Inicio do Contrato");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(600, 240, 140, 14);
+        jLabel5.setBounds(560, 270, 140, 20);
 
-        jLabel6.setText("Data do fim do contrato");
+        jLabel6.setText("Fim do Contrato");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(770, 240, 150, 20);
+        jLabel6.setBounds(680, 270, 150, 20);
 
         jLabel7.setText("Cliente selecionado");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(20, 190, 92, 14);
+        jLabel7.setBounds(50, 200, 92, 14);
 
         jLabel8.setText("Imovel Selecionado");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(20, 240, 100, 14);
-
-        jTextField3.setText("jTextField3");
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(620, 270, 59, 20);
-
-        jTextField4.setText("jTextField4");
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(780, 270, 59, 20);
-
-        jTextField5.setText("jTextField5");
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(110, 480, 59, 20);
-
-        jTextField6.setText("jTextField6");
-        getContentPane().add(jTextField6);
-        jTextField6.setBounds(310, 480, 300, 20);
-
-        jTextField7.setText("jTextField7");
-        getContentPane().add(jTextField7);
-        jTextField7.setBounds(80, 530, 280, 20);
-
-        jTextField10.setText("jTextField10");
-        getContentPane().add(jTextField10);
-        jTextField10.setBounds(440, 530, 65, 20);
+        jLabel8.setBounds(50, 260, 100, 14);
+        getContentPane().add(jtDataInicio);
+        jtDataInicio.setBounds(560, 290, 80, 20);
+        getContentPane().add(jtDataFim);
+        jtDataFim.setBounds(680, 290, 80, 20);
+        getContentPane().add(jtIdImovel);
+        jtIdImovel.setBounds(70, 500, 80, 20);
+        getContentPane().add(jtNomeProprietario);
+        jtNomeProprietario.setBounds(190, 500, 300, 20);
+        getContentPane().add(jtRua);
+        jtRua.setBounds(70, 540, 280, 20);
+        getContentPane().add(jtBairro);
+        jtBairro.setBounds(390, 540, 120, 20);
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbEstado);
-        jcbEstado.setBounds(610, 520, 66, 23);
+        jcbEstado.setBounds(730, 540, 66, 23);
+        getContentPane().add(jSeparator3);
+        jSeparator3.setBounds(0, 320, 1030, 10);
+        getContentPane().add(jSeparator4);
+        jSeparator4.setBounds(0, 190, 1030, 10);
+
+        jtCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtCidadeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jtCidade);
+        jtCidade.setBounds(550, 540, 140, 20);
+        jtCidade.getAccessibleContext().setAccessibleName("");
+
+        jLabel9.setText("Cidade");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(550, 520, 33, 14);
+        getContentPane().add(jSeparator5);
+        jSeparator5.setBounds(0, 470, 1030, 10);
+        getContentPane().add(jSeparator6);
+        jSeparator6.setBounds(0, 60, 1030, 10);
+
+        jbEfetuarLocacao.setText("Efetuar Locação");
+        jbEfetuarLocacao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbEfetuarLocacaoMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbEfetuarLocacao);
+        jbEfetuarLocacao.setBounds(860, 210, 150, 40);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -259,33 +297,147 @@ public class CadLocacao extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemoverMouseClicked
+    private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
 
-        if (jbRemover.isEnabled()) {
+        
+        new CadLocacaoHome(user).setVisible(true);
+        dispose();
+ 
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbCancelarMouseClicked
 
+    private void jbPesquisarImovelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarImovelMouseClicked
+        boolean control = true;
+
+        if (jtIdImovel.getText().equals("")) {
+            jtIdImovel.setForeground(Color.white);
+
+        } else if (!jtIdImovel.getText().equals("") && validacao.validaNumeros(jtIdImovel.getText())) {
+            jtIdImovel.setForeground(Color.white);
+        } else {
+            jtIdImovel.setForeground(Color.red);
+            control = false;
         }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbRemoverMouseClicked
 
-    private void jbRemover1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemover1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbRemover1MouseClicked
+        if (jtIdImovel.getText().equals("")) {
+            jtIdImovel.setForeground(Color.white);
 
-    private void jbRemover2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemover2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbRemover2MouseClicked
+        } else if (!jtIdImovel.getText().equals("") && validacao.validaLetras(jtIdImovel.getText())) {
+            jtIdImovel.setForeground(Color.white);
+        } else {
+            jtIdImovel.setForeground(Color.red);
+            control = false;
+        }
 
-    private void jbRemover3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemover3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbRemover3MouseClicked
+        if (jtNomeProprietario.getText().equals("")) {
+            jtNomeProprietario.setForeground(Color.white);
 
-    private void jbRemover4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemover4MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbRemover4MouseClicked
+        } else if (!jtNomeProprietario.getText().equals("") && validacao.validaLetras(jtNomeProprietario.getText())) {
+            jtIdImovel.setForeground(Color.white);
+        } else {
+            jtNomeProprietario.setForeground(Color.red);
+            control = false;
+        }
 
-    private void jbRemover3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRemover3ActionPerformed
+        if (jtNomeProprietario.getText().equals("")) {
+            jtNomeProprietario.setForeground(Color.white);
+
+        } else if (!jtNomeProprietario.getText().equals("") && validacao.validaLetras(jtNomeProprietario.getText())) {
+            jtNomeProprietario.setForeground(Color.white);
+        } else {
+            jtNomeProprietario.setForeground(Color.red);
+            control = false;
+        }
+
+        if (jtRua.getText().equals("")) {
+            jtRua.setForeground(Color.white);
+
+        } else if (!jtRua.getText().equals("") && validacao.validaLetras(jtRua.getText())) {
+            jtRua.setForeground(Color.white);
+        } else {
+            jtRua.setForeground(Color.red);
+            control = false;
+        }
+
+        if (jtBairro.getText().equals("")) {
+            jtBairro.setForeground(Color.white);
+
+        } else if (!jtBairro.getText().equals("") && validacao.validaLetras(jtBairro.getText())) {
+            jtBairro.setForeground(Color.white);
+        } else {
+            jtBairro.setForeground(Color.red);
+            control = false;
+        }
+        if (jtCidade.getText().equals("")) {
+            jtCidade.setForeground(Color.white);
+
+        } else if (!jtCidade.getText().equals("") && validacao.validaLetras(jtCidade.getText())) {
+            jtCidade.setForeground(Color.white);
+        } else {
+            jtCidade.setForeground(Color.red);
+            control = false;
+        }
+// pega o estado tbm..
+        if (control) {
+// faz algo..
+        } else {
+            control = true;
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jbPesquisarImovelMouseClicked
+
+    private void jbSelecionarImovelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSelecionarImovelMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jbRemover3ActionPerformed
+    }//GEN-LAST:event_jbSelecionarImovelMouseClicked
+
+    private void jbPesquisarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarClienteMouseClicked
+
+        boolean control = true;
+
+        if(jtIdCliente.getText().equals("")){
+            
+        } else if (!jtIdCliente.getText().equals("") && validacao.validaNumeros(jtIdCliente.getText())) {
+           jtIdCliente.setBackground(Color.white);
+        } else {
+           jtIdCliente.setBackground(Color.red);
+            control = false;
+        }
+        
+        
+        if (jtNomeCliente.getText().equals("")) {
+            jtNomeCliente.setBackground(Color.white);
+        } else if (!jtNomeCliente.getText().equals("") && validacao.validaLetras(jtNomeCliente.getText())) {
+            jtNomeCliente.setBackground(Color.white);
+        } else {
+            jtNomeCliente.setBackground(Color.red);
+            control = false;
+        }
+        
+        
+
+        if (control) {
+
+        } else {
+            control = true;
+        }
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_jbPesquisarClienteMouseClicked
+
+    private void jbSelecionarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSelecionarClienteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbSelecionarClienteMouseClicked
+
+    private void jbPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbPesquisarClienteActionPerformed
+
+    private void jtCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtCidadeActionPerformed
+
+    private void jbEfetuarLocacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEfetuarLocacaoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbEfetuarLocacaoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -336,28 +488,35 @@ public class CadLocacao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
-    private javax.swing.JButton jbRemover;
-    private javax.swing.JButton jbRemover1;
-    private javax.swing.JButton jbRemover2;
-    private javax.swing.JButton jbRemover3;
-    private javax.swing.JButton jbRemover4;
+    private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbEfetuarLocacao;
+    private javax.swing.JButton jbPesquisarCliente;
+    private javax.swing.JButton jbPesquisarImovel;
+    private javax.swing.JButton jbSelecionarCliente;
+    private javax.swing.JButton jbSelecionarImovel;
     private javax.swing.JComboBox jcbEstado;
+    private javax.swing.JTextField jtBairro;
+    private javax.swing.JTextField jtCidade;
+    private javax.swing.JTextField jtClienteSelecionado;
+    private javax.swing.JTextField jtDataFim;
+    private javax.swing.JTextField jtDataInicio;
+    private javax.swing.JTextField jtIdCliente;
+    private javax.swing.JTextField jtIdImovel;
+    private javax.swing.JTextField jtImovelSelecionado;
+    private javax.swing.JTextField jtNomeCliente;
+    private javax.swing.JTextField jtNomeProprietario;
+    private javax.swing.JTextField jtRua;
     // End of variables declaration//GEN-END:variables
 }

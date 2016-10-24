@@ -14,6 +14,7 @@ import dao.TipoImovelDAO;
 import global.model.Bairro;
 import global.model.Cidade;
 import global.model.Endereco;
+import global.model.Login.DialogLogin;
 import imovel.model.Documentacao;
 import imovel.model.Imovel;
 import imovel.model.Imovel_has_TipoContrato;
@@ -45,7 +46,42 @@ public class cadastroImovel extends javax.swing.JFrame {
         //Alterado system.exit(), para dispose()
 
         removerTitleBar();
-        EstadoDAO estadoDao = new EstadoDAO();
+        ComboBox();
+//        ImovelDAO imovelDao = new ImovelDAO();
+//        Imovel imovel = new Imovel();
+//        imovel = imovelDao.getById(Long.parseLong("1"));
+//popular(imovel);
+    }
+    
+        public cadastroImovel(int user) {
+             this.user = user;
+        initComponents();
+        fecharCadastro();
+        removerTitleBar();
+        verificaNivel0(); 
+        
+
+    }
+    
+    public cadastroImovel(String idImovel, int user) {
+                 this.user = user;
+
+        initComponents();
+        fecharCadastro();
+        removerTitleBar();
+        ImovelDAO imovelDao = new ImovelDAO();
+        Imovel imovel = imovelDao.getById(Long.valueOf(idImovel));
+        popular(imovel);
+        verificaNivel(); 
+        
+
+    }
+
+    
+    public void ComboBox(){
+        // Falta o Status
+        
+          EstadoDAO estadoDao = new EstadoDAO();
         List<Estado> estadoTemp = new ArrayList<>();
         List<String> listaSigla = new ArrayList<String>();
         estadoTemp = estadoDao.getAll();
@@ -54,29 +90,21 @@ public class cadastroImovel extends javax.swing.JFrame {
         }
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
         jcbEstado.setModel(defaultComboBox);
-//        ImovelDAO imovelDao = new ImovelDAO();
-//        Imovel imovel = new Imovel();
-//        imovel = imovelDao.getById(Long.parseLong("1"));
-//popular(imovel);
     }
-    
-    public void setImovel(Imovel imovel){
-        imovelTemp = imovel;
-    }
-    
-    public Imovel getImovel(){
-        
-        return imovelTemp;
-    }
+        public void verificaNivel0(){
+        if (user <= 2) {
+            DisableEnable(true);
+            jbEditar.setEnabled(false);
+            jbConfirmar.setEnabled(true);
 
-    public cadastroImovel(String idImovel, int user) {
-        initComponents();
-        fecharCadastro();
-        removerTitleBar();
-        ImovelDAO imovelDao = new ImovelDAO();
-        Imovel imovel = imovelDao.getById(Long.valueOf(idImovel));
-        popular(imovel);
+        } else {
+            DisableEnable(false);
+            jbConfirmar.setEnabled(false);
+            jbEditar.setEnabled(false);
 
+        }
+    }
+    public void verificaNivel(){
         if (user <= 2) {
             DisableEnable(false);
             jbEditar.setEnabled(true);
@@ -87,7 +115,18 @@ public class cadastroImovel extends javax.swing.JFrame {
             jbConfirmar.setEnabled(false);
 
         }
-
+    }
+    
+    
+    
+    
+    public void setImovel(Imovel imovel){
+        imovelTemp = imovel;
+    }
+    
+    public Imovel getImovel(){
+        
+        return imovelTemp;
     }
 
     public void DisableEnable(Boolean b) {
@@ -636,6 +675,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jbEditar = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
+        jcbStatus = new javax.swing.JComboBox<>();
         jmenuCadastro = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmNovoCadastro = new javax.swing.JMenuItem();
@@ -673,7 +713,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jlUF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jlUF.setText("UF");
         jifEndereco.getContentPane().add(jlUF);
-        jlUF.setBounds(510, 250, 16, 15);
+        jlUF.setBounds(600, 250, 16, 15);
 
         jlNumero.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jlNumero.setText("Nº");
@@ -701,7 +741,7 @@ public class cadastroImovel extends javax.swing.JFrame {
             }
         });
         jifEndereco.getContentPane().add(jtfUF);
-        jtfUF.setBounds(560, 240, 70, 20);
+        jtfUF.setBounds(640, 250, 70, 20);
         jifEndereco.getContentPane().add(jtfBairro);
         jtfBairro.setBounds(260, 120, 190, 20);
         jifEndereco.getContentPane().add(jtfCidade);
@@ -1158,7 +1198,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         getContentPane().add(jlStatus);
         jlStatus.setBounds(880, 10, 35, 15);
         getContentPane().add(jtfStatus);
-        jtfStatus.setBounds(860, 30, 90, 20);
+        jtfStatus.setBounds(880, 80, 90, 20);
 
         jbConfirmar.setText("Confirmar");
         jbConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1195,7 +1235,16 @@ public class cadastroImovel extends javax.swing.JFrame {
         jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(jSeparator5);
-        jSeparator5.setBounds(10, 0, 980, 70);
+        jSeparator5.setBounds(20, 0, 980, 70);
+
+        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbStatusActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jcbStatus);
+        jcbStatus.setBounds(880, 30, 56, 20);
 
         jMenu1.setText("File");
 
@@ -2099,7 +2148,21 @@ public class cadastroImovel extends javax.swing.JFrame {
     }//GEN-LAST:event_jmLoginActionPerformed
 
     private void jmLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmLoginMousePressed
-        // TODO add your handling code here:
+DialogLogin login = new DialogLogin(new javax.swing.JFrame(), true);
+            login.setVisible(true);
+            if(login.acesso() ==1){
+              user = login.acesso();  
+            }else if (login.acesso() ==2) {
+             user = login.acesso();   
+        } else if(login.acesso() ==3){
+            user = login.acesso();
+        }
+            
+            //falta mandar para o main..
+             verificaNivel(); 
+            
+                
+            
     }//GEN-LAST:event_jmLoginMousePressed
 
     private void jbEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseClicked
@@ -2107,6 +2170,10 @@ public class cadastroImovel extends javax.swing.JFrame {
             DisableEnable(true);
         }
     }//GEN-LAST:event_jbEditarMouseClicked
+
+    private void jcbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbStatusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2204,6 +2271,7 @@ public class cadastroImovel extends javax.swing.JFrame {
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JCheckBox jcbFesta;
     private javax.swing.JCheckBox jcbLocacao;
+    private javax.swing.JComboBox<String> jcbStatus;
     private javax.swing.JCheckBox jcbTemporada;
     private javax.swing.JCheckBox jcbVenda;
     private javax.swing.JInternalFrame jifDescricao;
