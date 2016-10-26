@@ -252,7 +252,7 @@ CREATE TABLE Login(
 CREATE TABLE Pessoa_has_Interesse(
     idPessoa INT NOT NULL,
     idTipoContrato INT NOT NULL,
-    CONSTRAINT PRIMARY KEY(idPessoa, idInteresse),
+    CONSTRAINT PRIMARY KEY(idPessoa, idTipoContrato),
     CONSTRAINT FOREIGN KEY(idPessoa)
     REFERENCES Pessoa(idPessoa),
     CONSTRAINT FOREIGN KEY(idTipoContrato)

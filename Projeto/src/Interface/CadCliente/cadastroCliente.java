@@ -9,6 +9,7 @@ import dao.EstadoCivilDAO;
 import dao.EstadoDAO;
 import dao.PessoaDAO;
 import dao.PessoaFisicaDAO;
+import dao.PessoaJuridicaDAO;
 import global.model.Bairro;
 import global.model.Cidade;
 import global.model.Endereco;
@@ -60,7 +61,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         configuraMascaras();
         carregaEstados();
         carregaEstadosCivis();
-        populaPessoaFisica();
+//        populaPessoaFisica();
 
 //        PessoaDAO pessoaDAO = new PessoaDAO();
 //        Pessoa pessoa = new Pessoa();
@@ -339,7 +340,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         Telefone telefone = new Telefone();
         Telefone celular = new Telefone();
         Telefone comercial = new Telefone();
-        
+
         telefone.setNumero(jftTelefone.getText());
         telefone.setPessoa(pessoaFisica);
         telefone.setOperadora("");
@@ -357,9 +358,9 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         pessoaFisica.setEmail(jtfEmail.getText());
 
-        if (bgSexo.getSelection() == jrbMasculino) {
+        if (jrbMasculino.isSelected()) {
             pessoaFisica.setSexo('M');
-        } else if (bgSexo.getSelection() == jrbFeminino) {
+        } else if (jrbFeminino.isSelected()) {
             pessoaFisica.setSexo('F');
         }
 
@@ -373,7 +374,64 @@ public class cadastroCliente extends javax.swing.JFrame {
 
     }
 
-    public void cadastrarPessoaJuridica() {
+    public void cadastrarPessoaJuridica() throws ParseException {
+        PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
+        PessoaJuridica pessoaJuridica = new PessoaJuridica();
+        pessoaJuridica.setNomePessoa(jtfNome.getText());
+        pessoaJuridica.setCnpj(jftCPF.getText());
+        pessoaJuridica.setInscricaoEstadual(jtfRG.getText());
+        Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataNascimento.getText());
+        pessoaJuridica.setDataNascimento(dataNascimento);
+        pessoaJuridica.setObservacoes(jtaObs.getText());
+
+        EstadoDAO estadoDAO = new EstadoDAO();
+        Estado estado = new Estado();
+        estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+
+        Cidade cidade = new Cidade();
+        cidade.setNomeCidade(jtfCidade.getText());
+        cidade.setEstado(estado);
+
+        Bairro bairro = new Bairro();
+        bairro.setNomeBairro(jtfBairro.getText());
+        bairro.setCidade(cidade);
+
+        Endereco endereco = new Endereco();
+        endereco.setNomeEndereco(jtfEndereco.getText());
+        endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
+        endereco.setCep(jftCEP.getText());
+        endereco.setComplemento(jtfComplemento.getText());
+        endereco.setBairro(bairro);
+        pessoaJuridica.setEndereco(endereco);
+
+        List<Telefone> telefones = new ArrayList<Telefone>();
+        Telefone telefone = new Telefone();
+        Telefone celular = new Telefone();
+        Telefone comercial = new Telefone();
+
+        telefone.setNumero(jftTelefone.getText());
+        telefone.setPessoa(pessoaJuridica);
+        telefone.setOperadora("");
+        celular.setNumero(jftCelular.getText());
+        celular.setPessoa(pessoaJuridica);
+        celular.setOperadora("");
+        comercial.setNumero(jftComercial.getText());
+        comercial.setPessoa(pessoaJuridica);
+        comercial.setOperadora("");
+
+        telefones.add(telefone);
+        telefones.add(celular);
+        telefones.add(comercial);
+        pessoaJuridica.setTelefone(telefones);
+
+        pessoaJuridica.setEmail(jtfEmail.getText());
+
+        pessoaJuridica.setCpfResponsavel(jftCPFResponsavel.getText());
+        pessoaJuridica.setNomeFantasia(jtfNomeFantasia.getText());
+        pessoaJuridica.setNomeResponsavel(jtfFiador.getText());
+        pessoaJuridica.setCadastroAtivo(jcbAtivo.isSelected());
+
+        pessoaJuridicaDAO.persist(pessoaJuridica);
 
     }
 
@@ -382,6 +440,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfCodigoInterno.setText(pessoa.getIdPessoa() + "");
         jtfNome.setText("Jean Felipe");
         jftCPF.setText("38933784802");
+        System.out.println("Aqui CPF" + jftCPF.getText());
         jtfRG.setText("RG");
         jftDataNascimento.setText("25/08/1991");
         jtaObs.setText("Qualquer OBS");
@@ -389,9 +448,37 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfCargo.setText("Chefe");
         jtfFiador.setText("Fiador");
         jcbEstadoCivil.setSelectedIndex(0);
+        jtfEndereco.setText("Av. Guilherme de Almeida");
+        jtfNumero.setText("2025");
+        jtfComplemento.setText("");
+        jtfBairro.setText("Morro do Algodão");
 
-//        jtfNomeFantasia.setText(null);
-//        jftCPFResponsavel.setText(null);
+        jftCEP.setText("11.671-000");
+        jtfCidade.setText("Caraguatatuba");
+
+        jcbEstado.setSelectedIndex(25);
+
+        jftTelefone.setText("1238875776");
+        jftCelular.setText("12981097059");
+        jftComercial.setText("");
+        jtfEmail.setText("teste@teste");
+    }
+
+    public void populaPessoaJuridica() {
+        Pessoa pessoa = new Pessoa();
+        jtfCodigoInterno.setText(pessoa.getIdPessoa() + "");
+        jtfNome.setText("Empresa S/A");
+        jftCPF.setText("19.339.754/0001-07");
+        System.out.println("Aqui CNPJ" + jftCPF.getText());
+        jtfRG.setText("Inscrição Estadual");
+        jftDataNascimento.setText("28/08/1991");
+        jtaObs.setText("Qualquer OBS");
+
+        jftCPFResponsavel.setText("11301353493");
+        jtfNomeFantasia.setText("Empresa S/A Fantasia");
+        jtfFiador.setText("José Maria");
+        jcbAtivo.setSelected(true);
+
         jtfEndereco.setText("Av. Guilherme de Almeida");
         jtfNumero.setText("2025");
         jtfComplemento.setText("");
@@ -717,8 +804,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
-        try {
-            //        if (jbConfirmar.isEnabled()) {
+        //        if (jbConfirmar.isEnabled()) {
 //            if (bgPessoa.getSelection() == jrbPessoaFisica) {
 //                System.out.println("Física");
 //                cadastrarPessoaFisica();
@@ -765,9 +851,18 @@ public class cadastroCliente extends javax.swing.JFrame {
 //            }
 //
 //        }
-            cadastrarPessoaFisica();
-        } catch (ParseException ex) {
-            Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        if (jrbPessoaFisica.isSelected()) {
+            try {
+                cadastrarPessoaFisica();
+            } catch (ParseException ex) {
+                Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else if (jrbPessoaJuridica.isSelected()) {
+            try {
+                cadastrarPessoaJuridica();
+            } catch (ParseException ex) {
+                Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
 
@@ -782,12 +877,17 @@ public class cadastroCliente extends javax.swing.JFrame {
         ativaPessoa(false);
         mascaraCPF_CNPJ(false);
         limpaCampos();
+        carregaEstados();
+        populaPessoaJuridica();
     }//GEN-LAST:event_jrbPessoaJuridicaMousePressed
 
     private void jrbPessoaFisicaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbPessoaFisicaMousePressed
         ativaPessoa(true);
         mascaraCPF_CNPJ(true);
         limpaCampos();
+        carregaEstados();
+        carregaEstadosCivis();
+        populaPessoaFisica();
     }//GEN-LAST:event_jrbPessoaFisicaMousePressed
 
     private void jcbEstadoCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoCivilActionPerformed

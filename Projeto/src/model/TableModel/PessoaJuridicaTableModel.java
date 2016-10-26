@@ -62,7 +62,12 @@ public class PessoaJuridicaTableModel extends AbstractTableModel {
             case 3:
                 return dadosPessoas.get(linha).getInscricaoEstadual();
             case 4:
-                return dadosPessoas.get(linha).isCadastroAtivo();           
+                if(dadosPessoas.get(linha).isCadastroAtivo()){
+                    return "Sim";
+                }
+                else{
+                    return "Não";
+                }
             case 5:
                 return dadosPessoas.get(linha).getNomeResponsavel();
             case 6:
