@@ -6,11 +6,17 @@
 package Interface.CadCliente;
 
 import dao.PessoaDAO;
+import dao.PessoaFisicaDAO;
+import dao.PessoaJuridicaDAO;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import model.TableModel.PessoaFisicaTableModel;
+import model.TableModel.PessoaJuridicaTableModel;
 import model.TableModel.PessoaTableModel;
 import model.pessoa.Pessoa;
+import model.pessoa.PessoaFisica;
+import model.pessoa.PessoaJuridica;
 import validacao.validacao;
 
 /**
@@ -26,6 +32,8 @@ public class cadastroClienteHome extends javax.swing.JFrame {
      */
     public cadastroClienteHome() {
         initComponents();
+        jcbPessoaFisica.setSelected(true);
+        jcbPessoaJuridica.setSelected(true);
         popularTabela();
     }
 
@@ -122,10 +130,20 @@ public class cadastroClienteHome extends javax.swing.JFrame {
 
         jcbPessoaFisica.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbPessoaFisica.setText("Pessoa Física");
+        jcbPessoaFisica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbPessoaFisicaMouseClicked(evt);
+            }
+        });
         getContentPane().add(jcbPessoaFisica, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, 130, 20));
 
         jcbPessoaJuridica.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbPessoaJuridica.setText("Pessoa Júridica");
+        jcbPessoaJuridica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbPessoaJuridicaMouseClicked(evt);
+            }
+        });
         getContentPane().add(jcbPessoaJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 140, -1));
         getContentPane().add(jtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 270, -1));
         getContentPane().add(jtTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 490, 120, -1));
@@ -203,10 +221,25 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jbPesquisarMouseClicked
 
     public void popularTabela() {
-        PessoaDAO pessoaDAO = new PessoaDAO();
-        List<Pessoa> pessoas = new ArrayList<Pessoa>();
-        pessoas = pessoaDAO.getAll();
-        jTable1.setModel(new PessoaTableModel(pessoas));
+        if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
+            PessoaDAO pessoaDAO = new PessoaDAO();
+            List<Pessoa> pessoas = new ArrayList<Pessoa>();
+            pessoas = pessoaDAO.getAll();
+            jTable1.setModel(new PessoaTableModel(pessoas));
+        }else if(jcbPessoaFisica.isSelected()){
+            PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+            List<PessoaFisica>pessoasFisicas = new ArrayList<PessoaFisica>();
+            pessoasFisicas = pessoaFisicaDAO.getAll();
+            jTable1.setModel(new PessoaFisicaTableModel(pessoasFisicas));
+        }else if(jcbPessoaJuridica.isSelected()){
+            PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
+            List<PessoaJuridica> pessoasJuridicas = new ArrayList<PessoaJuridica>();
+            pessoasJuridicas = pessoaJuridicaDAO.getAll();
+            jTable1.setModel(new PessoaJuridicaTableModel(pessoasJuridicas));
+        }else{
+            jTable1.setModel(new PessoaTableModel());
+        }
+
     }
 
     private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
@@ -219,6 +252,14 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         if (jbRemover.isEnabled()) {
         }// TODO add your handling code here:
     }//GEN-LAST:event_jbRemoverMouseClicked
+
+    private void jcbPessoaFisicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbPessoaFisicaMouseClicked
+        popularTabela();
+    }//GEN-LAST:event_jcbPessoaFisicaMouseClicked
+
+    private void jcbPessoaJuridicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbPessoaJuridicaMouseClicked
+       popularTabela();
+    }//GEN-LAST:event_jcbPessoaJuridicaMouseClicked
 
     /**
      * @param args the command line arguments
