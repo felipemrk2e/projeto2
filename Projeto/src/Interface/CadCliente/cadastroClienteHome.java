@@ -5,7 +5,12 @@
  */
 package Interface.CadCliente;
 
+import dao.PessoaDAO;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+import model.TableModel.PessoaTableModel;
+import model.pessoa.Pessoa;
 import validacao.validacao;
 
 /**
@@ -13,19 +18,21 @@ import validacao.validacao;
  * @author Sala
  */
 public class cadastroClienteHome extends javax.swing.JFrame {
-int user;
+
+    int user;
+
     /**
      * Creates new form cadastroClienteHome
      */
     public cadastroClienteHome() {
         initComponents();
+        popularTabela();
     }
-     public cadastroClienteHome(int user) {
-          this.user = user;
+
+    public cadastroClienteHome(int user) {
+        this.user = user;
         initComponents();
     }
-     
-     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -145,10 +152,10 @@ int user;
 
     private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
 
- if(jbCadastrar.isEnabled()){
-             new cadastroCliente(user).setVisible(true);     // TODO add your handling code here:
-        dispose();
- }
+        if (jbCadastrar.isEnabled()) {
+            new cadastroCliente(user).setVisible(true);     // TODO add your handling code here:
+            dispose();
+        }
 
 
     }//GEN-LAST:event_jbCadastrarMouseClicked
@@ -167,8 +174,7 @@ int user;
             control = false;
         }
 // arrumar a validacao...
-        
-        
+
 //        if (jtTelefone.getText().equals("")) {
 //            jtTelefone.setBackground(Color.white);
 //        } else if (!jtTelefone.getText().equals("") && validaAlgo......) {
@@ -177,7 +183,6 @@ int user;
 //            jtTelefone.setBackground(Color.red);
 //            control = false;
 //        }
-
         if (jcbPessoaFisica.isSelected()) {
 
         }
@@ -193,17 +198,26 @@ int user;
             control = true;
         }
         /// fim pesquisa
+
+
     }//GEN-LAST:event_jbPesquisarMouseClicked
 
+    public void popularTabela() {
+        PessoaDAO pessoaDAO = new PessoaDAO();
+        List<Pessoa> pessoas = new ArrayList<Pessoa>();
+        pessoas = pessoaDAO.getAll();
+        jTable1.setModel(new PessoaTableModel(pessoas));
+    }
+
     private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
-       String idcliente = "vazio no momento";
-            new cadastroCliente(user, idcliente).setVisible(true); 
-            dispose();  // TODO add your handling code here:
+        String idcliente = "vazio no momento";
+        new cadastroCliente(user, idcliente).setVisible(true);
+        dispose();  // TODO add your handling code here:
     }//GEN-LAST:event_jbVisualizarMouseClicked
 
     private void jbRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemoverMouseClicked
-if(jbRemover.isEnabled()){
-}// TODO add your handling code here:
+        if (jbRemover.isEnabled()) {
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jbRemoverMouseClicked
 
     /**
