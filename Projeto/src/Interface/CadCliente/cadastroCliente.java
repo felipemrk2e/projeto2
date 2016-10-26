@@ -21,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -303,13 +305,13 @@ public class cadastroCliente extends javax.swing.JFrame {
         // jcb fim
     }
 
-    public void cadastrarPessoaFisica() {
+    public void cadastrarPessoaFisica() throws ParseException {
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
         PessoaFisica pessoaFisica = new PessoaFisica();
         pessoaFisica.setNomePessoa(jtfNome.getText());
         pessoaFisica.setCPF(jftCPF.getText());
         pessoaFisica.setRG(jtfRG.getText());
-        Date dataNascimento = new Date(jftDataNascimento.getText());
+        Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataNascimento.getText());
         pessoaFisica.setDataNascimento(dataNascimento);
         pessoaFisica.setObservacoes(jtaObs.getText());
 
@@ -715,7 +717,8 @@ public class cadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
-//        if (jbConfirmar.isEnabled()) {
+        try {
+            //        if (jbConfirmar.isEnabled()) {
 //            if (bgPessoa.getSelection() == jrbPessoaFisica) {
 //                System.out.println("Física");
 //                cadastrarPessoaFisica();
@@ -731,7 +734,7 @@ public class cadastroCliente extends javax.swing.JFrame {
 ////            Cidade cidade;
 ////            Estado estado;
 ////            Telefone telefone;
-////            
+////
 ////            
 ////            if (this.getPessoa() == null) {
 ////                
@@ -762,7 +765,10 @@ public class cadastroCliente extends javax.swing.JFrame {
 //            }
 //
 //        }
-        cadastrarPessoaFisica();
+            cadastrarPessoaFisica();
+        } catch (ParseException ex) {
+            Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }//GEN-LAST:event_jbConfirmarMouseClicked
