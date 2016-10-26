@@ -50,7 +50,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         ImovelDAO imovelDao = new ImovelDAO();
         Imovel imovel = new Imovel();
-        imovel = imovelDao.getById(Long.parseLong("3"));
+        imovel = imovelDao.getById(Long.parseLong("1"));
         popular(imovel);
     }
 
@@ -1357,6 +1357,17 @@ public class cadastroImovel extends javax.swing.JFrame {
             Estado uf;
             Documentacao documentacao;
             Terreno terreno;
+            
+            TipoImovelDAO tipoImovelDao = new TipoImovelDAO();
+
+            TipoImovel tipoImovel = new TipoImovel();
+            List<TipoImovel> tipoImovelTemp = new ArrayList<>();
+            tipoImovelTemp = tipoImovelDao.getAll();
+            
+                TipoContratoDAO tipoContratoDao = new TipoContratoDAO();;
+            
+              
+
             if (this.getImovel() == null) {
                 imovel = new Imovel();
                 endereco = new Endereco();
@@ -1365,31 +1376,12 @@ public class cadastroImovel extends javax.swing.JFrame {
                 uf = new Estado();
                 documentacao = new Documentacao();
                 terreno = new Terreno();
-                
+
                 // arrumar valores no merge
-                TipoImovelDAO tipoImovelDao = new TipoImovelDAO();
-
-                TipoImovel tipoImovel = new TipoImovel();
-                List<TipoImovel> tipoImovelTemp = new ArrayList<>();
-                tipoImovelTemp = tipoImovelDao.getAll();
-
-                TipoContratoDAO tipoContratoDao = new TipoContratoDAO();
-                List<TipoContrato> tipoContrato = new ArrayList<>();
-                tipoContrato = tipoContratoDao.getAll();
-                
-            } else {
-                imovel = imovelTemp;
-                endereco = imovel.getEndereco();
-                bairro = imovel.getEndereco().getBairro();
-                cidade = imovel.getEndereco().getBairro().getCidade();
-                uf = imovel.getEndereco().getBairro().getCidade().getEstado();
-                documentacao = imovel.getDocumentacao();
-                terreno = imovel.getTerreno();
-
-            }
-    
-
-// Fora das tabs..
+              List<TipoContrato> tipoContrato = new ArrayList<>();
+               tipoContrato = tipoContratoDao.getAll();
+              
+               // Fora das tabs..
             if (jcbLocacao.isSelected()) {
                 if (jtValorLocacaoMes.getText().equals("")) {
                     jtValorLocacaoMes.setBackground(Color.white);
@@ -1455,6 +1447,92 @@ public class cadastroImovel extends javax.swing.JFrame {
             } else {
 
             }
+
+
+               
+            } else {
+                imovel = imovelTemp;
+                endereco = imovel.getEndereco();
+                bairro = imovel.getEndereco().getBairro();
+                cidade = imovel.getEndereco().getBairro().getCidade();
+                uf = imovel.getEndereco().getBairro().getCidade().getEstado();
+                documentacao = imovel.getDocumentacao();
+                terreno = imovel.getTerreno();
+                List<Imovel_has_TipoContrato> tipoContrato = imovel.getTiposContratos();
+               
+               
+              // Fora das tabs..
+            if (jcbLocacao.isSelected()) {
+                if (jtValorLocacaoMes.getText().equals("")) {
+                    jtValorLocacaoMes.setBackground(Color.white);
+                } else if (!jtValorLocacaoMes.getText().equals("") && validacao.validaNumeros(jtValorLocacaoMes.getText())) {
+                 tipoContrato.get(0).setValor(Double.valueOf(jtValorLocacaoMes.getText()));
+
+                    jtValorLocacaoMes.setBackground(Color.white);
+                } else {
+                    control2 = false;
+                    jtValorLocacaoMes.setBackground(Color.red);
+
+                }
+            } else {
+
+            }
+            if (jcbVenda.isSelected()) {
+                if (jtValorVenda.getText().equals("")) {
+                    jtValorVenda.setBackground(Color.white);
+                } else if (!jtValorVenda.getText().equals("") && validacao.validaNumeros(jtValorVenda.getText())) {
+
+                   tipoContrato.get(1).setValor(Double.valueOf(jtValorVenda.getText()));
+
+                    jtValorVenda.setBackground(Color.white);
+                } else {
+                    control2 = false;
+                    jtValorVenda.setBackground(Color.red);
+
+                }
+            } else {
+
+            }
+
+            if (jcbTemporada.isSelected()) {
+                if (jtValorTemporada.getText().equals("")) {
+                    jtValorTemporada.setBackground(Color.white);
+                } else if (!jtValorTemporada.getText().equals("") && validacao.validaNumeros(jtValorTemporada.getText())) {
+                    tipoContrato.get(2).setValor(Double.valueOf(jtValorTemporada.getText()));
+
+                    jtValorTemporada.setBackground(Color.white);
+                } else {
+                    control2 = false;
+                    jtValorTemporada.setBackground(Color.red);
+
+                }
+            } else {
+
+            }
+
+            if (jcbFesta.isSelected()) {
+                if (jtValorDiaria.getText().equals("")) {
+
+                    jtValorDiaria.setBackground(Color.white);
+
+                } else if (!jtValorDiaria.getText().equals("") && validacao.validaNumeros(jtValorDiaria.getText())) {
+                     tipoContrato.get(3).setValor(Double.valueOf(jtValorDiaria.getText()));
+
+                    jtValorDiaria.setBackground(Color.white);
+                } else {
+                    control2 = false;
+                    jtValorDiaria.setBackground(Color.red);
+
+                }
+            } else {
+
+            }
+
+              
+            }
+
+            
+             
 
             //Endereço
             //Principal        
