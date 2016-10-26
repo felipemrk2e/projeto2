@@ -5,22 +5,33 @@
  */
 package Interface.CadCliente;
 
+import dao.EstadoCivilDAO;
 import dao.EstadoDAO;
+import dao.PessoaDAO;
+import dao.PessoaFisicaDAO;
+import global.model.Bairro;
+import global.model.Cidade;
+import global.model.Endereco;
 import global.model.Estado;
 import java.awt.Color;
-import java.awt.Insets;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import model.pessoa.EstadoCivil;
+import model.pessoa.Pessoa;
+import model.pessoa.PessoaFisica;
+import model.pessoa.PessoaJuridica;
+import model.pessoa.Telefone;
 import validacao.*;
 
 /**
@@ -30,7 +41,11 @@ import validacao.*;
 public class cadastroCliente extends javax.swing.JFrame {
 
     int user;
-    private boolean fiador;
+    Pessoa pessoaTemp;
+    PessoaFisica pessoaFisicaTemp;
+    PessoaJuridica pessoaJuridicaTemp;
+    EstadoCivil estadoCivilTemp;
+    Telefone telefoneTemp;
 
     /**
      * Creates new form cadastroCliente
@@ -41,43 +56,36 @@ public class cadastroCliente extends javax.swing.JFrame {
         mascaraCPF_CNPJ(true);
         jrbPessoaFisica.setSelected(true);
         configuraMascaras();
-//        carregaEstados();
+        carregaEstados();
+        carregaEstadosCivis();
+        populaPessoaFisica();
 
-        UIManager.getDefaults().put("jtpCadastroCliente.contentBorderInsets", new Insets(0, 0, 0, 0));
-        UIManager.getDefaults().put("jtpCadastroCliente.tabsOverlapBorder", true);
-
+//        PessoaDAO pessoaDAO = new PessoaDAO();
+//        Pessoa pessoa = new Pessoa();
+//        pessoa = pessoaDAO.getById(Long.parseLong("1"));
     }
 
     public cadastroCliente(int user) {
-         this.user = user;
+        this.user = user;
         initComponents();
         ativaPessoa(true);
         mascaraCPF_CNPJ(true);
         jrbPessoaFisica.setSelected(true);
         configuraMascaras();
-//        carregaEstados();
-
-        UIManager.getDefaults().put("jtpCadastroCliente.contentBorderInsets", new Insets(0, 0, 0, 0));
-        UIManager.getDefaults().put("jtpCadastroCliente.tabsOverlapBorder", true);
+        carregaEstados();
         verificaNivel0();
 
     }
 
     public cadastroCliente(int user, String idCliente) {
-         this.user = user;
+        this.user = user;
         initComponents();
         ativaPessoa(true);
         mascaraCPF_CNPJ(true);
         jrbPessoaFisica.setSelected(true);
         configuraMascaras();
-
-        UIManager.getDefaults().put("jtpCadastroCliente.contentBorderInsets", new Insets(0, 0, 0, 0));
-        UIManager.getDefaults().put("jtpCadastroCliente.tabsOverlapBorder", true);
-
         popular();
         verificaNivel();
-     
-
     }
 
     public void verificaNivel0() {
@@ -293,6 +301,116 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
 
         // jcb fim
+    }
+
+    public void cadastrarPessoaFisica() {
+        PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+        PessoaFisica pessoaFisica = new PessoaFisica();
+        pessoaFisica.setNomePessoa(jtfNome.getText());
+        pessoaFisica.setCPF(jftCPF.getText());
+        pessoaFisica.setRG(jtfRG.getText());
+        Date dataNascimento = new Date(jftDataNascimento.getText());
+        pessoaFisica.setDataNascimento(dataNascimento);
+        pessoaFisica.setObservacoes(jtaObs.getText());
+
+        EstadoDAO estadoDAO = new EstadoDAO();
+        Estado estado = new Estado();
+        estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+
+        Cidade cidade = new Cidade();
+        cidade.setNomeCidade(jtfCidade.getText());
+        cidade.setEstado(estado);
+
+        Bairro bairro = new Bairro();
+        bairro.setNomeBairro(jtfBairro.getText());
+        bairro.setCidade(cidade);
+
+        Endereco endereco = new Endereco();
+        endereco.setNomeEndereco(jtfEndereco.getText());
+        endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
+        endereco.setCep(jftCEP.getText());
+        endereco.setComplemento(jtfComplemento.getText());
+        endereco.setBairro(bairro);
+        pessoaFisica.setEndereco(endereco);
+
+        List<Telefone> telefones = new ArrayList<Telefone>();
+        Telefone telefone = new Telefone();
+        Telefone celular = new Telefone();
+        Telefone comercial = new Telefone();
+        
+        telefone.setNumero(jftTelefone.getText());
+        telefone.setPessoa(pessoaFisica);
+        telefone.setOperadora("");
+        celular.setNumero(jftCelular.getText());
+        celular.setPessoa(pessoaFisica);
+        celular.setOperadora("");
+        comercial.setNumero(jftComercial.getText());
+        comercial.setPessoa(pessoaFisica);
+        comercial.setOperadora("");
+
+        telefones.add(telefone);
+        telefones.add(celular);
+        telefones.add(comercial);
+        pessoaFisica.setTelefone(telefones);
+
+        pessoaFisica.setEmail(jtfEmail.getText());
+
+        if (bgSexo.getSelection() == jrbMasculino) {
+            pessoaFisica.setSexo('M');
+        } else if (bgSexo.getSelection() == jrbFeminino) {
+            pessoaFisica.setSexo('F');
+        }
+
+        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
+        EstadoCivil estadoCivil = new EstadoCivil();
+        estadoCivil = estadoCivilDAO.getById((long) jcbEstadoCivil.getSelectedIndex() + 1);
+
+        pessoaFisica.setEstadoCivil(estadoCivil);
+
+        pessoaFisicaDAO.persist(pessoaFisica);
+
+    }
+
+    public void cadastrarPessoaJuridica() {
+
+    }
+
+    public void populaPessoaFisica() {
+        Pessoa pessoa = new Pessoa();
+        jtfCodigoInterno.setText(pessoa.getIdPessoa() + "");
+        jtfNome.setText("Jean Felipe");
+        jftCPF.setText("38933784802");
+        jtfRG.setText("RG");
+        jftDataNascimento.setText("25/08/1991");
+        jtaObs.setText("Qualquer OBS");
+
+        jtfCargo.setText("Chefe");
+        jtfFiador.setText("Fiador");
+        jcbEstadoCivil.setSelectedIndex(0);
+
+//        jtfNomeFantasia.setText(null);
+//        jftCPFResponsavel.setText(null);
+        jtfEndereco.setText("Av. Guilherme de Almeida");
+        jtfNumero.setText("2025");
+        jtfComplemento.setText("");
+        jtfBairro.setText("Morro do Algodão");
+
+        jftCEP.setText("11.671-000");
+        jtfCidade.setText("Caraguatatuba");
+
+        jcbEstado.setSelectedIndex(25);
+
+        jftTelefone.setText("1238875776");
+        jftCelular.setText("12981097059");
+        jftComercial.setText("");
+        jtfEmail.setText("teste@teste");
+    }
+
+    public Date trataData(String dataString) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        sdf.setLenient(false);
+        Date data = sdf.parse(dataString);
+        return data;
     }
 
     /**
@@ -566,6 +684,7 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         bgPessoa.add(jrbPessoaFisica);
         jrbPessoaFisica.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jrbPessoaFisica.setSelected(true);
         jrbPessoaFisica.setText("Física");
         jrbPessoaFisica.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -596,13 +715,54 @@ public class cadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
-        if (jbConfirmar.isEnabled()) {
-
-            if (!validaCampos(true)) {
-                JOptionPane.showMessageDialog(null, "Verifique os campos obrigatórios!");
-            }
-
-        }
+//        if (jbConfirmar.isEnabled()) {
+//            if (bgPessoa.getSelection() == jrbPessoaFisica) {
+//                System.out.println("Física");
+//                cadastrarPessoaFisica();
+//            } else if (bgPessoa.getSelection() == jrbPessoaJuridica) {
+//                System.out.println("Juridica");
+//            }
+//
+////            Pessoa pessoa;
+////            PessoaFisica pessoaFisica;
+////            PessoaJuridica pessoaJuridica;
+////            Endereco endereco;
+////            Bairro bairro;
+////            Cidade cidade;
+////            Estado estado;
+////            Telefone telefone;
+////            
+////            
+////            if (this.getPessoa() == null) {
+////                
+////                pessoa = new Pessoa();
+////                pessoaFisica = new PessoaFisica();
+////                pessoaJuridica = new PessoaJuridica();
+////                endereco = new Endereco();
+////                bairro = new Bairro();
+////                cidade = new Cidade();
+////                estado = new Estado();
+////                telefone = new Telefone();
+////                
+////                EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
+////                EstadoCivil estadoCivil = new EstadoCivil();
+////                List<EstadoCivil> estadoCivilTemp = new ArrayList<EstadoCivil>();
+////                estadoCivilTemp = estadoCivilDAO.getAll();
+////                
+////            } else {
+////                pessoa = pessoaTemp;
+////                endereco = pessoa.getEndereco();
+////                bairro = pessoa.getEndereco().getBairro();
+////                cidade = pessoa.getEndereco().getBairro().getCidade();
+////                estado = pessoa.getEndereco().getBairro().getCidade().getEstado();
+////
+////            }
+//            if (!validaCampos(true)) {
+//                JOptionPane.showMessageDialog(null, "Verifique os campos obrigatórios!");
+//            }
+//
+//        }
+        cadastrarPessoaFisica();
 
 
     }//GEN-LAST:event_jbConfirmarMouseClicked
@@ -790,7 +950,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                 jtfNumero.setBackground(Color.red);
                 valida = false;
             }
-            if (jcbEstado.getSelectedItem() == "") {
+            if (jcbEstado.getSelectedItem() != null) {
                 jcbEstado.setBackground(Color.white);
             } else {
                 jcbEstado.setBackground(Color.red);
@@ -815,7 +975,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                 jrbFeminino.setBackground(Color.red);
                 valida = false;
             }
-            if (jcbEstadoCivil.getSelectedItem() == "") {
+            if (jcbEstadoCivil.getSelectedItem() != null) {
                 jcbEstadoCivil.setBackground(Color.white);
             } else {
                 jcbEstadoCivil.setBackground(Color.red);
@@ -934,37 +1094,51 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
         jcbEstado.setModel(defaultComboBox);
-
     }
 
-    public void setJcbEstado() throws SQLException {
-//        List<String> strList = new ArrayList<String>();
-//        String query = "SELECT UF FROM Estado";
-//        Connection con = Conexao.getConnection();
-//        PreparedStatement ps = con.prepareStatement(query);
-//        ResultSet rs = ps.executeQuery();
-//        while (rs.next) {
-//            strList.add(rs.getString("UF"));
-//        }
-//        ps.close();
-//
-//        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(strList.toArray());
-//        jcbEstado.setModel(defaultComboBox);
+    public void carregaEstadosCivis() {
+        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
+        EstadoCivil estadoCivil = new EstadoCivil();
+        List<EstadoCivil> listaEstadoCivis = new ArrayList<EstadoCivil>();
+        List<String> listaNomeEstadoCivis = new ArrayList<String>();
+        listaEstadoCivis = estadoCivilDAO.getAll();
+        for (int i = 0; i < listaEstadoCivis.size(); i++) {
+            listaNomeEstadoCivis.add(listaEstadoCivis.get(i).getNomeEstadoCivil());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeEstadoCivis.toArray());
+        jcbEstadoCivil.setModel(defaultComboBox);
     }
 
-    public void setJcbEstadoCivil() throws SQLException {
-//        List<String> strList = new ArrayList<String>();
-//        String query = "SELECT nomeEstadoCivil FROM EstadoCivil";
-//        Connection con = Conexao.getConnection();
-//        PreparedStatement ps = con.prepareStatement(query);
-//        ResultSet rs = ps.executeQuery();
-//        while (rs.next) {
-//            strList.add(rs.getString("nomeEstadoCivil"));
-//        }
-//        ps.close();
+    public void fecharCadastro() {
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+
+//                if (COLOCAR VERIFICACAO) {
+//                    int resposta = JOptionPane.showConfirmDialog(null,
+//                            "Cadastro não salvo, Deseja salvar antes de sair?",
+//                            "Segurança",
+//                            JOptionPane.YES_NO_OPTION);
+//                    if (resposta == 1) {
 //
-//        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(strList.toArray());
-//        jcbEstadoCivil.setModel(defaultComboBox);
+//                        System.exit(0);
+//
+//                    } else {
+//
+//                    }
+//
+//                } else {
+                String ObjButtons[] = {"Sim", "Não"};
+                int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                    dispose();
+                }
+//                }
+
+            }
+        });
+
     }
 
     /**
