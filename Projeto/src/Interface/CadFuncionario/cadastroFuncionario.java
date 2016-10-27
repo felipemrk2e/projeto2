@@ -5,8 +5,37 @@
  */
 package Interface.CadFuncionario;
 
+import dao.CargoDAO;
+import dao.DepartamentoDAO;
+import dao.EstadoCivilDAO;
+import dao.EstadoDAO;
+import dao.FuncionarioDAO;
+import dao.PessoaFisicaDAO;
+import global.model.Bairro;
+import global.model.Cidade;
+import global.model.Endereco;
+import global.model.Estado;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import static java.awt.image.ImageObserver.WIDTH;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import model.pessoa.Cargo;
+import model.pessoa.Departamento;
+import model.pessoa.EstadoCivil;
+import model.pessoa.Funcionario;
+import model.pessoa.Pessoa;
+import model.pessoa.PessoaFisica;
+import model.pessoa.Telefone;
 
 /**
  *
@@ -21,17 +50,21 @@ public class cadastroFuncionario extends javax.swing.JFrame {
      */
     public cadastroFuncionario() {
         initComponents();
+        carregaCargos();
+        carregaEstados();
+        carregaEstadosCivis();
+        populaFuncionario();
     }
 
     public cadastroFuncionario(int user) {
-         this.user = user;
+        this.user = user;
         initComponents();
         verificaNivel0();
 
     }
 
     public cadastroFuncionario(int user, String idFuncionario) {
-         this.user = user;
+        this.user = user;
         initComponents();
         popular();
         verificaNivel();
@@ -72,7 +105,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jftCPF.setEnabled(b);
         jtfRG.setEnabled(b);
         jftDataNascimento.setEnabled(b);
-        jtfCargo.setEnabled(b);
         jtfEndereco.setEnabled(b);
         jtfNumero.setEnabled(b);
         jtfBairro.setEnabled(b);
@@ -115,8 +147,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jftCPF.setText("");
         jtfRG.setText("");
         jftDataNascimento.setText("");
-        jtfCargo.setText("");
-
         jtfEndereco.setText("");
         jtfNumero.setText("");
         jtfBairro.setText("");
@@ -165,7 +195,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jftCelular.setBackground(Color.white);
         jftComercial.setBackground(Color.white);
         jcbEstadoCivil.setBackground(Color.white);
-        jtfCargo.setBackground(Color.white);
         jtfComplemento.setBackground(Color.white);
         jtfEmail.setBackground(Color.white);
 
@@ -200,7 +229,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jftCPF.setText(null);
         jtfRG.setText(null);
         jftDataNascimento.setText(null);
-        jtfCargo.setText(null);
 
         jtfEndereco.setText(null);
         jtfNumero.setText(null);
@@ -251,8 +279,135 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         if (true) {
             jcbEstado.setSelectedIndex(WIDTH);
         }
-
         // jcb fim
+
+    }
+
+    public void cadastrarFuncionario() throws ParseException {
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        Funcionario funcionario = new Funcionario();
+        funcionario.setNomePessoa(jtfNome.getText());
+        funcionario.setCPF(jftCPF.getText());
+        funcionario.setRG(jtfRG.getText());
+        Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataNascimento.getText());
+        funcionario.setDataNascimento(dataNascimento);
+        funcionario.setObservacoes(jtaObs.getText());
+
+        EstadoDAO estadoDAO = new EstadoDAO();
+        Estado estado = new Estado();
+        estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+
+        Cidade cidade = new Cidade();
+        cidade.setNomeCidade(jtfCidade.getText());
+        cidade.setEstado(estado);
+
+        Bairro bairro = new Bairro();
+        bairro.setNomeBairro(jtfBairro.getText());
+        bairro.setCidade(cidade);
+
+        Endereco endereco = new Endereco();
+        endereco.setNomeEndereco(jtfEndereco.getText());
+        endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
+        endereco.setCep(jftCEP.getText());
+        endereco.setComplemento(jtfComplemento.getText());
+        endereco.setBairro(bairro);
+        funcionario.setEndereco(endereco);
+
+        List<Telefone> telefones = new ArrayList<Telefone>();
+        Telefone telefone = new Telefone();
+        Telefone celular = new Telefone();
+        Telefone comercial = new Telefone();
+
+        telefone.setNumero(jftTelefone.getText());
+        telefone.setPessoa(funcionario);
+        telefone.setOperadora("");
+        celular.setNumero(jftCelular.getText());
+        celular.setPessoa(funcionario);
+        celular.setOperadora("");
+        comercial.setNumero(jftComercial.getText());
+        comercial.setPessoa(funcionario);
+        comercial.setOperadora("");
+
+        telefones.add(telefone);
+        telefones.add(celular);
+        telefones.add(comercial);
+        funcionario.setTelefone(telefones);
+
+        funcionario.setEmail(jtfEmail.getText());
+
+        if (jrbMasculino.isSelected()) {
+            funcionario.setSexo('M');
+        } else if (jrbFeminino.isSelected()) {
+            funcionario.setSexo('F');
+        }
+
+        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
+        EstadoCivil estadoCivil = new EstadoCivil();
+        estadoCivil = estadoCivilDAO.getById((long) jcbEstadoCivil.getSelectedIndex() + 1);
+        funcionario.setEstadoCivil(estadoCivil);
+
+        CargoDAO cargoDAO = new CargoDAO();
+        Cargo cargo = new Cargo();
+        cargo = cargoDAO.getById((long) jcbCargo.getSelectedIndex() + 1);
+        funcionario.setCargo(cargo);
+
+        funcionario.setDependentes(Integer.parseInt(jtfDependentes.getText()));
+        funcionario.setEscolaridade(jtfEscolaridade.getText());
+
+        funcionario.setBanco(jtfBanco.getText());
+        funcionario.setTipoConta(jtfTipoConta.getText());
+        funcionario.setConta(jtfNConta.getText());
+        funcionario.setAgencia(jtfNConta.getText());
+        funcionario.setSalario(Double.parseDouble(jtfSalario.getText()));
+        funcionario.setCtps(jtfNCTPS.getText());
+        funcionario.setSerieCtps(jtfSerieCTPS.getText());
+        funcionario.setCargaHoraria(jtfCargaHoraria.getText());
+        Date admissao = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataAdmissao.getText());
+        funcionario.setDataAdmissao(admissao);
+
+        funcionarioDAO.persist(funcionario);
+    }
+
+    public void populaFuncionario() {
+        Pessoa pessoa = new Pessoa();
+        jtfCodigoInterno.setText(pessoa.getIdPessoa() + "");
+        jtfNome.setText("Jean Felipe");
+        jftCPF.setText("38933784802");
+        System.out.println("Aqui CPF" + jftCPF.getText());
+        jtfRG.setText("RG");
+        jftDataNascimento.setText("25/08/1991");
+        jtaObs.setText("Qualquer OBS");
+
+        jcbEstadoCivil.setSelectedIndex(0);
+        jtfEndereco.setText("Av. Guilherme de Almeida");
+        jtfNumero.setText("2025");
+        jtfComplemento.setText("");
+        jtfBairro.setText("Morro do Algodão");
+
+        jftCEP.setText("11.671-000");
+        jtfCidade.setText("Caraguatatuba");
+
+        jcbEstado.setSelectedIndex(25);
+
+        jftTelefone.setText("1238875776");
+        jftCelular.setText("12981097059");
+        jftComercial.setText("");
+        jtfEmail.setText("teste@teste");
+
+        jtfEscolaridade.setText("Ensino Médio");
+        jtfDependentes.setText("0");
+
+        jtfBanco.setText("Santander");
+        jtfTipoConta.setText("Corrente");
+        jtfNConta.setText("1111");
+        jtfAgencia.setText("2222");
+        jtfSalario.setText("2.500");
+        jtfNCTPS.setText("5454545");
+        jtfSerieCTPS.setText("5");
+        jtfCargaHoraria.setText("8");
+        jftDataAdmissao.setText("01/07/2013");
+        jrbMasculino.setSelected(true);
+        jcbCargo.setSelectedIndex(0);
     }
 
     /**
@@ -293,7 +448,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jlComplemento = new javax.swing.JLabel();
         jlObs = new javax.swing.JLabel();
         jlCargo = new javax.swing.JLabel();
-        jtfCargo = new javax.swing.JTextField();
         jlDataNascimento = new javax.swing.JLabel();
         jlEstadoCivil = new javax.swing.JLabel();
         jcbEstadoCivil = new javax.swing.JComboBox();
@@ -330,6 +484,8 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfSerieCTPS = new javax.swing.JTextField();
         jlCargaHoraria = new javax.swing.JLabel();
         jftDataAdmissao = new javax.swing.JFormattedTextField();
+        jcbCargo = new javax.swing.JComboBox();
+        jlAddCargo = new javax.swing.JLabel();
         jtfCargaHoraria = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
@@ -448,7 +604,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jlCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCargo.setText("Cargo");
         getContentPane().add(jlCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, -1));
-        getContentPane().add(jtfCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 150, -1));
 
         jlDataNascimento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlDataNascimento.setText("Data de Nascimento");
@@ -518,8 +673,8 @@ public class cadastroFuncionario extends javax.swing.JFrame {
 
         jlEscolaridade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlEscolaridade.setText("Escolaridade");
-        getContentPane().add(jlEscolaridade, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
-        getContentPane().add(jtfEscolaridade, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 230, -1));
+        getContentPane().add(jlEscolaridade, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, -1, -1));
+        getContentPane().add(jtfEscolaridade, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 200, -1));
 
         jlDataAdmissao.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlDataAdmissao.setText("Data de Admissão");
@@ -539,6 +694,17 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jlCargaHoraria.setText("Carga Horária");
         getContentPane().add(jlCargaHoraria, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, -1, -1));
         getContentPane().add(jftDataAdmissao, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, 100, -1));
+
+        jcbCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 150, -1));
+
+        jlAddCargo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add.png"))); // NOI18N
+        jlAddCargo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlAddCargoMousePressed(evt);
+            }
+        });
+        getContentPane().add(jlAddCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 20, 20));
         getContentPane().add(jtfCargaHoraria, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 70, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 830, 140));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 830, 110));
@@ -550,13 +716,92 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
-
+        try {
+            cadastrarFuncionario();
+        } catch (ParseException ex) {
+            Logger.getLogger(cadastroFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-                new CadFuncionarioHome(user).setVisible(true);
-                dispose();    // TODO add your handling code here:
+        new CadFuncionarioHome(user).setVisible(true);
+        dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
+
+    private void jlAddCargoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAddCargoMousePressed
+        //add cargo
+    }//GEN-LAST:event_jlAddCargoMousePressed
+
+    public void carregaEstados() {
+        EstadoDAO estadoDAO = new EstadoDAO();
+        Estado estado = new Estado();
+        List<Estado> listaEstados = new ArrayList<Estado>();
+        List<String> listaSigla = new ArrayList<String>();
+        listaEstados = estadoDAO.getAll();
+        for (int i = 0; i < listaEstados.size(); i++) {
+            listaSigla.add(listaEstados.get(i).getSigla());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
+        jcbEstado.setModel(defaultComboBox);
+    }
+
+    public void carregaEstadosCivis() {
+        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
+        EstadoCivil estadoCivil = new EstadoCivil();
+        List<EstadoCivil> listaEstadoCivis = new ArrayList<EstadoCivil>();
+        List<String> listaNomeEstadoCivis = new ArrayList<String>();
+        listaEstadoCivis = estadoCivilDAO.getAll();
+        for (int i = 0; i < listaEstadoCivis.size(); i++) {
+            listaNomeEstadoCivis.add(listaEstadoCivis.get(i).getNomeEstadoCivil());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeEstadoCivis.toArray());
+        jcbEstadoCivil.setModel(defaultComboBox);
+    }
+
+    public void carregaCargos() {
+        CargoDAO cargoDAO = new CargoDAO();
+        Cargo cargo = new Cargo();
+        List<Cargo> listaCargos = new ArrayList<Cargo>();
+        List<String> listaNomeCargos = new ArrayList<String>();
+        listaCargos = cargoDAO.getAll();
+        for (int i = 0; i < listaCargos.size(); i++) {
+            listaNomeCargos.add(listaCargos.get(i).getNomeCargo());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeCargos.toArray());
+        jcbCargo.setModel(defaultComboBox);
+    }
+
+    public void fecharCadastro() {
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+
+//                if (COLOCAR VERIFICACAO) {
+//                    int resposta = JOptionPane.showConfirmDialog(null,
+//                            "Cadastro não salvo, Deseja salvar antes de sair?",
+//                            "Segurança",
+//                            JOptionPane.YES_NO_OPTION);
+//                    if (resposta == 1) {
+//
+//                        System.exit(0);
+//
+//                    } else {
+//
+//                    }
+//
+//                } else {
+                String ObjButtons[] = {"Sim", "Não"};
+                int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                    dispose();
+                }
+//                }
+
+            }
+        });
+
+    }
 
     /**
      * @param args the command line arguments
@@ -601,6 +846,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JButton jbEditar;
+    private javax.swing.JComboBox jcbCargo;
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JComboBox jcbEstadoCivil;
     private javax.swing.JFormattedTextField jftCEP;
@@ -610,6 +856,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jftDataAdmissao;
     private javax.swing.JFormattedTextField jftDataNascimento;
     private javax.swing.JFormattedTextField jftTelefone;
+    private javax.swing.JLabel jlAddCargo;
     private javax.swing.JLabel jlAgencia;
     private javax.swing.JLabel jlBairro;
     private javax.swing.JLabel jlBanco;
@@ -649,7 +896,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField jtfBairro;
     private javax.swing.JTextField jtfBanco;
     private javax.swing.JTextField jtfCargaHoraria;
-    private javax.swing.JTextField jtfCargo;
     private javax.swing.JTextField jtfCidade;
     private javax.swing.JTextField jtfCodigoInterno;
     private javax.swing.JTextField jtfComplemento;

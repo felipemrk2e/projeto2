@@ -495,13 +495,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftComercial.setText("");
         jtfEmail.setText("teste@teste");
     }
-
-    public Date trataData(String dataString) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        sdf.setLenient(false);
-        Date data = sdf.parse(dataString);
-        return data;
-    }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -747,7 +741,7 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         jcbCompra.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbCompra.setText("Compra");
-        getContentPane().add(jcbCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, -1, -1));
+        getContentPane().add(jcbCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 75, -1, -1));
 
         jcbTroca.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbTroca.setText("Temporada");

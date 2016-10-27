@@ -5,7 +5,12 @@
  */
 package Interface.CadFuncionario;
 
+import dao.FuncionarioDAO;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+import model.TableModel.FuncionarioTableModel;
+import model.pessoa.Funcionario;
 import validacao.validacao;
 
 /**
@@ -13,18 +18,30 @@ import validacao.validacao;
  * @author user
  */
 public class CadFuncionarioHome extends javax.swing.JFrame {
-int user;
+
+    int user;
+
     /**
      * Creates new form CadFuncionarioHome
      */
     public CadFuncionarioHome() {
         initComponents();
+        popularTabela();
     }
+
     public CadFuncionarioHome(int user) {
-        
+
         this.user = user;
         initComponents();
     }
+    
+    public void popularTabela(){
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+            List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+            funcionarios = funcionarioDAO.getAll();
+            jTable1.setModel(new FuncionarioTableModel(funcionarios));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -214,32 +231,33 @@ int user;
     }//GEN-LAST:event_jbPesquisarMouseClicked
 
     private void jbExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbExcluirMouseClicked
-if(jbExcluir.isEnabled()){
-} // TODO add your handling code here:
+        if (jbExcluir.isEnabled()) {
+        } // TODO add your handling code here:
     }//GEN-LAST:event_jbExcluirMouseClicked
 
     private void jbNivelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbNivelMouseClicked
-if(jbNivel.isEnabled()){
-    String idFuncionario = "vazio no momento";
+        if (jbNivel.isEnabled()) {
+            String idFuncionario = "vazio no momento";
             new ControleFuncionario(user, idFuncionario).setVisible(true);
-dispose();  
+            dispose();
 
-}
+        }
 // TODO add your handling code here:
     }//GEN-LAST:event_jbNivelMouseClicked
 
     private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
-      String idFuncionario = "vazio no momento";
-            new cadastroFuncionario(user, idFuncionario).setVisible(true);
-            dispose();// TODO add your handling code here:
+        String idFuncionario = "vazio no momento";
+        new cadastroFuncionario(user, idFuncionario).setVisible(true);
+        dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jbVisualizarMouseClicked
 
     private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
-       
-        if(jbCadastrar.isEnabled()) {
+
+        if (jbCadastrar.isEnabled()) {
             new cadastroFuncionario(user).setVisible(true);
-dispose();        }  
-       // TODO add your handling code here:
+            dispose();
+        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_jbCadastrarMouseClicked
 
     /**
