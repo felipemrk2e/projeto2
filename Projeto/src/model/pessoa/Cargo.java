@@ -43,8 +43,7 @@ public class Cargo {
     @OneToMany(
             mappedBy = "cargo",
             targetEntity = Funcionario.class,
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST)
+            fetch = FetchType.LAZY)
     private List<Funcionario> funcionario = new ArrayList<>();
 
     public long getIdCargo() {

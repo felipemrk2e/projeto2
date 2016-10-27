@@ -33,9 +33,11 @@ import model.pessoa.Cargo;
 import model.pessoa.Departamento;
 import model.pessoa.EstadoCivil;
 import model.pessoa.Funcionario;
+import model.pessoa.Login;
 import model.pessoa.Pessoa;
 import model.pessoa.PessoaFisica;
 import model.pessoa.Telefone;
+import validacao.criaLogin;
 
 /**
  *
@@ -364,6 +366,14 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         funcionario.setCargaHoraria(jtfCargaHoraria.getText());
         Date admissao = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataAdmissao.getText());
         funcionario.setDataAdmissao(admissao);
+        
+        criaLogin loginNovo = new criaLogin();
+        
+        Login login = new Login();
+        login.setNivelAcesso(0);
+        login.setNomeUsuario(loginNovo.geraNovoUsuario(funcionario.getNomePessoa()));
+        login.setSenhaUsuario(loginNovo.gerarNovaSenha());
+        funcionario.setLogin(login);
 
         funcionarioDAO.persist(funcionario);
     }
@@ -769,7 +779,8 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         }
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeCargos.toArray());
         jcbCargo.setModel(defaultComboBox);
-    }
+    }  
+    
 
     public void fecharCadastro() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

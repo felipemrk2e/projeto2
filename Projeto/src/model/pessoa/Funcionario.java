@@ -67,12 +67,12 @@ public class Funcionario extends PessoaFisica {
     @JoinColumn(name = "idPessoa",  nullable = false)
     private PessoaFisica pessoaFisica;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "idCargo", nullable = false)
     private Cargo cargo;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idLogin", nullable = true)
+    @JoinColumn(name = "idLogin", nullable = false)
     private Login login;
 
     public Funcionario() {
