@@ -58,6 +58,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="jbCadastrar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/image/salvar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
@@ -66,12 +69,15 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="110" y="250" width="199" height="87"/>
+          <AbsoluteConstraints x="110" y="250" width="140" height="70"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="jbVisualisar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/image/view.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Visualizar"/>
       </Properties>
       <Events>
@@ -79,12 +85,15 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="400" y="250" width="195" height="88"/>
+          <AbsoluteConstraints x="400" y="250" width="140" height="70"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="jbRemover">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/image/remove2.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Remover"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
@@ -93,7 +102,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="690" y="250" width="199" height="94"/>
+          <AbsoluteConstraints x="690" y="250" width="140" height="70"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -188,6 +197,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jbPesquisar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/image/review.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Pesquisar"/>
       </Properties>
       <Events>
@@ -196,7 +208,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="800" y="430" width="199" height="91"/>
+          <AbsoluteConstraints x="800" y="430" width="140" height="70"/>
         </Constraint>
       </Constraints>
     </Component>

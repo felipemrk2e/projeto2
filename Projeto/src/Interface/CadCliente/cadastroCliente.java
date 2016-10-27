@@ -54,6 +54,7 @@ public class cadastroCliente extends javax.swing.JFrame {
      * Creates new form cadastroCliente
      */
     public cadastroCliente() {
+        this.setUndecorated(true);
         initComponents();
         ativaPessoa(true);
         mascaraCPF_CNPJ(true);
@@ -582,6 +583,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jbConfirmar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbConfirmar.setText("Confirmar");
         jbConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -591,6 +593,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         getContentPane().add(jbConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, 140, 70));
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
         jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -600,6 +603,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         getContentPane().add(jbCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 500, 140, 70));
 
         jbEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/editar2.png"))); // NOI18N
         jbEditar.setText("Editar");
         jbEditar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

@@ -13,6 +13,10 @@ import Interface.CadImovel.cadastroImovel;
 import Interface.CadImovel.cadastroImovelHome;
 import Interface.Locacao.CadLocacao;
 import Interface.Locacao.ControleLocacao;
+import java.awt.ComponentOrientation;
+import java.awt.Toolkit;
+import java.util.Locale;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
@@ -31,7 +35,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
-        jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+        this.setTitle("Sistema de Cadastro de Imóveis");
+        this.setExtendedState(MAXIMIZED_BOTH);
+//        this.setResizable(true);
+//        Toolkit tk = Toolkit.getDefaultToolkit();
+//        int xSize = ((int) tk.getScreenSize().getWidth());
+//        int ySize = ((int) tk.getScreenSize().getHeight());
+//        jSeparador2.setSize(xSize, ySize);
+//        jPanel1.setSize(165, ySize);
+//        jSeparator1.setSize(187, ySize);
+//        System.out.println(ySize);
+//        jSeparador2.repaint();
+//        jSeparator1.repaint();
+//        jPanel1.repaint();
+
+        jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);        
         iniciarPrincipal();
         this.setVisible(true);
         Login();
@@ -281,13 +299,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbControleCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbControleImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbControleCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbControleImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbControleLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbControleFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbControleFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -298,7 +316,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17)
                 .addComponent(jbControleCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -403,13 +421,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbControleImovelMousePressed
 
     private void jbLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLocacaoMousePressed
-       CadLocacao locacao = new CadLocacao();
-       locacao.setVisible(true);
+        CadLocacao locacao = new CadLocacao();
+        locacao.setVisible(true);
     }//GEN-LAST:event_jbLocacaoMousePressed
 
     private void jbControleLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleLocacaoMousePressed
-      ControleLocacao controleLocacao = new ControleLocacao();
-      controleLocacao.setVisible(true);
+        ControleLocacao controleLocacao = new ControleLocacao();
+        controleLocacao.setVisible(true);
     }//GEN-LAST:event_jbControleLocacaoMousePressed
 
     private void jbFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbFuncionarioMousePressed

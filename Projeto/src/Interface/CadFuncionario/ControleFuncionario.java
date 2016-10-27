@@ -107,7 +107,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         jtfCodigoInterno.setEnabled(false);
         getContentPane().add(jtfCodigoInterno);
-        jtfCodigoInterno.setBounds(20, 30, 100, 20);
+        jtfCodigoInterno.setBounds(20, 30, 100, 22);
 
         jlNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlNome.setText("Nome");
@@ -116,7 +116,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         jtfNome.setEnabled(false);
         getContentPane().add(jtfNome);
-        jtfNome.setBounds(150, 40, 400, 20);
+        jtfNome.setBounds(150, 40, 400, 22);
 
         jlCPF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCPF.setText("CPF");
@@ -125,7 +125,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         jftCPF.setEnabled(false);
         getContentPane().add(jftCPF);
-        jftCPF.setBounds(150, 90, 150, 20);
+        jftCPF.setBounds(150, 90, 150, 22);
 
         jlRG.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlRG.setText("RG");
@@ -134,59 +134,62 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         jtfRG.setEnabled(false);
         getContentPane().add(jtfRG);
-        jtfRG.setBounds(320, 90, 150, 20);
+        jtfRG.setBounds(320, 90, 150, 22);
 
         jLabel1.setText("Nova Senha");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(340, 260, 90, 14);
+        jLabel1.setBounds(340, 260, 90, 16);
 
         jLabel2.setText("Repetir Nova Senha");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(340, 310, 110, 14);
+        jLabel2.setBounds(340, 310, 110, 16);
 
         jLabel3.setText("Nivel de acesso");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(180, 210, 90, 14);
+        jLabel3.setBounds(180, 210, 90, 16);
         getContentPane().add(jtNivelAcesso);
-        jtNivelAcesso.setBounds(180, 230, 60, 20);
+        jtNivelAcesso.setBounds(180, 230, 60, 22);
         getContentPane().add(jtUser);
-        jtUser.setBounds(340, 230, 120, 20);
+        jtUser.setBounds(340, 230, 120, 22);
         getContentPane().add(jtNovaSenha2);
-        jtNovaSenha2.setBounds(340, 330, 120, 20);
+        jtNovaSenha2.setBounds(340, 330, 120, 22);
 
+        jbConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbConfirmar.setText("Confirmar");
         getContentPane().add(jbConfirmar);
-        jbConfirmar.setBounds(180, 470, 195, 88);
+        jbConfirmar.setBounds(180, 470, 140, 70);
 
+        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
         getContentPane().add(jbCancelar);
-        jbCancelar.setBounds(630, 470, 195, 88);
+        jbCancelar.setBounds(630, 470, 140, 70);
         getContentPane().add(jtCargo);
-        jtCargo.setBounds(520, 90, 60, 20);
+        jtCargo.setBounds(520, 90, 60, 22);
         getContentPane().add(jtDepartamento);
-        jtDepartamento.setBounds(650, 90, 60, 20);
+        jtDepartamento.setBounds(650, 90, 60, 22);
 
         jLabel4.setText("Cargo");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(520, 70, 29, 14);
+        jLabel4.setBounds(520, 70, 34, 16);
 
         jLabel5.setText("Departamento");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(650, 70, 120, 14);
+        jLabel5.setBounds(650, 70, 120, 16);
 
+        jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/editar2.png"))); // NOI18N
         jbEditar.setText("Editar");
         getContentPane().add(jbEditar);
-        jbEditar.setBounds(410, 470, 195, 88);
+        jbEditar.setBounds(410, 470, 140, 70);
         getContentPane().add(jSeparator3);
         jSeparator3.setBounds(0, 450, 1030, 10);
         getContentPane().add(jSeparator4);
         jSeparator4.setBounds(0, 190, 1030, 10);
         getContentPane().add(jtNovaSenha1);
-        jtNovaSenha1.setBounds(340, 280, 120, 20);
+        jtNovaSenha1.setBounds(340, 280, 120, 22);
 
         jLabel6.setText("Nome de Usuario");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(340, 210, 110, 14);
+        jLabel6.setBounds(340, 210, 110, 16);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);

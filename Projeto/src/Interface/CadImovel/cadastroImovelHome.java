@@ -111,6 +111,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
+        jbCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbCadastrar.setText("Cadastrar");
         jbCadastrar.setEnabled(false);
         jbCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,8 +120,9 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbCadastrar);
-        jbCadastrar.setBounds(110, 250, 199, 87);
+        jbCadastrar.setBounds(110, 250, 140, 70);
 
+        jbVisualisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
         jbVisualisar.setText("Visualizar");
         jbVisualisar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -128,8 +130,9 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbVisualisar);
-        jbVisualisar.setBounds(400, 250, 195, 88);
+        jbVisualisar.setBounds(400, 250, 140, 70);
 
+        jbRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
         jbRemover.setText("Remover");
         jbRemover.setEnabled(false);
         jbRemover.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -138,7 +141,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbRemover);
-        jbRemover.setBounds(690, 250, 199, 94);
+        jbRemover.setBounds(690, 250, 140, 70);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,6 +184,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(210, 380, 40, 20);
 
+        jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/review.png"))); // NOI18N
         jbPesquisar.setText("Pesquisar");
         jbPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -191,41 +195,41 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbPesquisar);
-        jbPesquisar.setBounds(800, 430, 199, 91);
+        jbPesquisar.setBounds(800, 430, 140, 70);
 
         jLabel2.setText("Nome do Proprietario");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(40, 420, 140, 14);
+        jLabel2.setBounds(40, 420, 140, 16);
         getContentPane().add(jtNomeProprietario);
-        jtNomeProprietario.setBounds(30, 440, 290, 20);
+        jtNomeProprietario.setBounds(30, 440, 290, 22);
 
         jLabel3.setText("Bairro");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(370, 480, 60, 14);
+        jLabel3.setBounds(370, 480, 60, 16);
         getContentPane().add(jtBairro);
-        jtBairro.setBounds(360, 500, 140, 20);
+        jtBairro.setBounds(360, 500, 140, 22);
 
         jLabel4.setText("Estado");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(710, 480, 60, 14);
+        jLabel4.setBounds(710, 480, 60, 16);
         getContentPane().add(jtRua);
-        jtRua.setBounds(30, 500, 300, 20);
+        jtRua.setBounds(30, 500, 300, 22);
         getContentPane().add(jtQtdQuarto);
-        jtQtdQuarto.setBounds(380, 440, 30, 20);
+        jtQtdQuarto.setBounds(380, 440, 30, 22);
         getContentPane().add(jtVagasGaragem);
-        jtVagasGaragem.setBounds(480, 440, 30, 20);
+        jtVagasGaragem.setBounds(480, 440, 30, 22);
 
         jLabel5.setText("Rua");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(40, 480, 40, 14);
+        jLabel5.setBounds(40, 480, 40, 16);
 
         jLabel6.setText("Qtd de quarto");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(360, 420, 80, 14);
+        jLabel6.setBounds(360, 420, 80, 16);
 
         jLabel7.setText("Vagas de Garagem");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(450, 420, 140, 14);
+        jLabel7.setBounds(450, 420, 140, 16);
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(-10, 550, 1040, 10);
 
@@ -246,11 +250,11 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         getContentPane().add(jSeparator5);
         jSeparator5.setBounds(760, 360, 10, 50);
         getContentPane().add(jtCidade);
-        jtCidade.setBounds(540, 500, 140, 20);
+        jtCidade.setBounds(540, 500, 140, 22);
 
         jLabel8.setText("Cidade");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(570, 480, 33, 14);
+        jLabel8.setBounds(570, 480, 39, 16);
 
         jMenu1.setText("File");
 

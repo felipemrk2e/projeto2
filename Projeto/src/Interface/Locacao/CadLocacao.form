@@ -120,6 +120,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jbCancelar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/image/Cancel.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
       <Events>
@@ -127,12 +130,15 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="860" y="260" width="150" height="40"/>
+          <AbsoluteConstraints x="860" y="260" width="140" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="jbPesquisarImovel">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/image/review.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Pesquisar"/>
       </Properties>
       <Events>
@@ -140,7 +146,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="860" y="530" width="150" height="40"/>
+          <AbsoluteConstraints x="860" y="530" width="140" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -166,6 +172,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jbSelecionarImovel">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/image/imovel.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Selecionar Imovel"/>
       </Properties>
       <Events>
@@ -173,7 +182,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="860" y="390" width="150" height="40"/>
+          <AbsoluteConstraints x="860" y="390" width="140" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -213,6 +222,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jbPesquisarCliente">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/image/review.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Pesquisar"/>
       </Properties>
       <Events>
@@ -221,12 +233,15 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="860" y="10" width="150" height="40"/>
+          <AbsoluteConstraints x="860" y="10" width="140" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="jbSelecionarCliente">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/image/clientes.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Selecionar Cliente"/>
       </Properties>
       <Events>
@@ -234,7 +249,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="860" y="100" width="150" height="40"/>
+          <AbsoluteConstraints x="860" y="100" width="140" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -443,6 +458,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jbEfetuarLocacao">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/image/Partnership-icon.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Efetuar Loca&#xe7;&#xe3;o"/>
       </Properties>
       <Events>
@@ -450,7 +468,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="860" y="210" width="150" height="40"/>
+          <AbsoluteConstraints x="860" y="210" width="140" height="40"/>
         </Constraint>
       </Constraints>
     </Component>

@@ -31,6 +31,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
      * Creates new form cadastroClienteHome
      */
     public cadastroClienteHome() {
+        this.setUndecorated(true);
         initComponents();
         jcbPessoaFisica.setSelected(true);
         jcbPessoaJuridica.setSelected(true);
@@ -89,6 +90,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 46, 920, 240));
 
         jbCadastrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbCadastrar.setText("Cadastrar");
         jbCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -98,6 +100,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         getContentPane().add(jbCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 140, 70));
 
         jbVisualizar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
         jbVisualizar.setText("Visualizar");
         jbVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -107,6 +110,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         getContentPane().add(jbVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 140, 70));
 
         jbRemover.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
         jbRemover.setText("Remover");
         jbRemover.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -116,6 +120,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         getContentPane().add(jbRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, 140, 70));
 
         jbPesquisar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/review.png"))); // NOI18N
         jbPesquisar.setText("Pesquisar");
         jbPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

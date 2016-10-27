@@ -94,7 +94,7 @@ public class ControleLocacao extends javax.swing.JFrame {
 
         jtNomeLocatario.setEnabled(false);
         getContentPane().add(jtNomeLocatario);
-        jtNomeLocatario.setBounds(50, 110, 350, 20);
+        jtNomeLocatario.setBounds(50, 110, 350, 22);
 
         jtNomeProprietario.setEnabled(false);
         jtNomeProprietario.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +103,7 @@ public class ControleLocacao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jtNomeProprietario);
-        jtNomeProprietario.setBounds(50, 160, 350, 20);
+        jtNomeProprietario.setBounds(50, 160, 350, 22);
 
         jtValor.setEnabled(false);
         getContentPane().add(jtValor);
@@ -124,7 +124,7 @@ public class ControleLocacao extends javax.swing.JFrame {
 
         jtNomeFiador.setEnabled(false);
         getContentPane().add(jtNomeFiador);
-        jtNomeFiador.setBounds(50, 210, 350, 20);
+        jtNomeFiador.setBounds(50, 210, 350, 22);
 
         jtIdImovel.setEnabled(false);
         getContentPane().add(jtIdImovel);
@@ -132,15 +132,15 @@ public class ControleLocacao extends javax.swing.JFrame {
 
         jLabel1.setText("Nome do locatario");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(50, 90, 86, 14);
+        jLabel1.setBounds(50, 90, 104, 16);
 
         jLabel2.setText("Nome do Proprietario");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(50, 140, 101, 14);
+        jLabel2.setBounds(50, 140, 122, 16);
 
         jLabel3.setText("Valor");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(590, 140, 24, 14);
+        jLabel3.setBounds(590, 140, 30, 16);
 
         jLabel4.setText("Inicio do contrato");
         getContentPane().add(jLabel4);
@@ -148,14 +148,15 @@ public class ControleLocacao extends javax.swing.JFrame {
 
         jLabel5.setText("Fim do Contrato");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(720, 190, 90, 14);
+        jLabel5.setBounds(720, 190, 90, 16);
         getContentPane().add(jLabel6);
         jLabel6.setBounds(310, 160, 0, 0);
 
         jLabel7.setText("Nome do fiador");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(50, 190, 80, 14);
+        jLabel7.setBounds(50, 190, 80, 16);
 
+        jbConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbConfirmar.setText("Confirmar");
         jbConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -163,8 +164,9 @@ public class ControleLocacao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbConfirmar);
-        jbConfirmar.setBounds(150, 460, 195, 88);
+        jbConfirmar.setBounds(150, 460, 140, 70);
 
+        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
         jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -172,8 +174,9 @@ public class ControleLocacao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbCancelar);
-        jbCancelar.setBounds(680, 460, 195, 88);
+        jbCancelar.setBounds(680, 460, 140, 70);
 
+        jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/editar2.png"))); // NOI18N
         jbEditar.setText("Editar");
         jbEditar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -181,8 +184,9 @@ public class ControleLocacao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbEditar);
-        jbEditar.setBounds(420, 460, 195, 88);
+        jbEditar.setBounds(420, 460, 140, 70);
 
+        jbFinalizarContrato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/contrato.png"))); // NOI18N
         jbFinalizarContrato.setText("Finalizar Contrato");
         jbFinalizarContrato.setEnabled(false);
         jbFinalizarContrato.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -191,7 +195,7 @@ public class ControleLocacao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbFinalizarContrato);
-        jbFinalizarContrato.setBounds(780, 40, 195, 88);
+        jbFinalizarContrato.setBounds(780, 40, 140, 70);
 
         jLabel8.setText("IdImovel");
         getContentPane().add(jLabel8);

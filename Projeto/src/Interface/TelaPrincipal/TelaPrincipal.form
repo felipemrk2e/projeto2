@@ -128,13 +128,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jbCliente" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                          <Component id="jbControleCliente" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                          <Component id="jbControleImovel" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                          <Component id="jbLocacao" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                          <Component id="jbImovel" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="jbControleCliente" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                          <Component id="jbControleImovel" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                          <Component id="jbLocacao" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                          <Component id="jbImovel" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                           <Component id="jbControleLocacao" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                          <Component id="jbControleFuncionario" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                          <Component id="jbFuncionario" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="jbControleFuncionario" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                          <Component id="jbFuncionario" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -149,7 +149,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jbCliente" min="-2" pref="62" max="-2" attributes="0"/>
+                      <Component id="jbCliente" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Component id="jbControleCliente" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>

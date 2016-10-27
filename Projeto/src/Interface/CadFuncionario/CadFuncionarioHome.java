@@ -74,6 +74,7 @@ int user;
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(70, 30, 880, 239);
 
+        jbCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbCadastrar.setText("Cadastrar");
         jbCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -81,8 +82,9 @@ int user;
             }
         });
         getContentPane().add(jbCadastrar);
-        jbCadastrar.setBounds(90, 290, 195, 88);
+        jbCadastrar.setBounds(90, 290, 140, 70);
 
+        jbVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
         jbVisualizar.setText("Visualisar");
         jbVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -90,8 +92,9 @@ int user;
             }
         });
         getContentPane().add(jbVisualizar);
-        jbVisualizar.setBounds(320, 290, 195, 88);
+        jbVisualizar.setBounds(320, 290, 140, 70);
 
+        jbExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
         jbExcluir.setText("Excluir");
         jbExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -99,8 +102,9 @@ int user;
             }
         });
         getContentPane().add(jbExcluir);
-        jbExcluir.setBounds(760, 290, 195, 88);
+        jbExcluir.setBounds(760, 290, 140, 70);
 
+        jbNivel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/acesso.png"))); // NOI18N
         jbNivel.setText("Nivel de acesso");
         jbNivel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -108,8 +112,9 @@ int user;
             }
         });
         getContentPane().add(jbNivel);
-        jbNivel.setBounds(540, 290, 195, 88);
+        jbNivel.setBounds(540, 290, 140, 70);
 
+        jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/review.png"))); // NOI18N
         jbPesquisar.setText("Pesquisar");
         jbPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -117,31 +122,31 @@ int user;
             }
         });
         getContentPane().add(jbPesquisar);
-        jbPesquisar.setBounds(780, 430, 195, 88);
+        jbPesquisar.setBounds(780, 430, 140, 70);
 
         jLabel1.setText("Nome do Funcionario");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(110, 410, 130, 14);
+        jLabel1.setBounds(110, 410, 130, 16);
         getContentPane().add(jtNomeFuncionario);
-        jtNomeFuncionario.setBounds(100, 440, 150, 20);
+        jtNomeFuncionario.setBounds(100, 440, 150, 22);
 
         jLabel2.setText("Cpf");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(330, 410, 17, 14);
+        jLabel2.setBounds(330, 410, 19, 16);
         getContentPane().add(jtCpf);
-        jtCpf.setBounds(300, 440, 110, 20);
+        jtCpf.setBounds(300, 440, 110, 22);
         getContentPane().add(jtCargo);
-        jtCargo.setBounds(480, 440, 90, 20);
+        jtCargo.setBounds(480, 440, 90, 22);
         getContentPane().add(jtDepartamento);
-        jtDepartamento.setBounds(610, 440, 110, 20);
+        jtDepartamento.setBounds(610, 440, 110, 22);
 
         jLabel3.setText("Cargo");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(490, 410, 29, 14);
+        jLabel3.setBounds(490, 410, 34, 16);
 
         jLabel4.setText("Departamento");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(610, 410, 90, 14);
+        jLabel4.setBounds(610, 410, 90, 16);
         getContentPane().add(jSeparator3);
         jSeparator3.setBounds(0, 390, 1020, 10);
 
