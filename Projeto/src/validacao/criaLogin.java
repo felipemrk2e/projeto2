@@ -50,7 +50,7 @@ public class criaLogin {
         String novoLogin = login;
         String tempLogin = login;
 
-        while (tempLogin.equalsIgnoreCase(logins.get(j).getNomeUsuario())) {
+       
             for (int i = 0; i < logins.size(); i++) {
                 if (tempLogin.equalsIgnoreCase(logins.get(i).getNomeUsuario())) {
                     novoLogin = (login + aux);
@@ -58,12 +58,7 @@ public class criaLogin {
                     j++;
                 }
                 novoLogin = login;
-            }
-            if (j >= logins.size()) {
-                j = 0;
-            }
-
-        }
+            }            
         return tempLogin.toLowerCase();
     }
 

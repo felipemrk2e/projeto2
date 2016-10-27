@@ -5,33 +5,47 @@
  */
 package Interface.TelaPrincipal;
 
+import dao.LoginDAO;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import model.pessoa.Login;
 
 /**
  *
  * @author Sala
  */
 public class TelaLogin extends javax.swing.JDialog {
+
+    private String usuario;
     
-    /**
-     * Creates new form TelaLogin
-     */
+    
     public TelaLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-    }
-    
-    public TelaLogin(){
-        
+
     }
 
-    public void limpaCampos(){
+    public TelaLogin() {
+
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    
+    
+    public void limpaCampos() {
         jtfUsuario.setText("");
-        jpfSenha.setText("");    
+        jpfSenha.setText("");
     }
 
     /**
@@ -111,14 +125,19 @@ public class TelaLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_jbAcessarMousePressed
 
     public boolean verificaLogin() {
-        if (jtfUsuario.getText().equals("teste") && jpfSenha.getText().equals("teste")) {             
-            return true;
-        } 
-        return false;
-    }
-    
-    
+        LoginDAO loginDAO = new LoginDAO();
+        List<Login> logins = new ArrayList<Login>();
+        logins = loginDAO.getAll();
 
+        for (int i = 0; i < logins.size(); i++) {
+            if (jtfUsuario.getText().equals(logins.get(i).getNomeUsuario()) && jpfSenha.getText().equals(logins.get(i).getSenhaUsuario())) {
+                setUsuario(logins.get(i).getNomeUsuario());
+                return true;
+            }            
+        }
+        return false;
+    }    
+    
     /**
      * @param args the command line arguments
      */

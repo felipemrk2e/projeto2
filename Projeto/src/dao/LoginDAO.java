@@ -46,4 +46,8 @@ public class LoginDAO extends DAO<Login> {
         return entityManager.createQuery("FROM Login").getResultList();
     }
     
+    public List<Login> getAcesso(String nomeUsuario) {
+        return entityManager.createQuery("FROM Login WHERE nomeUsuario ='"+nomeUsuario+"'").getResultList();
+    }
+    
 }

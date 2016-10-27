@@ -5,6 +5,7 @@
  */
 package Interface.CadFuncionario;
 
+import Interface.TelaPrincipal.TelaPrincipal;
 import dao.CargoDAO;
 import dao.DepartamentoDAO;
 import dao.EstadoCivilDAO;
@@ -56,6 +57,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         carregaEstados();
         carregaEstadosCivis();
         populaFuncionario();
+
     }
 
     public cadastroFuncionario(int user) {
@@ -366,9 +368,9 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         funcionario.setCargaHoraria(jtfCargaHoraria.getText());
         Date admissao = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataAdmissao.getText());
         funcionario.setDataAdmissao(admissao);
-        
+
         criaLogin loginNovo = new criaLogin();
-        
+
         Login login = new Login();
         login.setNivelAcesso(0);
         login.setNomeUsuario(loginNovo.geraNovoUsuario(funcionario.getNomePessoa()));
@@ -779,8 +781,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         }
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeCargos.toArray());
         jcbCargo.setModel(defaultComboBox);
-    }  
-    
+    }
 
     public void fecharCadastro() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -845,6 +846,10 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new cadastroFuncionario().setVisible(true);
+                TelaPrincipal telaPrincipal = new TelaPrincipal();
+                System.out.println("   =========================================================================================================================== ");
+                System.out.println("Nível de Acesso" + telaPrincipal.getNivelAcessoMain());
+                System.out.println("   =========================================================================================================================== ");
             }
         });
     }

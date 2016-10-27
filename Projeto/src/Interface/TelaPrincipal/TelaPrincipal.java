@@ -13,12 +13,16 @@ import Interface.CadImovel.cadastroImovel;
 import Interface.CadImovel.cadastroImovelHome;
 import Interface.Locacao.CadLocacao;
 import Interface.Locacao.ControleLocacao;
+import dao.LoginDAO;
 import java.awt.ComponentOrientation;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
+import model.pessoa.Login;
 
 /**
  *
@@ -29,6 +33,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private int tentativas = 0;
     private boolean logado = false;
     TelaLogin telaLogin = new TelaLogin(new javax.swing.JFrame(), true);
+    public static int nivelAcessoMain;
 
     /**
      * Creates new form TelaPrincipal
@@ -49,11 +54,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
 //        jSeparator1.repaint();
 //        jPanel1.repaint();
 
-        jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);        
+        jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         iniciarPrincipal();
         this.setVisible(true);
         Login();
     }
+
+    public static int getNivelAcessoMain() {
+        return nivelAcessoMain;
+    }
+
+    public static void setNivelAcessoMain(int nivelAcessoMain) {
+        TelaPrincipal.nivelAcessoMain = nivelAcessoMain;
+    }
+    
 
     public boolean isLogado() {
         return logado;
@@ -98,8 +112,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }
 
-    public void acesso() {
-        int nivelAcesso = 1;
+    public void acesso(String usuario) {
+        LoginDAO loginDAO = new LoginDAO();
+        List<Login> login = new ArrayList<Login>();
+        login = loginDAO.getAcesso(usuario);
+        int nivelAcesso = login.get(0).getNivelAcesso();
+        setNivelAcessoMain(nivelAcesso);
         if (nivelAcesso == 1) {
             System.out.println("Total");
             ocultaFuncoes(true);
@@ -135,7 +153,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
             setLogado(true);
             jlLogoff.setEnabled(true);
-            acesso();
+            acesso(telaLogin.getUsuario());
         } else {
             JOptionPane.showMessageDialog(null, "Acesso negado!\nUsuário ou Senha Incorretos");
             limpaCampos();
