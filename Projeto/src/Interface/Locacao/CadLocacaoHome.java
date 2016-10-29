@@ -53,28 +53,31 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jbVisualizar = new javax.swing.JButton();
         jbCadastrar = new javax.swing.JButton();
         jbPesquisar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jlIdImovel = new javax.swing.JLabel();
+        jlNomeProprietario = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jtNomeInquilino = new javax.swing.JTextField();
         jtNomeProprietario = new javax.swing.JTextField();
         jtIdImovel = new javax.swing.JTextField();
         jtRua = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jlRua = new javax.swing.JLabel();
+        jlBairro = new javax.swing.JLabel();
         jtBairro = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        jlEstado = new javax.swing.JLabel();
         jtCep = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        jlCep = new javax.swing.JLabel();
         jcbEstado = new javax.swing.JComboBox();
         jbControle = new javax.swing.JButton();
         jtCidade = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        jlCidade = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -84,12 +87,10 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1024, 640));
         getContentPane().setLayout(null);
 
+        jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -98,28 +99,31 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(50, 30, 910, 210);
+        jScrollPane1.setBounds(50, 40, 910, 210);
 
+        jbVisualizar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
-        jbVisualizar.setText("visualizar");
+        jbVisualizar.setText("Visualizar");
         jbVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbVisualizarMouseClicked(evt);
             }
         });
         getContentPane().add(jbVisualizar);
-        jbVisualizar.setBounds(420, 250, 140, 70);
+        jbVisualizar.setBounds(670, 260, 140, 70);
 
+        jbCadastrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
-        jbCadastrar.setText("Cadastro de locação");
+        jbCadastrar.setText("<html><center>Cadastro <br /> de <br /> Locação </center></html>");
         jbCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbCadastrarMouseClicked(evt);
             }
         });
         getContentPane().add(jbCadastrar);
-        jbCadastrar.setBounds(190, 250, 140, 70);
+        jbCadastrar.setBounds(820, 260, 140, 70);
 
+        jbPesquisar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/review.png"))); // NOI18N
         jbPesquisar.setText("Pesquisar");
         jbPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,70 +132,88 @@ public class CadLocacaoHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbPesquisar);
-        jbPesquisar.setBounds(800, 410, 140, 70);
+        jbPesquisar.setBounds(820, 480, 140, 70);
 
-        jLabel1.setText("Nome do Inquilino");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(130, 440, 200, 16);
+        jlIdImovel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlIdImovel.setText("Nome do Inquilino:");
+        getContentPane().add(jlIdImovel);
+        jlIdImovel.setBounds(50, 520, 120, 30);
 
-        jLabel2.setText("Nome do Proprietario");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(130, 380, 140, 16);
+        jlNomeProprietario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNomeProprietario.setText("Nome do Proprietário:");
+        getContentPane().add(jlNomeProprietario);
+        jlNomeProprietario.setBounds(50, 480, 140, 30);
 
-        jLabel3.setText("idImovel");
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setText("ID Imóvel:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 380, 80, 16);
+        jLabel3.setBounds(50, 400, 70, 30);
         getContentPane().add(jtNomeInquilino);
-        jtNomeInquilino.setBounds(130, 460, 350, 22);
+        jtNomeInquilino.setBounds(170, 520, 600, 30);
         getContentPane().add(jtNomeProprietario);
-        jtNomeProprietario.setBounds(130, 400, 350, 22);
+        jtNomeProprietario.setBounds(200, 480, 570, 30);
         getContentPane().add(jtIdImovel);
-        jtIdImovel.setBounds(30, 400, 90, 22);
+        jtIdImovel.setBounds(120, 400, 90, 30);
         getContentPane().add(jtRua);
-        jtRua.setBounds(20, 540, 260, 22);
+        jtRua.setBounds(460, 400, 310, 30);
 
-        jLabel4.setText("Rua");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 520, 34, 20);
+        jlRua.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlRua.setText("Rua:");
+        getContentPane().add(jlRua);
+        jlRua.setBounds(420, 400, 34, 30);
 
-        jLabel5.setText("bairro");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(310, 520, 34, 20);
+        jlBairro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlBairro.setText("Bairro:");
+        getContentPane().add(jlBairro);
+        jlBairro.setBounds(50, 440, 50, 30);
         getContentPane().add(jtBairro);
-        jtBairro.setBounds(310, 540, 160, 22);
+        jtBairro.setBounds(100, 440, 250, 30);
 
-        jLabel6.setText("estado");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(690, 520, 38, 20);
+        jlEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlEstado.setText("Estado:");
+        getContentPane().add(jlEstado);
+        jlEstado.setBounds(650, 440, 50, 30);
         getContentPane().add(jtCep);
-        jtCep.setBounds(580, 400, 90, 22);
+        jtCep.setBounds(320, 400, 90, 30);
 
-        jLabel7.setText("Cep do imóvel");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(580, 380, 100, 16);
+        jlCep.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlCep.setText("CEP do Imóvel:");
+        getContentPane().add(jlCep);
+        jlCep.setBounds(220, 400, 100, 30);
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbEstado);
-        jcbEstado.setBounds(690, 540, 66, 23);
+        jcbEstado.setBounds(700, 440, 66, 30);
 
+        jbControle.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbControle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/controle.png"))); // NOI18N
-        jbControle.setText("controle de locação");
+        jbControle.setText("<html><center>Controle <br/> de </br> Locação<center></html>");
         jbControle.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbControleMouseClicked(evt);
             }
         });
         getContentPane().add(jbControle);
-        jbControle.setBounds(640, 250, 140, 70);
+        jbControle.setBounds(520, 260, 140, 70);
         getContentPane().add(jtCidade);
-        jtCidade.setBounds(490, 540, 160, 22);
+        jtCidade.setBounds(410, 440, 230, 30);
 
-        jLabel8.setText("Cidade");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(500, 520, 50, 20);
+        jlCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlCidade.setText("Cidade:");
+        jlCidade.setAutoscrolls(true);
+        getContentPane().add(jlCidade);
+        jlCidade.setBounds(360, 440, 50, 30);
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Locação Home", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        getContentPane().add(jSeparator1);
+        jSeparator1.setBounds(20, 10, 970, 340);
+
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisar Locação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator4);
-        jSeparator4.setBounds(0, 350, 1030, 10);
+        jSeparator4.setBounds(20, 360, 970, 200);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -354,18 +376,14 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbCadastrar;
@@ -373,6 +391,13 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     private javax.swing.JButton jbPesquisar;
     private javax.swing.JButton jbVisualizar;
     private javax.swing.JComboBox jcbEstado;
+    private javax.swing.JLabel jlBairro;
+    private javax.swing.JLabel jlCep;
+    private javax.swing.JLabel jlCidade;
+    private javax.swing.JLabel jlEstado;
+    private javax.swing.JLabel jlIdImovel;
+    private javax.swing.JLabel jlNomeProprietario;
+    private javax.swing.JLabel jlRua;
     private javax.swing.JTextField jtBairro;
     private javax.swing.JTextField jtCep;
     private javax.swing.JTextField jtCidade;

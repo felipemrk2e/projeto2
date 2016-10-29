@@ -70,13 +70,12 @@ public class ControleLocacao extends javax.swing.JFrame {
         jtFimContrato = new javax.swing.JTextField();
         jtNomeFiador = new javax.swing.JTextField();
         jtIdImovel = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jlNomeLocatario = new javax.swing.JLabel();
+        jlNomeProprietario = new javax.swing.JLabel();
+        jlValor = new javax.swing.JLabel();
+        jlInicioContrato = new javax.swing.JLabel();
+        jlFimContrato = new javax.swing.JLabel();
+        jlNomeFiador = new javax.swing.JLabel();
         jbConfirmar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
         jbEditar = new javax.swing.JButton();
@@ -92,10 +91,12 @@ public class ControleLocacao extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1024, 640));
         getContentPane().setLayout(null);
 
+        jtNomeLocatario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtNomeLocatario.setEnabled(false);
         getContentPane().add(jtNomeLocatario);
-        jtNomeLocatario.setBounds(50, 110, 350, 22);
+        jtNomeLocatario.setBounds(210, 90, 510, 30);
 
+        jtNomeProprietario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtNomeProprietario.setEnabled(false);
         jtNomeProprietario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,12 +104,14 @@ public class ControleLocacao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jtNomeProprietario);
-        jtNomeProprietario.setBounds(50, 160, 350, 22);
+        jtNomeProprietario.setBounds(210, 130, 510, 30);
 
+        jtValor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtValor.setEnabled(false);
         getContentPane().add(jtValor);
-        jtValor.setBounds(570, 160, 80, 20);
+        jtValor.setBounds(370, 50, 350, 30);
 
+        jtInicioContrato.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtInicioContrato.setEnabled(false);
         jtInicioContrato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,46 +119,54 @@ public class ControleLocacao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jtInicioContrato);
-        jtInicioContrato.setBounds(570, 210, 80, 20);
+        jtInicioContrato.setBounds(210, 210, 200, 30);
 
+        jtFimContrato.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtFimContrato.setEnabled(false);
         getContentPane().add(jtFimContrato);
-        jtFimContrato.setBounds(720, 210, 80, 20);
+        jtFimContrato.setBounds(540, 210, 180, 30);
 
+        jtNomeFiador.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtNomeFiador.setEnabled(false);
         getContentPane().add(jtNomeFiador);
-        jtNomeFiador.setBounds(50, 210, 350, 22);
+        jtNomeFiador.setBounds(210, 170, 510, 30);
 
+        jtIdImovel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtIdImovel.setEnabled(false);
         getContentPane().add(jtIdImovel);
-        jtIdImovel.setBounds(50, 40, 60, 20);
+        jtIdImovel.setBounds(210, 50, 100, 30);
 
-        jLabel1.setText("Nome do locatario");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(50, 90, 104, 16);
+        jlNomeLocatario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNomeLocatario.setText("Nome do Locatário:");
+        getContentPane().add(jlNomeLocatario);
+        jlNomeLocatario.setBounds(80, 90, 130, 30);
 
-        jLabel2.setText("Nome do Proprietario");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(50, 140, 122, 16);
+        jlNomeProprietario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNomeProprietario.setText("Nome do Proprietário:");
+        getContentPane().add(jlNomeProprietario);
+        jlNomeProprietario.setBounds(60, 130, 150, 30);
 
-        jLabel3.setText("Valor");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(590, 140, 30, 16);
+        jlValor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlValor.setText("Valor:");
+        getContentPane().add(jlValor);
+        jlValor.setBounds(320, 50, 50, 30);
 
-        jLabel4.setText("Inicio do contrato");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(570, 190, 110, 20);
+        jlInicioContrato.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlInicioContrato.setText("Início do Contrato:");
+        getContentPane().add(jlInicioContrato);
+        jlInicioContrato.setBounds(90, 210, 120, 30);
 
-        jLabel5.setText("Fim do Contrato");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(720, 190, 90, 16);
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(310, 160, 0, 0);
+        jlFimContrato.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlFimContrato.setText("Fim do Contrato:");
+        getContentPane().add(jlFimContrato);
+        jlFimContrato.setBounds(420, 210, 110, 30);
 
-        jLabel7.setText("Nome do fiador");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(50, 190, 80, 16);
+        jlNomeFiador.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNomeFiador.setText("Nome do Fiador:");
+        getContentPane().add(jlNomeFiador);
+        jlNomeFiador.setBounds(100, 170, 110, 30);
 
+        jbConfirmar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbConfirmar.setText("Confirmar");
         jbConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -164,8 +175,9 @@ public class ControleLocacao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbConfirmar);
-        jbConfirmar.setBounds(150, 460, 140, 70);
+        jbConfirmar.setBounds(560, 280, 140, 70);
 
+        jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
         jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,8 +186,9 @@ public class ControleLocacao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbCancelar);
-        jbCancelar.setBounds(680, 460, 140, 70);
+        jbCancelar.setBounds(260, 280, 140, 70);
 
+        jbEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/editar2.png"))); // NOI18N
         jbEditar.setText("Editar");
         jbEditar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,10 +197,11 @@ public class ControleLocacao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbEditar);
-        jbEditar.setBounds(420, 460, 140, 70);
+        jbEditar.setBounds(410, 280, 140, 70);
 
+        jbFinalizarContrato.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbFinalizarContrato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/contrato.png"))); // NOI18N
-        jbFinalizarContrato.setText("Finalizar Contrato");
+        jbFinalizarContrato.setText("<html><center>Finalizar <br/> Contrato</center></html>");
         jbFinalizarContrato.setEnabled(false);
         jbFinalizarContrato.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -195,13 +209,17 @@ public class ControleLocacao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbFinalizarContrato);
-        jbFinalizarContrato.setBounds(780, 40, 140, 70);
+        jbFinalizarContrato.setBounds(740, 170, 140, 70);
 
-        jLabel8.setText("IdImovel");
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel8.setText("ID Imóvel:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(60, 20, 90, 20);
+        jLabel8.setBounds(140, 50, 70, 30);
+
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contrato", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator4);
-        jSeparator4.setBounds(0, 450, 1030, 10);
+        jSeparator4.setBounds(30, 20, 930, 240);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -292,13 +310,6 @@ public class ControleLocacao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -308,6 +319,12 @@ public class ControleLocacao extends javax.swing.JFrame {
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JButton jbEditar;
     private javax.swing.JButton jbFinalizarContrato;
+    private javax.swing.JLabel jlFimContrato;
+    private javax.swing.JLabel jlInicioContrato;
+    private javax.swing.JLabel jlNomeFiador;
+    private javax.swing.JLabel jlNomeLocatario;
+    private javax.swing.JLabel jlNomeProprietario;
+    private javax.swing.JLabel jlValor;
     private javax.swing.JTextField jtFimContrato;
     private javax.swing.JTextField jtIdImovel;
     private javax.swing.JTextField jtInicioContrato;
