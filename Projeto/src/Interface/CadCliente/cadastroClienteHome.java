@@ -38,11 +38,6 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         jcbPessoaJuridica.setSelected(true);
         popularTabela();
     }
-
-    public cadastroClienteHome(int user) {
-        this.user = user;
-        initComponents();
-    }
     
     public static cadastroClienteHome getInstancia() {
         if (instancia == null) {

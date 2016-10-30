@@ -121,8 +121,7 @@ public class TelaLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_jbAcessarMousePressed
 
     public boolean verificaLogin() {
-        Sessao sessao = Sessao.getInstance();      
-        System.out.println("=====================================================Chamou Login no VerificaLogin() TELA LOGIN");
+        Sessao sessao = Sessao.getInstance();   
         LoginDAO loginDAO = new LoginDAO();
         List<Login> logins = new ArrayList<Login>();
         logins = loginDAO.getAll();

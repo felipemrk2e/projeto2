@@ -188,6 +188,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftComercial.setText("");
         jtfEmail.setText("");
         jtaObs.setText("");
+        jftCPFResponsavel.setText("");
 
         //cad Fim 
         // JRB
@@ -875,7 +876,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-        new cadastroClienteHome(user).setVisible(true);
+        cadastroClienteHome homeCliente = cadastroClienteHome.getInstancia();       
         dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
 

@@ -13,6 +13,7 @@ import Interface.CadImovel.cadastroImovel;
 import Interface.CadImovel.cadastroImovelHome;
 import Interface.Locacao.CadLocacao;
 import Interface.Locacao.ControleLocacao;
+import java.awt.Component;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
@@ -33,7 +34,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         carregarPrincipal();
-        
+
     }
 
     public static TelaPrincipal getInstancia() {
@@ -50,8 +51,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public void setLogado(boolean logado) {
         this.logado = logado;
     }
-    
-    public void carregarPrincipal(){
+
+    public void carregarPrincipal() {
         this.setTitle("Sistema de Cadastro de Imóveis");
         this.setExtendedState(MAXIMIZED_BOTH);
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -162,7 +163,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 }
             }
         }
+    }
 
+    public void zerarCampos() {
+        if (cadastroCliente.getInstancia() != null) {
+            cadastroCliente.getInstancia().ZerarCampos();
+        }
+//        if (cadastroImovel.getInstancia() != null) {
+//            cadastroImovel.getInstancia().zerarCampos();
+//        }
+        if (cadastroImovelHome.getInstancia() != null) {
+           
+        }
+        if (CadLocacao.getInstancia() != null) {
+
+        }
+        if (ControleLocacao.getInstancia() != null) {
+        }
+        if (cadastroFuncionario.getInstancia() != null) {
+            cadastroFuncionario.getInstancia().ZerarCampos();
+        }
+        if (ControleFuncionario.getInstancia() != null) {
+            
+        }
+
+    }
+    
+    public Component getPosition() {
+        return jSeparator2;
     }
 
     /**
@@ -418,6 +446,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Logoff efetuado com sucesso!");
             ocultaFuncoes(false);
+            zerarCampos();
             setLogado(false);
             Login();
         }
@@ -471,7 +500,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbControleFuncionarioMousePressed
 
     private void jbControleLocacao1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleLocacao1MousePressed
-       
+
     }//GEN-LAST:event_jbControleLocacao1MousePressed
 
     private void jlTrocaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlTrocaMousePressed
