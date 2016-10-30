@@ -13,7 +13,7 @@ import java.util.Set;
  * @author user
  */
 public class ControleLocacao extends javax.swing.JFrame {
-
+    private static ControleLocacao instancia;
     int user;
 
     /**
@@ -27,6 +27,13 @@ public class ControleLocacao extends javax.swing.JFrame {
                  this.user = user;
           initComponents();
         popular();
+    }
+    
+    public static ControleLocacao getInstancia() {
+        if (instancia == null) {
+            instancia = new ControleLocacao();
+        }
+        return instancia;
     }
 
     public void verificaNivel() {

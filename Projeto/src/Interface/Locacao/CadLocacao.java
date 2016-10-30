@@ -13,7 +13,7 @@ import validacao.validacao;
  * @author user
  */
 public class CadLocacao extends javax.swing.JFrame {
-
+    private static CadLocacao instancia;
     int user;
 
     /**
@@ -33,6 +33,13 @@ public class CadLocacao extends javax.swing.JFrame {
                  this.user = user;
 
         initComponents();
+    }
+    
+    public static CadLocacao getInstancia() {
+        if (instancia == null) {
+            instancia = new CadLocacao();
+        }
+        return instancia;
     }
 
     /**

@@ -14,6 +14,7 @@ import validacao.validacao;
  */
 public class CadLocacaoHome extends javax.swing.JFrame {
 
+    private static CadLocacaoHome instancia;
     int user;
 
     /**
@@ -24,11 +25,18 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     }
 
     public CadLocacaoHome(int user) {
-                 this.user = user;
+        this.user = user;
 
         initComponents();
 
         verificaNivel();
+    }
+
+    public static CadLocacaoHome getInstancia() {
+        if (instancia == null) {
+            instancia = new CadLocacaoHome();
+        }
+        return instancia;
     }
 
     public void verificaNivel() {

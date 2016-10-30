@@ -33,7 +33,7 @@ import javax.swing.JOptionPane;
 import validacao.validacao;
 
 public class cadastroImovel extends javax.swing.JFrame {
-
+    private static cadastroImovel instancia;
     int user;
     Imovel imovelTemp;
 
@@ -74,6 +74,13 @@ public class cadastroImovel extends javax.swing.JFrame {
         popular(imovel);
         verificaNivel();
 
+    }
+    
+    public static cadastroImovel getInstancia() {
+        if (instancia == null) {
+            instancia = new cadastroImovel();
+        }
+        return instancia;
     }
 
     public void ComboBox() {

@@ -5,6 +5,7 @@
  */
 package Interface.CadCliente;
 
+import Interface.TelaPrincipal.TelaPrincipal;
 import dao.EstadoCivilDAO;
 import dao.EstadoDAO;
 import dao.PessoaDAO;
@@ -43,6 +44,7 @@ import validacao.*;
  */
 public class cadastroCliente extends javax.swing.JFrame {
 
+    private static cadastroCliente instancia;
     int user;
     Pessoa pessoaTemp;
     PessoaFisica pessoaFisicaTemp;
@@ -90,6 +92,13 @@ public class cadastroCliente extends javax.swing.JFrame {
         configuraMascaras();
         popular();
         verificaNivel();
+    }
+
+    public static cadastroCliente getInstancia() {
+        if (instancia == null) {
+            instancia = new cadastroCliente();
+        }
+        return instancia;
     }
 
     public void verificaNivel0() {
@@ -495,7 +504,6 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftComercial.setText("");
         jtfEmail.setText("teste@teste");
     }
-  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -855,7 +863,7 @@ public class cadastroCliente extends javax.swing.JFrame {
             } catch (ParseException ex) {
                 Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else if (jrbPessoaJuridica.isSelected()) {
+        } else if (jrbPessoaJuridica.isSelected()) {
             try {
                 cadastrarPessoaJuridica();
             } catch (ParseException ex) {

@@ -25,6 +25,7 @@ import validacao.validacao;
  */
 public class cadastroClienteHome extends javax.swing.JFrame {
 
+    private static cadastroClienteHome instancia;
     int user;
 
     /**
@@ -41,6 +42,13 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     public cadastroClienteHome(int user) {
         this.user = user;
         initComponents();
+    }
+    
+    public static cadastroClienteHome getInstancia() {
+        if (instancia == null) {
+            instancia = new cadastroClienteHome();
+        }
+        return instancia;
     }
 
     /**

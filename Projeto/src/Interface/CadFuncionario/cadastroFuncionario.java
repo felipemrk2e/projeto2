@@ -5,6 +5,7 @@
  */
 package Interface.CadFuncionario;
 
+import Interface.TelaPrincipal.Sessao;
 import Interface.TelaPrincipal.TelaPrincipal;
 import dao.CargoDAO;
 import dao.DepartamentoDAO;
@@ -46,12 +47,14 @@ import validacao.criaLogin;
  */
 public class cadastroFuncionario extends javax.swing.JFrame {
 
-    int user;
+    private static cadastroFuncionario instancia;
+    int user = Sessao.getInstance().getUsuario().getNivelAcesso();
 
     /**
      * Creates new form cadastroFuncionario
      */
     public cadastroFuncionario() {
+        this.setUndecorated(true);
         initComponents();
         carregaCargos();
         carregaEstados();
@@ -61,6 +64,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }
 
     public cadastroFuncionario(int user) {
+        this.setUndecorated(true);
         this.user = user;
         initComponents();
         verificaNivel0();
@@ -73,6 +77,13 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         popular();
         verificaNivel();
 
+    }
+    
+    public static cadastroFuncionario getInstancia() {
+        if (instancia == null) {
+            instancia = new cadastroFuncionario();
+        }
+        return instancia;
     }
 
     public void verificaNivel0() {
@@ -736,8 +747,8 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-        new CadFuncionarioHome(user).setVisible(true);
-        dispose();    // TODO add your handling code here:
+//        new CadFuncionarioHome(user).setVisible(true);
+//        dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
 
     private void jlAddCargoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAddCargoMousePressed
@@ -846,10 +857,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new cadastroFuncionario().setVisible(true);
-                TelaPrincipal telaPrincipal = new TelaPrincipal();
-                System.out.println("   =========================================================================================================================== ");
-                System.out.println("Nível de Acesso" + telaPrincipal.getNivelAcessoMain());
-                System.out.println("   =========================================================================================================================== ");
             }
         });
     }

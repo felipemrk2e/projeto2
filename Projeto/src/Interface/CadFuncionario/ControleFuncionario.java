@@ -5,27 +5,30 @@
  */
 package Interface.CadFuncionario;
 
+import Interface.TelaPrincipal.Sessao;
+
 /**
  *
  * @author user
  */
 public class ControleFuncionario extends javax.swing.JFrame {
 
-    int user;
+    private static ControleFuncionario instancia;
+    int user = Sessao.getInstance().getUsuario().getNivelAcesso();
 
     /**
      * Creates new form ControleFuncionario
      */
     public ControleFuncionario() {
+        this.setUndecorated(true);
         initComponents();
     }
-
-    public ControleFuncionario(int user, String idFuncionario) {
-         this.user = user;
-        initComponents();
-        verificaNivel();
-        popular();
-
+    
+    public static ControleFuncionario getInstancia() {
+        if (instancia == null) {
+            instancia = new ControleFuncionario();
+        }
+        return instancia;
     }
 
     public void popular() {

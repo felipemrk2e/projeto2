@@ -5,6 +5,8 @@
  */
 package Interface.CadFuncionario;
 
+import Interface.TelaPrincipal.Sessao;
+import Interface.TelaPrincipal.TelaPrincipal;
 import dao.FuncionarioDAO;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -19,27 +21,31 @@ import validacao.validacao;
  */
 public class CadFuncionarioHome extends javax.swing.JFrame {
 
-    int user;
+    private static CadFuncionarioHome instancia;
+    int user = Sessao.getInstance().getUsuario().getNivelAcesso();
 
     /**
      * Creates new form CadFuncionarioHome
      */
     public CadFuncionarioHome() {
+        this.setUndecorated(true);
         initComponents();
+        this.setTitle("Cadastro de Funcionários");
         popularTabela();
     }
-
-    public CadFuncionarioHome(int user) {
-
-        this.user = user;
-        initComponents();
-    }
     
-    public void popularTabela(){
+    public static CadFuncionarioHome getInstancia() {
+        if (instancia == null) {
+            instancia = new CadFuncionarioHome();
+        }
+        return instancia;
+    }
+
+    public void popularTabela() {
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-            List<Funcionario> funcionarios = new ArrayList<Funcionario>();
-            funcionarios = funcionarioDAO.getAll();
-            jTable1.setModel(new FuncionarioTableModel(funcionarios));
+        List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+        funcionarios = funcionarioDAO.getAll();
+        jTable1.setModel(new FuncionarioTableModel(funcionarios));
     }
 
     /**
@@ -236,12 +242,12 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jbExcluirMouseClicked
 
     private void jbNivelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbNivelMouseClicked
-        if (jbNivel.isEnabled()) {
-            String idFuncionario = "vazio no momento";
-            new ControleFuncionario(user, idFuncionario).setVisible(true);
-            dispose();
-
-        }
+//        if (jbNivel.isEnabled()) {
+//            String idFuncionario = "vazio no momento";
+//            new ControleFuncionario(user, idFuncionario).setVisible(true);
+//            dispose();
+//
+//        }
 // TODO add your handling code here:
     }//GEN-LAST:event_jbNivelMouseClicked
 

@@ -82,9 +82,13 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jlSair">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/image/exit.png"/>
         </Property>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;&lt;br/&gt;Sair&lt;/html&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlSairMousePressed"/>
@@ -97,9 +101,13 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jlLogoff">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/image/logoff.png"/>
         </Property>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;&lt;br/&gt;Logout&lt;/html&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlLogoffMousePressed"/>
@@ -107,6 +115,25 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="920" y="0" width="120" height="40"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlTroca">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/image/kabinet.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Trocar&lt;br/&gt;Usu&#xe1;rio&lt;/html&gt;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlTrocaMousePressed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="920" y="50" width="100" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -180,6 +207,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/usuarioadd.png"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Cadastrar&lt;br/&gt;Cliente&lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbClienteMousePressed"/>
@@ -193,6 +221,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/imovel.png"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Cadastrar&lt;br/&gt;Imovel&lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbImovelMousePressed"/>
@@ -206,6 +235,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/search_user.png"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Controle&lt;br/&gt;Cliente&lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbControleClienteMousePressed"/>
@@ -219,6 +249,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/imovels.png"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Controle&lt;br/&gt;Imovel&lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbControleImovelMousePressed"/>
@@ -232,6 +263,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/login-icon2.png"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Controle&lt;br/&gt;Funcionario&lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbControleFuncionarioMousePressed"/>
@@ -245,6 +277,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/Partnership-icon.png"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Cadastrar&lt;br/&gt;Loca&#xe7;&#xe3;o&lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbLocacaoMousePressed"/>
@@ -258,6 +291,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/House-Rent.png"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Controle&lt;br/&gt;Loca&#xe7;&#xe3;o&lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbControleLocacaoMousePressed"/>
@@ -284,6 +318,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/image/funcionario2.png"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Cadastrar&lt;br/&gt;Funcionario&lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbFuncionarioMousePressed"/>
@@ -307,7 +342,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JSeparator" name="jSeparador2">
+    <Component class="javax.swing.JSeparator" name="jSeparator2">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">

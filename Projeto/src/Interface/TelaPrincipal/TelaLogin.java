@@ -21,8 +21,7 @@ import model.pessoa.Login;
 public class TelaLogin extends javax.swing.JDialog {
 
     private String usuario;
-    
-    
+
     public TelaLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -30,7 +29,6 @@ public class TelaLogin extends javax.swing.JDialog {
     }
 
     public TelaLogin() {
-
     }
 
     public String getUsuario() {
@@ -41,8 +39,6 @@ public class TelaLogin extends javax.swing.JDialog {
         this.usuario = usuario;
     }
 
-    
-    
     public void limpaCampos() {
         jtfUsuario.setText("");
         jpfSenha.setText("");
@@ -125,6 +121,8 @@ public class TelaLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_jbAcessarMousePressed
 
     public boolean verificaLogin() {
+        Sessao sessao = Sessao.getInstance();      
+        System.out.println("=====================================================Chamou Login no VerificaLogin() TELA LOGIN");
         LoginDAO loginDAO = new LoginDAO();
         List<Login> logins = new ArrayList<Login>();
         logins = loginDAO.getAll();
@@ -132,12 +130,13 @@ public class TelaLogin extends javax.swing.JDialog {
         for (int i = 0; i < logins.size(); i++) {
             if (jtfUsuario.getText().equals(logins.get(i).getNomeUsuario()) && jpfSenha.getText().equals(logins.get(i).getSenhaUsuario())) {
                 setUsuario(logins.get(i).getNomeUsuario());
+                 sessao.setUsuario(logins.get(i));
                 return true;
-            }            
+            }
         }
         return false;
-    }    
-    
+    }
+
     /**
      * @param args the command line arguments
      */
