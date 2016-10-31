@@ -35,3 +35,5 @@ INSERT INTO Estado VALUES(27, 'Tocantins', 'TO');
 INSERT INTO EstadoCivil(nomeEstadoCivil) VALUES("Solteiro");
 INSERT INTO EstadoCivil(nomeEstadoCivil) VALUES("Casado");
 INSERT INTO EstadoCivil(nomeEstadoCivil) VALUES("Viuvo");
+
+INSERT INTO `Status` VALUES(0, 'Vazio'), (0, 'Manutenção'), (0, 'Em uso pelo proprietário'), (0, 'Locado');
