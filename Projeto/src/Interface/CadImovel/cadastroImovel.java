@@ -41,6 +41,7 @@ public class cadastroImovel extends javax.swing.JFrame {
      * Creates new form cadastroImovel2
      */
     public cadastroImovel() {
+        this.setUndecorated(true);
         initComponents();
         fecharCadastro();
         //Alterado system.exit(), para dispose()
@@ -55,6 +56,7 @@ public class cadastroImovel extends javax.swing.JFrame {
     }
 
     public cadastroImovel(int user) {
+        this.setUndecorated(true);
         this.user = user;
         initComponents();
         fecharCadastro();
@@ -64,6 +66,7 @@ public class cadastroImovel extends javax.swing.JFrame {
     }
 
     public cadastroImovel(String idImovel, int user) {
+        this.setUndecorated(true);
         this.user = user;
 
         initComponents();

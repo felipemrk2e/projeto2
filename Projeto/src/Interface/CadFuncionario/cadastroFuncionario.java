@@ -72,6 +72,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }
 
     public cadastroFuncionario(int user, String idFuncionario) {
+        this.setUndecorated(true);
         this.user = user;
         initComponents();
         popular();

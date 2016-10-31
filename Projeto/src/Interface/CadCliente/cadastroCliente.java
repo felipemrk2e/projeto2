@@ -72,6 +72,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     }
 
     public cadastroCliente(int user) {
+        this.setUndecorated(true);
         this.user = user;
         initComponents();
         ativaPessoa(true);
@@ -84,6 +85,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     }
 
     public cadastroCliente(int user, String idCliente) {
+        this.setUndecorated(true);
         this.user = user;
         initComponents();
         ativaPessoa(true);

@@ -133,7 +133,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     public void Login() {
-        if (!isLogado()) {
+        if (!isLogado()) {            
             TelaLogin telaLogin = new TelaLogin(new javax.swing.JFrame(), true);
             telaLogin.setLocationRelativeTo(jSeparator2);
             telaLogin.setVisible(true);
@@ -454,47 +454,56 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jlLogoffMousePressed
 
     private void jbClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbClienteMousePressed
+        finalizarInstancias();
         cadastroCliente cliente = cadastroCliente.getInstancia();
         cliente.setLocationRelativeTo(jSeparator2);
         cliente.setVisible(true);
     }//GEN-LAST:event_jbClienteMousePressed
 
     private void jbImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbImovelMousePressed
+        finalizarInstancias();
         cadastroImovel imovel = cadastroImovel.getInstancia();
         imovel.setLocationRelativeTo(jSeparator2);
         imovel.setVisible(true);
     }//GEN-LAST:event_jbImovelMousePressed
 
     private void jbControleClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleClienteMousePressed
+        finalizarInstancias();
         cadastroClienteHome clienteHome = cadastroClienteHome.getInstancia();
         clienteHome.setLocationRelativeTo(jSeparator2);
         clienteHome.setVisible(true);
     }//GEN-LAST:event_jbControleClienteMousePressed
 
     private void jbControleImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleImovelMousePressed
+        finalizarInstancias();
         cadastroImovelHome imovelHome = cadastroImovelHome.getInstancia();
         imovelHome.setLocationRelativeTo(jSeparator2);
         imovelHome.setVisible(true);
     }//GEN-LAST:event_jbControleImovelMousePressed
 
     private void jbLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLocacaoMousePressed
+        finalizarInstancias();
         CadLocacao locacao = CadLocacao.getInstancia();
         locacao.setLocationRelativeTo(jSeparator2);
         locacao.setVisible(true);
     }//GEN-LAST:event_jbLocacaoMousePressed
 
     private void jbControleLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleLocacaoMousePressed
+        finalizarInstancias();
         ControleLocacao controleLocacao = ControleLocacao.getInstancia();
         controleLocacao.setLocationRelativeTo(jSeparator2);
         controleLocacao.setVisible(true);
     }//GEN-LAST:event_jbControleLocacaoMousePressed
 
     private void jbFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbFuncionarioMousePressed
+        finalizarInstancias();
         cadastroFuncionario funcionario = cadastroFuncionario.getInstancia();
+        funcionario.setLocationRelativeTo(jSeparator2);
         funcionario.setVisible(true);
     }//GEN-LAST:event_jbFuncionarioMousePressed
 
     private void jbControleFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleFuncionarioMousePressed
+        finalizarInstancias();
         ControleFuncionario controleFuncionario = ControleFuncionario.getInstancia();
         controleFuncionario.setLocationRelativeTo(jSeparator2);
         controleFuncionario.setVisible(true);

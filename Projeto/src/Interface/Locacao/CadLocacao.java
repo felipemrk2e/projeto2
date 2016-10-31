@@ -20,17 +20,21 @@ public class CadLocacao extends javax.swing.JFrame {
      * Creates new form CadLocacao
      */
     public CadLocacao() {
+        this.setUndecorated(true);
         initComponents();
     }
 
     public CadLocacao(int user) {
+        this.setUndecorated(true);
                  this.user = user;
 
         initComponents();
     }
 
     public CadLocacao(int user, String idlocacao) {
+        this.setUndecorated(true);
                  this.user = user;
+                 
 
         initComponents();
     }

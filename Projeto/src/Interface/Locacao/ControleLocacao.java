@@ -20,10 +20,12 @@ public class ControleLocacao extends javax.swing.JFrame {
      * Creates new form ControleLocacao
      */
     public ControleLocacao() {
+        this.setUndecorated(true);
         initComponents();
     }
 
     public ControleLocacao(int user, String IdLoccao) {
+        this.setUndecorated(true);
                  this.user = user;
           initComponents();
         popular();

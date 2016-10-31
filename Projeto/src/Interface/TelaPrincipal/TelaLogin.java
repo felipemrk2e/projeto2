@@ -19,7 +19,7 @@ import model.pessoa.Login;
  * @author Sala
  */
 public class TelaLogin extends javax.swing.JDialog {
-
+    private static TelaLogin instancia;
     private String usuario;
 
     public TelaLogin(java.awt.Frame parent, boolean modal) {
@@ -31,6 +31,17 @@ public class TelaLogin extends javax.swing.JDialog {
     public TelaLogin() {
     }
 
+    public static TelaLogin getInstancia() {
+        if (instancia == null) {
+            instancia = new TelaLogin();
+        }
+        return instancia;
+    }
+    
+    public static void encerrarInstancia(){
+        instancia = null;
+    }
+    
     public String getUsuario() {
         return usuario;
     }
