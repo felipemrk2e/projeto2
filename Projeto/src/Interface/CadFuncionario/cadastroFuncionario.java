@@ -85,6 +85,10 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         }
         return instancia;
     }
+    
+    public static void encerrarInstancia(){
+        instancia = null;
+    }
 
     public void verificaNivel0() {
         if (user <= 2) {

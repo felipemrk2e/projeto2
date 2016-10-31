@@ -45,6 +45,10 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         }
         return instancia;
     }
+    
+    public static void encerrarInstancia(){
+        instancia = null;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

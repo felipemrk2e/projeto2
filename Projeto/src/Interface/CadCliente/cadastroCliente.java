@@ -100,6 +100,10 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
         return instancia;
     }
+    
+    public static void encerrarInstancia(){
+        instancia = null;
+    }
 
     public void verificaNivel0() {
         if (user <= 2) {
@@ -876,7 +880,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-        cadastroClienteHome homeCliente = cadastroClienteHome.getInstancia();       
+        cadastroClienteHome homeCliente = cadastroClienteHome.getInstancia();
         dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
 

@@ -35,6 +35,10 @@ public class ControleLocacao extends javax.swing.JFrame {
         }
         return instancia;
     }
+    
+    public static void encerrarInstancia(){
+        instancia = null;
+    }
 
     public void verificaNivel() {
         if (user <= 2) {

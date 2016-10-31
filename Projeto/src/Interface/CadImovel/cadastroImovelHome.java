@@ -49,6 +49,10 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         }
         return instancia;
     }
+     
+     public static void encerrarInstancia(){
+        instancia = null;
+    }
 
     public void fechar() {
         this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);

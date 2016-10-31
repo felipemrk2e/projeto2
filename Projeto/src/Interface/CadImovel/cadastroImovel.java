@@ -82,6 +82,10 @@ public class cadastroImovel extends javax.swing.JFrame {
         }
         return instancia;
     }
+    
+    public static void encerrarInstancia(){
+        instancia = null;
+    }
 
     public void ComboBox() {
         // Falta o Status

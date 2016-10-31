@@ -40,6 +40,10 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         }
         return instancia;
     }
+    
+    public static void encerrarInstancia(){
+        instancia = null;
+    }
 
     public void popularTabela() {
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();

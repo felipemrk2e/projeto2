@@ -165,26 +165,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
-    public void zerarCampos() {
+    public void finalizarInstancias() {
         if (cadastroCliente.getInstancia() != null) {
-            cadastroCliente.getInstancia().ZerarCampos();
+            cadastroCliente.getInstancia().encerrarInstancia();
         }
 //        if (cadastroImovel.getInstancia() != null) {
-//            cadastroImovel.getInstancia().zerarCampos();
+//            cadastroImovel.getInstancia().encerrarInstancia();
 //        }
         if (cadastroImovelHome.getInstancia() != null) {
-           
+           cadastroImovelHome.getInstancia().encerrarInstancia();
         }
         if (CadLocacao.getInstancia() != null) {
-
+            CadLocacao.getInstancia().encerrarInstancia();
         }
         if (ControleLocacao.getInstancia() != null) {
+            ControleLocacao.getInstancia().encerrarInstancia();
         }
         if (cadastroFuncionario.getInstancia() != null) {
-            cadastroFuncionario.getInstancia().ZerarCampos();
+            cadastroFuncionario.getInstancia().encerrarInstancia();
         }
         if (ControleFuncionario.getInstancia() != null) {
-            
+            ControleFuncionario.getInstancia().encerrarInstancia();
         }
 
     }
@@ -446,7 +447,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Logoff efetuado com sucesso!");
             ocultaFuncoes(false);
-            zerarCampos();
+            finalizarInstancias();
             setLogado(false);
             Login();
         }
