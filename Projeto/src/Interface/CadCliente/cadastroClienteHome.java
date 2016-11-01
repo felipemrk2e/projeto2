@@ -177,7 +177,6 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             dispose();
         }
 
-
     }//GEN-LAST:event_jbCadastrarMouseClicked
 
     private void jbPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarMouseClicked

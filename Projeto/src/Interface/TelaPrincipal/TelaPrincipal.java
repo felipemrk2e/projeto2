@@ -861,7 +861,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jmiTrocarUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiTrocarUsuarioMousePressed
         trocarUsuario();
-
     }//GEN-LAST:event_jmiTrocarUsuarioMousePressed
 
     /**
