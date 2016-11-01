@@ -170,24 +170,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public void finalizarInstancias() {
         if (cadastroCliente.getInstancia() != null) {
             cadastroCliente.getInstancia().encerrarInstancia();
+            System.out.println("1");
         }
 //        if (cadastroImovel.getInstancia() != null) {
 //            cadastroImovel.getInstancia().encerrarInstancia();
 //        }
         if (cadastroImovelHome.getInstancia() != null) {
             cadastroImovelHome.getInstancia().encerrarInstancia();
+             System.out.println("2");
         }
         if (CadLocacao.getInstancia() != null) {
             CadLocacao.getInstancia().encerrarInstancia();
+             System.out.println("3");
         }
         if (ControleLocacao.getInstancia() != null) {
             ControleLocacao.getInstancia().encerrarInstancia();
+             System.out.println("4");
         }
         if (cadastroFuncionario.getInstancia() != null) {
             cadastroFuncionario.getInstancia().encerrarInstancia();
+             System.out.println("5");
         }
         if (ControleFuncionario.getInstancia() != null) {
             ControleFuncionario.getInstancia().encerrarInstancia();
+             System.out.println("6");
         }
 
     }
@@ -670,6 +676,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiConsultarImovelMousePressed
 
     private void jmiConsultarFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarFuncionarioMousePressed
+        finalizarInstancias();
         CadFuncionarioHome cadFuncionarioHome = CadFuncionarioHome.getInstancia();
         cadFuncionarioHome.setLocationRelativeTo(jSeparator2);
         cadFuncionarioHome.setVisible(true);        
@@ -704,6 +711,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiControleLocacaoMousePressed
 
     private void jbConsultarFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarFuncionarioMousePressed
+        finalizarInstancias();
         CadFuncionarioHome cadFuncionarioHome = CadFuncionarioHome.getInstancia();
         cadFuncionarioHome.setLocationRelativeTo(jSeparator2);
         cadFuncionarioHome.setVisible(true);
