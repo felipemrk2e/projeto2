@@ -12,6 +12,7 @@ import Interface.CadFuncionario.cadastroFuncionario;
 import Interface.CadImovel.cadastroImovel;
 import Interface.CadImovel.cadastroImovelHome;
 import Interface.Locacao.CadLocacao;
+import Interface.Locacao.CadLocacaoHome;
 import Interface.Locacao.ControleLocacao;
 import java.awt.Component;
 import java.awt.Toolkit;
@@ -133,7 +134,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     public void Login() {
-        if (!isLogado()) {            
+        if (!isLogado()) {
             TelaLogin telaLogin = new TelaLogin(new javax.swing.JFrame(), true);
             telaLogin.setLocationRelativeTo(jSeparator2);
             telaLogin.setVisible(true);
@@ -173,7 +174,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 //            cadastroImovel.getInstancia().encerrarInstancia();
 //        }
         if (cadastroImovelHome.getInstancia() != null) {
-           cadastroImovelHome.getInstancia().encerrarInstancia();
+            cadastroImovelHome.getInstancia().encerrarInstancia();
         }
         if (CadLocacao.getInstancia() != null) {
             CadLocacao.getInstancia().encerrarInstancia();
@@ -189,7 +190,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
 
     }
-    
+
     public Component getPosition() {
         return jSeparator2;
     }
@@ -223,11 +224,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmCadastrar = new javax.swing.JMenu();
         jmiCadastrarCliente = new javax.swing.JMenuItem();
         jmiCadastrarImovel = new javax.swing.JMenuItem();
-        jmiCadastrarFuncionario = new javax.swing.JMenuItem();
-        jmiConsultar = new javax.swing.JMenu();
+        jmConsultar = new javax.swing.JMenu();
         jmiConsultarCliente = new javax.swing.JMenuItem();
         jmiConsultarImovel = new javax.swing.JMenuItem();
+        jmLocacao = new javax.swing.JMenu();
+        jmiCadastrarLocacao = new javax.swing.JMenuItem();
+        jmiConsultarLocacao = new javax.swing.JMenuItem();
+        jmiControleLocacao = new javax.swing.JMenuItem();
+        jmFuncionario = new javax.swing.JMenu();
+        jmiCadastrarFuncionario = new javax.swing.JMenuItem();
         jmiConsultarFuncionario = new javax.swing.JMenuItem();
+        jmiControleFuncionario = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -332,6 +339,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jbControleLocacao1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbControleLocacao1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/House-Rent.png"))); // NOI18N
+        jbControleLocacao1.setText("<html><center>Consultar<br/>Locação</html>");
         jbControleLocacao1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbControleLocacao1MousePressed(evt);
@@ -408,28 +416,98 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmCadastrar.setText("Cadastrar");
 
         jmiCadastrarCliente.setText("Cliente");
+        jmiCadastrarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiCadastrarClienteMousePressed(evt);
+            }
+        });
         jmCadastrar.add(jmiCadastrarCliente);
 
         jmiCadastrarImovel.setText("Imóvel");
+        jmiCadastrarImovel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiCadastrarImovelMousePressed(evt);
+            }
+        });
         jmCadastrar.add(jmiCadastrarImovel);
-
-        jmiCadastrarFuncionario.setText("Funcionário");
-        jmCadastrar.add(jmiCadastrarFuncionario);
 
         jmBarraMenu.add(jmCadastrar);
 
-        jmiConsultar.setText("Consultar");
+        jmConsultar.setText("Consultar");
 
         jmiConsultarCliente.setText("Cliente");
-        jmiConsultar.add(jmiConsultarCliente);
+        jmiConsultarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiConsultarClienteMousePressed(evt);
+            }
+        });
+        jmConsultar.add(jmiConsultarCliente);
 
         jmiConsultarImovel.setText("Imóvel");
-        jmiConsultar.add(jmiConsultarImovel);
+        jmiConsultarImovel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiConsultarImovelMousePressed(evt);
+            }
+        });
+        jmConsultar.add(jmiConsultarImovel);
 
-        jmiConsultarFuncionario.setText("Funcionário");
-        jmiConsultar.add(jmiConsultarFuncionario);
+        jmBarraMenu.add(jmConsultar);
 
-        jmBarraMenu.add(jmiConsultar);
+        jmLocacao.setText("Locação");
+
+        jmiCadastrarLocacao.setText("Cadastrar Locação");
+        jmiCadastrarLocacao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiCadastrarLocacaoMousePressed(evt);
+            }
+        });
+        jmLocacao.add(jmiCadastrarLocacao);
+
+        jmiConsultarLocacao.setText("Consultar Locação");
+        jmiConsultarLocacao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiConsultarLocacaoMousePressed(evt);
+            }
+        });
+        jmLocacao.add(jmiConsultarLocacao);
+
+        jmiControleLocacao.setText("Controle Locação");
+        jmiControleLocacao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiControleLocacaoMousePressed(evt);
+            }
+        });
+        jmLocacao.add(jmiControleLocacao);
+
+        jmBarraMenu.add(jmLocacao);
+
+        jmFuncionario.setText("Funcionário");
+
+        jmiCadastrarFuncionario.setText("Cadastrar Funcionário");
+        jmiCadastrarFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiCadastrarFuncionarioMousePressed(evt);
+            }
+        });
+        jmFuncionario.add(jmiCadastrarFuncionario);
+
+        jmiConsultarFuncionario.setText("Consultar Funcionário");
+        jmiConsultarFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiConsultarFuncionarioMousePressed(evt);
+            }
+        });
+        jmFuncionario.add(jmiConsultarFuncionario);
+
+        jmiControleFuncionario.setText("Controle Funcionário");
+        jmiControleFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiControleFuncionarioMousePressed(evt);
+            }
+        });
+        jmFuncionario.add(jmiControleFuncionario);
+
+        jmBarraMenu.add(jmFuncionario);
 
         setJMenuBar(jmBarraMenu);
 
@@ -510,6 +588,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbControleFuncionarioMousePressed
 
     private void jbControleLocacao1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleLocacao1MousePressed
+        finalizarInstancias();
+        CadLocacaoHome cadLocacaoHome = CadLocacaoHome.getInstancia();
+        cadLocacaoHome.setLocationRelativeTo(jSeparator2);
+        cadLocacaoHome.setVisible(true);
 
     }//GEN-LAST:event_jbControleLocacao1MousePressed
 
@@ -521,6 +603,76 @@ public class TelaPrincipal extends javax.swing.JFrame {
             Login();
         }
     }//GEN-LAST:event_jlTrocaMousePressed
+
+    private void jmiCadastrarClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarClienteMousePressed
+        finalizarInstancias();
+        cadastroCliente cliente = cadastroCliente.getInstancia();
+        cliente.setLocationRelativeTo(jSeparator2);
+        cliente.setVisible(true);
+    }//GEN-LAST:event_jmiCadastrarClienteMousePressed
+
+    private void jmiCadastrarImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarImovelMousePressed
+        finalizarInstancias();
+        cadastroImovel imovel = cadastroImovel.getInstancia();
+        imovel.setLocationRelativeTo(jSeparator2);
+        imovel.setVisible(true);
+    }//GEN-LAST:event_jmiCadastrarImovelMousePressed
+
+    private void jmiCadastrarFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarFuncionarioMousePressed
+        finalizarInstancias();
+        cadastroFuncionario funcionario = cadastroFuncionario.getInstancia();
+        funcionario.setLocationRelativeTo(jSeparator2);
+        funcionario.setVisible(true);
+    }//GEN-LAST:event_jmiCadastrarFuncionarioMousePressed
+
+    private void jmiConsultarClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarClienteMousePressed
+        finalizarInstancias();
+        cadastroClienteHome clienteHome = cadastroClienteHome.getInstancia();
+        clienteHome.setLocationRelativeTo(jSeparator2);
+        clienteHome.setVisible(true);
+    }//GEN-LAST:event_jmiConsultarClienteMousePressed
+
+    private void jmiConsultarImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarImovelMousePressed
+        finalizarInstancias();
+        cadastroImovelHome imovelHome = cadastroImovelHome.getInstancia();
+        imovelHome.setLocationRelativeTo(jSeparator2);
+        imovelHome.setVisible(true);
+    }//GEN-LAST:event_jmiConsultarImovelMousePressed
+
+    private void jmiConsultarFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarFuncionarioMousePressed
+        finalizarInstancias();
+        ControleFuncionario controleFuncionario = ControleFuncionario.getInstancia();
+        controleFuncionario.setLocationRelativeTo(jSeparator2);
+        controleFuncionario.setVisible(true);
+    }//GEN-LAST:event_jmiConsultarFuncionarioMousePressed
+
+    private void jmiControleFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiControleFuncionarioMousePressed
+        finalizarInstancias();
+        ControleFuncionario controleFuncionario = ControleFuncionario.getInstancia();
+        controleFuncionario.setLocationRelativeTo(jSeparator2);
+        controleFuncionario.setVisible(true);
+    }//GEN-LAST:event_jmiControleFuncionarioMousePressed
+
+    private void jmiCadastrarLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarLocacaoMousePressed
+        finalizarInstancias();
+        CadLocacao locacao = CadLocacao.getInstancia();
+        locacao.setLocationRelativeTo(jSeparator2);
+        locacao.setVisible(true);
+    }//GEN-LAST:event_jmiCadastrarLocacaoMousePressed
+
+    private void jmiConsultarLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarLocacaoMousePressed
+        finalizarInstancias();
+        CadLocacaoHome cadLocacaoHome = CadLocacaoHome.getInstancia();
+        cadLocacaoHome.setLocationRelativeTo(jSeparator2);
+        cadLocacaoHome.setVisible(true);
+    }//GEN-LAST:event_jmiConsultarLocacaoMousePressed
+
+    private void jmiControleLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiControleLocacaoMousePressed
+        finalizarInstancias();
+        ControleLocacao controleLocacao = ControleLocacao.getInstancia();
+        controleLocacao.setLocationRelativeTo(jSeparator2);
+        controleLocacao.setVisible(true);
+    }//GEN-LAST:event_jmiControleLocacaoMousePressed
 
     /**
      * @param args the command line arguments
@@ -576,12 +728,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jlTroca;
     private javax.swing.JMenuBar jmBarraMenu;
     private javax.swing.JMenu jmCadastrar;
+    private javax.swing.JMenu jmConsultar;
+    private javax.swing.JMenu jmFuncionario;
+    private javax.swing.JMenu jmLocacao;
     private javax.swing.JMenuItem jmiCadastrarCliente;
     private javax.swing.JMenuItem jmiCadastrarFuncionario;
     private javax.swing.JMenuItem jmiCadastrarImovel;
-    private javax.swing.JMenu jmiConsultar;
+    private javax.swing.JMenuItem jmiCadastrarLocacao;
     private javax.swing.JMenuItem jmiConsultarCliente;
     private javax.swing.JMenuItem jmiConsultarFuncionario;
     private javax.swing.JMenuItem jmiConsultarImovel;
+    private javax.swing.JMenuItem jmiConsultarLocacao;
+    private javax.swing.JMenuItem jmiControleFuncionario;
+    private javax.swing.JMenuItem jmiControleLocacao;
     // End of variables declaration//GEN-END:variables
 }
