@@ -602,13 +602,14 @@ public class cadastroCliente extends javax.swing.JFrame {
         getContentPane().add(jlCPF_CNPJ, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 150, 30));
 
         jlRG_Incricao.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlRG_Incricao.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlRG_Incricao.setText("RG:");
-        getContentPane().add(jlRG_Incricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, -1, 30));
+        getContentPane().add(jlRG_Incricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 180, 30));
 
         jlSexo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlSexo.setText("Sexo:");
         getContentPane().add(jlSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 40, 30));
-        getContentPane().add(jtfRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 160, 30));
+        getContentPane().add(jtfRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 160, 30));
         getContentPane().add(jtfNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 350, 30));
         getContentPane().add(jtfBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 280, 170, 30));
         getContentPane().add(jtfCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, 230, 30));
@@ -677,6 +678,12 @@ public class cadastroCliente extends javax.swing.JFrame {
         jlCargo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlCargo.setText("Cargo:");
         getContentPane().add(jlCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 150, 30));
+
+        jtfCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCargoActionPerformed(evt);
+            }
+        });
         getContentPane().add(jtfCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 150, 30));
 
         jlDataNascimento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -713,7 +720,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jlCPFResponsavel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlCPFResponsavel.setText("CPF Responsavel:");
         getContentPane().add(jlCPFResponsavel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 140, 30));
-        getContentPane().add(jftCPFResponsavel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 150, 30));
+        getContentPane().add(jftCPFResponsavel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 150, 30));
 
         jspObs.setBorder(null);
 
@@ -889,6 +896,10 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_jbEditarMouseClicked
+
+    private void jtfCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCargoActionPerformed
 
     public void ativaPessoa(boolean ativo) {
         if (ativo == false) {
