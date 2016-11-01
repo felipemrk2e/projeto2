@@ -6,6 +6,7 @@
 package model.pessoa;
 
 import global.model.Endereco;
+import imovel.model.TipoContrato;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -80,7 +81,7 @@ public class PessoaFisica extends Pessoa {
         this.estadoCivil = estadoCivil;
     }
 
-    public PessoaFisica(String CPF, String RG, char sexo, Funcionario funcionario, EstadoCivil estadoCivil, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, List<Interesse> interesses) {
+    public PessoaFisica(String CPF, String RG, char sexo, Funcionario funcionario, EstadoCivil estadoCivil, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, List<TipoContrato> interesses) {
         super(nomePessoa, email, observacoes, dataNascimento, endereco, interesses);
         this.CPF = CPF;
         this.RG = RG;

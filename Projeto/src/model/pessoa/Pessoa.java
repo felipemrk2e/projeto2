@@ -6,6 +6,7 @@
 package model.pessoa;
 
 import global.model.Endereco;
+import imovel.model.TipoContrato;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,28 +49,6 @@ public class Pessoa {
 
     @Column
     private Date dataNascimento;
-
-    public Pessoa() {
-
-    }
-
-    public Pessoa(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco) {
-        this.nomePessoa = nomePessoa;
-        this.email = email;
-        this.observacoes = observacoes;
-        this.dataNascimento = dataNascimento;
-        this.endereco = endereco;
-    }
-
-    public Pessoa(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, List<Interesse> interesses) {
-        this.nomePessoa = nomePessoa;
-        this.email = email;
-        this.observacoes = observacoes;
-        this.dataNascimento = dataNascimento;
-        this.endereco = endereco;
-        this.interesses = interesses;
-    }
-
     
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idEndereco", nullable = true)
@@ -88,14 +67,34 @@ public class Pessoa {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idPessoa", nullable = true)
     private PessoaFisica pessoaFisica;
+    
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "Pessoa_has_Interesse", 
+    joinColumns = { @JoinColumn(name = "idPessoa") }, 
+    inverseJoinColumns = { @JoinColumn(name = "idTipoContrato") })
+    private List<TipoContrato> interesses = new ArrayList<TipoContrato>();
 
-    @ManyToMany
-    @JoinTable(name = "Pessoa_has_Interesse", joinColumns = {
-        @JoinColumn(name = "idPessoa")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "idInteresse")})
-    private List<Interesse> interesses;
+    public Pessoa() {
 
+    }
+
+    public Pessoa(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco) {
+        this.nomePessoa = nomePessoa;
+        this.email = email;
+        this.observacoes = observacoes;
+        this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
+    }
+
+    public Pessoa(String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, List<TipoContrato> interesses) {
+        this.nomePessoa = nomePessoa;
+        this.email = email;
+        this.observacoes = observacoes;
+        this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
+        this.interesses = interesses;
+    }
+    
     public long getIdPessoa() {
         return idPessoa;
     }
@@ -156,15 +155,15 @@ public class Pessoa {
         this.telefone.add(telefone);
     }
 
-    public List<Interesse> getInteresses() {
+    public List<TipoContrato> getInteresses() {
         return interesses;
     }
 
-    public void setInteresses(List<Interesse> interesses) {
+    public void setInteresses(List<TipoContrato> interesses) {
         this.interesses = interesses;
     }
        
-        public void addInteresse(Interesse interesse) {
+    public void addInteresse(TipoContrato interesse) {
         this.interesses.add(interesse);
     }
     
