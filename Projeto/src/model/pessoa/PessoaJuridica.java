@@ -7,6 +7,7 @@ package model.pessoa;
 
 
 import global.model.Endereco;
+import imovel.model.TipoContrato;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -56,7 +57,7 @@ public class PessoaJuridica extends Pessoa {
         this.cpfResponsavel = cpfResponsavel;
     }
 
-    public PessoaJuridica(String cnpj, String inscricaoEstadual, boolean cadastroAtivo, String nomeFantasia, String nomeResponsavel, String cpfResponsavel, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, List<Interesse> interesses) {
+    public PessoaJuridica(String cnpj, String inscricaoEstadual, boolean cadastroAtivo, String nomeFantasia, String nomeResponsavel, String cpfResponsavel, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, List<TipoContrato> interesses) {
         super(nomePessoa, email, observacoes, dataNascimento, endereco, interesses);
         this.cnpj = cnpj;
         this.inscricaoEstadual = inscricaoEstadual;
