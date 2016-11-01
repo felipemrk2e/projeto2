@@ -17,39 +17,32 @@ public class PessoaJuridicaDAO extends DAO<PessoaJuridica>{
     @Override
     public PessoaJuridica getById(Long id) {
         PessoaJuridica pessoaJuridica = null;
-        try {
-            pessoaJuridica = entityManager.find(PessoaJuridica.class, id);
-        } catch (Exception e) {
-            System.out.println("Erro na consulta de Pessoa Juridica: " + e);
-        } finally {
-            entityManager.close();
-        }
-        return pessoaJuridica;
+		try{
+			pessoaJuridica = entityManager.find(PessoaJuridica.class, id);
+		}catch(Exception e){
+			System.out.println("Erro na consulta de Pessoa Juridica: "+e);
+		}
+		return pessoaJuridica; 
     }
 
     @Override
     public boolean removeById(Long id) {
         PessoaJuridica pessoaJuridica = null;
-        boolean flag = true;
-        try {
-            pessoaJuridica = this.getById(id);
-            entityManager.getTransaction().begin();
-            entityManager.remove(pessoaJuridica);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            flag = false;
-            System.out.println("Erro na exclusão de Pessoa Juridica: " + e);
-        } finally {
-            entityManager.close();
-        }
-        return flag;
+                try{
+                    pessoaJuridica = this.getById(id);
+                    entityManager.getTransaction().begin();
+                    entityManager.remove(pessoaJuridica);
+                    entityManager.getTransaction().commit();
+                    return true;
+                }catch(Exception e){
+                    entityManager.getTransaction().rollback();
+                    System.out.println("Erro na exclusão de Pessoa Juridica: "+e);
+                }
+		return false;
     }
 
     @Override
     public List<PessoaJuridica> getAll() {
-        List<PessoaJuridica> pessoasj = entityManager.createQuery("FROM PessoaJuridica").getResultList();
-        entityManager.close();
-        return pessoasj;
+        return entityManager.createQuery("FROM PessoaJuridica").getResultList();
     }
 }

@@ -17,40 +17,33 @@ public class TipoContratoDAO extends DAO<TipoContrato>{
     @Override
     public TipoContrato getById(Long id) {
         TipoContrato tipoContrato = null;
-        try {
+	try{
             tipoContrato = entityManager.find(TipoContrato.class, id);
-        } catch (Exception e) {
-            System.out.println("Erro na consulta do tipoContrato: " + e);
-        } finally {
-            entityManager.close();
+	}catch(Exception e){
+            System.out.println("Erro na consulta do tipoContrato: "+e);
         }
-        return tipoContrato;
+	return tipoContrato;
     }
 
     @Override
     public boolean removeById(Long id) {
         TipoContrato tipoContrato = null;
-        boolean flag = true;
-        try {
+        try{
             tipoContrato = this.getById(id);
             entityManager.getTransaction().begin();
             entityManager.remove(tipoContrato);
             entityManager.getTransaction().commit();
-        } catch (Exception e) {
+            return true;
+        }catch(Exception e){
             entityManager.getTransaction().rollback();
-            flag = false;
-            System.out.println("Erro na exclusão do TipoContrato: " + e);
-        } finally {
-            entityManager.close();
+            System.out.println("Erro na exclusão do TipoContrato: "+e);
         }
-        return flag;
+	return false;
     }
 
     @Override
     public List<TipoContrato> getAll() {
-        List<TipoContrato> tiposContratos = entityManager.createQuery("FROM TipoContrato").getResultList();
-        entityManager.close();
-        return tiposContratos;
+       return entityManager.createQuery("FROM TipoContrato").getResultList();
     }
     
 }

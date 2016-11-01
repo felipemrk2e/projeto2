@@ -17,40 +17,33 @@ public class FuncionarioDAO extends DAO<Funcionario> {
     @Override
     public Funcionario getById(Long id) {
         Funcionario funcionario = null;
-        try {
-            funcionario = entityManager.find(Funcionario.class, id);
-        } catch (Exception e) {
-            System.out.println("Erro na consulta de Funcionario: " + e);
-        } finally {
-            entityManager.close();
-        }
-        return funcionario;
+		try{
+			funcionario = entityManager.find(Funcionario.class, id);
+		}catch(Exception e){
+			System.out.println("Erro na consulta de Funcionario: "+e);
+		}
+		return funcionario;       
     }
 
     @Override
     public boolean removeById(Long id) {
         Funcionario funcionario = null;
-        boolean flag = true;
-        try {
-            funcionario = this.getById(id);
-            entityManager.getTransaction().begin();
-            entityManager.remove(funcionario);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            flag = false;
-            System.out.println("Erro na exclusão de Funcionario: " + e);
-        } finally {
-            entityManager.close();
-        }
-        return flag;
+                try{
+                    funcionario = this.getById(id);
+                    entityManager.getTransaction().begin();
+                    entityManager.remove(funcionario);
+                    entityManager.getTransaction().commit();
+                    return true;
+                }catch(Exception e){
+                    entityManager.getTransaction().rollback();
+                    System.out.println("Erro na exclusão de Funcionario: "+e);
+                }
+		return false;
     }
 
     @Override
     public List<Funcionario> getAll() {
-        List<Funcionario> funcionarios = entityManager.createQuery("FROM Funcionario").getResultList();
-        entityManager.close();
-        return funcionarios;
+        return entityManager.createQuery("FROM Funcionario").getResultList();
     }
     
 }

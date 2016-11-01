@@ -17,40 +17,33 @@ public class EstadoCivilDAO extends DAO<EstadoCivil> {
     @Override
     public EstadoCivil getById(Long id) {
         EstadoCivil estadoCivil = null;
-        try {
-            estadoCivil = entityManager.find(EstadoCivil.class, id);
-        } catch (Exception e) {
-            System.out.println("Erro na consulta de Estado Civil: " + e);
-        } finally {
-            entityManager.close();
-        }
-        return estadoCivil;
+		try{
+			estadoCivil = entityManager.find(EstadoCivil.class, id);
+		}catch(Exception e){
+			System.out.println("Erro na consulta de Estado Civil: "+e);
+		}
+		return estadoCivil;  
     }
 
     @Override
     public boolean removeById(Long id) {
         EstadoCivil estadoCivil = null;
-        boolean flag = true;
-        try {
-            estadoCivil = this.getById(id);
-            entityManager.getTransaction().begin();
-            entityManager.remove(estadoCivil);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            flag = false;
-            System.out.println("Erro na exclusão de Estado Civil: " + e);
-        } finally {
-            entityManager.close();
-        }
-        return flag;
+                try{
+                    estadoCivil = this.getById(id);
+                    entityManager.getTransaction().begin();
+                    entityManager.remove(estadoCivil);
+                    entityManager.getTransaction().commit();
+                    return true;
+                }catch(Exception e){
+                    entityManager.getTransaction().rollback();
+                    System.out.println("Erro na exclusão de Estado Civil: "+e);
+                }
+		return false;
     }
 
     @Override
     public List<EstadoCivil> getAll() {
-        List<EstadoCivil> estadoscivis = entityManager.createQuery("FROM EstadoCivil").getResultList();
-        entityManager.close();
-        return estadoscivis;
+         return entityManager.createQuery("FROM EstadoCivil").getResultList();
     }
     
 }

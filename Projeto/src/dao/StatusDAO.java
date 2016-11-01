@@ -17,40 +17,33 @@ public class StatusDAO extends DAO<Status>{
     @Override
     public Status getById(Long id) {
         Status status = null;
-        try {
+	try{
             status = entityManager.find(Status.class, id);
-        } catch (Exception e) {
-            System.out.println("Erro na consulta do Status: " + e);
-        } finally {
-            entityManager.close();
-        }
-        return status;
+	}catch(Exception e){
+        	System.out.println("Erro na consulta do Status: "+e);
+	}
+	return status;
     }
 
     @Override
     public boolean removeById(Long id) {
         Status status = null;
-        boolean flag = true;
-        try {
+        try{
             status = this.getById(id);
             entityManager.getTransaction().begin();
             entityManager.remove(status);
             entityManager.getTransaction().commit();
-        } catch (Exception e) {
+            return true;
+        }catch(Exception e){
             entityManager.getTransaction().rollback();
-            flag = false;
-            System.out.println("Erro na exclusão do Status: " + e);
-        } finally {
-            entityManager.close();
+            System.out.println("Erro na exclusão do Status: "+e);
         }
-        return flag;
+	return false;
     }
 
     @Override
     public List<Status> getAll() {
-        List<Status> status = entityManager.createQuery("FROM Status").getResultList();
-        entityManager.close();
-        return status;
+        return entityManager.createQuery("FROM Status").getResultList();
     }
     
 }

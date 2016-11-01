@@ -17,40 +17,33 @@ public class PessoaFisicaDAO extends DAO<PessoaFisica>{
     @Override
     public PessoaFisica getById(Long id) {
         PessoaFisica pessoaFisica = null;
-        try {
-            pessoaFisica = entityManager.find(PessoaFisica.class, id);
-        } catch (Exception e) {
-            System.out.println("Erro na consulta de Pessoa Física: " + e);
-        } finally {
-            entityManager.close();
-        }
-        return pessoaFisica;
+		try{
+			pessoaFisica = entityManager.find(PessoaFisica.class, id);
+		}catch(Exception e){
+			System.out.println("Erro na consulta de Pessoa Física: "+e);
+		}
+		return pessoaFisica; 
     }
 
     @Override
     public boolean removeById(Long id) {
         PessoaFisica pessoaFisica = null;
-        boolean flag = true;
-        try {
-            pessoaFisica = this.getById(id);
-            entityManager.getTransaction().begin();
-            entityManager.remove(pessoaFisica);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            flag = false;
-            System.out.println("Erro na exclusão de Pessoa Física: " + e);
-        } finally {
-            entityManager.close();
-        }
-        return flag;
+                try{
+                    pessoaFisica = this.getById(id);
+                    entityManager.getTransaction().begin();
+                    entityManager.remove(pessoaFisica);
+                    entityManager.getTransaction().commit();
+                    return true;
+                }catch(Exception e){
+                    entityManager.getTransaction().rollback();
+                    System.out.println("Erro na exclusão de Pessoa Física: "+e);
+                }
+		return false;
     }
 
     @Override
     public List<PessoaFisica> getAll() {
-        List<PessoaFisica> pessoasf = entityManager.createQuery("FROM PessoaFisica").getResultList();;
-        entityManager.close();
-        return pessoasf;
+        return entityManager.createQuery("FROM PessoaFisica").getResultList();
     }
     
 }

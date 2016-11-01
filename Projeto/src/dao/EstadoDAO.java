@@ -21,9 +21,7 @@ public class EstadoDAO extends DAO<Estado>{
             estado = entityManager.find(Estado.class, id);
 	}catch(Exception e){
 		System.out.println("Erro na consulta do Estado: "+e);
-	} finally {
-            entityManager.close();
-        }
+	}
 	return estado;
     }
 
@@ -34,9 +32,7 @@ public class EstadoDAO extends DAO<Estado>{
 
     @Override
     public List<Estado> getAll() {
-        List<Estado> estados = entityManager.createQuery("FROM Estado").getResultList();
-        entityManager.close();
-        return estados;
+        return entityManager.createQuery("FROM Estado").getResultList();
     }
     
 }

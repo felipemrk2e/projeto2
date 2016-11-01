@@ -17,40 +17,33 @@ public class CargoDAO extends DAO<Cargo>{
     @Override
     public Cargo getById(Long id) {
         Cargo cargo = null;
-        try {
-            cargo = entityManager.find(Cargo.class, id);
-        } catch (Exception e) {
-            System.out.println("Erro na consulta de Cargo: " + e);
-        } finally {
-            entityManager.close();
-        }
-        return cargo;
+		try{
+			cargo = entityManager.find(Cargo.class, id);
+		}catch(Exception e){
+			System.out.println("Erro na consulta de Cargo: "+e);
+		}
+		return cargo;      
     }
 
     @Override
     public boolean removeById(Long id) {
         Cargo cargo = null;
-        boolean flag = true;
-        try {
-            cargo = this.getById(id);
-            entityManager.getTransaction().begin();
-            entityManager.remove(cargo);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            flag = false;
-            System.out.println("Erro na exclusão de Cargo: " + e);
-        } finally {
-            entityManager.close();
-        }
-        return flag;
+                try{
+                    cargo = this.getById(id);
+                    entityManager.getTransaction().begin();
+                    entityManager.remove(cargo);
+                    entityManager.getTransaction().commit();
+                    return true;
+                }catch(Exception e){
+                    entityManager.getTransaction().rollback();
+                    System.out.println("Erro na exclusão de Cargo: "+e);
+                }
+		return false;
     }
 
     @Override
     public List<Cargo> getAll() {
-        List<Cargo> cargos = entityManager.createQuery("FROM Cargo").getResultList();
-        entityManager.close();
-        return cargos;
+         return entityManager.createQuery("FROM Cargo").getResultList();
     }
     
 }
