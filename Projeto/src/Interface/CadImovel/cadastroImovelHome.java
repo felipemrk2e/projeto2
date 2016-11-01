@@ -27,6 +27,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     public cadastroImovelHome() {
         this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
         fechar();
 
     }
@@ -36,6 +37,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         this.user = user;
 
         initComponents();
+        setAlwaysOnTop(true);
         fechar();
         if (user <= 2) {
             jbRemover.setEnabled(true);
@@ -115,10 +117,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jtCidade = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jmLogin = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -213,37 +211,37 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
         jLabel2.setText("Nome do Proprietario");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(40, 420, 140, 16);
+        jLabel2.setBounds(40, 420, 140, 14);
         getContentPane().add(jtNomeProprietario);
-        jtNomeProprietario.setBounds(30, 440, 290, 22);
+        jtNomeProprietario.setBounds(30, 440, 290, 20);
 
         jLabel3.setText("Bairro");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(370, 480, 60, 16);
+        jLabel3.setBounds(370, 480, 60, 14);
         getContentPane().add(jtBairro);
-        jtBairro.setBounds(360, 500, 140, 22);
+        jtBairro.setBounds(360, 500, 140, 20);
 
         jLabel4.setText("Estado");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(710, 480, 60, 16);
+        jLabel4.setBounds(710, 480, 60, 14);
         getContentPane().add(jtRua);
-        jtRua.setBounds(30, 500, 300, 22);
+        jtRua.setBounds(30, 500, 300, 20);
         getContentPane().add(jtQtdQuarto);
-        jtQtdQuarto.setBounds(380, 440, 30, 22);
+        jtQtdQuarto.setBounds(380, 440, 30, 20);
         getContentPane().add(jtVagasGaragem);
-        jtVagasGaragem.setBounds(480, 440, 30, 22);
+        jtVagasGaragem.setBounds(480, 440, 30, 20);
 
         jLabel5.setText("Rua");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(40, 480, 40, 16);
+        jLabel5.setBounds(40, 480, 40, 14);
 
         jLabel6.setText("Qtd de quarto");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(360, 420, 80, 16);
+        jLabel6.setBounds(360, 420, 80, 14);
 
         jLabel7.setText("Vagas de Garagem");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(450, 420, 140, 16);
+        jLabel7.setBounds(450, 420, 140, 14);
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(-10, 550, 1040, 10);
 
@@ -264,28 +262,11 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         getContentPane().add(jSeparator5);
         jSeparator5.setBounds(760, 360, 10, 50);
         getContentPane().add(jtCidade);
-        jtCidade.setBounds(540, 500, 140, 22);
+        jtCidade.setBounds(540, 500, 140, 20);
 
         jLabel8.setText("Cidade");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(570, 480, 39, 16);
-
-        jMenu1.setText("File");
-
-        jmLogin.setText("Login");
-        jmLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jmLoginMousePressed(evt);
-            }
-        });
-        jMenu1.add(jmLogin);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        jLabel8.setBounds(570, 480, 33, 14);
 
         pack();
         setLocationRelativeTo(null);
@@ -307,10 +288,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_jbRemoverMouseClicked
-
-    private void jmLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmLoginMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmLoginMousePressed
 
     private void jbVisualisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualisarMouseClicked
         //Falta pegar a id da table;
@@ -463,9 +440,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -483,7 +457,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JCheckBox jcbSalao;
     private javax.swing.JCheckBox jcbTemporario;
-    private javax.swing.JMenuItem jmLogin;
     private javax.swing.JTextField jtBairro;
     private javax.swing.JTextField jtCidade;
     private javax.swing.JTextField jtNomeProprietario;

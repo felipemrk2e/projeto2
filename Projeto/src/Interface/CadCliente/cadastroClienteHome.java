@@ -5,6 +5,7 @@
  */
 package Interface.CadCliente;
 
+import Interface.TelaPrincipal.Sessao;
 import dao.PessoaDAO;
 import dao.PessoaFisicaDAO;
 import dao.PessoaJuridicaDAO;
@@ -34,19 +35,20 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     public cadastroClienteHome() {
         this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
         jcbPessoaFisica.setSelected(true);
         jcbPessoaJuridica.setSelected(true);
         popularTabela();
     }
-    
+
     public static cadastroClienteHome getInstancia() {
         if (instancia == null) {
             instancia = new cadastroClienteHome();
         }
         return instancia;
     }
-    
-    public static void encerrarInstancia(){
+
+    public static void encerrarInstancia() {
         instancia = null;
     }
 
@@ -72,9 +74,6 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         jtTelefone = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -166,24 +165,15 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         jLabel3.setText("Telefone");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 470, -1, -1));
 
-        jMenu1.setText("File");
-        jMenu1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenu2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
-
         if (jbCadastrar.isEnabled()) {
-            new cadastroCliente(user).setVisible(true);     // TODO add your handling code here:
+            cadastroCliente cliente = cadastroCliente.getInstancia();
+            cliente.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            cliente.getInstancia().setVisible(true);     // TODO add your handling code here:
             dispose();
         }
 
@@ -238,26 +228,24 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             List<Pessoa> pessoas = new ArrayList<Pessoa>();
             pessoas = pessoaDAO.getAll();
             jTable1.setModel(new PessoaTableModel(pessoas));
-        }else if(jcbPessoaFisica.isSelected()){
+        } else if (jcbPessoaFisica.isSelected()) {
             PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-            List<PessoaFisica>pessoasFisicas = new ArrayList<PessoaFisica>();
+            List<PessoaFisica> pessoasFisicas = new ArrayList<PessoaFisica>();
             pessoasFisicas = pessoaFisicaDAO.getAll();
             jTable1.setModel(new PessoaFisicaTableModel(pessoasFisicas));
-        }else if(jcbPessoaJuridica.isSelected()){
+        } else if (jcbPessoaJuridica.isSelected()) {
             PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
             List<PessoaJuridica> pessoasJuridicas = new ArrayList<PessoaJuridica>();
             pessoasJuridicas = pessoaJuridicaDAO.getAll();
             jTable1.setModel(new PessoaJuridicaTableModel(pessoasJuridicas));
-        }else{
+        } else {
             jTable1.setModel(new PessoaTableModel());
         }
 
     }
 
     private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
-        String idcliente = "vazio no momento";
-        new cadastroCliente(user, idcliente).setVisible(true);
-        dispose();  // TODO add your handling code here:
+         // TODO add your handling code here:
     }//GEN-LAST:event_jbVisualizarMouseClicked
 
     private void jbRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemoverMouseClicked
@@ -270,7 +258,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbPessoaFisicaMouseClicked
 
     private void jcbPessoaJuridicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbPessoaJuridicaMouseClicked
-       popularTabela();
+        popularTabela();
     }//GEN-LAST:event_jcbPessoaJuridicaMouseClicked
 
     /**
@@ -312,9 +300,6 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbCadastrar;

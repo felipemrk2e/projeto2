@@ -23,6 +23,7 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     public CadLocacaoHome() {
         this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
     }
 
     public CadLocacaoHome(int user) {
@@ -30,6 +31,7 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         this.user = user;
 
         initComponents();
+        setAlwaysOnTop(true);
 
         verificaNivel();
     }
@@ -93,9 +95,6 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         jlCidade = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -228,14 +227,6 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         jSeparator4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisar Locação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator4);
         jSeparator4.setBounds(20, 360, 970, 200);
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -391,9 +382,6 @@ public class CadLocacaoHome extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

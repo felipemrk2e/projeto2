@@ -22,12 +22,14 @@ public class ControleLocacao extends javax.swing.JFrame {
     public ControleLocacao() {
         this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
     }
 
     public ControleLocacao(int user, String IdLoccao) {
         this.setUndecorated(true);
                  this.user = user;
           initComponents();
+          setAlwaysOnTop(true);
         popular();
     }
     
@@ -95,9 +97,6 @@ public class ControleLocacao extends javax.swing.JFrame {
         jbFinalizarContrato = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setEnabled(false);
@@ -234,14 +233,6 @@ public class ControleLocacao extends javax.swing.JFrame {
         getContentPane().add(jSeparator4);
         jSeparator4.setBounds(30, 20, 930, 240);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -324,9 +315,6 @@ public class ControleLocacao extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbConfirmar;

@@ -121,6 +121,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Trocar Usu&#xe1;rio"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jmiTrocarUsuarioMousePressed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiLogoff">
               <Properties>
@@ -379,7 +382,7 @@
                   <Font name="Arial" size="16" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/image/House-Rent.png"/>
+                  <Image iconType="3" name="/image/immobili_ico.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Controle&lt;br/&gt;Loca&#xe7;&#xe3;o&lt;/html&gt;"/>
               </Properties>

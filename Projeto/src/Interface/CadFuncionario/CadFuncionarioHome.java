@@ -30,6 +30,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     public CadFuncionarioHome() {
         this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
         this.setTitle("Cadastro de Funcionários");
         popularTabela();
     }
@@ -77,9 +78,6 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -153,37 +151,29 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
 
         jLabel1.setText("Nome do Funcionario");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(110, 410, 130, 16);
+        jLabel1.setBounds(110, 410, 130, 14);
         getContentPane().add(jtNomeFuncionario);
-        jtNomeFuncionario.setBounds(100, 440, 150, 22);
+        jtNomeFuncionario.setBounds(100, 440, 150, 20);
 
         jLabel2.setText("Cpf");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(330, 410, 19, 16);
+        jLabel2.setBounds(330, 410, 17, 14);
         getContentPane().add(jtCpf);
-        jtCpf.setBounds(300, 440, 110, 22);
+        jtCpf.setBounds(300, 440, 110, 20);
         getContentPane().add(jtCargo);
-        jtCargo.setBounds(480, 440, 90, 22);
+        jtCargo.setBounds(480, 440, 90, 20);
         getContentPane().add(jtDepartamento);
-        jtDepartamento.setBounds(610, 440, 110, 22);
+        jtDepartamento.setBounds(610, 440, 110, 20);
 
         jLabel3.setText("Cargo");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(490, 410, 34, 16);
+        jLabel3.setBounds(490, 410, 29, 14);
 
         jLabel4.setText("Departamento");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(610, 410, 90, 16);
+        jLabel4.setBounds(610, 410, 90, 14);
         getContentPane().add(jSeparator3);
         jSeparator3.setBounds(0, 390, 1020, 10);
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -310,9 +300,6 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;

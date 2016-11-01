@@ -22,6 +22,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
     public ControleFuncionario() {
         this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
     }
     
     public static ControleFuncionario getInstancia() {
@@ -99,9 +100,6 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jtNovaSenha1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -114,7 +112,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         jtfCodigoInterno.setEnabled(false);
         getContentPane().add(jtfCodigoInterno);
-        jtfCodigoInterno.setBounds(20, 30, 100, 22);
+        jtfCodigoInterno.setBounds(20, 30, 100, 20);
 
         jlNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlNome.setText("Nome");
@@ -123,7 +121,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         jtfNome.setEnabled(false);
         getContentPane().add(jtfNome);
-        jtfNome.setBounds(150, 40, 400, 22);
+        jtfNome.setBounds(150, 40, 400, 20);
 
         jlCPF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCPF.setText("CPF");
@@ -132,7 +130,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         jftCPF.setEnabled(false);
         getContentPane().add(jftCPF);
-        jftCPF.setBounds(150, 90, 150, 22);
+        jftCPF.setBounds(150, 90, 150, 20);
 
         jlRG.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlRG.setText("RG");
@@ -141,25 +139,25 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         jtfRG.setEnabled(false);
         getContentPane().add(jtfRG);
-        jtfRG.setBounds(320, 90, 150, 22);
+        jtfRG.setBounds(320, 90, 150, 20);
 
         jLabel1.setText("Nova Senha");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(340, 260, 90, 16);
+        jLabel1.setBounds(340, 260, 90, 14);
 
         jLabel2.setText("Repetir Nova Senha");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(340, 310, 110, 16);
+        jLabel2.setBounds(340, 310, 110, 14);
 
         jLabel3.setText("Nivel de acesso");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(180, 210, 90, 16);
+        jLabel3.setBounds(180, 210, 90, 14);
         getContentPane().add(jtNivelAcesso);
-        jtNivelAcesso.setBounds(180, 230, 60, 22);
+        jtNivelAcesso.setBounds(180, 230, 60, 20);
         getContentPane().add(jtUser);
-        jtUser.setBounds(340, 230, 120, 22);
+        jtUser.setBounds(340, 230, 120, 20);
         getContentPane().add(jtNovaSenha2);
-        jtNovaSenha2.setBounds(340, 330, 120, 22);
+        jtNovaSenha2.setBounds(340, 330, 120, 20);
 
         jbConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbConfirmar.setText("Confirmar");
@@ -171,17 +169,17 @@ public class ControleFuncionario extends javax.swing.JFrame {
         getContentPane().add(jbCancelar);
         jbCancelar.setBounds(630, 470, 140, 70);
         getContentPane().add(jtCargo);
-        jtCargo.setBounds(520, 90, 60, 22);
+        jtCargo.setBounds(520, 90, 60, 20);
         getContentPane().add(jtDepartamento);
-        jtDepartamento.setBounds(650, 90, 60, 22);
+        jtDepartamento.setBounds(650, 90, 60, 20);
 
         jLabel4.setText("Cargo");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(520, 70, 34, 16);
+        jLabel4.setBounds(520, 70, 29, 14);
 
         jLabel5.setText("Departamento");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(650, 70, 120, 16);
+        jLabel5.setBounds(650, 70, 120, 14);
 
         jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/editar2.png"))); // NOI18N
         jbEditar.setText("Editar");
@@ -192,19 +190,11 @@ public class ControleFuncionario extends javax.swing.JFrame {
         getContentPane().add(jSeparator4);
         jSeparator4.setBounds(0, 190, 1030, 10);
         getContentPane().add(jtNovaSenha1);
-        jtNovaSenha1.setBounds(340, 280, 120, 22);
+        jtNovaSenha1.setBounds(340, 280, 120, 20);
 
         jLabel6.setText("Nome de Usuario");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(340, 210, 110, 16);
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        jLabel6.setBounds(340, 210, 110, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -251,9 +241,6 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JButton jbCancelar;

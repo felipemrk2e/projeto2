@@ -22,6 +22,7 @@ public class CadLocacao extends javax.swing.JFrame {
     public CadLocacao() {
         this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
     }
 
     public CadLocacao(int user) {
@@ -29,6 +30,7 @@ public class CadLocacao extends javax.swing.JFrame {
                  this.user = user;
 
         initComponents();
+        setAlwaysOnTop(true);
     }
 
     public CadLocacao(int user, String idlocacao) {
@@ -37,6 +39,7 @@ public class CadLocacao extends javax.swing.JFrame {
                  
 
         initComponents();
+        setAlwaysOnTop(true);
     }
     
     public static CadLocacao getInstancia() {
@@ -96,9 +99,6 @@ public class CadLocacao extends javax.swing.JFrame {
         jsImovel = new javax.swing.JSeparator();
         jsCliente = new javax.swing.JSeparator();
         jsLocacao = new javax.swing.JSeparator();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -321,14 +321,6 @@ public class CadLocacao extends javax.swing.JFrame {
         getContentPane().add(jsLocacao);
         jsLocacao.setBounds(10, 420, 1000, 190);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -514,9 +506,6 @@ public class CadLocacao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbEfetuarLocacao;
     private javax.swing.JButton jbPesquisarCliente;

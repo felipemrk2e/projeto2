@@ -5,6 +5,7 @@
  */
 package Interface.CadCliente;
 
+import Interface.TelaPrincipal.Sessao;
 import Interface.TelaPrincipal.TelaPrincipal;
 import dao.EstadoCivilDAO;
 import dao.EstadoDAO;
@@ -44,13 +45,7 @@ import validacao.*;
  */
 public class cadastroCliente extends javax.swing.JFrame {
 
-    private static cadastroCliente instancia;
-    int user;
-    Pessoa pessoaTemp;
-    PessoaFisica pessoaFisicaTemp;
-    PessoaJuridica pessoaJuridicaTemp;
-    EstadoCivil estadoCivilTemp;
-    Telefone telefoneTemp;
+    private static cadastroCliente instancia;     
 
     /**
      * Creates new form cadastroCliente
@@ -58,81 +53,50 @@ public class cadastroCliente extends javax.swing.JFrame {
     public cadastroCliente() {
         this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
         ativaPessoa(true);
         mascaraCPF_CNPJ(true);
         jrbPessoaFisica.setSelected(true);
         configuraMascaras();
         carregaEstados();
         carregaEstadosCivis();
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 //        populaPessoaFisica();
 
-//        PessoaDAO pessoaDAO = new PessoaDAO();
-//        Pessoa pessoa = new Pessoa();
-//        pessoa = pessoaDAO.getById(Long.parseLong("1"));
     }
-
-    public cadastroCliente(int user) {
-        this.setUndecorated(true);
-        this.user = user;
-        initComponents();
-        ativaPessoa(true);
-        mascaraCPF_CNPJ(true);
-        jrbPessoaFisica.setSelected(true);
-        configuraMascaras();
-        carregaEstados();
-        verificaNivel0();
-
-    }
-
-    public cadastroCliente(int user, String idCliente) {
-        this.setUndecorated(true);
-        this.user = user;
-        initComponents();
-        ativaPessoa(true);
-        mascaraCPF_CNPJ(true);
-        jrbPessoaFisica.setSelected(true);
-        configuraMascaras();
-        popular();
-        verificaNivel();
-    }
-
+    
     public static cadastroCliente getInstancia() {
         if (instancia == null) {
             instancia = new cadastroCliente();
         }
         return instancia;
     }
-    
-    public static void encerrarInstancia(){
+
+    public static void encerrarInstancia() {
         instancia = null;
     }
 
-    public void verificaNivel0() {
-        if (user <= 2) {
-            DisableEnable(true);
-            jbConfirmar.setEnabled(true);
-            jbEditar.setEnabled(false);
-
-        } else {
-            DisableEnable(false);
-            jbConfirmar.setEnabled(false);
-            jbEditar.setEnabled(false);
+    public void acesso(int nivel) {
+        System.out.println("====================================================Nível de Acesso: "+nivel);
+        DisableEnable(false);
+        switch (nivel) {
+            case 1:
+                DisableEnable(true);
+                jbConfirmar.setEnabled(true);
+                jbEditar.setEnabled(false);
+                break;
+            case 2:
+                DisableEnable(true);
+                jbConfirmar.setEnabled(true);
+                jbEditar.setEnabled(false);
+                break;
+            case 3:
+                DisableEnable(false);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
         }
-    }
-
-    public void verificaNivel() {
-        if (user <= 2) {
-            DisableEnable(false);
-            jbConfirmar.setEnabled(false);
-            jbEditar.setEnabled(true);
-
-        } else {
-            DisableEnable(false);
-            jbConfirmar.setEnabled(false);
-            jbEditar.setEnabled(false);
-
-        }
-    }
+    }       
 
     public void DisableEnable(Boolean b) {
 
@@ -883,6 +847,7 @@ public class cadastroCliente extends javax.swing.JFrame {
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
         cadastroClienteHome homeCliente = cadastroClienteHome.getInstancia();
+       cadastroClienteHome.getInstancia().setVisible(true);
         dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
 
