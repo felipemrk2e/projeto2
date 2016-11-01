@@ -223,7 +223,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
             jtDepartamento.setBackground(Color.red);
             control = false;
         }
-// Querry
+// Query
 
         if (control) {
 
