@@ -46,5 +46,17 @@ public class QueryBuilder {
         public List<Object> getFromWhere(String tableName, String condition){
             return entityManager.createQuery("FROM "+tableName+" WHERE "+condition).getResultList();
         }
+        
+    //Metodo para encerrar 
+    public boolean close(){
+        boolean close = true;
+        try{
+            entityManager.close();
+        }catch(Exception ex){
+            close = false;
+        }
+        
+        return close;
+    }
 
 }
