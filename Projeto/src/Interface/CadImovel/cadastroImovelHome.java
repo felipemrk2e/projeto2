@@ -17,6 +17,7 @@ import validacao.validacao;
  * @author user
  */
 public class cadastroImovelHome extends javax.swing.JFrame {
+
     private static cadastroImovelHome instancia;
     int user;
 
@@ -24,13 +25,15 @@ public class cadastroImovelHome extends javax.swing.JFrame {
      * Creates new form cadastroImovelHome
      */
     public cadastroImovelHome() {
+        this.setUndecorated(true);
         initComponents();
         fechar();
 
     }
 
     public cadastroImovelHome(int user) {
-                 this.user = user;
+        this.setUndecorated(true);
+        this.user = user;
 
         initComponents();
         fechar();
@@ -43,14 +46,15 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         }
 
     }
-     public static cadastroImovelHome getInstancia() {
+
+    public static cadastroImovelHome getInstancia() {
         if (instancia == null) {
             instancia = new cadastroImovelHome();
         }
         return instancia;
     }
-     
-     public static void encerrarInstancia(){
+
+    public static void encerrarInstancia() {
         instancia = null;
     }
 
@@ -326,27 +330,26 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         // Verificar campos antes de pesquisar 
         boolean control = true;
         // Falta Querry
-        
-        if(jcbCasa.isSelected()) {
-     
+
+        if (jcbCasa.isSelected()) {
+
         }
-          
-        if(jcbApartamento.isSelected()) {
-     
+
+        if (jcbApartamento.isSelected()) {
+
         }
-          
-        if(jcbSalao.isSelected()) {
-     
+
+        if (jcbSalao.isSelected()) {
+
         }
-          
-        if(jcbTemporario.isSelected()) {
-     
+
+        if (jcbTemporario.isSelected()) {
+
         }
-          
-        if(jcbComercio.isSelected()) {
-     
+
+        if (jcbComercio.isSelected()) {
+
         }
-        
 
         if (jtNomeProprietario.getText().equals("")) {
             jtNomeProprietario.setBackground(Color.white);
