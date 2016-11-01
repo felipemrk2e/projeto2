@@ -72,7 +72,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }
 
     public cadastroFuncionario(int user, String idFuncionario) {
-        this.setUndecorated(true);
         this.user = user;
         initComponents();
         popular();
@@ -447,6 +446,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bgSexo = new javax.swing.ButtonGroup();
         jbConfirmar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
         jbEditar = new javax.swing.JButton();
@@ -516,9 +516,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jlAddCargo = new javax.swing.JLabel();
         jtfCargaHoraria = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1024, 640));
@@ -533,7 +530,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
                 jbConfirmarMouseClicked(evt);
             }
         });
-        getContentPane().add(jbConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, 140, 70));
+        getContentPane().add(jbConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 480, 140, 70));
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
@@ -543,108 +540,110 @@ public class cadastroFuncionario extends javax.swing.JFrame {
                 jbCancelarMouseClicked(evt);
             }
         });
-        getContentPane().add(jbCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 500, 140, 70));
+        getContentPane().add(jbCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 480, 140, 70));
 
         jbEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/editar2.png"))); // NOI18N
         jbEditar.setText("Editar");
-        getContentPane().add(jbEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, 140, 70));
+        getContentPane().add(jbEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 480, 140, 70));
 
         jlCodigoInterno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCodigoInterno.setText("Código Interno");
-        getContentPane().add(jlCodigoInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-        getContentPane().add(jtfCodigoInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 100, -1));
+        getContentPane().add(jlCodigoInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 100, 30));
+        getContentPane().add(jtfCodigoInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 100, 30));
 
         jlNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlNome.setText("Nome");
-        getContentPane().add(jlNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
+        jlNome.setText("Nome:");
+        getContentPane().add(jlNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 50, 30));
 
         jlCPF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCPF.setText("CPF");
-        getContentPane().add(jlCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
+        jlCPF.setText("CPF:");
+        getContentPane().add(jlCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 40, 30));
 
         jlSexo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlSexo.setText("Sexo");
-        getContentPane().add(jlSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, -1, -1));
+        jlSexo.setText("Sexo:");
+        getContentPane().add(jlSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 40, -1, 30));
 
         jlRG.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlRG.setText("RG");
-        getContentPane().add(jlRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, -1, -1));
-        getContentPane().add(jtfRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 150, 30));
-        getContentPane().add(jtfNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 400, 30));
-        getContentPane().add(jtfBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, 130, 30));
-        getContentPane().add(jtfCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 140, 30));
-        getContentPane().add(jtfEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 400, 30));
+        jlRG.setText("RG:");
+        getContentPane().add(jlRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 30, 30));
+        getContentPane().add(jtfRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 150, 30));
+        getContentPane().add(jtfNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 490, 30));
+        getContentPane().add(jtfBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 200, 140, 30));
+        getContentPane().add(jtfCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 140, 30));
+        getContentPane().add(jtfEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 400, 30));
 
+        bgSexo.add(jrbMasculino);
         jrbMasculino.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jrbMasculino.setText("Masculino");
-        getContentPane().add(jrbMasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, -1));
+        getContentPane().add(jrbMasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, -1, -1));
 
+        bgSexo.add(jrbFeminino);
         jrbFeminino.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jrbFeminino.setText("Feminino");
-        getContentPane().add(jrbFeminino, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, -1, -1));
-        getContentPane().add(jftCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 150, 30));
+        getContentPane().add(jrbFeminino, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 40, -1, -1));
+        getContentPane().add(jftCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 150, 30));
 
         jlEndereco.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlEndereco.setText("Endereço");
-        getContentPane().add(jlEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, -1, -1));
+        jlEndereco.setText("Endereço:");
+        getContentPane().add(jlEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 70, 30));
 
         jlNumero.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlNumero.setText("Nº");
-        getContentPane().add(jlNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, -1, -1));
+        jlNumero.setText("Número:");
+        getContentPane().add(jlNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, -1, 30));
 
         jlBairro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlBairro.setText("Bairro");
-        getContentPane().add(jlBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 320, -1, -1));
+        jlBairro.setText("Bairro:");
+        getContentPane().add(jlBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, -1, 30));
 
         jlCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCidade.setText("Cidade");
-        getContentPane().add(jlCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, -1, -1));
+        jlCidade.setText("Cidade:");
+        getContentPane().add(jlCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, -1, 30));
 
         jlEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlEstado.setText("Estado");
-        getContentPane().add(jlEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, -1, -1));
+        jlEstado.setText("Estado:");
+        getContentPane().add(jlEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, -1, 30));
 
         jlTelefone.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlTelefone.setText("Telefone");
-        getContentPane().add(jlTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 440, -1, -1));
+        jlTelefone.setText("Telefone:");
+        getContentPane().add(jlTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, -1, 30));
 
         jlCelular.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCelular.setText("Celular");
-        getContentPane().add(jlCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, 60, -1));
+        jlCelular.setText("Celular:");
+        getContentPane().add(jlCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, 50, 30));
 
         jlComercial.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlComercial.setText("Alternativo");
-        getContentPane().add(jlComercial, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, -1, -1));
+        jlComercial.setText("Alternativo:");
+        getContentPane().add(jlComercial, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 280, 80, 30));
 
         jlEmail.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlEmail.setText("Email");
-        getContentPane().add(jlEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, -1, -1));
+        jlEmail.setText("Email:");
+        getContentPane().add(jlEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, -1, 30));
 
         jlComplemento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlComplemento.setText("Complemento");
-        getContentPane().add(jlComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 370, -1, -1));
+        jlComplemento.setText("Complemento:");
+        getContentPane().add(jlComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, -1, 30));
 
         jlObs.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlObs.setText("Observações");
-        getContentPane().add(jlObs, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, -1, 30));
+        jlObs.setText("Observações:");
+        getContentPane().add(jlObs, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, -1, 30));
 
         jlCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCargo.setText("Cargo");
-        getContentPane().add(jlCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, -1));
+        jlCargo.setText("Cargo:");
+        getContentPane().add(jlCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 50, 30));
 
         jlDataNascimento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlDataNascimento.setText("Data de Nascimento");
-        getContentPane().add(jlDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, -1, -1));
+        jlDataNascimento.setText("Data de Nascimento: ");
+        getContentPane().add(jlDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 140, 30));
 
         jlEstadoCivil.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlEstadoCivil.setText("Estado Civil");
-        getContentPane().add(jlEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, -1, -1));
+        jlEstadoCivil.setText("Estado Civil: ");
+        getContentPane().add(jlEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, -1, 30));
 
         jcbEstadoCivil.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jcbEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, -1, -1));
-        getContentPane().add(jftDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 130, 30));
+        getContentPane().add(jcbEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, -1, 30));
+        getContentPane().add(jftDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 130, 30));
 
         jspObs.setBorder(null);
 
@@ -652,79 +651,79 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtaObs.setRows(5);
         jspObs.setViewportView(jtaObs);
 
-        getContentPane().add(jspObs, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 130, 380, 30));
-        getContentPane().add(jtfNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, 50, 30));
+        getContentPane().add(jspObs, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 230, 70));
+        getContentPane().add(jtfNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 50, 30));
 
         jlCEP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCEP.setText("CEP");
-        getContentPane().add(jlCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, -1, -1));
-        getContentPane().add(jftCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 390, 110, 30));
+        jlCEP.setText("CEP:");
+        getContentPane().add(jlCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 40, 30));
+        getContentPane().add(jftCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 110, 30));
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 390, -1, -1));
-        getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 230, 30));
-        getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, 110, 30));
-        getContentPane().add(jftCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 130, 30));
-        getContentPane().add(jftComercial, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 460, 110, 30));
-        getContentPane().add(jtfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 460, 230, 30));
+        getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, 30));
+        getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 240, 330, 30));
+        getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 210, 30));
+        getContentPane().add(jftCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, 180, 30));
+        getContentPane().add(jftComercial, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 280, 180, 30));
+        getContentPane().add(jtfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 720, 30));
 
         jlBanco.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlBanco.setText("Banco");
-        getContentPane().add(jlBanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, -1, -1));
-        getContentPane().add(jtfBanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 150, 30));
+        jlBanco.setText("Banco:");
+        getContentPane().add(jlBanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, -1, 30));
+        getContentPane().add(jtfBanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 210, 30));
 
         jlTipoConta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlTipoConta.setText("Tipo de Conta");
-        getContentPane().add(jlTipoConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, -1, -1));
-        getContentPane().add(jtfTipoConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 130, 30));
+        jlTipoConta.setText("Tipo de Conta:");
+        getContentPane().add(jlTipoConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, -1, 30));
+        getContentPane().add(jtfTipoConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 360, 130, 30));
 
         jlNConta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlNConta.setText("Nº Conta");
-        getContentPane().add(jlNConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, -1, -1));
-        getContentPane().add(jtfNConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 210, 100, 30));
+        jlNConta.setText("Número da Conta:");
+        getContentPane().add(jlNConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 360, -1, 30));
+        getContentPane().add(jtfNConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 360, 140, 30));
 
         jlAgencia.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlAgencia.setText("Agência");
-        getContentPane().add(jlAgencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, -1, -1));
-        getContentPane().add(jtfAgencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 210, 50, 30));
+        jlAgencia.setText("Agência:");
+        getContentPane().add(jlAgencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, -1, 30));
+        getContentPane().add(jtfAgencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, 70, 30));
 
         jlSalario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlSalario.setText("Salário");
-        getContentPane().add(jlSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, -1, -1));
-        getContentPane().add(jtfSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 210, 100, 30));
+        jlSalario.setText("Salário:");
+        getContentPane().add(jlSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, -1, 30));
+        getContentPane().add(jtfSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, 100, 30));
 
         jlDependentes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlDependentes.setText("Dependentes");
-        getContentPane().add(jlDependentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 50, -1, -1));
-        getContentPane().add(jtfDependentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, 80, -1));
+        jlDependentes.setText("Dependentes:");
+        getContentPane().add(jlDependentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, -1, 30));
+        getContentPane().add(jtfDependentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 110, 30));
 
         jlEscolaridade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlEscolaridade.setText("Escolaridade");
-        getContentPane().add(jlEscolaridade, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, -1, -1));
-        getContentPane().add(jtfEscolaridade, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 200, 30));
+        jlEscolaridade.setText("Escolaridade: ");
+        getContentPane().add(jlEscolaridade, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, 30));
+        getContentPane().add(jtfEscolaridade, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 200, 30));
 
         jlDataAdmissao.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlDataAdmissao.setText("Data de Admissão");
-        getContentPane().add(jlDataAdmissao, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, -1, -1));
+        jlDataAdmissao.setText("Data de Admissão:");
+        getContentPane().add(jlDataAdmissao, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, -1, 30));
 
         jlNCTPS.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlNCTPS.setText("Nº CTPS");
-        getContentPane().add(jlNCTPS, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, -1, -1));
-        getContentPane().add(jtfNCTPS, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 120, 30));
+        jlNCTPS.setText("Número da CTPS:");
+        getContentPane().add(jlNCTPS, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 440, -1, 30));
+        getContentPane().add(jtfNCTPS, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 440, 150, 30));
 
         jlSerieCTPS.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlSerieCTPS.setText("Série CTPS");
-        getContentPane().add(jlSerieCTPS, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
-        getContentPane().add(jtfSerieCTPS, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 70, 30));
+        jlSerieCTPS.setText("Série CTPS:");
+        getContentPane().add(jlSerieCTPS, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 440, -1, 30));
+        getContentPane().add(jtfSerieCTPS, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 70, 30));
 
         jlCargaHoraria.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCargaHoraria.setText("Carga Horária");
-        getContentPane().add(jlCargaHoraria, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, -1, -1));
-        getContentPane().add(jftDataAdmissao, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, 100, 30));
+        jlCargaHoraria.setText("Carga Horária:");
+        getContentPane().add(jlCargaHoraria, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, -1, 30));
+        getContentPane().add(jftDataAdmissao, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 440, 100, 30));
 
         jcbCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jcbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 150, -1));
+        getContentPane().add(jcbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 150, 30));
 
         jlAddCargo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add.png"))); // NOI18N
         jlAddCargo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -732,12 +731,11 @@ public class cadastroFuncionario extends javax.swing.JFrame {
                 jlAddCargoMousePressed(evt);
             }
         });
-        getContentPane().add(jlAddCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 20, 20));
-        getContentPane().add(jtfCargaHoraria, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 70, 30));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 830, 140));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 830, 110));
-        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 830, 90));
-        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 830, 120));
+        getContentPane().add(jlAddCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 120, 20, 30));
+        getContentPane().add(jtfCargaHoraria, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 440, 70, 30));
+
+        jSeparator1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Funcionário", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 930, 550));
 
         pack();
         setLocationRelativeTo(null);
@@ -867,10 +865,8 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgSexo;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JButton jbEditar;
