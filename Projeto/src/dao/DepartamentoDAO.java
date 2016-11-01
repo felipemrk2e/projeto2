@@ -17,33 +17,40 @@ public class DepartamentoDAO extends DAO<Departamento> {
     @Override
     public Departamento getById(Long id) {
         Departamento departamento = null;
-		try{
-			departamento = entityManager.find(Departamento.class, id);
-		}catch(Exception e){
-			System.out.println("Erro na consulta de Departamento: "+e);
-		}
-		return departamento;  
+        try {
+            departamento = entityManager.find(Departamento.class, id);
+        } catch (Exception e) {
+            System.out.println("Erro na consulta de Departamento: " + e);
+        } finally {
+            entityManager.close();
+        }
+        return departamento;
     }
 
     @Override
     public boolean removeById(Long id) {
         Departamento departamento = null;
-                try{
-                    departamento = this.getById(id);
-                    entityManager.getTransaction().begin();
-                    entityManager.remove(departamento);
-                    entityManager.getTransaction().commit();
-                    return true;
-                }catch(Exception e){
-                    entityManager.getTransaction().rollback();
-                    System.out.println("Erro na exclusão de Departamento: "+e);
-                }
-		return false;
+        boolean flag = true;
+        try {
+            departamento = this.getById(id);
+            entityManager.getTransaction().begin();
+            entityManager.remove(departamento);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            flag = false;
+            System.out.println("Erro na exclusão de Departamento: " + e);
+        } finally {
+            entityManager.close();
+        }
+        return flag;
     }
 
     @Override
     public List<Departamento> getAll() {
-        return entityManager.createQuery("FROM Departamento").getResultList();
+        List<Departamento> departamentos = entityManager.createQuery("FROM Departamento").getResultList();
+        entityManager.close();
+        return departamentos;
     }
     
 }
