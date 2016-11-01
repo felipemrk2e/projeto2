@@ -17,6 +17,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import global.model.Endereco;
+import global.model.Status;
+import imovel.model.Terreno;
+import imovel.model.TipoImovel;
+import imovel.model.Documentacao;
 
 @Entity
 public class Imovel {
@@ -110,6 +114,10 @@ public class Imovel {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="idEndereco", nullable = true)
 	private Endereco endereco;
+        
+        @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name="idStatus", nullable = true)
+	private Status status;
 	
 	//+addTipo
 	@OneToMany(
@@ -123,8 +131,8 @@ public class Imovel {
 			int lavanderia, int vagasGaragem, int areaServico, int piscina, int lavabos, int depEmpregados,
 			String areaExterna, int anoConstrucao, String acabamento, String outrosItens, String descImovel,
 			String observacoes, String chaves, int tipoMobilia, String descMobilia, double valorIptu,
-			double valorCondominio, imovel.model.TipoImovel tipoImovel, imovel.model.Documentacao documentacao,
-			imovel.model.Terreno terreno, global.model.Endereco endereco) {
+			double valorCondominio, TipoImovel tipoImovel, Documentacao documentacao,
+			Terreno terreno, Endereco endereco, Status status) {
                 this.ativo = ativo;
 		this.qtdQuartos = qtdQuartos;
 		this.qtdSuites = qtdSuites;
@@ -152,14 +160,15 @@ public class Imovel {
 		this.documentacao = documentacao;
 		this.terreno = terreno;
 		this.endereco = endereco;
+                this.status = status;
 	}
         
         public Imovel(int qtdQuartos, int qtdSuites, int qtdSalas, int qtdBanheiros, int qtdPisos,
 			int lavanderia, int vagasGaragem, int areaServico, int piscina, int lavabos, int depEmpregados,
 			String areaExterna, int anoConstrucao, String acabamento, String outrosItens, String descImovel,
 			String observacoes, String chaves, int tipoMobilia, String descMobilia, double valorIptu,
-			double valorCondominio, imovel.model.TipoImovel tipoImovel, imovel.model.Documentacao documentacao,
-			imovel.model.Terreno terreno, global.model.Endereco endereco) {
+			double valorCondominio, TipoImovel tipoImovel, Documentacao documentacao,
+			Terreno terreno, Endereco endereco, Status status) {
 		this.qtdQuartos = qtdQuartos;
 		this.qtdSuites = qtdSuites;
 		this.qtdSalas = qtdSalas;
@@ -186,6 +195,7 @@ public class Imovel {
 		this.documentacao = documentacao;
 		this.terreno = terreno;
 		this.endereco = endereco;
+                this.status = status;
 	}
 
 	public Imovel(){
@@ -420,6 +430,14 @@ public class Imovel {
 	public List<Imovel_has_TipoContrato> getTiposContratos(){
 		return this.tiposContratos;
 	}
+        
+        public Status getStatus(){
+            return this.status;
+        }
+        
+        public void setStatus(Status status){
+            this.status = status;
+        }
 	
 	public void addTipoContrato(TipoContrato tipoContrato, double valor) {
 		Imovel_has_TipoContrato imovelTipoContrato = new Imovel_has_TipoContrato(this, tipoContrato, valor);

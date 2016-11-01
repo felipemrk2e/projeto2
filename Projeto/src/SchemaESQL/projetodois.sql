@@ -1,9 +1,7 @@
 CREATE DATABASE projetodois;
 USE projetodois;
 
-/* Retirado tabela interesse;
-   Tabela Pessoa_has_Interesse agora está relacionada com Pessoa e TipoContrato;
-   25.10.2016
+/* Adição da tabela Status que se relaciona com Imovel
 */
 
 CREATE TABLE TipoImovel(
@@ -73,6 +71,12 @@ CREATE TABLE Terreno(
     CONSTRAINT PRIMARY KEY (idTerreno)
 );
 
+CREATE TABLE `Status`(
+	idStatus INT NOT NULL AUTO_INCREMENT,
+    `status` VARCHAR(255) NOT NULL,
+    CONSTRAINT PRIMARY KEY(idStatus)
+);
+
 CREATE TABLE Imovel(
     idImovel INT AUTO_INCREMENT NOT NULL,
     ativo BOOLEAN DEFAULT 1 NOT NULL,
@@ -102,6 +106,7 @@ CREATE TABLE Imovel(
     idEndereco INT NOT NULL,
     idDocumentacao INT NOT NULL,
     idTerreno INT NOT NULL,
+    idStatus INT NOT NULL,
     CONSTRAINT pk_idImovel PRIMARY KEY (idImovel),
     CONSTRAINT fk_tipoImovel FOREIGN KEY (idTipoImovel)
     REFERENCES TipoImovel(idTipoImovel),
@@ -110,7 +115,9 @@ CREATE TABLE Imovel(
     CONSTRAINT fk_idDocumentacao FOREIGN KEY(idDocumentacao)
     REFERENCES Documentacao(idDocumentacao),
     CONSTRAINT fk_idTerreno FOREIGN KEY(idTerreno)
-    REFERENCES Terreno(idTerreno)
+    REFERENCES Terreno(idTerreno),
+    CONSTRAINT fk_idStatus FOREIGN KEY(idStatus)
+    REFERENCES `Status`(idStatus)
 );
 
 CREATE TABLE TipoContrato(
