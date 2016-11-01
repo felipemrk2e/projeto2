@@ -17,33 +17,40 @@ public class TelefoneDAO extends DAO<Telefone>{
     @Override
     public Telefone getById(Long id) {
         Telefone telefone = null;
-		try{
-			telefone = entityManager.find(Telefone.class, id);
-		}catch(Exception e){
-			System.out.println("Erro na consulta de Telefone: "+e);
-		}
-		return telefone;       
+        try {
+            telefone = entityManager.find(Telefone.class, id);
+        } catch (Exception e) {
+            System.out.println("Erro na consulta de Telefone: " + e);
+        } finally {
+            entityManager.close();
+        }
+        return telefone;
     }
 
     @Override
     public boolean removeById(Long id) {
         Telefone telefone = null;
-                try{
-                    telefone = this.getById(id);
-                    entityManager.getTransaction().begin();
-                    entityManager.remove(telefone);
-                    entityManager.getTransaction().commit();
-                    return true;
-                }catch(Exception e){
-                    entityManager.getTransaction().rollback();
-                    System.out.println("Erro na exclusão de Telefone: "+e);
-                }
-		return false;
+        boolean flag = true;
+        try {
+            telefone = this.getById(id);
+            entityManager.getTransaction().begin();
+            entityManager.remove(telefone);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            flag = false;
+            System.out.println("Erro na exclusão de Telefone: " + e);
+        } finally {
+            entityManager.close();
+        }
+        return flag;
     }
 
     @Override
     public List<Telefone> getAll() {
-        return entityManager.createQuery("FROM Telefone").getResultList();
+        List<Telefone> telefones = entityManager.createQuery("FROM Telefone").getResultList();
+        entityManager.close();
+        return telefones;
     }
     
 }
