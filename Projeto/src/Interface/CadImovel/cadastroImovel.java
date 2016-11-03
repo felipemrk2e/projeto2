@@ -9,12 +9,14 @@ import global.model.Estado;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import dao.EstadoDAO;
 import dao.ImovelDAO;
+import dao.StatusDAO;
 import dao.TipoContratoDAO;
 import dao.TipoImovelDAO;
 import global.model.Bairro;
 import global.model.Cidade;
 import global.model.Endereco;
 import global.model.Login.DialogLogin;
+import global.model.Status;
 import imovel.model.Documentacao;
 import imovel.model.Imovel;
 import imovel.model.Imovel_has_TipoContrato;
@@ -33,15 +35,18 @@ import javax.swing.JOptionPane;
 import validacao.validacao;
 
 public class cadastroImovel extends javax.swing.JFrame {
+
     private static cadastroImovel instancia;
     int user;
     Imovel imovelTemp;
+    ImovelDAO imovelDao = new ImovelDAO();
+    // Imovel imovel = new Imovel();
 
     /**
      * Creates new form cadastroImovel2
      */
     public cadastroImovel() {
-        this.setUndecorated(true);
+        //   this.setUndecorated(true);
         initComponents();
         fecharCadastro();
         //Alterado system.exit(), para dispose()
@@ -49,10 +54,9 @@ public class cadastroImovel extends javax.swing.JFrame {
         removerTitleBar();
         ComboBox();
 
-        ImovelDAO imovelDao = new ImovelDAO();
-        Imovel imovel = new Imovel();
-        imovel = imovelDao.getById(Long.parseLong("1"));
-        popular(imovel);
+
+//        Imovel imovel = imovelDao.getById(Long.parseLong("2"));
+//        popular(imovel);
     }
 
     public cadastroImovel(int user) {
@@ -74,21 +78,20 @@ public class cadastroImovel extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         fecharCadastro();
         removerTitleBar();
-        ImovelDAO imovelDao = new ImovelDAO();
         Imovel imovel = imovelDao.getById(Long.valueOf(idImovel));
         popular(imovel);
         verificaNivel();
 
     }
-    
+
     public static cadastroImovel getInstancia() {
         if (instancia == null) {
             instancia = new cadastroImovel();
         }
         return instancia;
     }
-    
-    public static void encerrarInstancia(){
+
+    public static void encerrarInstancia() {
         instancia = null;
     }
 
@@ -104,6 +107,17 @@ public class cadastroImovel extends javax.swing.JFrame {
         }
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
         jcbEstado.setModel(defaultComboBox);
+        StatusDAO statusDao= new StatusDAO();
+        List <Status> status = new ArrayList<>();
+        status = statusDao.getAll();
+         List<String> StatusList = new ArrayList<String>();
+        for (int i = 0; i < status.size() -1; i++) {
+            StatusList.add(status.get(i).getStatus());
+        }
+        DefaultComboBoxModel defaultComboBox2 = new DefaultComboBoxModel(StatusList.toArray());
+        jcbStatus.setModel(defaultComboBox2);
+        jcbStatus.setSelectedIndex(0);
+        
     }
 
     public void verificaNivel0() {
@@ -158,7 +172,19 @@ public class cadastroImovel extends javax.swing.JFrame {
         jcbTemporada.setEnabled(b);
         jcbVenda.setEnabled(b);
         jcbFesta.setEnabled(b);
-        jtfStatus.setEnabled(b);
+        
+         if(b && imovelTemp.getStatus().getIdStatus() !=4){
+                jcbStatus.setEnabled(true);
+            }
+         else if (b && imovelTemp.getStatus().getIdStatus() ==4){
+               jcbStatus.setEnabled(false);
+         }
+               else {
+           jcbStatus.setEnabled(false);
+                       };
+         
+        
+       
 
         //Endereço
         jtfLogradouro.setEnabled(b);
@@ -171,6 +197,8 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtfReferencia.setEnabled(b);
         jtfZona.setEnabled(b);
         jtfCondominio.setEnabled(b);
+        jcbEstado.setEnabled(b);
+        jcbStatus.setEnabled(b);
 
         //valores
         jtValorLocacaoMes.setEnabled(b);
@@ -235,6 +263,19 @@ public class cadastroImovel extends javax.swing.JFrame {
         } else if (imovel.getTipoImovel().getIdTipoImovel() == 5) {
             jrbCondominio.setSelected(true);
         }
+        
+           StatusDAO statusDao= new StatusDAO();
+        List <Status> status = new ArrayList<>();
+        status = statusDao.getAll();
+         List<String> StatusList = new ArrayList<String>();
+        for (int i = 0; i < status.size() -1; i++) {
+            StatusList.add(status.get(i).getStatus());
+        }
+        DefaultComboBoxModel defaultComboBox2 = new DefaultComboBoxModel(StatusList.toArray());
+        jcbStatus.setModel(defaultComboBox2);
+        int statusTemp = (int)imovel.getStatus().getIdStatus();
+        jcbStatus.setSelectedIndex(statusTemp);
+        jcbStatus.setEnabled(false);
 
         for (int i = 0; i < imovel.getTiposContratos().size(); i++) {
 
@@ -1328,7 +1369,22 @@ public class cadastroImovel extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbLocacaoMouseClicked
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
-
+//
+//
+//        List<Imovel_has_TipoContrato> tipoContrato = imovelTemp.getTiposContratos();
+//        TipoContratoDAO tipoContratoDao = new TipoContratoDAO();;
+//      
+//        List<TipoContrato> tipoContrato2 = new ArrayList<>();
+//        tipoContrato2 = tipoContratoDao.getAll();
+//        imovelTemp.addTipoContrato(tipoContrato2.get(1), (55.00));
+//       // imovelDao.persist(imovelTemp);
+//      //  tipoContrato.get(0).setValor((44.00));
+//
+//        imovelDao.merge(imovelTemp);
+//        //   dao.merge(imovel);
+//        System.out.println("");
+//        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+//
         if (jbConfirmar.isEnabled()) {
             int control = 0;
             boolean control2 = true;
@@ -1340,16 +1396,14 @@ public class cadastroImovel extends javax.swing.JFrame {
             Estado uf;
             Documentacao documentacao;
             Terreno terreno;
-            
+
             TipoImovelDAO tipoImovelDao = new TipoImovelDAO();
 
             TipoImovel tipoImovel = new TipoImovel();
             List<TipoImovel> tipoImovelTemp = new ArrayList<>();
             tipoImovelTemp = tipoImovelDao.getAll();
-            
-                TipoContratoDAO tipoContratoDao = new TipoContratoDAO();;
-            
-              
+
+            TipoContratoDAO tipoContratoDao = new TipoContratoDAO();;
 
             if (this.getImovel() == null) {
                 imovel = new Imovel();
@@ -1361,78 +1415,76 @@ public class cadastroImovel extends javax.swing.JFrame {
                 terreno = new Terreno();
 
                 // arrumar valores no merge
-              List<TipoContrato> tipoContrato = new ArrayList<>();
-               tipoContrato = tipoContratoDao.getAll();
-              
-               // Fora das tabs..
-            if (jcbLocacao.isSelected()) {
-                if (jtValorLocacaoMes.getText().equals("")) {
-                    jtValorLocacaoMes.setBackground(Color.white);
-                } else if (!jtValorLocacaoMes.getText().equals("") && validacao.validaNumeros(jtValorLocacaoMes.getText())) {
-                    imovel.addTipoContrato(tipoContrato.get(0), Double.valueOf(jtValorLocacaoMes.getText()));
+                List<TipoContrato> tipoContrato = new ArrayList<>();
+                tipoContrato = tipoContratoDao.getAll();
 
-                    jtValorLocacaoMes.setBackground(Color.white);
+                // Fora das tabs..
+                if (jcbLocacao.isSelected()) {
+                    if (jtValorLocacaoMes.getText().equals("")) {
+                        jtValorLocacaoMes.setBackground(Color.white);
+                    } else if (!jtValorLocacaoMes.getText().equals("") && validacao.validaNumeros(jtValorLocacaoMes.getText())) {
+                        imovel.addTipoContrato(tipoContrato.get(0), Double.valueOf(jtValorLocacaoMes.getText()));
+
+                        jtValorLocacaoMes.setBackground(Color.white);
+                    } else {
+                        control2 = false;
+                        jtValorLocacaoMes.setBackground(Color.red);
+
+                    }
                 } else {
-                    control2 = false;
-                    jtValorLocacaoMes.setBackground(Color.red);
 
                 }
-            } else {
+                if (jcbVenda.isSelected()) {
+                    if (jtValorVenda.getText().equals("")) {
+                        jtValorVenda.setBackground(Color.white);
+                    } else if (!jtValorVenda.getText().equals("") && validacao.validaNumeros(jtValorVenda.getText())) {
 
-            }
-            if (jcbVenda.isSelected()) {
-                if (jtValorVenda.getText().equals("")) {
-                    jtValorVenda.setBackground(Color.white);
-                } else if (!jtValorVenda.getText().equals("") && validacao.validaNumeros(jtValorVenda.getText())) {
+                        imovel.addTipoContrato(tipoContrato.get(1), Double.valueOf(jtValorVenda.getText()));
 
-                    imovel.addTipoContrato(tipoContrato.get(1), Double.valueOf(jtValorVenda.getText()));
+                        jtValorVenda.setBackground(Color.white);
+                    } else {
+                        control2 = false;
+                        jtValorVenda.setBackground(Color.red);
 
-                    jtValorVenda.setBackground(Color.white);
+                    }
                 } else {
-                    control2 = false;
-                    jtValorVenda.setBackground(Color.red);
 
                 }
-            } else {
 
-            }
+                if (jcbTemporada.isSelected()) {
+                    if (jtValorTemporada.getText().equals("")) {
+                        jtValorTemporada.setBackground(Color.white);
+                    } else if (!jtValorTemporada.getText().equals("") && validacao.validaNumeros(jtValorTemporada.getText())) {
+                        imovel.addTipoContrato(tipoContrato.get(2), Double.valueOf(jtValorTemporada.getText()));
 
-            if (jcbTemporada.isSelected()) {
-                if (jtValorTemporada.getText().equals("")) {
-                    jtValorTemporada.setBackground(Color.white);
-                } else if (!jtValorTemporada.getText().equals("") && validacao.validaNumeros(jtValorTemporada.getText())) {
-                    imovel.addTipoContrato(tipoContrato.get(2), Double.valueOf(jtValorTemporada.getText()));
+                        jtValorTemporada.setBackground(Color.white);
+                    } else {
+                        control2 = false;
+                        jtValorTemporada.setBackground(Color.red);
 
-                    jtValorTemporada.setBackground(Color.white);
+                    }
                 } else {
-                    control2 = false;
-                    jtValorTemporada.setBackground(Color.red);
 
                 }
-            } else {
 
-            }
+                if (jcbFesta.isSelected()) {
+                    if (jtValorDiaria.getText().equals("")) {
 
-            if (jcbFesta.isSelected()) {
-                if (jtValorDiaria.getText().equals("")) {
+                        jtValorDiaria.setBackground(Color.white);
 
-                    jtValorDiaria.setBackground(Color.white);
+                    } else if (!jtValorDiaria.getText().equals("") && validacao.validaNumeros(jtValorDiaria.getText())) {
+                        imovel.addTipoContrato(tipoContrato.get(3), Double.valueOf(jtValorDiaria.getText()));
 
-                } else if (!jtValorDiaria.getText().equals("") && validacao.validaNumeros(jtValorDiaria.getText())) {
-                    imovel.addTipoContrato(tipoContrato.get(3), Double.valueOf(jtValorDiaria.getText()));
+                        jtValorDiaria.setBackground(Color.white);
+                    } else {
+                        control2 = false;
+                        jtValorDiaria.setBackground(Color.red);
 
-                    jtValorDiaria.setBackground(Color.white);
+                    }
                 } else {
-                    control2 = false;
-                    jtValorDiaria.setBackground(Color.red);
 
                 }
-            } else {
 
-            }
-
-
-               
             } else {
                 imovel = imovelTemp;
                 endereco = imovel.getEndereco();
@@ -1442,80 +1494,130 @@ public class cadastroImovel extends javax.swing.JFrame {
                 documentacao = imovel.getDocumentacao();
                 terreno = imovel.getTerreno();
                 List<Imovel_has_TipoContrato> tipoContrato = imovel.getTiposContratos();
-               
-               
-              // Fora das tabs..
-            if (jcbLocacao.isSelected()) {
-                if (jtValorLocacaoMes.getText().equals("")) {
-                    jtValorLocacaoMes.setBackground(Color.white);
-                } else if (!jtValorLocacaoMes.getText().equals("") && validacao.validaNumeros(jtValorLocacaoMes.getText())) {
-                 tipoContrato.get(0).setValor(Double.valueOf(jtValorLocacaoMes.getText()));
 
-                    jtValorLocacaoMes.setBackground(Color.white);
-                } else {
-                    control2 = false;
-                    jtValorLocacaoMes.setBackground(Color.red);
+                List<TipoContrato> tipoContrato2 = new ArrayList<>();
+                tipoContrato2 = tipoContratoDao.getAll();
 
-                }
-            } else {
 
-            }
-            if (jcbVenda.isSelected()) {
-                if (jtValorVenda.getText().equals("")) {
-                    jtValorVenda.setBackground(Color.white);
-                } else if (!jtValorVenda.getText().equals("") && validacao.validaNumeros(jtValorVenda.getText())) {
+                boolean locacao = false;
+                boolean venda = false;
+                boolean temporada = false;
+                boolean festa = false;
+                for (int i = 0; i < tipoContrato.size(); i++) {
+                    if (tipoContrato.get(i).getTipoContrato().getIdTipoContrato() == 1) {
+                        locacao = true;
 
-                   tipoContrato.get(1).setValor(Double.valueOf(jtValorVenda.getText()));
+                    } else if (tipoContrato.get(i).getTipoContrato().getIdTipoContrato() == 2) {
+                        venda = true;
 
-                    jtValorVenda.setBackground(Color.white);
-                } else {
-                    control2 = false;
-                    jtValorVenda.setBackground(Color.red);
+                    } else if (tipoContrato.get(i).getTipoContrato().getIdTipoContrato() == 3) {
+                        temporada = true;
+
+                    } else if (tipoContrato.get(i).getTipoContrato().getIdTipoContrato() == 4) {
+                        festa = true;
+
+                    }
 
                 }
-            } else {
+                System.out.println(locacao);
+                System.out.println(venda);
+                System.out.println(temporada);
+                System.out.println(festa);
+                //  Fora das tabs..
+                if (jcbLocacao.isSelected()) {
+                    if (jtValorLocacaoMes.getText().equals("")) {
+                        jtValorLocacaoMes.setBackground(Color.white);
+                    } else if (!jtValorLocacaoMes.getText().equals("") && validacao.validaNumeros(jtValorLocacaoMes.getText())) {
+                        // imovel.addTipoContrato(tipoContrato2.get(0), Double.valueOf(jtValorLocacaoMes.getText()));
 
-            }
+                        if (locacao) {
+                            tipoContrato.get(0).setValor(Double.valueOf(jtValorLocacaoMes.getText()));
 
-            if (jcbTemporada.isSelected()) {
-                if (jtValorTemporada.getText().equals("")) {
-                    jtValorTemporada.setBackground(Color.white);
-                } else if (!jtValorTemporada.getText().equals("") && validacao.validaNumeros(jtValorTemporada.getText())) {
-                    tipoContrato.get(2).setValor(Double.valueOf(jtValorTemporada.getText()));
+                        } else {
+                            imovel.addTipoContrato(tipoContrato2.get(0), Double.valueOf(jtValorLocacaoMes.getText()));
 
-                    jtValorTemporada.setBackground(Color.white);
+                        }
+
+                        jtValorLocacaoMes.setBackground(Color.white);
+                    } else {
+                        control2 = false;
+                        jtValorLocacaoMes.setBackground(Color.red);
+
+                    }
                 } else {
-                    control2 = false;
-                    jtValorTemporada.setBackground(Color.red);
 
                 }
-            } else {
+                if (jcbVenda.isSelected()) {
+                    if (jtValorVenda.getText().equals("")) {
+                        jtValorVenda.setBackground(Color.white);
+                    } else if (!jtValorVenda.getText().equals("") && validacao.validaNumeros(jtValorVenda.getText())) {
 
-            }
+                        if (venda) {
+                            tipoContrato.get(1).setValor(Double.valueOf(jtValorVenda.getText()));
 
-            if (jcbFesta.isSelected()) {
-                if (jtValorDiaria.getText().equals("")) {
+                        } else {
+                            imovel.addTipoContrato(tipoContrato2.get(1), Double.valueOf(jtValorVenda.getText()));
 
-                    jtValorDiaria.setBackground(Color.white);
+                        }
 
-                } else if (!jtValorDiaria.getText().equals("") && validacao.validaNumeros(jtValorDiaria.getText())) {
-                     tipoContrato.get(3).setValor(Double.valueOf(jtValorDiaria.getText()));
+                        jtValorVenda.setBackground(Color.white);
+                    } else {
+                        control2 = false;
+                        jtValorVenda.setBackground(Color.red);
 
-                    jtValorDiaria.setBackground(Color.white);
+                    }
                 } else {
-                    control2 = false;
-                    jtValorDiaria.setBackground(Color.red);
 
                 }
-            } else {
+
+                if (jcbTemporada.isSelected()) {
+                    if (jtValorTemporada.getText().equals("")) {
+                        jtValorTemporada.setBackground(Color.white);
+                    } else if (!jtValorTemporada.getText().equals("") && validacao.validaNumeros(jtValorTemporada.getText())) {
+
+                        if (temporada) {
+                            tipoContrato.get(2).setValor(Double.valueOf(jtValorTemporada.getText()));
+
+                        } else {
+                            imovel.addTipoContrato(tipoContrato2.get(2), Double.valueOf(jtValorTemporada.getText()));
+
+                        }
+
+                        jtValorTemporada.setBackground(Color.white);
+                    } else {
+                        control2 = false;
+                        jtValorTemporada.setBackground(Color.red);
+
+                    }
+                } else {
+
+                }
+
+                if (jcbFesta.isSelected()) {
+                    if (jtValorDiaria.getText().equals("")) {
+
+                        jtValorDiaria.setBackground(Color.white);
+
+                    } else if (!jtValorDiaria.getText().equals("") && validacao.validaNumeros(jtValorDiaria.getText())) {
+                        if (festa) {
+                            tipoContrato.get(3).setValor(Double.valueOf(jtValorDiaria.getText()));
+
+                        } else {
+                            imovel.addTipoContrato(tipoContrato2.get(3), Double.valueOf(jtValorDiaria.getText()));
+
+                        }
+
+                        jtValorDiaria.setBackground(Color.white);
+                    } else {
+                        control2 = false;
+                        jtValorDiaria.setBackground(Color.red);
+
+                    }
+                } else {
+
+                }
 
             }
-
-              
-            }
-
-            
-             
 
             //Endereço
             //Principal        
@@ -1595,14 +1697,6 @@ public class cadastroImovel extends javax.swing.JFrame {
                 control++;
             }
 
-//            if (!jtfUF.getText().equals("") && validacao.validaLetras(jtfUF.getText())) {
-//                uf.setNome(jtfUF.getText());
-//                jtfUF.setBackground(Color.white);
-//                control++;
-//            } else {
-//                jtfUF.setBackground(Color.red);
-//
-//            }
 // Pricipal End
             if (jtCep.getText().equals("")) {
                 endereco.setCep(" ");
@@ -1613,10 +1707,7 @@ public class cadastroImovel extends javax.swing.JFrame {
                 jtCep.setBackground(Color.white);
 
             }
-//            else {
-//                 control2 = false;
-//                jtCep.setBackground(Color.red);
-//            }
+
             if (jtfComplemento.getText().equals("")) {
                 endereco.setComplemento(" ");
             } else if (!jtfComplemento.getText().equals("")) {
@@ -2004,8 +2095,8 @@ public class cadastroImovel extends javax.swing.JFrame {
                 imovel.setTipoImovel(tipoImovel);
 
                 //        conexao banco;  
-                ImovelDAO daoImovel = new ImovelDAO();
-                if (daoImovel.merge(imovel)) {
+            //  ImovelDAO daoImovel = new ImovelDAO();
+                if (imovelDao.merge(imovel)) {
                     JOptionPane.showMessageDialog(null, "Atualização Efetuado com Sucesso !");
 
                     new cadastroImovelHome().setVisible(true);
@@ -2016,7 +2107,9 @@ public class cadastroImovel extends javax.swing.JFrame {
                 }
 
             } else if ((control == 6) && control2 == true) {
-
+                   Status status = new Status();
+                status.setIdStatus(Long.valueOf(1));
+                imovel.setStatus(status);
                 cidade.setEstado(uf);
                 bairro.setCidade(cidade);
                 endereco.setBairro(bairro);
@@ -2026,8 +2119,8 @@ public class cadastroImovel extends javax.swing.JFrame {
                 imovel.setTipoImovel(tipoImovel);
 
                 //        conexao banco;  
-                ImovelDAO daoImovel = new ImovelDAO();
-                daoImovel.persist(imovel);
+              //  ImovelDAO daoImovel = new ImovelDAO();
+                imovelDao.persist(imovel);
 
                 JOptionPane.showMessageDialog(null, "Cadastro Efetuado com Sucesso !");
                 System.out.println("Cadastro Efetuado");
@@ -2052,8 +2145,6 @@ public class cadastroImovel extends javax.swing.JFrame {
             }
 
         }
-
-// TODO add your handling code here:
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     public void zerarCampos() {
@@ -2191,6 +2282,7 @@ public class cadastroImovel extends javax.swing.JFrame {
     private void jbEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseClicked
         if (jbEditar.isEnabled()) {
             DisableEnable(true);
+           
         }
     }//GEN-LAST:event_jbEditarMouseClicked
 
