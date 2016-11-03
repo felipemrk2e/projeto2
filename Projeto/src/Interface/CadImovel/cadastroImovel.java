@@ -53,8 +53,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         removerTitleBar();
         ComboBox();
-
-
+//
 //        Imovel imovel = imovelDao.getById(Long.parseLong("2"));
 //        popular(imovel);
     }
@@ -96,7 +95,6 @@ public class cadastroImovel extends javax.swing.JFrame {
     }
 
     public void ComboBox() {
-        // Falta o Status
 
         EstadoDAO estadoDao = new EstadoDAO();
         List<Estado> estadoTemp = new ArrayList<>();
@@ -107,17 +105,17 @@ public class cadastroImovel extends javax.swing.JFrame {
         }
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
         jcbEstado.setModel(defaultComboBox);
-        StatusDAO statusDao= new StatusDAO();
-        List <Status> status = new ArrayList<>();
+        StatusDAO statusDao = new StatusDAO();
+        List<Status> status = new ArrayList<>();
         status = statusDao.getAll();
-         List<String> StatusList = new ArrayList<String>();
-        for (int i = 0; i < status.size() -1; i++) {
+        List<String> StatusList = new ArrayList<String>();
+        for (int i = 0; i < status.size() - 1; i++) {
             StatusList.add(status.get(i).getStatus());
         }
         DefaultComboBoxModel defaultComboBox2 = new DefaultComboBoxModel(StatusList.toArray());
         jcbStatus.setModel(defaultComboBox2);
         jcbStatus.setSelectedIndex(0);
-        
+
     }
 
     public void verificaNivel0() {
@@ -172,19 +170,14 @@ public class cadastroImovel extends javax.swing.JFrame {
         jcbTemporada.setEnabled(b);
         jcbVenda.setEnabled(b);
         jcbFesta.setEnabled(b);
-        
-         if(b && imovelTemp.getStatus().getIdStatus() !=4){
-                jcbStatus.setEnabled(true);
-            }
-         else if (b && imovelTemp.getStatus().getIdStatus() ==4){
-               jcbStatus.setEnabled(false);
-         }
-               else {
-           jcbStatus.setEnabled(false);
-                       };
-         
-        
-       
+
+        if (b && imovelTemp.getStatus().getIdStatus() != 4) {
+            jcbStatus.setEnabled(true);
+        } else if (b && imovelTemp.getStatus().getIdStatus() == 4) {
+            jcbStatus.setEnabled(false);
+        } else {
+            jcbStatus.setEnabled(false);
+        };
 
         //Endereço
         jtfLogradouro.setEnabled(b);
@@ -263,18 +256,28 @@ public class cadastroImovel extends javax.swing.JFrame {
         } else if (imovel.getTipoImovel().getIdTipoImovel() == 5) {
             jrbCondominio.setSelected(true);
         }
-        
-           StatusDAO statusDao= new StatusDAO();
-        List <Status> status = new ArrayList<>();
+
+        StatusDAO statusDao = new StatusDAO();
+        List<Status> status = new ArrayList<>();
         status = statusDao.getAll();
-         List<String> StatusList = new ArrayList<String>();
-        for (int i = 0; i < status.size() -1; i++) {
-            StatusList.add(status.get(i).getStatus());
+        List<String> StatusList = new ArrayList<String>();
+
+        if (status.size() < 3) {
+            for (int i = 0; i < status.size() - 1; i++) {
+                StatusList.add(status.get(i).getStatus());
+            }
+        } else {
+            for (int i = 0; i < status.size(); i++) {
+                StatusList.add(status.get(i).getStatus());
+            }
         }
+
         DefaultComboBoxModel defaultComboBox2 = new DefaultComboBoxModel(StatusList.toArray());
         jcbStatus.setModel(defaultComboBox2);
-        int statusTemp = (int)imovel.getStatus().getIdStatus();
-        jcbStatus.setSelectedIndex(statusTemp);
+        int statusTemp = (int) imovel.getStatus().getIdStatus();
+        System.out.println(statusTemp);
+        jcbStatus.setSelectedIndex(statusTemp - 1);
+
         jcbStatus.setEnabled(false);
 
         for (int i = 0; i < imovel.getTiposContratos().size(); i++) {
@@ -286,21 +289,23 @@ public class cadastroImovel extends javax.swing.JFrame {
                 jcbLocacao.setSelected(true);
                 jtValorLocacaoMes.setEnabled(true);
                 jtValorLocacaoMes.setText(String.valueOf(Imovel_tipoContrato.getValor()));
+                jtValorLocacaoMes.setEditable(true);
 
             } else if (tipoContrato.getIdTipoContrato() == 2) {
-                jcbTemporada.setSelected(true);
-                jtValorTemporada.setEnabled(true);
-
-                jtValorTemporada.setText(String.valueOf(Imovel_tipoContrato.getValor()));
-            } else if (tipoContrato.getIdTipoContrato() == 3) {
                 jcbVenda.setSelected(true);
                 jtValorVenda.setEnabled(true);
-
                 jtValorVenda.setText(String.valueOf(Imovel_tipoContrato.getValor()));
+                jtValorVenda.setEditable(true);
+            } else if (tipoContrato.getIdTipoContrato() == 3) {
+                jcbTemporada.setSelected(true);
+                jtValorTemporada.setEnabled(true);
+                jtValorTemporada.setText(String.valueOf(Imovel_tipoContrato.getValor()));
+                jtValorTemporada.setEditable(true);
             } else if (tipoContrato.getIdTipoContrato() == 4) {
                 jcbFesta.setSelected(true);
                 jtValorDiaria.setEnabled(true);
                 jtValorDiaria.setText(String.valueOf(Imovel_tipoContrato.getValor()));
+                jtValorDiaria.setEditable(true);
             }
 
         }
@@ -1290,7 +1295,7 @@ public class cadastroImovel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jcbStatus);
-        jcbStatus.setBounds(880, 30, 56, 20);
+        jcbStatus.setBounds(820, 30, 170, 20);
 
         pack();
         setLocationRelativeTo(null);
@@ -1390,6 +1395,7 @@ public class cadastroImovel extends javax.swing.JFrame {
             boolean control2 = true;
 
             Imovel imovel;
+            Status status;
             Endereco endereco;
             Bairro bairro;
             Cidade cidade;
@@ -1407,6 +1413,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
             if (this.getImovel() == null) {
                 imovel = new Imovel();
+                status = new Status();
                 endereco = new Endereco();
                 bairro = new Bairro();
                 cidade = new Cidade();
@@ -1487,6 +1494,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
             } else {
                 imovel = imovelTemp;
+                status = imovel.getStatus();
                 endereco = imovel.getEndereco();
                 bairro = imovel.getEndereco().getBairro();
                 cidade = imovel.getEndereco().getBairro().getCidade();
@@ -1497,7 +1505,6 @@ public class cadastroImovel extends javax.swing.JFrame {
 
                 List<TipoContrato> tipoContrato2 = new ArrayList<>();
                 tipoContrato2 = tipoContratoDao.getAll();
-
 
                 boolean locacao = false;
                 boolean venda = false;
@@ -1528,7 +1535,6 @@ public class cadastroImovel extends javax.swing.JFrame {
                     if (jtValorLocacaoMes.getText().equals("")) {
                         jtValorLocacaoMes.setBackground(Color.white);
                     } else if (!jtValorLocacaoMes.getText().equals("") && validacao.validaNumeros(jtValorLocacaoMes.getText())) {
-                        // imovel.addTipoContrato(tipoContrato2.get(0), Double.valueOf(jtValorLocacaoMes.getText()));
 
                         if (locacao) {
                             tipoContrato.get(0).setValor(Double.valueOf(jtValorLocacaoMes.getText()));
@@ -2085,30 +2091,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
             //Descrição End
             if ((control == 6) && control2 == true && (!jtCodigo.getText().equals(""))) {
-
-                cidade.setEstado(uf);
-                bairro.setCidade(cidade);
-                endereco.setBairro(bairro);
-                imovel.setEndereco(endereco);
-                imovel.setDocumentacao(documentacao);
-                imovel.setTerreno(terreno);
-                imovel.setTipoImovel(tipoImovel);
-
-                //        conexao banco;  
-            //  ImovelDAO daoImovel = new ImovelDAO();
-                if (imovelDao.merge(imovel)) {
-                    JOptionPane.showMessageDialog(null, "Atualização Efetuado com Sucesso !");
-
-                    new cadastroImovelHome().setVisible(true);
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Erro durante a Atualização !");
-
-                }
-
-            } else if ((control == 6) && control2 == true) {
-                   Status status = new Status();
-                status.setIdStatus(Long.valueOf(1));
+                status.setIdStatus(Long.valueOf(jcbStatus.getSelectedIndex() + 1));
                 imovel.setStatus(status);
                 cidade.setEstado(uf);
                 bairro.setCidade(cidade);
@@ -2119,7 +2102,29 @@ public class cadastroImovel extends javax.swing.JFrame {
                 imovel.setTipoImovel(tipoImovel);
 
                 //        conexao banco;  
-              //  ImovelDAO daoImovel = new ImovelDAO();
+                if (imovelDao.persist(imovel)) {
+                    JOptionPane.showMessageDialog(null, "Atualização Efetuado com Sucesso !");
+
+                    new cadastroImovelHome().setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro durante a Atualização !");
+
+                }
+
+            } else if ((control == 6) && control2 == true) {
+
+                status.setIdStatus(Long.valueOf(jcbStatus.getSelectedIndex() + 1));
+                imovel.setStatus(status);
+                cidade.setEstado(uf);
+                bairro.setCidade(cidade);
+                endereco.setBairro(bairro);
+                imovel.setEndereco(endereco);
+                imovel.setDocumentacao(documentacao);
+                imovel.setTerreno(terreno);
+                imovel.setTipoImovel(tipoImovel);
+
+                //        conexao banco;  
                 imovelDao.persist(imovel);
 
                 JOptionPane.showMessageDialog(null, "Cadastro Efetuado com Sucesso !");
@@ -2282,7 +2287,7 @@ public class cadastroImovel extends javax.swing.JFrame {
     private void jbEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseClicked
         if (jbEditar.isEnabled()) {
             DisableEnable(true);
-           
+
         }
     }//GEN-LAST:event_jbEditarMouseClicked
 
