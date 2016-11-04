@@ -63,59 +63,38 @@ public class cadastroFuncionario extends javax.swing.JFrame {
 
     }
 
-    public cadastroFuncionario(int user) {
-        this.setUndecorated(true);
-        this.user = user;
-        initComponents();
-        verificaNivel0();
-
-    }
-
-    public cadastroFuncionario(int user, String idFuncionario) {
-        this.user = user;
-        initComponents();
-        popular();
-        verificaNivel();
-
-    }
-    
     public static cadastroFuncionario getInstancia() {
         if (instancia == null) {
             instancia = new cadastroFuncionario();
         }
         return instancia;
     }
-    
-    public static void encerrarInstancia(){
+
+    public static void encerrarInstancia() {
         instancia = null;
     }
-
-    public void verificaNivel0() {
-        if (user <= 2) {
-            DisableEnable(true);
-            jbEditar.setEnabled(false);
-            jbConfirmar.setEnabled(true);
-
-        } else {
-            DisableEnable(false);
-            jbEditar.setEnabled(false);
-            jbConfirmar.setEnabled(false);
-
+    
+    public void acesso(int nivel) {
+        System.out.println("====================================================Nível de Acesso: " + nivel);
+        DisableEnable(false);
+        switch (nivel) {
+            case 1:
+                DisableEnable(true);
+                jbConfirmar.setEnabled(true);
+                jbEditar.setEnabled(true);
+                break;
+            case 2:
+                DisableEnable(true);
+                break;
+            case 3:
+                DisableEnable(false);                
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
 
-    public void verificaNivel() {
-        if (user <= 2) {
-            DisableEnable(false);
-            jbEditar.setEnabled(true);
-            jbConfirmar.setEnabled(false);
-
-        } else {
-            DisableEnable(false);
-            jbConfirmar.setEnabled(false);
-
-        }
-    }
+    
 
     public void DisableEnable(Boolean b) {
 

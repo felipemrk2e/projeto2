@@ -253,17 +253,11 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jbNivelMouseClicked
 
     private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
-        String idFuncionario = "vazio no momento";
-        new cadastroFuncionario(user, idFuncionario).setVisible(true);
-        dispose();// TODO add your handling code here:
+        
     }//GEN-LAST:event_jbVisualizarMouseClicked
 
     private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
 
-        if (jbCadastrar.isEnabled()) {
-            new cadastroFuncionario(user).setVisible(true);
-            dispose();
-        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jbCadastrarMouseClicked
 

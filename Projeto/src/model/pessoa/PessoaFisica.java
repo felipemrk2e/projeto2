@@ -64,7 +64,7 @@ public class PessoaFisica extends Pessoa {
 //    @ManyToMany(mappedBy = "pessoas")
 //    private List<PessoaFisica> fiadores;
     
-    @ManyToMany
+    @OneToMany
     @JoinTable(name = "fiadorDe", joinColumns = @JoinColumn(name = "idPessoa"), inverseJoinColumns = @JoinColumn(name = "idFiador"))
     private List<PessoaFisica> listaFiadores;
 

@@ -89,7 +89,7 @@ public class PessoaJuridicaTableModel extends AbstractTableModel {
         this.fireTableRowsDeleted(linha, linha);
     }
 
-    public Pessoa get(int linha) {
+    public PessoaJuridica get(int linha) {
         return this.dadosPessoas.get(linha);
     }
 
