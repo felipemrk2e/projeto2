@@ -29,8 +29,6 @@ public class cadastroCargo extends javax.swing.JFrame {
 
         jtfCodigoCargo = new javax.swing.JTextField();
         jlDescricaoCargo = new javax.swing.JLabel();
-        jlDepartamento = new javax.swing.JLabel();
-        jcbDepartamento = new javax.swing.JComboBox<>();
         jlNomeCargo = new javax.swing.JLabel();
         jlCodigoCargo = new javax.swing.JLabel();
         jlCodigoDepartamento = new javax.swing.JLabel();
@@ -42,106 +40,119 @@ public class cadastroCargo extends javax.swing.JFrame {
         jlRamal = new javax.swing.JLabel();
         jtfRamal = new javax.swing.JTextField();
         jtNomeCargo = new javax.swing.JTextField();
-        jbCadastrarCargo = new javax.swing.JButton();
+        jbEditar = new javax.swing.JButton();
         jbCadastrarDepartamento = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaDescricaoCargo = new javax.swing.JTextArea();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jbCadastrarCargo1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(704, 460));
-        setMinimumSize(new java.awt.Dimension(704, 460));
-        setPreferredSize(new java.awt.Dimension(704, 460));
+        setMinimumSize(new java.awt.Dimension(747, 640));
         getContentPane().setLayout(null);
         getContentPane().add(jtfCodigoCargo);
-        jtfCodigoCargo.setBounds(10, 30, 100, 20);
+        jtfCodigoCargo.setBounds(180, 250, 100, 20);
 
         jlDescricaoCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlDescricaoCargo.setText("Descrição do Cargo");
         getContentPane().add(jlDescricaoCargo);
-        jlDescricaoCargo.setBounds(130, 130, 200, 17);
-
-        jlDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlDepartamento.setText("Departamento");
-        getContentPane().add(jlDepartamento);
-        jlDepartamento.setBounds(130, 260, 120, 17);
-
-        jcbDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jcbDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jcbDepartamento);
-        jcbDepartamento.setBounds(230, 260, 66, 23);
+        jlDescricaoCargo.setBounds(180, 340, 200, 17);
 
         jlNomeCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlNomeCargo.setText("Nome do Cargo");
         getContentPane().add(jlNomeCargo);
-        jlNomeCargo.setBounds(130, 80, 110, 17);
+        jlNomeCargo.setBounds(180, 290, 110, 17);
 
         jlCodigoCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCodigoCargo.setText("Código do Cargo");
         getContentPane().add(jlCodigoCargo);
-        jlCodigoCargo.setBounds(10, 10, 150, 17);
+        jlCodigoCargo.setBounds(180, 230, 150, 17);
 
         jlCodigoDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCodigoDepartamento.setText("Código do Departamento");
         getContentPane().add(jlCodigoDepartamento);
-        jlCodigoDepartamento.setBounds(10, 300, 159, 17);
+        jlCodigoDepartamento.setBounds(10, 20, 159, 17);
         getContentPane().add(jtfCodigoDepartamento);
-        jtfCodigoDepartamento.setBounds(10, 320, 100, 20);
+        jtfCodigoDepartamento.setBounds(10, 40, 100, 20);
 
         jlNomeDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlNomeDepartamento.setText("Nome do Departamento");
         getContentPane().add(jlNomeDepartamento);
-        jlNomeDepartamento.setBounds(130, 360, 160, 17);
+        jlNomeDepartamento.setBounds(130, 80, 160, 17);
         getContentPane().add(jtfNomeDepartamento);
-        jtfNomeDepartamento.setBounds(130, 380, 250, 20);
+        jtfNomeDepartamento.setBounds(130, 100, 250, 20);
 
         jlTelefone.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlTelefone.setText("Telefone");
         getContentPane().add(jlTelefone);
-        jlTelefone.setBounds(130, 410, 100, 17);
+        jlTelefone.setBounds(130, 130, 100, 17);
         getContentPane().add(jftTelefone);
-        jftTelefone.setBounds(130, 430, 110, 20);
+        jftTelefone.setBounds(130, 150, 110, 20);
 
         jlRamal.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlRamal.setText("Ramal");
         getContentPane().add(jlRamal);
-        jlRamal.setBounds(260, 410, 46, 17);
+        jlRamal.setBounds(260, 130, 46, 17);
         getContentPane().add(jtfRamal);
-        jtfRamal.setBounds(260, 430, 90, 20);
+        jtfRamal.setBounds(260, 150, 90, 20);
         getContentPane().add(jtNomeCargo);
-        jtNomeCargo.setBounds(130, 100, 250, 20);
+        jtNomeCargo.setBounds(180, 310, 250, 20);
 
-        jbCadastrarCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jbCadastrarCargo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
-        jbCadastrarCargo.setText("<html><center>Cadastrar<br/>Cargo</html>");
-        getContentPane().add(jbCadastrarCargo);
-        jbCadastrarCargo.setBounds(520, 80, 140, 70);
+        jbEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
+        jbEditar.setText("<html><center>Editar<br/>Cargo</html>");
+        getContentPane().add(jbEditar);
+        jbEditar.setBounds(570, 340, 140, 70);
 
         jbCadastrarDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCadastrarDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbCadastrarDepartamento.setText("<html><center>Cadastrar<br/>Departamento</html>");
         jbCadastrarDepartamento.setIconTextGap(0);
         getContentPane().add(jbCadastrarDepartamento);
-        jbCadastrarDepartamento.setBounds(520, 370, 140, 70);
+        jbCadastrarDepartamento.setBounds(570, 90, 140, 70);
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("<html><center>Cancelar<br/></html>");
         getContentPane().add(jbCancelar);
-        jbCancelar.setBounds(520, 220, 140, 70);
+        jbCancelar.setBounds(570, 430, 140, 70);
 
         jtaDescricaoCargo.setColumns(20);
         jtaDescricaoCargo.setRows(5);
         jScrollPane1.setViewportView(jtaDescricaoCargo);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(130, 150, 360, 96);
+        jScrollPane1.setBounds(180, 360, 360, 150);
         getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(100, 350, 390, 160);
+        jSeparator1.setBounds(-10, 70, 760, 110);
         getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(100, 70, 390, 160);
+        jSeparator2.setBounds(0, 210, 770, 10);
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(jList1);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(10, 250, 140, 260);
+
+        jbCadastrarCargo1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCadastrarCargo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
+        jbCadastrarCargo1.setText("<html><center>Cadastrar<br/>Cargo</html>");
+        getContentPane().add(jbCadastrarCargo1);
+        jbCadastrarCargo1.setBounds(570, 250, 140, 70);
+
+        jLabel1.setText("Cargos do Departamento");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(14, 230, 140, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -183,17 +194,19 @@ public class cadastroCargo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JButton jbCadastrarCargo;
+    private javax.swing.JButton jbCadastrarCargo1;
     private javax.swing.JButton jbCadastrarDepartamento;
     private javax.swing.JButton jbCancelar;
-    private javax.swing.JComboBox<String> jcbDepartamento;
+    private javax.swing.JButton jbEditar;
     private javax.swing.JFormattedTextField jftTelefone;
     private javax.swing.JLabel jlCodigoCargo;
     private javax.swing.JLabel jlCodigoDepartamento;
-    private javax.swing.JLabel jlDepartamento;
     private javax.swing.JLabel jlDescricaoCargo;
     private javax.swing.JLabel jlNomeCargo;
     private javax.swing.JLabel jlNomeDepartamento;
