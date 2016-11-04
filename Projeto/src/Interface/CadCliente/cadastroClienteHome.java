@@ -299,32 +299,63 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     }
 
     private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
-//        int linhaSelecionada = jTable1.getSelectedRow();
-//        if (linhaSelecionada == -1) {
-//            return; //Nada selecionado
-//        }
-//        if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
-//            PessoaTableModel pessoaModel = (PessoaTableModel) jTable1.getModel();
-//            Pessoa pessoaSelecionada = pessoaModel.get(linhaSelecionada);
-//            System.out.println(pessoaSelecionada.getNomePessoa());
-//
-//        } else if (jcbPessoaFisica.isSelected()) {
-//            PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel)jTable1.getModel();
-//            PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
-//            System.out.println(pessoaFisicaSelecionada.getCPF());
-//            
-//        } else if (jcbPessoaJuridica.isSelected()) {
-//            PessoaJuridicaTableModel pessoaJuridicaModel = (PessoaJuridicaTableModel)jTable1.getModel();
-//            PessoaJuridica pessoaJuridicaSelecionada = pessoaJuridicaModel.get(linhaSelecionada);
-//            System.out.println(pessoaJuridicaSelecionada.getCnpj());
-//        } else {
-//             JOptionPane.showMessageDialog(null, "Nenhum campo foi selecionado!");
-//        }
+        int linhaSelecionada = jTable1.getSelectedRow();
+        if (linhaSelecionada == -1) {
+            return; //Nada selecionado
+        }
+        if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
+            PessoaTableModel pessoaModel = (PessoaTableModel) jTable1.getModel();
+            Pessoa pessoaSelecionada = pessoaModel.get(linhaSelecionada);
+            System.out.println(pessoaSelecionada.getNomePessoa());
+
+        } else if (jcbPessoaFisica.isSelected()) {
+            PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jTable1.getModel();
+            PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
+            cadastroCliente cadastroPessoaFisica = new cadastroCliente(pessoaFisicaSelecionada);
+            cadastroPessoaFisica.setVisible(true);
+            cadastroPessoaFisica.setLocationRelativeTo(this);
+
+        } else if (jcbPessoaJuridica.isSelected()) {
+            PessoaJuridicaTableModel pessoaJuridicaModel = (PessoaJuridicaTableModel) jTable1.getModel();
+            PessoaJuridica pessoaJuridicaSelecionada = pessoaJuridicaModel.get(linhaSelecionada);
+            System.out.println(pessoaJuridicaSelecionada.getCnpj());
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhum campo foi selecionado!");
+        }
+
 
     }//GEN-LAST:event_jbVisualizarMouseClicked
 
     private void jbRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemoverMouseClicked
         if (jbRemover.isEnabled()) {
+            int linhaSelecionada = jTable1.getSelectedRow();
+            if (linhaSelecionada == -1) {
+                return; //Nada selecionado
+            }
+            if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
+                PessoaTableModel pessoaModel = (PessoaTableModel) jTable1.getModel();
+                Pessoa pessoaSelecionada = pessoaModel.get(linhaSelecionada);
+                PessoaDAO pessoaDAO = new PessoaDAO();
+                pessoaDAO.removeById(pessoaSelecionada.getIdPessoa());
+                pessoaModel.removeRow(linhaSelecionada);
+
+            } else if (jcbPessoaFisica.isSelected()) {
+                PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jTable1.getModel();
+                PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
+                PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+                pessoaFisicaDAO.removeById(pessoaFisicaSelecionada.getIdPessoa());
+                pessoaFisicaModel.removeRow(linhaSelecionada);
+
+            } else if (jcbPessoaJuridica.isSelected()) {
+                PessoaJuridicaTableModel pessoaJuridicaModel = (PessoaJuridicaTableModel) jTable1.getModel();
+                PessoaJuridica pessoaJuridicaSelecionada = pessoaJuridicaModel.get(linhaSelecionada);
+                PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
+                pessoaJuridicaDAO.removeById(pessoaJuridicaSelecionada.getIdPessoa());
+                pessoaJuridicaModel.removeRow(linhaSelecionada);
+                System.out.println(pessoaJuridicaSelecionada.getCnpj());
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhum campo foi selecionado!");
+            }
         }// TODO add your handling code here:
     }//GEN-LAST:event_jbRemoverMouseClicked
 
