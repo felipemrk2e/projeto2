@@ -27,15 +27,6 @@ CREATE TABLE Cidade(
     REFERENCES Estado(id)
 );
 
-CREATE TABLE Bairro(
-    idBairro INT NOT NULL AUTO_INCREMENT,
-    nomeBairro VARCHAR(255) NOT NULL,
-    idCidade INT NOT NULL,
-    CONSTRAINT PRIMARY KEY (idBairro),
-    CONSTRAINT FOREIGN KEY (idCidade)
-    REFERENCES Cidade(idCidade)
-);
-
 CREATE TABLE Documentacao(
     idDocumentacao INT AUTO_INCREMENT NOT NULL,
     numMatricula VARCHAR(255),
@@ -50,16 +41,17 @@ CREATE TABLE Documentacao(
 CREATE TABLE Endereco(
     idEndereco INT AUTO_INCREMENT NOT NULL,
     nomeEndereco VARCHAR(255) NOT NULL,
+    bairro VARCHAR(255) NOT NULL,
     numero INT NOT NULL,
     zona VARCHAR(255),
     referencia VARCHAR(255),
     complemento VARCHAR(255),
     nomeCondominio VARCHAR(255),
     cep VARCHAR(10) NOT NULL,
-    idBairro INT NOT NULL,
+    idCidade INT NOT NULL,
     CONSTRAINT PRIMARY KEY(idEndereco),
-    CONSTRAINT FOREIGN KEY (idBairro)
-    REFERENCES Bairro(idBairro)
+    CONSTRAINT FOREIGN KEY (idCidade)
+    REFERENCES Cidade(idCidade)
 );
 
 CREATE TABLE Terreno(
