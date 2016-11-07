@@ -7,13 +7,13 @@ package Interface.CadCliente;
 
 import Interface.TelaPrincipal.Sessao;
 import Interface.TelaPrincipal.TelaPrincipal;
+import dao.CidadeDAO;
 import dao.EstadoCivilDAO;
 import dao.EstadoDAO;
 import dao.PessoaDAO;
 import dao.PessoaFisicaDAO;
 import dao.PessoaJuridicaDAO;
 import dao.TipoContratoDAO;
-import global.model.Bairro;
 import global.model.Cidade;
 import global.model.Endereco;
 import global.model.Estado;
@@ -46,7 +46,7 @@ import validacao.*;
  * @author Sala
  */
 public class cadastroCliente extends javax.swing.JFrame {
-    
+
     private static cadastroCliente instancia;
 
     /**
@@ -68,7 +68,7 @@ public class cadastroCliente extends javax.swing.JFrame {
 
     }
 
-    public cadastroCliente(PessoaFisica pessoaFisica) {        
+    public cadastroCliente(PessoaFisica pessoaFisica) {
         initComponents();
         setAlwaysOnTop(true);
         ativaPessoa(true);
@@ -81,30 +81,30 @@ public class cadastroCliente extends javax.swing.JFrame {
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
         atualizarPessoaFisica(pessoaFisica);
     }
-    
-    public cadastroCliente(PessoaJuridica pessoaJuridica) {        
+
+    public cadastroCliente(PessoaJuridica pessoaJuridica) {
         initComponents();
         setAlwaysOnTop(true);
         ativaPessoa(false);
         mascaraCPF_CNPJ(false);
         jrbPessoaJuridica.setSelected(true);
         configuraMascaras();
-        carregaEstados();        
+        carregaEstados();
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
         atualizarPessoaJuridica(pessoaJuridica);
     }
-    
+
     public static cadastroCliente getInstancia() {
         if (instancia == null) {
             instancia = new cadastroCliente();
         }
         return instancia;
     }
-    
+
     public static void encerrarInstancia() {
         instancia = null;
     }
-    
+
     public void acesso(int nivel) {
         System.out.println("====================================================Nível de Acesso: " + nivel);
         DisableEnable(false);
@@ -126,7 +126,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
-    
+
     public void DisableEnable(Boolean b) {
 
         //cad
@@ -141,7 +141,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfNumero.setEnabled(b);
         jtfBairro.setEnabled(b);
         jftCEP.setEnabled(b);
-        jtfCidade.setEnabled(b);
+        jcbCidade.setEnabled(b);
         jtfComplemento.setEnabled(b);
         jftTelefone.setEnabled(b);
         jftCelular.setEnabled(b);
@@ -165,7 +165,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jcbEstadoCivil.setEnabled(b);
         jcbEstado.setEnabled(b);
     }
-    
+
     public void ZerarCampos() {
         jtfCodigoInterno.setText("");
         //cad
@@ -179,8 +179,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfEndereco.setText("");
         jtfNumero.setText("");
         jtfBairro.setText("");
-        jftCEP.setText("");
-        jtfCidade.setText("");
+        jftCEP.setText("");       
         jtfComplemento.setText("");
         jftTelefone.setText("");
         jftCelular.setText("");
@@ -203,8 +202,10 @@ public class cadastroCliente extends javax.swing.JFrame {
         jcbTroca.setSelected(false);
         jcbLocacao.setSelected(false);
         jcbEstadoCivil.setSelectedIndex(-1);
+        jcbCidade.setSelectedIndex(-1);
         jcbEstado.setSelectedIndex(-1);
         jcbFiador.setSelectedIndex(-1);
+         
 
         // jcb fim
         //Tirando os alertas
@@ -212,7 +213,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftCPF.setBackground(Color.white);
         jtfEndereco.setBackground(Color.white);
         jtfBairro.setBackground(Color.white);
-        jtfCidade.setBackground(Color.white);
+        jcbCidade.setBackground(Color.white);
         jftDataNascimento.setBackground(Color.white);
         jtfNumero.setBackground(Color.white);
         jcbEstado.setBackground(Color.white);
@@ -228,7 +229,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfEmail.setBackground(Color.white);
         // Fim
     }
-    
+
     public void popular() {
         //nivel usuario
         if (true) {
@@ -238,7 +239,7 @@ public class cadastroCliente extends javax.swing.JFrame {
             jbConfirmar.setEnabled(false);
             jbEditar.setEnabled(false);
         }
-        
+
         jtfCodigoInterno.setText(null);
         //cad
 
@@ -253,7 +254,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfNumero.setText(null);
         jtfBairro.setText(null);
         jftCEP.setText(null);
-        jtfCidade.setText(null);
+//        jcbCidade.setText(null);
         jtfComplemento.setText(null);
         jftTelefone.setText(null);
         jftCelular.setText(null);
@@ -272,10 +273,10 @@ public class cadastroCliente extends javax.swing.JFrame {
             ativaPessoa(false);
             mascaraCPF_CNPJ(false);
         }
-        
+
         if (true) {
             jrbMasculino.setSelected(true);
-            
+
         } else if (true) {
             jrbFeminino.setSelected(true);
         }
@@ -284,21 +285,21 @@ public class cadastroCliente extends javax.swing.JFrame {
         // jcb     // falta arrumar o estado pois muda bem a logica..
         if (true) {
             jcbAtivo.setSelected(true);
-            
+
         }
-        
+
         if (true) {
             jcbCompra.setSelected(true);
         }
-        
+
         if (true) {
             jcbTroca.setSelected(true);
         }
-        
+
         if (true) {
             jcbLocacao.setSelected(true);
         }
-        
+
         if (true) {
             jcbEstadoCivil.setSelectedIndex(0);
         } else if (true) {
@@ -316,7 +317,7 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         // jcb fim
     }
-    
+
     public void cadastrarPessoaFisica() throws ParseException {
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
         PessoaFisica pessoaFisica = new PessoaFisica();
@@ -327,32 +328,28 @@ public class cadastroCliente extends javax.swing.JFrame {
         Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataNascimento.getText());
         pessoaFisica.setDataNascimento(dataNascimento);
         pessoaFisica.setObservacoes(jtaObs.getText());
-        
+
         EstadoDAO estadoDAO = new EstadoDAO();
         Estado estado = new Estado();
         estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
-        
+
+        CidadeDAO cidadeDAO = new CidadeDAO();
         Cidade cidade = new Cidade();
-        cidade.setNomeCidade(jtfCidade.getText());
-        cidade.setEstado(estado);
-        
-        Bairro bairro = new Bairro();
-        bairro.setNomeBairro(jtfBairro.getText());
-        bairro.setCidade(cidade);
-        
+        cidade = cidadeDAO.getById((long) jcbEstado.getSelectedIndex() + 1);       
+
         Endereco endereco = new Endereco();
+        endereco.setBairro(jtfBairro.getText());
         endereco.setNomeEndereco(jtfEndereco.getText());
         endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
         endereco.setCep(jftCEP.getText());
         endereco.setComplemento(jtfComplemento.getText());
-        endereco.setBairro(bairro);
         pessoaFisica.setEndereco(endereco);
-        
+
         List<Telefone> telefones = new ArrayList<Telefone>();
         Telefone telefone = new Telefone();
         Telefone celular = new Telefone();
         Telefone comercial = new Telefone();
-        
+
         telefone.setNumero(jftTelefone.getText());
         telefone.setPessoa(pessoaFisica);
         telefone.setOperadora("");
@@ -362,33 +359,33 @@ public class cadastroCliente extends javax.swing.JFrame {
         comercial.setNumero(jftComercial.getText());
         comercial.setPessoa(pessoaFisica);
         comercial.setOperadora("");
-        
+
         telefones.add(telefone);
         telefones.add(celular);
         telefones.add(comercial);
         pessoaFisica.setTelefone(telefones);
-        
+
         pessoaFisica.setEmail(jtfEmail.getText());
-        
+
         if (jrbMasculino.isSelected()) {
             pessoaFisica.setSexo('M');
         } else if (jrbFeminino.isSelected()) {
             pessoaFisica.setSexo('F');
         }
-        
+
         EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
         EstadoCivil estadoCivil = new EstadoCivil();
         estadoCivil = estadoCivilDAO.getById((long) jcbEstadoCivil.getSelectedIndex() + 1);
-        
+
         pessoaFisica.setListaFiadores(pessoaFisicaDAO.getFiadores((long) jcbFiador.getSelectedIndex() + 1));
         pessoaFisica.setEstadoCivil(estadoCivil);
-        
+
         TipoContratoDAO tipoContratoDAO = new TipoContratoDAO();
         TipoContrato tipoContrato = new TipoContrato();
         List<TipoContrato> tiposContrato = new ArrayList<TipoContrato>();
         tiposContrato = tipoContratoDAO.getAll();
         List<TipoContrato> interesses = new ArrayList<TipoContrato>();
-        
+
         if (jcbLocacao.isSelected()) {
             interesses.add(tiposContrato.get(0));
         }
@@ -400,9 +397,9 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
         pessoaFisica.setInteresses(interesses);
         pessoaFisicaDAO.persist(pessoaFisica);
-        
+
     }
-    
+
     public void cadastrarPessoaJuridica() throws ParseException {
         PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
         PessoaJuridica pessoaJuridica = new PessoaJuridica();
@@ -413,32 +410,28 @@ public class cadastroCliente extends javax.swing.JFrame {
         Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataNascimento.getText());
         pessoaJuridica.setDataNascimento(dataNascimento);
         pessoaJuridica.setObservacoes(jtaObs.getText());
-        
+
         EstadoDAO estadoDAO = new EstadoDAO();
         Estado estado = new Estado();
         estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
-        
+
+        CidadeDAO cidadeDAO = new CidadeDAO();
         Cidade cidade = new Cidade();
-        cidade.setNomeCidade(jtfCidade.getText());
-        cidade.setEstado(estado);
+        cidade = cidadeDAO.getById((long) jcbEstado.getSelectedIndex() + 1); 
         
-        Bairro bairro = new Bairro();
-        bairro.setNomeBairro(jtfBairro.getText());
-        bairro.setCidade(cidade);
-        
-        Endereco endereco = new Endereco();
+        Endereco endereco = new Endereco();        
         endereco.setNomeEndereco(jtfEndereco.getText());
         endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
         endereco.setCep(jftCEP.getText());
         endereco.setComplemento(jtfComplemento.getText());
-        endereco.setBairro(bairro);
+        endereco.setBairro(jtfBairro.getText());
         pessoaJuridica.setEndereco(endereco);
-        
+
         List<Telefone> telefones = new ArrayList<Telefone>();
         Telefone telefone = new Telefone();
         Telefone celular = new Telefone();
         Telefone comercial = new Telefone();
-        
+
         telefone.setNumero(jftTelefone.getText());
         telefone.setPessoa(pessoaJuridica);
         telefone.setOperadora("");
@@ -448,25 +441,25 @@ public class cadastroCliente extends javax.swing.JFrame {
         comercial.setNumero(jftComercial.getText());
         comercial.setPessoa(pessoaJuridica);
         comercial.setOperadora("");
-        
+
         telefones.add(telefone);
         telefones.add(celular);
         telefones.add(comercial);
         pessoaJuridica.setTelefone(telefones);
-        
+
         pessoaJuridica.setEmail(jtfEmail.getText());
-        
+
         pessoaJuridica.setCpfResponsavel(jftCPFResponsavel.getText());
         pessoaJuridica.setNomeFantasia(jtfNomeFantasia.getText());
         pessoaJuridica.setNomeResponsavel(jtfNomeResponsavel.getText());
         pessoaJuridica.setCadastroAtivo(jcbAtivo.isSelected());
-        
+
         TipoContratoDAO tipoContratoDAO = new TipoContratoDAO();
         TipoContrato tipoContrato = new TipoContrato();
         List<TipoContrato> tiposContrato = new ArrayList<TipoContrato>();
         tiposContrato = tipoContratoDAO.getAll();
         List<TipoContrato> interesses = new ArrayList<TipoContrato>();
-        
+
         if (jcbLocacao.isSelected()) {
             interesses.add(tiposContrato.get(0));
         }
@@ -477,13 +470,13 @@ public class cadastroCliente extends javax.swing.JFrame {
             interesses.add(tiposContrato.get(2));
         }
         pessoaJuridica.setInteresses(interesses);
-        
+
         pessoaJuridicaDAO.persist(pessoaJuridica);
     }
-    
+
     public void atualizarPessoaFisica(PessoaFisica pessoaFisica) {
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-        
+
         jtfNome.setText(pessoaFisica.getNomePessoa());
         jftCPF.setText(pessoaFisica.getCPF());
         jtfRG.setText(pessoaFisica.getRG());
@@ -491,54 +484,54 @@ public class cadastroCliente extends javax.swing.JFrame {
         System.out.println(dataString);
         jftDataNascimento.setText(dataString);
         jtaObs.setText(pessoaFisica.getObservacoes());
-        
-        jcbEstado.setSelectedIndex((int) (pessoaFisica.getEndereco().getBairro().getCidade().getEstado().getId() - 1));        
-        
-        jtfCidade.setText(pessoaFisica.getEndereco().getBairro().getCidade().getNomeCidade());
-        
-        jtfBairro.setText(pessoaFisica.getEndereco().getBairro().getNomeBairro());        
+
+        jcbEstado.setSelectedIndex((int) (pessoaFisica.getEndereco().getCidade().getEstado().getId() - 1));
+
+        jcbCidade.setSelectedIndex((int) pessoaFisica.getEndereco().getCidade().getIdCidade() - 1);
+
+        jtfBairro.setText(pessoaFisica.getEndereco().getBairro());
         
         jtfEndereco.setText(pessoaFisica.getEndereco().getNomeEndereco());
         jtfNumero.setText("" + pessoaFisica.getEndereco().getNumero());
         jftCEP.setText(pessoaFisica.getEndereco().getCep());
         jtfComplemento.setText(pessoaFisica.getEndereco().getComplemento());
-        
+
         if (pessoaFisica.getTelefone().get(0).getNumero().trim().length() == 13) {
             jftTelefone.setText(pessoaFisica.getTelefone().get(0).getNumero());
         } else {
             jftTelefone.setText(null);
         }
-        
+
         if (pessoaFisica.getTelefone().get(1).getNumero().trim().length() == 14) {
             jftCelular.setText(pessoaFisica.getTelefone().get(1).getNumero());
         } else {
             jftCelular.setText(null);
         }
-        
+
         if (pessoaFisica.getTelefone().get(2).getNumero().trim().length() == 13) {
             jftComercial.setText(pessoaFisica.getTelefone().get(2).getNumero());
         } else {
             jftComercial.setText(null);
         }
 //        
-        
+
         jtfEmail.setText(pessoaFisica.getEmail());
-        
+
         if (pessoaFisica.getSexo() == 'M') {
             jrbMasculino.setSelected(true);
         }
         if (pessoaFisica.getSexo() == 'F') {
             jrbFeminino.setSelected(true);
         }
-        
-        jcbEstadoCivil.setSelectedIndex((int) pessoaFisica.getEstadoCivil().getIdEstadoCivil() - 1);        
-        
+
+        jcbEstadoCivil.setSelectedIndex((int) pessoaFisica.getEstadoCivil().getIdEstadoCivil() - 1);
+
         TipoContratoDAO tipoContratoDAO = new TipoContratoDAO();
         TipoContrato tipoContrato = new TipoContrato();
         List<TipoContrato> tiposContrato = new ArrayList<TipoContrato>();
         tiposContrato = tipoContratoDAO.getAll();
         List<TipoContrato> interesses = new ArrayList<TipoContrato>();
-        
+
         if (jcbLocacao.isSelected()) {
             interesses.add(tiposContrato.get(0));
         }
@@ -549,12 +542,12 @@ public class cadastroCliente extends javax.swing.JFrame {
             interesses.add(tiposContrato.get(2));
         }
         pessoaFisica.setInteresses(interesses);
-        
+
     }
-    
+
     public void atualizarPessoaJuridica(PessoaJuridica pessoaJuridica) {
         PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
-        
+
         jtfNome.setText(pessoaJuridica.getNomePessoa());
         jftCPF.setText(pessoaJuridica.getCnpj());
         jtfRG.setText(pessoaJuridica.getInscricaoEstadual());
@@ -562,50 +555,50 @@ public class cadastroCliente extends javax.swing.JFrame {
         System.out.println(dataString);
         jftDataNascimento.setText(dataString);
         jtaObs.setText(pessoaJuridica.getObservacoes());
-        
-        jcbEstado.setSelectedIndex((int) (pessoaJuridica.getEndereco().getBairro().getCidade().getEstado().getId() - 1));        
-        
-        jtfCidade.setText(pessoaJuridica.getEndereco().getBairro().getCidade().getNomeCidade());
-        
-        jtfBairro.setText(pessoaJuridica.getEndereco().getBairro().getNomeBairro());        
-        
+
+        jcbEstado.setSelectedIndex((int) (pessoaJuridica.getEndereco().getCidade().getEstado().getId() - 1));
+
+        jcbCidade.setSelectedIndex((int) pessoaJuridica.getEndereco().getCidade().getIdCidade() - 1);
+
+        jtfBairro.setText(pessoaJuridica.getEndereco().getBairro());
+
         jtfEndereco.setText(pessoaJuridica.getEndereco().getNomeEndereco());
         jtfNumero.setText("" + pessoaJuridica.getEndereco().getNumero());
         jftCEP.setText(pessoaJuridica.getEndereco().getCep());
         jtfComplemento.setText(pessoaJuridica.getEndereco().getComplemento());
-        
+
         if (pessoaJuridica.getTelefone().get(0).getNumero().trim().length() == 13) {
             jftTelefone.setText(pessoaJuridica.getTelefone().get(0).getNumero());
         } else {
             jftTelefone.setText(null);
         }
-        
+
         if (pessoaJuridica.getTelefone().get(1).getNumero().trim().length() == 14) {
             jftCelular.setText(pessoaJuridica.getTelefone().get(1).getNumero());
         } else {
             jftCelular.setText(null);
         }
-        
+
         if (pessoaJuridica.getTelefone().get(2).getNumero().trim().length() == 13) {
             jftComercial.setText(pessoaJuridica.getTelefone().get(2).getNumero());
         } else {
             jftComercial.setText(null);
         }
 //        
-        
-        jtfEmail.setText(pessoaJuridica.getEmail());        
-        
+
+        jtfEmail.setText(pessoaJuridica.getEmail());
+
         jtfNomeFantasia.setText(pessoaJuridica.getNomeFantasia());
         jftCPFResponsavel.setText(pessoaJuridica.getCpfResponsavel());
         jtfNomeResponsavel.setText(pessoaJuridica.getNomeResponsavel());
         jcbAtivo.setSelected(pessoaJuridica.isCadastroAtivo());
-        
+
         TipoContratoDAO tipoContratoDAO = new TipoContratoDAO();
         TipoContrato tipoContrato = new TipoContrato();
         List<TipoContrato> tiposContrato = new ArrayList<TipoContrato>();
         tiposContrato = tipoContratoDAO.getAll();
         List<TipoContrato> interesses = new ArrayList<TipoContrato>();
-        
+
         if (jcbLocacao.isSelected()) {
             interesses.add(tiposContrato.get(0));
         }
@@ -616,9 +609,9 @@ public class cadastroCliente extends javax.swing.JFrame {
             interesses.add(tiposContrato.get(2));
         }
         pessoaJuridica.setInteresses(interesses);
-        
+
     }
-    
+
     public void populaPessoaFisica() {
         Pessoa pessoa = new Pessoa();
         jtfCodigoInterno.setText(pessoa.getIdPessoa() + "");
@@ -628,25 +621,25 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfRG.setText("RG");
         jftDataNascimento.setText("25/08/1991");
         jtaObs.setText("Qualquer OBS");
-        
+
         jtfCargo.setText("Chefe");
         jcbEstadoCivil.setSelectedIndex(0);
         jtfEndereco.setText("Av. Guilherme de Almeida");
         jtfNumero.setText("2025");
         jtfComplemento.setText("");
         jtfBairro.setText("Morro do Algodão");
-        
+
         jftCEP.setText("11.671-000");
-        jtfCidade.setText("Caraguatatuba");
-        
+        jcbCidade.setSelectedIndex(8796);
+
         jcbEstado.setSelectedIndex(25);
-        
+
         jftTelefone.setText("1238875776");
         jftCelular.setText("12981097059");
         jftComercial.setText("");
         jtfEmail.setText("teste@teste");
     }
-    
+
     public void populaPessoaJuridica() {
         Pessoa pessoa = new Pessoa();
         jtfCodigoInterno.setText(pessoa.getIdPessoa() + "");
@@ -656,22 +649,22 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfRG.setText("Inscrição Estadual");
         jftDataNascimento.setText("28/08/1991");
         jtaObs.setText("Qualquer OBS");
-        
+
         jftCPFResponsavel.setText("11301353493");
         jtfNomeFantasia.setText("Empresa S/A Fantasia");
         jtfNomeResponsavel.setText("José Maria");
         jcbAtivo.setSelected(true);
-        
+
         jtfEndereco.setText("Av. Guilherme de Almeida");
         jtfNumero.setText("2025");
         jtfComplemento.setText("");
         jtfBairro.setText("Morro do Algodão");
-        
+
         jftCEP.setText("11.671-000");
-        jtfCidade.setText("Caraguatatuba");
-        
+        jcbCidade.setSelectedIndex(8796);
+
         jcbEstado.setSelectedIndex(25);
-        
+
         jftTelefone.setText("1238875776");
         jftCelular.setText("12981097059");
         jftComercial.setText("");
@@ -701,7 +694,6 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfRG = new javax.swing.JTextField();
         jtfNome = new javax.swing.JTextField();
         jtfBairro = new javax.swing.JTextField();
-        jtfCidade = new javax.swing.JTextField();
         jtfEndereco = new javax.swing.JTextField();
         jrbMasculino = new javax.swing.JRadioButton();
         jrbFeminino = new javax.swing.JRadioButton();
@@ -740,6 +732,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftCEP = new javax.swing.JFormattedTextField();
         jcbFiador = new javax.swing.JComboBox<>();
         jcbEstado = new javax.swing.JComboBox();
+        jcbCidade = new javax.swing.JComboBox<>();
         jtfComplemento = new javax.swing.JTextField();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCelular = new javax.swing.JFormattedTextField();
@@ -815,7 +808,6 @@ public class cadastroCliente extends javax.swing.JFrame {
         getContentPane().add(jtfRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 160, 30));
         getContentPane().add(jtfNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 350, 30));
         getContentPane().add(jtfBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 320, 170, 30));
-        getContentPane().add(jtfCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 230, 30));
         getContentPane().add(jtfEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 350, 30));
 
         bgSexo.add(jrbMasculino);
@@ -950,6 +942,9 @@ public class cadastroCliente extends javax.swing.JFrame {
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 320, 70, 30));
+
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 230, 30));
         getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 760, 30));
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, 180, 30));
         getContentPane().add(jftCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 440, 200, 30));
@@ -1052,7 +1047,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                 Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
 
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
@@ -1086,7 +1081,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_jbEditarMouseClicked
-    
+
     public void ativaPessoa(boolean ativo) {
         if (ativo == false) {
             jlCPF_CNPJ.setText("CNPJ");
@@ -1137,7 +1132,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jlSituacao.setVisible(!ativo);
         jlSituacao.setEnabled(!ativo);
     }
-    
+
     public void mascaraCPF_CNPJ(boolean ativa) {
         try {
             if (ativa) {
@@ -1153,28 +1148,28 @@ public class cadastroCliente extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     public void mascaraData() {
         try {
             jftDataNascimento.setFormatterFactory(new DefaultFormatterFactory(
                     new MaskFormatter("##/##/####")));
-            
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
     public void mascaraCEP() {
         try {
             jftCEP.setFormatterFactory(new DefaultFormatterFactory(
                     new MaskFormatter("##.###-###")));
-            
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
-    
+
     public void mascaraTelefone() {
         try {
             jftTelefone.setFormatterFactory(new DefaultFormatterFactory(
@@ -1185,7 +1180,7 @@ public class cadastroCliente extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     public void mascaraCelular() {
         try {
             jftCelular.setFormatterFactory(new DefaultFormatterFactory(
@@ -1194,14 +1189,14 @@ public class cadastroCliente extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     public void configuraMascaras() {
         mascaraCelular();
         mascaraTelefone();
         mascaraCEP();
         mascaraData();
     }
-    
+
     public boolean validaCampos(boolean valida) {
         if (jrbPessoaFisica.isSelected()) {
             if (!jtfNome.getText().equals("") && validacao.validaLetras(jtfNome.getText())) {
@@ -1228,10 +1223,10 @@ public class cadastroCliente extends javax.swing.JFrame {
                 jtfBairro.setBackground(Color.red);
                 valida = false;
             }
-            if (!jtfCidade.getText().equals("") && validacao.validaLetras(jtfCidade.getText())) {
-                jtfCidade.setBackground(Color.white);
+            if (jcbCidade.getSelectedItem() != null) {
+                jcbCidade.setBackground(Color.white);
             } else {
-                jtfCidade.setBackground(Color.red);
+                jcbCidade.setBackground(Color.red);
                 valida = false;
             }
             if (jftDataNascimento.getText().trim().length() == 10) {
@@ -1302,10 +1297,10 @@ public class cadastroCliente extends javax.swing.JFrame {
                 jtfBairro.setBackground(Color.red);
                 valida = false;
             }
-            if (!jtfCidade.getText().equals("") && validacao.validaLetras(jtfCidade.getText())) {
-                jtfCidade.setBackground(Color.white);
+            if (jcbCidade.getSelectedItem() != null) {
+                jcbCidade.setBackground(Color.white);
             } else {
-                jtfCidade.setBackground(Color.red);
+                jcbCidade.setBackground(Color.red);
                 valida = false;
             }
             if (jftDataNascimento.getText().trim().length() == 10) {
@@ -1320,7 +1315,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                 jtfNumero.setBackground(Color.red);
                 valida = false;
             }
-            
+
             if (jcbEstado.getSelectedItem() == "") {
                 jcbEstado.setBackground(Color.white);
             } else {
@@ -1341,7 +1336,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
         return valida;
     }
-    
+
     public void limpaCampos() {
         jtfNome.setText("");
         jtfNome.setBackground(Color.white);
@@ -1351,8 +1346,8 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfEndereco.setBackground(Color.white);
         jtfBairro.setText("");
         jtfBairro.setBackground(Color.white);
-        jtfCidade.setText("");
-        jtfCidade.setBackground(Color.white);
+//        jcbCidade.setText("");
+        jcbCidade.setBackground(Color.white);
         jftDataNascimento.setText("");
         jftDataNascimento.setBackground(Color.white);
         jtfNumero.setText("");
@@ -1378,7 +1373,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfEmail.setText("");
         jtfEmail.setBackground(Color.white);
     }
-    
+
     public void carregaEstados() {
         EstadoDAO estadoDAO = new EstadoDAO();
         Estado estado = new Estado();
@@ -1392,6 +1387,14 @@ public class cadastroCliente extends javax.swing.JFrame {
         jcbEstado.setModel(defaultComboBox);
     }
     
+    public void carregaCidades(Estado estado){
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        Cidade cidade = new Cidade();
+        List<Cidade> listaCidades = new ArrayList<Cidade>();
+        List<String> listaNomeCidades = new ArrayList<String>();
+        listaCidades = cidadeDAO.getEstado(estado.getId());
+    }
+
     public void carregaEstadosCivis() {
         EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
         EstadoCivil estadoCivil = new EstadoCivil();
@@ -1404,7 +1407,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeEstadoCivis.toArray());
         jcbEstadoCivil.setModel(defaultComboBox);
     }
-    
+
     public void carregaFiadores() {
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
         PessoaFisica pessoaFisica = new PessoaFisica();
@@ -1417,7 +1420,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomePessoas.toArray());
         jcbFiador.setModel(defaultComboBox);
     }
-    
+
     public void fecharCadastro() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -1447,7 +1450,7 @@ public class cadastroCliente extends javax.swing.JFrame {
 
             }
         });
-        
+
     }
 
     /**
@@ -1493,6 +1496,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JButton jbEditar;
     private javax.swing.JCheckBox jcbAtivo;
+    private javax.swing.JComboBox<String> jcbCidade;
     private javax.swing.JCheckBox jcbCompra;
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JComboBox jcbEstadoCivil;
@@ -1539,7 +1543,6 @@ public class cadastroCliente extends javax.swing.JFrame {
     private javax.swing.JTextArea jtaObs;
     private javax.swing.JTextField jtfBairro;
     private javax.swing.JTextField jtfCargo;
-    private javax.swing.JTextField jtfCidade;
     private javax.swing.JTextField jtfCodigoInterno;
     private javax.swing.JTextField jtfComplemento;
     private javax.swing.JTextField jtfEmail;

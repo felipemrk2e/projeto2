@@ -8,12 +8,12 @@ package Interface.CadFuncionario;
 import Interface.TelaPrincipal.Sessao;
 import Interface.TelaPrincipal.TelaPrincipal;
 import dao.CargoDAO;
+import dao.CidadeDAO;
 import dao.DepartamentoDAO;
 import dao.EstadoCivilDAO;
 import dao.EstadoDAO;
 import dao.FuncionarioDAO;
 import dao.PessoaFisicaDAO;
-import global.model.Bairro;
 import global.model.Cidade;
 import global.model.Endereco;
 import global.model.Estado;
@@ -107,7 +107,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfNumero.setEnabled(b);
         jtfBairro.setEnabled(b);
         jftCEP.setEnabled(b);
-        jtfCidade.setEnabled(b);
+        jcbCidade.setEnabled(b);
         jtfComplemento.setEnabled(b);
         jftTelefone.setEnabled(b);
         jftCelular.setEnabled(b);
@@ -148,8 +148,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfEndereco.setText("");
         jtfNumero.setText("");
         jtfBairro.setText("");
-        jftCEP.setText("");
-        jtfCidade.setText("");
+        jftCEP.setText("");        
         jtfComplemento.setText("");
         jftTelefone.setText("");
         jftCelular.setText("");
@@ -178,6 +177,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         // jcb     
         jcbEstadoCivil.setSelectedIndex(-1);
         jcbEstado.setSelectedIndex(-1);
+        jcbCidade.setSelectedIndex(-1);
 
         // jcb fim
         //Tirando os alertas
@@ -185,7 +185,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jftCPF.setBackground(Color.white);
         jtfEndereco.setBackground(Color.white);
         jtfBairro.setBackground(Color.white);
-        jtfCidade.setBackground(Color.white);
+        jcbCidade.setBackground(Color.white);
         jftDataNascimento.setBackground(Color.white);
         jtfNumero.setBackground(Color.white);
         jcbEstado.setBackground(Color.white);
@@ -231,8 +231,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfEndereco.setText(null);
         jtfNumero.setText(null);
         jtfBairro.setText(null);
-        jftCEP.setText(null);
-        jtfCidade.setText(null);
+        jftCEP.setText(null);        
         jtfComplemento.setText(null);
         jftTelefone.setText(null);
         jftCelular.setText(null);
@@ -277,6 +276,8 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         if (true) {
             jcbEstado.setSelectedIndex(WIDTH);
         }
+        
+        jcbCidade.setSelectedIndex(WIDTH);
         // jcb fim
 
     }
@@ -295,20 +296,16 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         Estado estado = new Estado();
         estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
 
+        CidadeDAO cidadeDAO = new CidadeDAO();
         Cidade cidade = new Cidade();
-        cidade.setNomeCidade(jtfCidade.getText());
-        cidade.setEstado(estado);
-
-        Bairro bairro = new Bairro();
-        bairro.setNomeBairro(jtfBairro.getText());
-        bairro.setCidade(cidade);
-
+        cidade = cidadeDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+        
         Endereco endereco = new Endereco();
         endereco.setNomeEndereco(jtfEndereco.getText());
         endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
         endereco.setCep(jftCEP.getText());
         endereco.setComplemento(jtfComplemento.getText());
-        endereco.setBairro(bairro);
+        endereco.setBairro(jtfBairro.getText());
         funcionario.setEndereco(endereco);
 
         List<Telefone> telefones = new ArrayList<Telefone>();
@@ -391,7 +388,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfBairro.setText("Morro do Algodão");
 
         jftCEP.setText("11.671-000");
-        jtfCidade.setText("Caraguatatuba");
+        jcbCidade.setSelectedIndex(8796);
 
         jcbEstado.setSelectedIndex(25);
 
@@ -438,7 +435,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfRG = new javax.swing.JTextField();
         jtfNome = new javax.swing.JTextField();
         jtfBairro = new javax.swing.JTextField();
-        jtfCidade = new javax.swing.JTextField();
         jtfEndereco = new javax.swing.JTextField();
         jrbMasculino = new javax.swing.JRadioButton();
         jrbFeminino = new javax.swing.JRadioButton();
@@ -465,6 +461,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jlCEP = new javax.swing.JLabel();
         jftCEP = new javax.swing.JFormattedTextField();
         jcbEstado = new javax.swing.JComboBox();
+        jcbCidade = new javax.swing.JComboBox<>();
         jtfComplemento = new javax.swing.JTextField();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCelular = new javax.swing.JFormattedTextField();
@@ -549,7 +546,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         getContentPane().add(jtfRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 150, 30));
         getContentPane().add(jtfNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 490, 30));
         getContentPane().add(jtfBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 200, 140, 30));
-        getContentPane().add(jtfCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 140, 30));
         getContentPane().add(jtfEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 400, 30));
 
         bgSexo.add(jrbMasculino);
@@ -601,7 +597,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
 
         jlComplemento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlComplemento.setText("Complemento:");
-        getContentPane().add(jlComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, -1, 30));
+        getContentPane().add(jlComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 240, -1, 30));
 
         jlObs.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlObs.setText("Observações:");
@@ -641,7 +637,10 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, 30));
-        getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 240, 330, 30));
+
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 140, 30));
+        getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 270, 30));
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 210, 30));
         getContentPane().add(jftCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, 180, 30));
         getContentPane().add(jftComercial, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 280, 180, 30));
@@ -850,6 +849,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JButton jbEditar;
     private javax.swing.JComboBox jcbCargo;
+    private javax.swing.JComboBox<String> jcbCidade;
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JComboBox jcbEstadoCivil;
     private javax.swing.JFormattedTextField jftCEP;
@@ -899,7 +899,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField jtfBairro;
     private javax.swing.JTextField jtfBanco;
     private javax.swing.JTextField jtfCargaHoraria;
-    private javax.swing.JTextField jtfCidade;
     private javax.swing.JTextField jtfCodigoInterno;
     private javax.swing.JTextField jtfComplemento;
     private javax.swing.JTextField jtfDependentes;

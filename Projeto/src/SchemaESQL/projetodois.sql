@@ -177,13 +177,12 @@ CREATE TABLE Telefone(
 );
 
 CREATE TABLE PessoaFisica(
-    idPessoaFisica INT AUTO_INCREMENT NOT NULL,
+	idPessoa INT NOT NULL,
     cpf CHAR(14) NOT NULL,
     rg VARCHAR(25) NOT NULL,
     sexo CHAR(1) NOT NULL,
-    idEstadoCivil INT NOT NULL,
-    idPessoa INT NOT NULL,
-    CONSTRAINT PRIMARY KEY(idPessoaFisica),
+    idEstadoCivil INT NOT NULL,    
+    CONSTRAINT PRIMARY KEY(idPessoa),
     CONSTRAINT FOREIGN KEY(idEstadoCivil)
     REFERENCES EstadoCivil(idEstadoCivil),
     CONSTRAINT FOREIGN KEY(idPessoa)
@@ -191,61 +190,59 @@ CREATE TABLE PessoaFisica(
 );
 
 CREATE TABLE fiadorDe(
-    idPessoaFisica INT NOT NULL,
+    idPessoa INT NOT NULL,
     idFiador INT NOT NULL,
-    CONSTRAINT PRIMARY KEY(idPessoaFisica, idFiador),
-    CONSTRAINT FOREIGN KEY(idPessoaFisica)
-    REFERENCES PessoaFisica(idPessoaFisica),
+    CONSTRAINT PRIMARY KEY(idPessoa, idFiador),
+    CONSTRAINT FOREIGN KEY(idPessoa)
+    REFERENCES PessoaFisica(idPessoa),
     CONSTRAINT FOREIGN KEY(idFiador)
-    REFERENCES PessoaFisica(idPessoaFisica)
+    REFERENCES PessoaFisica(idPessoa)
 );
 
-CREATE TABLE Funcionario(
-    idFuncionario INT AUTO_INCREMENT NOT NULL,
+CREATE TABLE Login(
+    idLogin INT AUTO_INCREMENT NOT NULL,
+    nomeUsuario VARCHAR(40) NOT NULL,
+    senhaUsuario VARCHAR(40) NOT NULL,
+    nivelAcesso INT NOT NULL,
+    CONSTRAINT PRIMARY KEY(idLogin)    
+);
+
+CREATE TABLE Funcionario(  
+    idPessoa INT NOT NULL,  
     salario DOUBLE NOT NULL,
     banco VARCHAR(45) NOT NULL,
     tipoConta VARCHAR(45) NOT NULL,
     conta VARCHAR(45) NOT NULL,
     agencia VARCHAR(45) NOT NULL,
     ctps VARCHAR(20) NOT NULL,
-    pis VARCHAR(30) NOT NULL,
     serieCtps VARCHAR(20) NOT NULL,
     dataAdmissao DATE NOT NULL,
     cargaHoraria VARCHAR(20) NOT NULL,
     escolaridade VARCHAR(45) NOT NULL,
     dependentes INT NOT NULL,
-    idPessoaFisica INT NOT NULL,
+    
     idCargo INT NOT NULL,
-    CONSTRAINT PRIMARY KEY(idFuncionario),
-    CONSTRAINT FOREIGN KEY(idPessoaFisica)
-    REFERENCES PessoaFisica(idPessoaFisica),
+    idLogin INT NOT NULL,
+    CONSTRAINT PRIMARY KEY(idPessoa),
+    CONSTRAINT FOREIGN KEY(idPessoa)
+    REFERENCES PessoaFisica(idPessoa),
     CONSTRAINT FOREIGN KEY(idCargo)
-    REFERENCES Cargo(idCargo)
-);
+    REFERENCES Cargo(idCargo),
+	CONSTRAINT FOREIGN KEY(idLogin)
+    REFERENCES Login(idLogin)	
+	);
 
-CREATE TABLE PessoaJuridica(
-    idPessoaJuridica INT AUTO_INCREMENT NOT NULL,
+CREATE TABLE PessoaJuridica(   
+	idPessoa INT NOT NULL,
     cnpj CHAR(18) NOT NULL,
     inscricaoEstadual VARCHAR(20),
     cadastroAtivo BOOLEAN NOT NULL,
-    nomeFantasia VARCHAR(45),
+    nomeFantasia VARCHAR(45) NOT NULL,
     nomeResponsavel VARCHAR(45) NOT NULL,
-    cpfResponsavel CHAR(14) NOT NULL,
-    idPessoa INT NOT NULL,
-    CONSTRAINT PRIMARY KEY(idPessoaJuridica),
+    cpfResponsavel CHAR(14) NOT NULL,    
+	CONSTRAINT PRIMARY KEY(idPessoa),
     CONSTRAINT FOREIGN KEY(idPessoa)
     REFERENCES Pessoa(idPessoa)
-);
-
-CREATE TABLE Login(
-    idLogin INT NOT NULL,
-    nomeUsuario VARCHAR(40) NOT NULL,
-    senhaUsuario VARCHAR(40) NOT NULL,
-    nivelAcesso INT NOT NULL,
-    idFuncionario INT NOT NULL,
-    CONSTRAINT PRIMARY KEY(idLogin),
-    CONSTRAINT FOREIGN KEY(idFuncionario)
-    REFERENCES Funcionario(idFuncionario)
 );
 
 CREATE TABLE Pessoa_has_Interesse(

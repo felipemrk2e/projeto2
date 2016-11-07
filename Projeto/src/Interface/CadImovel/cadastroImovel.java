@@ -12,7 +12,6 @@ import dao.ImovelDAO;
 import dao.StatusDAO;
 import dao.TipoContratoDAO;
 import dao.TipoImovelDAO;
-import global.model.Bairro;
 import global.model.Cidade;
 import global.model.Endereco;
 import global.model.Login.DialogLogin;
@@ -328,10 +327,10 @@ public class cadastroImovel extends javax.swing.JFrame {
         //Endereço parte obrigatoria
         jtfLogradouro.setText(imovel.getEndereco().getNomeEndereco());
         jtfNumero.setText(String.valueOf(imovel.getEndereco().getNumero()));
-        jtfCidade.setText(imovel.getEndereco().getBairro().getCidade().getNomeCidade());
-        jtfBairro.setText(imovel.getEndereco().getBairro().getNomeBairro());
-        jtfUF.setText(imovel.getEndereco().getBairro().getCidade().getEstado().getNome());
-        jcbEstado.setSelectedIndex((int) imovel.getEndereco().getBairro().getCidade().getEstado().getId() - 1);
+        jtfCidade.setText(imovel.getEndereco().getCidade().getNomeCidade());
+        jtfBairro.setText(imovel.getEndereco().getBairro());
+        jtfUF.setText(imovel.getEndereco().getCidade().getEstado().getNome());
+        jcbEstado.setSelectedIndex((int) imovel.getEndereco().getCidade().getEstado().getId() - 1);
 
         //endereço não obrigatorio
         if (imovel.getEndereco().getCep().equals(" ")) {
@@ -1396,8 +1395,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
             Imovel imovel;
             Status status;
-            Endereco endereco;
-            Bairro bairro;
+            Endereco endereco;            
             Cidade cidade;
             Estado uf;
             Documentacao documentacao;
@@ -1415,7 +1413,6 @@ public class cadastroImovel extends javax.swing.JFrame {
                 imovel = new Imovel();
                 status = new Status();
                 endereco = new Endereco();
-                bairro = new Bairro();
                 cidade = new Cidade();
                 uf = new Estado();
                 documentacao = new Documentacao();
@@ -1495,10 +1492,9 @@ public class cadastroImovel extends javax.swing.JFrame {
             } else {
                 imovel = imovelTemp;
                 status = imovel.getStatus();
-                endereco = imovel.getEndereco();
-                bairro = imovel.getEndereco().getBairro();
-                cidade = imovel.getEndereco().getBairro().getCidade();
-                uf = imovel.getEndereco().getBairro().getCidade().getEstado();
+                endereco = imovel.getEndereco();                
+                cidade = imovel.getEndereco().getCidade();
+                uf = imovel.getEndereco().getCidade().getEstado();
                 documentacao = imovel.getDocumentacao();
                 terreno = imovel.getTerreno();
                 List<Imovel_has_TipoContrato> tipoContrato = imovel.getTiposContratos();
@@ -1689,7 +1685,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
             }
             if (!jtfBairro.getText().equals("") && validacao.validaLetras(jtfBairro.getText())) {
-                bairro.setNomeBairro(jtfBairro.getText());
+                endereco.setBairro(jtfBairro.getText());
                 jtfBairro.setBackground(Color.white);
                 control++;
             } else {
@@ -2094,8 +2090,8 @@ public class cadastroImovel extends javax.swing.JFrame {
                 status.setIdStatus(Long.valueOf(jcbStatus.getSelectedIndex() + 1));
                 imovel.setStatus(status);
                 cidade.setEstado(uf);
-                bairro.setCidade(cidade);
-                endereco.setBairro(bairro);
+                endereco.setCidade(cidade);
+                endereco.setBairro(jtfBairro.getText());
                 imovel.setEndereco(endereco);
                 imovel.setDocumentacao(documentacao);
                 imovel.setTerreno(terreno);
@@ -2117,8 +2113,8 @@ public class cadastroImovel extends javax.swing.JFrame {
                 status.setIdStatus(Long.valueOf(jcbStatus.getSelectedIndex() + 1));
                 imovel.setStatus(status);
                 cidade.setEstado(uf);
-                bairro.setCidade(cidade);
-                endereco.setBairro(bairro);
+                endereco.setCidade(cidade);
+                endereco.setBairro(jtfBairro.getText());
                 imovel.setEndereco(endereco);
                 imovel.setDocumentacao(documentacao);
                 imovel.setTerreno(terreno);

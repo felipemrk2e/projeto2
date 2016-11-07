@@ -24,6 +24,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 /**
  *
@@ -50,6 +51,7 @@ public class Pessoa {
     @Column
     private Date dataNascimento;
     
+    @Transient
     private boolean tipoPessoa;
     
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
