@@ -306,6 +306,20 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
             PessoaTableModel pessoaModel = (PessoaTableModel) jTable1.getModel();
             Pessoa pessoaSelecionada = pessoaModel.get(linhaSelecionada);
+            if (pessoaSelecionada.isTipoPessoa()) {
+                PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jTable1.getModel();
+                PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
+                cadastroCliente cadastroPessoaFisica = new cadastroCliente(pessoaFisicaSelecionada);
+                cadastroPessoaFisica.setVisible(true);
+                cadastroPessoaFisica.setLocationRelativeTo(this);
+            } else {
+                PessoaJuridicaTableModel pessoaJuridicaModel = (PessoaJuridicaTableModel) jTable1.getModel();
+                PessoaJuridica pessoaJuridicaSelecionada = pessoaJuridicaModel.get(linhaSelecionada);
+                cadastroCliente cadastroPessoaJuridica = new cadastroCliente(pessoaJuridicaSelecionada);
+                cadastroPessoaJuridica.setVisible(true);
+                cadastroPessoaJuridica.setLocationRelativeTo(this);
+            }
+
             System.out.println(pessoaSelecionada.getNomePessoa());
 
         } else if (jcbPessoaFisica.isSelected()) {
@@ -318,7 +332,9 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         } else if (jcbPessoaJuridica.isSelected()) {
             PessoaJuridicaTableModel pessoaJuridicaModel = (PessoaJuridicaTableModel) jTable1.getModel();
             PessoaJuridica pessoaJuridicaSelecionada = pessoaJuridicaModel.get(linhaSelecionada);
-            System.out.println(pessoaJuridicaSelecionada.getCnpj());
+            cadastroCliente cadastroPessoaJuridica = new cadastroCliente(pessoaJuridicaSelecionada);
+            cadastroPessoaJuridica.setVisible(true);
+            cadastroPessoaJuridica.setLocationRelativeTo(this);
         } else {
             JOptionPane.showMessageDialog(null, "Nenhum campo foi selecionado!");
         }

@@ -50,6 +50,8 @@ public class Pessoa {
     @Column
     private Date dataNascimento;
     
+    private boolean tipoPessoa;
+    
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idEndereco", nullable = true)
     private Endereco endereco;
@@ -166,6 +168,15 @@ public class Pessoa {
     public void addInteresse(TipoContrato interesse) {
         this.interesses.add(interesse);
     }
+
+    public boolean isTipoPessoa() {
+        return tipoPessoa;
+    }
+
+    public void setTipoPessoa(boolean tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
+    }
+    
     
 
 }
