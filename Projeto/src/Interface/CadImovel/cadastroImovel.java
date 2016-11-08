@@ -7,6 +7,7 @@ package Interface.CadImovel;
 
 import global.model.Estado;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
+import dao.CidadeDAO;
 import dao.EstadoDAO;
 import dao.ImovelDAO;
 import dao.StatusDAO;
@@ -114,6 +115,18 @@ public class cadastroImovel extends javax.swing.JFrame {
         DefaultComboBoxModel defaultComboBox2 = new DefaultComboBoxModel(StatusList.toArray());
         jcbStatus.setModel(defaultComboBox2);
         jcbStatus.setSelectedIndex(0);
+        
+        CidadeDAO cidadeDao = new CidadeDAO();
+       
+        List<Cidade> cidadeTemp = new ArrayList<>();
+        cidadeTemp = cidadeDao.getWhereIdEstado((long)(jcbEstado.getSelectedIndex()+1));
+    
+        List<String> listaCidade = new ArrayList<String>();
+        for (int i = 0; i < cidadeTemp.size(); i++) {
+          listaCidade.add(cidadeTemp.get(i).getNomeCidade());
+        }
+        DefaultComboBoxModel defaultComboBox3 = new DefaultComboBoxModel(listaCidade.toArray());
+        jcbCidade.setModel(defaultComboBox3);
 
     }
 
@@ -622,6 +635,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jtCep = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        jcbCidade = new javax.swing.JComboBox<>();
         jifValores = new javax.swing.JInternalFrame();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
@@ -815,6 +829,11 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEstadoActionPerformed(evt);
+            }
+        });
         jifEndereco.getContentPane().add(jcbEstado);
         jcbEstado.setBounds(480, 120, 66, 23);
 
@@ -827,6 +846,10 @@ public class cadastroImovel extends javax.swing.JFrame {
         jLabel8.setText("CEP");
         jifEndereco.getContentPane().add(jLabel8);
         jLabel8.setBounds(600, 100, 30, 14);
+
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jifEndereco.getContentPane().add(jcbCidade);
+        jcbCidade.setBounds(70, 140, 190, 20);
 
         jtpCadastro.addTab("Endereço", jifEndereco);
 
@@ -2291,6 +2314,10 @@ public class cadastroImovel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbStatusActionPerformed
 
+    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
+             // TODO add your handling code here:
+    }//GEN-LAST:event_jcbEstadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2382,6 +2409,7 @@ public class cadastroImovel extends javax.swing.JFrame {
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JButton jbEditar;
+    private javax.swing.JComboBox<String> jcbCidade;
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JCheckBox jcbFesta;
     private javax.swing.JCheckBox jcbLocacao;
