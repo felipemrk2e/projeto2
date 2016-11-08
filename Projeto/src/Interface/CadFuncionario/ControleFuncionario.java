@@ -98,106 +98,115 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jtNovaSenha1 = new javax.swing.JTextField();
         jlNomeUsuario = new javax.swing.JLabel();
         jcbNivelAcesso = new javax.swing.JComboBox<>();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
         getContentPane().setLayout(null);
 
         jlCodigoInterno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlCodigoInterno.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlCodigoInterno.setText("Código Interno:");
         getContentPane().add(jlCodigoInterno);
-        jlCodigoInterno.setBounds(30, 20, 101, 30);
+        jlCodigoInterno.setBounds(20, 20, 101, 30);
 
         jtfCodigoInterno.setEnabled(false);
         getContentPane().add(jtfCodigoInterno);
-        jtfCodigoInterno.setBounds(130, 20, 100, 30);
+        jtfCodigoInterno.setBounds(130, 20, 70, 30);
 
         jlNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNome.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlNome.setText("Nome:");
         getContentPane().add(jlNome);
-        jlNome.setBounds(240, 20, 50, 30);
+        jlNome.setBounds(310, 40, 50, 30);
 
         jtfNome.setEnabled(false);
         getContentPane().add(jtfNome);
-        jtfNome.setBounds(290, 20, 580, 30);
+        jtfNome.setBounds(370, 40, 580, 30);
 
         jlCPF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlCPF.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlCPF.setText("CPF:");
         getContentPane().add(jlCPF);
-        jlCPF.setBounds(250, 60, 40, 30);
+        jlCPF.setBounds(310, 80, 50, 30);
 
         jftCPF.setEnabled(false);
         getContentPane().add(jftCPF);
-        jftCPF.setBounds(290, 60, 150, 30);
+        jftCPF.setBounds(370, 80, 150, 30);
 
         jlRG.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlRG.setText("RG:");
         getContentPane().add(jlRG);
-        jlRG.setBounds(460, 60, 30, 30);
+        jlRG.setBounds(530, 80, 30, 30);
 
         jtfRG.setEnabled(false);
         getContentPane().add(jtfRG);
-        jtfRG.setBounds(490, 60, 150, 30);
+        jtfRG.setBounds(570, 80, 150, 30);
 
         jlNovaSenha.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNovaSenha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlNovaSenha.setText("Nova Senha:");
         getContentPane().add(jlNovaSenha);
-        jlNovaSenha.setBounds(200, 220, 90, 30);
+        jlNovaSenha.setBounds(270, 240, 90, 30);
 
         jlRepetirNovaSenha.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlRepetirNovaSenha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlRepetirNovaSenha.setText("Repetir Nova Senha:");
         getContentPane().add(jlRepetirNovaSenha);
-        jlRepetirNovaSenha.setBounds(150, 260, 140, 30);
+        jlRepetirNovaSenha.setBounds(220, 280, 140, 30);
 
         jlNivelAcesso.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNivelAcesso.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlNivelAcesso.setText("Nivel de Acesso:");
         getContentPane().add(jlNivelAcesso);
-        jlNivelAcesso.setBounds(180, 140, 110, 30);
+        jlNivelAcesso.setBounds(250, 160, 110, 30);
         getContentPane().add(jtNivelAcesso);
-        jtNivelAcesso.setBounds(350, 140, 60, 30);
+        jtNivelAcesso.setBounds(440, 160, 60, 30);
         getContentPane().add(jtUser);
-        jtUser.setBounds(290, 180, 580, 30);
+        jtUser.setBounds(370, 200, 580, 30);
         getContentPane().add(jtNovaSenha2);
-        jtNovaSenha2.setBounds(290, 260, 580, 30);
+        jtNovaSenha2.setBounds(370, 280, 580, 30);
 
         jbConfirmar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbConfirmar.setText("Confirmar");
         getContentPane().add(jbConfirmar);
-        jbConfirmar.setBounds(730, 320, 140, 70);
+        jbConfirmar.setBounds(810, 320, 140, 70);
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
         getContentPane().add(jbCancelar);
-        jbCancelar.setBounds(400, 320, 140, 70);
+        jbCancelar.setBounds(510, 320, 140, 70);
         getContentPane().add(jtCargo);
-        jtCargo.setBounds(710, 60, 160, 30);
+        jtCargo.setBounds(790, 80, 160, 30);
         getContentPane().add(jtDepartamento);
-        jtDepartamento.setBounds(290, 100, 150, 30);
+        jtDepartamento.setBounds(370, 120, 150, 30);
 
         jlCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCargo.setText("Cargo:");
         getContentPane().add(jlCargo);
-        jlCargo.setBounds(660, 60, 50, 30);
+        jlCargo.setBounds(730, 80, 50, 30);
 
         jlDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlDepartamento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlDepartamento.setText("Departamento:");
         getContentPane().add(jlDepartamento);
-        jlDepartamento.setBounds(190, 100, 100, 30);
+        jlDepartamento.setBounds(260, 120, 100, 30);
 
         jbEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/editar2.png"))); // NOI18N
         jbEditar.setText("Editar");
         getContentPane().add(jbEditar);
-        jbEditar.setBounds(560, 320, 140, 70);
+        jbEditar.setBounds(660, 320, 140, 70);
         getContentPane().add(jtNovaSenha1);
-        jtNovaSenha1.setBounds(290, 220, 580, 30);
+        jtNovaSenha1.setBounds(370, 240, 580, 30);
 
         jlNomeUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNomeUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlNomeUsuario.setText("Nome de Usuario:");
         getContentPane().add(jlNomeUsuario);
-        jlNomeUsuario.setBounds(170, 180, 120, 30);
+        jlNomeUsuario.setBounds(240, 200, 120, 30);
 
         jcbNivelAcesso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbNivelAcesso.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +215,11 @@ public class ControleFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jcbNivelAcesso);
-        jcbNivelAcesso.setBounds(290, 140, 56, 30);
+        jcbNivelAcesso.setBounds(370, 160, 56, 30);
+
+        jSeparator1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Controle de Funcionário", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        getContentPane().add(jSeparator1);
+        jSeparator1.setBounds(210, 10, 760, 400);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -251,6 +264,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JButton jbEditar;

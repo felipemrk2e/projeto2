@@ -121,6 +121,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         jftTelefone = new javax.swing.JFormattedTextField();
         jlCPF = new javax.swing.JLabel();
         jftCPF = new javax.swing.JFormattedTextField();
+        jbCancelar = new javax.swing.JButton();
         jsPesquisaCliente = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -138,7 +139,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtClientes);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 46, 920, 240));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 920, 240));
 
         jbCadastrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
@@ -148,7 +149,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
                 jbCadastrarMouseClicked(evt);
             }
         });
-        getContentPane().add(jbCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 300, 140, 70));
+        getContentPane().add(jbCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 260, 140, 70));
 
         jbVisualizar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
@@ -158,7 +159,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
                 jbVisualizarMouseClicked(evt);
             }
         });
-        getContentPane().add(jbVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 300, 140, 70));
+        getContentPane().add(jbVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 260, 140, 70));
 
         jbRemover.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
@@ -168,7 +169,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
                 jbRemoverMouseClicked(evt);
             }
         });
-        getContentPane().add(jbRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 300, 140, 70));
+        getContentPane().add(jbRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 140, 70));
 
         jbPesquisar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/review.png"))); // NOI18N
@@ -178,12 +179,12 @@ public class cadastroClienteHome extends javax.swing.JFrame {
                 jbPesquisarMouseClicked(evt);
             }
         });
-        getContentPane().add(jbPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 480, 140, 70));
+        getContentPane().add(jbPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 410, 140, 70));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Filtros:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 410, 50, 30));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, 50, 30));
 
         jcbPessoaFisica.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbPessoaFisica.setText("Pessoa Física");
@@ -192,7 +193,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
                 jcbPessoaFisicaMouseClicked(evt);
             }
         });
-        getContentPane().add(jcbPessoaFisica, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 130, 30));
+        getContentPane().add(jcbPessoaFisica, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, 130, 30));
 
         jcbPessoaJuridica.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbPessoaJuridica.setText("Pessoa Júridica");
@@ -201,40 +202,45 @@ public class cadastroClienteHome extends javax.swing.JFrame {
                 jcbPessoaJuridicaMouseClicked(evt);
             }
         });
-        getContentPane().add(jcbPessoaJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 140, 30));
+        getContentPane().add(jcbPessoaJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, 140, 30));
 
         jtNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtNomeKeyReleased(evt);
             }
         });
-        getContentPane().add(jtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 440, 690, 30));
+        getContentPane().add(jtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 690, 30));
 
         jlNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlNome.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlNome.setText("Nome:");
-        getContentPane().add(jlNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 60, 30));
+        getContentPane().add(jlNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 60, 30));
 
         jlTelefone.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlTelefone.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlTelefone.setText("Telefone:");
-        getContentPane().add(jlTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, -1, 30));
+        getContentPane().add(jlTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, 30));
 
         jftTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jftTelefoneKeyPressed(evt);
             }
         });
-        getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, 690, 30));
+        getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 450, 690, 30));
 
         jlCPF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCPF.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlCPF.setText("CPF:");
-        getContentPane().add(jlCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 520, 60, 30));
-        getContentPane().add(jftCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 520, 690, 30));
+        getContentPane().add(jlCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 60, 30));
+        getContentPane().add(jftCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 690, 30));
+
+        jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
+        jbCancelar.setText("<html><center>Cancelar<br/></html>");
+        getContentPane().add(jbCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 490, 140, 70));
 
         jsPesquisaCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa de Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
-        getContentPane().add(jsPesquisaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 930, 180));
+        getContentPane().add(jsPesquisaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 940, 220));
 
         pack();
         setLocationRelativeTo(null);
@@ -515,6 +521,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbCadastrar;
+    private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbPesquisar;
     private javax.swing.JButton jbRemover;
     private javax.swing.JButton jbVisualizar;
