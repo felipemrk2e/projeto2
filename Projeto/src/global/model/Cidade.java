@@ -30,10 +30,10 @@ public class Cidade {
 	private Estado estado;
 	
 	@OneToMany(
-			mappedBy = "cidade", 
-			targetEntity = Bairro.class, 
-			fetch = FetchType.LAZY)
-	private final List<Bairro> bairros = new ArrayList<Bairro>();
+                    mappedBy = "cidade", 
+                    targetEntity = Endereco.class, 
+                    fetch = FetchType.LAZY)
+	private final List<Endereco> enderecos = new ArrayList<Endereco>();
 	
 	public Cidade(String nomeCidade, Estado estado) {
 		this.nomeCidade = nomeCidade;
@@ -65,8 +65,8 @@ public class Cidade {
 		this.estado = estado;
 	}
 	
-	public void addBairro(Bairro bairro){
-		this.bairros.add(bairro);
+	public void addEndereco(Endereco endereco){
+		this.enderecos.add(endereco);
 	}
 	
 }

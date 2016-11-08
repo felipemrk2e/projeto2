@@ -6,6 +6,7 @@
 package model.pessoa;
 
 import global.model.Endereco;
+import imovel.model.TipoContrato;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -67,12 +68,12 @@ public class Funcionario extends PessoaFisica {
     @JoinColumn(name = "idPessoa",  nullable = false)
     private PessoaFisica pessoaFisica;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "idCargo", nullable = false)
     private Cargo cargo;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idLogin", nullable = true)
+    @JoinColumn(name = "idLogin", nullable = false)
     private Login login;
 
     public Funcionario() {
@@ -132,7 +133,7 @@ public class Funcionario extends PessoaFisica {
         this.login = login;
     }
 
-    public Funcionario(double salario, String banco, String tipoConta, String conta, String agencia, String ctps, String serieCtps, Date dataAdmissao, String cargaHoraria, String escolaridade, int dependentes, PessoaFisica pessoaFisica, Cargo cargo, Login login, String CPF, String RG, char sexo, Funcionario funcionario, EstadoCivil estadoCivil, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, List<Interesse> interesses) {
+    public Funcionario(double salario, String banco, String tipoConta, String conta, String agencia, String ctps, String serieCtps, Date dataAdmissao, String cargaHoraria, String escolaridade, int dependentes, PessoaFisica pessoaFisica, Cargo cargo, Login login, String CPF, String RG, char sexo, Funcionario funcionario, EstadoCivil estadoCivil, String nomePessoa, String email, String observacoes, Date dataNascimento, Endereco endereco, List<TipoContrato> interesses) {
         super(CPF, RG, sexo, funcionario, estadoCivil, nomePessoa, email, observacoes, dataNascimento, endereco, interesses);
         this.salario = salario;
         this.banco = banco;

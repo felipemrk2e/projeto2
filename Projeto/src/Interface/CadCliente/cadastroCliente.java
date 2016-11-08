@@ -5,22 +5,40 @@
  */
 package Interface.CadCliente;
 
+import Interface.TelaPrincipal.Sessao;
+import Interface.TelaPrincipal.TelaPrincipal;
+import dao.EstadoCivilDAO;
 import dao.EstadoDAO;
+import dao.PessoaDAO;
+import dao.PessoaFisicaDAO;
+import dao.PessoaJuridicaDAO;
+import dao.TipoContratoDAO;
+import global.model.Bairro;
+import global.model.Cidade;
+import global.model.Endereco;
 import global.model.Estado;
+import imovel.model.TipoContrato;
 import java.awt.Color;
-import java.awt.Insets;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import model.pessoa.EstadoCivil;
+import model.pessoa.Pessoa;
+import model.pessoa.PessoaFisica;
+import model.pessoa.PessoaJuridica;
+import model.pessoa.Telefone;
 import validacao.*;
 
 /**
@@ -28,85 +46,87 @@ import validacao.*;
  * @author Sala
  */
 public class cadastroCliente extends javax.swing.JFrame {
-
-    int user;
-    private boolean fiador;
+    
+    private static cadastroCliente instancia;
 
     /**
      * Creates new form cadastroCliente
      */
     public cadastroCliente() {
+        this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
         ativaPessoa(true);
         mascaraCPF_CNPJ(true);
         jrbPessoaFisica.setSelected(true);
         configuraMascaras();
-//        carregaEstados();
-
-        UIManager.getDefaults().put("jtpCadastroCliente.contentBorderInsets", new Insets(0, 0, 0, 0));
-        UIManager.getDefaults().put("jtpCadastroCliente.tabsOverlapBorder", true);
+        carregaEstados();
+        carregaEstadosCivis();
+        carregaFiadores();
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        populaPessoaFisica();
 
     }
 
-    public cadastroCliente(int user) {
-         this.user = user;
+    public cadastroCliente(PessoaFisica pessoaFisica) {        
         initComponents();
+        setAlwaysOnTop(true);
         ativaPessoa(true);
         mascaraCPF_CNPJ(true);
         jrbPessoaFisica.setSelected(true);
         configuraMascaras();
-//        carregaEstados();
-
-        UIManager.getDefaults().put("jtpCadastroCliente.contentBorderInsets", new Insets(0, 0, 0, 0));
-        UIManager.getDefaults().put("jtpCadastroCliente.tabsOverlapBorder", true);
-        verificaNivel0();
-
+        carregaEstados();
+        carregaEstadosCivis();
+        carregaFiadores();
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+        atualizarPessoaFisica(pessoaFisica);
     }
-
-    public cadastroCliente(int user, String idCliente) {
-         this.user = user;
+    
+    public cadastroCliente(PessoaJuridica pessoaJuridica) {        
         initComponents();
-        ativaPessoa(true);
-        mascaraCPF_CNPJ(true);
-        jrbPessoaFisica.setSelected(true);
+        setAlwaysOnTop(true);
+        ativaPessoa(false);
+        mascaraCPF_CNPJ(false);
+        jrbPessoaJuridica.setSelected(true);
         configuraMascaras();
-
-        UIManager.getDefaults().put("jtpCadastroCliente.contentBorderInsets", new Insets(0, 0, 0, 0));
-        UIManager.getDefaults().put("jtpCadastroCliente.tabsOverlapBorder", true);
-
-        popular();
-        verificaNivel();
-     
-
+        carregaEstados();        
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+        atualizarPessoaJuridica(pessoaJuridica);
     }
-
-    public void verificaNivel0() {
-        if (user <= 2) {
-            DisableEnable(true);
-            jbConfirmar.setEnabled(true);
-            jbEditar.setEnabled(false);
-
-        } else {
-            DisableEnable(false);
-            jbConfirmar.setEnabled(false);
-            jbEditar.setEnabled(false);
+    
+    public static cadastroCliente getInstancia() {
+        if (instancia == null) {
+            instancia = new cadastroCliente();
+        }
+        return instancia;
+    }
+    
+    public static void encerrarInstancia() {
+        instancia = null;
+    }
+    
+    public void acesso(int nivel) {
+        System.out.println("====================================================Nível de Acesso: " + nivel);
+        DisableEnable(false);
+        switch (nivel) {
+            case 1:
+                DisableEnable(true);
+                jbConfirmar.setEnabled(true);
+                jbEditar.setEnabled(false);
+                break;
+            case 2:
+                DisableEnable(true);
+                jbConfirmar.setEnabled(true);
+                jbEditar.setEnabled(false);
+                break;
+            case 3:
+                DisableEnable(false);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
-
-    public void verificaNivel() {
-        if (user <= 2) {
-            DisableEnable(false);
-            jbConfirmar.setEnabled(false);
-            jbEditar.setEnabled(true);
-
-        } else {
-            DisableEnable(false);
-            jbConfirmar.setEnabled(false);
-            jbEditar.setEnabled(false);
-
-        }
-    }
-
+    
     public void DisableEnable(Boolean b) {
 
         //cad
@@ -116,7 +136,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftDataNascimento.setEnabled(b);
         jtfCargo.setEnabled(b);
         jtfNomeFantasia.setEnabled(b);
-        jtfFiador.setEnabled(b);
+        jtfNomeResponsavel.setEnabled(b);
         jtfEndereco.setEnabled(b);
         jtfNumero.setEnabled(b);
         jtfBairro.setEnabled(b);
@@ -145,7 +165,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jcbEstadoCivil.setEnabled(b);
         jcbEstado.setEnabled(b);
     }
-
+    
     public void ZerarCampos() {
         jtfCodigoInterno.setText("");
         //cad
@@ -155,7 +175,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftDataNascimento.setText("");
         jtfCargo.setText("");
         jtfNomeFantasia.setText("");
-        jtfFiador.setText("");
+        jtfNomeResponsavel.setText("");
         jtfEndereco.setText("");
         jtfNumero.setText("");
         jtfBairro.setText("");
@@ -167,6 +187,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftComercial.setText("");
         jtfEmail.setText("");
         jtaObs.setText("");
+        jftCPFResponsavel.setText("");
 
         //cad Fim 
         // JRB
@@ -183,6 +204,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jcbLocacao.setSelected(false);
         jcbEstadoCivil.setSelectedIndex(-1);
         jcbEstado.setSelectedIndex(-1);
+        jcbFiador.setSelectedIndex(-1);
 
         // jcb fim
         //Tirando os alertas
@@ -199,14 +221,14 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftComercial.setBackground(Color.white);
         jcbEstadoCivil.setBackground(Color.white);
         jtfCargo.setBackground(Color.white);
-        jtfFiador.setBackground(Color.white);
+        jtfNomeResponsavel.setBackground(Color.white);
         jtfNomeFantasia.setBackground(Color.white);
         jftCPFResponsavel.setBackground(Color.white);
         jtfComplemento.setBackground(Color.white);
         jtfEmail.setBackground(Color.white);
         // Fim
     }
-
+    
     public void popular() {
         //nivel usuario
         if (true) {
@@ -216,7 +238,7 @@ public class cadastroCliente extends javax.swing.JFrame {
             jbConfirmar.setEnabled(false);
             jbEditar.setEnabled(false);
         }
-
+        
         jtfCodigoInterno.setText(null);
         //cad
 
@@ -226,7 +248,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftDataNascimento.setText(null);
         jtfCargo.setText(null);
         jtfNomeFantasia.setText(null);
-        jtfFiador.setText(null);
+        jtfNomeResponsavel.setText(null);
         jtfEndereco.setText(null);
         jtfNumero.setText(null);
         jtfBairro.setText(null);
@@ -250,10 +272,10 @@ public class cadastroCliente extends javax.swing.JFrame {
             ativaPessoa(false);
             mascaraCPF_CNPJ(false);
         }
-
+        
         if (true) {
             jrbMasculino.setSelected(true);
-
+            
         } else if (true) {
             jrbFeminino.setSelected(true);
         }
@@ -262,21 +284,21 @@ public class cadastroCliente extends javax.swing.JFrame {
         // jcb     // falta arrumar o estado pois muda bem a logica..
         if (true) {
             jcbAtivo.setSelected(true);
-
+            
         }
-
+        
         if (true) {
             jcbCompra.setSelected(true);
         }
-
+        
         if (true) {
             jcbTroca.setSelected(true);
         }
-
+        
         if (true) {
             jcbLocacao.setSelected(true);
         }
-
+        
         if (true) {
             jcbEstadoCivil.setSelectedIndex(0);
         } else if (true) {
@@ -293,6 +315,367 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
 
         // jcb fim
+    }
+    
+    public void cadastrarPessoaFisica() throws ParseException {
+        PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+        PessoaFisica pessoaFisica = new PessoaFisica();
+        pessoaFisica.setTipoPessoa(true);
+        pessoaFisica.setNomePessoa(jtfNome.getText());
+        pessoaFisica.setCPF(jftCPF.getText());
+        pessoaFisica.setRG(jtfRG.getText());
+        Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataNascimento.getText());
+        pessoaFisica.setDataNascimento(dataNascimento);
+        pessoaFisica.setObservacoes(jtaObs.getText());
+        
+        EstadoDAO estadoDAO = new EstadoDAO();
+        Estado estado = new Estado();
+        estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+        
+        Cidade cidade = new Cidade();
+        cidade.setNomeCidade(jtfCidade.getText());
+        cidade.setEstado(estado);
+        
+        Bairro bairro = new Bairro();
+        bairro.setNomeBairro(jtfBairro.getText());
+        bairro.setCidade(cidade);
+        
+        Endereco endereco = new Endereco();
+        endereco.setNomeEndereco(jtfEndereco.getText());
+        endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
+        endereco.setCep(jftCEP.getText());
+        endereco.setComplemento(jtfComplemento.getText());
+        endereco.setBairro(bairro);
+        pessoaFisica.setEndereco(endereco);
+        
+        List<Telefone> telefones = new ArrayList<Telefone>();
+        Telefone telefone = new Telefone();
+        Telefone celular = new Telefone();
+        Telefone comercial = new Telefone();
+        
+        telefone.setNumero(jftTelefone.getText());
+        telefone.setPessoa(pessoaFisica);
+        telefone.setOperadora("");
+        celular.setNumero(jftCelular.getText());
+        celular.setPessoa(pessoaFisica);
+        celular.setOperadora("");
+        comercial.setNumero(jftComercial.getText());
+        comercial.setPessoa(pessoaFisica);
+        comercial.setOperadora("");
+        
+        telefones.add(telefone);
+        telefones.add(celular);
+        telefones.add(comercial);
+        pessoaFisica.setTelefone(telefones);
+        
+        pessoaFisica.setEmail(jtfEmail.getText());
+        
+        if (jrbMasculino.isSelected()) {
+            pessoaFisica.setSexo('M');
+        } else if (jrbFeminino.isSelected()) {
+            pessoaFisica.setSexo('F');
+        }
+        
+        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
+        EstadoCivil estadoCivil = new EstadoCivil();
+        estadoCivil = estadoCivilDAO.getById((long) jcbEstadoCivil.getSelectedIndex() + 1);
+        
+        pessoaFisica.setListaFiadores(pessoaFisicaDAO.getFiadores((long) jcbFiador.getSelectedIndex() + 1));
+        pessoaFisica.setEstadoCivil(estadoCivil);
+        
+        TipoContratoDAO tipoContratoDAO = new TipoContratoDAO();
+        TipoContrato tipoContrato = new TipoContrato();
+        List<TipoContrato> tiposContrato = new ArrayList<TipoContrato>();
+        tiposContrato = tipoContratoDAO.getAll();
+        List<TipoContrato> interesses = new ArrayList<TipoContrato>();
+        
+        if (jcbLocacao.isSelected()) {
+            interesses.add(tiposContrato.get(0));
+        }
+        if (jcbCompra.isSelected()) {
+            interesses.add(tiposContrato.get(1));
+        }
+        if (jcbTroca.isSelected()) {
+            interesses.add(tiposContrato.get(2));
+        }
+        pessoaFisica.setInteresses(interesses);
+        pessoaFisicaDAO.persist(pessoaFisica);
+        
+    }
+    
+    public void cadastrarPessoaJuridica() throws ParseException {
+        PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
+        PessoaJuridica pessoaJuridica = new PessoaJuridica();
+        pessoaJuridica.setTipoPessoa(false);
+        pessoaJuridica.setNomePessoa(jtfNome.getText());
+        pessoaJuridica.setCnpj(jftCPF.getText());
+        pessoaJuridica.setInscricaoEstadual(jtfRG.getText());
+        Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataNascimento.getText());
+        pessoaJuridica.setDataNascimento(dataNascimento);
+        pessoaJuridica.setObservacoes(jtaObs.getText());
+        
+        EstadoDAO estadoDAO = new EstadoDAO();
+        Estado estado = new Estado();
+        estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+        
+        Cidade cidade = new Cidade();
+        cidade.setNomeCidade(jtfCidade.getText());
+        cidade.setEstado(estado);
+        
+        Bairro bairro = new Bairro();
+        bairro.setNomeBairro(jtfBairro.getText());
+        bairro.setCidade(cidade);
+        
+        Endereco endereco = new Endereco();
+        endereco.setNomeEndereco(jtfEndereco.getText());
+        endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
+        endereco.setCep(jftCEP.getText());
+        endereco.setComplemento(jtfComplemento.getText());
+        endereco.setBairro(bairro);
+        pessoaJuridica.setEndereco(endereco);
+        
+        List<Telefone> telefones = new ArrayList<Telefone>();
+        Telefone telefone = new Telefone();
+        Telefone celular = new Telefone();
+        Telefone comercial = new Telefone();
+        
+        telefone.setNumero(jftTelefone.getText());
+        telefone.setPessoa(pessoaJuridica);
+        telefone.setOperadora("");
+        celular.setNumero(jftCelular.getText());
+        celular.setPessoa(pessoaJuridica);
+        celular.setOperadora("");
+        comercial.setNumero(jftComercial.getText());
+        comercial.setPessoa(pessoaJuridica);
+        comercial.setOperadora("");
+        
+        telefones.add(telefone);
+        telefones.add(celular);
+        telefones.add(comercial);
+        pessoaJuridica.setTelefone(telefones);
+        
+        pessoaJuridica.setEmail(jtfEmail.getText());
+        
+        pessoaJuridica.setCpfResponsavel(jftCPFResponsavel.getText());
+        pessoaJuridica.setNomeFantasia(jtfNomeFantasia.getText());
+        pessoaJuridica.setNomeResponsavel(jtfNomeResponsavel.getText());
+        pessoaJuridica.setCadastroAtivo(jcbAtivo.isSelected());
+        
+        TipoContratoDAO tipoContratoDAO = new TipoContratoDAO();
+        TipoContrato tipoContrato = new TipoContrato();
+        List<TipoContrato> tiposContrato = new ArrayList<TipoContrato>();
+        tiposContrato = tipoContratoDAO.getAll();
+        List<TipoContrato> interesses = new ArrayList<TipoContrato>();
+        
+        if (jcbLocacao.isSelected()) {
+            interesses.add(tiposContrato.get(0));
+        }
+        if (jcbCompra.isSelected()) {
+            interesses.add(tiposContrato.get(1));
+        }
+        if (jcbTroca.isSelected()) {
+            interesses.add(tiposContrato.get(2));
+        }
+        pessoaJuridica.setInteresses(interesses);
+        
+        pessoaJuridicaDAO.persist(pessoaJuridica);
+    }
+    
+    public void atualizarPessoaFisica(PessoaFisica pessoaFisica) {
+        PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+        
+        jtfNome.setText(pessoaFisica.getNomePessoa());
+        jftCPF.setText(pessoaFisica.getCPF());
+        jtfRG.setText(pessoaFisica.getRG());
+        String dataString = new SimpleDateFormat("dd/MM/yyyy").format(pessoaFisica.getDataNascimento());
+        System.out.println(dataString);
+        jftDataNascimento.setText(dataString);
+        jtaObs.setText(pessoaFisica.getObservacoes());
+        
+        jcbEstado.setSelectedIndex((int) (pessoaFisica.getEndereco().getBairro().getCidade().getEstado().getId() - 1));        
+        
+        jtfCidade.setText(pessoaFisica.getEndereco().getBairro().getCidade().getNomeCidade());
+        
+        jtfBairro.setText(pessoaFisica.getEndereco().getBairro().getNomeBairro());        
+        
+        jtfEndereco.setText(pessoaFisica.getEndereco().getNomeEndereco());
+        jtfNumero.setText("" + pessoaFisica.getEndereco().getNumero());
+        jftCEP.setText(pessoaFisica.getEndereco().getCep());
+        jtfComplemento.setText(pessoaFisica.getEndereco().getComplemento());
+        
+        if (pessoaFisica.getTelefone().get(0).getNumero().trim().length() == 13) {
+            jftTelefone.setText(pessoaFisica.getTelefone().get(0).getNumero());
+        } else {
+            jftTelefone.setText(null);
+        }
+        
+        if (pessoaFisica.getTelefone().get(1).getNumero().trim().length() == 14) {
+            jftCelular.setText(pessoaFisica.getTelefone().get(1).getNumero());
+        } else {
+            jftCelular.setText(null);
+        }
+        
+        if (pessoaFisica.getTelefone().get(2).getNumero().trim().length() == 13) {
+            jftComercial.setText(pessoaFisica.getTelefone().get(2).getNumero());
+        } else {
+            jftComercial.setText(null);
+        }
+//        
+        
+        jtfEmail.setText(pessoaFisica.getEmail());
+        
+        if (pessoaFisica.getSexo() == 'M') {
+            jrbMasculino.setSelected(true);
+        }
+        if (pessoaFisica.getSexo() == 'F') {
+            jrbFeminino.setSelected(true);
+        }
+        
+        jcbEstadoCivil.setSelectedIndex((int) pessoaFisica.getEstadoCivil().getIdEstadoCivil() - 1);        
+        
+        TipoContratoDAO tipoContratoDAO = new TipoContratoDAO();
+        TipoContrato tipoContrato = new TipoContrato();
+        List<TipoContrato> tiposContrato = new ArrayList<TipoContrato>();
+        tiposContrato = tipoContratoDAO.getAll();
+        List<TipoContrato> interesses = new ArrayList<TipoContrato>();
+        
+        if (jcbLocacao.isSelected()) {
+            interesses.add(tiposContrato.get(0));
+        }
+        if (jcbCompra.isSelected()) {
+            interesses.add(tiposContrato.get(1));
+        }
+        if (jcbTroca.isSelected()) {
+            interesses.add(tiposContrato.get(2));
+        }
+        pessoaFisica.setInteresses(interesses);
+        
+    }
+    
+    public void atualizarPessoaJuridica(PessoaJuridica pessoaJuridica) {
+        PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
+        
+        jtfNome.setText(pessoaJuridica.getNomePessoa());
+        jftCPF.setText(pessoaJuridica.getCnpj());
+        jtfRG.setText(pessoaJuridica.getInscricaoEstadual());
+        String dataString = new SimpleDateFormat("dd/MM/yyyy").format(pessoaJuridica.getDataNascimento());
+        System.out.println(dataString);
+        jftDataNascimento.setText(dataString);
+        jtaObs.setText(pessoaJuridica.getObservacoes());
+        
+        jcbEstado.setSelectedIndex((int) (pessoaJuridica.getEndereco().getBairro().getCidade().getEstado().getId() - 1));        
+        
+        jtfCidade.setText(pessoaJuridica.getEndereco().getBairro().getCidade().getNomeCidade());
+        
+        jtfBairro.setText(pessoaJuridica.getEndereco().getBairro().getNomeBairro());        
+        
+        jtfEndereco.setText(pessoaJuridica.getEndereco().getNomeEndereco());
+        jtfNumero.setText("" + pessoaJuridica.getEndereco().getNumero());
+        jftCEP.setText(pessoaJuridica.getEndereco().getCep());
+        jtfComplemento.setText(pessoaJuridica.getEndereco().getComplemento());
+        
+        if (pessoaJuridica.getTelefone().get(0).getNumero().trim().length() == 13) {
+            jftTelefone.setText(pessoaJuridica.getTelefone().get(0).getNumero());
+        } else {
+            jftTelefone.setText(null);
+        }
+        
+        if (pessoaJuridica.getTelefone().get(1).getNumero().trim().length() == 14) {
+            jftCelular.setText(pessoaJuridica.getTelefone().get(1).getNumero());
+        } else {
+            jftCelular.setText(null);
+        }
+        
+        if (pessoaJuridica.getTelefone().get(2).getNumero().trim().length() == 13) {
+            jftComercial.setText(pessoaJuridica.getTelefone().get(2).getNumero());
+        } else {
+            jftComercial.setText(null);
+        }
+//        
+        
+        jtfEmail.setText(pessoaJuridica.getEmail());        
+        
+        jtfNomeFantasia.setText(pessoaJuridica.getNomeFantasia());
+        jftCPFResponsavel.setText(pessoaJuridica.getCpfResponsavel());
+        jtfNomeResponsavel.setText(pessoaJuridica.getNomeResponsavel());
+        jcbAtivo.setSelected(pessoaJuridica.isCadastroAtivo());
+        
+        TipoContratoDAO tipoContratoDAO = new TipoContratoDAO();
+        TipoContrato tipoContrato = new TipoContrato();
+        List<TipoContrato> tiposContrato = new ArrayList<TipoContrato>();
+        tiposContrato = tipoContratoDAO.getAll();
+        List<TipoContrato> interesses = new ArrayList<TipoContrato>();
+        
+        if (jcbLocacao.isSelected()) {
+            interesses.add(tiposContrato.get(0));
+        }
+        if (jcbCompra.isSelected()) {
+            interesses.add(tiposContrato.get(1));
+        }
+        if (jcbTroca.isSelected()) {
+            interesses.add(tiposContrato.get(2));
+        }
+        pessoaJuridica.setInteresses(interesses);
+        
+    }
+    
+    public void populaPessoaFisica() {
+        Pessoa pessoa = new Pessoa();
+        jtfCodigoInterno.setText(pessoa.getIdPessoa() + "");
+        jtfNome.setText("Jean Felipe");
+        jftCPF.setText("38933784802");
+        System.out.println("Aqui CPF" + jftCPF.getText());
+        jtfRG.setText("RG");
+        jftDataNascimento.setText("25/08/1991");
+        jtaObs.setText("Qualquer OBS");
+        
+        jtfCargo.setText("Chefe");
+        jcbEstadoCivil.setSelectedIndex(0);
+        jtfEndereco.setText("Av. Guilherme de Almeida");
+        jtfNumero.setText("2025");
+        jtfComplemento.setText("");
+        jtfBairro.setText("Morro do Algodão");
+        
+        jftCEP.setText("11.671-000");
+        jtfCidade.setText("Caraguatatuba");
+        
+        jcbEstado.setSelectedIndex(25);
+        
+        jftTelefone.setText("1238875776");
+        jftCelular.setText("12981097059");
+        jftComercial.setText("");
+        jtfEmail.setText("teste@teste");
+    }
+    
+    public void populaPessoaJuridica() {
+        Pessoa pessoa = new Pessoa();
+        jtfCodigoInterno.setText(pessoa.getIdPessoa() + "");
+        jtfNome.setText("Empresa S/A");
+        jftCPF.setText("19.339.754/0001-07");
+        System.out.println("Aqui CNPJ" + jftCPF.getText());
+        jtfRG.setText("Inscrição Estadual");
+        jftDataNascimento.setText("28/08/1991");
+        jtaObs.setText("Qualquer OBS");
+        
+        jftCPFResponsavel.setText("11301353493");
+        jtfNomeFantasia.setText("Empresa S/A Fantasia");
+        jtfNomeResponsavel.setText("José Maria");
+        jcbAtivo.setSelected(true);
+        
+        jtfEndereco.setText("Av. Guilherme de Almeida");
+        jtfNumero.setText("2025");
+        jtfComplemento.setText("");
+        jtfBairro.setText("Morro do Algodão");
+        
+        jftCEP.setText("11.671-000");
+        jtfCidade.setText("Caraguatatuba");
+        
+        jcbEstado.setSelectedIndex(25);
+        
+        jftTelefone.setText("1238875776");
+        jftCelular.setText("12981097059");
+        jftComercial.setText("");
+        jtfEmail.setText("teste@teste");
     }
 
     /**
@@ -339,35 +722,34 @@ public class cadastroCliente extends javax.swing.JFrame {
         jlDataNascimento = new javax.swing.JLabel();
         jlEstadoCivil = new javax.swing.JLabel();
         jcbEstadoCivil = new javax.swing.JComboBox();
+        jftCPFResponsavel = new javax.swing.JFormattedTextField();
         jlFiador = new javax.swing.JLabel();
-        jtfFiador = new javax.swing.JTextField();
+        jtfNomeResponsavel = new javax.swing.JTextField();
         jftDataNascimento = new javax.swing.JFormattedTextField();
         jlNomeFantasia = new javax.swing.JLabel();
         jtfNomeFantasia = new javax.swing.JTextField();
         jlCPFResponsavel = new javax.swing.JLabel();
-        jftCPFResponsavel = new javax.swing.JFormattedTextField();
         jspObs = new javax.swing.JScrollPane();
         jtaObs = new javax.swing.JTextArea();
         jlInteresses = new javax.swing.JLabel();
+        jcbLocacao = new javax.swing.JCheckBox();
         jcbCompra = new javax.swing.JCheckBox();
         jcbTroca = new javax.swing.JCheckBox();
-        jcbLocacao = new javax.swing.JCheckBox();
-        jSeparator1 = new javax.swing.JSeparator();
         jtfNumero = new javax.swing.JTextField();
         jlCEP = new javax.swing.JLabel();
         jftCEP = new javax.swing.JFormattedTextField();
+        jcbFiador = new javax.swing.JComboBox<>();
         jcbEstado = new javax.swing.JComboBox();
         jtfComplemento = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JSeparator();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCelular = new javax.swing.JFormattedTextField();
         jftComercial = new javax.swing.JFormattedTextField();
         jtfEmail = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
         jrbPessoaFisica = new javax.swing.JRadioButton();
         jrbPessoaJuridica = new javax.swing.JRadioButton();
         jcbAtivo = new javax.swing.JCheckBox();
         jlSituacao = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -375,204 +757,215 @@ public class cadastroCliente extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jbConfirmar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbConfirmar.setText("Confirmar");
         jbConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbConfirmarMouseClicked(evt);
             }
         });
-        getContentPane().add(jbConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, 140, 70));
+        getContentPane().add(jbConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 520, 140, 70));
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
         jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbCancelarMouseClicked(evt);
             }
         });
-        getContentPane().add(jbCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 500, 140, 70));
+        getContentPane().add(jbCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 520, 140, 70));
 
         jbEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/editar2.png"))); // NOI18N
         jbEditar.setText("Editar");
         jbEditar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbEditarMouseClicked(evt);
             }
         });
-        getContentPane().add(jbEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, 140, 70));
+        getContentPane().add(jbEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 520, 140, 70));
 
         jlCodigoInterno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCodigoInterno.setText("Código Interno");
-        getContentPane().add(jlCodigoInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jlCodigoInterno.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlCodigoInterno.setText("Código Interno:");
+        getContentPane().add(jlCodigoInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 150, 30));
 
         jtfCodigoInterno.setEditable(false);
-        getContentPane().add(jtfCodigoInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 100, -1));
+        getContentPane().add(jtfCodigoInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 100, 30));
 
         jlNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlNome.setText("Nome");
-        getContentPane().add(jlNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
+        jlNome.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlNome.setText("Nome:");
+        getContentPane().add(jlNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 150, 30));
 
         jlCPF_CNPJ.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCPF_CNPJ.setText("CPF");
-        getContentPane().add(jlCPF_CNPJ, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, -1, -1));
+        jlCPF_CNPJ.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlCPF_CNPJ.setText("CPF:");
+        getContentPane().add(jlCPF_CNPJ, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 150, 30));
 
         jlRG_Incricao.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlRG_Incricao.setText("RG");
-        getContentPane().add(jlRG_Incricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, -1));
+        jlRG_Incricao.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlRG_Incricao.setText("RG:");
+        getContentPane().add(jlRG_Incricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 180, 30));
 
         jlSexo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlSexo.setText("Sexo");
-        getContentPane().add(jlSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, -1, -1));
-        getContentPane().add(jtfRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 150, -1));
-        getContentPane().add(jtfNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 400, -1));
-        getContentPane().add(jtfBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 280, 130, -1));
-        getContentPane().add(jtfCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 140, -1));
-        getContentPane().add(jtfEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 400, -1));
+        jlSexo.setText("Sexo:");
+        getContentPane().add(jlSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 40, 30));
+        getContentPane().add(jtfRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 160, 30));
+        getContentPane().add(jtfNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 350, 30));
+        getContentPane().add(jtfBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 320, 170, 30));
+        getContentPane().add(jtfCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 230, 30));
+        getContentPane().add(jtfEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 350, 30));
 
         bgSexo.add(jrbMasculino);
         jrbMasculino.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jrbMasculino.setText("Masculino");
-        getContentPane().add(jrbMasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 28, -1, -1));
+        getContentPane().add(jrbMasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 80, -1, 30));
 
         bgSexo.add(jrbFeminino);
         jrbFeminino.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jrbFeminino.setText("Feminino");
-        getContentPane().add(jrbFeminino, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 28, -1, -1));
-        getContentPane().add(jftCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 150, -1));
+        getContentPane().add(jrbFeminino, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, -1, 30));
+        getContentPane().add(jftCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 150, 30));
 
         jlEndereco.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlEndereco.setText("Endereço");
-        getContentPane().add(jlEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, -1, -1));
+        jlEndereco.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlEndereco.setText("Endereço:");
+        getContentPane().add(jlEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 150, 30));
 
         jlNumero.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlNumero.setText("Nº");
-        getContentPane().add(jlNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, -1));
+        jlNumero.setText("Número:");
+        getContentPane().add(jlNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, -1, 30));
 
         jlBairro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlBairro.setText("Bairro");
-        getContentPane().add(jlBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 260, -1, -1));
+        jlBairro.setText("Bairro:");
+        getContentPane().add(jlBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, -1, 30));
 
         jlCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCidade.setText("Cidade");
-        getContentPane().add(jlCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, -1, -1));
+        jlCidade.setText("Cidade:");
+        getContentPane().add(jlCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 50, 30));
 
         jlEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlEstado.setText("Estado");
-        getContentPane().add(jlEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 310, -1, -1));
+        jlEstado.setText("Estado:");
+        getContentPane().add(jlEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 320, -1, 30));
 
         jlTelefone.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlTelefone.setText("Telefone");
-        getContentPane().add(jlTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 390, -1, -1));
+        jlTelefone.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlTelefone.setText("Telefone:");
+        getContentPane().add(jlTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 150, 30));
 
         jlCelular.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCelular.setText("Celular");
-        getContentPane().add(jlCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 60, -1));
+        jlCelular.setText("Celular:");
+        getContentPane().add(jlCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 60, 30));
 
         jlComercial.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlComercial.setText("Alternativo");
-        getContentPane().add(jlComercial, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 390, -1, -1));
+        jlComercial.setText("Alternativo:");
+        getContentPane().add(jlComercial, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 440, -1, 30));
 
         jlEmail.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlEmail.setText("Email");
-        getContentPane().add(jlEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, -1, -1));
+        jlEmail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlEmail.setText("Email:");
+        getContentPane().add(jlEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 150, 30));
 
         jlComplemento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlComplemento.setText("Complemento");
-        getContentPane().add(jlComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 310, -1, -1));
+        jlComplemento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlComplemento.setText("Complemento:");
+        getContentPane().add(jlComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 150, 30));
 
         jlObs.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlObs.setText("Observações");
-        getContentPane().add(jlObs, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 130, -1, 30));
+        jlObs.setText("Observações:");
+        getContentPane().add(jlObs, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 200, -1, 30));
 
         jlCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCargo.setText("Cargo");
-        getContentPane().add(jlCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, -1, -1));
-        getContentPane().add(jtfCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 150, -1));
+        jlCargo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlCargo.setText("Cargo:");
+        getContentPane().add(jlCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 150, 30));
+        getContentPane().add(jtfCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 150, 30));
 
         jlDataNascimento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlDataNascimento.setText("Data de Nascimento");
-        getContentPane().add(jlDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, -1, -1));
+        jlDataNascimento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlDataNascimento.setText("Data de Nascimento:");
+        getContentPane().add(jlDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 150, 30));
 
         jlEstadoCivil.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlEstadoCivil.setText("Estado Civil");
-        getContentPane().add(jlEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, -1, -1));
+        jlEstadoCivil.setText("Estado Civil:");
+        getContentPane().add(jlEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, -1, 30));
 
         jcbEstadoCivil.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jcbEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbEstadoCivilActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jcbEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 100, -1, -1));
+        getContentPane().add(jcbEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, 130, 30));
+        getContentPane().add(jftCPFResponsavel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 150, 30));
 
         jlFiador.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlFiador.setText("Fiador");
-        getContentPane().add(jlFiador, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
-        getContentPane().add(jtfFiador, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 400, -1));
-        getContentPane().add(jftDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 130, -1));
+        jlFiador.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlFiador.setText("Fiador:");
+        getContentPane().add(jlFiador, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 150, 30));
+        getContentPane().add(jtfNomeResponsavel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 350, 30));
+        getContentPane().add(jftDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 120, 30));
 
         jlNomeFantasia.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlNomeFantasia.setText("Nome Fantasia");
-        getContentPane().add(jlNomeFantasia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, -1, -1));
-        getContentPane().add(jtfNomeFantasia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 400, -1));
+        jlNomeFantasia.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlNomeFantasia.setText("Nome Fantasia:");
+        getContentPane().add(jlNomeFantasia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 140, 30));
+        getContentPane().add(jtfNomeFantasia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 350, 30));
 
         jlCPFResponsavel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCPFResponsavel.setText("CPF Responsavel");
-        getContentPane().add(jlCPFResponsavel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
-        getContentPane().add(jftCPFResponsavel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 150, -1));
-
-        jspObs.setBorder(null);
+        jlCPFResponsavel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlCPFResponsavel.setText("CPF Responsavel:");
+        getContentPane().add(jlCPFResponsavel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 140, 30));
 
         jtaObs.setColumns(20);
         jtaObs.setRows(5);
         jspObs.setViewportView(jtaObs);
 
-        getContentPane().add(jspObs, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, 380, 65));
+        getContentPane().add(jspObs, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 230, 380, 70));
 
         jlInteresses.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlInteresses.setText("Interesses");
-        getContentPane().add(jlInteresses, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, -1, -1));
-
-        jcbCompra.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jcbCompra.setText("Compra");
-        getContentPane().add(jcbCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, -1, -1));
-
-        jcbTroca.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jcbTroca.setText("Temporada");
-        getContentPane().add(jcbTroca, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 100, 120, -1));
+        getContentPane().add(jlInteresses, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 70, -1, 30));
 
         jcbLocacao.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbLocacao.setText("Locação");
-        getContentPane().add(jcbLocacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 50, -1, -1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 830, 140));
-        getContentPane().add(jtfNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, 50, -1));
+        getContentPane().add(jcbLocacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 100, -1, 30));
+
+        jcbCompra.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jcbCompra.setText("Compra");
+        getContentPane().add(jcbCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 130, -1, 30));
+
+        jcbTroca.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jcbTroca.setText("Temporada");
+        getContentPane().add(jcbTroca, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 160, 100, 30));
+        getContentPane().add(jtfNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, 50, 30));
 
         jlCEP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCEP.setText("CEP");
-        getContentPane().add(jlCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, -1, -1));
-        getContentPane().add(jftCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 110, -1));
+        jlCEP.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlCEP.setText("CEP:");
+        getContentPane().add(jlCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 150, 30));
+        getContentPane().add(jftCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 110, 30));
+
+        jcbFiador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbFiador, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 350, 30));
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, -1, -1));
-        getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 230, -1));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 830, 120));
-        getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 110, -1));
-        getContentPane().add(jftCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, 130, -1));
-        getContentPane().add(jftComercial, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 410, 110, -1));
-        getContentPane().add(jtfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 410, 230, -1));
-        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 830, 90));
+        getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 320, 70, 30));
+        getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 760, 30));
+        getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, 180, 30));
+        getContentPane().add(jftCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 440, 200, 30));
+        getContentPane().add(jftComercial, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 440, 220, 30));
+        getContentPane().add(jtfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, 760, 30));
 
         bgPessoa.add(jrbPessoaFisica);
         jrbPessoaFisica.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jrbPessoaFisica.setSelected(true);
         jrbPessoaFisica.setText("Física");
         jrbPessoaFisica.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jrbPessoaFisicaMousePressed(evt);
             }
         });
-        getContentPane().add(jrbPessoaFisica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+        getContentPane().add(jrbPessoaFisica, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, -1, 30));
 
         bgPessoa.add(jrbPessoaJuridica);
         jrbPessoaJuridica.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -582,33 +975,90 @@ public class cadastroCliente extends javax.swing.JFrame {
                 jrbPessoaJuridicaMousePressed(evt);
             }
         });
-        getContentPane().add(jrbPessoaJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        getContentPane().add(jrbPessoaJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, -1, 30));
 
         jcbAtivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbAtivo.setText("Ativo");
-        getContentPane().add(jcbAtivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, -1, -1));
+        getContentPane().add(jcbAtivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, -1, -1));
 
         jlSituacao.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlSituacao.setText("Situação Cadastral");
-        getContentPane().add(jlSituacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, -1, -1));
+        jlSituacao.setText("Situação Cadastral:");
+        getContentPane().add(jlSituacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, -1, 30));
+
+        jSeparator1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 970, 570));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
-        if (jbConfirmar.isEnabled()) {
-
-            if (!validaCampos(true)) {
-                JOptionPane.showMessageDialog(null, "Verifique os campos obrigatórios!");
+        //        if (jbConfirmar.isEnabled()) {
+//            if (bgPessoa.getSelection() == jrbPessoaFisica) {
+//                System.out.println("Física");
+//                cadastrarPessoaFisica();
+//            } else if (bgPessoa.getSelection() == jrbPessoaJuridica) {
+//                System.out.println("Juridica");
+//            }
+//
+////            Pessoa pessoa;
+////            PessoaFisica pessoaFisica;
+////            PessoaJuridica pessoaJuridica;
+////            Endereco endereco;
+////            Bairro bairro;
+////            Cidade cidade;
+////            Estado estado;
+////            Telefone telefone;
+////
+////            
+////            if (this.getPessoa() == null) {
+////                
+////                pessoa = new Pessoa();
+////                pessoaFisica = new PessoaFisica();
+////                pessoaJuridica = new PessoaJuridica();
+////                endereco = new Endereco();
+////                bairro = new Bairro();
+////                cidade = new Cidade();
+////                estado = new Estado();
+////                telefone = new Telefone();
+////                
+////                EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
+////                EstadoCivil estadoCivil = new EstadoCivil();
+////                List<EstadoCivil> estadoCivilTemp = new ArrayList<EstadoCivil>();
+////                estadoCivilTemp = estadoCivilDAO.getAll();
+////                
+////            } else {
+////                pessoa = pessoaTemp;
+////                endereco = pessoa.getEndereco();
+////                bairro = pessoa.getEndereco().getBairro();
+////                cidade = pessoa.getEndereco().getBairro().getCidade();
+////                estado = pessoa.getEndereco().getBairro().getCidade().getEstado();
+////
+////            }
+//            if (!validaCampos(true)) {
+//                JOptionPane.showMessageDialog(null, "Verifique os campos obrigatórios!");
+//            }
+//
+//        }
+        if (jrbPessoaFisica.isSelected()) {
+            try {
+                cadastrarPessoaFisica();
+            } catch (ParseException ex) {
+                Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+        } else if (jrbPessoaJuridica.isSelected()) {
+            try {
+                cadastrarPessoaJuridica();
+            } catch (ParseException ex) {
+                Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
+        
 
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-        new cadastroClienteHome(user).setVisible(true);
+        cadastroClienteHome homeCliente = cadastroClienteHome.getInstancia();
+        cadastroClienteHome.getInstancia().setVisible(true);
         dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
 
@@ -616,17 +1066,18 @@ public class cadastroCliente extends javax.swing.JFrame {
         ativaPessoa(false);
         mascaraCPF_CNPJ(false);
         limpaCampos();
+        carregaEstados();
+        populaPessoaJuridica();
     }//GEN-LAST:event_jrbPessoaJuridicaMousePressed
 
     private void jrbPessoaFisicaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbPessoaFisicaMousePressed
         ativaPessoa(true);
         mascaraCPF_CNPJ(true);
         limpaCampos();
+        carregaEstados();
+        carregaEstadosCivis();
+        populaPessoaFisica();
     }//GEN-LAST:event_jrbPessoaFisicaMousePressed
-
-    private void jcbEstadoCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoCivilActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbEstadoCivilActionPerformed
 
     private void jbEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseClicked
         if (jbEditar.isEnabled()) {
@@ -635,7 +1086,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_jbEditarMouseClicked
-
+    
     public void ativaPessoa(boolean ativo) {
         if (ativo == false) {
             jlCPF_CNPJ.setText("CNPJ");
@@ -643,25 +1094,26 @@ public class cadastroCliente extends javax.swing.JFrame {
             jlNome.setText("Razão Social");
             jlEndereco.setText("Logradouro");
             jlDataNascimento.setText("Data Fundação");
+            jlFiador.setText("Nome Responsável");
         } else {
             jlCPF_CNPJ.setText("CPF");
             jlRG_Incricao.setText("RG");
             jlNome.setText("Nome");
             jlEndereco.setText("Endereço");
             jlDataNascimento.setText("Data Nascimento");
+            jlFiador.setText("Fiador");
         }
         //Passando True Ativa Pessoa Fisica, False Pessoa Juridica
         jlCargo.setVisible(ativo);
         jlCargo.setEnabled(ativo);
         jtfCargo.setVisible(ativo);
         jtfCargo.setEnabled(ativo);
-        jlFiador.setVisible(ativo);
-        jtfFiador.setVisible(ativo);
-        jtfFiador.setEnabled(ativo);
         jlEstadoCivil.setVisible(ativo);
         jlEstadoCivil.setEnabled(ativo);
         jcbEstadoCivil.setVisible(ativo);
         jcbEstadoCivil.setEnabled(ativo);
+        jcbFiador.setVisible(ativo);
+        jcbFiador.setEnabled(ativo);
         jlSexo.setVisible(ativo);
         jlSexo.setEnabled(ativo);
         jrbFeminino.setVisible(ativo);
@@ -670,6 +1122,8 @@ public class cadastroCliente extends javax.swing.JFrame {
         jrbMasculino.setEnabled(ativo);
 
         //Passando False Pessoa Juridica
+        jtfNomeResponsavel.setVisible(!ativo);
+        jtfNomeResponsavel.setEnabled(!ativo);
         jlNomeFantasia.setVisible(!ativo);
         jlNomeFantasia.setEnabled(!ativo);
         jtfNomeFantasia.setEnabled(!ativo);
@@ -683,7 +1137,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jlSituacao.setVisible(!ativo);
         jlSituacao.setEnabled(!ativo);
     }
-
+    
     public void mascaraCPF_CNPJ(boolean ativa) {
         try {
             if (ativa) {
@@ -692,33 +1146,35 @@ public class cadastroCliente extends javax.swing.JFrame {
             } else {
                 jftCPF.setFormatterFactory(new DefaultFormatterFactory(
                         new MaskFormatter("##.###.###/####-##")));
+                jftCPFResponsavel.setFormatterFactory(new DefaultFormatterFactory(
+                        new MaskFormatter("###.###.###-##")));
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
-
+    
     public void mascaraData() {
         try {
             jftDataNascimento.setFormatterFactory(new DefaultFormatterFactory(
                     new MaskFormatter("##/##/####")));
-
+            
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     public void mascaraCEP() {
         try {
             jftCEP.setFormatterFactory(new DefaultFormatterFactory(
                     new MaskFormatter("##.###-###")));
-
+            
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
-
+    
     public void mascaraTelefone() {
         try {
             jftTelefone.setFormatterFactory(new DefaultFormatterFactory(
@@ -729,7 +1185,7 @@ public class cadastroCliente extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+    
     public void mascaraCelular() {
         try {
             jftCelular.setFormatterFactory(new DefaultFormatterFactory(
@@ -738,14 +1194,14 @@ public class cadastroCliente extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+    
     public void configuraMascaras() {
         mascaraCelular();
         mascaraTelefone();
         mascaraCEP();
         mascaraData();
     }
-
+    
     public boolean validaCampos(boolean valida) {
         if (jrbPessoaFisica.isSelected()) {
             if (!jtfNome.getText().equals("") && validacao.validaLetras(jtfNome.getText())) {
@@ -790,7 +1246,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                 jtfNumero.setBackground(Color.red);
                 valida = false;
             }
-            if (jcbEstado.getSelectedItem() == "") {
+            if (jcbEstado.getSelectedItem() != null) {
                 jcbEstado.setBackground(Color.white);
             } else {
                 jcbEstado.setBackground(Color.red);
@@ -815,7 +1271,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                 jrbFeminino.setBackground(Color.red);
                 valida = false;
             }
-            if (jcbEstadoCivil.getSelectedItem() == "") {
+            if (jcbEstadoCivil.getSelectedItem() != null) {
                 jcbEstadoCivil.setBackground(Color.white);
             } else {
                 jcbEstadoCivil.setBackground(Color.red);
@@ -864,7 +1320,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                 jtfNumero.setBackground(Color.red);
                 valida = false;
             }
-
+            
             if (jcbEstado.getSelectedItem() == "") {
                 jcbEstado.setBackground(Color.white);
             } else {
@@ -885,7 +1341,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
         return valida;
     }
-
+    
     public void limpaCampos() {
         jtfNome.setText("");
         jtfNome.setBackground(Color.white);
@@ -911,8 +1367,8 @@ public class cadastroCliente extends javax.swing.JFrame {
         jcbEstadoCivil.setBackground(Color.white);
         jtfCargo.setText("");
         jtfCargo.setBackground(Color.white);
-        jtfFiador.setText("");
-        jtfFiador.setBackground(Color.white);
+        jtfNomeResponsavel.setText("");
+        jtfNomeResponsavel.setBackground(Color.white);
         jtfNomeFantasia.setText("");
         jtfNomeFantasia.setBackground(Color.white);
         jftCPFResponsavel.setText("");
@@ -922,7 +1378,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfEmail.setText("");
         jtfEmail.setBackground(Color.white);
     }
-
+    
     public void carregaEstados() {
         EstadoDAO estadoDAO = new EstadoDAO();
         Estado estado = new Estado();
@@ -934,37 +1390,64 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
         jcbEstado.setModel(defaultComboBox);
-
     }
-
-    public void setJcbEstado() throws SQLException {
-//        List<String> strList = new ArrayList<String>();
-//        String query = "SELECT UF FROM Estado";
-//        Connection con = Conexao.getConnection();
-//        PreparedStatement ps = con.prepareStatement(query);
-//        ResultSet rs = ps.executeQuery();
-//        while (rs.next) {
-//            strList.add(rs.getString("UF"));
-//        }
-//        ps.close();
-//
-//        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(strList.toArray());
-//        jcbEstado.setModel(defaultComboBox);
+    
+    public void carregaEstadosCivis() {
+        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
+        EstadoCivil estadoCivil = new EstadoCivil();
+        List<EstadoCivil> listaEstadoCivis = new ArrayList<EstadoCivil>();
+        List<String> listaNomeEstadoCivis = new ArrayList<String>();
+        listaEstadoCivis = estadoCivilDAO.getAll();
+        for (int i = 0; i < listaEstadoCivis.size(); i++) {
+            listaNomeEstadoCivis.add(listaEstadoCivis.get(i).getNomeEstadoCivil());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeEstadoCivis.toArray());
+        jcbEstadoCivil.setModel(defaultComboBox);
     }
+    
+    public void carregaFiadores() {
+        PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+        PessoaFisica pessoaFisica = new PessoaFisica();
+        List<PessoaFisica> listaPessoas = new ArrayList<PessoaFisica>();
+        List<String> listaNomePessoas = new ArrayList<String>();
+        listaPessoas = pessoaFisicaDAO.getAll();
+        for (int i = 0; i < listaPessoas.size(); i++) {
+            listaNomePessoas.add(listaPessoas.get(i).getNomePessoa());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomePessoas.toArray());
+        jcbFiador.setModel(defaultComboBox);
+    }
+    
+    public void fecharCadastro() {
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
 
-    public void setJcbEstadoCivil() throws SQLException {
-//        List<String> strList = new ArrayList<String>();
-//        String query = "SELECT nomeEstadoCivil FROM EstadoCivil";
-//        Connection con = Conexao.getConnection();
-//        PreparedStatement ps = con.prepareStatement(query);
-//        ResultSet rs = ps.executeQuery();
-//        while (rs.next) {
-//            strList.add(rs.getString("nomeEstadoCivil"));
-//        }
-//        ps.close();
+//                if (COLOCAR VERIFICACAO) {
+//                    int resposta = JOptionPane.showConfirmDialog(null,
+//                            "Cadastro não salvo, Deseja salvar antes de sair?",
+//                            "Segurança",
+//                            JOptionPane.YES_NO_OPTION);
+//                    if (resposta == 1) {
 //
-//        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(strList.toArray());
-//        jcbEstadoCivil.setModel(defaultComboBox);
+//                        System.exit(0);
+//
+//                    } else {
+//
+//                    }
+//
+//                } else {
+                String ObjButtons[] = {"Sim", "Não"};
+                int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                    dispose();
+                }
+//                }
+
+            }
+        });
+        
     }
 
     /**
@@ -1006,8 +1489,6 @@ public class cadastroCliente extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bgPessoa;
     private javax.swing.ButtonGroup bgSexo;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JButton jbEditar;
@@ -1015,6 +1496,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     private javax.swing.JCheckBox jcbCompra;
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JComboBox jcbEstadoCivil;
+    private javax.swing.JComboBox<String> jcbFiador;
     private javax.swing.JCheckBox jcbLocacao;
     private javax.swing.JCheckBox jcbTroca;
     private javax.swing.JFormattedTextField jftCEP;
@@ -1062,9 +1544,9 @@ public class cadastroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField jtfComplemento;
     private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfEndereco;
-    private javax.swing.JTextField jtfFiador;
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfNomeFantasia;
+    private javax.swing.JTextField jtfNomeResponsavel;
     private javax.swing.JTextField jtfNumero;
     private javax.swing.JTextField jtfRG;
     // End of variables declaration//GEN-END:variables

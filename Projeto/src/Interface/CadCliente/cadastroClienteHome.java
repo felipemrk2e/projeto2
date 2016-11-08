@@ -5,7 +5,27 @@
  */
 package Interface.CadCliente;
 
+import Interface.TelaPrincipal.Sessao;
+import dao.PessoaDAO;
+import dao.PessoaFisicaDAO;
+import dao.PessoaJuridicaDAO;
 import java.awt.Color;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
+import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import model.TableModel.PessoaFisicaTableModel;
+import model.TableModel.PessoaJuridicaTableModel;
+import model.TableModel.PessoaTableModel;
+import model.pessoa.Pessoa;
+import model.pessoa.PessoaFisica;
+import model.pessoa.PessoaJuridica;
+import org.hibernate.Session;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
 import validacao.validacao;
 
 /**
@@ -13,19 +33,69 @@ import validacao.validacao;
  * @author Sala
  */
 public class cadastroClienteHome extends javax.swing.JFrame {
-int user;
+
+    private static cadastroClienteHome instancia;
+    int user;
+
     /**
      * Creates new form cadastroClienteHome
      */
     public cadastroClienteHome() {
+        this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
+        jcbPessoaFisica.setSelected(true);
+        jcbPessoaJuridica.setSelected(true);
+        popularTabela();
+        mascaraTelefone();
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
-     public cadastroClienteHome(int user) {
-          this.user = user;
-        initComponents();
+
+    public static cadastroClienteHome getInstancia() {
+        if (instancia == null) {
+            instancia = new cadastroClienteHome();
+        }
+        return instancia;
     }
-     
-     
+
+    public static void encerrarInstancia() {
+        instancia = null;
+    }
+
+    public void acesso(int nivel) {
+        System.out.println("====================================================Nível de Acesso: " + nivel);
+        DisableEnable(false);
+        switch (nivel) {
+            case 1:
+                DisableEnable(true);
+                jbCadastrar.setEnabled(true);
+                jbVisualizar.setEnabled(true);
+                jbRemover.setEnabled(true);
+                jbPesquisar.setEnabled(true);
+                break;
+            case 2:
+                DisableEnable(true);
+                jbCadastrar.setEnabled(true);
+                jbVisualizar.setEnabled(true);
+                jbRemover.setEnabled(true);
+                jbPesquisar.setEnabled(true);
+                break;
+            case 3:
+                DisableEnable(false);
+                jbPesquisar.setEnabled(true);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
+        }
+    }
+
+    public void DisableEnable(Boolean b) {
+        jbCadastrar.setEnabled(b);
+        jbVisualizar.setEnabled(b);
+        jbRemover.setEnabled(b);
+        jbPesquisar.setEnabled(b);
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,12 +116,9 @@ int user;
         jcbPessoaFisica = new javax.swing.JCheckBox();
         jcbPessoaJuridica = new javax.swing.JCheckBox();
         jtNome = new javax.swing.JTextField();
-        jtTelefone = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jftTelefone = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -74,6 +141,7 @@ int user;
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 46, 920, 240));
 
         jbCadastrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbCadastrar.setText("Cadastrar");
         jbCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -83,6 +151,7 @@ int user;
         getContentPane().add(jbCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 140, 70));
 
         jbVisualizar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
         jbVisualizar.setText("Visualizar");
         jbVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -92,6 +161,7 @@ int user;
         getContentPane().add(jbVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 140, 70));
 
         jbRemover.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
         jbRemover.setText("Remover");
         jbRemover.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -101,6 +171,7 @@ int user;
         getContentPane().add(jbRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, 140, 70));
 
         jbPesquisar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/review.png"))); // NOI18N
         jbPesquisar.setText("Pesquisar");
         jbPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -115,60 +186,54 @@ int user;
 
         jcbPessoaFisica.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbPessoaFisica.setText("Pessoa Física");
+        jcbPessoaFisica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbPessoaFisicaMouseClicked(evt);
+            }
+        });
         getContentPane().add(jcbPessoaFisica, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, 130, 20));
 
         jcbPessoaJuridica.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbPessoaJuridica.setText("Pessoa Júridica");
+        jcbPessoaJuridica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbPessoaJuridicaMouseClicked(evt);
+            }
+        });
         getContentPane().add(jcbPessoaJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 140, -1));
         getContentPane().add(jtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 270, -1));
-        getContentPane().add(jtTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 490, 120, -1));
 
         jLabel2.setText("Nome");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, -1, -1));
 
         jLabel3.setText("Telefone");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 470, -1, -1));
-
-        jMenu1.setText("File");
-        jMenu1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenu2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 490, 120, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
-
- if(jbCadastrar.isEnabled()){
-             new cadastroCliente(user).setVisible(true);     // TODO add your handling code here:
-        dispose();
- }
-
+        if (jbCadastrar.isEnabled()) {
+            cadastroCliente cliente = cadastroCliente.getInstancia();
+            cliente.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            cliente.getInstancia().setVisible(true);     // TODO add your handling code here:
+            dispose();
+        }
 
     }//GEN-LAST:event_jbCadastrarMouseClicked
 
     private void jbPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarMouseClicked
         // Verificação do pesquisar   // falta tudo !
-
-        boolean control = true;
-
-        if (jtNome.getText().equals("")) {
-            jtNome.setBackground(Color.white);
-        } else if (!jtNome.getText().equals("") && validacao.validaLetras(jtNome.getText())) {
-            jtNome.setBackground(Color.white);
-        } else {
-            jtNome.setBackground(Color.red);
-            control = false;
-        }
+//        if (!jtNome.getText().equals("") && validacao.validaLetras(jtNome.getText())) {
+//            jtNome.setBackground(Color.white);
+        popularTabelaQuery();
+//        } else {
+//            jtNome.setBackground(Color.red);
+//        }
 // arrumar a validacao...
-        
-        
+
 //        if (jtTelefone.getText().equals("")) {
 //            jtTelefone.setBackground(Color.white);
 //        } else if (!jtTelefone.getText().equals("") && validaAlgo......) {
@@ -177,7 +242,6 @@ int user;
 //            jtTelefone.setBackground(Color.red);
 //            control = false;
 //        }
-
         if (jcbPessoaFisica.isSelected()) {
 
         }
@@ -185,26 +249,139 @@ int user;
 
         }
 
-        // Pesquisa Querry
-        if (control) {
 
-            // querry
-        } else {
-            control = true;
-        }
-        /// fim pesquisa
     }//GEN-LAST:event_jbPesquisarMouseClicked
 
+    public void popularTabela() {
+        if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
+            PessoaDAO pessoaDAO = new PessoaDAO();
+            List<Pessoa> pessoas = new ArrayList<Pessoa>();
+            pessoas = pessoaDAO.getAll();
+            jTable1.setModel(new PessoaTableModel(pessoas));
+        } else if (jcbPessoaFisica.isSelected()) {
+            PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+            List<PessoaFisica> pessoasFisicas = new ArrayList<PessoaFisica>();
+            pessoasFisicas = pessoaFisicaDAO.getAll();
+            jTable1.setModel(new PessoaFisicaTableModel(pessoasFisicas));
+        } else if (jcbPessoaJuridica.isSelected()) {
+            PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
+            List<PessoaJuridica> pessoasJuridicas = new ArrayList<PessoaJuridica>();
+            pessoasJuridicas = pessoaJuridicaDAO.getAll();
+            jTable1.setModel(new PessoaJuridicaTableModel(pessoasJuridicas));
+        } else {
+            jTable1.setModel(new PessoaTableModel());
+        }
+
+    }
+
+    public void popularTabelaQuery() {
+        if (!jtNome.getText().isEmpty()) {
+            PessoaDAO pessoaDAO = new PessoaDAO();
+            List<Pessoa> pessoas = new ArrayList<Pessoa>();
+            pessoas = pessoaDAO.getQuery("WHERE nomePessoa LIKE '%" + jtNome.getText() + "%'");
+            jTable1.setModel(new PessoaTableModel(pessoas));
+        }
+//        if (!jftTelefone.getText().isEmpty()) {
+//            PessoaDAO pessoaDAO = new PessoaDAO();
+//            List<Pessoa> pessoas = new ArrayList<Pessoa>();
+//            pessoas = pessoaDAO.getQuery("INNER JOIN Telefone ON Pessoa.idPessoa = Telefone.idPessoa WHERE numero LIKE '%" + jftTelefone.getText() + "%'");
+//            jTable1.setModel(new PessoaTableModel(pessoas));
+//        }
+    }
+
+    public void mascaraTelefone() {
+        try {
+            jftTelefone.setFormatterFactory(new DefaultFormatterFactory(
+                    new MaskFormatter("(##)####-####")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
-       String idcliente = "vazio no momento";
-            new cadastroCliente(user, idcliente).setVisible(true); 
-            dispose();  // TODO add your handling code here:
+        int linhaSelecionada = jTable1.getSelectedRow();
+        if (linhaSelecionada == -1) {
+            return; //Nada selecionado
+        }
+        if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
+            PessoaTableModel pessoaModel = (PessoaTableModel) jTable1.getModel();
+            Pessoa pessoaSelecionada = pessoaModel.get(linhaSelecionada);
+            if (pessoaSelecionada.isTipoPessoa()) {
+                PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jTable1.getModel();
+                PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
+                cadastroCliente cadastroPessoaFisica = new cadastroCliente(pessoaFisicaSelecionada);
+                cadastroPessoaFisica.setVisible(true);
+                cadastroPessoaFisica.setLocationRelativeTo(this);
+            } else {
+                PessoaJuridicaTableModel pessoaJuridicaModel = (PessoaJuridicaTableModel) jTable1.getModel();
+                PessoaJuridica pessoaJuridicaSelecionada = pessoaJuridicaModel.get(linhaSelecionada);
+                cadastroCliente cadastroPessoaJuridica = new cadastroCliente(pessoaJuridicaSelecionada);
+                cadastroPessoaJuridica.setVisible(true);
+                cadastroPessoaJuridica.setLocationRelativeTo(this);
+            }
+
+            System.out.println(pessoaSelecionada.getNomePessoa());
+
+        } else if (jcbPessoaFisica.isSelected()) {
+            PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jTable1.getModel();
+            PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
+            cadastroCliente cadastroPessoaFisica = new cadastroCliente(pessoaFisicaSelecionada);
+            cadastroPessoaFisica.setVisible(true);
+            cadastroPessoaFisica.setLocationRelativeTo(this);
+
+        } else if (jcbPessoaJuridica.isSelected()) {
+            PessoaJuridicaTableModel pessoaJuridicaModel = (PessoaJuridicaTableModel) jTable1.getModel();
+            PessoaJuridica pessoaJuridicaSelecionada = pessoaJuridicaModel.get(linhaSelecionada);
+            cadastroCliente cadastroPessoaJuridica = new cadastroCliente(pessoaJuridicaSelecionada);
+            cadastroPessoaJuridica.setVisible(true);
+            cadastroPessoaJuridica.setLocationRelativeTo(this);
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhum campo foi selecionado!");
+        }
+
+
     }//GEN-LAST:event_jbVisualizarMouseClicked
 
     private void jbRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemoverMouseClicked
-if(jbRemover.isEnabled()){
-}// TODO add your handling code here:
+        if (jbRemover.isEnabled()) {
+            int linhaSelecionada = jTable1.getSelectedRow();
+            if (linhaSelecionada == -1) {
+                return; //Nada selecionado
+            }
+            if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
+                PessoaTableModel pessoaModel = (PessoaTableModel) jTable1.getModel();
+                Pessoa pessoaSelecionada = pessoaModel.get(linhaSelecionada);
+                PessoaDAO pessoaDAO = new PessoaDAO();
+                pessoaDAO.removeById(pessoaSelecionada.getIdPessoa());
+                pessoaModel.removeRow(linhaSelecionada);
+
+            } else if (jcbPessoaFisica.isSelected()) {
+                PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jTable1.getModel();
+                PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
+                PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+                pessoaFisicaDAO.removeById(pessoaFisicaSelecionada.getIdPessoa());
+                pessoaFisicaModel.removeRow(linhaSelecionada);
+
+            } else if (jcbPessoaJuridica.isSelected()) {
+                PessoaJuridicaTableModel pessoaJuridicaModel = (PessoaJuridicaTableModel) jTable1.getModel();
+                PessoaJuridica pessoaJuridicaSelecionada = pessoaJuridicaModel.get(linhaSelecionada);
+                PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
+                pessoaJuridicaDAO.removeById(pessoaJuridicaSelecionada.getIdPessoa());
+                pessoaJuridicaModel.removeRow(linhaSelecionada);
+                System.out.println(pessoaJuridicaSelecionada.getCnpj());
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhum campo foi selecionado!");
+            }
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jbRemoverMouseClicked
+
+    private void jcbPessoaFisicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbPessoaFisicaMouseClicked
+        popularTabela();
+    }//GEN-LAST:event_jcbPessoaFisicaMouseClicked
+
+    private void jcbPessoaJuridicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbPessoaJuridicaMouseClicked
+        popularTabela();
+    }//GEN-LAST:event_jcbPessoaJuridicaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -245,9 +422,6 @@ if(jbRemover.isEnabled()){
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbCadastrar;
@@ -256,7 +430,7 @@ if(jbRemover.isEnabled()){
     private javax.swing.JButton jbVisualizar;
     private javax.swing.JCheckBox jcbPessoaFisica;
     private javax.swing.JCheckBox jcbPessoaJuridica;
+    private javax.swing.JFormattedTextField jftTelefone;
     private javax.swing.JTextField jtNome;
-    private javax.swing.JTextField jtTelefone;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,21 +18,26 @@ import validacao.validacao;
  */
 public class cadastroImovelHome extends javax.swing.JFrame {
 
+    private static cadastroImovelHome instancia;
     int user;
 
     /**
      * Creates new form cadastroImovelHome
      */
     public cadastroImovelHome() {
+        this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
         fechar();
 
     }
 
     public cadastroImovelHome(int user) {
-                 this.user = user;
+        this.setUndecorated(true);
+        this.user = user;
 
         initComponents();
+        setAlwaysOnTop(true);
         fechar();
         if (user <= 2) {
             jbRemover.setEnabled(true);
@@ -42,6 +47,17 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             jbCadastrar.setEnabled(false);
         }
 
+    }
+
+    public static cadastroImovelHome getInstancia() {
+        if (instancia == null) {
+            instancia = new cadastroImovelHome();
+        }
+        return instancia;
+    }
+
+    public static void encerrarInstancia() {
+        instancia = null;
     }
 
     public void fechar() {
@@ -101,16 +117,13 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jtCidade = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jmLogin = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
         setResizable(false);
         getContentPane().setLayout(null);
 
+        jbCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbCadastrar.setText("Cadastrar");
         jbCadastrar.setEnabled(false);
         jbCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,8 +132,9 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbCadastrar);
-        jbCadastrar.setBounds(110, 250, 199, 87);
+        jbCadastrar.setBounds(110, 250, 140, 70);
 
+        jbVisualisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
         jbVisualisar.setText("Visualizar");
         jbVisualisar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -128,8 +142,9 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbVisualisar);
-        jbVisualisar.setBounds(400, 250, 195, 88);
+        jbVisualisar.setBounds(400, 250, 140, 70);
 
+        jbRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
         jbRemover.setText("Remover");
         jbRemover.setEnabled(false);
         jbRemover.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -138,7 +153,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbRemover);
-        jbRemover.setBounds(690, 250, 199, 94);
+        jbRemover.setBounds(690, 250, 140, 70);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,6 +196,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(210, 380, 40, 20);
 
+        jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/review.png"))); // NOI18N
         jbPesquisar.setText("Pesquisar");
         jbPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -191,7 +207,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbPesquisar);
-        jbPesquisar.setBounds(800, 430, 199, 91);
+        jbPesquisar.setBounds(800, 430, 140, 70);
 
         jLabel2.setText("Nome do Proprietario");
         getContentPane().add(jLabel2);
@@ -252,23 +268,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         getContentPane().add(jLabel8);
         jLabel8.setBounds(570, 480, 33, 14);
 
-        jMenu1.setText("File");
-
-        jmLogin.setText("Login");
-        jmLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jmLoginMousePressed(evt);
-            }
-        });
-        jMenu1.add(jmLogin);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -290,10 +289,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_jbRemoverMouseClicked
 
-    private void jmLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmLoginMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmLoginMousePressed
-
     private void jbVisualisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualisarMouseClicked
         //Falta pegar a id da table;
         String idImovel = "vazio no momento";
@@ -312,27 +307,26 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         // Verificar campos antes de pesquisar 
         boolean control = true;
         // Falta Querry
-        
-        if(jcbCasa.isSelected()) {
-     
+
+        if (jcbCasa.isSelected()) {
+
         }
-          
-        if(jcbApartamento.isSelected()) {
-     
+
+        if (jcbApartamento.isSelected()) {
+
         }
-          
-        if(jcbSalao.isSelected()) {
-     
+
+        if (jcbSalao.isSelected()) {
+
         }
-          
-        if(jcbTemporario.isSelected()) {
-     
+
+        if (jcbTemporario.isSelected()) {
+
         }
-          
-        if(jcbComercio.isSelected()) {
-     
+
+        if (jcbComercio.isSelected()) {
+
         }
-        
 
         if (jtNomeProprietario.getText().equals("")) {
             jtNomeProprietario.setBackground(Color.white);
@@ -446,9 +440,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -466,7 +457,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JCheckBox jcbSalao;
     private javax.swing.JCheckBox jcbTemporario;
-    private javax.swing.JMenuItem jmLogin;
     private javax.swing.JTextField jtBairro;
     private javax.swing.JTextField jtCidade;
     private javax.swing.JTextField jtNomeProprietario;

@@ -5,7 +5,14 @@
  */
 package Interface.CadFuncionario;
 
+import Interface.TelaPrincipal.Sessao;
+import Interface.TelaPrincipal.TelaPrincipal;
+import dao.FuncionarioDAO;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+import model.TableModel.FuncionarioTableModel;
+import model.pessoa.Funcionario;
 import validacao.validacao;
 
 /**
@@ -13,18 +20,38 @@ import validacao.validacao;
  * @author user
  */
 public class CadFuncionarioHome extends javax.swing.JFrame {
-int user;
+
+    private static CadFuncionarioHome instancia;
+    int user = Sessao.getInstance().getUsuario().getNivelAcesso();
+
     /**
      * Creates new form CadFuncionarioHome
      */
     public CadFuncionarioHome() {
+        this.setUndecorated(true);
         initComponents();
+        this.setTitle("Cadastro de Funcionários");
+        popularTabela();
     }
-    public CadFuncionarioHome(int user) {
-        
-        this.user = user;
-        initComponents();
+    
+    public static CadFuncionarioHome getInstancia() {
+        if (instancia == null) {
+            instancia = new CadFuncionarioHome();
+        }
+        return instancia;
     }
+    
+    public static void encerrarInstancia(){
+        instancia = null;
+    }
+
+    public void popularTabela() {
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+        funcionarios = funcionarioDAO.getAll();
+        jTable1.setModel(new FuncionarioTableModel(funcionarios));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,18 +68,15 @@ int user;
         jbExcluir = new javax.swing.JButton();
         jbNivel = new javax.swing.JButton();
         jbPesquisar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jlNomeFuncionario = new javax.swing.JLabel();
         jtNomeFuncionario = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jlCPF = new javax.swing.JLabel();
         jtCpf = new javax.swing.JTextField();
         jtCargo = new javax.swing.JTextField();
         jtDepartamento = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        jlCargo = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -60,10 +84,7 @@ int user;
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -74,6 +95,8 @@ int user;
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(70, 30, 880, 239);
 
+        jbCadastrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbCadastrar.setText("Cadastrar");
         jbCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -81,17 +104,21 @@ int user;
             }
         });
         getContentPane().add(jbCadastrar);
-        jbCadastrar.setBounds(90, 290, 195, 88);
+        jbCadastrar.setBounds(810, 290, 140, 70);
 
-        jbVisualizar.setText("Visualisar");
+        jbVisualizar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
+        jbVisualizar.setText("Visualizar");
         jbVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbVisualizarMouseClicked(evt);
             }
         });
         getContentPane().add(jbVisualizar);
-        jbVisualizar.setBounds(320, 290, 195, 88);
+        jbVisualizar.setBounds(590, 290, 140, 70);
 
+        jbExcluir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
         jbExcluir.setText("Excluir");
         jbExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -99,17 +126,21 @@ int user;
             }
         });
         getContentPane().add(jbExcluir);
-        jbExcluir.setBounds(760, 290, 195, 88);
+        jbExcluir.setBounds(150, 290, 140, 70);
 
-        jbNivel.setText("Nivel de acesso");
+        jbNivel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbNivel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/acesso.png"))); // NOI18N
+        jbNivel.setText("<html><center>Nível <br> de <br> Acesso</center></html>");
         jbNivel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbNivelMouseClicked(evt);
             }
         });
         getContentPane().add(jbNivel);
-        jbNivel.setBounds(540, 290, 195, 88);
+        jbNivel.setBounds(370, 290, 140, 70);
 
+        jbPesquisar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/review.png"))); // NOI18N
         jbPesquisar.setText("Pesquisar");
         jbPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -117,41 +148,39 @@ int user;
             }
         });
         getContentPane().add(jbPesquisar);
-        jbPesquisar.setBounds(780, 430, 195, 88);
+        jbPesquisar.setBounds(810, 420, 140, 70);
 
-        jLabel1.setText("Nome do Funcionario");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(110, 410, 130, 14);
+        jlNomeFuncionario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNomeFuncionario.setText("Nome do Funcionário:");
+        getContentPane().add(jlNomeFuncionario);
+        jlNomeFuncionario.setBounds(80, 420, 150, 30);
         getContentPane().add(jtNomeFuncionario);
-        jtNomeFuncionario.setBounds(100, 440, 150, 20);
+        jtNomeFuncionario.setBounds(230, 420, 280, 30);
 
-        jLabel2.setText("Cpf");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(330, 410, 17, 14);
+        jlCPF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlCPF.setText("CPF:");
+        getContentPane().add(jlCPF);
+        jlCPF.setBounds(590, 420, 40, 30);
         getContentPane().add(jtCpf);
-        jtCpf.setBounds(300, 440, 110, 20);
+        jtCpf.setBounds(630, 420, 160, 30);
         getContentPane().add(jtCargo);
-        jtCargo.setBounds(480, 440, 90, 20);
+        jtCargo.setBounds(230, 460, 280, 30);
         getContentPane().add(jtDepartamento);
-        jtDepartamento.setBounds(610, 440, 110, 20);
+        jtDepartamento.setBounds(630, 460, 160, 30);
 
-        jLabel3.setText("Cargo");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(490, 410, 29, 14);
+        jlCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlCargo.setText("Cargo:");
+        getContentPane().add(jlCargo);
+        jlCargo.setBounds(170, 460, 60, 30);
 
-        jLabel4.setText("Departamento");
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel4.setText("Departamento:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(610, 410, 90, 14);
+        jLabel4.setBounds(530, 460, 100, 30);
+
+        jSeparator3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa de Funcionário", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator3);
-        jSeparator3.setBounds(0, 390, 1020, 10);
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        jSeparator3.setBounds(30, 390, 940, 120);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -194,7 +223,7 @@ int user;
             jtDepartamento.setBackground(Color.red);
             control = false;
         }
-// Querry
+// Query
 
         if (control) {
 
@@ -209,32 +238,27 @@ int user;
     }//GEN-LAST:event_jbPesquisarMouseClicked
 
     private void jbExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbExcluirMouseClicked
-if(jbExcluir.isEnabled()){
-} // TODO add your handling code here:
+        if (jbExcluir.isEnabled()) {
+        } // TODO add your handling code here:
     }//GEN-LAST:event_jbExcluirMouseClicked
 
     private void jbNivelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbNivelMouseClicked
-if(jbNivel.isEnabled()){
-    String idFuncionario = "vazio no momento";
-            new ControleFuncionario(user, idFuncionario).setVisible(true);
-dispose();  
-
-}
+//        if (jbNivel.isEnabled()) {
+//            String idFuncionario = "vazio no momento";
+//            new ControleFuncionario(user, idFuncionario).setVisible(true);
+//            dispose();
+//
+//        }
 // TODO add your handling code here:
     }//GEN-LAST:event_jbNivelMouseClicked
 
     private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
-      String idFuncionario = "vazio no momento";
-            new cadastroFuncionario(user, idFuncionario).setVisible(true);
-            dispose();// TODO add your handling code here:
+        
     }//GEN-LAST:event_jbVisualizarMouseClicked
 
     private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
-       
-        if(jbCadastrar.isEnabled()) {
-            new cadastroFuncionario(user).setVisible(true);
-dispose();        }  
-       // TODO add your handling code here:
+
+        // TODO add your handling code here:
     }//GEN-LAST:event_jbCadastrarMouseClicked
 
     /**
@@ -273,13 +297,7 @@ dispose();        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
@@ -288,6 +306,9 @@ dispose();        }
     private javax.swing.JButton jbNivel;
     private javax.swing.JButton jbPesquisar;
     private javax.swing.JButton jbVisualizar;
+    private javax.swing.JLabel jlCPF;
+    private javax.swing.JLabel jlCargo;
+    private javax.swing.JLabel jlNomeFuncionario;
     private javax.swing.JTextField jtCargo;
     private javax.swing.JTextField jtCpf;
     private javax.swing.JTextField jtDepartamento;

@@ -5,27 +5,34 @@
  */
 package Interface.CadFuncionario;
 
+import Interface.TelaPrincipal.Sessao;
+
 /**
  *
  * @author user
  */
 public class ControleFuncionario extends javax.swing.JFrame {
 
-    int user;
+    private static ControleFuncionario instancia;
+    int user = Sessao.getInstance().getUsuario().getNivelAcesso();
 
     /**
      * Creates new form ControleFuncionario
      */
     public ControleFuncionario() {
+        this.setUndecorated(true);
         initComponents();
     }
-
-    public ControleFuncionario(int user, String idFuncionario) {
-         this.user = user;
-        initComponents();
-        verificaNivel();
-        popular();
-
+    
+    public static ControleFuncionario getInstancia() {
+        if (instancia == null) {
+            instancia = new ControleFuncionario();
+        }
+        return instancia;
+    }
+    
+    public static void encerrarInstancia(){
+        instancia = null;
     }
 
     public void popular() {
@@ -75,9 +82,9 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jftCPF = new javax.swing.JFormattedTextField();
         jlRG = new javax.swing.JLabel();
         jtfRG = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jlNovaSenha = new javax.swing.JLabel();
+        jlRepetirNovaSenha = new javax.swing.JLabel();
+        jlNivelAcesso = new javax.swing.JLabel();
         jtNivelAcesso = new javax.swing.JTextField();
         jtUser = new javax.swing.JTextField();
         jtNovaSenha2 = new javax.swing.JTextField();
@@ -85,119 +92,128 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jbCancelar = new javax.swing.JButton();
         jtCargo = new javax.swing.JTextField();
         jtDepartamento = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jlCargo = new javax.swing.JLabel();
+        jlDepartamento = new javax.swing.JLabel();
         jbEditar = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
         jtNovaSenha1 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jlNomeUsuario = new javax.swing.JLabel();
+        jcbNivelAcesso = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
         getContentPane().setLayout(null);
 
         jlCodigoInterno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCodigoInterno.setText("Código Interno");
+        jlCodigoInterno.setText("Código Interno:");
         getContentPane().add(jlCodigoInterno);
-        jlCodigoInterno.setBounds(20, 10, 101, 17);
+        jlCodigoInterno.setBounds(30, 20, 101, 30);
 
         jtfCodigoInterno.setEnabled(false);
         getContentPane().add(jtfCodigoInterno);
-        jtfCodigoInterno.setBounds(20, 30, 100, 20);
+        jtfCodigoInterno.setBounds(130, 20, 100, 30);
 
         jlNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlNome.setText("Nome");
+        jlNome.setText("Nome:");
         getContentPane().add(jlNome);
-        jlNome.setBounds(150, 20, 36, 17);
+        jlNome.setBounds(240, 20, 50, 30);
 
         jtfNome.setEnabled(false);
         getContentPane().add(jtfNome);
-        jtfNome.setBounds(150, 40, 400, 20);
+        jtfNome.setBounds(290, 20, 580, 30);
 
         jlCPF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCPF.setText("CPF");
+        jlCPF.setText("CPF:");
         getContentPane().add(jlCPF);
-        jlCPF.setBounds(150, 70, 28, 17);
+        jlCPF.setBounds(250, 60, 40, 30);
 
         jftCPF.setEnabled(false);
         getContentPane().add(jftCPF);
-        jftCPF.setBounds(150, 90, 150, 20);
+        jftCPF.setBounds(290, 60, 150, 30);
 
         jlRG.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlRG.setText("RG");
+        jlRG.setText("RG:");
         getContentPane().add(jlRG);
-        jlRG.setBounds(320, 70, 21, 17);
+        jlRG.setBounds(460, 60, 30, 30);
 
         jtfRG.setEnabled(false);
         getContentPane().add(jtfRG);
-        jtfRG.setBounds(320, 90, 150, 20);
+        jtfRG.setBounds(490, 60, 150, 30);
 
-        jLabel1.setText("Nova Senha");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(340, 260, 90, 14);
+        jlNovaSenha.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNovaSenha.setText("Nova Senha:");
+        getContentPane().add(jlNovaSenha);
+        jlNovaSenha.setBounds(200, 220, 90, 30);
 
-        jLabel2.setText("Repetir Nova Senha");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(340, 310, 110, 14);
+        jlRepetirNovaSenha.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlRepetirNovaSenha.setText("Repetir Nova Senha:");
+        getContentPane().add(jlRepetirNovaSenha);
+        jlRepetirNovaSenha.setBounds(150, 260, 140, 30);
 
-        jLabel3.setText("Nivel de acesso");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(180, 210, 90, 14);
+        jlNivelAcesso.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNivelAcesso.setText("Nivel de Acesso:");
+        getContentPane().add(jlNivelAcesso);
+        jlNivelAcesso.setBounds(180, 140, 110, 30);
         getContentPane().add(jtNivelAcesso);
-        jtNivelAcesso.setBounds(180, 230, 60, 20);
+        jtNivelAcesso.setBounds(350, 140, 60, 30);
         getContentPane().add(jtUser);
-        jtUser.setBounds(340, 230, 120, 20);
+        jtUser.setBounds(290, 180, 580, 30);
         getContentPane().add(jtNovaSenha2);
-        jtNovaSenha2.setBounds(340, 330, 120, 20);
+        jtNovaSenha2.setBounds(290, 260, 580, 30);
 
+        jbConfirmar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbConfirmar.setText("Confirmar");
         getContentPane().add(jbConfirmar);
-        jbConfirmar.setBounds(180, 470, 195, 88);
+        jbConfirmar.setBounds(730, 320, 140, 70);
 
+        jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
         getContentPane().add(jbCancelar);
-        jbCancelar.setBounds(630, 470, 195, 88);
+        jbCancelar.setBounds(400, 320, 140, 70);
         getContentPane().add(jtCargo);
-        jtCargo.setBounds(520, 90, 60, 20);
+        jtCargo.setBounds(710, 60, 160, 30);
         getContentPane().add(jtDepartamento);
-        jtDepartamento.setBounds(650, 90, 60, 20);
+        jtDepartamento.setBounds(290, 100, 150, 30);
 
-        jLabel4.setText("Cargo");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(520, 70, 29, 14);
+        jlCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlCargo.setText("Cargo:");
+        getContentPane().add(jlCargo);
+        jlCargo.setBounds(660, 60, 50, 30);
 
-        jLabel5.setText("Departamento");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(650, 70, 120, 14);
+        jlDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlDepartamento.setText("Departamento:");
+        getContentPane().add(jlDepartamento);
+        jlDepartamento.setBounds(190, 100, 100, 30);
 
+        jbEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/editar2.png"))); // NOI18N
         jbEditar.setText("Editar");
         getContentPane().add(jbEditar);
-        jbEditar.setBounds(410, 470, 195, 88);
-        getContentPane().add(jSeparator3);
-        jSeparator3.setBounds(0, 450, 1030, 10);
-        getContentPane().add(jSeparator4);
-        jSeparator4.setBounds(0, 190, 1030, 10);
+        jbEditar.setBounds(560, 320, 140, 70);
         getContentPane().add(jtNovaSenha1);
-        jtNovaSenha1.setBounds(340, 280, 120, 20);
+        jtNovaSenha1.setBounds(290, 220, 580, 30);
 
-        jLabel6.setText("Nome de Usuario");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(340, 210, 110, 14);
+        jlNomeUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNomeUsuario.setText("Nome de Usuario:");
+        getContentPane().add(jlNomeUsuario);
+        jlNomeUsuario.setBounds(170, 180, 120, 30);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        jcbNivelAcesso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbNivelAcesso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbNivelAcessoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jcbNivelAcesso);
+        jcbNivelAcesso.setBounds(290, 140, 56, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jcbNivelAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbNivelAcessoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbNivelAcessoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,25 +251,21 @@ public class ControleFuncionario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JButton jbEditar;
+    private javax.swing.JComboBox<String> jcbNivelAcesso;
     private javax.swing.JFormattedTextField jftCPF;
     private javax.swing.JLabel jlCPF;
+    private javax.swing.JLabel jlCargo;
     private javax.swing.JLabel jlCodigoInterno;
+    private javax.swing.JLabel jlDepartamento;
+    private javax.swing.JLabel jlNivelAcesso;
     private javax.swing.JLabel jlNome;
+    private javax.swing.JLabel jlNomeUsuario;
+    private javax.swing.JLabel jlNovaSenha;
     private javax.swing.JLabel jlRG;
+    private javax.swing.JLabel jlRepetirNovaSenha;
     private javax.swing.JTextField jtCargo;
     private javax.swing.JTextField jtDepartamento;
     private javax.swing.JTextField jtNivelAcesso;

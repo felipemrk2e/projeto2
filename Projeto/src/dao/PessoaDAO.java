@@ -16,34 +16,38 @@ public class PessoaDAO extends DAO<Pessoa> {
 
     @Override
     public Pessoa getById(Long id) {
-     Pessoa pessoa = null;
-		try{
-			pessoa = entityManager.find(Pessoa.class, id);
-		}catch(Exception e){
-			System.out.println("Erro na consulta de Pessoa: "+e);
-		}
-		return pessoa;        
+        Pessoa pessoa = null;
+        try {
+            pessoa = entityManager.find(Pessoa.class, id);
+        } catch (Exception e) {
+            System.out.println("Erro na consulta de Pessoa: " + e);
+        }
+        return pessoa;
     }
 
     @Override
     public boolean removeById(Long id) {
         Pessoa pessoa = null;
-                try{
-                    pessoa = this.getById(id);
-                    entityManager.getTransaction().begin();
-                    entityManager.remove(pessoa);
-                    entityManager.getTransaction().commit();
-                    return true;
-                }catch(Exception e){
-                    entityManager.getTransaction().rollback();
-                    System.out.println("Erro na exclusão de Pessoa: "+e);
-                }
-		return false;
+        try {
+            pessoa = this.getById(id);
+            entityManager.getTransaction().begin();
+            entityManager.remove(pessoa);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("Erro na exclusão de Pessoa: " + e);
+        }
+        return false;
     }
 
     @Override
     public List<Pessoa> getAll() {
-       return entityManager.createQuery("FROM Pessoa").getResultList();
+        return entityManager.createQuery("FROM Pessoa").getResultList();
     }
-    
+
+    public List<Pessoa> getQuery(String query) {
+        return entityManager.createQuery("FROM Pessoa " + query).getResultList();
+    }
+
 }

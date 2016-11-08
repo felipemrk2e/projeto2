@@ -11,52 +11,56 @@ public abstract class DAO<E> {
 	
 
 	public DAO() {
-		entityManager = getEntityManager(); 
+            entityManager = getEntityManager(); 
 	}
 
 	private EntityManager getEntityManager () {
 		
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("ProjetoPU");
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ProjetoPU");
 		
-		if (entityManager == null)
-			entityManager = factory.createEntityManager();
+            if (entityManager == null)
+		entityManager = factory.createEntityManager();
 		
-		return entityManager;
+            return entityManager;
 			
 	}
 	
 	public boolean persist (E object) {
-		boolean result = true;
+            boolean result = true;
+	
+            try {
+		entityManager.getTransaction().begin();
+		entityManager.persist(object);
+		entityManager.getTransaction().commit();
+            } catch (Exception e) {
+		e.printStackTrace();
+		entityManager.getTransaction().rollback();
+		result = false;
+            }finally {
+                entityManager.close();
+            }
 		
-		try {
-			entityManager.getTransaction().begin();
-			entityManager.persist(object);
-			entityManager.getTransaction().commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			entityManager.getTransaction().rollback();
-			result = false;
-		}
-		
-		return result;
+            return result;
 	}
 	
 	public boolean merge(E object) {
     	
-    	boolean result = true;
-    	
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.merge(object);
-            entityManager.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            entityManager.getTransaction().rollback();
-            result = false;
+            boolean result = true;
+
+            try {
+                entityManager.getTransaction().begin();
+                entityManager.merge(object);
+                entityManager.getTransaction().commit();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                entityManager.getTransaction().rollback();
+                result = false;
+            }finally {
+                entityManager.close();
+            }
+
+            return result;
         }
-        
-        return result;
-    }
  
     public boolean remove(E object) {
     	
@@ -70,6 +74,8 @@ public abstract class DAO<E> {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
             result = false;
+        }finally {
+            entityManager.close();
         }
         
         return result;

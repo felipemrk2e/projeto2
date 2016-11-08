@@ -46,4 +46,8 @@ public class PessoaFisicaDAO extends DAO<PessoaFisica>{
         return entityManager.createQuery("FROM PessoaFisica").getResultList();
     }
     
+    public List<PessoaFisica> getFiadores(long idPessoa){
+         return entityManager.createQuery("FROM PessoaFisica WHERE idPessoa = '"+idPessoa+"'").getResultList();
+    }
+    
 }

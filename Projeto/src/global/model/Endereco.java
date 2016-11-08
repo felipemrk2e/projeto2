@@ -20,6 +20,9 @@ public class Endereco {
 
     @Column
     private String nomeEndereco;
+    
+    @Column
+    private String bairro;
 
     @Column
     private int numero;
@@ -39,12 +42,12 @@ public class Endereco {
     @Column
     private String cep;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idBairro", nullable = false)
-    private Bairro bairro;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idCidade", nullable = false)
+    private Cidade cidade;
 
-    public Endereco(String nomeEndereco, int numero, String zona, String referencia, String complemento, String nomeCondominio,
-            String cep, Bairro bairro) {
+    public Endereco(String nomeEndereco, String bairro, int numero, String zona, String referencia, String complemento, String nomeCondominio,
+            String cep, Cidade cidade) {
         this.nomeEndereco = nomeEndereco;
         this.numero = numero;
         this.zona = zona;
@@ -52,7 +55,7 @@ public class Endereco {
         this.complemento = complemento;
         this.nomeCondominio = nomeCondominio;
         this.cep = cep;
-        this.bairro = bairro;
+        this.cidade = cidade;
     }
 
     public Endereco() {
@@ -69,6 +72,14 @@ public class Endereco {
 
     public void setNomeEndereco(String nomeEndereco) {
         this.nomeEndereco = nomeEndereco;
+    }
+    
+    public String getBairro(){
+        return this.bairro;
+    }
+    
+    public void setBairro(String bairro){
+        this.bairro = bairro;
     }
 
     public int getNumero() {
@@ -119,12 +130,12 @@ public class Endereco {
         return this.cep;
     }
 
-    public Bairro getBairro() {
-        return this.bairro;
+    public Cidade getCidade() {
+        return this.cidade;
     }
 
-    public void setBairro(Bairro bairro) {
-        bairro.addEndereco(this);
-        this.bairro = bairro;
+    public void setCidade(Cidade cidade) {
+        cidade.addEndereco(this);
+        this.cidade = cidade;
     }
 }
