@@ -61,6 +61,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jrbPessoaFisica.setSelected(true);
         configuraMascaras();
         carregaEstados();
+        carregaCidades();
         carregaEstadosCivis();
         carregaFiadores();
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
@@ -77,6 +78,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         configuraMascaras();
         carregaEstados();
         carregaEstadosCivis();
+        carregaCidades();
         carregaFiadores();
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
         atualizarPessoaFisica(pessoaFisica);
@@ -90,6 +92,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jrbPessoaJuridica.setSelected(true);
         configuraMascaras();
         carregaEstados();
+        carregaCidades();
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
         atualizarPessoaJuridica(pessoaJuridica);
     }
@@ -179,7 +182,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfEndereco.setText("");
         jtfNumero.setText("");
         jtfBairro.setText("");
-        jftCEP.setText("");       
+        jftCEP.setText("");
         jtfComplemento.setText("");
         jftTelefone.setText("");
         jftCelular.setText("");
@@ -205,7 +208,6 @@ public class cadastroCliente extends javax.swing.JFrame {
         jcbCidade.setSelectedIndex(-1);
         jcbEstado.setSelectedIndex(-1);
         jcbFiador.setSelectedIndex(-1);
-         
 
         // jcb fim
         //Tirando os alertas
@@ -335,7 +337,7 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         CidadeDAO cidadeDAO = new CidadeDAO();
         Cidade cidade = new Cidade();
-        cidade = cidadeDAO.getById((long) jcbEstado.getSelectedIndex() + 1);       
+        cidade = cidadeDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
 
         Endereco endereco = new Endereco();
         endereco.setBairro(jtfBairro.getText());
@@ -343,6 +345,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
         endereco.setCep(jftCEP.getText());
         endereco.setComplemento(jtfComplemento.getText());
+        endereco.setCidade(cidade);
         pessoaFisica.setEndereco(endereco);
 
         List<Telefone> telefones = new ArrayList<Telefone>();
@@ -417,14 +420,15 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         CidadeDAO cidadeDAO = new CidadeDAO();
         Cidade cidade = new Cidade();
-        cidade = cidadeDAO.getById((long) jcbEstado.getSelectedIndex() + 1); 
-        
-        Endereco endereco = new Endereco();        
+        cidade = cidadeDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+
+        Endereco endereco = new Endereco();
         endereco.setNomeEndereco(jtfEndereco.getText());
         endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
         endereco.setCep(jftCEP.getText());
         endereco.setComplemento(jtfComplemento.getText());
         endereco.setBairro(jtfBairro.getText());
+        endereco.setCidade(cidade);
         pessoaJuridica.setEndereco(endereco);
 
         List<Telefone> telefones = new ArrayList<Telefone>();
@@ -490,7 +494,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jcbCidade.setSelectedIndex((int) pessoaFisica.getEndereco().getCidade().getIdCidade() - 1);
 
         jtfBairro.setText(pessoaFisica.getEndereco().getBairro());
-        
+
         jtfEndereco.setText(pessoaFisica.getEndereco().getNomeEndereco());
         jtfNumero.setText("" + pessoaFisica.getEndereco().getNumero());
         jftCEP.setText(pessoaFisica.getEndereco().getCep());
@@ -630,7 +634,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfBairro.setText("Morro do Algodão");
 
         jftCEP.setText("11.671-000");
-        jcbCidade.setSelectedIndex(8796);
+        jcbCidade.setSelectedIndex(1);
 
         jcbEstado.setSelectedIndex(25);
 
@@ -661,7 +665,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfBairro.setText("Morro do Algodão");
 
         jftCEP.setText("11.671-000");
-        jcbCidade.setSelectedIndex(8796);
+        jcbCidade.setSelectedIndex(1);
 
         jcbEstado.setSelectedIndex(25);
 
@@ -730,9 +734,9 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfNumero = new javax.swing.JTextField();
         jlCEP = new javax.swing.JLabel();
         jftCEP = new javax.swing.JFormattedTextField();
-        jcbFiador = new javax.swing.JComboBox<>();
+        jcbFiador = new javax.swing.JComboBox<String>();
         jcbEstado = new javax.swing.JComboBox();
-        jcbCidade = new javax.swing.JComboBox<>();
+        jcbCidade = new javax.swing.JComboBox<String>();
         jtfComplemento = new javax.swing.JTextField();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCelular = new javax.swing.JFormattedTextField();
@@ -807,7 +811,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         getContentPane().add(jlSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 40, 30));
         getContentPane().add(jtfRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 160, 30));
         getContentPane().add(jtfNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 350, 30));
-        getContentPane().add(jtfBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 320, 170, 30));
+        getContentPane().add(jtfBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 170, 30));
         getContentPane().add(jtfEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 350, 30));
 
         bgSexo.add(jrbMasculino);
@@ -832,15 +836,15 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         jlBairro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlBairro.setText("Bairro:");
-        getContentPane().add(jlBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, -1, 30));
+        getContentPane().add(jlBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, 30));
 
         jlCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCidade.setText("Cidade:");
-        getContentPane().add(jlCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 50, 30));
+        getContentPane().add(jlCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 320, 50, 30));
 
         jlEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlEstado.setText("Estado:");
-        getContentPane().add(jlEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 320, -1, 30));
+        getContentPane().add(jlEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, -1, 30));
 
         jlTelefone.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlTelefone.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -936,15 +940,20 @@ public class cadastroCliente extends javax.swing.JFrame {
         getContentPane().add(jlCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 150, 30));
         getContentPane().add(jftCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 110, 30));
 
-        jcbFiador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbFiador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbFiador, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 350, 30));
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 320, 70, 30));
+        jcbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEstadoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 320, 70, 30));
 
-        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 230, 30));
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 320, 230, 30));
         getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 760, 30));
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, 180, 30));
         getContentPane().add(jftCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 440, 200, 30));
@@ -1081,6 +1090,16 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_jbEditarMouseClicked
+
+    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
+        if (jcbEstado.getSelectedIndex() > -1) {
+            EstadoDAO estadoDAO = new EstadoDAO();
+            Estado estado = new Estado();
+            estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+            carregaCidades(estado);
+
+        }
+    }//GEN-LAST:event_jcbEstadoActionPerformed
 
     public void ativaPessoa(boolean ativo) {
         if (ativo == false) {
@@ -1386,13 +1405,47 @@ public class cadastroCliente extends javax.swing.JFrame {
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
         jcbEstado.setModel(defaultComboBox);
     }
-    
-    public void carregaCidades(Estado estado){
+
+    public void carregaEstados(Cidade cidade) {
+        EstadoDAO estadoDAO = new EstadoDAO();
+        Estado estado = new Estado();
+        estado = estadoDAO.getById(cidade.getEstado().getId());
+
+        List<Estado> listaEstados = new ArrayList<Estado>();
+        List<String> listaSigla = new ArrayList<String>();
+        listaEstados = estadoDAO.getAll();
+        for (int i = 0; i < listaEstados.size(); i++) {
+            listaSigla.add(listaEstados.get(i).getSigla());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
+        jcbEstado.setModel(defaultComboBox);
+        jcbEstado.setSelectedIndex((int)estado.getId()-1);
+    }
+
+    public void carregaCidades(Estado estado) {
         CidadeDAO cidadeDAO = new CidadeDAO();
         Cidade cidade = new Cidade();
         List<Cidade> listaCidades = new ArrayList<Cidade>();
-        List<String> listaNomeCidades = new ArrayList<String>();
+        List<String> listaNomeCidade = new ArrayList<String>();
         listaCidades = cidadeDAO.getWhereIdEstado(estado.getId());
+        for (int i = 0; i < listaCidades.size(); i++) {
+            listaNomeCidade.add(listaCidades.get(i).getNomeCidade());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeCidade.toArray());
+        jcbCidade.setModel(defaultComboBox);
+    }
+
+    public void carregaCidades() {
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        Cidade cidade = new Cidade();
+        List<Cidade> listaCidades = new ArrayList<Cidade>();
+        List<String> listaNomeCidade = new ArrayList<String>();
+        listaCidades = cidadeDAO.getAll();
+        for (int i = 0; i < listaCidades.size(); i++) {
+            listaNomeCidade.add(listaCidades.get(i).getNomeCidade());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeCidade.toArray());
+        jcbCidade.setModel(defaultComboBox);
     }
 
     public void carregaEstadosCivis() {

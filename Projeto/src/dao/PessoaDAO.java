@@ -49,5 +49,15 @@ public class PessoaDAO extends DAO<Pessoa> {
     public List<Pessoa> getQuery(String query) {
         return entityManager.createQuery("FROM Pessoa " + query).getResultList();
     }
+    
+    public List<Pessoa> getPorTelefone(String tel){
+         return entityManager.createQuery("FROM Pessoa p JOIN FETCH p.telefone tel WHERE tel.numero = '"+tel+"'").getResultList();
+    }
+    
+    public List<Pessoa> getCliente(){
+         return entityManager.createQuery("FROM Pessoa AS p INNER JOIN p.PessoaFisica").getResultList();
+    }
+    
+    
 
 }

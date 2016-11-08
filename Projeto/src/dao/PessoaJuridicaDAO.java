@@ -8,6 +8,7 @@ package dao;
 
 import model.pessoa.PessoaJuridica;
 import java.util.List;
+import model.pessoa.PessoaFisica;
 
 /**
  *
@@ -44,5 +45,9 @@ public class PessoaJuridicaDAO extends DAO<PessoaJuridica>{
     @Override
     public List<PessoaJuridica> getAll() {
         return entityManager.createQuery("FROM PessoaJuridica").getResultList();
+    }
+    
+    public  List<PessoaJuridica> getPorCNPJ(String cnpj){
+         return entityManager.createQuery("FROM Pessoa WHERE cnpj = '"+cnpj+"'").getResultList();
     }
 }

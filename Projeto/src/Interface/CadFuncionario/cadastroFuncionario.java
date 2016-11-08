@@ -56,10 +56,13 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     public cadastroFuncionario() {
         this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
         carregaCargos();
         carregaEstados();
+        carregaCidades();
         carregaEstadosCivis();
         populaFuncionario();
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 
     }
 
@@ -73,7 +76,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     public static void encerrarInstancia() {
         instancia = null;
     }
-    
+
     public void acesso(int nivel) {
         System.out.println("====================================================Nível de Acesso: " + nivel);
         DisableEnable(false);
@@ -87,14 +90,12 @@ public class cadastroFuncionario extends javax.swing.JFrame {
                 DisableEnable(true);
                 break;
             case 3:
-                DisableEnable(false);                
+                DisableEnable(false);
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
-
-    
 
     public void DisableEnable(Boolean b) {
 
@@ -148,7 +149,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfEndereco.setText("");
         jtfNumero.setText("");
         jtfBairro.setText("");
-        jftCEP.setText("");        
+        jftCEP.setText("");
         jtfComplemento.setText("");
         jftTelefone.setText("");
         jftCelular.setText("");
@@ -231,7 +232,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfEndereco.setText(null);
         jtfNumero.setText(null);
         jtfBairro.setText(null);
-        jftCEP.setText(null);        
+        jftCEP.setText(null);
         jtfComplemento.setText(null);
         jftTelefone.setText(null);
         jftCelular.setText(null);
@@ -276,7 +277,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         if (true) {
             jcbEstado.setSelectedIndex(WIDTH);
         }
-        
+
         jcbCidade.setSelectedIndex(WIDTH);
         // jcb fim
 
@@ -299,13 +300,14 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         CidadeDAO cidadeDAO = new CidadeDAO();
         Cidade cidade = new Cidade();
         cidade = cidadeDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
-        
+
         Endereco endereco = new Endereco();
         endereco.setNomeEndereco(jtfEndereco.getText());
         endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
         endereco.setCep(jftCEP.getText());
         endereco.setComplemento(jtfComplemento.getText());
         endereco.setBairro(jtfBairro.getText());
+        endereco.setCidade(cidade);
         funcionario.setEndereco(endereco);
 
         List<Telefone> telefones = new ArrayList<Telefone>();
@@ -388,7 +390,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfBairro.setText("Morro do Algodão");
 
         jftCEP.setText("11.671-000");
-        jcbCidade.setSelectedIndex(8796);
+        jcbCidade.setSelectedIndex(1);
 
         jcbEstado.setSelectedIndex(25);
 
@@ -461,7 +463,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jlCEP = new javax.swing.JLabel();
         jftCEP = new javax.swing.JFormattedTextField();
         jcbEstado = new javax.swing.JComboBox();
-        jcbCidade = new javax.swing.JComboBox<>();
+        jcbCidade = new javax.swing.JComboBox<String>();
         jtfComplemento = new javax.swing.JTextField();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCelular = new javax.swing.JFormattedTextField();
@@ -636,9 +638,14 @@ public class cadastroFuncionario extends javax.swing.JFrame {
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEstadoActionPerformed(evt);
+            }
+        });
         getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, 30));
 
-        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 140, 30));
         getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 270, 30));
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 210, 30));
@@ -736,6 +743,16 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         //add cargo
     }//GEN-LAST:event_jlAddCargoMousePressed
 
+    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
+        if (jcbEstado.getSelectedIndex() > -1) {
+            EstadoDAO estadoDAO = new EstadoDAO();
+            Estado estado = new Estado();
+            estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+            carregaCidades(estado);
+
+        }
+    }//GEN-LAST:event_jcbEstadoActionPerformed
+
     public void carregaEstados() {
         EstadoDAO estadoDAO = new EstadoDAO();
         Estado estado = new Estado();
@@ -747,6 +764,48 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         }
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
         jcbEstado.setModel(defaultComboBox);
+    }
+
+    public void carregaEstados(Cidade cidade) {
+        EstadoDAO estadoDAO = new EstadoDAO();
+        Estado estado = new Estado();
+        estado = estadoDAO.getById(cidade.getEstado().getId());
+
+        List<Estado> listaEstados = new ArrayList<Estado>();
+        List<String> listaSigla = new ArrayList<String>();
+        listaEstados = estadoDAO.getAll();
+        for (int i = 0; i < listaEstados.size(); i++) {
+            listaSigla.add(listaEstados.get(i).getSigla());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
+        jcbEstado.setModel(defaultComboBox);
+        jcbEstado.setSelectedIndex((int) estado.getId() - 1);
+    }
+
+    public void carregaCidades(Estado estado) {
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        Cidade cidade = new Cidade();
+        List<Cidade> listaCidades = new ArrayList<Cidade>();
+        List<String> listaNomeCidade = new ArrayList<String>();
+        listaCidades = cidadeDAO.getWhereIdEstado(estado.getId());
+        for (int i = 0; i < listaCidades.size(); i++) {
+            listaNomeCidade.add(listaCidades.get(i).getNomeCidade());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeCidade.toArray());
+        jcbCidade.setModel(defaultComboBox);
+    }
+
+    public void carregaCidades() {
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        Cidade cidade = new Cidade();
+        List<Cidade> listaCidades = new ArrayList<Cidade>();
+        List<String> listaNomeCidade = new ArrayList<String>();
+        listaCidades = cidadeDAO.getAll();
+        for (int i = 0; i < listaCidades.size(); i++) {
+            listaNomeCidade.add(listaCidades.get(i).getNomeCidade());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeCidade.toArray());
+        jcbCidade.setModel(defaultComboBox);
     }
 
     public void carregaEstadosCivis() {

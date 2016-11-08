@@ -50,4 +50,11 @@ public class PessoaFisicaDAO extends DAO<PessoaFisica>{
          return entityManager.createQuery("FROM PessoaFisica WHERE idPessoa = '"+idPessoa+"'").getResultList();
     }
     
+    public List<PessoaFisica> getPorTelefone(String tel){
+         return entityManager.createQuery("FROM PessoaFisica pf JOIN FETCH pf.telefone tel WHERE tel.numero = '"+tel+"'").getResultList();
+    }   
+    
+    public  List<PessoaFisica> getPorCPF(String cpf){
+         return entityManager.createQuery("FROM PessoaFisica WHERE cpf = '"+cpf+"'").getResultList();
+    }
 }

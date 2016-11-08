@@ -119,6 +119,8 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jftTelefone = new javax.swing.JFormattedTextField();
+        jlCPF = new javax.swing.JLabel();
+        jftCPF = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -201,6 +203,12 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jcbPessoaJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 140, -1));
+
+        jtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtNomeKeyReleased(evt);
+            }
+        });
         getContentPane().add(jtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 270, -1));
 
         jLabel2.setText("Nome");
@@ -208,7 +216,17 @@ public class cadastroClienteHome extends javax.swing.JFrame {
 
         jLabel3.setText("Telefone");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 470, -1, -1));
+
+        jftTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jftTelefoneKeyPressed(evt);
+            }
+        });
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 490, 120, -1));
+
+        jlCPF.setText("CPF");
+        getContentPane().add(jlCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 530, -1, -1));
+        getContentPane().add(jftCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 552, 270, 20));
 
         pack();
         setLocationRelativeTo(null);
@@ -254,21 +272,42 @@ public class cadastroClienteHome extends javax.swing.JFrame {
 
     public void popularTabela() {
         if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
+            jlCPF.setVisible(false);
+            jlCPF.setEnabled(false);
+            jftCPF.setVisible(false);
+            jftCPF.setEnabled(false);
+
             PessoaDAO pessoaDAO = new PessoaDAO();
             List<Pessoa> pessoas = new ArrayList<Pessoa>();
             pessoas = pessoaDAO.getAll();
             jTable1.setModel(new PessoaTableModel(pessoas));
         } else if (jcbPessoaFisica.isSelected()) {
+            jlCPF.setVisible(true);
+            jlCPF.setEnabled(true);
+            jftCPF.setVisible(true);
+            jftCPF.setEnabled(true);
+            jlCPF.setText("CPF");
+            mascaraCPF_CNPJ(true);
             PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
             List<PessoaFisica> pessoasFisicas = new ArrayList<PessoaFisica>();
             pessoasFisicas = pessoaFisicaDAO.getAll();
             jTable1.setModel(new PessoaFisicaTableModel(pessoasFisicas));
         } else if (jcbPessoaJuridica.isSelected()) {
+            jlCPF.setVisible(true);
+            jlCPF.setEnabled(true);
+            jftCPF.setVisible(true);
+            jftCPF.setEnabled(true);
+            jlCPF.setText("CNPJ");
+            mascaraCPF_CNPJ(false);
             PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
             List<PessoaJuridica> pessoasJuridicas = new ArrayList<PessoaJuridica>();
             pessoasJuridicas = pessoaJuridicaDAO.getAll();
             jTable1.setModel(new PessoaJuridicaTableModel(pessoasJuridicas));
         } else {
+            jlCPF.setVisible(false);
+            jlCPF.setEnabled(false);
+            jftCPF.setVisible(false);
+            jftCPF.setEnabled(false);
             jTable1.setModel(new PessoaTableModel());
         }
 
@@ -280,19 +319,43 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             List<Pessoa> pessoas = new ArrayList<Pessoa>();
             pessoas = pessoaDAO.getQuery("WHERE nomePessoa LIKE '%" + jtNome.getText() + "%'");
             jTable1.setModel(new PessoaTableModel(pessoas));
+        } else if (!jftTelefone.getText().isEmpty() && jftTelefone.getText().trim().length() == 13) {
+            PessoaDAO pessoaDAO = new PessoaDAO();
+            List<Pessoa> pessoas = new ArrayList<Pessoa>();
+            pessoas = pessoaDAO.getPorTelefone(jftTelefone.getText());
+            jTable1.setModel(new PessoaTableModel(pessoas));
+        } else if (jcbPessoaJuridica.isSelected() && jftCPF.getText().trim().length() == 18) {
+            PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
+            List<PessoaJuridica> pessoasJuridicas = new ArrayList<PessoaJuridica>();
+            pessoasJuridicas = pessoaJuridicaDAO.getPorCNPJ(jftCPF.getText());
+            jTable1.setModel(new PessoaJuridicaTableModel(pessoasJuridicas));
+
+        } else if (jcbPessoaFisica.isSelected() && jftCPF.getText().trim().length() == 14) {
+            PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+            List<PessoaFisica> pessoasFisicas = new ArrayList<PessoaFisica>();
+            pessoasFisicas = pessoaFisicaDAO.getPorCPF(jftCPF.getText());
+            jTable1.setModel(new PessoaFisicaTableModel(pessoasFisicas));
         }
-//        if (!jftTelefone.getText().isEmpty()) {
-//            PessoaDAO pessoaDAO = new PessoaDAO();
-//            List<Pessoa> pessoas = new ArrayList<Pessoa>();
-//            pessoas = pessoaDAO.getQuery("INNER JOIN Telefone ON Pessoa.idPessoa = Telefone.idPessoa WHERE numero LIKE '%" + jftTelefone.getText() + "%'");
-//            jTable1.setModel(new PessoaTableModel(pessoas));
-//        }
     }
 
     public void mascaraTelefone() {
         try {
             jftTelefone.setFormatterFactory(new DefaultFormatterFactory(
                     new MaskFormatter("(##)####-####")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void mascaraCPF_CNPJ(boolean ativa) {
+        try {
+            if (ativa) {
+                jftCPF.setFormatterFactory(new DefaultFormatterFactory(
+                        new MaskFormatter("###.###.###-##")));
+            } else {
+                jftCPF.setFormatterFactory(new DefaultFormatterFactory(
+                        new MaskFormatter("##.###.###/####-##")));
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -383,6 +446,28 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         popularTabela();
     }//GEN-LAST:event_jcbPessoaJuridicaMouseClicked
 
+    private void jftTelefoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jftTelefoneKeyPressed
+
+        jlCPF.setVisible(false);
+        jlCPF.setEnabled(false);
+        jftCPF.setVisible(false);
+        jftCPF.setEnabled(false);
+    }//GEN-LAST:event_jftTelefoneKeyPressed
+
+    private void jtNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNomeKeyReleased
+        if (jtNome.getText().length() == 0) {
+            jlCPF.setVisible(true);
+            jlCPF.setEnabled(true);
+            jftCPF.setVisible(true);
+            jftCPF.setEnabled(true);
+        } else {
+            jlCPF.setVisible(false);
+            jlCPF.setEnabled(false);
+            jftCPF.setVisible(false);
+            jftCPF.setEnabled(false);
+        }
+    }//GEN-LAST:event_jtNomeKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -430,7 +515,9 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     private javax.swing.JButton jbVisualizar;
     private javax.swing.JCheckBox jcbPessoaFisica;
     private javax.swing.JCheckBox jcbPessoaJuridica;
+    private javax.swing.JFormattedTextField jftCPF;
     private javax.swing.JFormattedTextField jftTelefone;
+    private javax.swing.JLabel jlCPF;
     private javax.swing.JTextField jtNome;
     // End of variables declaration//GEN-END:variables
 }

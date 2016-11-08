@@ -54,142 +54,142 @@ public class Teste {
         //Data sistema para inclusão de data
         Date data = new Date();
 
-        //Teste Pessoa
-        System.out.println("===========================================PESSOA===================================================");
-        Endereco enderecoPessoa = new Endereco();
-        enderecoPessoa.setNomeEndereco("Endereço Pessoa");
-        enderecoPessoa.setNumero(1);
-        enderecoPessoa.setCep("1");
-        enderecoPessoa.setBairro("Morro do Algodão");
-
-        Estado estadoPessoa = new Estado();
-        estadoPessoa.setId(26);
-
-        CidadeDAO cidadePessoaDAO = new CidadeDAO();
-        Cidade cidadePessoa = cidadePessoaDAO.getById(Long.parseLong("8797"));
-
-        enderecoPessoa.setCidade(cidadePessoa);
-
-        PessoaDAO pessoaDao = new PessoaDAO();
-        Pessoa pessoa = new Pessoa();
-        pessoa.setEndereco(enderecoPessoa);
-        pessoa.setNomePessoa("Jean");
-        pessoa.setEmail("teste@teste");
-        pessoa.setDataNascimento(data);
-        pessoa.setObservacoes("xxxxx");
-
-        pessoaDao.persist(pessoa);
-
-        //Teste Pessoa Juridica
-        System.out.println("===========================================PESSOA JURIDICA===================================================");
-        Endereco enderecoPessoaJuridica = new Endereco();
-        enderecoPessoaJuridica.setNomeEndereco("Endereço PessoaJuridica");
-        enderecoPessoaJuridica.setNumero(2);
-        enderecoPessoaJuridica.setCep("2");
-        enderecoPessoaJuridica.setBairro("Morro do Algodão");
-
-        Estado estadoPessoaJuridica = new Estado();
-        estadoPessoaJuridica.setId(26);
-
-        CidadeDAO cidadePessoaJuridicaDAO = new CidadeDAO();
-        Cidade cidadePessoaJuridica = cidadePessoaJuridicaDAO.getById(Long.parseLong("8797"));
-
-        enderecoPessoaJuridica.setCidade(cidadePessoaJuridica);
-
-        PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
-        PessoaJuridica pessoaJuridica = new PessoaJuridica();
-        pessoaJuridica.setNomePessoa("Empresa A");
-        pessoaJuridica.setEmail("email@");
-        pessoaJuridica.setObservacoes("xxxxx");
-        pessoaJuridica.setDataNascimento(data);
-        pessoaJuridica.setEndereco(enderecoPessoaJuridica);
-        pessoaJuridica.setCnpj("CNPJ");
-        pessoaJuridica.setInscricaoEstadual("Inscrição");
-        pessoaJuridica.setCadastroAtivo(true);
-        pessoaJuridica.setNomeFantasia("QualquerNome");
-        pessoaJuridica.setNomeResponsavel("Nome Responsavel");
-        pessoaJuridica.setCpfResponsavel("CPF Res");
-        Telefone telPessoaJutidica = new Telefone();
-        telPessoaJutidica.setPessoa(pessoaJuridica);
-        telPessoaJutidica.setNumero("123");
-        telPessoaJutidica.setOperadora("Vivo");
-
-        Telefone celPessoaJuridica = new Telefone();
-        celPessoaJuridica.setPessoa(pessoaJuridica);
-        celPessoaJuridica.setNumero("456");
-        celPessoaJuridica.setOperadora("Tim");
-        pessoaJuridica.addTelefone(telPessoaJutidica);
-        pessoaJuridica.addTelefone(celPessoaJuridica);
-
-        pessoaJuridicaDAO.persist(pessoaJuridica);
-
-        //Teste PessoaFisica  
-        System.out.println("===========================================PESSOA FÍSICA===================================================");
-        Endereco enderecoPessoaFisica = new Endereco();
-        enderecoPessoaFisica.setNomeEndereco("Endereço PessoaFisica");
-        enderecoPessoaFisica.setNumero(3);
-        enderecoPessoaFisica.setCep("3");
-        enderecoPessoaFisica.setBairro("Morro do Algodão");
-
-        Estado estadoPessoaFisica = new Estado();
-        estadoPessoaFisica.setId(26);
-
-        CidadeDAO cidadePessoaFisicaDAO = new CidadeDAO();
-        Cidade cidadePessoaFisica = cidadePessoaFisicaDAO.getById(Long.parseLong("8797"));
-
-        enderecoPessoaFisica.setCidade(cidadePessoaFisica);
-
-        PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-        PessoaFisica pessoaFisica = new PessoaFisica();
-        pessoaFisica.setNomePessoa("Jean Brock");
-        pessoaFisica.setEmail("email@");
-        pessoaFisica.setObservacoes("xxxxx");
-        pessoaFisica.setDataNascimento(data);
-        pessoaFisica.setEndereco(enderecoPessoaFisica);
-        pessoaFisica.setCPF("CPF");
-        pessoaFisica.setRG("RG");
-        pessoaFisica.setSexo('M');
-
-        //Teste EstadoCivil
-        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
-        List<EstadoCivil> estadosCivis = new ArrayList<EstadoCivil>();
-        estadosCivis = estadoCivilDAO.getAll();
-        pessoaFisica.setEstadoCivil(estadosCivis.get(0));
-
-        Telefone telPessoaFisica = new Telefone();
-        telPessoaFisica.setPessoa(pessoaFisica);
-        telPessoaFisica.setNumero("123");
-        telPessoaFisica.setOperadora("Vivo");
-
-        Telefone celPessoaFisica = new Telefone();
-        celPessoaFisica.setPessoa(pessoaFisica);
-        celPessoaFisica.setNumero("456");
-        celPessoaFisica.setOperadora("Tim");
-        pessoaFisica.addTelefone(telPessoaFisica);
-        pessoaFisica.addTelefone(celPessoaFisica);
-
-        pessoaFisicaDAO.persist(pessoaFisica);
-
-//        //Teste Departamento
-//        System.out.println("===========================================DEPARTAMENTO===================================================");
-//        DepartamentoDAO departamentoDAO = new DepartamentoDAO();
-//        Departamento departamento = new Departamento();
-//        departamento.setNomeDepartamento("Logistica");
-//        departamento.setTelefoneDepartamento("TelefoneLog");
-//        departamento.setRamal("ramalLog");
-//        
-//        departamentoDAO.persist(departamento);
-//        
-//        //Teste Cargo
-//        System.out.println("===========================================CARGO===================================================");
-//        CargoDAO cargoDAO = new CargoDAO();
-//        Cargo cargo = new Cargo();
-//        cargo.setNomeCargo("Testador");
-//        cargo.setDescricaoCargo("Testador de testes");
-//        cargo.setDepartamento(departamento);
-//        
-//        cargoDAO.persist(cargo);
-        //Teste Funcionario
+//        //Teste Pessoa
+//        System.out.println("===========================================PESSOA===================================================");
+//        Endereco enderecoPessoa = new Endereco();
+//        enderecoPessoa.setNomeEndereco("Endereço Pessoa");
+//        enderecoPessoa.setNumero(1);
+//        enderecoPessoa.setCep("1");
+//        enderecoPessoa.setBairro("Morro do Algodão");
+//
+//        Estado estadoPessoa = new Estado();
+//        estadoPessoa.setId(26);
+//
+//        CidadeDAO cidadePessoaDAO = new CidadeDAO();
+//        Cidade cidadePessoa = cidadePessoaDAO.getById(Long.parseLong("8797"));
+//
+//        enderecoPessoa.setCidade(cidadePessoa);
+//
+//        PessoaDAO pessoaDao = new PessoaDAO();
+//        Pessoa pessoa = new Pessoa();
+//        pessoa.setEndereco(enderecoPessoa);
+//        pessoa.setNomePessoa("Jean");
+//        pessoa.setEmail("teste@teste");
+//        pessoa.setDataNascimento(data);
+//        pessoa.setObservacoes("xxxxx");
+//
+//        pessoaDao.persist(pessoa);
+//
+//        //Teste Pessoa Juridica
+//        System.out.println("===========================================PESSOA JURIDICA===================================================");
+//        Endereco enderecoPessoaJuridica = new Endereco();
+//        enderecoPessoaJuridica.setNomeEndereco("Endereço PessoaJuridica");
+//        enderecoPessoaJuridica.setNumero(2);
+//        enderecoPessoaJuridica.setCep("2");
+//        enderecoPessoaJuridica.setBairro("Morro do Algodão");
+//
+//        Estado estadoPessoaJuridica = new Estado();
+//        estadoPessoaJuridica.setId(26);
+//
+//        CidadeDAO cidadePessoaJuridicaDAO = new CidadeDAO();
+//        Cidade cidadePessoaJuridica = cidadePessoaJuridicaDAO.getById(Long.parseLong("8797"));
+//
+//        enderecoPessoaJuridica.setCidade(cidadePessoaJuridica);
+//
+//        PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
+//        PessoaJuridica pessoaJuridica = new PessoaJuridica();
+//        pessoaJuridica.setNomePessoa("Empresa A");
+//        pessoaJuridica.setEmail("email@");
+//        pessoaJuridica.setObservacoes("xxxxx");
+//        pessoaJuridica.setDataNascimento(data);
+//        pessoaJuridica.setEndereco(enderecoPessoaJuridica);
+//        pessoaJuridica.setCnpj("CNPJ");
+//        pessoaJuridica.setInscricaoEstadual("Inscrição");
+//        pessoaJuridica.setCadastroAtivo(true);
+//        pessoaJuridica.setNomeFantasia("QualquerNome");
+//        pessoaJuridica.setNomeResponsavel("Nome Responsavel");
+//        pessoaJuridica.setCpfResponsavel("CPF Res");
+//        Telefone telPessoaJutidica = new Telefone();
+//        telPessoaJutidica.setPessoa(pessoaJuridica);
+//        telPessoaJutidica.setNumero("123");
+//        telPessoaJutidica.setOperadora("Vivo");
+//
+//        Telefone celPessoaJuridica = new Telefone();
+//        celPessoaJuridica.setPessoa(pessoaJuridica);
+//        celPessoaJuridica.setNumero("456");
+//        celPessoaJuridica.setOperadora("Tim");
+//        pessoaJuridica.addTelefone(telPessoaJutidica);
+//        pessoaJuridica.addTelefone(celPessoaJuridica);
+//
+//        pessoaJuridicaDAO.persist(pessoaJuridica);
+//
+//        //Teste PessoaFisica  
+//        System.out.println("===========================================PESSOA FÍSICA===================================================");
+//        Endereco enderecoPessoaFisica = new Endereco();
+//        enderecoPessoaFisica.setNomeEndereco("Endereço PessoaFisica");
+//        enderecoPessoaFisica.setNumero(3);
+//        enderecoPessoaFisica.setCep("3");
+//        enderecoPessoaFisica.setBairro("Morro do Algodão");
+//
+//        Estado estadoPessoaFisica = new Estado();
+//        estadoPessoaFisica.setId(26);
+//
+//        CidadeDAO cidadePessoaFisicaDAO = new CidadeDAO();
+//        Cidade cidadePessoaFisica = cidadePessoaFisicaDAO.getById(Long.parseLong("8797"));
+//
+//        enderecoPessoaFisica.setCidade(cidadePessoaFisica);
+//
+//        PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+//        PessoaFisica pessoaFisica = new PessoaFisica();
+//        pessoaFisica.setNomePessoa("Jean Brock");
+//        pessoaFisica.setEmail("email@");
+//        pessoaFisica.setObservacoes("xxxxx");
+//        pessoaFisica.setDataNascimento(data);
+//        pessoaFisica.setEndereco(enderecoPessoaFisica);
+//        pessoaFisica.setCPF("CPF");
+//        pessoaFisica.setRG("RG");
+//        pessoaFisica.setSexo('M');
+//
+//        //Teste EstadoCivil
+//        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
+//        List<EstadoCivil> estadosCivis = new ArrayList<EstadoCivil>();
+//        estadosCivis = estadoCivilDAO.getAll();
+//        pessoaFisica.setEstadoCivil(estadosCivis.get(0));
+//
+//        Telefone telPessoaFisica = new Telefone();
+//        telPessoaFisica.setPessoa(pessoaFisica);
+//        telPessoaFisica.setNumero("123");
+//        telPessoaFisica.setOperadora("Vivo");
+//
+//        Telefone celPessoaFisica = new Telefone();
+//        celPessoaFisica.setPessoa(pessoaFisica);
+//        celPessoaFisica.setNumero("456");
+//        celPessoaFisica.setOperadora("Tim");
+//        pessoaFisica.addTelefone(telPessoaFisica);
+//        pessoaFisica.addTelefone(celPessoaFisica);
+//
+//        pessoaFisicaDAO.persist(pessoaFisica);
+//
+////        //Teste Departamento
+////        System.out.println("===========================================DEPARTAMENTO===================================================");
+////        DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+////        Departamento departamento = new Departamento();
+////        departamento.setNomeDepartamento("Logistica");
+////        departamento.setTelefoneDepartamento("TelefoneLog");
+////        departamento.setRamal("ramalLog");
+////        
+////        departamentoDAO.persist(departamento);
+////        
+////        //Teste Cargo
+////        System.out.println("===========================================CARGO===================================================");
+////        CargoDAO cargoDAO = new CargoDAO();
+////        Cargo cargo = new Cargo();
+////        cargo.setNomeCargo("Testador");
+////        cargo.setDescricaoCargo("Testador de testes");
+////        cargo.setDepartamento(departamento);
+////        
+////        cargoDAO.persist(cargo);
+//        //Teste Funcionario
         System.out.println("===========================================FUNCIONÁRIO===================================================");
         Endereco enderecofuncionario = new Endereco();
         enderecofuncionario.setNomeEndereco("Endereço Funcionario");
@@ -234,12 +234,12 @@ public class Teste {
 
         Telefone telFuncionario = new Telefone();
         telFuncionario.setPessoa(funcionario);
-        telFuncionario.setNumero("123");
+        telFuncionario.setNumero("(12)3888-8888");
         telFuncionario.setOperadora("Vivo");
 
         Telefone celFuncionario = new Telefone();
         celFuncionario.setPessoa(funcionario);
-        celFuncionario.setNumero("456");
+        celFuncionario.setNumero("(12)3888-8888");
         celFuncionario.setOperadora("Tim");
         funcionario.addTelefone(telFuncionario);
         funcionario.addTelefone(celFuncionario);
