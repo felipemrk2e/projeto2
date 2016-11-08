@@ -37,8 +37,8 @@ public class CidadeDAO extends DAO<Cidade> {
         return entityManager.createQuery("FROM Cidade").getResultList();
     }
     
-    public List<Cidade> getEstado(long idEstado){
-        return entityManager.createQuery("FROM Cidade WHERE idEstado = '"+idEstado+"'").getResultList();
+    public List<Cidade> getWhereIdEstado(Long idEstado){
+        return entityManager.createQuery("FROM Cidade WHERE idEstado = "+idEstado).getResultList();
     }
 
 }
