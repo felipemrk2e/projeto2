@@ -166,6 +166,19 @@ CREATE TABLE Pessoa(
     REFERENCES Endereco(idEndereco)
 );
 
+CREATE TABLE Locacao(
+    idLocacao INT AUTO_INCREMENT NOT NULL,
+    dataInicio DATE NOT NULL,
+    dataFim DATE NOT NULL,
+    idPessoa INT NOT NULL,
+    idImovel INT NOT NULL,
+    CONSTRAINT PRIMARY KEY(idLocacao),
+    CONSTRAINT FOREIGN KEY(idPessoa)
+    REFERENCES Pessoa(idPessoa),
+    CONSTRAINT FOREIGN KEY(idImovel)
+    REFERENCES Imovel(idImovel)
+);
+
 CREATE TABLE Telefone(
     idTelefone INT AUTO_INCREMENT NOT NULL,
     numero VARCHAR(14) NOT NULL,
