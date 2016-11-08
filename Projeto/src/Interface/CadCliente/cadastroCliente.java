@@ -1392,7 +1392,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         Cidade cidade = new Cidade();
         List<Cidade> listaCidades = new ArrayList<Cidade>();
         List<String> listaNomeCidades = new ArrayList<String>();
-        listaCidades = cidadeDAO.getEstado(estado.getId());
+        listaCidades = cidadeDAO.getWhereIdEstado(estado.getId());
     }
 
     public void carregaEstadosCivis() {
