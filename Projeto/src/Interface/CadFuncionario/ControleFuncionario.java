@@ -6,6 +6,7 @@
 package Interface.CadFuncionario;
 
 import Interface.TelaPrincipal.Sessao;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +23,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
     public ControleFuncionario() {
         this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);    
+        this.setTitle("Controle de Funcionários");
     }
     
     public static ControleFuncionario getInstancia() {
@@ -97,7 +100,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jbEditar = new javax.swing.JButton();
         jtNovaSenha1 = new javax.swing.JTextField();
         jlNomeUsuario = new javax.swing.JLabel();
-        jcbNivelAcesso = new javax.swing.JComboBox<>();
+        jcbNivelAcesso = new javax.swing.JComboBox<String>();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -176,6 +179,11 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
+        jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbCancelarMousePressed(evt);
+            }
+        });
         getContentPane().add(jbCancelar);
         jbCancelar.setBounds(510, 320, 140, 70);
         getContentPane().add(jtCargo);
@@ -208,14 +216,14 @@ public class ControleFuncionario extends javax.swing.JFrame {
         getContentPane().add(jlNomeUsuario);
         jlNomeUsuario.setBounds(240, 200, 120, 30);
 
-        jcbNivelAcesso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbNivelAcesso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbNivelAcesso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbNivelAcessoActionPerformed(evt);
             }
         });
         getContentPane().add(jcbNivelAcesso);
-        jcbNivelAcesso.setBounds(370, 160, 56, 30);
+        jcbNivelAcesso.setBounds(370, 160, 64, 30);
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Controle de Funcionário", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator1);
@@ -227,6 +235,23 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private void jcbNivelAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbNivelAcessoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbNivelAcessoActionPerformed
+
+    private void jbCancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMousePressed
+         if (jbCancelar.isEnabled()) {
+            if (instancia == null) {                
+                dispose();
+            } else {
+                setAlwaysOnTop(false);
+                String ObjButtons[] = {"Sim", "Não"};
+                int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                    dispose();
+                } else {
+
+                }
+            }
+        }
+    }//GEN-LAST:event_jbCancelarMousePressed
 
     /**
      * @param args the command line arguments

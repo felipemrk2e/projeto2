@@ -53,6 +53,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         this.setUndecorated(true);
         initComponents();
         setAlwaysOnTop(true);
+        this.setTitle("Cadastro de Clientes");
         ativaPessoa(true);
         mascaraCPF_CNPJ(true);
         jrbPessoaFisica.setSelected(true);
@@ -69,6 +70,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     public cadastroCliente(PessoaFisica pessoaFisica) {
         initComponents();
         setAlwaysOnTop(true);
+        this.setTitle("Cadastro de Clientes");
         ativaPessoa(true);
         mascaraCPF_CNPJ(true);
         jrbPessoaFisica.setSelected(true);
@@ -84,6 +86,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     public cadastroCliente(PessoaJuridica pessoaJuridica) {
         initComponents();
         setAlwaysOnTop(true);
+        this.setTitle("Cadastro de Clientes");
         ativaPessoa(false);
         mascaraCPF_CNPJ(false);
         jrbPessoaJuridica.setSelected(true);
@@ -397,10 +400,10 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftDataNascimento.setText(dataString);
         jtaObs.setText(pessoaFisica.getObservacoes());
 
+         jcbCidade.setSelectedIndex((int) pessoaFisica.getEndereco().getCidade().getIdCidade() - 1);
+        
         jcbEstado.setSelectedIndex((int) (pessoaFisica.getEndereco().getCidade().getEstado().getId() - 1));
-
-        jcbCidade.setSelectedIndex((int) pessoaFisica.getEndereco().getCidade().getIdCidade() - 1);
-
+        
         jtfBairro.setText(pessoaFisica.getEndereco().getBairro());
 
         jtfEndereco.setText(pessoaFisica.getEndereco().getNomeEndereco());
@@ -468,10 +471,10 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftDataNascimento.setText(dataString);
         jtaObs.setText(pessoaJuridica.getObservacoes());
 
-        jcbEstado.setSelectedIndex((int) (pessoaJuridica.getEndereco().getCidade().getEstado().getId() - 1));
-
         jcbCidade.setSelectedIndex((int) pessoaJuridica.getEndereco().getCidade().getIdCidade() - 1);
-
+        
+        jcbEstado.setSelectedIndex((int) (pessoaJuridica.getEndereco().getCidade().getEstado().getId() - 1));
+        
         jtfBairro.setText(pessoaJuridica.getEndereco().getBairro());
 
         jtfEndereco.setText(pessoaJuridica.getEndereco().getNomeEndereco());
@@ -642,9 +645,9 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfNumero = new javax.swing.JTextField();
         jlCEP = new javax.swing.JLabel();
         jftCEP = new javax.swing.JFormattedTextField();
-        jcbFiador = new javax.swing.JComboBox<>();
+        jcbFiador = new javax.swing.JComboBox<String>();
         jcbEstado = new javax.swing.JComboBox();
-        jcbCidade = new javax.swing.JComboBox<>();
+        jcbCidade = new javax.swing.JComboBox<String>();
         jtfComplemento = new javax.swing.JTextField();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCelular = new javax.swing.JFormattedTextField();
@@ -848,7 +851,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         getContentPane().add(jlCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 150, 30));
         getContentPane().add(jftCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 110, 30));
 
-        jcbFiador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbFiador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbFiador, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 350, 30));
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -860,7 +863,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         });
         getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 320, 70, 30));
 
-        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 320, 230, 30));
         getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 760, 30));
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, 180, 30));
@@ -1090,6 +1093,13 @@ public class cadastroCliente extends javax.swing.JFrame {
             jcbEstado.setBackground(Color.white);
         } else {
             jcbEstado.setBackground(Color.red);
+            valida = false;
+        }
+        //CEP
+        if (jftCEP.getText().trim().length() == 10) {
+            jftCEP.setBackground(Color.white);
+        } else {
+            jftCEP.setBackground(Color.red);
             valida = false;
         }
         //Data Nascimento
@@ -1344,13 +1354,13 @@ public class cadastroCliente extends javax.swing.JFrame {
                 cadastroClienteHome.getInstancia().setVisible(true);
                 dispose();
             } else {
-                
+                setAlwaysOnTop(false);
                 String ObjButtons[] = {"Sim", "Não"};
                 int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
                 if (PromptResult == JOptionPane.YES_OPTION) {
                     dispose();
                 } else {
-                    
+
                 }
             }
         }

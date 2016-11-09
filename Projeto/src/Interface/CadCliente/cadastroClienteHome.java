@@ -9,11 +9,9 @@ import Interface.TelaPrincipal.Sessao;
 import dao.PessoaDAO;
 import dao.PessoaFisicaDAO;
 import dao.PessoaJuridicaDAO;
-import java.awt.Color;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
@@ -23,10 +21,6 @@ import model.TableModel.PessoaTableModel;
 import model.pessoa.Pessoa;
 import model.pessoa.PessoaFisica;
 import model.pessoa.PessoaJuridica;
-import org.hibernate.Session;
-import org.hibernate.criterion.Example;
-import org.hibernate.criterion.MatchMode;
-import validacao.validacao;
 
 /**
  *
@@ -44,6 +38,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         this.setUndecorated(true);
         initComponents();
         setAlwaysOnTop(true);
+        this.setTitle("Consulta de Clientes");
         jcbPessoaFisica.setSelected(true);
         jcbPessoaJuridica.setSelected(true);
         popularTabela();
@@ -62,8 +57,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         instancia = null;
     }
 
-    public void acesso(int nivel) {
-        System.out.println("====================================================Nível de Acesso: " + nivel);
+    public void acesso(int nivel) {       
         DisableEnable(false);
         switch (nivel) {
             case 1:
@@ -237,6 +231,11 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("<html><center>Cancelar<br/></html>");
+        jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbCancelarMousePressed(evt);
+            }
+        });
         getContentPane().add(jbCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 490, 140, 70));
 
         jsPesquisaCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa de Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
@@ -381,6 +380,8 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             return; //Nada selecionado
         }
         if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
+            //Corrigir consulta genérica
+            
             PessoaTableModel pessoaModel = (PessoaTableModel) jtClientes.getModel();
             Pessoa pessoaSelecionada = pessoaModel.get(linhaSelecionada);
             if (pessoaSelecionada.isTipoPessoa()) {
@@ -396,9 +397,6 @@ public class cadastroClienteHome extends javax.swing.JFrame {
                 cadastroPessoaJuridica.setVisible(true);
                 cadastroPessoaJuridica.setLocationRelativeTo(this);
             }
-
-            System.out.println(pessoaSelecionada.getNomePessoa());
-
         } else if (jcbPessoaFisica.isSelected()) {
             PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jtClientes.getModel();
             PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
@@ -481,6 +479,23 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             jftCPF.setEnabled(false);
         }
     }//GEN-LAST:event_jtNomeKeyReleased
+
+    private void jbCancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMousePressed
+         if (jbCancelar.isEnabled()) {
+            if (instancia == null) {                
+                dispose();
+            } else {
+                setAlwaysOnTop(false);
+                String ObjButtons[] = {"Sim", "Não"};
+                int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                    dispose();
+                } else {
+
+                }
+            }
+        }
+    }//GEN-LAST:event_jbCancelarMousePressed
 
     /**
      * @param args the command line arguments

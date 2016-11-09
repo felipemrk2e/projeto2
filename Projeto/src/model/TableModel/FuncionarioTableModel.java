@@ -96,7 +96,7 @@ public class FuncionarioTableModel extends AbstractTableModel {
         this.fireTableRowsDeleted(linha, linha);
     }
 
-    public Pessoa get(int linha) {
+    public Funcionario get(int linha) {
         return this.dadosPessoas.get(linha);
     }
 

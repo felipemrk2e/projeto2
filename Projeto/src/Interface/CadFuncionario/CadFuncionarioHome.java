@@ -8,11 +8,18 @@ package Interface.CadFuncionario;
 import Interface.TelaPrincipal.Sessao;
 import Interface.TelaPrincipal.TelaPrincipal;
 import dao.FuncionarioDAO;
+import dao.PessoaDAO;
+import dao.PessoaFisicaDAO;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.TableModel.FuncionarioTableModel;
+import model.TableModel.PessoaFisicaTableModel;
+import model.TableModel.PessoaTableModel;
 import model.pessoa.Funcionario;
+import model.pessoa.Pessoa;
+import model.pessoa.PessoaFisica;
 import validacao.validacao;
 
 /**
@@ -30,18 +37,19 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     public CadFuncionarioHome() {
         this.setUndecorated(true);
         initComponents();
-        this.setTitle("Cadastro de Funcionários");
+        this.setTitle("Consulta de Funcionários");
+        setAlwaysOnTop(true);
         popularTabela();
     }
-    
+
     public static CadFuncionarioHome getInstancia() {
         if (instancia == null) {
             instancia = new CadFuncionarioHome();
         }
         return instancia;
     }
-    
-    public static void encerrarInstancia(){
+
+    public static void encerrarInstancia() {
         instancia = null;
     }
 
@@ -49,7 +57,31 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         List<Funcionario> funcionarios = new ArrayList<Funcionario>();
         funcionarios = funcionarioDAO.getAll();
-        jTable1.setModel(new FuncionarioTableModel(funcionarios));
+        jtFuncionarios.setModel(new FuncionarioTableModel(funcionarios));
+    }
+    
+    public void popularTabelaQuery() {
+        if (!jtNomeFuncionario.getText().isEmpty()) {
+            PessoaDAO pessoaDAO = new PessoaDAO();
+            List<Pessoa> pessoas = new ArrayList<Pessoa>();
+            pessoas = pessoaDAO.getQuery("WHERE nomePessoa LIKE '%" + jtNomeFuncionario.getText() + "%'");
+            jtFuncionarios.setModel(new PessoaTableModel(pessoas));
+        } else if (!jtCargo.getText().isEmpty()) {
+            PessoaDAO pessoaDAO = new PessoaDAO();
+            List<Pessoa> pessoas = new ArrayList<Pessoa>();
+            pessoas = pessoaDAO.getPorTelefone(jtCargo.getText());
+            jtFuncionarios.setModel(new PessoaTableModel(pessoas));
+        } else if (jftCPF.getText().trim().length() == 14) {
+            PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+            List<PessoaFisica> pessoasFisicas = new ArrayList<PessoaFisica>();
+            pessoasFisicas = pessoaFisicaDAO.getPorCPF(jftCPF.getText());
+            jtFuncionarios.setModel(new PessoaFisicaTableModel(pessoasFisicas));
+        } else if (jtDepartamento.getText().isEmpty()) {
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+            List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+            funcionarios = funcionarioDAO.getAll();
+            jtFuncionarios.setModel(new FuncionarioTableModel(funcionarios));
+        }
     }
 
     /**
@@ -62,7 +94,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtFuncionarios = new javax.swing.JTable();
         jbCadastrar = new javax.swing.JButton();
         jbVisualizar = new javax.swing.JButton();
         jbExcluir = new javax.swing.JButton();
@@ -71,7 +103,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         jlNomeFuncionario = new javax.swing.JLabel();
         jtNomeFuncionario = new javax.swing.JTextField();
         jlCPF = new javax.swing.JLabel();
-        jtCpf = new javax.swing.JTextField();
+        jftCPF = new javax.swing.JFormattedTextField();
         jtCargo = new javax.swing.JTextField();
         jtDepartamento = new javax.swing.JTextField();
         jlCargo = new javax.swing.JLabel();
@@ -83,7 +115,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1024, 640));
         getContentPane().setLayout(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -91,7 +123,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtFuncionarios);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(70, 30, 880, 160);
@@ -113,6 +145,9 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         jbVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbVisualizarMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbVisualizarMousePressed(evt);
             }
         });
         getContentPane().add(jbVisualizar);
@@ -164,8 +199,8 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         jlCPF.setText("CPF:");
         getContentPane().add(jlCPF);
         jlCPF.setBounds(180, 400, 40, 30);
-        getContentPane().add(jtCpf);
-        jtCpf.setBounds(230, 400, 570, 30);
+        getContentPane().add(jftCPF);
+        jftCPF.setBounds(230, 400, 570, 30);
         getContentPane().add(jtCargo);
         jtCargo.setBounds(230, 360, 570, 30);
         getContentPane().add(jtDepartamento);
@@ -186,6 +221,11 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("<html><center>Cancelar<br/></html>");
+        jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbCancelarMousePressed(evt);
+            }
+        });
         getContentPane().add(jbCancelar);
         jbCancelar.setBounds(810, 400, 140, 70);
 
@@ -197,55 +237,9 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarMouseClicked
-        //Verificar Pesquisar //Falta tudo
-        boolean control = true;
-
-        if (jtNomeFuncionario.equals("")) {
-
-        } else if (!jtNomeFuncionario.equals("") && validacao.validaLetras(jtNomeFuncionario.getText())) {
-
-        } else {
-            jtNomeFuncionario.setBackground(Color.red);
-            control = false;
+        if (jbPesquisar.isEnabled()) {
+            popularTabelaQuery();
         }
-
-        if (true) {
-
-        } else if (true) {
-
-        } else {
-            jtCpf.setBackground(Color.red);
-            control = false;
-        }
-
-        if (true) {
-
-        } else if (true) {
-
-        } else {
-            jtCargo.setBackground(Color.red);
-            control = false;
-        }
-        if (true) {
-
-        } else if (true) {
-
-        } else {
-            jtDepartamento.setBackground(Color.red);
-            control = false;
-        }
-// Query
-
-        if (control) {
-
-        } else {
-
-            control = true;
-
-        }
-
-        //Fim Pesquisar Verificar 
-        // TODO add your handling code here:
     }//GEN-LAST:event_jbPesquisarMouseClicked
 
     private void jbExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbExcluirMouseClicked
@@ -264,13 +258,42 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jbNivelMouseClicked
 
     private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
-        
+
     }//GEN-LAST:event_jbVisualizarMouseClicked
 
     private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jbCadastrarMouseClicked
+
+    private void jbCancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMousePressed
+        if (jbCancelar.isEnabled()) {
+            if (instancia == null) {
+                dispose();
+            } else {
+                setAlwaysOnTop(false);
+                String ObjButtons[] = {"Sim", "Não"};
+                int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                    dispose();
+                } else {
+
+                }
+            }
+        }
+    }//GEN-LAST:event_jbCancelarMousePressed
+
+    private void jbVisualizarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMousePressed
+        int linhaSelecionada = jtFuncionarios.getSelectedRow();
+        if (linhaSelecionada == -1) {
+            return; //Nada selecionado
+        }
+        FuncionarioTableModel funcionarioModel = (FuncionarioTableModel) jtFuncionarios.getModel();
+        Funcionario funcionarioSelecionado = funcionarioModel.get(linhaSelecionada);
+        cadastroFuncionario cadFuncionario = new cadastroFuncionario(funcionarioSelecionado);
+        cadFuncionario.setVisible(true);
+        cadFuncionario.setLocationRelativeTo(this);
+    }//GEN-LAST:event_jbVisualizarMousePressed
 
     /**
      * @param args the command line arguments
@@ -311,19 +334,19 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbExcluir;
     private javax.swing.JButton jbNivel;
     private javax.swing.JButton jbPesquisar;
     private javax.swing.JButton jbVisualizar;
+    private javax.swing.JFormattedTextField jftCPF;
     private javax.swing.JLabel jlCPF;
     private javax.swing.JLabel jlCargo;
     private javax.swing.JLabel jlNomeFuncionario;
     private javax.swing.JTextField jtCargo;
-    private javax.swing.JTextField jtCpf;
     private javax.swing.JTextField jtDepartamento;
+    private javax.swing.JTable jtFuncionarios;
     private javax.swing.JTextField jtNomeFuncionario;
     // End of variables declaration//GEN-END:variables
 }
