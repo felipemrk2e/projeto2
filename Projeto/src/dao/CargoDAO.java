@@ -46,4 +46,8 @@ public class CargoDAO extends DAO<Cargo>{
          return entityManager.createQuery("FROM Cargo").getResultList();
     }
     
+    public List<Cargo> getNomeCargo(String nome){
+         return entityManager.createQuery("FROM Cargo WHERE nomeCargo = '"+nome+"'").getResultList();
+    }
+    
 }
