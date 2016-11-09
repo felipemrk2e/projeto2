@@ -80,7 +80,7 @@ public class TelaLogin extends javax.swing.JDialog {
 
         jlImagem.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jlImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/corretagem_imob3.png"))); // NOI18N
-        getContentPane().add(jlImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 200, 300));
+        getContentPane().add(jlImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 200, 340));
 
         jlUsuario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jlUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -94,8 +94,11 @@ public class TelaLogin extends javax.swing.JDialog {
         jlSenha.setText("  Senha:");
         getContentPane().add(jlSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 150, 40));
 
+        jtfUsuario.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jtfUsuario.setText("teste");
         getContentPane().add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 190, 40));
+
+        jpfSenha.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         getContentPane().add(jpfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 190, 40));
 
         jbAcessar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -106,7 +109,7 @@ public class TelaLogin extends javax.swing.JDialog {
                 jbAcessarMousePressed(evt);
             }
         });
-        getContentPane().add(jbAcessar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, -1, 70));
+        getContentPane().add(jbAcessar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, 140, 70));
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
@@ -116,7 +119,7 @@ public class TelaLogin extends javax.swing.JDialog {
                 jbCancelarMousePressed(evt);
             }
         });
-        getContentPane().add(jbCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, -1, 70));
+        getContentPane().add(jbCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 140, 70));
 
         jlTitulo.setFont(new java.awt.Font("Arial", 0, 44)); // NOI18N
         jlTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

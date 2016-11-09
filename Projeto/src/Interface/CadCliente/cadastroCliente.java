@@ -45,6 +45,8 @@ import validacao.*;
 public class cadastroCliente extends javax.swing.JFrame {
 
     private static cadastroCliente instancia;
+    private boolean flagConfirmar;
+    private static PessoaFisica pessoaFisica;
 
     /**
      * Creates new form cadastroCliente
@@ -232,6 +234,8 @@ public class cadastroCliente extends javax.swing.JFrame {
     }
 
     public void cadastrarPessoaFisica() throws ParseException {
+        System.out.println("=======================================ENTROU NO PERSIT");
+        flagConfirmar = true;
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
         PessoaFisica pessoaFisica = new PessoaFisica();
         pessoaFisica.setTipoPessoa(true);
@@ -315,6 +319,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     }
 
     public void cadastrarPessoaJuridica() throws ParseException {
+        flagConfirmar = true;
         PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
         PessoaJuridica pessoaJuridica = new PessoaJuridica();
         pessoaJuridica.setTipoPessoa(false);
@@ -390,6 +395,8 @@ public class cadastroCliente extends javax.swing.JFrame {
     }
 
     public void atualizarPessoaFisica(PessoaFisica pessoaFisica) {
+        System.out.println("========================================== ENTROU NO MERGE");
+         flagConfirmar = false;
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
 
         jtfNome.setText(pessoaFisica.getNomePessoa());
@@ -400,10 +407,10 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftDataNascimento.setText(dataString);
         jtaObs.setText(pessoaFisica.getObservacoes());
 
-         jcbCidade.setSelectedIndex((int) pessoaFisica.getEndereco().getCidade().getIdCidade() - 1);
-        
+        jcbCidade.setSelectedIndex((int) pessoaFisica.getEndereco().getCidade().getIdCidade() - 1);
+
         jcbEstado.setSelectedIndex((int) (pessoaFisica.getEndereco().getCidade().getEstado().getId() - 1));
-        
+
         jtfBairro.setText(pessoaFisica.getEndereco().getBairro());
 
         jtfEndereco.setText(pessoaFisica.getEndereco().getNomeEndereco());
@@ -458,9 +465,12 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
         pessoaFisica.setInteresses(interesses);
 
+        pessoaFisicaDAO.merge(pessoaFisica);
+
     }
 
     public void atualizarPessoaJuridica(PessoaJuridica pessoaJuridica) {
+         flagConfirmar = false;
         PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
 
         jtfNome.setText(pessoaJuridica.getNomePessoa());
@@ -472,9 +482,9 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtaObs.setText(pessoaJuridica.getObservacoes());
 
         jcbCidade.setSelectedIndex((int) pessoaJuridica.getEndereco().getCidade().getIdCidade() - 1);
-        
+
         jcbEstado.setSelectedIndex((int) (pessoaJuridica.getEndereco().getCidade().getEstado().getId() - 1));
-        
+
         jtfBairro.setText(pessoaJuridica.getEndereco().getBairro());
 
         jtfEndereco.setText(pessoaJuridica.getEndereco().getNomeEndereco());
@@ -525,6 +535,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
         pessoaJuridica.setInteresses(interesses);
 
+        pessoaJuridicaDAO.merge(pessoaJuridica);
     }
 
     public void populaPessoaFisica() {
@@ -912,7 +923,11 @@ public class cadastroCliente extends javax.swing.JFrame {
             if (jrbPessoaFisica.isSelected()) {
                 if (validaCampos(true)) {
                     try {
-                        cadastrarPessoaFisica();
+                        if (flagConfirmar) {
+                            cadastrarPessoaFisica();
+                        }else{
+                            atualizarPessoaFisica(pessoaFisica);
+                        }                        
                         ZerarCampos();
                         instancia = null;
                     } catch (ParseException ex) {

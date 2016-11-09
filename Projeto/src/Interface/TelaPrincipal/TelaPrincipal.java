@@ -72,7 +72,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jlSair.setLocation(xSize - 100, ySize - 100);
         jlLogoff.repaint();
 
-        jSeparator1.setSize(180, ySize);
+//        jSeparator1.setSize(180, ySize);
         jScrollPane1.setSize(180, ySize - 80);
 
         jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);

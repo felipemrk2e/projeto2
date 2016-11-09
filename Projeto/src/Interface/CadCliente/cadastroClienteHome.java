@@ -57,7 +57,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         instancia = null;
     }
 
-    public void acesso(int nivel) {       
+    public void acesso(int nivel) {
         DisableEnable(false);
         switch (nivel) {
             case 1:
@@ -381,22 +381,17 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         }
         if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
             //Corrigir consulta genérica
-            
+
             PessoaTableModel pessoaModel = (PessoaTableModel) jtClientes.getModel();
             Pessoa pessoaSelecionada = pessoaModel.get(linhaSelecionada);
-            if (pessoaSelecionada.isTipoPessoa()) {
-                PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jtClientes.getModel();
-                PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
-                cadastroCliente cadastroPessoaFisica = new cadastroCliente(pessoaFisicaSelecionada);
+            System.out.println("====================================================="+pessoaSelecionada.getIdPessoa());
+            
+                PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+                PessoaFisica pessoaFisica = pessoaFisicaDAO.getById(pessoaSelecionada.getIdPessoa());
+                cadastroCliente cadastroPessoaFisica = new cadastroCliente(pessoaFisica);
                 cadastroPessoaFisica.setVisible(true);
                 cadastroPessoaFisica.setLocationRelativeTo(this);
-            } else {
-                PessoaJuridicaTableModel pessoaJuridicaModel = (PessoaJuridicaTableModel) jtClientes.getModel();
-                PessoaJuridica pessoaJuridicaSelecionada = pessoaJuridicaModel.get(linhaSelecionada);
-                cadastroCliente cadastroPessoaJuridica = new cadastroCliente(pessoaJuridicaSelecionada);
-                cadastroPessoaJuridica.setVisible(true);
-                cadastroPessoaJuridica.setLocationRelativeTo(this);
-            }
+            
         } else if (jcbPessoaFisica.isSelected()) {
             PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jtClientes.getModel();
             PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
@@ -481,8 +476,8 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jtNomeKeyReleased
 
     private void jbCancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMousePressed
-         if (jbCancelar.isEnabled()) {
-            if (instancia == null) {                
+        if (jbCancelar.isEnabled()) {
+            if (instancia == null) {
                 dispose();
             } else {
                 setAlwaysOnTop(false);
