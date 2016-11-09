@@ -137,6 +137,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(230, 390, 330, 180);
 
+        jList1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -166,11 +167,11 @@ public class cadastroCargo extends javax.swing.JFrame {
         getContentPane().add(jbCancelarDepartamento);
         jbCancelarDepartamento.setBounds(570, 160, 140, 70);
 
-        jsCadastrarCargo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar Cargo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        jsCadastrarCargo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar Cargo", 2, 0, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jsCadastrarCargo);
         jsCadastrarCargo.setBounds(10, 260, 720, 330);
 
-        jsCadastrarDepartamento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar Departamento", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        jsCadastrarDepartamento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar Departamento", 2, 0, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jsCadastrarDepartamento);
         jsCadastrarDepartamento.setBounds(10, 50, 720, 190);
 

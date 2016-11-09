@@ -51,37 +51,42 @@ public class cadastroCargoHome extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jlCodigoCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlCodigoCargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlCodigoCargo.setText("Código do Cargo");
         getContentPane().add(jlCodigoCargo);
-        jlCodigoCargo.setBounds(20, 10, 150, 17);
+        jlCodigoCargo.setBounds(70, 20, 130, 30);
+
+        jtfCodigoCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCodigoCargoActionPerformed(evt);
+            }
+        });
         getContentPane().add(jtfCodigoCargo);
-        jtfCodigoCargo.setBounds(20, 30, 100, 20);
+        jtfCodigoCargo.setBounds(70, 50, 130, 30);
 
         jlCodigoDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlCodigoDepartamento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlCodigoDepartamento.setText("Código Departamento");
         getContentPane().add(jlCodigoDepartamento);
-        jlCodigoDepartamento.setBounds(20, 360, 140, 17);
+        jlCodigoDepartamento.setBounds(60, 310, 140, 30);
         getContentPane().add(jtfCodigoDepartamento);
-        jtfCodigoDepartamento.setBounds(20, 380, 100, 20);
+        jtfCodigoDepartamento.setBounds(60, 340, 140, 30);
         getContentPane().add(jButton1);
-        jButton1.setBounds(740, 60, 140, 70);
+        jButton1.setBounds(790, 50, 140, 70);
         getContentPane().add(jButton2);
-        jButton2.setBounds(740, 150, 140, 70);
+        jButton2.setBounds(790, 130, 140, 70);
         getContentPane().add(jButton3);
-        jButton3.setBounds(740, 330, 140, 70);
+        jButton3.setBounds(790, 340, 140, 70);
         getContentPane().add(jButton4);
-        jButton4.setBounds(740, 510, 140, 70);
+        jButton4.setBounds(790, 500, 140, 70);
         getContentPane().add(jButton5);
-        jButton5.setBounds(740, 240, 140, 70);
+        jButton5.setBounds(790, 210, 140, 70);
         getContentPane().add(jButton6);
-        jButton6.setBounds(740, 420, 140, 70);
+        jButton6.setBounds(790, 420, 140, 70);
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -90,14 +95,11 @@ public class cadastroCargoHome extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTable3);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(180, 330, 530, 150);
+        jScrollPane3.setBounds(230, 340, 530, 150);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -106,14 +108,22 @@ public class cadastroCargoHome extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(180, 50, 530, 150);
+        jScrollPane2.setBounds(230, 50, 530, 150);
+
+        jSeparator2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa de Cargo", 2, 0, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(180, 40, 690, 200);
+        jSeparator2.setBounds(210, 20, 740, 270);
+
+        jSeparator3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa de Departamento", 2, 0, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator3);
-        jSeparator3.setBounds(180, 320, 690, 360);
+        jSeparator3.setBounds(210, 310, 740, 270);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtfCodigoCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodigoCargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCodigoCargoActionPerformed
 
     /**
      * @param args the command line arguments

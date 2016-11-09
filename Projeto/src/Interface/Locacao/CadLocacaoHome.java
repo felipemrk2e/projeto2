@@ -95,7 +95,6 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         jlCidade = new javax.swing.JLabel();
         jbCancelar = new javax.swing.JButton();
         jbCancelarTabela = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -237,13 +236,8 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         getContentPane().add(jbCancelarTabela);
         jbCancelarTabela.setBounds(370, 260, 140, 70);
 
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jSeparator1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Locação Home", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
-        getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(20, 10, 970, 340);
-
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jSeparator4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisar Locação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        jSeparator4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisar Locação", 2, 0, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator4);
         jSeparator4.setBounds(20, 360, 970, 210);
 
@@ -406,7 +400,6 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
