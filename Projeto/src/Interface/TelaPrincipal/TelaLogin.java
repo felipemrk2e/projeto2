@@ -74,26 +74,29 @@ public class TelaLogin extends javax.swing.JDialog {
         jlTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(704, 460));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jlImagem.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jlImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/corretagem_imob3.png"))); // NOI18N
-        getContentPane().add(jlImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 200, 350));
+        getContentPane().add(jlImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 200, 300));
 
         jlUsuario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jlUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/usuario.png"))); // NOI18N
         jlUsuario.setText("Usuário:");
-        getContentPane().add(jlUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, -1, -1));
+        getContentPane().add(jlUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 150, 40));
 
         jlSenha.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jlSenha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/password3.png"))); // NOI18N
         jlSenha.setText("  Senha:");
-        getContentPane().add(jlSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, -1, -1));
+        getContentPane().add(jlSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 150, 40));
 
         jtfUsuario.setText("teste");
-        getContentPane().add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 190, -1));
-        getContentPane().add(jpfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 190, -1));
+        getContentPane().add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 190, 40));
+        getContentPane().add(jpfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 190, 40));
 
         jbAcessar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbAcessar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Ok.png"))); // NOI18N
@@ -103,7 +106,7 @@ public class TelaLogin extends javax.swing.JDialog {
                 jbAcessarMousePressed(evt);
             }
         });
-        getContentPane().add(jbAcessar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, -1, -1));
+        getContentPane().add(jbAcessar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, -1, 70));
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
@@ -113,11 +116,12 @@ public class TelaLogin extends javax.swing.JDialog {
                 jbCancelarMousePressed(evt);
             }
         });
-        getContentPane().add(jbCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, -1, -1));
+        getContentPane().add(jbCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, -1, 70));
 
-        jlTitulo.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
+        jlTitulo.setFont(new java.awt.Font("Arial", 0, 44)); // NOI18N
+        jlTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlTitulo.setText("Sistema de Cadastro de Imóveis");
-        getContentPane().add(jlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        getContentPane().add(jlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 650, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
