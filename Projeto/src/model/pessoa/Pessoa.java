@@ -72,7 +72,7 @@ public class Pessoa {
     @JoinColumn(name = "idPessoa", nullable = true)
     private PessoaFisica pessoaFisica;
     
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @JoinTable(name = "Pessoa_has_Interesse", 
     joinColumns = { @JoinColumn(name = "idPessoa") }, 
     inverseJoinColumns = { @JoinColumn(name = "idTipoContrato") })
