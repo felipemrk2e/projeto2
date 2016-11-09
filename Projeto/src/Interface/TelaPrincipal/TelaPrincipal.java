@@ -347,7 +347,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbConsultarLocacao = new javax.swing.JButton();
         jbFuncionario = new javax.swing.JButton();
         jbConsultarFuncionario = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jmBarraMenu = new javax.swing.JMenuBar();
         jmCadastrar = new javax.swing.JMenu();
@@ -550,11 +549,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jPanel1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(0, 20, 180, 550);
-
-        jSeparator1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(0, 0, 180, 750);
+        jScrollPane1.setBounds(0, 0, 180, 620);
 
         jSeparator2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(jSeparator2);
@@ -909,7 +904,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbCadastrarCliente;
     private javax.swing.JButton jbCadastrarImovel;

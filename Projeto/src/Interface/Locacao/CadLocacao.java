@@ -151,12 +151,13 @@ public class CadLocacao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbPesquisarImovel);
-        jbPesquisarImovel.setBounds(850, 370, 140, 40);
+        jbPesquisarImovel.setBounds(850, 330, 140, 70);
 
         jlIdCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlIdCliente.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlIdCliente.setText("ID Cliente:");
         getContentPane().add(jlIdCliente);
-        jlIdCliente.setBounds(250, 140, 70, 40);
+        jlIdCliente.setBounds(230, 140, 70, 30);
 
         jtImovelSelecionado.setToolTipText("");
         getContentPane().add(jtImovelSelecionado);
@@ -182,13 +183,14 @@ public class CadLocacao extends javax.swing.JFrame {
         jbSelecionarImovel.setBounds(850, 210, 140, 70);
 
         jlNomeCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNomeCliente.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlNomeCliente.setText("Nome Cliente:");
         getContentPane().add(jlNomeCliente);
-        jlNomeCliente.setBounds(430, 140, 90, 40);
+        jlNomeCliente.setBounds(420, 140, 90, 30);
         getContentPane().add(jtIdCliente);
-        jtIdCliente.setBounds(320, 140, 100, 40);
+        jtIdCliente.setBounds(310, 140, 100, 30);
         getContentPane().add(jtNomeCliente);
-        jtNomeCliente.setBounds(520, 140, 320, 40);
+        jtNomeCliente.setBounds(520, 140, 320, 30);
 
         jbPesquisarCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbPesquisarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/review.png"))); // NOI18N
@@ -204,7 +206,7 @@ public class CadLocacao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbPesquisarCliente);
-        jbPesquisarCliente.setBounds(850, 140, 140, 40);
+        jbPesquisarCliente.setBounds(850, 100, 140, 70);
 
         jbSelecionarCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbSelecionarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/clientes.png"))); // NOI18N
@@ -218,29 +220,32 @@ public class CadLocacao extends javax.swing.JFrame {
         jbSelecionarCliente.setBounds(850, 20, 140, 70);
 
         jlIdImovel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlIdImovel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlIdImovel.setText("ID Imovel:");
         getContentPane().add(jlIdImovel);
-        jlIdImovel.setBounds(20, 330, 70, 40);
+        jlIdImovel.setBounds(20, 330, 70, 30);
 
         jlNomeProprietario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNomeProprietario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlNomeProprietario.setText("Nome Proprietario:");
         getContentPane().add(jlNomeProprietario);
-        jlNomeProprietario.setBounds(180, 330, 120, 40);
+        jlNomeProprietario.setBounds(180, 330, 120, 30);
 
         jlRua.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlRua.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlRua.setText("Rua:");
         getContentPane().add(jlRua);
-        jlRua.setBounds(20, 380, 30, 30);
+        jlRua.setBounds(20, 370, 70, 30);
 
         jlBairro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlBairro.setText("Bairro:");
         getContentPane().add(jlBairro);
-        jlBairro.setBounds(365, 380, 50, 30);
+        jlBairro.setBounds(370, 370, 42, 30);
 
         jlEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlEstado.setText("Estado:");
         getContentPane().add(jlEstado);
-        jlEstado.setBounds(720, 380, 50, 30);
+        jlEstado.setBounds(720, 370, 50, 30);
 
         jlInicioContrato.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlInicioContrato.setText("Inicio do Contrato:");
@@ -268,18 +273,18 @@ public class CadLocacao extends javax.swing.JFrame {
 
         jtIdImovel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         getContentPane().add(jtIdImovel);
-        jtIdImovel.setBounds(90, 330, 80, 40);
+        jtIdImovel.setBounds(100, 330, 70, 30);
         getContentPane().add(jtNomeProprietario);
-        jtNomeProprietario.setBounds(300, 330, 540, 40);
+        jtNomeProprietario.setBounds(310, 330, 530, 30);
         getContentPane().add(jtRua);
-        jtRua.setBounds(60, 380, 300, 30);
+        jtRua.setBounds(100, 370, 260, 30);
         getContentPane().add(jtBairro);
-        jtBairro.setBounds(410, 380, 100, 30);
+        jtBairro.setBounds(420, 370, 100, 30);
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbEstado);
-        jcbEstado.setBounds(770, 380, 66, 30);
+        jcbEstado.setBounds(770, 370, 66, 30);
 
         jtCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,13 +292,13 @@ public class CadLocacao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jtCidade);
-        jtCidade.setBounds(570, 380, 140, 30);
+        jtCidade.setBounds(590, 370, 120, 30);
         jtCidade.getAccessibleContext().setAccessibleName("");
 
         jlCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCidade.setText("Cidade:");
         getContentPane().add(jlCidade);
-        jlCidade.setBounds(520, 380, 50, 30);
+        jlCidade.setBounds(530, 370, 50, 30);
 
         jbEfetuarLocacao.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbEfetuarLocacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Partnership-icon.png"))); // NOI18N

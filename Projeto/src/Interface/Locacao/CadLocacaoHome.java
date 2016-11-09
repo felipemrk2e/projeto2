@@ -93,6 +93,8 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         jbControle = new javax.swing.JButton();
         jtCidade = new javax.swing.JTextField();
         jlCidade = new javax.swing.JLabel();
+        jbCancelar = new javax.swing.JButton();
+        jbCancelarTabela = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
 
@@ -144,8 +146,13 @@ public class CadLocacaoHome extends javax.swing.JFrame {
                 jbPesquisarMouseClicked(evt);
             }
         });
+        jbPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbPesquisarActionPerformed(evt);
+            }
+        });
         getContentPane().add(jbPesquisar);
-        jbPesquisar.setBounds(820, 480, 140, 70);
+        jbPesquisar.setBounds(820, 400, 140, 70);
 
         jlIdImovel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlIdImovel.setText("Nome do Inquilino:");
@@ -162,13 +169,13 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(50, 400, 70, 30);
         getContentPane().add(jtNomeInquilino);
-        jtNomeInquilino.setBounds(170, 520, 600, 30);
+        jtNomeInquilino.setBounds(180, 520, 600, 30);
         getContentPane().add(jtNomeProprietario);
-        jtNomeProprietario.setBounds(200, 480, 570, 30);
+        jtNomeProprietario.setBounds(200, 480, 580, 30);
         getContentPane().add(jtIdImovel);
         jtIdImovel.setBounds(120, 400, 90, 30);
         getContentPane().add(jtRua);
-        jtRua.setBounds(460, 400, 310, 30);
+        jtRua.setBounds(460, 400, 320, 30);
 
         jlRua.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlRua.setText("Rua:");
@@ -197,7 +204,7 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbEstado);
-        jcbEstado.setBounds(700, 440, 66, 30);
+        jcbEstado.setBounds(700, 440, 80, 30);
 
         jbControle.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbControle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/controle.png"))); // NOI18N
@@ -218,6 +225,18 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         getContentPane().add(jlCidade);
         jlCidade.setBounds(360, 440, 50, 30);
 
+        jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
+        jbCancelar.setText("Cancelar");
+        getContentPane().add(jbCancelar);
+        jbCancelar.setBounds(820, 480, 140, 70);
+
+        jbCancelarTabela.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCancelarTabela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
+        jbCancelarTabela.setText("Cancelar");
+        getContentPane().add(jbCancelarTabela);
+        jbCancelarTabela.setBounds(370, 260, 140, 70);
+
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Locação Home", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator1);
@@ -226,7 +245,7 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisar Locação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator4);
-        jSeparator4.setBounds(20, 360, 970, 200);
+        jSeparator4.setBounds(20, 360, 970, 210);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -345,6 +364,10 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbControleMouseClicked
 
+    private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbPesquisarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -389,6 +412,8 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbCadastrar;
+    private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbCancelarTabela;
     private javax.swing.JButton jbControle;
     private javax.swing.JButton jbPesquisar;
     private javax.swing.JButton jbVisualizar;
