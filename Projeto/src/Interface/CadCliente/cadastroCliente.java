@@ -6,11 +6,9 @@
 package Interface.CadCliente;
 
 import Interface.TelaPrincipal.Sessao;
-import Interface.TelaPrincipal.TelaPrincipal;
 import dao.CidadeDAO;
 import dao.EstadoCivilDAO;
 import dao.EstadoDAO;
-import dao.PessoaDAO;
 import dao.PessoaFisicaDAO;
 import dao.PessoaJuridicaDAO;
 import dao.TipoContratoDAO;
@@ -28,7 +26,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
@@ -109,7 +106,6 @@ public class cadastroCliente extends javax.swing.JFrame {
     }
 
     public void acesso(int nivel) {
-        System.out.println("====================================================Nível de Acesso: " + nivel);
         DisableEnable(false);
         switch (nivel) {
             case 1:
@@ -230,94 +226,6 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfComplemento.setBackground(Color.white);
         jtfEmail.setBackground(Color.white);
         // Fim
-    }
-
-    public void popular() {
-        //nivel usuario
-        if (true) {
-            jbConfirmar.setEnabled(true);
-            jbEditar.setEnabled(true);
-        } else {
-            jbConfirmar.setEnabled(false);
-            jbEditar.setEnabled(false);
-        }
-
-        jtfCodigoInterno.setText(null);
-        //cad
-
-        jtfNome.setText(null);
-        jftCPF.setText(null);
-        jtfRG.setText(null);
-        jftDataNascimento.setText(null);
-        jtfCargo.setText(null);
-        jtfNomeFantasia.setText(null);
-        jtfNomeResponsavel.setText(null);
-        jtfEndereco.setText(null);
-        jtfNumero.setText(null);
-        jtfBairro.setText(null);
-        jftCEP.setText(null);
-//        jcbCidade.setText(null);
-        jtfComplemento.setText(null);
-        jftTelefone.setText(null);
-        jftCelular.setText(null);
-        jftComercial.setText(null);
-        jtfEmail.setText(null);
-        jtaObs.setText(null);
-
-        //cad Fim 
-        // JRB
-        if (true) {
-            jrbPessoaFisica.setSelected(true);
-            ativaPessoa(true);
-            mascaraCPF_CNPJ(true);
-        } else if (true) {
-            jrbPessoaJuridica.setSelected(true);
-            ativaPessoa(false);
-            mascaraCPF_CNPJ(false);
-        }
-
-        if (true) {
-            jrbMasculino.setSelected(true);
-
-        } else if (true) {
-            jrbFeminino.setSelected(true);
-        }
-        // jrb fim
-
-        // jcb     // falta arrumar o estado pois muda bem a logica..
-        if (true) {
-            jcbAtivo.setSelected(true);
-
-        }
-
-        if (true) {
-            jcbCompra.setSelected(true);
-        }
-
-        if (true) {
-            jcbTroca.setSelected(true);
-        }
-
-        if (true) {
-            jcbLocacao.setSelected(true);
-        }
-
-        if (true) {
-            jcbEstadoCivil.setSelectedIndex(0);
-        } else if (true) {
-            jcbEstadoCivil.setSelectedIndex(1);
-        } else if (true) {
-            jcbEstadoCivil.setSelectedIndex(2);
-        } else if (true) {
-            jcbEstadoCivil.setSelectedIndex(3);
-        }
-
-        // Estado vai ser necessario elaborar mais isso..
-        if (true) {
-            jcbEstado.setSelectedIndex(WIDTH);
-        }
-
-        // jcb fim
     }
 
     public void cadastrarPessoaFisica() throws ParseException {
@@ -996,110 +904,34 @@ public class cadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
-        //        if (jbConfirmar.isEnabled()) {
-//            if (bgPessoa.getSelection() == jrbPessoaFisica) {
-//                System.out.println("Física");
-//                cadastrarPessoaFisica();
-//            } else if (bgPessoa.getSelection() == jrbPessoaJuridica) {
-//                System.out.println("Juridica");
-//            }
-//
-////            Pessoa pessoa;
-////            PessoaFisica pessoaFisica;
-////            PessoaJuridica pessoaJuridica;
-////            Endereco endereco;
-////            Bairro bairro;
-////            Cidade cidade;
-////            Estado estado;
-////            Telefone telefone;
-////
-////            
-////            if (this.getPessoa() == null) {
-////                
-////                pessoa = new Pessoa();
-////                pessoaFisica = new PessoaFisica();
-////                pessoaJuridica = new PessoaJuridica();
-////                endereco = new Endereco();
-////                bairro = new Bairro();
-////                cidade = new Cidade();
-////                estado = new Estado();
-////                telefone = new Telefone();
-////                
-////                EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
-////                EstadoCivil estadoCivil = new EstadoCivil();
-////                List<EstadoCivil> estadoCivilTemp = new ArrayList<EstadoCivil>();
-////                estadoCivilTemp = estadoCivilDAO.getAll();
-////                
-////            } else {
-////                pessoa = pessoaTemp;
-////                endereco = pessoa.getEndereco();
-////                bairro = pessoa.getEndereco().getBairro();
-////                cidade = pessoa.getEndereco().getBairro().getCidade();
-////                estado = pessoa.getEndereco().getBairro().getCidade().getEstado();
-////
-////            }
-//            if (!validaCampos(true)) {
-//                JOptionPane.showMessageDialog(null, "Verifique os campos obrigatórios!");
-//            }
-//
-//        }
-        if (jrbPessoaFisica.isSelected()) {
-            try {
-                cadastrarPessoaFisica();
-            } catch (ParseException ex) {
-                Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else if (jrbPessoaJuridica.isSelected()) {
-            try {
-                cadastrarPessoaJuridica();
-            } catch (ParseException ex) {
-                Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        if (jbConfirmar.isEnabled()) {
+            if (jrbPessoaFisica.isSelected()) {
+                if (validaCampos(true)) {
+                    try {
+                        cadastrarPessoaFisica();
+                        ZerarCampos();
+                        instancia = null;
+                    } catch (ParseException ex) {
+                        Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Verifique os campos obrigatórios!");
+                }
+            } else if (jrbPessoaJuridica.isSelected()) {
+                if (validaCampos(true)) {
+                    try {
+                        cadastrarPessoaJuridica();
+                        ZerarCampos();
+                        instancia = null;
+                    } catch (ParseException ex) {
+                        Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Verifique os campos obrigatórios!");
             }
         }
-
-
     }//GEN-LAST:event_jbConfirmarMouseClicked
-
-    private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-        cadastroClienteHome homeCliente = cadastroClienteHome.getInstancia();
-        cadastroClienteHome.getInstancia().setVisible(true);
-        dispose();    // TODO add your handling code here:
-    }//GEN-LAST:event_jbCancelarMouseClicked
-
-    private void jrbPessoaJuridicaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbPessoaJuridicaMousePressed
-        ativaPessoa(false);
-        mascaraCPF_CNPJ(false);
-        limpaCampos();
-        carregaEstados();
-        populaPessoaJuridica();
-    }//GEN-LAST:event_jrbPessoaJuridicaMousePressed
-
-    private void jrbPessoaFisicaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbPessoaFisicaMousePressed
-        ativaPessoa(true);
-        mascaraCPF_CNPJ(true);
-        limpaCampos();
-        carregaEstados();
-        carregaEstadosCivis();
-        populaPessoaFisica();
-    }//GEN-LAST:event_jrbPessoaFisicaMousePressed
-
-    private void jbEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseClicked
-        if (jbEditar.isEnabled()) {
-            DisableEnable(true);
-            jbConfirmar.setEnabled(true);
-        }
-// TODO add your handling code here:
-    }//GEN-LAST:event_jbEditarMouseClicked
-
-    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
-        if (jcbEstado.getSelectedIndex() > -1) {
-            EstadoDAO estadoDAO = new EstadoDAO();
-            Estado estado = new Estado();
-            estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
-            carregaCidades(estado);
-
-        }
-    }//GEN-LAST:event_jcbEstadoActionPerformed
 
     public void ativaPessoa(boolean ativo) {
         if (ativo == false) {
@@ -1217,66 +1049,90 @@ public class cadastroCliente extends javax.swing.JFrame {
     }
 
     public boolean validaCampos(boolean valida) {
+        //PESSOA        
+        //Email
+        if (!jtfEmail.getText().equals("")) {
+            jtfEmail.setBackground(Color.white);
+        } else {
+            jtfEmail.setBackground(Color.red);
+            valida = false;
+        }
+        //Endereço
+        if (!jtfEndereco.getText().equals("")) {
+            jtfEndereco.setBackground(Color.white);
+        } else {
+            jtfEndereco.setBackground(Color.red);
+            valida = false;
+        }
+        //Número
+        if (!jtfNumero.getText().equals("") && validacao.validaNumeros(jtfNumero.getText())) {
+            jtfNumero.setBackground(Color.white);
+        } else {
+            jtfNumero.setBackground(Color.red);
+            valida = false;
+        }
+        //Bairro
+        if (!jtfBairro.getText().equals("") && validacao.validaLetras(jtfBairro.getText())) {
+            jtfBairro.setBackground(Color.white);
+        } else {
+            jtfBairro.setBackground(Color.red);
+            valida = false;
+        }
+        //Cidade
+        if (jcbCidade.getSelectedItem() != null) {
+            jcbCidade.setBackground(Color.white);
+        } else {
+            jcbCidade.setBackground(Color.red);
+            valida = false;
+        }
+        //Estado
+        if (jcbEstado.getSelectedItem() != null) {
+            jcbEstado.setBackground(Color.white);
+        } else {
+            jcbEstado.setBackground(Color.red);
+            valida = false;
+        }
+        //Data Nascimento
+        if (jftDataNascimento.getText().trim().length() == 10) {
+            jftDataNascimento.setBackground(Color.white);
+        } else {
+            jftDataNascimento.setBackground(Color.red);
+            valida = false;
+        }
+        //Telefone
+        if (jftTelefone.getText().trim().length() == 13 || jftCelular.getText().trim().length() == 14 || jftComercial.getText().trim().length() == 13) {
+            jftTelefone.setBackground(Color.white);
+            jftCelular.setBackground(Color.white);
+            jftComercial.setBackground(Color.white);
+        } else {
+            jftTelefone.setBackground(Color.red);
+            jftCelular.setBackground(Color.red);
+            jftComercial.setBackground(Color.red);
+            valida = false;
+        }
+        //PESSOA FÍSICA
         if (jrbPessoaFisica.isSelected()) {
+            //Nome
             if (!jtfNome.getText().equals("") && validacao.validaLetras(jtfNome.getText())) {
                 jtfNome.setBackground(Color.white);
             } else {
                 jtfNome.setBackground(Color.red);
                 valida = false;
             }
+            //CPF
             if (jftCPF.getText().trim().length() == 14) {
                 jftCPF.setBackground(Color.white);
             } else {
                 jftCPF.setBackground(Color.red);
                 valida = false;
             }
-            if (!jtfEndereco.getText().equals("") && validacao.validaLetras(jtfEndereco.getText())) {
-                jtfEndereco.setBackground(Color.white);
+            if (!jtfRG.getText().isEmpty()) {
+                jtfRG.setBackground(Color.white);
             } else {
-                jtfEndereco.setBackground(Color.red);
+                jtfRG.setBackground(Color.red);
                 valida = false;
             }
-            if (!jtfBairro.getText().equals("") && validacao.validaLetras(jtfBairro.getText())) {
-                jtfBairro.setBackground(Color.white);
-            } else {
-                jtfBairro.setBackground(Color.red);
-                valida = false;
-            }
-            if (jcbCidade.getSelectedItem() != null) {
-                jcbCidade.setBackground(Color.white);
-            } else {
-                jcbCidade.setBackground(Color.red);
-                valida = false;
-            }
-            if (jftDataNascimento.getText().trim().length() == 10) {
-                jftDataNascimento.setBackground(Color.white);
-            } else {
-                jftDataNascimento.setBackground(Color.red);
-                valida = false;
-            }
-            if (!jtfNumero.getText().equals("") && validacao.validaNumeros(jtfNumero.getText())) {
-                jtfNumero.setBackground(Color.white);
-            } else {
-                jtfNumero.setBackground(Color.red);
-                valida = false;
-            }
-            if (jcbEstado.getSelectedItem() != null) {
-                jcbEstado.setBackground(Color.white);
-            } else {
-                jcbEstado.setBackground(Color.red);
-                valida = false;
-            }
-            System.out.println(jftTelefone.getText().trim().length());
-            if (jftTelefone.getText().trim().length() == 13 || jftCelular.getText().trim().length() == 14 || jftComercial.getText().trim().length() == 13) {
-                jftTelefone.setBackground(Color.white);
-                jftCelular.setBackground(Color.white);
-                jftComercial.setBackground(Color.white);
-            } else {
-                jftTelefone.setBackground(Color.red);
-                jftCelular.setBackground(Color.red);
-                jftComercial.setBackground(Color.red);
-                valida = false;
-            }
+            //Sexo
             if (jrbMasculino.isSelected() || jrbFeminino.isSelected()) {
                 jrbMasculino.setBackground(Color.white);
                 jrbFeminino.setBackground(Color.white);
@@ -1285,71 +1141,45 @@ public class cadastroCliente extends javax.swing.JFrame {
                 jrbFeminino.setBackground(Color.red);
                 valida = false;
             }
+            //Estado Cíveil
             if (jcbEstadoCivil.getSelectedItem() != null) {
                 jcbEstadoCivil.setBackground(Color.white);
             } else {
                 jcbEstadoCivil.setBackground(Color.red);
                 valida = false;
             }
+            //PESSOA JURÍDICA
         } else if (jrbPessoaJuridica.isSelected()) {
-            if (!jtfNome.getText().equals("") && validacao.validaLetras(jtfNome.getText())) {
+            //Razão Social
+            if (!jtfNome.getText().equals("")) {
                 jtfNome.setBackground(Color.white);
             } else {
                 jtfNome.setBackground(Color.red);
                 valida = false;
             }
+            //CNPJ
             if (jftCPF.getText().trim().length() == 18) {
                 jftCPF.setBackground(Color.white);
             } else {
                 jftCPF.setBackground(Color.red);
                 valida = false;
             }
-            if (!jtfEndereco.getText().equals("") && validacao.validaLetras(jtfEndereco.getText())) {
-                jtfEndereco.setBackground(Color.white);
+            if (!jtfNomeFantasia.getText().isEmpty()) {
+                jtfNomeFantasia.setBackground(Color.white);
             } else {
-                jtfEndereco.setBackground(Color.red);
+                jtfNomeFantasia.setBackground(Color.red);
                 valida = false;
             }
-            if (!jtfBairro.getText().equals("") && validacao.validaLetras(jtfBairro.getText())) {
-                jtfBairro.setBackground(Color.white);
+            if (!jtfNomeResponsavel.getText().isEmpty() && validacao.validaLetras(jtfNomeResponsavel.getText())) {
+                jtfNomeResponsavel.setBackground(Color.white);
             } else {
-                jtfBairro.setBackground(Color.red);
+                jtfNomeResponsavel.setBackground(Color.red);
                 valida = false;
             }
-            if (jcbCidade.getSelectedItem() != null) {
-                jcbCidade.setBackground(Color.white);
+            if (jftCPFResponsavel.getText().trim().length() == 14) {
+                jftCPFResponsavel.setBackground(Color.white);
             } else {
-                jcbCidade.setBackground(Color.red);
-                valida = false;
-            }
-            if (jftDataNascimento.getText().trim().length() == 10) {
-                jftDataNascimento.setBackground(Color.white);
-            } else {
-                jftDataNascimento.setBackground(Color.red);
-                valida = false;
-            }
-            if (!jtfNumero.getText().equals("") && validacao.validaNumeros(jtfNumero.getText())) {
-                jtfNumero.setBackground(Color.white);
-            } else {
-                jtfNumero.setBackground(Color.red);
-                valida = false;
-            }
-
-            if (jcbEstado.getSelectedItem() == "") {
-                jcbEstado.setBackground(Color.white);
-            } else {
-                jcbEstado.setBackground(Color.red);
-                valida = false;
-            }
-            System.out.println(jftTelefone.getText().trim().length());
-            if (jftTelefone.getText().trim().length() == 13 || jftCelular.getText().trim().length() == 14 || jftComercial.getText().trim().length() == 13) {
-                jftTelefone.setBackground(Color.white);
-                jftCelular.setBackground(Color.white);
-                jftComercial.setBackground(Color.white);
-            } else {
-                jftTelefone.setBackground(Color.red);
-                jftCelular.setBackground(Color.red);
-                jftComercial.setBackground(Color.red);
+                jftCPFResponsavel.setBackground(Color.red);
                 valida = false;
             }
         }
@@ -1419,7 +1249,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
         jcbEstado.setModel(defaultComboBox);
-        jcbEstado.setSelectedIndex((int)estado.getId()-1);
+        jcbEstado.setSelectedIndex((int) estado.getId() - 1);
     }
 
     public void carregaCidades(Estado estado) {
@@ -1505,6 +1335,60 @@ public class cadastroCliente extends javax.swing.JFrame {
         });
 
     }
+
+
+    private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
+        if (jbCancelar.isEnabled()) {
+            if (instancia == null) {
+                cadastroClienteHome homeCliente = cadastroClienteHome.getInstancia();
+                cadastroClienteHome.getInstancia().setVisible(true);
+                dispose();
+            } else {
+                
+                String ObjButtons[] = {"Sim", "Não"};
+                int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                    dispose();
+                } else {
+                    
+                }
+            }
+        }
+
+    }//GEN-LAST:event_jbCancelarMouseClicked
+
+    private void jrbPessoaJuridicaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbPessoaJuridicaMousePressed
+        ativaPessoa(false);
+        mascaraCPF_CNPJ(false);
+        limpaCampos();
+        carregaEstados();
+        populaPessoaJuridica();
+    }//GEN-LAST:event_jrbPessoaJuridicaMousePressed
+
+    private void jrbPessoaFisicaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbPessoaFisicaMousePressed
+        ativaPessoa(true);
+        mascaraCPF_CNPJ(true);
+        limpaCampos();
+        carregaEstados();
+        carregaEstadosCivis();
+        populaPessoaFisica();
+    }//GEN-LAST:event_jrbPessoaFisicaMousePressed
+
+    private void jbEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseClicked
+        if (jbEditar.isEnabled()) {
+            DisableEnable(true);
+            jbConfirmar.setEnabled(true);
+        }
+    }//GEN-LAST:event_jbEditarMouseClicked
+
+    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
+        if (jcbEstado.getSelectedIndex() > -1) {
+            EstadoDAO estadoDAO = new EstadoDAO();
+            Estado estado = new Estado();
+            estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+            carregaCidades(estado);
+        }
+    }//GEN-LAST:event_jcbEstadoActionPerformed
 
     /**
      * @param args the command line arguments
