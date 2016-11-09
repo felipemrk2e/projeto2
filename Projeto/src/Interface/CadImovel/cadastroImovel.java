@@ -345,6 +345,21 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtfUF.setText(imovel.getEndereco().getCidade().getEstado().getNome());
         jcbEstado.setSelectedIndex((int) imovel.getEndereco().getCidade().getEstado().getId() - 1);
 
+      CidadeDAO cidadeDao = new CidadeDAO();
+       
+        List<Cidade> cidadeTemp = new ArrayList<>();
+        cidadeTemp = cidadeDao.getWhereIdEstado((long)(jcbEstado.getSelectedIndex()+1));
+        int index = 0;
+        List<String> listaCidade = new ArrayList<String>();
+        for (int i = 0; i < cidadeTemp.size(); i++) {
+          listaCidade.add(cidadeTemp.get(i).getNomeCidade());
+         if (cidadeTemp.get(i).getIdCidade() == imovelTemp.getEndereco().getCidade().getIdCidade()){
+             index = i;
+         }
+        }
+        DefaultComboBoxModel defaultComboBox3 = new DefaultComboBoxModel(listaCidade.toArray());
+        jcbCidade.setModel(defaultComboBox3);
+        jcbCidade.setSelectedIndex(index);
         //endereço não obrigatorio
         if (imovel.getEndereco().getCep().equals(" ")) {
             jtCep.setText("");
@@ -2525,7 +2540,19 @@ public class cadastroImovel extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbStatusActionPerformed
 
     private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
-             // TODO add your handling code here:
+CidadeDAO cidadeDao = new CidadeDAO();
+       
+        List<Cidade> cidadeTemp = new ArrayList<>();
+        cidadeTemp = cidadeDao.getWhereIdEstado((long)(jcbEstado.getSelectedIndex()+1));
+    
+        List<String> listaCidade = new ArrayList<String>();
+        for (int i = 0; i < cidadeTemp.size(); i++) {
+          listaCidade.add(cidadeTemp.get(i).getNomeCidade());
+        }
+        DefaultComboBoxModel defaultComboBox3 = new DefaultComboBoxModel(listaCidade.toArray());
+        jcbCidade.setModel(defaultComboBox3);       
+        
+// TODO add your handling code here:
     }//GEN-LAST:event_jcbEstadoActionPerformed
 
     private void jtfStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfStatusActionPerformed
