@@ -81,5 +81,21 @@ public class ImovelDAO extends DAO<Imovel>{
         }
         return entityManager.createQuery("FROM Imovel im WHERE "+query+" and im.ativo = 1").getResultList();
     }
+    
+    /**
+        * Retorna apenas Imoveis que estejam ativos.
+        * @return      lista de Imoveis ativos
+    */
+    public List<Imovel> getAtivos(){
+        return entityManager.createQuery("FROM Imovel im WHERE im.ativo = 1").getResultList();
+    }
+    
+    /**
+        * Retorna apenas Imoveis que estejam inativos.
+        * @return      lista de Imoveis inativos
+    */
+    public List<Imovel> getInativos(){
+        return entityManager.createQuery("FROM Imovel im WHERE im.ativo = 0").getResultList();
+    }
 
 }
