@@ -15,6 +15,21 @@ import model.pessoa.PessoaFisica;
  * @author a1502735
  */
 public class PessoaJuridicaDAO extends DAO<PessoaJuridica>{
+    
+    private static PessoaJuridicaDAO instancia;
+
+    public static PessoaJuridicaDAO getInstancia() {
+        if (instancia == null) {
+            instancia = new PessoaJuridicaDAO();
+        }
+        return instancia;
+    }
+
+    public static void encerrarInstancia() {
+        instancia = null;
+    }
+    
+    
     @Override
     public PessoaJuridica getById(Long id) {
         PessoaJuridica pessoaJuridica = null;

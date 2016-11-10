@@ -29,7 +29,6 @@ import validacao.validacao;
 public class CadFuncionarioHome extends javax.swing.JFrame {
 
     private static CadFuncionarioHome instancia;
-    int user = Sessao.getInstance().getUsuario().getNivelAcesso();
 
     /**
      * Creates new form CadFuncionarioHome
@@ -54,12 +53,11 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     }
 
     public void popularTabela() {
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         List<Funcionario> funcionarios = new ArrayList<Funcionario>();
-        funcionarios = funcionarioDAO.getAll();
+        funcionarios = FuncionarioDAO.getInstancia().getAll();
         jtFuncionarios.setModel(new FuncionarioTableModel(funcionarios));
     }
-    
+
     public void popularTabelaQuery() {
         if (!jtNomeFuncionario.getText().isEmpty()) {
             PessoaDAO pessoaDAO = new PessoaDAO();
@@ -143,9 +141,6 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         jbVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
         jbVisualizar.setText("Visualizar");
         jbVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbVisualizarMouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbVisualizarMousePressed(evt);
             }
@@ -248,37 +243,40 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jbExcluirMouseClicked
 
     private void jbNivelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbNivelMouseClicked
-//        if (jbNivel.isEnabled()) {
-//            String idFuncionario = "vazio no momento";
-//            new ControleFuncionario(user, idFuncionario).setVisible(true);
-//            dispose();
-//
-//        }
-// TODO add your handling code here:
+        int linhaSelecionada = jtFuncionarios.getSelectedRow();
+        if (linhaSelecionada == -1) {
+            return; //Nada selecionado
+        }
+        FuncionarioTableModel funcionarioModel = (FuncionarioTableModel) jtFuncionarios.getModel();
+        Funcionario funcionarioSelecionado = funcionarioModel.get(linhaSelecionada);
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        ControleFuncionario.getInstancia().funcionario = funcionarioSelecionado;
+        setLocationRelativeTo(this);
+        ControleFuncionario.getInstancia().atualizarSenha(funcionarioSelecionado);
+        ControleFuncionario.getInstancia().setVisible(true);
+        ControleFuncionario.getInstancia().DisableEnable(false);
+        ControleFuncionario.getInstancia().setLocationRelativeTo(this);
+        ControleFuncionario.getInstancia().setAlwaysOnTop(true);
     }//GEN-LAST:event_jbNivelMouseClicked
 
-    private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
-
-    }//GEN-LAST:event_jbVisualizarMouseClicked
-
     private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
-
-        // TODO add your handling code here:
+        if (jbCadastrar.isEnabled()) {
+            cadastroFuncionario funcionario = cadastroFuncionario.getInstancia();
+            funcionario.setLocationRelativeTo(this);
+            funcionario.setVisible(true);
+        }
     }//GEN-LAST:event_jbCadastrarMouseClicked
 
     private void jbCancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMousePressed
         if (jbCancelar.isEnabled()) {
-            if (instancia == null) {
-                dispose();
-            } else {
-                setAlwaysOnTop(false);
-                String ObjButtons[] = {"Sim", "Não"};
-                int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
-                if (PromptResult == JOptionPane.YES_OPTION) {
-                    dispose();
-                } else {
+//            if (instancia == null) {
+//                dispose();
+//            } else {
 
-                }
+            String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {
+                dispose();
             }
         }
     }//GEN-LAST:event_jbCancelarMousePressed
@@ -290,9 +288,14 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         }
         FuncionarioTableModel funcionarioModel = (FuncionarioTableModel) jtFuncionarios.getModel();
         Funcionario funcionarioSelecionado = funcionarioModel.get(linhaSelecionada);
-        cadastroFuncionario cadFuncionario = new cadastroFuncionario(funcionarioSelecionado);
-        cadFuncionario.setVisible(true);
-        cadFuncionario.setLocationRelativeTo(this);
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        cadastroFuncionario.getInstancia().funcionario = funcionarioSelecionado;
+        setLocationRelativeTo(this);
+        cadastroFuncionario.getInstancia().atualizarFuncionario(funcionarioSelecionado);
+        cadastroFuncionario.getInstancia().setVisible(true);
+        cadastroFuncionario.getInstancia().DisableEnable(false);
+        cadastroFuncionario.getInstancia().setLocationRelativeTo(this);
+        cadastroFuncionario.getInstancia().setAlwaysOnTop(true);
     }//GEN-LAST:event_jbVisualizarMousePressed
 
     /**

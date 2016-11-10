@@ -927,7 +927,8 @@ public class cadastroCliente extends javax.swing.JFrame {
                             cadastrarPessoaFisica();
                         }else{
                             atualizarPessoaFisica(pessoaFisica);
-                        }                        
+                        }      
+                        JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
                         ZerarCampos();
                         instancia = null;
                     } catch (ParseException ex) {
@@ -940,6 +941,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                 if (validaCampos(true)) {
                     try {
                         cadastrarPessoaJuridica();
+                        JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
                         ZerarCampos();
                         instancia = null;
                     } catch (ParseException ex) {

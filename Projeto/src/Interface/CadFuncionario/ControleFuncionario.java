@@ -6,7 +6,20 @@
 package Interface.CadFuncionario;
 
 import Interface.TelaPrincipal.Sessao;
+import dao.FuncionarioDAO;
+import java.awt.Color;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import model.pessoa.Funcionario;
+import model.pessoa.Login;
 
 /**
  *
@@ -15,7 +28,8 @@ import javax.swing.JOptionPane;
 public class ControleFuncionario extends javax.swing.JFrame {
 
     private static ControleFuncionario instancia;
-    int user = Sessao.getInstance().getUsuario().getNivelAcesso();
+
+    public static Funcionario funcionario = null;
 
     /**
      * Creates new form ControleFuncionario
@@ -23,49 +37,143 @@ public class ControleFuncionario extends javax.swing.JFrame {
     public ControleFuncionario() {
         this.setUndecorated(true);
         initComponents();
-        setAlwaysOnTop(true);    
+        setAlwaysOnTop(true);
         this.setTitle("Controle de Funcionários");
+        mascaraCPF();
+        carregaNiveis();
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
-    
+
     public static ControleFuncionario getInstancia() {
         if (instancia == null) {
             instancia = new ControleFuncionario();
         }
         return instancia;
     }
-    
-    public static void encerrarInstancia(){
+
+    public static void encerrarInstancia() {
         instancia = null;
     }
 
-    public void popular() {
-        //Falta Cargo e departamento..
+    public void acesso(int nivel) {
+        DisableEnable(false);
 
-        jtfNome.setText("");
-        jtfCodigoInterno.setText("");
-        jftCPF.setText("");
-        jtfRG.setText("");
+        switch (nivel) {
+            case 1:
+                DisableEnable(true);
+                jbConfirmar.setEnabled(true);
+                jbEditar.setEnabled(true);
+                break;
+            case 2:
+                DisableEnable(true);
+                break;
+            case 3:
+                DisableEnable(false);
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "Acesso negado!\nNível de Acesso Inválido");
+        }
     }
 
     public void DisableEnable(boolean b) {
-
-        //falta nivel de acesso;
+        jcbNivelAcesso.setEnabled(b);
         jtUser.setEnabled(b);
-        jtNovaSenha1.setEnabled(b);
-        jtNovaSenha2.setEnabled(b);
+        jpfNovaSenha1.setEnabled(b);
+        jpfNovaSenha2.setEnabled(b);
     }
 
-    public void verificaNivel() {
-        if (user <= 2) {
-            DisableEnable(false);
-            jbEditar.setEnabled(true);
-            jbConfirmar.setEnabled(false);
+    public void cadastrarSenha(Funcionario funcionario) {
 
+        Login login = new Login();
+        login.setNivelAcesso(jcbNivelAcesso.getSelectedIndex() + 1);
+        login.setNomeUsuario(jtUser.getText());
+
+        char[] chars = jpfNovaSenha1.getPassword();        
+        String password = String.valueOf(chars);
+        login.setSenhaUsuario(password);
+        funcionario.setLogin(login);
+
+        FuncionarioDAO.getInstancia().merge(funcionario);
+    }
+
+    public void atualizarSenha(Funcionario funcionario) {
+        jtfCodigoInterno.setText("" + funcionario.getIdPessoa());
+        jtfNome.setText(funcionario.getNomePessoa());
+        jftCPF.setText(funcionario.getCPF());
+        jtfRG.setText(funcionario.getRG());
+        jtCargo.setText(funcionario.getCargo().getNomeCargo());
+        jtDepartamento.setText(funcionario.getCargo().getDepartamento().getNomeDepartamento());
+        jcbNivelAcesso.setSelectedIndex(funcionario.getLogin().getNivelAcesso() - 1);
+        jtUser.setText(funcionario.getLogin().getNomeUsuario());
+    }
+
+    public boolean validaCampos(boolean valida) {
+        if (!jtUser.getText().isEmpty()) {
+            jtUser.setBackground(Color.white);
         } else {
-            DisableEnable(false);
-            jbConfirmar.setEnabled(false);
-            jbEditar.setEnabled(false);
+            jtUser.setBackground(Color.red);
+            valida = false;
         }
+        if (!jpfNovaSenha1.getText().isEmpty()) {
+            jpfNovaSenha1.setBackground(Color.white);
+        } else {
+            jpfNovaSenha1.setBackground(Color.red);
+            valida = false;
+        }
+        if (!jpfNovaSenha2.getText().isEmpty()) {
+            jpfNovaSenha2.setBackground(Color.white);
+        } else {
+            jpfNovaSenha2.setBackground(Color.red);
+            valida = false;
+        }
+        if (jcbNivelAcesso.getSelectedItem() != null) {
+            jcbNivelAcesso.setBackground(Color.white);
+        } else {
+            jcbNivelAcesso.setBackground(Color.red);
+            valida = false;
+        }
+
+        if (!Arrays.equals(jpfNovaSenha2.getPassword(), jpfNovaSenha1.getPassword())) {
+            valida = false;
+            JOptionPane.showMessageDialog(this, "Senhas não coincidem!");
+            jpfNovaSenha1.setText("");
+            jpfNovaSenha2.setText("");
+        }
+
+        return valida;
+    }
+
+    public void ZerarCampos() {
+        jtfCodigoInterno.setText("");
+        jtfNome.setText("");
+        jftCPF.setText("");
+        jtfRG.setText("");
+        jtCargo.setText("");
+        jtDepartamento.setText("");
+        jcbNivelAcesso.setSelectedIndex(-1);
+        jtUser.setText("");
+        jpfNovaSenha1.setText("");
+        jpfNovaSenha2.setText("");
+    }
+
+    public void mascaraCPF() {
+        try {
+            jftCPF.setFormatterFactory(new DefaultFormatterFactory(
+                    new MaskFormatter("###.###.###-##")));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void carregaNiveis() {
+        List niveis = new ArrayList();
+        niveis.add("1");
+        niveis.add("2");
+        niveis.add("3");
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(niveis.toArray());
+        jcbNivelAcesso.setModel(defaultComboBox);
+
     }
 
     /**
@@ -90,7 +198,6 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jlNivelAcesso = new javax.swing.JLabel();
         jtNivelAcesso = new javax.swing.JTextField();
         jtUser = new javax.swing.JTextField();
-        jtNovaSenha2 = new javax.swing.JTextField();
         jbConfirmar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
         jtCargo = new javax.swing.JTextField();
@@ -98,7 +205,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jlCargo = new javax.swing.JLabel();
         jlDepartamento = new javax.swing.JLabel();
         jbEditar = new javax.swing.JButton();
-        jtNovaSenha1 = new javax.swing.JTextField();
+        jpfNovaSenha1 = new javax.swing.JPasswordField();
+        jpfNovaSenha2 = new javax.swing.JPasswordField();
         jlNomeUsuario = new javax.swing.JLabel();
         jcbNivelAcesso = new javax.swing.JComboBox<String>();
         jSeparator1 = new javax.swing.JSeparator();
@@ -167,12 +275,15 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jtNivelAcesso.setBounds(440, 160, 60, 30);
         getContentPane().add(jtUser);
         jtUser.setBounds(370, 200, 580, 30);
-        getContentPane().add(jtNovaSenha2);
-        jtNovaSenha2.setBounds(370, 280, 580, 30);
 
         jbConfirmar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbConfirmar.setText("Confirmar");
+        jbConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbConfirmarMousePressed(evt);
+            }
+        });
         getContentPane().add(jbConfirmar);
         jbConfirmar.setBounds(810, 320, 140, 70);
 
@@ -186,8 +297,12 @@ public class ControleFuncionario extends javax.swing.JFrame {
         });
         getContentPane().add(jbCancelar);
         jbCancelar.setBounds(510, 320, 140, 70);
+
+        jtCargo.setEditable(false);
         getContentPane().add(jtCargo);
         jtCargo.setBounds(790, 80, 160, 30);
+
+        jtDepartamento.setEditable(false);
         getContentPane().add(jtDepartamento);
         jtDepartamento.setBounds(370, 120, 150, 30);
 
@@ -205,10 +320,23 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jbEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/editar2.png"))); // NOI18N
         jbEditar.setText("Editar");
+        jbEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbEditarMousePressed(evt);
+            }
+        });
         getContentPane().add(jbEditar);
         jbEditar.setBounds(660, 320, 140, 70);
-        getContentPane().add(jtNovaSenha1);
-        jtNovaSenha1.setBounds(370, 240, 580, 30);
+
+        jpfNovaSenha1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jpfNovaSenha1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jpfNovaSenha1);
+        jpfNovaSenha1.setBounds(370, 240, 580, 30);
+        getContentPane().add(jpfNovaSenha2);
+        jpfNovaSenha2.setBounds(370, 280, 580, 30);
 
         jlNomeUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlNomeUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -237,21 +365,50 @@ public class ControleFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbNivelAcessoActionPerformed
 
     private void jbCancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMousePressed
-         if (jbCancelar.isEnabled()) {
-            if (instancia == null) {                
-                dispose();
-            } else {
-                setAlwaysOnTop(false);
-                String ObjButtons[] = {"Sim", "Não"};
-                int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
-                if (PromptResult == JOptionPane.YES_OPTION) {
-                    dispose();
-                } else {
+        if (jbCancelar.isEnabled()) {
+//            if (instancia == null) {
+//                dispose();
+//            } else {
 
-                }
+            String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {
+                dispose();
             }
         }
     }//GEN-LAST:event_jbCancelarMousePressed
+
+    private void jpfNovaSenha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpfNovaSenha1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jpfNovaSenha1ActionPerformed
+
+    private void jbConfirmarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMousePressed
+        if (jbConfirmar.isEnabled()) {
+            if (validaCampos(true)) {
+                try {
+                    cadastrarSenha(funcionario);
+                    JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
+                    ZerarCampos();
+                    funcionario = null;
+                    encerrarInstancia();
+                    dispose();
+
+                } catch (Exception ex) {
+                    Logger.getLogger(ControleFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Verifique os campos obrigatórios!");
+            }
+
+        }
+    }//GEN-LAST:event_jbConfirmarMousePressed
+
+    private void jbEditarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMousePressed
+        if (jbEditar.isEnabled()) {
+            ControleFuncionario.getInstancia().DisableEnable(true);
+            JOptionPane.showMessageDialog(this, "Campos abertos para edição!");
+        }
+    }//GEN-LAST:event_jbEditarMousePressed
 
     /**
      * @param args the command line arguments
@@ -305,11 +462,11 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jlNovaSenha;
     private javax.swing.JLabel jlRG;
     private javax.swing.JLabel jlRepetirNovaSenha;
+    private javax.swing.JPasswordField jpfNovaSenha1;
+    private javax.swing.JPasswordField jpfNovaSenha2;
     private javax.swing.JTextField jtCargo;
     private javax.swing.JTextField jtDepartamento;
     private javax.swing.JTextField jtNivelAcesso;
-    private javax.swing.JTextField jtNovaSenha1;
-    private javax.swing.JTextField jtNovaSenha2;
     private javax.swing.JTextField jtUser;
     private javax.swing.JTextField jtfCodigoInterno;
     private javax.swing.JTextField jtfNome;

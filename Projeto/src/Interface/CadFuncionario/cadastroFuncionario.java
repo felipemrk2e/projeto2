@@ -51,7 +51,8 @@ import validacao.validacao;
 public class cadastroFuncionario extends javax.swing.JFrame {
 
     private static cadastroFuncionario instancia;
-    int user = Sessao.getInstance().getUsuario().getNivelAcesso();
+
+    public static Funcionario funcionario = null;
 
     /**
      * Creates new form cadastroFuncionario
@@ -66,26 +67,28 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         carregaEstados();
         carregaCidades();
         carregaEstadosCivis();
-        populaFuncionario();
+        if (funcionario == null) {
+            populaFuncionario();
+        }
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 
     }
 
-    public cadastroFuncionario(Funcionario funcionario) {
-        this.setUndecorated(true);
-        initComponents();
-        setAlwaysOnTop(true);
-        this.setTitle("Cadastro de Funcionários");
-        configuraMascaras();
-        carregaCargos();
-        carregaEstados();
-        carregaCidades();
-        carregaEstadosCivis();
-        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
-        atualizarFuncionario(funcionario);
-
-    }
-
+//    public cadastroFuncionario(Funcionario funcionario) {
+//        this.funcionario = funcionario;
+//        this.setUndecorated(true);
+//        initComponents();
+//        setAlwaysOnTop(true);
+//        this.setTitle("Atualização de Funcionário");
+//        configuraMascaras();
+//        carregaCargos();
+//        carregaEstados();
+//        carregaCidades();
+//        carregaEstadosCivis();
+//        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        atualizarFuncionario();
+//
+//    }
     public static cadastroFuncionario getInstancia() {
         if (instancia == null) {
             instancia = new cadastroFuncionario();
@@ -112,12 +115,12 @@ public class cadastroFuncionario extends javax.swing.JFrame {
                 DisableEnable(false);
                 break;
             default:
-                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
+                JOptionPane.showMessageDialog(this, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
 
     public void DisableEnable(Boolean b) {
-
+        jtfCodigoInterno.setEditable(true);
         //cad
         jtfNome.setEnabled(b);
         jftCPF.setEnabled(b);
@@ -127,7 +130,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfNumero.setEnabled(b);
         jtfBairro.setEnabled(b);
         jftCEP.setEnabled(b);
-        jcbCidade.setEnabled(b);
         jtfComplemento.setEnabled(b);
         jftTelefone.setEnabled(b);
         jftCelular.setEnabled(b);
@@ -146,6 +148,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfSerieCTPS.setEnabled(b);
         jtfCargaHoraria.setEnabled(b);
         jftDataAdmissao.setEnabled(b);
+        jtfSalario.setEnabled(b);
 
         //cad Fim 
         // JRB
@@ -156,6 +159,8 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         // jcb     
         jcbEstadoCivil.setEnabled(b);
         jcbEstado.setEnabled(b);
+        jcbCidade.setEnabled(b);
+        jcbCargo.setEnabled(b);
     }
 
     public void ZerarCampos() {
@@ -199,6 +204,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jcbEstadoCivil.setSelectedIndex(-1);
         jcbEstado.setSelectedIndex(-1);
         jcbCidade.setSelectedIndex(-1);
+        jcbCargo.setSelectedIndex(-1);
 
         // jcb fim
         //Tirando os alertas
@@ -321,9 +327,89 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         funcionarioDAO.persist(funcionario);
     }
 
-    public void atualizarFuncionario(Funcionario funcionario) {
+    public void cadastrarFuncionario(Funcionario funcionario) throws ParseException {
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        funcionario.setNomePessoa(jtfNome.getText());
+        funcionario.setCPF(jftCPF.getText());
+        funcionario.setRG(jtfRG.getText());
+        Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataNascimento.getText());
+        funcionario.setDataNascimento(dataNascimento);
+        funcionario.setObservacoes(jtaObs.getText());
 
+        EstadoDAO estadoDAO = new EstadoDAO();
+        Estado estado = new Estado();
+        estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        Cidade cidade = new Cidade();
+        cidade = cidadeDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+
+        Endereco endereco = new Endereco();
+        endereco.setNomeEndereco(jtfEndereco.getText());
+        endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
+        endereco.setCep(jftCEP.getText());
+        endereco.setComplemento(jtfComplemento.getText());
+        endereco.setBairro(jtfBairro.getText());
+        endereco.setCidade(cidade);
+        funcionario.setEndereco(endereco);
+
+        List<Telefone> telefones = new ArrayList<Telefone>();
+        Telefone telefone = new Telefone();
+        Telefone celular = new Telefone();
+        Telefone comercial = new Telefone();
+
+        telefone.setNumero(jftTelefone.getText());
+        telefone.setPessoa(funcionario);
+        telefone.setOperadora("");
+        celular.setNumero(jftCelular.getText());
+        celular.setPessoa(funcionario);
+        celular.setOperadora("");
+        comercial.setNumero(jftComercial.getText());
+        comercial.setPessoa(funcionario);
+        comercial.setOperadora("");
+
+        telefones.add(telefone);
+        telefones.add(celular);
+        telefones.add(comercial);
+        funcionario.setTelefone(telefones);
+
+        funcionario.setEmail(jtfEmail.getText());
+
+        if (jrbMasculino.isSelected()) {
+            funcionario.setSexo('M');
+        } else if (jrbFeminino.isSelected()) {
+            funcionario.setSexo('F');
+        }
+
+        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
+        EstadoCivil estadoCivil = new EstadoCivil();
+        estadoCivil = estadoCivilDAO.getById((long) jcbEstadoCivil.getSelectedIndex() + 1);
+        funcionario.setEstadoCivil(estadoCivil);
+
+        CargoDAO cargoDAO = new CargoDAO();
+        Cargo cargo = new Cargo();
+        cargo = cargoDAO.getById((long) jcbCargo.getSelectedIndex() + 1);
+        funcionario.setCargo(cargo);
+
+        funcionario.setDependentes(Integer.parseInt(jtfDependentes.getText()));
+        funcionario.setEscolaridade(jtfEscolaridade.getText());
+
+        funcionario.setBanco(jtfBanco.getText());
+        funcionario.setTipoConta(jtfTipoConta.getText());
+        funcionario.setConta(jtfNConta.getText());
+        funcionario.setAgencia(jtfNConta.getText());
+        funcionario.setSalario(Double.parseDouble(jtfSalario.getText()));
+        funcionario.setCtps(jtfNCTPS.getText());
+        funcionario.setSerieCtps(jtfSerieCTPS.getText());
+        funcionario.setCargaHoraria(jtfCargaHoraria.getText());
+        Date admissao = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataAdmissao.getText());
+        funcionario.setDataAdmissao(admissao);       
+
+        funcionarioDAO.merge(funcionario);
+    }
+
+    public void atualizarFuncionario(Funcionario funcionario) {
+        jtfCodigoInterno.setText("" + funcionario.getIdPessoa());       
         jtfNome.setText(funcionario.getNomePessoa());
         jftCPF.setText(funcionario.getCPF());
         jtfRG.setText(funcionario.getRG());
@@ -383,7 +469,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfCargaHoraria.setText(funcionario.getCargaHoraria());
         String dataAdmissao = new SimpleDateFormat("dd/MM/yyyy").format(funcionario.getDataAdmissao());
         jftDataAdmissao.setText(dataAdmissao);
-
         jcbCargo.setSelectedIndex((int) funcionario.getCargo().getIdCargo() - 1);
     }
 
@@ -728,7 +813,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jlCEP = new javax.swing.JLabel();
         jftCEP = new javax.swing.JFormattedTextField();
         jcbEstado = new javax.swing.JComboBox();
-        jcbCidade = new javax.swing.JComboBox<>();
+        jcbCidade = new javax.swing.JComboBox<String>();
         jtfComplemento = new javax.swing.JTextField();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCelular = new javax.swing.JFormattedTextField();
@@ -788,6 +873,11 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jbEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/editar2.png"))); // NOI18N
         jbEditar.setText("Editar");
+        jbEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbEditarMousePressed(evt);
+            }
+        });
         getContentPane().add(jbEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 480, 140, 70));
 
         jlCodigoInterno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -910,7 +1000,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         });
         getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, 30));
 
-        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 140, 30));
         getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 270, 30));
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 210, 30));
@@ -984,7 +1074,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         getContentPane().add(jlAddCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 120, 20, 30));
         getContentPane().add(jtfCargaHoraria, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 440, 70, 30));
 
-        jSeparator1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Funcionário", 2, 0, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        jSeparator1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Funcionário", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 930, 550));
 
         pack();
@@ -995,10 +1085,29 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         if (jbConfirmar.isEnabled()) {
             if (validaCampos(true)) {
                 try {
-                    cadastrarFuncionario();
-                    ZerarCampos();
-                    instancia = null;
+                    if (funcionario == null) {
+                        cadastrarFuncionario();
+                        JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
+                        ZerarCampos();
+                        funcionario = null;
+                        encerrarInstancia();
+                        CadFuncionarioHome homeFuncionario = CadFuncionarioHome.getInstancia();
+                        CadFuncionarioHome.getInstancia().setVisible(true);
+                        CadFuncionarioHome.getInstancia().setLocationRelativeTo(this);
+                        CadFuncionarioHome.getInstancia().popularTabela();
+                        dispose();
+                    } else {
+                        cadastrarFuncionario(funcionario);
+                        JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
+                        ZerarCampos();
+                        funcionario = null;
+                        encerrarInstancia();
+                        dispose();
+                    }
+
                 } catch (ParseException ex) {
+                    Logger.getLogger(cadastroFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
                     Logger.getLogger(cadastroFuncionario.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
@@ -1010,20 +1119,16 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-        if (jbCancelar.isEnabled()) {
-            if (instancia == null) {
+        if (jbCancelar.isEnabled()) {//                   
+            String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {
                 CadFuncionarioHome homeFuncionario = CadFuncionarioHome.getInstancia();
                 CadFuncionarioHome.getInstancia().setVisible(true);
+                CadFuncionarioHome.getInstancia().setLocationRelativeTo(this);
+                CadFuncionarioHome.getInstancia().popularTabela();
                 dispose();
-            } else {
-                setAlwaysOnTop(false);
-                String ObjButtons[] = {"Sim", "Não"};
-                int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
-                if (PromptResult == JOptionPane.YES_OPTION) {
-                    dispose();
-                } else {
-
-                }
+                encerrarInstancia();
             }
         }
     }//GEN-LAST:event_jbCancelarMouseClicked
@@ -1041,6 +1146,13 @@ public class cadastroFuncionario extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jcbEstadoActionPerformed
+
+    private void jbEditarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMousePressed
+        if (jbEditar.isEnabled()) {
+            cadastroFuncionario.getInstancia().DisableEnable(true);
+            JOptionPane.showMessageDialog(this, "Campos abertos para edição!");
+        }
+    }//GEN-LAST:event_jbEditarMousePressed
 
     public void carregaEstados() {
         EstadoDAO estadoDAO = new EstadoDAO();

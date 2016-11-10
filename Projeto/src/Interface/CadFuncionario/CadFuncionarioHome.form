@@ -111,7 +111,6 @@
         <Property name="text" type="java.lang.String" value="Visualizar"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbVisualizarMouseClicked"/>
         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbVisualizarMousePressed"/>
       </Events>
       <Constraints>

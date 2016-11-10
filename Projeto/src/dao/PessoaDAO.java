@@ -14,6 +14,19 @@ import java.util.List;
  */
 public class PessoaDAO extends DAO<Pessoa> {
 
+    private static PessoaDAO instancia;
+
+    public static PessoaDAO getInstancia() {
+        if (instancia == null) {
+            instancia = new PessoaDAO();
+        }
+        return instancia;
+    }
+
+    public static void encerrarInstancia() {
+        instancia = null;
+    }
+
     @Override
     public Pessoa getById(Long id) {
         Pessoa pessoa = null;
@@ -49,15 +62,13 @@ public class PessoaDAO extends DAO<Pessoa> {
     public List<Pessoa> getQuery(String query) {
         return entityManager.createQuery("FROM Pessoa " + query).getResultList();
     }
-    
-    public List<Pessoa> getPorTelefone(String tel){
-         return entityManager.createQuery("FROM Pessoa p JOIN FETCH p.telefone tel WHERE tel.numero = '"+tel+"'").getResultList();
+
+    public List<Pessoa> getPorTelefone(String tel) {
+        return entityManager.createQuery("FROM Pessoa p JOIN FETCH p.telefone tel WHERE tel.numero = '" + tel + "'").getResultList();
     }
-    
-    public List<Pessoa> getCliente(){
-         return entityManager.createQuery("FROM Pessoa AS p INNER JOIN p.PessoaFisica").getResultList();
+
+    public List<Pessoa> getCliente() {
+        return entityManager.createQuery("FROM Pessoa AS p INNER JOIN p.PessoaFisica").getResultList();
     }
-    
-    
 
 }

@@ -850,6 +850,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         finalizarInstancias();
         CadFuncionarioHome cadFuncionarioHome = CadFuncionarioHome.getInstancia();
         cadFuncionarioHome.setLocationRelativeTo(jSeparator2);
+        cadFuncionarioHome.setAlwaysOnTop(true);
         cadFuncionarioHome.setVisible(true);
         }
     }//GEN-LAST:event_jbConsultarFuncionarioMousePressed
