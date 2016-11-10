@@ -6,9 +6,13 @@
 package Interface.CadImovel;
 
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
+import dao.ImovelDAO;
+import imovel.model.Imovel;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import validacao.validacao;
 
@@ -26,6 +30,8 @@ public class cadastroImovelHome extends javax.swing.JFrame {
      */
     public cadastroImovelHome() {
         //this.setUndecorated(true);
+        
+        
         initComponents();
         //setAlwaysOnTop(true);
         fechar();
@@ -54,6 +60,13 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             instancia = new cadastroImovelHome();
         }
         return instancia;
+    }
+    
+    public void popularTable(){
+        List <Imovel> imovel = new ArrayList<>();
+        ImovelDAO dao = new ImovelDAO();
+        imovel = dao.getAll();
+        
     }
 
     public static void encerrarInstancia() {

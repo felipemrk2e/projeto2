@@ -56,9 +56,9 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         removerTitleBar();
         ComboBox();
-//
-//        Imovel imovel = imovelDao.getById(Long.parseLong("4"));
-//        popular(imovel);
+
+        Imovel imovel = imovelDao.getById(Long.parseLong("6"));
+        popular(imovel);
     }
 
     public cadastroImovel(int user) {
@@ -2314,7 +2314,8 @@ public class cadastroImovel extends javax.swing.JFrame {
             } else if (!jtOutros.getText().equals("")) {
                 imovel.setOutrosItens(jtOutros.getText());
             }
-
+             
+            imovel.setAtivo(true);
             //Descrição End
             if ((control == 6) && control2 == true && (!jtCodigo.getText().equals(""))) {
                 status.setIdStatus(Long.valueOf(jcbStatus.getSelectedIndex() + 1));
@@ -2519,7 +2520,7 @@ public class cadastroImovel extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbStatusActionPerformed
 
     private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
-CidadeDAO cidadeDao = new CidadeDAO();
+        CidadeDAO cidadeDao = new CidadeDAO();
        
         List<Cidade> cidadeTemp = new ArrayList<>();
         cidadeTemp = cidadeDao.getWhereIdEstado((long)(jcbEstado.getSelectedIndex()+1));
