@@ -248,9 +248,8 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
         if (jbCadastrar.isEnabled()) {
             cadastroCliente cliente = cadastroCliente.getInstancia();
-            cliente.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
-            cliente.getInstancia().setVisible(true);     // TODO add your handling code here:
-            dispose();
+            cliente.setLocationRelativeTo(this);
+            cliente.setVisible(true);
         }
 
     }//GEN-LAST:event_jbCadastrarMouseClicked
@@ -375,38 +374,69 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     }
 
     private void jbVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarMouseClicked
+//        int linhaSelecionada = jtClientes.getSelectedRow();
+//        if (linhaSelecionada == -1) {
+//            return; //Nada selecionado
+//        }
+//        if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
+//            //Corrigir consulta genérica
+//
+//            PessoaTableModel pessoaModel = (PessoaTableModel) jtClientes.getModel();
+//            Pessoa pessoaSelecionada = pessoaModel.get(linhaSelecionada);
+//            System.out.println("====================================================="+pessoaSelecionada.getIdPessoa());
+//            
+//                PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+//                PessoaFisica pessoaFisica = pessoaFisicaDAO.getById(pessoaSelecionada.getIdPessoa());
+//                cadastroCliente cadastroPessoaFisica = new cadastroCliente(pessoaFisica);
+//                cadastroPessoaFisica.setVisible(true);
+//                cadastroPessoaFisica.setLocationRelativeTo(this);
+//            
+//        } else if (jcbPessoaFisica.isSelected()) {
+//            PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jtClientes.getModel();
+//            PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
+//            cadastroCliente cadastroPessoaFisica = new cadastroCliente(pessoaFisicaSelecionada);
+//            cadastroPessoaFisica.setVisible(true);
+//            cadastroPessoaFisica.setLocationRelativeTo(this);
+//
+//        } else if (jcbPessoaJuridica.isSelected()) {
+//            PessoaJuridicaTableModel pessoaJuridicaModel = (PessoaJuridicaTableModel) jtClientes.getModel();
+//            PessoaJuridica pessoaJuridicaSelecionada = pessoaJuridicaModel.get(linhaSelecionada);
+//            cadastroCliente cadastroPessoaJuridica = new cadastroCliente(pessoaJuridicaSelecionada);
+//            cadastroPessoaJuridica.setVisible(true);
+//            cadastroPessoaJuridica.setLocationRelativeTo(this);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Nenhum campo foi selecionado!");
+//        }
+
         int linhaSelecionada = jtClientes.getSelectedRow();
         if (linhaSelecionada == -1) {
             return; //Nada selecionado
         }
         if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
-            //Corrigir consulta genérica
 
-            PessoaTableModel pessoaModel = (PessoaTableModel) jtClientes.getModel();
-            Pessoa pessoaSelecionada = pessoaModel.get(linhaSelecionada);
-            System.out.println("====================================================="+pessoaSelecionada.getIdPessoa());
-            
-                PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-                PessoaFisica pessoaFisica = pessoaFisicaDAO.getById(pessoaSelecionada.getIdPessoa());
-                cadastroCliente cadastroPessoaFisica = new cadastroCliente(pessoaFisica);
-                cadastroPessoaFisica.setVisible(true);
-                cadastroPessoaFisica.setLocationRelativeTo(this);
-            
         } else if (jcbPessoaFisica.isSelected()) {
             PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jtClientes.getModel();
             PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
-            cadastroCliente cadastroPessoaFisica = new cadastroCliente(pessoaFisicaSelecionada);
-            cadastroPessoaFisica.setVisible(true);
-            cadastroPessoaFisica.setLocationRelativeTo(this);
+            PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+            cadastroCliente.getInstancia().pessoaFisica = pessoaFisicaSelecionada;
+            setLocationRelativeTo(this);
+            cadastroCliente.getInstancia().atualizarPessoaFisica(pessoaFisicaSelecionada);
+            cadastroCliente.getInstancia().setVisible(true);
+            cadastroCliente.getInstancia().DisableEnable(false);
+            cadastroCliente.getInstancia().setLocationRelativeTo(this);
+            cadastroCliente.getInstancia().setAlwaysOnTop(true);
 
         } else if (jcbPessoaJuridica.isSelected()) {
             PessoaJuridicaTableModel pessoaJuridicaModel = (PessoaJuridicaTableModel) jtClientes.getModel();
             PessoaJuridica pessoaJuridicaSelecionada = pessoaJuridicaModel.get(linhaSelecionada);
-            cadastroCliente cadastroPessoaJuridica = new cadastroCliente(pessoaJuridicaSelecionada);
-            cadastroPessoaJuridica.setVisible(true);
-            cadastroPessoaJuridica.setLocationRelativeTo(this);
-        } else {
-            JOptionPane.showMessageDialog(null, "Nenhum campo foi selecionado!");
+            PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+            cadastroCliente.getInstancia().pessoaJuridica = pessoaJuridicaSelecionada;
+            setLocationRelativeTo(this);
+            cadastroCliente.getInstancia().atualizarPessoaJuridica(pessoaJuridicaSelecionada);
+            cadastroCliente.getInstancia().setVisible(true);
+            cadastroCliente.getInstancia().DisableEnable(false);
+            cadastroCliente.getInstancia().setLocationRelativeTo(this);
+            cadastroCliente.getInstancia().setAlwaysOnTop(true);
         }
 
 
@@ -477,18 +507,17 @@ public class cadastroClienteHome extends javax.swing.JFrame {
 
     private void jbCancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMousePressed
         if (jbCancelar.isEnabled()) {
-            if (instancia == null) {
-                dispose();
-            } else {
-                setAlwaysOnTop(false);
-                String ObjButtons[] = {"Sim", "Não"};
-                int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
-                if (PromptResult == JOptionPane.YES_OPTION) {
-                    dispose();
-                } else {
+            if (jbCancelar.isEnabled()) {
+//            if (instancia == null) {
+//                dispose();
+//            } else {
 
-                }
+            String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {
+                dispose();
             }
+        }
         }
     }//GEN-LAST:event_jbCancelarMousePressed
 

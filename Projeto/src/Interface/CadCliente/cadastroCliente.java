@@ -45,8 +45,9 @@ import validacao.*;
 public class cadastroCliente extends javax.swing.JFrame {
 
     private static cadastroCliente instancia;
-    private boolean flagConfirmar;
-    private static PessoaFisica pessoaFisica;
+
+    public static PessoaFisica pessoaFisica;
+    public static PessoaJuridica pessoaJuridica;
 
     /**
      * Creates new form cadastroCliente
@@ -67,36 +68,6 @@ public class cadastroCliente extends javax.swing.JFrame {
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 //        populaPessoaFisica();
 
-    }
-
-    public cadastroCliente(PessoaFisica pessoaFisica) {
-        initComponents();
-        setAlwaysOnTop(true);
-        this.setTitle("Cadastro de Clientes");
-        ativaPessoa(true);
-        mascaraCPF_CNPJ(true);
-        jrbPessoaFisica.setSelected(true);
-        configuraMascaras();
-        carregaEstados();
-        carregaEstadosCivis();
-        carregaCidades();
-        carregaFiadores();
-        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
-        atualizarPessoaFisica(pessoaFisica);
-    }
-
-    public cadastroCliente(PessoaJuridica pessoaJuridica) {
-        initComponents();
-        setAlwaysOnTop(true);
-        this.setTitle("Cadastro de Clientes");
-        ativaPessoa(false);
-        mascaraCPF_CNPJ(false);
-        jrbPessoaJuridica.setSelected(true);
-        configuraMascaras();
-        carregaEstados();
-        carregaCidades();
-        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
-        atualizarPessoaJuridica(pessoaJuridica);
     }
 
     public static cadastroCliente getInstancia() {
@@ -234,8 +205,6 @@ public class cadastroCliente extends javax.swing.JFrame {
     }
 
     public void cadastrarPessoaFisica() throws ParseException {
-        System.out.println("=======================================ENTROU NO PERSIT");
-        flagConfirmar = true;
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
         PessoaFisica pessoaFisica = new PessoaFisica();
         pessoaFisica.setTipoPessoa(true);
@@ -318,8 +287,88 @@ public class cadastroCliente extends javax.swing.JFrame {
 
     }
 
+    public void cadastrarPessoaFisica(PessoaFisica pessoaFisica) throws ParseException {
+        PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+        pessoaFisica.setTipoPessoa(true);
+        pessoaFisica.setNomePessoa(jtfNome.getText());
+        pessoaFisica.setCPF(jftCPF.getText());
+        pessoaFisica.setRG(jtfRG.getText());
+        Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataNascimento.getText());
+        pessoaFisica.setDataNascimento(dataNascimento);
+        pessoaFisica.setObservacoes(jtaObs.getText());
+
+        EstadoDAO estadoDAO = new EstadoDAO();
+        Estado estado = new Estado();
+        estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        Cidade cidade = new Cidade();
+        cidade = cidadeDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+
+        Endereco endereco = new Endereco();
+        endereco.setBairro(jtfBairro.getText());
+        endereco.setNomeEndereco(jtfEndereco.getText());
+        endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
+        endereco.setCep(jftCEP.getText());
+        endereco.setComplemento(jtfComplemento.getText());
+        endereco.setCidade(cidade);
+        pessoaFisica.setEndereco(endereco);
+
+        List<Telefone> telefones = new ArrayList<Telefone>();
+        Telefone telefone = new Telefone();
+        Telefone celular = new Telefone();
+        Telefone comercial = new Telefone();
+
+        telefone.setNumero(jftTelefone.getText());
+        telefone.setPessoa(pessoaFisica);
+        telefone.setOperadora("");
+        celular.setNumero(jftCelular.getText());
+        celular.setPessoa(pessoaFisica);
+        celular.setOperadora("");
+        comercial.setNumero(jftComercial.getText());
+        comercial.setPessoa(pessoaFisica);
+        comercial.setOperadora("");
+
+        telefones.add(telefone);
+        telefones.add(celular);
+        telefones.add(comercial);
+        pessoaFisica.setTelefone(telefones);
+
+        pessoaFisica.setEmail(jtfEmail.getText());
+
+        if (jrbMasculino.isSelected()) {
+            pessoaFisica.setSexo('M');
+        } else if (jrbFeminino.isSelected()) {
+            pessoaFisica.setSexo('F');
+        }
+
+        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
+        EstadoCivil estadoCivil = new EstadoCivil();
+        estadoCivil = estadoCivilDAO.getById((long) jcbEstadoCivil.getSelectedIndex() + 1);
+
+        pessoaFisica.setListaFiadores(pessoaFisicaDAO.getFiadores((long) jcbFiador.getSelectedIndex() + 1));
+        pessoaFisica.setEstadoCivil(estadoCivil);
+
+        TipoContratoDAO tipoContratoDAO = new TipoContratoDAO();
+        TipoContrato tipoContrato = new TipoContrato();
+        List<TipoContrato> tiposContrato = new ArrayList<TipoContrato>();
+        tiposContrato = tipoContratoDAO.getAll();
+        List<TipoContrato> interesses = new ArrayList<TipoContrato>();
+
+        if (jcbLocacao.isSelected()) {
+            interesses.add(tiposContrato.get(0));
+        }
+        if (jcbCompra.isSelected()) {
+            interesses.add(tiposContrato.get(1));
+        }
+        if (jcbTroca.isSelected()) {
+            interesses.add(tiposContrato.get(2));
+        }
+        pessoaFisica.setInteresses(interesses);
+        pessoaFisicaDAO.merge(pessoaFisica);
+    }
+
     public void cadastrarPessoaJuridica() throws ParseException {
-        flagConfirmar = true;
         PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
         PessoaJuridica pessoaJuridica = new PessoaJuridica();
         pessoaJuridica.setTipoPessoa(false);
@@ -394,11 +443,81 @@ public class cadastroCliente extends javax.swing.JFrame {
         pessoaJuridicaDAO.persist(pessoaJuridica);
     }
 
-    public void atualizarPessoaFisica(PessoaFisica pessoaFisica) {
-        System.out.println("========================================== ENTROU NO MERGE");
-         flagConfirmar = false;
-        PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+    public void cadastrarPessoaJuridica(PessoaJuridica pessoaJuridica) throws ParseException {
+        PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
+        pessoaJuridica.setTipoPessoa(false);
+        pessoaJuridica.setNomePessoa(jtfNome.getText());
+        pessoaJuridica.setCnpj(jftCPF.getText());
+        pessoaJuridica.setInscricaoEstadual(jtfRG.getText());
+        Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataNascimento.getText());
+        pessoaJuridica.setDataNascimento(dataNascimento);
+        pessoaJuridica.setObservacoes(jtaObs.getText());
 
+        EstadoDAO estadoDAO = new EstadoDAO();
+        Estado estado = new Estado();
+        estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        Cidade cidade = new Cidade();
+        cidade = cidadeDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+
+        Endereco endereco = new Endereco();
+        endereco.setNomeEndereco(jtfEndereco.getText());
+        endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
+        endereco.setCep(jftCEP.getText());
+        endereco.setComplemento(jtfComplemento.getText());
+        endereco.setBairro(jtfBairro.getText());
+        endereco.setCidade(cidade);
+        pessoaJuridica.setEndereco(endereco);
+
+        List<Telefone> telefones = new ArrayList<Telefone>();
+        Telefone telefone = new Telefone();
+        Telefone celular = new Telefone();
+        Telefone comercial = new Telefone();
+
+        telefone.setNumero(jftTelefone.getText());
+        telefone.setPessoa(pessoaJuridica);
+        telefone.setOperadora("");
+        celular.setNumero(jftCelular.getText());
+        celular.setPessoa(pessoaJuridica);
+        celular.setOperadora("");
+        comercial.setNumero(jftComercial.getText());
+        comercial.setPessoa(pessoaJuridica);
+        comercial.setOperadora("");
+
+        telefones.add(telefone);
+        telefones.add(celular);
+        telefones.add(comercial);
+        pessoaJuridica.setTelefone(telefones);
+
+        pessoaJuridica.setEmail(jtfEmail.getText());
+
+        pessoaJuridica.setCpfResponsavel(jftCPFResponsavel.getText());
+        pessoaJuridica.setNomeFantasia(jtfNomeFantasia.getText());
+        pessoaJuridica.setNomeResponsavel(jtfNomeResponsavel.getText());
+        pessoaJuridica.setCadastroAtivo(jcbAtivo.isSelected());
+
+        TipoContratoDAO tipoContratoDAO = new TipoContratoDAO();
+        TipoContrato tipoContrato = new TipoContrato();
+        List<TipoContrato> tiposContrato = new ArrayList<TipoContrato>();
+        tiposContrato = tipoContratoDAO.getAll();
+        List<TipoContrato> interesses = new ArrayList<TipoContrato>();
+
+        if (jcbLocacao.isSelected()) {
+            interesses.add(tiposContrato.get(0));
+        }
+        if (jcbCompra.isSelected()) {
+            interesses.add(tiposContrato.get(1));
+        }
+        if (jcbTroca.isSelected()) {
+            interesses.add(tiposContrato.get(2));
+        }
+        pessoaJuridica.setInteresses(interesses);
+
+        pessoaJuridicaDAO.merge(pessoaJuridica);
+    }
+
+    public void atualizarPessoaFisica(PessoaFisica pessoaFisica) {
         jtfNome.setText(pessoaFisica.getNomePessoa());
         jftCPF.setText(pessoaFisica.getCPF());
         jtfRG.setText(pessoaFisica.getRG());
@@ -464,15 +583,9 @@ public class cadastroCliente extends javax.swing.JFrame {
             interesses.add(tiposContrato.get(2));
         }
         pessoaFisica.setInteresses(interesses);
-
-        pessoaFisicaDAO.merge(pessoaFisica);
-
     }
 
     public void atualizarPessoaJuridica(PessoaJuridica pessoaJuridica) {
-         flagConfirmar = false;
-        PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
-
         jtfNome.setText(pessoaJuridica.getNomePessoa());
         jftCPF.setText(pessoaJuridica.getCnpj());
         jtfRG.setText(pessoaJuridica.getInscricaoEstadual());
@@ -534,8 +647,6 @@ public class cadastroCliente extends javax.swing.JFrame {
             interesses.add(tiposContrato.get(2));
         }
         pessoaJuridica.setInteresses(interesses);
-
-        pessoaJuridicaDAO.merge(pessoaJuridica);
     }
 
     public void populaPessoaFisica() {
@@ -923,14 +1034,24 @@ public class cadastroCliente extends javax.swing.JFrame {
             if (jrbPessoaFisica.isSelected()) {
                 if (validaCampos(true)) {
                     try {
-                        if (flagConfirmar) {
+                        if (pessoaFisica == null) {
                             cadastrarPessoaFisica();
-                        }else{
-                            atualizarPessoaFisica(pessoaFisica);
-                        }      
-                        JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
-                        ZerarCampos();
-                        instancia = null;
+                            JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
+                            ZerarCampos();
+                            pessoaFisica = null;
+                            encerrarInstancia();
+                            cadastroClienteHome.getInstancia().setVisible(true);
+                            cadastroClienteHome.getInstancia().setLocationRelativeTo(this);
+                            cadastroClienteHome.getInstancia().popularTabela();
+                            dispose();
+                        } else {
+                            cadastrarPessoaFisica(pessoaFisica);
+                            JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
+                            ZerarCampos();
+                            pessoaFisica = null;
+                            encerrarInstancia();
+                            dispose();
+                        }
                     } catch (ParseException ex) {
                         Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -940,16 +1061,31 @@ public class cadastroCliente extends javax.swing.JFrame {
             } else if (jrbPessoaJuridica.isSelected()) {
                 if (validaCampos(true)) {
                     try {
-                        cadastrarPessoaJuridica();
-                        JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
-                        ZerarCampos();
-                        instancia = null;
+                        if (pessoaJuridica == null) {
+                            cadastrarPessoaJuridica();
+                            JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
+                            ZerarCampos();
+                            pessoaJuridica = null;
+                            encerrarInstancia();
+                            cadastroClienteHome.getInstancia().setVisible(true);
+                            cadastroClienteHome.getInstancia().setLocationRelativeTo(this);
+                            cadastroClienteHome.getInstancia().popularTabela();
+                            dispose();
+                        } else {
+                            cadastrarPessoaJuridica(pessoaJuridica);
+                            JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
+                            ZerarCampos();
+                            pessoaJuridica = null;
+                            encerrarInstancia();
+                            dispose();
+                        }
                     } catch (ParseException ex) {
                         Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Verifique os campos obrigatórios!");
+
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Verifique os campos obrigatórios!");
             }
         }
     }//GEN-LAST:event_jbConfirmarMouseClicked
@@ -1367,20 +1503,18 @@ public class cadastroCliente extends javax.swing.JFrame {
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
         if (jbCancelar.isEnabled()) {
-            if (instancia == null) {
-                cadastroClienteHome homeCliente = cadastroClienteHome.getInstancia();
+            if (jbCancelar.isEnabled()) {//                   
+            String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {
+                cadastroClienteHome homeFuncionario = cadastroClienteHome.getInstancia();
                 cadastroClienteHome.getInstancia().setVisible(true);
+                cadastroClienteHome.getInstancia().setLocationRelativeTo(this);
+                cadastroClienteHome.getInstancia().popularTabela();
                 dispose();
-            } else {
-                setAlwaysOnTop(false);
-                String ObjButtons[] = {"Sim", "Não"};
-                int PromptResult = JOptionPane.showOptionDialog(null, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
-                if (PromptResult == JOptionPane.YES_OPTION) {
-                    dispose();
-                } else {
-
-                }
+                encerrarInstancia();
             }
+        }
         }
 
     }//GEN-LAST:event_jbCancelarMouseClicked
@@ -1403,9 +1537,9 @@ public class cadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jrbPessoaFisicaMousePressed
 
     private void jbEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseClicked
-        if (jbEditar.isEnabled()) {
-            DisableEnable(true);
-            jbConfirmar.setEnabled(true);
+         if (jbEditar.isEnabled()) {
+            cadastroCliente.getInstancia().DisableEnable(true);
+            JOptionPane.showMessageDialog(this, "Campos abertos para edição!");
         }
     }//GEN-LAST:event_jbEditarMouseClicked
 
