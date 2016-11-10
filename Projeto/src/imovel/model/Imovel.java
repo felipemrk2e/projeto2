@@ -124,7 +124,7 @@ public class Imovel {
 			mappedBy = "imovel", 
 			targetEntity = Imovel_has_TipoContrato.class, 
 			fetch = FetchType.LAZY,
-			cascade = CascadeType.PERSIST)
+			cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 	private List<Imovel_has_TipoContrato> tiposContratos =  new ArrayList<>();
 
 	public Imovel(boolean ativo, int qtdQuartos, int qtdSuites, int qtdSalas, int qtdBanheiros, int qtdPisos,
