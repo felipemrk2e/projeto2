@@ -40,6 +40,9 @@ public class cadastroImovel extends javax.swing.JFrame {
     int user;
     Imovel imovelTemp;
     ImovelDAO imovelDao = new ImovelDAO();
+    List<Cidade> cidadeGlobal;
+    List<Estado> estadoGlobal;
+    
     // Imovel imovel = new Imovel();
 
     /**
@@ -54,7 +57,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         removerTitleBar();
         ComboBox();
 //
-//        Imovel imovel = imovelDao.getById(Long.parseLong("2"));
+//        Imovel imovel = imovelDao.getById(Long.parseLong("4"));
 //        popular(imovel);
     }
 
@@ -127,7 +130,8 @@ public class cadastroImovel extends javax.swing.JFrame {
         }
         DefaultComboBoxModel defaultComboBox3 = new DefaultComboBoxModel(listaCidade.toArray());
         jcbCidade.setModel(defaultComboBox3);
-
+        estadoGlobal = estadoTemp;
+        cidadeGlobal = cidadeTemp;
     }
 
     public void verificaNivel0() {
@@ -694,6 +698,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jrbMobiliada = new javax.swing.JRadioButton();
         jrbSemiMobiliada = new javax.swing.JRadioButton();
         jrbSemMobilia = new javax.swing.JRadioButton();
+        jSeparator1 = new javax.swing.JSeparator();
         jtComprimento = new javax.swing.JTextField();
         jtLargura = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -703,6 +708,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         jifDescricao = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -1145,6 +1151,13 @@ public class cadastroImovel extends javax.swing.JFrame {
         jifOutros.getContentPane().add(jrbSemMobilia);
         jrbSemMobilia.setBounds(360, 260, 180, 30);
 
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator1.setAlignmentX(2.0F);
+        jSeparator1.setAlignmentY(2.0F);
+        jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jifOutros.getContentPane().add(jSeparator1);
+        jSeparator1.setBounds(10, 10, 320, 300);
+
         jtComprimento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifOutros.getContentPane().add(jtComprimento);
         jtComprimento.setBounds(470, 60, 50, 30);
@@ -1191,6 +1204,10 @@ public class cadastroImovel extends javax.swing.JFrame {
         jifOutros.getContentPane().add(jLabel13);
         jLabel13.setBounds(570, 200, 190, 30);
 
+        jSeparator2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jifOutros.getContentPane().add(jSeparator2);
+        jSeparator2.setBounds(340, 10, 430, 300);
+
         jtpCadastro.addTab("Outros", jifOutros);
 
         jifDescricao.setVisible(true);
@@ -1200,75 +1217,75 @@ public class cadastroImovel extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Quartos:");
         jifDescricao.getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 20, 110, 30);
+        jLabel1.setBounds(10, 10, 110, 30);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Suites:");
         jifDescricao.getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 60, 110, 30);
+        jLabel2.setBounds(10, 50, 110, 30);
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Salas:");
         jifDescricao.getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 100, 110, 30);
+        jLabel3.setBounds(10, 90, 110, 30);
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Lavanderia:");
         jifDescricao.getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 220, 110, 30);
+        jLabel4.setBounds(10, 210, 110, 30);
 
         jLabel23.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel23.setText("Vagas Garagem:");
         jifDescricao.getContentPane().add(jLabel23);
-        jLabel23.setBounds(210, 60, 130, 30);
+        jLabel23.setBounds(200, 50, 130, 30);
 
         jLabel24.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel24.setText("Area de serviço:");
         jifDescricao.getContentPane().add(jLabel24);
-        jLabel24.setBounds(10, 260, 110, 30);
+        jLabel24.setBounds(10, 250, 110, 30);
 
         jLabel25.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel25.setText("Piscina:");
         jifDescricao.getContentPane().add(jLabel25);
-        jLabel25.setBounds(210, 20, 130, 30);
+        jLabel25.setBounds(200, 10, 130, 30);
 
         jLabel26.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel26.setText("Lavabos:");
         jifDescricao.getContentPane().add(jLabel26);
-        jLabel26.setBounds(10, 180, 110, 30);
+        jLabel26.setBounds(10, 170, 110, 30);
 
         jLabel27.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel27.setText("Banheiros:");
         jifDescricao.getContentPane().add(jLabel27);
-        jLabel27.setBounds(10, 140, 110, 30);
+        jLabel27.setBounds(10, 130, 110, 30);
 
         jLabel28.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel28.setText("Dep. Empregada:");
         jifDescricao.getContentPane().add(jLabel28);
-        jLabel28.setBounds(210, 100, 130, 30);
+        jLabel28.setBounds(200, 90, 130, 30);
 
         jLabel29.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel29.setText("Pisos (Andares):");
         jifDescricao.getContentPane().add(jLabel29);
-        jLabel29.setBounds(210, 140, 130, 30);
+        jLabel29.setBounds(200, 130, 130, 30);
 
         jtSalas.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifDescricao.getContentPane().add(jtSalas);
-        jtSalas.setBounds(130, 100, 60, 30);
+        jtSalas.setBounds(130, 90, 60, 30);
 
         jtBanheiros.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifDescricao.getContentPane().add(jtBanheiros);
-        jtBanheiros.setBounds(130, 140, 60, 30);
+        jtBanheiros.setBounds(130, 130, 60, 30);
 
         jtLavanderia.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtLavanderia.addActionListener(new java.awt.event.ActionListener() {
@@ -1277,101 +1294,93 @@ public class cadastroImovel extends javax.swing.JFrame {
             }
         });
         jifDescricao.getContentPane().add(jtLavanderia);
-        jtLavanderia.setBounds(130, 220, 60, 30);
+        jtLavanderia.setBounds(130, 210, 60, 30);
 
         jtSuites.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifDescricao.getContentPane().add(jtSuites);
-        jtSuites.setBounds(130, 60, 60, 30);
+        jtSuites.setBounds(130, 50, 60, 30);
 
         jtQuartos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifDescricao.getContentPane().add(jtQuartos);
-        jtQuartos.setBounds(130, 20, 60, 30);
+        jtQuartos.setBounds(130, 10, 60, 30);
 
         jtLavados.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifDescricao.getContentPane().add(jtLavados);
-        jtLavados.setBounds(130, 180, 60, 30);
+        jtLavados.setBounds(130, 170, 60, 30);
 
         jtAreaServico.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifDescricao.getContentPane().add(jtAreaServico);
-        jtAreaServico.setBounds(130, 260, 60, 30);
+        jtAreaServico.setBounds(130, 250, 60, 30);
 
         jtPscina.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifDescricao.getContentPane().add(jtPscina);
-        jtPscina.setBounds(350, 20, 60, 30);
+        jtPscina.setBounds(340, 10, 60, 30);
 
         jtDepEmpregada.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifDescricao.getContentPane().add(jtDepEmpregada);
-        jtDepEmpregada.setBounds(350, 100, 60, 30);
+        jtDepEmpregada.setBounds(340, 90, 60, 30);
 
         jtPisos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifDescricao.getContentPane().add(jtPisos);
-        jtPisos.setBounds(350, 140, 60, 30);
+        jtPisos.setBounds(340, 130, 60, 30);
 
         jtVagasGaragem.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifDescricao.getContentPane().add(jtVagasGaragem);
-        jtVagasGaragem.setBounds(350, 60, 60, 30);
+        jtVagasGaragem.setBounds(340, 50, 60, 30);
 
         jtTipoImovel.setColumns(20);
         jtTipoImovel.setRows(5);
         jScrollPane1.setViewportView(jtTipoImovel);
 
         jifDescricao.getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(580, 20, 200, 60);
+        jScrollPane1.setBounds(550, 10, 200, 70);
 
         jtAreaExterna.setColumns(20);
         jtAreaExterna.setRows(5);
         jScrollPane2.setViewportView(jtAreaExterna);
 
         jifDescricao.getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(580, 90, 200, 60);
+        jScrollPane2.setBounds(550, 90, 200, 60);
 
         jtAcabamento.setColumns(20);
         jtAcabamento.setRows(5);
         jScrollPane3.setViewportView(jtAcabamento);
 
         jifDescricao.getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(580, 160, 200, 60);
+        jScrollPane3.setBounds(550, 160, 200, 60);
 
-        jLabel30.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel30.setText("Descrição Imovel:");
+        jLabel30.setText("Descrição Imovel");
         jifDescricao.getContentPane().add(jLabel30);
-        jLabel30.setBounds(460, 20, 111, 30);
+        jLabel30.setBounds(460, 10, 90, 14);
 
-        jLabel31.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel31.setText("Area Externa:");
+        jLabel31.setText("Area Externa");
         jifDescricao.getContentPane().add(jLabel31);
-        jLabel31.setBounds(460, 90, 110, 30);
+        jLabel31.setBounds(460, 90, 80, 14);
 
         jtOutros.setColumns(20);
         jtOutros.setRows(5);
         jScrollPane4.setViewportView(jtOutros);
 
         jifDescricao.getContentPane().add(jScrollPane4);
-        jScrollPane4.setBounds(580, 230, 200, 60);
+        jScrollPane4.setBounds(550, 230, 200, 60);
 
-        jLabel33.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel33.setText("Acabamento:");
+        jLabel33.setText("Acabamento");
         jifDescricao.getContentPane().add(jLabel33);
-        jLabel33.setBounds(460, 160, 110, 30);
+        jLabel33.setBounds(460, 160, 80, 14);
 
-        jLabel32.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel32.setText("Outros:");
+        jLabel32.setText("Outros");
         jifDescricao.getContentPane().add(jLabel32);
-        jLabel32.setBounds(460, 230, 110, 30);
+        jLabel32.setBounds(490, 230, 50, 14);
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText("Ano da Construção :");
         jifDescricao.getContentPane().add(jLabel14);
-        jLabel14.setBounds(210, 180, 130, 30);
+        jLabel14.setBounds(200, 170, 130, 30);
 
         jtIdadeImovel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifDescricao.getContentPane().add(jtIdadeImovel);
-        jtIdadeImovel.setBounds(350, 180, 60, 30);
+        jtIdadeImovel.setBounds(340, 170, 60, 30);
 
         jtpCadastro.addTab("Descrição", jifDescricao);
 
@@ -1495,7 +1504,7 @@ public class cadastroImovel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbConfirmar);
-        jbConfirmar.setBounds(840, 470, 140, 70);
+        jbConfirmar.setBounds(540, 470, 140, 70);
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
@@ -1506,7 +1515,7 @@ public class cadastroImovel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbCancelar);
-        jbCancelar.setBounds(540, 470, 140, 70);
+        jbCancelar.setBounds(840, 470, 140, 70);
 
         jbEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/editar2.png"))); // NOI18N
@@ -1616,22 +1625,8 @@ public class cadastroImovel extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbLocacaoMouseClicked
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
-//
-//
-//        List<Imovel_has_TipoContrato> tipoContrato = imovelTemp.getTiposContratos();
-//        TipoContratoDAO tipoContratoDao = new TipoContratoDAO();;
-//      
-//        List<TipoContrato> tipoContrato2 = new ArrayList<>();
-//        tipoContrato2 = tipoContratoDao.getAll();
-//        imovelTemp.addTipoContrato(tipoContrato2.get(1), (55.00));
-//       // imovelDao.persist(imovelTemp);
-//      //  tipoContrato.get(0).setValor((44.00));
-//
-//        imovelDao.merge(imovelTemp);
-//        //   dao.merge(imovel);
-//        System.out.println("");
-//        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-//
+
+
         if (jbConfirmar.isEnabled()) {
             int control = 0;
             boolean control2 = true;
@@ -1736,8 +1731,9 @@ public class cadastroImovel extends javax.swing.JFrame {
                 imovel = imovelTemp;
                 status = imovel.getStatus();
                 endereco = imovel.getEndereco();                
-                cidade = imovel.getEndereco().getCidade();
-                uf = imovel.getEndereco().getCidade().getEstado();
+                cidade = new Cidade();
+     
+        
                 documentacao = imovel.getDocumentacao();
                 terreno = imovel.getTerreno();
                 List<Imovel_has_TipoContrato> tipoContrato = imovel.getTiposContratos();
@@ -1765,10 +1761,7 @@ public class cadastroImovel extends javax.swing.JFrame {
                     }
 
                 }
-                System.out.println(locacao);
-                System.out.println(venda);
-                System.out.println(temporada);
-                System.out.println(festa);
+         
                 //  Fora das tabs..
                 if (jcbLocacao.isSelected()) {
                     if (jtValorLocacaoMes.getText().equals("")) {
@@ -1919,14 +1912,12 @@ public class cadastroImovel extends javax.swing.JFrame {
 
             }
 
-            if (!jtfCidade.getText().equals("") && validacao.validaLetras(jtfCidade.getText())) {
-                cidade.setNomeCidade(jtfCidade.getText());
-                jtfCidade.setBackground(Color.white);
-                control++;
-            } else {
-                jtfCidade.setBackground(Color.red);
+               cidade.setIdCidade(cidadeGlobal.get(jcbCidade.getSelectedIndex()).getIdCidade());
 
-            }
+              
+              control++;
+              control++;
+              
             if (!jtfBairro.getText().equals("") && validacao.validaLetras(jtfBairro.getText())) {
                 endereco.setBairro(jtfBairro.getText());
                 jtfBairro.setBackground(Color.white);
@@ -1936,11 +1927,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
             }
 
-            if (jcbEstado.getSelectedIndex() != -1) {
-                uf.setId(jcbEstado.getSelectedIndex() + 1);
 
-                control++;
-            }
 
 // Pricipal End
             if (jtCep.getText().equals("")) {
@@ -2332,7 +2319,6 @@ public class cadastroImovel extends javax.swing.JFrame {
             if ((control == 6) && control2 == true && (!jtCodigo.getText().equals(""))) {
                 status.setIdStatus(Long.valueOf(jcbStatus.getSelectedIndex() + 1));
                 imovel.setStatus(status);
-                cidade.setEstado(uf);
                 endereco.setCidade(cidade);
                 endereco.setBairro(jtfBairro.getText());
                 imovel.setEndereco(endereco);
@@ -2355,7 +2341,6 @@ public class cadastroImovel extends javax.swing.JFrame {
 
                 status.setIdStatus(Long.valueOf(jcbStatus.getSelectedIndex() + 1));
                 imovel.setStatus(status);
-                cidade.setEstado(uf);
                 endereco.setCidade(cidade);
                 endereco.setBairro(jtfBairro.getText());
                 imovel.setEndereco(endereco);
@@ -2380,8 +2365,7 @@ public class cadastroImovel extends javax.swing.JFrame {
                     jlTipo.setForeground(Color.red);
                 }
 
-                //bgMobilia.clearSelection();
-                //bgTipo.clearSelection();
+        
                 control = 0;
                 control2 = true;
                 JOptionPane.showMessageDialog(null, "Erro Verifique os campos !");
@@ -2547,6 +2531,8 @@ CidadeDAO cidadeDao = new CidadeDAO();
         DefaultComboBoxModel defaultComboBox3 = new DefaultComboBoxModel(listaCidade.toArray());
         jcbCidade.setModel(defaultComboBox3);       
         
+        
+        cidadeGlobal = cidadeTemp;
 // TODO add your handling code here:
     }//GEN-LAST:event_jcbEstadoActionPerformed
 
@@ -2639,6 +2625,8 @@ CidadeDAO cidadeDao = new CidadeDAO();
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JButton jbEditar;
