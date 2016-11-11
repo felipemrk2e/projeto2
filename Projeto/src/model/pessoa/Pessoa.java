@@ -6,6 +6,8 @@
 package model.pessoa;
 
 import global.model.Endereco;
+import global.model.Locacao;
+import imovel.model.Imovel;
 import imovel.model.TipoContrato;
 import java.util.ArrayList;
 import java.util.Date;
@@ -77,6 +79,13 @@ public class Pessoa {
     joinColumns = { @JoinColumn(name = "idPessoa") }, 
     inverseJoinColumns = { @JoinColumn(name = "idTipoContrato") })
     private List<TipoContrato> interesses = new ArrayList<TipoContrato>();
+    
+    @OneToMany(
+            mappedBy = "pessoa", 
+            targetEntity = Locacao.class, 
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    private List<Locacao> imoveisLocados =  new ArrayList<>();
 
     public Pessoa() {
 
@@ -179,11 +188,30 @@ public class Pessoa {
         this.tipoPessoa = tipoPessoa;
     }
     
+    public List<Locacao> getImoveisLocados(){
+        return this.imoveisLocados;
+    }
+    
+    public void addImovelLocado(Imovel imovel, String dataInicio, String dataFim){
+        Locacao locacao = new Locacao(imovel, this, dataInicio, dataFim);
+        this.imoveisLocados.add(locacao);
+        imovel.setLocacao(locacao);
+    }
+    
+//    public void removeLocacao(Imovel imovel) {
+//    	Locacao locacao = new Locacao(imovel, this, "", "");
+//        imovel.removeLocacao();
+//        imoveisLocados.remove(locacao);
+//        locacao.setImovel(null);
+//        locacao.setPessoa(null);
+//        locacao.setDataInicio(null);
+//        locacao.setDataFim(null);
+//    }
+    
+    
     @Override
     public String toString() {
         return nomePessoa;
     }
-    
-    
 
 }
