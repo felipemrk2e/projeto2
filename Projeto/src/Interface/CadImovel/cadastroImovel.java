@@ -56,9 +56,9 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         removerTitleBar();
         ComboBox();
-
-        Imovel imovel = imovelDao.getById(Long.parseLong("6"));
-        popular(imovel);
+//
+//        Imovel imovel = imovelDao.getById(Long.parseLong("7"));
+//        popular(imovel);
     }
 
     public cadastroImovel(int user) {
@@ -199,9 +199,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtfLogradouro.setEnabled(b);
         jtfNumero.setEnabled(b);
         jtfComplemento.setEnabled(b);
-        jtfCidade.setEnabled(b);
-        jtfBairro.setEnabled(b);
-        jtfUF.setEnabled(b);
+jtfBairro.setEnabled(b);
         jtCep.setEnabled(b);
         jtfReferencia.setEnabled(b);
         jtfZona.setEnabled(b);
@@ -339,14 +337,12 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtCodigo.setText(String.valueOf(imovel.getIdImovel()));
 
         // falta o atributo no sql status     
-        jtfStatus.setText("");
+    
 
         //Endereço parte obrigatoria
         jtfLogradouro.setText(imovel.getEndereco().getNomeEndereco());
         jtfNumero.setText(String.valueOf(imovel.getEndereco().getNumero()));
-        jtfCidade.setText(imovel.getEndereco().getCidade().getNomeCidade());
-        jtfBairro.setText(imovel.getEndereco().getBairro());
-        jtfUF.setText(imovel.getEndereco().getCidade().getEstado().getNome());
+   jtfBairro.setText(imovel.getEndereco().getBairro());
         jcbEstado.setSelectedIndex((int) imovel.getEndereco().getCidade().getEstado().getId() - 1);
 
       CidadeDAO cidadeDao = new CidadeDAO();
@@ -636,14 +632,11 @@ public class cadastroImovel extends javax.swing.JFrame {
         jlZona = new javax.swing.JLabel();
         jlReferencia = new javax.swing.JLabel();
         jlCondominio = new javax.swing.JLabel();
-        jlUF = new javax.swing.JLabel();
         jlNumero = new javax.swing.JLabel();
         jlBairro = new javax.swing.JLabel();
         jlCidade = new javax.swing.JLabel();
         jlLogradouro = new javax.swing.JLabel();
-        jtfUF = new javax.swing.JTextField();
         jtfBairro = new javax.swing.JTextField();
-        jtfCidade = new javax.swing.JTextField();
         jtfLogradouro = new javax.swing.JTextField();
         jtfNumero = new javax.swing.JTextField();
         jtfCondominio = new javax.swing.JTextField();
@@ -759,7 +752,6 @@ public class cadastroImovel extends javax.swing.JFrame {
         jrbComercio = new javax.swing.JRadioButton();
         jrbCondominio = new javax.swing.JRadioButton();
         jlStatus = new javax.swing.JLabel();
-        jtfStatus = new javax.swing.JTextField();
         jbConfirmar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
         jbEditar = new javax.swing.JButton();
@@ -787,7 +779,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jlZona.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlZona.setText("Zona:");
         jifEndereco.getContentPane().add(jlZona);
-        jlZona.setBounds(20, 260, 120, 30);
+        jlZona.setBounds(20, 140, 120, 30);
 
         jlReferencia.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlReferencia.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -800,12 +792,6 @@ public class cadastroImovel extends javax.swing.JFrame {
         jlCondominio.setText("Condomínio:");
         jifEndereco.getContentPane().add(jlCondominio);
         jlCondominio.setBounds(20, 220, 120, 30);
-
-        jlUF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlUF.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlUF.setText("UF:");
-        jifEndereco.getContentPane().add(jlUF);
-        jlUF.setBounds(250, 260, 30, 30);
 
         jlNumero.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlNumero.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -831,22 +817,9 @@ public class cadastroImovel extends javax.swing.JFrame {
         jifEndereco.getContentPane().add(jlLogradouro);
         jlLogradouro.setBounds(24, 20, 120, 30);
 
-        jtfUF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtfUF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfUFActionPerformed(evt);
-            }
-        });
-        jifEndereco.getContentPane().add(jtfUF);
-        jtfUF.setBounds(290, 260, 70, 30);
-
         jtfBairro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifEndereco.getContentPane().add(jtfBairro);
         jtfBairro.setBounds(450, 60, 310, 30);
-
-        jtfCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jifEndereco.getContentPane().add(jtfCidade);
-        jtfCidade.setBounds(150, 100, 220, 30);
 
         jtfLogradouro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifEndereco.getContentPane().add(jtfLogradouro);
@@ -867,7 +840,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         jtfZona.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifEndereco.getContentPane().add(jtfZona);
-        jtfZona.setBounds(150, 260, 90, 30);
+        jtfZona.setBounds(150, 140, 90, 30);
 
         jtfComplemento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jifEndereco.getContentPane().add(jtfComplemento);
@@ -906,7 +879,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jcbCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jifEndereco.getContentPane().add(jcbCidade);
-        jcbCidade.setBounds(150, 140, 220, 30);
+        jcbCidade.setBounds(150, 100, 220, 30);
 
         jtpCadastro.addTab("Endereço", jifEndereco);
 
@@ -1179,7 +1152,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jLabel6.setBounds(350, 20, 110, 30);
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel9.setText("M²");
+        jLabel9.setText("M");
         jifOutros.getContentPane().add(jLabel9);
         jLabel9.setBounds(530, 20, 20, 30);
 
@@ -1194,7 +1167,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jLabel11.setBounds(530, 100, 20, 30);
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel12.setText("M²");
+        jLabel12.setText("M");
         jifOutros.getContentPane().add(jLabel12);
         jLabel12.setBounds(530, 60, 20, 30);
 
@@ -1351,7 +1324,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         jLabel30.setText("Descrição Imovel");
         jifDescricao.getContentPane().add(jLabel30);
-        jLabel30.setBounds(460, 10, 90, 14);
+        jLabel30.setBounds(430, 20, 110, 14);
 
         jLabel31.setText("Area Externa");
         jifDescricao.getContentPane().add(jLabel31);
@@ -1487,14 +1460,6 @@ public class cadastroImovel extends javax.swing.JFrame {
         getContentPane().add(jlStatus);
         jlStatus.setBounds(740, 20, 50, 30);
 
-        jtfStatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfStatusActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jtfStatus);
-        jtfStatus.setBounds(30, 80, 120, 30);
-
         jbConfirmar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbConfirmar.setText("Confirmar");
@@ -1559,10 +1524,6 @@ public class cadastroImovel extends javax.swing.JFrame {
     private void jtfNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNumeroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNumeroActionPerformed
-
-    private void jtfUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfUFActionPerformed
 
     private void jrbComercioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbComercioActionPerformed
         // TODO add your handling code here:
@@ -2391,16 +2352,16 @@ public class cadastroImovel extends javax.swing.JFrame {
         jcbFesta.setSelected(false);
 
         jtCodigo.setText("");
-        jtfStatus.setText("");
+      
 
         //Endereço
         jtfLogradouro.setText("");
         jtfNumero.setText("");
         jtfComplemento.setText("");
-        jtfCidade.setText("");
+  
         jtfBairro.setText("");
         jcbEstado.setSelectedIndex(1);
-        jtfUF.setText("");
+       
         jtCep.setText("");
         jtfReferencia.setText("");
         jtfZona.setText("");
@@ -2409,9 +2370,9 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtfLogradouro.setBackground(Color.white);
         jtfNumero.setBackground(Color.white);
         jtfComplemento.setBackground(Color.white);
-        jtfCidade.setBackground(Color.white);
+      
         jtfBairro.setBackground(Color.white);
-        jtfUF.setBackground(Color.white);
+  
         jtCep.setBackground(Color.white);
         jtfReferencia.setBackground(Color.white);
         jtfZona.setBackground(Color.white);
@@ -2537,10 +2498,6 @@ public class cadastroImovel extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_jcbEstadoActionPerformed
 
-    private void jtfStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfStatusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfStatusActionPerformed
-
     private void jtLavanderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtLavanderiaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtLavanderiaActionPerformed
@@ -2653,7 +2610,6 @@ public class cadastroImovel extends javax.swing.JFrame {
     private javax.swing.JLabel jlStatus;
     private javax.swing.JLabel jlTamanhoTotal;
     private javax.swing.JLabel jlTipo;
-    private javax.swing.JLabel jlUF;
     private javax.swing.JLabel jlValorCondominio;
     private javax.swing.JLabel jlValorFesta;
     private javax.swing.JLabel jlValorIPTU;
@@ -2710,14 +2666,11 @@ public class cadastroImovel extends javax.swing.JFrame {
     private javax.swing.JTextField jtValorTemporada;
     private javax.swing.JTextField jtValorVenda;
     private javax.swing.JTextField jtfBairro;
-    private javax.swing.JTextField jtfCidade;
     private javax.swing.JTextField jtfComplemento;
     private javax.swing.JTextField jtfCondominio;
     private javax.swing.JTextField jtfLogradouro;
     private javax.swing.JTextField jtfNumero;
     private javax.swing.JTextField jtfReferencia;
-    private javax.swing.JTextField jtfStatus;
-    private javax.swing.JTextField jtfUF;
     private javax.swing.JTextField jtfZona;
     private javax.swing.JTabbedPane jtpCadastro;
     // End of variables declaration//GEN-END:variables
