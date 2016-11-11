@@ -70,5 +70,27 @@ public class PessoaDAO extends DAO<Pessoa> {
     public List<Pessoa> getCliente() {
         return entityManager.createQuery("FROM Pessoa AS p INNER JOIN p.PessoaFisica").getResultList();
     }
+    
+    public List<Pessoa> searchPessoa(String nome, String telefone, String cpf){
+        String query = "";
+        String or = "";
+        
+        if(nome != ""){
+            query += "pe.nomePessoa LIKE '%"+nome+"%'";
+            or = " or ";
+        }
+        
+//        if(telefone != ""){
+//            query += "pe.telefone.numero LIKE '%"+telefone+"%'";
+//            or = " or ";
+//        }
+        
+        if(cpf != ""){
+            query += or+"pe.pessoaFisica.CPF LIKE '%"+cpf+"%'";
+            or = " or ";
+        }
+        
+        return entityManager.createQuery("FROM Pessoa pe WHERE "+query).getResultList();
+    }
 
 }

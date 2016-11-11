@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import validacao.validacao;
+import model.TableModel.ImovelTableModel;
 
 /**
  *
@@ -35,6 +36,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         initComponents();
         //setAlwaysOnTop(true);
         fechar();
+        popularTable();
 
     }
 
@@ -66,6 +68,9 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         List <Imovel> imovel = new ArrayList<>();
         ImovelDAO dao = new ImovelDAO();
         imovel = dao.getAll();
+     //  ImovelTableModel test = new ImovelTableModel(imovel);
+      jtImovel.setModel(new ImovelTableModel(imovel));
+        
         
     }
 
@@ -103,7 +108,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jbVisualisar = new javax.swing.JButton();
         jbRemover = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtImovel = new javax.swing.JTable();
         jcbCasa = new javax.swing.JCheckBox();
         jcbApartamento = new javax.swing.JCheckBox();
         jcbSalao = new javax.swing.JCheckBox();
@@ -168,7 +173,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         getContentPane().add(jbRemover);
         jbRemover.setBounds(560, 240, 140, 70);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtImovel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -176,7 +181,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtImovel);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(20, 30, 980, 200);
@@ -309,7 +314,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         getContentPane().add(jbCancelar);
         jbCancelar.setBounds(860, 470, 140, 70);
 
-        jSeparator3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa de Imóvel", 2, 0, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        jSeparator3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa de Imóvel", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator3);
         jSeparator3.setBounds(10, 320, 1010, 250);
 
@@ -483,7 +488,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbPesquisar;
@@ -505,6 +509,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JLabel jlVagasGaragem;
     private javax.swing.JTextField jtBairro;
     private javax.swing.JTextField jtCidade;
+    private javax.swing.JTable jtImovel;
     private javax.swing.JTextField jtNomeProprietario;
     private javax.swing.JTextField jtQtdQuarto;
     private javax.swing.JTextField jtRua;
