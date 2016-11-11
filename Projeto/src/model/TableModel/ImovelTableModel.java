@@ -22,10 +22,25 @@ public class ImovelTableModel extends AbstractTableModel {
 
     public ImovelTableModel() {
         dadosImovel = new ArrayList<Imovel>();
+
     }
 
     public ImovelTableModel(List<Imovel> imovelList) {
         dadosImovel = imovelList;
+
+    }
+
+    public void addRow(Imovel p) {
+        this.dadosImovel.add(p);
+        this.fireTableDataChanged();
+    }
+
+    public boolean isCellEditable(int linha, int coluna) {
+        return true;
+    }
+
+    public String getColumnName(int num) {
+        return this.colunas[num];
     }
 
     @Override
@@ -38,20 +53,40 @@ public class ImovelTableModel extends AbstractTableModel {
         return colunas.length;
     }
 
+    public void removeRow(int linha) {
+        this.dadosImovel.remove(linha);
+        this.fireTableRowsDeleted(linha, linha);
+    }
+
+    public Imovel get(int linha) {
+        return this.dadosImovel.get(linha);
+    }
+
     @Override
-    public Object getValueAt(int linha, int columnIndex) {
-        switch (columnIndex) {
+    public Object getValueAt(int linha, int colunas) {
+
+        switch (colunas) {
             case 0:
                 return dadosImovel.get(linha).getIdImovel();
             case 1:
-                return dadosImovel.get(linha).getTipoImovel().getDescricao();
+                return dadosImovel.get(linha).getTipoImovel().getTipo();
             case 2:
                 return dadosImovel.get(linha).getEndereco().getReferencia();
             case 3:
                 return dadosImovel.get(linha).getDescImovel();
             case 4:
 
-                return dadosImovel.get(linha).getTiposContratos().get(1).getValor();
+                if (dadosImovel.get(linha).getTiposContratos() != null) {
+
+                    for (int i = 0; i < dadosImovel.get(linha).getTiposContratos().size(); i++) {
+                        if (dadosImovel.get(linha).getTiposContratos().get(i).getTipoContrato().getIdTipoContrato() == 1) {
+                            return dadosImovel.get(linha).getTiposContratos().get(0).getValor();
+                        }
+                        return "Não Cadastrado";
+
+                    }
+                }
+
             case 5:
                 return dadosImovel.get(linha).getQtdQuartos();
             case 6:
@@ -82,9 +117,9 @@ public class ImovelTableModel extends AbstractTableModel {
             case 16:
                 return dadosImovel.get(linha).getTerreno().getSituacaoEscritura();
             case 17:
-                return dadosImovel.get(linha).getEndereco().getCidade();
+                return dadosImovel.get(linha).getEndereco().getCidade().getNomeCidade();
             case 18:
-                return dadosImovel.get(linha).getEndereco().getCidade().getEstado();
+                return dadosImovel.get(linha).getEndereco().getCidade().getEstado().getSigla();
 
         }
         return null;
