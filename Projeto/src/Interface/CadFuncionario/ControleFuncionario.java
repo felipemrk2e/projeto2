@@ -41,6 +41,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
         this.setTitle("Controle de Funcionários");
         mascaraCPF();
         carregaNiveis();
+        carregarFuncionarios();
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
 
@@ -175,6 +176,15 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jcbNivelAcesso.setModel(defaultComboBox);
 
     }
+    
+    public void carregarFuncionarios(){
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+        funcionarios = funcionarioDAO.getAll();
+        
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(funcionarios.toArray());
+        jcbFuncionarios.setModel(defaultComboBox);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -208,8 +218,11 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jpfNovaSenha1 = new javax.swing.JPasswordField();
         jpfNovaSenha2 = new javax.swing.JPasswordField();
         jlNomeUsuario = new javax.swing.JLabel();
-        jcbNivelAcesso = new javax.swing.JComboBox<String>();
+        jcbNivelAcesso = new javax.swing.JComboBox<>();
+        jlFuncionarios = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jcbFuncionarios = new javax.swing.JComboBox<>();
+        jbCarregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -344,18 +357,39 @@ public class ControleFuncionario extends javax.swing.JFrame {
         getContentPane().add(jlNomeUsuario);
         jlNomeUsuario.setBounds(240, 200, 120, 30);
 
-        jcbNivelAcesso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbNivelAcesso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbNivelAcesso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbNivelAcessoActionPerformed(evt);
             }
         });
         getContentPane().add(jcbNivelAcesso);
-        jcbNivelAcesso.setBounds(370, 160, 64, 30);
+        jcbNivelAcesso.setBounds(370, 160, 56, 30);
+
+        jlFuncionarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlFuncionarios.setText("Funcionários");
+        getContentPane().add(jlFuncionarios);
+        jlFuncionarios.setBounds(20, 60, 180, 30);
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Controle de Funcionário", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(210, 10, 760, 400);
+
+        jcbFuncionarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jcbFuncionarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbFuncionarios);
+        jcbFuncionarios.setBounds(20, 90, 180, 30);
+
+        jbCarregar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCarregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
+        jbCarregar.setText("Carregar");
+        jbCarregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbCarregarMousePressed(evt);
+            }
+        });
+        getContentPane().add(jbCarregar);
+        jbCarregar.setBounds(40, 130, 140, 70);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -410,6 +444,10 @@ public class ControleFuncionario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbEditarMousePressed
 
+    private void jbCarregarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCarregarMousePressed
+        
+    }//GEN-LAST:event_jbCarregarMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -448,14 +486,17 @@ public class ControleFuncionario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbCarregar;
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JButton jbEditar;
+    private javax.swing.JComboBox<String> jcbFuncionarios;
     private javax.swing.JComboBox<String> jcbNivelAcesso;
     private javax.swing.JFormattedTextField jftCPF;
     private javax.swing.JLabel jlCPF;
     private javax.swing.JLabel jlCargo;
     private javax.swing.JLabel jlCodigoInterno;
     private javax.swing.JLabel jlDepartamento;
+    private javax.swing.JLabel jlFuncionarios;
     private javax.swing.JLabel jlNivelAcesso;
     private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlNomeUsuario;

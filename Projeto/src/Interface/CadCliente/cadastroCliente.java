@@ -87,12 +87,12 @@ public class cadastroCliente extends javax.swing.JFrame {
             case 1:
                 DisableEnable(true);
                 jbConfirmar.setEnabled(true);
-                jbEditar.setEnabled(false);
+                jbEditar.setEnabled(true);
                 break;
             case 2:
                 DisableEnable(true);
                 jbConfirmar.setEnabled(true);
-                jbEditar.setEnabled(false);
+                jbEditar.setEnabled(true);
                 break;
             case 3:
                 DisableEnable(false);
@@ -1049,6 +1049,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
                             ZerarCampos();
                             pessoaFisica = null;
+                            cadastroClienteHome.getInstancia().popularTabela();
                             encerrarInstancia();
                             dispose();
                         }
@@ -1076,6 +1077,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
                             ZerarCampos();
                             pessoaJuridica = null;
+                            cadastroClienteHome.getInstancia().popularTabela();
                             encerrarInstancia();
                             dispose();
                         }
