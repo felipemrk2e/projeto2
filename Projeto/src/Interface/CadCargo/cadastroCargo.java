@@ -8,6 +8,7 @@ package Interface.CadCargo;
 import Interface.TelaPrincipal.Sessao;
 import dao.CargoDAO;
 import dao.DepartamentoDAO;
+import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.pessoa.Cargo;
@@ -73,7 +74,19 @@ public class cadastroCargo extends javax.swing.JFrame {
     }
 
     public boolean validaCargo(boolean valida) {
-
+        if (!jtNomeCargo.getText().isEmpty()) {
+            jtNomeCargo.setBackground(Color.white);
+        } else {
+            jtNomeCargo.setBackground(Color.red);
+            valida = false;
+        }
+        if (!jtaDescricaoCargo.getText().isEmpty()) {
+            jtaDescricaoCargo.setBackground(Color.white);
+        } else {
+            jtaDescricaoCargo.setBackground(Color.red);
+            valida = false;
+        }
+        
         return valida;
     }
 
@@ -147,7 +160,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaDescricaoCargo = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jlCargosList = new javax.swing.JList<String>();
+        jlCargosList = new javax.swing.JList<>();
         jbCadastrarCargo1 = new javax.swing.JButton();
         jlCargosDepartamento = new javax.swing.JLabel();
         jbCancelarDepartamento = new javax.swing.JButton();
@@ -158,7 +171,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(747, 640));
         getContentPane().setLayout(null);
         getContentPane().add(jtfCodigoCargo);
-        jtfCodigoCargo.setBounds(360, 290, 200, 30);
+        jtfCodigoCargo.setBounds(360, 290, 80, 30);
 
         jlDescricaoCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlDescricaoCargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -239,10 +252,10 @@ public class cadastroCargo extends javax.swing.JFrame {
         jScrollPane1.setBounds(230, 390, 330, 180);
 
         jlCargosList.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCargosList.setModel(new javax.swing.AbstractListModel() {
+        jlCargosList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            public String getElementAt(int i) { return strings[i]; }
         });
         jlCargosList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jlCargosList);

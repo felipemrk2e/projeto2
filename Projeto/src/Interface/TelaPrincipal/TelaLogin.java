@@ -6,8 +6,11 @@
 package Interface.TelaPrincipal;
 
 import dao.LoginDAO;
+import global.model.MD5;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -103,7 +106,7 @@ public class TelaLogin extends javax.swing.JDialog {
 
         jbAcessar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbAcessar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Ok.png"))); // NOI18N
-        jbAcessar.setText("Acessar");
+        jbAcessar.setText("<html><center>Acessar<br/></html>");
         jbAcessar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbAcessarMousePressed(evt);
@@ -113,7 +116,7 @@ public class TelaLogin extends javax.swing.JDialog {
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
-        jbCancelar.setText("Cancelar");
+        jbCancelar.setText("<html><center>Cancelar<br/></html>");
         jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbCancelarMousePressed(evt);
@@ -134,18 +137,23 @@ public class TelaLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_jbCancelarMousePressed
 
     private void jbAcessarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAcessarMousePressed
-        verificaLogin();
+        try {
+            verificaLogin();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_jbAcessarMousePressed
 
-    public boolean verificaLogin() {
+    public boolean verificaLogin() throws Exception {
+        MD5 md5 = new MD5();        
         Sessao sessao = Sessao.getInstance();   
         LoginDAO loginDAO = new LoginDAO();
         List<Login> logins = new ArrayList<Login>();
         logins = loginDAO.getAll();
 
         for (int i = 0; i < logins.size(); i++) {
-            if (jtfUsuario.getText().equals(logins.get(i).getNomeUsuario()) && jpfSenha.getText().equals(logins.get(i).getSenhaUsuario())) {
+            if (jtfUsuario.getText().equals(logins.get(i).getNomeUsuario()) && md5.gerarMD5(jpfSenha.getText()).equals(logins.get(i).getSenhaUsuario())) {
                 setUsuario(logins.get(i).getNomeUsuario());
                  sessao.setUsuario(logins.get(i));
                 return true;

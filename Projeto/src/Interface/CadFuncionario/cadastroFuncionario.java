@@ -17,6 +17,7 @@ import dao.PessoaFisicaDAO;
 import global.model.Cidade;
 import global.model.Endereco;
 import global.model.Estado;
+import global.model.MD5;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -224,7 +225,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         // Fim
     }
 
-    public void cadastrarFuncionario() throws ParseException {
+    public void cadastrarFuncionario() throws ParseException, Exception {
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         Funcionario funcionario = new Funcionario();
         funcionario.setNomePessoa(jtfNome.getText());
@@ -294,14 +295,17 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         funcionario.setDataAdmissao(admissao);
 
         criaLogin loginNovo = new criaLogin();
+        MD5 md5 = new MD5();
 
         Login login = new Login();
         login.setNivelAcesso(0);
-        login.setNomeUsuario(loginNovo.geraNovoUsuario(funcionario.getNomePessoa()));
-        login.setSenhaUsuario(loginNovo.gerarNovaSenha());
+        login.setNomeUsuario(loginNovo.geraNovoUsuario(funcionario.getNomePessoa()));        String senha = loginNovo.gerarNovaSenha();
+        
+        login.setSenhaUsuario(md5.gerarMD5(senha));
         funcionario.setLogin(login);
 
         funcionarioDAO.persist(funcionario);
+        JOptionPane.showMessageDialog(this, "Senha gerada com sucesso!\nUsuário: "+funcionario.getNomePessoa()+"\nSenha: "+senha);
     }
 
     public void cadastrarFuncionario(Funcionario funcionario) throws ParseException {
@@ -390,7 +394,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
             if (listaCidadesGlobal.get(i).getIdCidade() == funcionario.getEndereco().getCidade().getIdCidade()) {
                 indexCidade = i;
             }
-        } 
+        }
         jcbCidade.setSelectedIndex(indexCidade);
 
         jtfBairro.setText(funcionario.getEndereco().getBairro());
@@ -786,7 +790,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jlCEP = new javax.swing.JLabel();
         jftCEP = new javax.swing.JFormattedTextField();
         jcbEstado = new javax.swing.JComboBox();
-        jcbCidade = new javax.swing.JComboBox<String>();
+        jcbCidade = new javax.swing.JComboBox<>();
         jtfComplemento = new javax.swing.JTextField();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCelular = new javax.swing.JFormattedTextField();
@@ -973,7 +977,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         });
         getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, 30));
 
-        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 140, 30));
         getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 270, 30));
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 210, 30));
@@ -1146,7 +1150,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaCidades.toArray());
         jcbCidade.setModel(defaultComboBox);
         listaCidadesGlobal = listaCidades;
-        
+
     }
 
     public void carregaEstadosCivis() {

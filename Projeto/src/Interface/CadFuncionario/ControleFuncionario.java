@@ -11,7 +11,9 @@ import dao.CargoDAO;
 import dao.DepartamentoDAO;
 import dao.FuncionarioDAO;
 import dao.LoginDAO;
+import global.model.MD5;
 import java.awt.Color;
+import java.security.MessageDigest;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -92,7 +94,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jcbDepartamento.setEnabled(b);
     }
 
-    public void cadastrarSenha() {
+    public void cadastrarSenha() throws Exception {
+        MD5 md5 = new MD5();
         funcionario = cadastroFuncionario.getInstancia().funcionario;
         LoginDAO loginDAO = new LoginDAO();
         Login login = loginDAO.getById(funcionario.getLogin().getIdLogin());
@@ -101,7 +104,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         char[] chars = jpfNovaSenha1.getPassword();
         String password = String.valueOf(chars);
-        login.setSenhaUsuario(password);
+        login.setSenhaUsuario(md5.gerarMD5(password));
         loginDAO.merge(login);
     }
 
@@ -208,7 +211,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(departamentos.toArray());
         jcbDepartamento.setModel(defaultComboBox);
         jcbDepartamento.setSelectedIndex(-1);
-    }
+    }    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
