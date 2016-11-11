@@ -197,9 +197,6 @@ public class Teste {
         enderecofuncionario.setCep("4");
         enderecofuncionario.setBairro("Golfinho");
 
-        Estado estadofuncionario = new Estado();
-        estadofuncionario.setId(26);
-
         CidadeDAO cidadeFuncionarioDAO = new CidadeDAO();
         Cidade cidadeFuncionario = cidadeFuncionarioDAO.getById(Long.parseLong("8797"));
 

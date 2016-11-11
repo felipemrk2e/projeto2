@@ -72,5 +72,10 @@ public class Cidade {
     public void addEndereco(Endereco endereco) {
         this.enderecos.add(endereco);
     }
+    
+    @Override
+    public String toString() {
+        return nomeCidade;
+    }
 
 }

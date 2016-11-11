@@ -250,7 +250,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         FuncionarioTableModel funcionarioModel = (FuncionarioTableModel) jtFuncionarios.getModel();
         Funcionario funcionarioSelecionado = funcionarioModel.get(linhaSelecionada);
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        ControleFuncionario.getInstancia().funcionario = funcionarioSelecionado;
+        cadastroFuncionario.getInstancia().funcionario = funcionarioSelecionado;
         setLocationRelativeTo(this);
         ControleFuncionario.getInstancia().atualizarSenha(funcionarioSelecionado);
         ControleFuncionario.getInstancia().setVisible(true);

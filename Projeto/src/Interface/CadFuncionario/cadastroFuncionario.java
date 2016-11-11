@@ -53,6 +53,8 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     private static cadastroFuncionario instancia;
 
     public static Funcionario funcionario = null;
+    private List<Cidade> listaCidadesGlobal;
+    private int indexCidade;
 
     /**
      * Creates new form cadastroFuncionario
@@ -68,27 +70,12 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         carregaCidades();
         carregaEstadosCivis();
         if (funcionario == null) {
-            populaFuncionario();
+//            populaFuncionario();
         }
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 
     }
 
-//    public cadastroFuncionario(Funcionario funcionario) {
-//        this.funcionario = funcionario;
-//        this.setUndecorated(true);
-//        initComponents();
-//        setAlwaysOnTop(true);
-//        this.setTitle("Atualização de Funcionário");
-//        configuraMascaras();
-//        carregaCargos();
-//        carregaEstados();
-//        carregaCidades();
-//        carregaEstadosCivis();
-//        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
-//        atualizarFuncionario();
-//
-//    }
     public static cadastroFuncionario getInstancia() {
         if (instancia == null) {
             instancia = new cadastroFuncionario();
@@ -120,7 +107,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }
 
     public void DisableEnable(Boolean b) {
-        jtfCodigoInterno.setEditable(true);
+        jtfCodigoInterno.setEditable(b);
         //cad
         jtfNome.setEnabled(b);
         jftCPF.setEnabled(b);
@@ -247,13 +234,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         funcionario.setDataNascimento(dataNascimento);
         funcionario.setObservacoes(jtaObs.getText());
 
-        EstadoDAO estadoDAO = new EstadoDAO();
-        Estado estado = new Estado();
-        estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
-
-        CidadeDAO cidadeDAO = new CidadeDAO();
-        Cidade cidade = new Cidade();
-        cidade = cidadeDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+        Cidade cidade = (Cidade) jcbCidade.getSelectedItem();
 
         Endereco endereco = new Endereco();
         endereco.setNomeEndereco(jtfEndereco.getText());
@@ -292,14 +273,10 @@ public class cadastroFuncionario extends javax.swing.JFrame {
             funcionario.setSexo('F');
         }
 
-        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
-        EstadoCivil estadoCivil = new EstadoCivil();
-        estadoCivil = estadoCivilDAO.getById((long) jcbEstadoCivil.getSelectedIndex() + 1);
+        EstadoCivil estadoCivil = (EstadoCivil) jcbEstadoCivil.getSelectedItem();
         funcionario.setEstadoCivil(estadoCivil);
 
-        CargoDAO cargoDAO = new CargoDAO();
-        Cargo cargo = new Cargo();
-        cargo = cargoDAO.getById((long) jcbCargo.getSelectedIndex() + 1);
+        Cargo cargo = (Cargo) jcbCargo.getSelectedItem();
         funcionario.setCargo(cargo);
 
         funcionario.setDependentes(Integer.parseInt(jtfDependentes.getText()));
@@ -336,13 +313,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         funcionario.setDataNascimento(dataNascimento);
         funcionario.setObservacoes(jtaObs.getText());
 
-        EstadoDAO estadoDAO = new EstadoDAO();
-        Estado estado = new Estado();
-        estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
-
-        CidadeDAO cidadeDAO = new CidadeDAO();
-        Cidade cidade = new Cidade();
-        cidade = cidadeDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
+        Cidade cidade = (Cidade) jcbCidade.getSelectedItem();
 
         Endereco endereco = new Endereco();
         endereco.setNomeEndereco(jtfEndereco.getText());
@@ -381,14 +352,10 @@ public class cadastroFuncionario extends javax.swing.JFrame {
             funcionario.setSexo('F');
         }
 
-        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
-        EstadoCivil estadoCivil = new EstadoCivil();
-        estadoCivil = estadoCivilDAO.getById((long) jcbEstadoCivil.getSelectedIndex() + 1);
+        EstadoCivil estadoCivil = (EstadoCivil) jcbEstadoCivil.getSelectedItem();
         funcionario.setEstadoCivil(estadoCivil);
 
-        CargoDAO cargoDAO = new CargoDAO();
-        Cargo cargo = new Cargo();
-        cargo = cargoDAO.getById((long) jcbCargo.getSelectedIndex() + 1);
+        Cargo cargo = (Cargo) jcbCargo.getSelectedItem();
         funcionario.setCargo(cargo);
 
         funcionario.setDependentes(Integer.parseInt(jtfDependentes.getText()));
@@ -403,24 +370,28 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         funcionario.setSerieCtps(jtfSerieCTPS.getText());
         funcionario.setCargaHoraria(jtfCargaHoraria.getText());
         Date admissao = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataAdmissao.getText());
-        funcionario.setDataAdmissao(admissao);       
+        funcionario.setDataAdmissao(admissao);
 
         funcionarioDAO.merge(funcionario);
     }
 
     public void atualizarFuncionario(Funcionario funcionario) {
-        jtfCodigoInterno.setText("" + funcionario.getIdPessoa());       
+        jtfCodigoInterno.setText("" + funcionario.getIdPessoa());
         jtfNome.setText(funcionario.getNomePessoa());
         jftCPF.setText(funcionario.getCPF());
         jtfRG.setText(funcionario.getRG());
         String dataString = new SimpleDateFormat("dd/MM/yyyy").format(funcionario.getDataNascimento());
-        System.out.println(dataString);
         jftDataNascimento.setText(dataString);
         jtaObs.setText(funcionario.getObservacoes());
 
-        jcbCidade.setSelectedIndex((int) funcionario.getEndereco().getCidade().getIdCidade() - 1);
+        jcbEstado.setSelectedIndex((int) funcionario.getEndereco().getCidade().getEstado().getId() - 1);
 
-        jcbEstado.setSelectedIndex((int) (funcionario.getEndereco().getCidade().getEstado().getId() - 1));
+        for (int i = 0; i < listaCidadesGlobal.size(); i++) {
+            if (listaCidadesGlobal.get(i).getIdCidade() == funcionario.getEndereco().getCidade().getIdCidade()) {
+                indexCidade = i;
+            }
+        } 
+        jcbCidade.setSelectedIndex(indexCidade);
 
         jtfBairro.setText(funcionario.getEndereco().getBairro());
 
@@ -720,6 +691,8 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         try {
             jftDataNascimento.setFormatterFactory(new DefaultFormatterFactory(
                     new MaskFormatter("##/##/####")));
+            jftDataAdmissao.setFormatterFactory(new DefaultFormatterFactory(
+                    new MaskFormatter("##/##/####")));
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -813,7 +786,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jlCEP = new javax.swing.JLabel();
         jftCEP = new javax.swing.JFormattedTextField();
         jcbEstado = new javax.swing.JComboBox();
-        jcbCidade = new javax.swing.JComboBox<>();
+        jcbCidade = new javax.swing.JComboBox<String>();
         jtfComplemento = new javax.swing.JTextField();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCelular = new javax.swing.JFormattedTextField();
@@ -1000,7 +973,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         });
         getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, 30));
 
-        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 140, 30));
         getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 270, 30));
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 210, 30));
@@ -1137,16 +1110,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         //add cargo
     }//GEN-LAST:event_jlAddCargoMousePressed
 
-    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
-        if (jcbEstado.getSelectedIndex() > -1) {
-            EstadoDAO estadoDAO = new EstadoDAO();
-            Estado estado = new Estado();
-            estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
-            carregaCidades(estado);
-
-        }
-    }//GEN-LAST:event_jcbEstadoActionPerformed
-
     private void jbEditarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMousePressed
         if (jbEditar.isEnabled()) {
             cadastroFuncionario.getInstancia().DisableEnable(true);
@@ -1154,85 +1117,51 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbEditarMousePressed
 
+    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
+        if (jcbEstado.getSelectedIndex() > -1) {
+            carregaCidadeEstados();
+        }
+    }//GEN-LAST:event_jcbEstadoActionPerformed
+
     public void carregaEstados() {
         EstadoDAO estadoDAO = new EstadoDAO();
         Estado estado = new Estado();
-        List<Estado> listaEstados = new ArrayList<Estado>();
-        List<String> listaSigla = new ArrayList<String>();
-        listaEstados = estadoDAO.getAll();
-        for (int i = 0; i < listaEstados.size(); i++) {
-            listaSigla.add(listaEstados.get(i).getSigla());
-        }
-        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
+        List<Estado> listaEstados = estadoDAO.getAll();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaEstados.toArray());
         jcbEstado.setModel(defaultComboBox);
-    }
-
-    public void carregaEstados(Cidade cidade) {
-        EstadoDAO estadoDAO = new EstadoDAO();
-        Estado estado = new Estado();
-        estado = estadoDAO.getById(cidade.getEstado().getId());
-
-        List<Estado> listaEstados = new ArrayList<Estado>();
-        List<String> listaSigla = new ArrayList<String>();
-        listaEstados = estadoDAO.getAll();
-        for (int i = 0; i < listaEstados.size(); i++) {
-            listaSigla.add(listaEstados.get(i).getSigla());
-        }
-        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
-        jcbEstado.setModel(defaultComboBox);
-        jcbEstado.setSelectedIndex((int) estado.getId() - 1);
-    }
-
-    public void carregaCidades(Estado estado) {
-        CidadeDAO cidadeDAO = new CidadeDAO();
-        Cidade cidade = new Cidade();
-        List<Cidade> listaCidades = new ArrayList<Cidade>();
-        List<String> listaNomeCidade = new ArrayList<String>();
-        listaCidades = cidadeDAO.getWhereIdEstado(estado.getId());
-        for (int i = 0; i < listaCidades.size(); i++) {
-            listaNomeCidade.add(listaCidades.get(i).getNomeCidade());
-        }
-        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeCidade.toArray());
-        jcbCidade.setModel(defaultComboBox);
     }
 
     public void carregaCidades() {
         CidadeDAO cidadeDAO = new CidadeDAO();
-        Cidade cidade = new Cidade();
-        List<Cidade> listaCidades = new ArrayList<Cidade>();
-        List<String> listaNomeCidade = new ArrayList<String>();
-        listaCidades = cidadeDAO.getAll();
-        for (int i = 0; i < listaCidades.size(); i++) {
-            listaNomeCidade.add(listaCidades.get(i).getNomeCidade());
-        }
-        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeCidade.toArray());
+        List<Cidade> listaCidades = cidadeDAO.getAll();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaCidades.toArray());
         jcbCidade.setModel(defaultComboBox);
+    }
+
+    public void carregaCidadeEstados() {
+        Estado estado = (Estado) jcbEstado.getSelectedItem();
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        List<Cidade> listaCidades = cidadeDAO.getWhereIdEstado(estado.getId());
+        jcbCidade.removeAllItems();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaCidades.toArray());
+        jcbCidade.setModel(defaultComboBox);
+        listaCidadesGlobal = listaCidades;
+        
     }
 
     public void carregaEstadosCivis() {
         EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
-        EstadoCivil estadoCivil = new EstadoCivil();
-        List<EstadoCivil> listaEstadoCivis = new ArrayList<EstadoCivil>();
-        List<String> listaNomeEstadoCivis = new ArrayList<String>();
-        listaEstadoCivis = estadoCivilDAO.getAll();
-        for (int i = 0; i < listaEstadoCivis.size(); i++) {
-            listaNomeEstadoCivis.add(listaEstadoCivis.get(i).getNomeEstadoCivil());
-        }
-        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeEstadoCivis.toArray());
+        List<EstadoCivil> listaEstadoCivis = estadoCivilDAO.getAll();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaEstadoCivis.toArray());
         jcbEstadoCivil.setModel(defaultComboBox);
     }
 
     public void carregaCargos() {
         CargoDAO cargoDAO = new CargoDAO();
-        Cargo cargo = new Cargo();
-        List<Cargo> listaCargos = new ArrayList<Cargo>();
-        List<String> listaNomeCargos = new ArrayList<String>();
-        listaCargos = cargoDAO.getAll();
-        for (int i = 0; i < listaCargos.size(); i++) {
-            listaNomeCargos.add(listaCargos.get(i).getNomeCargo());
-        }
-        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeCargos.toArray());
+        List<Cargo> cargos = cargoDAO.getAll();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(cargos.toArray());
         jcbCargo.setModel(defaultComboBox);
+        jcbCargo.setSelectedIndex(-1);
     }
 
     public void fecharCadastro() {

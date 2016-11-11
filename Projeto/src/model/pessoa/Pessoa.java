@@ -179,6 +179,11 @@ public class Pessoa {
         this.tipoPessoa = tipoPessoa;
     }
     
+    @Override
+    public String toString() {
+        return nomePessoa;
+    }
+    
     
 
 }

@@ -99,6 +99,10 @@ public class Departamento {
 	this.cargo.add(cargo);
     }
     
+    @Override
+    public String toString() {
+        return nomeDepartamento;
+    }
     
     
 }

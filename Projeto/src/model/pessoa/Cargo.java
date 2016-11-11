@@ -89,6 +89,12 @@ public class Cargo {
     public void addFuncionario(Funcionario funcionario) {
 	this.funcionario.add(funcionario);
     }
+
+    @Override
+    public String toString() {
+        return nomeCargo;
+    }
+    
     
     
     

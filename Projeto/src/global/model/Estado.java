@@ -11,52 +11,57 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Estado {
-	
-	@Id
-	@Column
-	private long id;
-	
-	@Column
-	private String nome;
-	
-	@Column
-	private String sigla;
-	
-	@OneToMany(
-			mappedBy = "estado", 
-			targetEntity = Cidade.class, 
-			fetch = FetchType.LAZY)
-	private final List<Cidade> cidades = new ArrayList<Cidade>();
-	
-	public Estado(){
-		
-	}
 
-	public long getId() {
-		return id;
-	}
+    @Id
+    @Column
+    private long id;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @Column
+    private String nome;
 
-	public String getNome() {
-		return nome;
-	}
+    @Column
+    private String sigla;
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    @OneToMany(
+            mappedBy = "estado",
+            targetEntity = Cidade.class,
+            fetch = FetchType.LAZY)
+    private final List<Cidade> cidades = new ArrayList<Cidade>();
 
-	public String getSigla() {
-		return sigla;
-	}
+    public Estado() {
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
-	}
-	
-	public void addCidade(Cidade cidade){
-		this.cidades.add(cidade);
-	}
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSigla() {
+        return sigla;
+    }
+
+    public void setSigla(String sigla) {
+        this.sigla = sigla;
+    }
+
+    public void addCidade(Cidade cidade) {
+        this.cidades.add(cidade);
+    }
+
+    @Override
+    public String toString() {
+        return sigla;
+    }
 }

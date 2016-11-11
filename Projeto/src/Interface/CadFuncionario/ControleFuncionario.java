@@ -5,8 +5,12 @@
  */
 package Interface.CadFuncionario;
 
+import static Interface.CadFuncionario.cadastroFuncionario.funcionario;
 import Interface.TelaPrincipal.Sessao;
+import dao.CargoDAO;
+import dao.DepartamentoDAO;
 import dao.FuncionarioDAO;
+import dao.LoginDAO;
 import java.awt.Color;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -18,6 +22,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import model.pessoa.Cargo;
+import model.pessoa.Departamento;
 import model.pessoa.Funcionario;
 import model.pessoa.Login;
 
@@ -29,8 +35,6 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
     private static ControleFuncionario instancia;
 
-    public static Funcionario funcionario = null;
-
     /**
      * Creates new form ControleFuncionario
      */
@@ -39,9 +43,12 @@ public class ControleFuncionario extends javax.swing.JFrame {
         initComponents();
         setAlwaysOnTop(true);
         this.setTitle("Controle de Funcionários");
+        DisableEnable(false);
         mascaraCPF();
         carregaNiveis();
         carregarFuncionarios();
+        carregarCargos();
+        carregarDepartamentos();
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
 
@@ -81,20 +88,21 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jtUser.setEnabled(b);
         jpfNovaSenha1.setEnabled(b);
         jpfNovaSenha2.setEnabled(b);
+        jcbCargo.setEnabled(b);
+        jcbDepartamento.setEnabled(b);
     }
 
-    public void cadastrarSenha(Funcionario funcionario) {
-
-        Login login = new Login();
+    public void cadastrarSenha() {
+        funcionario = cadastroFuncionario.getInstancia().funcionario;
+        LoginDAO loginDAO = new LoginDAO();
+        Login login = loginDAO.getById(funcionario.getLogin().getIdLogin());
         login.setNivelAcesso(jcbNivelAcesso.getSelectedIndex() + 1);
         login.setNomeUsuario(jtUser.getText());
 
-        char[] chars = jpfNovaSenha1.getPassword();        
+        char[] chars = jpfNovaSenha1.getPassword();
         String password = String.valueOf(chars);
         login.setSenhaUsuario(password);
-        funcionario.setLogin(login);
-
-        FuncionarioDAO.getInstancia().merge(funcionario);
+        loginDAO.merge(login);
     }
 
     public void atualizarSenha(Funcionario funcionario) {
@@ -102,8 +110,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jtfNome.setText(funcionario.getNomePessoa());
         jftCPF.setText(funcionario.getCPF());
         jtfRG.setText(funcionario.getRG());
-        jtCargo.setText(funcionario.getCargo().getNomeCargo());
-        jtDepartamento.setText(funcionario.getCargo().getDepartamento().getNomeDepartamento());
+        jcbCargo.setSelectedIndex((int) funcionario.getCargo().getIdCargo() - 1);
+        jcbDepartamento.setSelectedIndex((int) funcionario.getCargo().getDepartamento().getIdDepartamento());
         jcbNivelAcesso.setSelectedIndex(funcionario.getLogin().getNivelAcesso() - 1);
         jtUser.setText(funcionario.getLogin().getNomeUsuario());
     }
@@ -149,8 +157,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jtfNome.setText("");
         jftCPF.setText("");
         jtfRG.setText("");
-        jtCargo.setText("");
-        jtDepartamento.setText("");
+        jcbCargo.setSelectedIndex(-1);
+        jcbDepartamento.setSelectedIndex(-1);
         jcbNivelAcesso.setSelectedIndex(-1);
         jtUser.setText("");
         jpfNovaSenha1.setText("");
@@ -174,16 +182,32 @@ public class ControleFuncionario extends javax.swing.JFrame {
         niveis.add("3");
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(niveis.toArray());
         jcbNivelAcesso.setModel(defaultComboBox);
+        jcbNivelAcesso.setSelectedIndex(-1);
 
     }
-    
-    public void carregarFuncionarios(){
+
+    public void carregarFuncionarios() {
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        List<Funcionario> funcionarios = new ArrayList<Funcionario>();
-        funcionarios = funcionarioDAO.getAll();
-        
+        List<Funcionario> funcionarios = funcionarioDAO.getAll();
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(funcionarios.toArray());
         jcbFuncionarios.setModel(defaultComboBox);
+        jcbFuncionarios.setSelectedIndex(-1);
+    }
+
+    public void carregarCargos() {
+        CargoDAO cargoDAO = new CargoDAO();
+        List<Cargo> cargos = cargoDAO.getAll();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(cargos.toArray());
+        jcbCargo.setModel(defaultComboBox);
+        jcbCargo.setSelectedIndex(-1);
+    }
+
+    public void carregarDepartamentos() {
+        DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+        List<Departamento> departamentos = departamentoDAO.getAll();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(departamentos.toArray());
+        jcbDepartamento.setModel(defaultComboBox);
+        jcbDepartamento.setSelectedIndex(-1);
     }
 
     /**
@@ -210,19 +234,19 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jtUser = new javax.swing.JTextField();
         jbConfirmar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
-        jtCargo = new javax.swing.JTextField();
-        jtDepartamento = new javax.swing.JTextField();
         jlCargo = new javax.swing.JLabel();
         jlDepartamento = new javax.swing.JLabel();
         jbEditar = new javax.swing.JButton();
         jpfNovaSenha1 = new javax.swing.JPasswordField();
         jpfNovaSenha2 = new javax.swing.JPasswordField();
         jlNomeUsuario = new javax.swing.JLabel();
-        jcbNivelAcesso = new javax.swing.JComboBox<>();
+        jcbNivelAcesso = new javax.swing.JComboBox<String>();
         jlFuncionarios = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jcbFuncionarios = new javax.swing.JComboBox<>();
+        jcbFuncionarios = new javax.swing.JComboBox<String>();
         jbCarregar = new javax.swing.JButton();
+        jcbDepartamento = new javax.swing.JComboBox();
+        jcbCargo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -311,14 +335,6 @@ public class ControleFuncionario extends javax.swing.JFrame {
         getContentPane().add(jbCancelar);
         jbCancelar.setBounds(510, 320, 140, 70);
 
-        jtCargo.setEditable(false);
-        getContentPane().add(jtCargo);
-        jtCargo.setBounds(790, 80, 160, 30);
-
-        jtDepartamento.setEditable(false);
-        getContentPane().add(jtDepartamento);
-        jtDepartamento.setBounds(370, 120, 150, 30);
-
         jlCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCargo.setText("Cargo:");
         getContentPane().add(jlCargo);
@@ -357,14 +373,14 @@ public class ControleFuncionario extends javax.swing.JFrame {
         getContentPane().add(jlNomeUsuario);
         jlNomeUsuario.setBounds(240, 200, 120, 30);
 
-        jcbNivelAcesso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbNivelAcesso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbNivelAcesso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbNivelAcessoActionPerformed(evt);
             }
         });
         getContentPane().add(jcbNivelAcesso);
-        jcbNivelAcesso.setBounds(370, 160, 56, 30);
+        jcbNivelAcesso.setBounds(370, 160, 64, 30);
 
         jlFuncionarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlFuncionarios.setText("Funcionários");
@@ -376,7 +392,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jSeparator1.setBounds(210, 10, 760, 400);
 
         jcbFuncionarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jcbFuncionarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbFuncionarios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbFuncionarios);
         jcbFuncionarios.setBounds(20, 90, 180, 30);
 
@@ -390,6 +406,14 @@ public class ControleFuncionario extends javax.swing.JFrame {
         });
         getContentPane().add(jbCarregar);
         jbCarregar.setBounds(40, 130, 140, 70);
+
+        jcbDepartamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbDepartamento);
+        jcbDepartamento.setBounds(370, 120, 150, 30);
+
+        jcbCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbCargo);
+        jcbCargo.setBounds(790, 80, 160, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -420,10 +444,9 @@ public class ControleFuncionario extends javax.swing.JFrame {
         if (jbConfirmar.isEnabled()) {
             if (validaCampos(true)) {
                 try {
-                    cadastrarSenha(funcionario);
+                    cadastrarSenha();
                     JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
                     ZerarCampos();
-                    funcionario = null;
                     encerrarInstancia();
                     dispose();
 
@@ -445,7 +468,16 @@ public class ControleFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jbEditarMousePressed
 
     private void jbCarregarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCarregarMousePressed
-        
+        if (jbCarregar.isEnabled()) {
+            setLocationRelativeTo(this);
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+            cadastroFuncionario.getInstancia().funcionario = (Funcionario) jcbFuncionarios.getSelectedItem();
+            ControleFuncionario.getInstancia().atualizarSenha(cadastroFuncionario.getInstancia().funcionario);
+            ControleFuncionario.getInstancia().setVisible(true);
+            ControleFuncionario.getInstancia().DisableEnable(false);
+            ControleFuncionario.getInstancia().setLocationRelativeTo(this);
+            ControleFuncionario.getInstancia().setAlwaysOnTop(true);
+        }
     }//GEN-LAST:event_jbCarregarMousePressed
 
     /**
@@ -489,6 +521,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton jbCarregar;
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JButton jbEditar;
+    private javax.swing.JComboBox jcbCargo;
+    private javax.swing.JComboBox jcbDepartamento;
     private javax.swing.JComboBox<String> jcbFuncionarios;
     private javax.swing.JComboBox<String> jcbNivelAcesso;
     private javax.swing.JFormattedTextField jftCPF;
@@ -505,8 +539,6 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jlRepetirNovaSenha;
     private javax.swing.JPasswordField jpfNovaSenha1;
     private javax.swing.JPasswordField jpfNovaSenha2;
-    private javax.swing.JTextField jtCargo;
-    private javax.swing.JTextField jtDepartamento;
     private javax.swing.JTextField jtNivelAcesso;
     private javax.swing.JTextField jtUser;
     private javax.swing.JTextField jtfCodigoInterno;

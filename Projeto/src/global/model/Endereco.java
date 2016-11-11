@@ -138,4 +138,9 @@ public class Endereco {
         cidade.addEndereco(this);
         this.cidade = cidade;
     }
+    
+    @Override
+    public String toString() {
+        return nomeEndereco;
+    }
 }

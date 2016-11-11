@@ -106,7 +106,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         jbVisualizar = new javax.swing.JButton();
         jbRemover = new javax.swing.JButton();
         jbPesquisar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jlFiltros = new javax.swing.JLabel();
         jcbPessoaFisica = new javax.swing.JCheckBox();
         jcbPessoaJuridica = new javax.swing.JCheckBox();
         jtNome = new javax.swing.JTextField();
@@ -175,10 +175,10 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         });
         getContentPane().add(jbPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 410, 140, 70));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Filtros:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, 50, 30));
+        jlFiltros.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlFiltros.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlFiltros.setText("Filtros:");
+        getContentPane().add(jlFiltros, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, 50, 30));
 
         jcbPessoaFisica.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbPessoaFisica.setText("Pessoa Física");
@@ -557,7 +557,6 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbCancelar;
@@ -569,6 +568,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jftCPF;
     private javax.swing.JFormattedTextField jftTelefone;
     private javax.swing.JLabel jlCPF;
+    private javax.swing.JLabel jlFiltros;
     private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlTelefone;
     private javax.swing.JSeparator jsPesquisaCliente;

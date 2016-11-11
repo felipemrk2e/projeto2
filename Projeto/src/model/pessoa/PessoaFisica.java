@@ -138,5 +138,10 @@ public class PessoaFisica extends Pessoa {
     public void setListaFiadores(List<PessoaFisica> listaFiadores) {
         this.listaFiadores = listaFiadores;
     }
+    
+    @Override
+    public String toString() {
+        return getNomePessoa();
+    }
 
 }
