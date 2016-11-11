@@ -5,17 +5,118 @@
  */
 package Interface.CadCargo;
 
+import Interface.TelaPrincipal.Sessao;
+import dao.CargoDAO;
+import dao.DepartamentoDAO;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.pessoa.Cargo;
+import model.pessoa.Departamento;
+
 /**
  *
  * @author a1502735
  */
 public class cadastroCargo extends javax.swing.JFrame {
 
+    private static cadastroCargo instancia;
+
     /**
      * Creates new form cadastrarCargo
      */
     public cadastroCargo() {
         initComponents();
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+
+    }
+
+    public static cadastroCargo getInstancia() {
+        if (instancia == null) {
+            instancia = new cadastroCargo();
+        }
+        return instancia;
+    }
+
+    public static void encerrarInstancia() {
+        instancia = null;
+    }
+
+    public void acesso(int nivel) {
+        DisableEnable(false);
+        switch (nivel) {
+            case 1:
+                DisableEnable(true);
+                jbCadastrarDepartamento.setEnabled(true);
+                jbCadastrarCargo1.setEnabled(true);
+                jbEditar.setEnabled(true);
+                break;
+            case 2:
+                DisableEnable(false);
+                break;
+            case 3:
+                DisableEnable(false);
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "Acesso negado!\nNível de Acesso Inválido");
+        }
+    }
+
+    public void DisableEnable(Boolean b) {
+        jtfCodigoDepartamento.setEnabled(false);
+        jtfNomeDepartamento.setEnabled(b);
+        jftTelefone.setEnabled(b);
+        jtfRamal.setEnabled(b);
+        jtfCodigoCargo.setEnabled(b);
+        jtNomeCargo.setEnabled(b);
+        jtaDescricaoCargo.setEnabled(b);
+        jlCargosList.setEnabled(b);
+    }
+
+    public boolean validaCargo(boolean valida) {
+
+        return valida;
+    }
+
+    public boolean validaDepartamento(boolean valida) {
+
+        return valida;
+    }
+
+    public void ZerarCampos() {
+        jtfCodigoDepartamento.setText("");
+        jtfNomeDepartamento.setText("");
+        jftTelefone.setText("");
+        jtfRamal.setText("");
+        jtfCodigoCargo.setText("");
+        jtNomeCargo.setText("");
+        jtaDescricaoCargo.setText("");
+        jlCargosList.setSelectedIndex(-1);
+    }
+
+    public void cadastrarCargo() {
+        Cargo cargo = new Cargo();
+        CargoDAO cargoDAO = new CargoDAO();
+        cargo.setNomeCargo(jtNomeCargo.getText());
+        cargo.setDescricaoCargo(jtaDescricaoCargo.getText());
+        cargo.setDepartamento(null);
+        cargoDAO.persist(cargo);
+    }
+
+    public void cadastrarCargo(Cargo cargo) {
+        CargoDAO cargoDAO = new CargoDAO();
+        cargo.setNomeCargo(jtNomeCargo.getText());
+        cargo.setDescricaoCargo(jtaDescricaoCargo.getText());
+        cargo.setDepartamento(null);
+        cargoDAO.merge(cargo);
+    }
+
+    public void cadastrarDepartamento() {
+        DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+        Departamento departamento = new Departamento();
+        departamento.setNomeDepartamento(jtfNomeDepartamento.getText());
+        departamento.setRamal(jtfRamal.getText());
+        departamento.setTelefoneDepartamento(jftTelefone.getText());
+        departamento.setCargo((List<Cargo>) jlCargosList.getModel());
     }
 
     /**
@@ -46,7 +147,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaDescricaoCargo = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jlCargosList = new javax.swing.JList<String>();
         jbCadastrarCargo1 = new javax.swing.JButton();
         jlCargosDepartamento = new javax.swing.JLabel();
         jbCancelarDepartamento = new javax.swing.JButton();
@@ -137,14 +238,14 @@ public class cadastroCargo extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(230, 390, 330, 180);
 
-        jList1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        jlCargosList.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlCargosList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(jList1);
+        jlCargosList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(jlCargosList);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(30, 310, 180, 260);
@@ -157,7 +258,7 @@ public class cadastroCargo extends javax.swing.JFrame {
 
         jlCargosDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCargosDepartamento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlCargosDepartamento.setText("Cargos do Departamento");
+        jlCargosDepartamento.setText("Departamento");
         getContentPane().add(jlCargosDepartamento);
         jlCargosDepartamento.setBounds(30, 280, 180, 30);
 
@@ -167,11 +268,11 @@ public class cadastroCargo extends javax.swing.JFrame {
         getContentPane().add(jbCancelarDepartamento);
         jbCancelarDepartamento.setBounds(570, 160, 140, 70);
 
-        jsCadastrarCargo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar Cargo", 2, 0, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        jsCadastrarCargo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar Cargo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jsCadastrarCargo);
         jsCadastrarCargo.setBounds(10, 260, 720, 330);
 
-        jsCadastrarDepartamento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar Departamento", 2, 0, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        jsCadastrarDepartamento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar Departamento", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jsCadastrarDepartamento);
         jsCadastrarDepartamento.setBounds(10, 50, 720, 190);
 
@@ -215,7 +316,6 @@ public class cadastroCargo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbCadastrarCargo1;
@@ -225,6 +325,7 @@ public class cadastroCargo extends javax.swing.JFrame {
     private javax.swing.JButton jbEditar;
     private javax.swing.JFormattedTextField jftTelefone;
     private javax.swing.JLabel jlCargosDepartamento;
+    private javax.swing.JList<String> jlCargosList;
     private javax.swing.JLabel jlCodigoCargo;
     private javax.swing.JLabel jlCodigoDepartamento;
     private javax.swing.JLabel jlDescricaoCargo;

@@ -107,7 +107,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }
 
     public void DisableEnable(Boolean b) {
-        jtfCodigoInterno.setEditable(b);
+        jtfCodigoInterno.setEnabled(false);
         //cad
         jtfNome.setEnabled(b);
         jftCPF.setEnabled(b);
