@@ -9,8 +9,14 @@ import Interface.TelaPrincipal.Sessao;
 import dao.CargoDAO;
 import dao.DepartamentoDAO;
 import java.awt.Color;
+import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import model.pessoa.Cargo;
 import model.pessoa.Departamento;
 
@@ -21,12 +27,19 @@ import model.pessoa.Departamento;
 public class cadastroCargo extends javax.swing.JFrame {
 
     private static cadastroCargo instancia;
+    public static Departamento departamento = null;
+    public static Cargo cargo = null;
+    DefaultListModel listModel = new DefaultListModel();
 
     /**
      * Creates new form cadastrarCargo
      */
     public cadastroCargo() {
+        this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
+        this.setTitle("Cadastro de Departamento");
+        mascaraTelefone();
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 
     }
@@ -48,7 +61,7 @@ public class cadastroCargo extends javax.swing.JFrame {
             case 1:
                 DisableEnable(true);
                 jbCadastrarDepartamento.setEnabled(true);
-                jbCadastrarCargo1.setEnabled(true);
+                jbCadastrarCargo.setEnabled(true);
                 jbEditar.setEnabled(true);
                 break;
             case 2:
@@ -86,11 +99,23 @@ public class cadastroCargo extends javax.swing.JFrame {
             jtaDescricaoCargo.setBackground(Color.red);
             valida = false;
         }
-        
+
         return valida;
     }
 
     public boolean validaDepartamento(boolean valida) {
+        if (!jtfNomeDepartamento.getText().isEmpty()) {
+            jtfNomeDepartamento.setBackground(Color.white);
+        } else {
+            jtfNomeDepartamento.setBackground(Color.red);
+            valida = false;
+        }
+        if (!jftTelefone.getText().isEmpty()) {
+            jftTelefone.setBackground(Color.white);
+        } else {
+            jftTelefone.setBackground(Color.red);
+            valida = false;
+        }
 
         return valida;
     }
@@ -106,20 +131,23 @@ public class cadastroCargo extends javax.swing.JFrame {
         jlCargosList.setSelectedIndex(-1);
     }
 
-    public void cadastrarCargo() {
+    public void cadastrarCargo(Departamento departamento) {
         Cargo cargo = new Cargo();
         CargoDAO cargoDAO = new CargoDAO();
         cargo.setNomeCargo(jtNomeCargo.getText());
         cargo.setDescricaoCargo(jtaDescricaoCargo.getText());
-        cargo.setDepartamento(null);
+        cargo.setDepartamento(departamento);
         cargoDAO.persist(cargo);
+        listModel.addElement(cargo);
+        jlCargosList.setModel(listModel);
+        
     }
 
-    public void cadastrarCargo(Cargo cargo) {
+    public void cadastrarCargo(Cargo cargo, Departamento departamento) {
         CargoDAO cargoDAO = new CargoDAO();
         cargo.setNomeCargo(jtNomeCargo.getText());
         cargo.setDescricaoCargo(jtaDescricaoCargo.getText());
-        cargo.setDepartamento(null);
+        cargo.setDepartamento(departamento);
         cargoDAO.merge(cargo);
     }
 
@@ -130,6 +158,50 @@ public class cadastroCargo extends javax.swing.JFrame {
         departamento.setRamal(jtfRamal.getText());
         departamento.setTelefoneDepartamento(jftTelefone.getText());
         departamento.setCargo((List<Cargo>) jlCargosList.getModel());
+        departamentoDAO.persist(departamento);
+    }
+
+    public void cadastrarDepartamento(Departamento departamento) {
+        DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+        departamento.setNomeDepartamento(jtfNomeDepartamento.getText());
+        departamento.setRamal(jtfRamal.getText());
+        departamento.setTelefoneDepartamento(jftTelefone.getText());
+        departamento.setCargo((List<Cargo>) jlCargosList.getModel());
+        departamentoDAO.merge(departamento);
+    }
+
+    public void atualizarDepartamento(Departamento departamento) {
+        jtfCodigoDepartamento.setText("" + departamento.getIdDepartamento());
+        jtfNomeDepartamento.setText(departamento.getNomeDepartamento());
+        jtfRamal.setText(departamento.getRamal());
+        jftTelefone.setText(departamento.getTelefoneDepartamento());
+        DefaultListModel listModel = new DefaultListModel();
+        for (int i = 0; i < departamento.getCargo().size(); i++) {
+            listModel.addElement(departamento.getCargo().get(i));
+        }
+        jlCargosList.setModel(listModel);
+    }
+
+    public void atualizaCargo(Cargo cargo) {
+        jtfCodigoCargo.setText("" + cargo.getIdCargo());
+        jtNomeCargo.setText(cargo.getNomeCargo());
+        jtaDescricaoCargo.setText(cargo.getDescricaoCargo());
+    }
+
+    public void carregaListaCargos() {        
+        for (int i = 0; i < departamento.getCargo().size(); i++) {
+            listModel.addElement(departamento.getCargo().get(i));
+        }
+        jlCargosList.setModel(listModel);
+    }
+    
+    public void mascaraTelefone() {
+        try {
+            jftTelefone.setFormatterFactory(new DefaultFormatterFactory(
+                    new MaskFormatter("(##)####-####")));           
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -161,7 +233,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         jtaDescricaoCargo = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         jlCargosList = new javax.swing.JList<>();
-        jbCadastrarCargo1 = new javax.swing.JButton();
+        jbCadastrarCargo = new javax.swing.JButton();
         jlCargosDepartamento = new javax.swing.JLabel();
         jbCancelarDepartamento = new javax.swing.JButton();
         jsCadastrarCargo = new javax.swing.JSeparator();
@@ -228,6 +300,11 @@ public class cadastroCargo extends javax.swing.JFrame {
         jbEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbEditar.setText("<html><center>Editar<br/>Cargo</html>");
+        jbEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbEditarMousePressed(evt);
+            }
+        });
         getContentPane().add(jbEditar);
         jbEditar.setBounds(570, 420, 140, 70);
 
@@ -235,12 +312,22 @@ public class cadastroCargo extends javax.swing.JFrame {
         jbCadastrarDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
         jbCadastrarDepartamento.setText("<html><center>Cadastrar<br/>Departamento</html>");
         jbCadastrarDepartamento.setIconTextGap(0);
+        jbCadastrarDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbCadastrarDepartamentoMousePressed(evt);
+            }
+        });
         getContentPane().add(jbCadastrarDepartamento);
         jbCadastrarDepartamento.setBounds(570, 80, 140, 70);
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("<html><center>Cancelar<br/></html>");
+        jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbCancelarMousePressed(evt);
+            }
+        });
         getContentPane().add(jbCancelar);
         jbCancelar.setBounds(570, 500, 140, 70);
 
@@ -252,22 +339,22 @@ public class cadastroCargo extends javax.swing.JFrame {
         jScrollPane1.setBounds(230, 390, 330, 180);
 
         jlCargosList.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlCargosList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jlCargosList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jlCargosList);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(30, 310, 180, 260);
 
-        jbCadastrarCargo1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jbCadastrarCargo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
-        jbCadastrarCargo1.setText("<html><center>Cadastrar<br/>Cargo</html>");
-        getContentPane().add(jbCadastrarCargo1);
-        jbCadastrarCargo1.setBounds(570, 290, 140, 70);
+        jbCadastrarCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCadastrarCargo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
+        jbCadastrarCargo.setText("<html><center>Cadastrar<br/>Cargo</html>");
+        jbCadastrarCargo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbCadastrarCargoMousePressed(evt);
+            }
+        });
+        getContentPane().add(jbCadastrarCargo);
+        jbCadastrarCargo.setBounds(570, 290, 140, 70);
 
         jlCargosDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCargosDepartamento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -278,6 +365,11 @@ public class cadastroCargo extends javax.swing.JFrame {
         jbCancelarDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelarDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelarDepartamento.setText("<html><center>Cancelar<br/></html>");
+        jbCancelarDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbCancelarDepartamentoMousePressed(evt);
+            }
+        });
         getContentPane().add(jbCancelarDepartamento);
         jbCancelarDepartamento.setBounds(570, 160, 140, 70);
 
@@ -291,6 +383,97 @@ public class cadastroCargo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbCadastrarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarDepartamentoMousePressed
+        if (jbCadastrarDepartamento.isEnabled()) {
+
+            if (validaDepartamento(true)) {
+                try {
+                    if (departamento == null) {
+                        cadastrarDepartamento();
+                        JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
+                        ZerarCampos();
+                        departamento = null;
+                        encerrarInstancia();
+                        cadastroCargoHome.getInstancia().setVisible(true);
+                        cadastroCargoHome.getInstancia().setLocationRelativeTo(this);
+                        cadastroCargoHome.getInstancia().popularTabela();
+                        dispose();
+                    } else {
+                        cadastrarDepartamento(departamento);
+                        JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
+                        ZerarCampos();
+                        departamento = null;
+                        encerrarInstancia();
+                        dispose();
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(cadastroCargo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Verifique os campos obrigatórios!");
+            }
+        }
+    }//GEN-LAST:event_jbCadastrarDepartamentoMousePressed
+
+    private void jbCadastrarCargoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarCargoMousePressed
+        if (jbCadastrarCargo.isEnabled()) {
+
+            if (validaCargo(true)) {
+                try {
+                    if (cargo == null) {
+                        cadastrarCargo(departamento);
+                        JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
+                        ZerarCampos();                        
+                    } else {
+                        cadastrarCargo(departamento);
+                        JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
+                        ZerarCampos();                       
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(cadastroCargo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Verifique os campos obrigatórios!");
+            }
+
+        }
+    }//GEN-LAST:event_jbCadastrarCargoMousePressed
+
+    private void jbEditarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMousePressed
+        if (jbEditar.isEnabled()) {
+            cadastroCargoHome.getInstancia().DisableEnable(true);
+            JOptionPane.showMessageDialog(this, "Campos abertos para edição!");
+        }
+    }//GEN-LAST:event_jbEditarMousePressed
+
+    private void jbCancelarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarDepartamentoMousePressed
+        if (jbCancelarDepartamento.isEnabled()) {//                   
+            String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {
+                cadastroCargoHome.getInstancia().setVisible(true);
+                cadastroCargoHome.getInstancia().setLocationRelativeTo(this);
+                cadastroCargoHome.getInstancia().popularTabela();
+                dispose();
+                encerrarInstancia();
+            }
+        }
+    }//GEN-LAST:event_jbCancelarDepartamentoMousePressed
+
+    private void jbCancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMousePressed
+        if (jbCancelar.isEnabled()) {
+            String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {
+                cadastroCargoHome.getInstancia().setVisible(true);
+                cadastroCargoHome.getInstancia().setLocationRelativeTo(this);
+                cadastroCargoHome.getInstancia().popularTabela();
+                dispose();
+                encerrarInstancia();
+            }
+        }
+    }//GEN-LAST:event_jbCancelarMousePressed
 
     /**
      * @param args the command line arguments
@@ -331,7 +514,7 @@ public class cadastroCargo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton jbCadastrarCargo1;
+    private javax.swing.JButton jbCadastrarCargo;
     private javax.swing.JButton jbCadastrarDepartamento;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbCancelarDepartamento;
