@@ -72,7 +72,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
     }
 
-    public cadastroImovel(String idImovel, int user) {
+    public cadastroImovel(String idImovel) {
         this.setUndecorated(true);
         this.user = user;
 
@@ -82,7 +82,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         removerTitleBar();
         Imovel imovel = imovelDao.getById(Long.valueOf(idImovel));
         popular(imovel);
-        verificaNivel();
+    //    verificaNivel();
 
     }
 
