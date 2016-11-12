@@ -17,10 +17,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import global.model.Endereco;
+import global.model.Locacao;
 import global.model.Status;
 import imovel.model.Terreno;
 import imovel.model.TipoImovel;
 import imovel.model.Documentacao;
+import javax.persistence.JoinTable;
+import model.pessoa.Pessoa;
 
 @Entity
 public class Imovel {
@@ -118,6 +121,9 @@ public class Imovel {
         @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name="idStatus", nullable = true)
 	private Status status;
+        
+        @OneToOne(mappedBy="imovel", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REMOVE})
+        Locacao locacao;
 	
 	//+addTipo
 	@OneToMany(
@@ -445,14 +451,30 @@ public class Imovel {
         tipoContrato.getTiposContratos().add(imovelTipoContrato);
     }
 
-    public void removetipoContrato(TipoContrato tipoContrato) {
-    	Imovel_has_TipoContrato imovelTipoContrato = new Imovel_has_TipoContrato(this, tipoContrato, 0);
-    	tipoContrato.getTiposContratos().remove(imovelTipoContrato);
-    	tiposContratos.remove(imovelTipoContrato);
-        imovelTipoContrato.setImovel(null);
-        imovelTipoContrato.setTipoContrato(null);
-        imovelTipoContrato.setValor(0);
+//    public void removetipoContrato(TipoContrato tipoContrato) {
+//    	Imovel_has_TipoContrato imovelTipoContrato = new Imovel_has_TipoContrato(this, tipoContrato, 0);
+//    	tipoContrato.getTiposContratos().remove(imovelTipoContrato);
+//    	tiposContratos.remove(imovelTipoContrato);
+//        imovelTipoContrato.setImovel(null);
+//        imovelTipoContrato.setTipoContrato(null);
+//        imovelTipoContrato.setValor(0);
+//    }
+    
+    public Locacao getLocacao(){
+        return this.locacao;
     }
+    
+    public void setLocacao(Locacao locacao){
+        this.locacao = locacao;
+    }
+    
+    public void setLocador(Pessoa pessoa, String dataInicio, String dataFim){
+        pessoa.addImovelLocado(this, dataInicio, dataFim);
+    }
+    
+//    public void removeLocacao(){
+//        this.locacao = null;
+//    }
     
     public boolean mudaAtivo(){
         if(this.ativo==true)

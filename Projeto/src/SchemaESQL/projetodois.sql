@@ -167,12 +167,11 @@ CREATE TABLE Pessoa(
 );
 
 CREATE TABLE Locacao(
-    idLocacao INT AUTO_INCREMENT NOT NULL,
+    idImovel INT NOT NULL,
+    idPessoa INT NOT NULL,
     dataInicio DATE NOT NULL,
     dataFim DATE NOT NULL,
-    idPessoa INT NOT NULL,
-    idImovel INT NOT NULL,
-    CONSTRAINT PRIMARY KEY(idLocacao),
+    CONSTRAINT PRIMARY KEY(idImovel),
     CONSTRAINT FOREIGN KEY(idPessoa)
     REFERENCES Pessoa(idPessoa),
     CONSTRAINT FOREIGN KEY(idImovel)
