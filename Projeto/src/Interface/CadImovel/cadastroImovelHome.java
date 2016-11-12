@@ -6,16 +6,22 @@
 package Interface.CadImovel;
 
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
+import dao.CidadeDAO;
+import dao.EstadoDAO;
 import dao.ImovelDAO;
+import global.model.Cidade;
+import global.model.Estado;
 import imovel.model.Imovel;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import validacao.validacao;
 import model.TableModel.ImovelTableModel;
+import model.TableModel.ImovelTableModel2;
 
 /**
  *
@@ -25,19 +31,21 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
     private static cadastroImovelHome instancia;
     int user;
+    List<Estado> estadoGlobal;
+    List<Cidade> cidadeGlobal;
+    List<Imovel> imovelGlobal;
 
     /**
      * Creates new form cadastroImovelHome
      */
     public cadastroImovelHome() {
         //this.setUndecorated(true);
-        
-        
+
         initComponents();
         //setAlwaysOnTop(true);
         fechar();
         popularTable();
-
+        ComboBox();
     }
 
     public cadastroImovelHome(int user) {
@@ -57,21 +65,48 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
     }
 
+    public void ComboBox() {
+        EstadoDAO estadoDao = new EstadoDAO();
+        List<Estado> estadoTemp = new ArrayList<>();
+        List<String> listaSigla = new ArrayList<String>();
+        estadoTemp = estadoDao.getAll();
+        for (int i = 0; i < estadoTemp.size(); i++) {
+            listaSigla.add(estadoTemp.get(i).getSigla());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
+        jcbEstado.setModel(defaultComboBox);
+
+        CidadeDAO cidadeDao = new CidadeDAO();
+
+        List<Cidade> cidadeTemp = new ArrayList<>();
+        cidadeTemp = cidadeDao.getWhereIdEstado((long) (jcbEstado.getSelectedIndex() + 1));
+
+        List<String> listaCidade = new ArrayList<String>();
+        for (int i = 0; i < cidadeTemp.size(); i++) {
+            listaCidade.add(cidadeTemp.get(i).getNomeCidade());
+        }
+        DefaultComboBoxModel defaultComboBox3 = new DefaultComboBoxModel(listaCidade.toArray());
+        jcbCidade.setModel(defaultComboBox3);
+
+        estadoGlobal = estadoTemp;
+        cidadeGlobal = cidadeTemp;
+    }
+
     public static cadastroImovelHome getInstancia() {
         if (instancia == null) {
             instancia = new cadastroImovelHome();
         }
         return instancia;
     }
-    
-    public void popularTable(){
-        List <Imovel> imovel = new ArrayList<>();
+
+    public void popularTable() {
+        List<Imovel> imovel = new ArrayList<>();
         ImovelDAO dao = new ImovelDAO();
         imovel = dao.getAll();
-     //  ImovelTableModel test = new ImovelTableModel(imovel);
-      jtImovel.setModel(new ImovelTableModel(imovel));
-        
-        
+        imovelGlobal = imovel;
+        //  ImovelTableModel test = new ImovelTableModel(imovel);
+        jtImovel.setModel(new ImovelTableModel2(imovel));
+
     }
 
     public static void encerrarInstancia() {
@@ -128,10 +163,10 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jlQuantidadeQuartos = new javax.swing.JLabel();
         jlVagasGaragem = new javax.swing.JLabel();
         jcbEstado = new javax.swing.JComboBox();
-        jtCidade = new javax.swing.JTextField();
         jlCidade = new javax.swing.JLabel();
         jbCancelar = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JSeparator();
+        separador = new javax.swing.JSeparator();
+        jcbCidade = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -188,11 +223,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
         jcbCasa.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbCasa.setText("Casa");
-        jcbCasa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbCasaActionPerformed(evt);
-            }
-        });
         getContentPane().add(jcbCasa);
         jcbCasa.setBounds(190, 350, 60, 30);
 
@@ -295,12 +325,13 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEstadoActionPerformed(evt);
+            }
+        });
         getContentPane().add(jcbEstado);
         jcbEstado.setBounds(780, 470, 66, 30);
-
-        jtCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        getContentPane().add(jtCidade);
-        jtCidade.setBounds(520, 470, 180, 30);
 
         jlCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCidade.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -314,9 +345,14 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         getContentPane().add(jbCancelar);
         jbCancelar.setBounds(860, 470, 140, 70);
 
-        jSeparator3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa de Imóvel", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
-        getContentPane().add(jSeparator3);
-        jSeparator3.setBounds(10, 320, 1010, 250);
+        separador.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa de Imóvel", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        getContentPane().add(separador);
+        separador.setBounds(10, 330, 1010, 250);
+
+        jcbCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbCidade);
+        jcbCidade.setBounds(520, 470, 190, 30);
 
         pack();
         setLocationRelativeTo(null);
@@ -341,9 +377,13 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
     private void jbVisualisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualisarMouseClicked
         //Falta pegar a id da table;
-        String idImovel = "vazio no momento";
-        new cadastroImovel(idImovel, user).setVisible(true);
-        dispose();
+        if (jtImovel.getSelectedRow() != -1){
+            
+            
+               new cadastroImovel(String.valueOf(imovelGlobal.get(jtImovel.getSelectedRow()).getIdImovel())).setVisible(true);
+               dispose();
+        }
+     
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jbVisualisarMouseClicked
@@ -356,31 +396,48 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private void jbPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarMouseClicked
         // Verificar campos antes de pesquisar 
         boolean control = true;
-        // Falta Querry
+        boolean controlTipo = false;        
 
+        String Rua = "";
+        String Bairro = "";
+        long idcidade = 0;
+        int qtdQuartos = 0;
+        int garagem = 0;
+        List<Long> ids = new ArrayList<>();
+        
         if (jcbCasa.isSelected()) {
-
+            ids.add(Long.valueOf("1"));
+            controlTipo = true;
+               jlFiltro.setForeground(Color.black);
         }
 
         if (jcbApartamento.isSelected()) {
-
+            ids.add(Long.valueOf("2"));
+            controlTipo = true;
+       jlFiltro.setForeground(Color.black);
         }
 
         if (jcbSalao.isSelected()) {
-
-        }
-
-        if (jcbTemporario.isSelected()) {
-
+            ids.add(Long.valueOf("3"));
+            controlTipo = true;
+             jlFiltro.setForeground(Color.black);
         }
 
         if (jcbComercio.isSelected()) {
-
+            ids.add(Long.valueOf("4"));
+            controlTipo = true;
+              jlFiltro.setForeground(Color.black);
+        }
+        if (jcbTemporario.isSelected()) {
+            ids.add(Long.valueOf("5"));
+            controlTipo = true;
+              jlFiltro.setForeground(Color.black);
         }
 
         if (jtNomeProprietario.getText().equals("")) {
             jtNomeProprietario.setBackground(Color.white);
         } else if (!jtNomeProprietario.getText().equals("") && validacao.validaLetras(jtNomeProprietario.getText())) {
+
             jtNomeProprietario.setBackground(Color.white);
         } else {
             jtNomeProprietario.setBackground(Color.red);
@@ -390,7 +447,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         if (jtQtdQuarto.getText().equals("")) {
             jtQtdQuarto.setBackground(Color.white);
         } else if (!jtQtdQuarto.getText().equals("") && validacao.validaNumeros(jtQtdQuarto.getText())) {
-
+            qtdQuartos = Integer.parseInt(jtQtdQuarto.getText());
             jtQtdQuarto.setBackground(Color.white);
         } else {
             jtQtdQuarto.setBackground(Color.red);
@@ -400,7 +457,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         if (jtVagasGaragem.getText().equals("")) {
             jtVagasGaragem.setBackground(Color.white);
         } else if (!jtVagasGaragem.getText().equals("") && validacao.validaNumeros(jtVagasGaragem.getText())) {
-
+            garagem = Integer.parseInt(jtVagasGaragem.getText());
             jtVagasGaragem.setBackground(Color.white);
         } else {
             jtVagasGaragem.setBackground(Color.red);
@@ -410,6 +467,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         if (jtRua.getText().equals("")) {
             jtRua.setBackground(Color.white);
         } else if (!jtRua.getText().equals("") && validacao.validaLetras(jtRua.getText())) {
+            Rua = jtRua.getText();
             jtRua.setBackground(Color.white);
         } else {
             jtRua.setBackground(Color.red);
@@ -418,37 +476,46 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         if (jtBairro.getText().equals("")) {
             jtBairro.setBackground(Color.white);
         } else if (!jtBairro.getText().equals("") && validacao.validaLetras(jtBairro.getText())) {
-
+            Bairro = jtBairro.getText();
             jtBairro.setBackground(Color.white);
         } else {
             jtBairro.setBackground(Color.red);
             control = false;
         }
-        if (jtCidade.getText().equals("")) {
-
-        } else if (!jtCidade.getText().equals("") && validacao.validaLetras(jtCidade.getText())) {
-
-            jtCidade.setBackground(Color.white);
+            
+      
+      
+        if (control& controlTipo) {
+            ImovelDAO dao = new ImovelDAO();
+            List<Imovel> imovel = dao.searchImovel(ids, Rua, Bairro, idcidade, qtdQuartos, garagem);
+           imovelGlobal = imovel;
+            jtImovel.setModel(new ImovelTableModel(imovel));
         } else {
-            jtCidade.setBackground(Color.red);
-            control = false;
-        }
-
-        // Mandar Estado na querry
-        // inserir pesquisa no banco // falta coisas..
-        if (control) {
-
-        } else {
-
+            if(!controlTipo){
+               jlFiltro.setForeground(Color.red);
+            }
             control = true;
         }
 
         // fim verificação   // TODO add your handling code here:
     }//GEN-LAST:event_jbPesquisarMouseClicked
 
-    private void jcbCasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCasaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbCasaActionPerformed
+    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
+           CidadeDAO cidadeDao = new CidadeDAO();
+       
+        List<Cidade> cidadeTemp = new ArrayList<>();
+        cidadeTemp = cidadeDao.getWhereIdEstado((long)(jcbEstado.getSelectedIndex()+1));
+    
+        List<String> listaCidade = new ArrayList<String>();
+        for (int i = 0; i < cidadeTemp.size(); i++) {
+          listaCidade.add(cidadeTemp.get(i).getNomeCidade());
+        }
+        DefaultComboBoxModel defaultComboBox3 = new DefaultComboBoxModel(listaCidade.toArray());
+        jcbCidade.setModel(defaultComboBox3);       
+        
+        
+        cidadeGlobal = cidadeTemp; // TODO add your handling code here:
+    }//GEN-LAST:event_jcbEstadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -487,7 +554,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbPesquisar;
@@ -495,6 +561,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JButton jbVisualisar;
     private javax.swing.JCheckBox jcbApartamento;
     private javax.swing.JCheckBox jcbCasa;
+    private javax.swing.JComboBox jcbCidade;
     private javax.swing.JCheckBox jcbComercio;
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JCheckBox jcbSalao;
@@ -508,11 +575,11 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JLabel jlRua;
     private javax.swing.JLabel jlVagasGaragem;
     private javax.swing.JTextField jtBairro;
-    private javax.swing.JTextField jtCidade;
     private javax.swing.JTable jtImovel;
     private javax.swing.JTextField jtNomeProprietario;
     private javax.swing.JTextField jtQtdQuarto;
     private javax.swing.JTextField jtRua;
     private javax.swing.JTextField jtVagasGaragem;
+    private javax.swing.JSeparator separador;
     // End of variables declaration//GEN-END:variables
 }
