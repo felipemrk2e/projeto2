@@ -48,7 +48,6 @@ public class cadastroCliente extends javax.swing.JFrame {
 
     public static PessoaFisica pessoaFisica;
     public static PessoaJuridica pessoaJuridica;
-    public static PessoaFisica fiadorGlobal = null;
     private List<Cidade> listaCidadesGlobal;
     private int indexCidade;
 
@@ -112,7 +111,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftCPF.setEnabled(b);
         jtfRG.setEnabled(b);
         jftDataNascimento.setEnabled(b);
-        jtfNovoFiador.setEnabled(b);
+        jtfCargo.setEnabled(b);
         jtfNomeFantasia.setEnabled(b);
         jtfNomeResponsavel.setEnabled(b);
         jtfEndereco.setEnabled(b);
@@ -142,7 +141,6 @@ public class cadastroCliente extends javax.swing.JFrame {
         jcbLocacao.setEnabled(b);
         jcbEstadoCivil.setEnabled(b);
         jcbEstado.setEnabled(b);
-        jcbFiador.setEnabled(b);
     }
 
     public void ZerarCampos() {
@@ -152,7 +150,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftCPF.setText("");
         jtfRG.setText("");
         jftDataNascimento.setText("");
-        jtfNovoFiador.setText("");
+        jtfCargo.setText("");
         jtfNomeFantasia.setText("");
         jtfNomeResponsavel.setText("");
         jtfEndereco.setText("");
@@ -199,7 +197,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftCelular.setBackground(Color.white);
         jftComercial.setBackground(Color.white);
         jcbEstadoCivil.setBackground(Color.white);
-        jtfNovoFiador.setBackground(Color.white);
+        jtfCargo.setBackground(Color.white);
         jtfNomeResponsavel.setBackground(Color.white);
         jtfNomeFantasia.setBackground(Color.white);
         jftCPFResponsavel.setBackground(Color.white);
@@ -261,20 +259,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         EstadoCivil estadoCivil = (EstadoCivil) jcbEstadoCivil.getSelectedItem();
         pessoaFisica.setEstadoCivil(estadoCivil);
 
-        if (jcbFiador.getSelectedIndex() >= 0) {
-            PessoaFisica fiador = (PessoaFisica) jcbFiador.getSelectedItem();
-            pessoaFisica.setListaFiadores(pessoaFisicaDAO.getFiadores(fiador.getIdPessoa()));
-        }
-
-        if (!jtfNovoFiador.getText().isEmpty() && jcbFiador.getSelectedItem() == null) {
-            cadastroFiador.getInstancia().setLocationRelativeTo(this);
-            cadastroFiador.getInstancia().setVisible(true);    
-             pessoaFisica.setListaFiadores(pessoaFisicaDAO.getFiadores(fiadorGlobal.getIdPessoa()));
-            carregaFiadores();
-            jtfNovoFiador.setText("");
-            jcbFiador.setSelectedItem(fiadorGlobal);
-        }        
-
+        pessoaFisica.setListaFiadores(pessoaFisicaDAO.getFiadores((long) jcbFiador.getSelectedIndex() + 1));
         pessoaFisica.setEstadoCivil(estadoCivil);
 
         TipoContratoDAO tipoContratoDAO = new TipoContratoDAO();
@@ -294,7 +279,6 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
         pessoaFisica.setInteresses(interesses);
         pessoaFisicaDAO.persist(pessoaFisica);
-        fiadorGlobal = null;
 
     }
 
@@ -580,12 +564,6 @@ public class cadastroCliente extends javax.swing.JFrame {
             interesses.add(tiposContrato.get(2));
         }
         pessoaFisica.setInteresses(interesses);
-        
-        if (pessoaFisica.getListaFiadores().size() > 0) {
-            jcbFiador.getModel().setSelectedItem(pessoaFisica.getListaFiadores().get(0));            
-        }else{
-           jcbFiador.setSelectedIndex(-1);
-        }
     }
 
     public void atualizarPessoaJuridica(PessoaJuridica pessoaJuridica) {
@@ -661,12 +639,13 @@ public class cadastroCliente extends javax.swing.JFrame {
         Pessoa pessoa = new Pessoa();
         jtfCodigoInterno.setText(pessoa.getIdPessoa() + "");
         jtfNome.setText("Jean Felipe");
-        jftCPF.setText("38933784802");        
+        jftCPF.setText("38933784802");
+        System.out.println("Aqui CPF" + jftCPF.getText());
         jtfRG.setText("RG");
         jftDataNascimento.setText("25/08/1991");
         jtaObs.setText("Qualquer OBS");
-        jrbMasculino.setSelected(true);
-        jtfNovoFiador.setText("Fiador de");
+
+        jtfCargo.setText("Chefe");
         jcbEstadoCivil.setSelectedIndex(0);
         jtfEndereco.setText("Av. Guilherme de Almeida");
         jtfNumero.setText("2025");
@@ -703,35 +682,12 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfBairro.setText("Morro do Algodão");
 
         jftCEP.setText("11.671-000");
-        jcbCidade.setSelectedIndex(189);
+        jcbCidade.setSelectedIndex(189);        
 
         jftTelefone.setText("1238875776");
         jftCelular.setText("12981097059");
         jftComercial.setText("");
         jtfEmail.setText("teste@teste");
-    }
-
-    public void populaFiador() {
-        jftCPF.setText("38933784802");
-        jtfRG.setText("RG");
-        jftDataNascimento.setText("25/08/1991");
-        jtaObs.setText("Qualquer OBS");
-
-        jtfNovoFiador.setText("Chefe");
-        jcbEstadoCivil.setSelectedIndex(0);
-        jtfEndereco.setText("Av. Guilherme de Almeida");
-        jtfNumero.setText("2025");
-        jtfComplemento.setText("");
-        jtfBairro.setText("Morro do Algodão");
-
-        jftCEP.setText("11.671-000");
-        jcbCidade.setSelectedIndex(189);
-
-        jftTelefone.setText("1238875776");
-        jftCelular.setText("12981097059");
-        jftComercial.setText("");
-        jtfEmail.setText("teste@teste");
-
     }
 
     /**
@@ -772,8 +728,8 @@ public class cadastroCliente extends javax.swing.JFrame {
         jlEmail = new javax.swing.JLabel();
         jlComplemento = new javax.swing.JLabel();
         jlObs = new javax.swing.JLabel();
-        jlNovoFiador = new javax.swing.JLabel();
-        jtfNovoFiador = new javax.swing.JTextField();
+        jlCargo = new javax.swing.JLabel();
+        jtfCargo = new javax.swing.JTextField();
         jlDataNascimento = new javax.swing.JLabel();
         jlEstadoCivil = new javax.swing.JLabel();
         jcbEstadoCivil = new javax.swing.JComboBox();
@@ -933,11 +889,11 @@ public class cadastroCliente extends javax.swing.JFrame {
         jlObs.setText("Observações:");
         getContentPane().add(jlObs, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 200, -1, 30));
 
-        jlNovoFiador.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlNovoFiador.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlNovoFiador.setText("Novo Fiador:");
-        getContentPane().add(jlNovoFiador, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 150, 30));
-        getContentPane().add(jtfNovoFiador, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 350, 30));
+        jlCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlCargo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlCargo.setText("Cargo:");
+        getContentPane().add(jlCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 150, 30));
+        getContentPane().add(jtfCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 150, 30));
 
         jlDataNascimento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlDataNascimento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -955,7 +911,7 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         jlFiador.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlFiador.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlFiador.setText("Selecionar Fiador:");
+        jlFiador.setText("Fiador:");
         getContentPane().add(jlFiador, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 150, 30));
         getContentPane().add(jtfNomeResponsavel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 350, 30));
         getContentPane().add(jftDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 120, 30));
@@ -1060,10 +1016,9 @@ public class cadastroCliente extends javax.swing.JFrame {
             if (jrbPessoaFisica.isSelected()) {
                 if (validaCampos(true)) {
                     try {
-                        if (pessoaFisica == null) {                            
+                        if (pessoaFisica == null) {
                             cadastrarPessoaFisica();
                             JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
-                            cadastroFiador.getInstancia().dispose();
                             ZerarCampos();
                             pessoaFisica = null;
                             encerrarInstancia();
@@ -1136,10 +1091,10 @@ public class cadastroCliente extends javax.swing.JFrame {
             jlFiador.setText("Fiador");
         }
         //Passando True Ativa Pessoa Fisica, False Pessoa Juridica
-        jlNovoFiador.setVisible(ativo);
-        jlNovoFiador.setEnabled(ativo);
-        jtfNovoFiador.setVisible(ativo);
-        jtfNovoFiador.setEnabled(ativo);
+        jlCargo.setVisible(ativo);
+        jlCargo.setEnabled(ativo);
+        jtfCargo.setVisible(ativo);
+        jtfCargo.setEnabled(ativo);
         jlEstadoCivil.setVisible(ativo);
         jlEstadoCivil.setEnabled(ativo);
         jcbEstadoCivil.setVisible(ativo);
@@ -1402,8 +1357,8 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftComercial.setText("");
         jftComercial.setBackground(Color.white);
         jcbEstadoCivil.setBackground(Color.white);
-        jtfNovoFiador.setText("");
-        jtfNovoFiador.setBackground(Color.white);
+        jtfCargo.setText("");
+        jtfCargo.setBackground(Color.white);
         jtfNomeResponsavel.setText("");
         jtfNomeResponsavel.setBackground(Color.white);
         jtfNomeFantasia.setText("");
@@ -1450,11 +1405,15 @@ public class cadastroCliente extends javax.swing.JFrame {
 
     public void carregaFiadores() {
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-        List<PessoaFisica> listaFiadores = pessoaFisicaDAO.getAll();
-        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaFiadores.toArray());
-        defaultComboBox.addElement(null);
-        jcbFiador.setModel(defaultComboBox);       
-        jcbFiador.setSelectedIndex(-1);
+        PessoaFisica pessoaFisica = new PessoaFisica();
+        List<PessoaFisica> listaPessoas = new ArrayList<PessoaFisica>();
+        List<String> listaNomePessoas = new ArrayList<String>();
+        listaPessoas = pessoaFisicaDAO.getAll();
+        for (int i = 0; i < listaPessoas.size(); i++) {
+            listaNomePessoas.add(listaPessoas.get(i).getNomePessoa());
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomePessoas.toArray());
+        jcbFiador.setModel(defaultComboBox);
     }
 
     public void fecharCadastro() {
@@ -1508,19 +1467,6 @@ public class cadastroCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jbCancelarMouseClicked
 
-    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
-        if (jcbEstado.getSelectedIndex() > -1) {
-            carregaCidadeEstados();
-        }
-    }//GEN-LAST:event_jcbEstadoActionPerformed
-
-    private void jbEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseClicked
-        if (jbEditar.isEnabled()) {
-            cadastroCliente.getInstancia().DisableEnable(true);
-            JOptionPane.showMessageDialog(this, "Campos abertos para edição!");
-        }
-    }//GEN-LAST:event_jbEditarMouseClicked
-
     private void jrbPessoaJuridicaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbPessoaJuridicaMousePressed
         ativaPessoa(false);
         mascaraCPF_CNPJ(false);
@@ -1538,6 +1484,19 @@ public class cadastroCliente extends javax.swing.JFrame {
         populaPessoaFisica();
     }//GEN-LAST:event_jrbPessoaFisicaMousePressed
 
+    private void jbEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseClicked
+        if (jbEditar.isEnabled()) {
+            cadastroCliente.getInstancia().DisableEnable(true);
+            JOptionPane.showMessageDialog(this, "Campos abertos para edição!");
+        }
+    }//GEN-LAST:event_jbEditarMouseClicked
+
+    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
+        if (jcbEstado.getSelectedIndex() > -1) {
+            carregaCidadeEstados();
+        }
+    }//GEN-LAST:event_jcbEstadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1552,24 +1511,16 @@ public class cadastroCliente extends javax.swing.JFrame {
                 if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(cadastroCliente.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            java.util.logging.Logger.getLogger(cadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(cadastroCliente.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            java.util.logging.Logger.getLogger(cadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(cadastroCliente.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            java.util.logging.Logger.getLogger(cadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(cadastroCliente.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(cadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1593,7 +1544,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     private javax.swing.JCheckBox jcbCompra;
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JComboBox jcbEstadoCivil;
-    public static javax.swing.JComboBox<String> jcbFiador;
+    private javax.swing.JComboBox<String> jcbFiador;
     private javax.swing.JCheckBox jcbLocacao;
     private javax.swing.JCheckBox jcbTroca;
     private javax.swing.JFormattedTextField jftCEP;
@@ -1607,6 +1558,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jlCEP;
     private javax.swing.JLabel jlCPFResponsavel;
     private javax.swing.JLabel jlCPF_CNPJ;
+    private javax.swing.JLabel jlCargo;
     private javax.swing.JLabel jlCelular;
     private javax.swing.JLabel jlCidade;
     private javax.swing.JLabel jlCodigoInterno;
@@ -1621,7 +1573,6 @@ public class cadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jlInteresses;
     private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlNomeFantasia;
-    private javax.swing.JLabel jlNovoFiador;
     private javax.swing.JLabel jlNumero;
     private javax.swing.JLabel jlObs;
     private javax.swing.JLabel jlRG_Incricao;
@@ -1635,6 +1586,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jspObs;
     private javax.swing.JTextArea jtaObs;
     private javax.swing.JTextField jtfBairro;
+    private javax.swing.JTextField jtfCargo;
     private javax.swing.JTextField jtfCodigoInterno;
     private javax.swing.JTextField jtfComplemento;
     private javax.swing.JTextField jtfEmail;
@@ -1642,7 +1594,6 @@ public class cadastroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfNomeFantasia;
     private javax.swing.JTextField jtfNomeResponsavel;
-    public static javax.swing.JTextField jtfNovoFiador;
     private javax.swing.JTextField jtfNumero;
     private javax.swing.JTextField jtfRG;
     // End of variables declaration//GEN-END:variables
