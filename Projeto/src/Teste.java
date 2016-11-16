@@ -22,6 +22,7 @@ import dao.TelefoneDAO;
 import global.model.Cidade;
 import global.model.Endereco;
 import global.model.Estado;
+import global.model.MD5;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,7 +51,7 @@ public class Teste {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         //Data sistema para inclusão de data
         Date data = new Date();
 
@@ -246,12 +247,14 @@ public class Teste {
         estadosCivisF = estadoCivilDAOFuncionario.getAll();
         funcionario.setEstadoCivil(estadosCivisF.get(0));
 
+        MD5 md5 = new MD5();
+        
         System.out.println("===========================================LOGIN===================================================");
         LoginDAO loginDAO = new LoginDAO();
         Login login = new Login();
         login.setNivelAcesso(1);
         login.setNomeUsuario("teste");
-        login.setSenhaUsuario("teste");
+        login.setSenhaUsuario(md5.gerarMD5("teste"));
 //        login.setFuncionario(funcionario);
         funcionario.setLogin(login);
 
