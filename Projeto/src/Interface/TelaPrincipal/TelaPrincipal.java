@@ -504,15 +504,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jbCadastrarDepartamento.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbCadastrarDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCadastrarDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/chart_organisation_add.png"))); // NOI18N
         jbCadastrarDepartamento.setText("<html><center>Cadastrar<br/>Departamento</html>");
+        jbCadastrarDepartamento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jbCadastrarDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbCadastrarDepartamentoMousePressed(evt);
             }
         });
 
-        jbConsultarDepartamento.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbConsultarDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbConsultarDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Farm-Fresh_smartart_organization_chart_rh.png"))); // NOI18N
         jbConsultarDepartamento.setText("<html><center>Consultar<br/>Departamento</html>");
         jbConsultarDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
