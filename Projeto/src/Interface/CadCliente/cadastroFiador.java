@@ -736,8 +736,6 @@ public class cadastroFiador extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
                     ZerarCampos();
                     cadastroCliente.getInstancia().populaFiador();
-                    cadastroCliente.getInstancia().jtfNovoFiador.setText("");
-                    cadastroCliente.getInstancia().jcbFiador.setSelectedItem(cadastroCliente.getInstancia().fiadorGlobal);
                     cadastroFiador.getInstancia().dispose();
                     instancia = null;
                 } catch (ParseException ex) {

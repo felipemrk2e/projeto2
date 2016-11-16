@@ -268,12 +268,11 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         if (!jtfNovoFiador.getText().isEmpty() && jcbFiador.getSelectedItem() == null) {
             cadastroFiador.getInstancia().setLocationRelativeTo(this);
-            cadastroFiador.getInstancia().setVisible(true);    
-             pessoaFisica.setListaFiadores(pessoaFisicaDAO.getFiadores(fiadorGlobal.getIdPessoa()));
-            carregaFiadores();
-            jtfNovoFiador.setText("");
+            cadastroFiador.getInstancia().setVisible(true);
+            pessoaFisica.setListaFiadores(pessoaFisicaDAO.getFiadores(fiadorGlobal.getIdPessoa()));
             jcbFiador.setSelectedItem(fiadorGlobal);
-        }        
+
+        }
 
         pessoaFisica.setEstadoCivil(estadoCivil);
 
@@ -580,11 +579,11 @@ public class cadastroCliente extends javax.swing.JFrame {
             interesses.add(tiposContrato.get(2));
         }
         pessoaFisica.setInteresses(interesses);
-        
+
         if (pessoaFisica.getListaFiadores().size() > 0) {
-            jcbFiador.getModel().setSelectedItem(pessoaFisica.getListaFiadores().get(0));            
-        }else{
-           jcbFiador.setSelectedIndex(-1);
+            jcbFiador.getModel().setSelectedItem(pessoaFisica.getListaFiadores().get(0));
+        } else {
+            jcbFiador.setSelectedIndex(-1);
         }
     }
 
@@ -661,7 +660,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         Pessoa pessoa = new Pessoa();
         jtfCodigoInterno.setText(pessoa.getIdPessoa() + "");
         jtfNome.setText("Jean Felipe");
-        jftCPF.setText("38933784802");        
+        jftCPF.setText("38933784802");
         jtfRG.setText("RG");
         jftDataNascimento.setText("25/08/1991");
         jtaObs.setText("Qualquer OBS");
@@ -717,7 +716,6 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftDataNascimento.setText("25/08/1991");
         jtaObs.setText("Qualquer OBS");
 
-        jtfNovoFiador.setText("Chefe");
         jcbEstadoCivil.setSelectedIndex(0);
         jtfEndereco.setText("Av. Guilherme de Almeida");
         jtfNumero.setText("2025");
@@ -1060,7 +1058,7 @@ public class cadastroCliente extends javax.swing.JFrame {
             if (jrbPessoaFisica.isSelected()) {
                 if (validaCampos(true)) {
                     try {
-                        if (pessoaFisica == null) {                            
+                        if (pessoaFisica == null) {
                             cadastrarPessoaFisica();
                             JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
                             cadastroFiador.getInstancia().dispose();
@@ -1453,7 +1451,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         List<PessoaFisica> listaFiadores = pessoaFisicaDAO.getAll();
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaFiadores.toArray());
         defaultComboBox.addElement(null);
-        jcbFiador.setModel(defaultComboBox);       
+        jcbFiador.setModel(defaultComboBox);
         jcbFiador.setSelectedIndex(-1);
     }
 
