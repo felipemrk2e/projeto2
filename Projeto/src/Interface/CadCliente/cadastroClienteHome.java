@@ -29,8 +29,7 @@ import model.pessoa.PessoaJuridica;
 public class cadastroClienteHome extends javax.swing.JFrame {
 
     private static cadastroClienteHome instancia;
-    int user;
-
+   
     /**
      * Creates new form cadastroClienteHome
      */

@@ -58,10 +58,10 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
 
         switch (nivel) {
             case 1:
-                DisableEnable(true);                
+                DisableEnable(true);
                 break;
             case 2:
-                DisableEnable(false);                
+                DisableEnable(false);
                 break;
             case 3:
                 DisableEnable(false);
@@ -102,7 +102,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     }
 
     public void DisableEnable(boolean b) {
-        jbExcluir.setEnabled(b);
+        jbRemover.setEnabled(b);
         jbNivel.setEnabled(b);
         jbVisualizar.setEnabled(b);
         jbCadastrar.setEnabled(b);
@@ -126,7 +126,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         jtFuncionarios = new javax.swing.JTable();
         jbCadastrar = new javax.swing.JButton();
         jbVisualizar = new javax.swing.JButton();
-        jbExcluir = new javax.swing.JButton();
+        jbRemover = new javax.swing.JButton();
         jbNivel = new javax.swing.JButton();
         jbPesquisar = new javax.swing.JButton();
         jlNomeFuncionario = new javax.swing.JLabel();
@@ -179,16 +179,16 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         getContentPane().add(jbVisualizar);
         jbVisualizar.setBounds(660, 200, 140, 70);
 
-        jbExcluir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jbExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
-        jbExcluir.setText("Excluir");
-        jbExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbRemover.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
+        jbRemover.setText("Remover");
+        jbRemover.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbExcluirMouseClicked(evt);
+                jbRemoverMouseClicked(evt);
             }
         });
-        getContentPane().add(jbExcluir);
-        jbExcluir.setBounds(360, 200, 140, 70);
+        getContentPane().add(jbRemover);
+        jbRemover.setBounds(360, 200, 140, 70);
 
         jbNivel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbNivel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/acesso.png"))); // NOI18N
@@ -268,10 +268,19 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbPesquisarMouseClicked
 
-    private void jbExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbExcluirMouseClicked
-        if (jbExcluir.isEnabled()) {
+    private void jbRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemoverMouseClicked
+        if (jbRemover.isEnabled()) {
+            int linhaSelecionada = jtFuncionarios.getSelectedRow();
+            if (linhaSelecionada == -1) {
+                return; //Nada selecionado
+            }
+            FuncionarioTableModel funcionarioModel = (FuncionarioTableModel) jtFuncionarios.getModel();
+            Funcionario funcionarioSelecionado = funcionarioModel.get(linhaSelecionada);
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+            funcionarioDAO.removeById(funcionarioSelecionado.getIdPessoa());
+            funcionarioModel.removeRow(linhaSelecionada);
         } // TODO add your handling code here:
-    }//GEN-LAST:event_jbExcluirMouseClicked
+    }//GEN-LAST:event_jbRemoverMouseClicked
 
     private void jbNivelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbNivelMouseClicked
         int linhaSelecionada = jtFuncionarios.getSelectedRow();
@@ -370,9 +379,9 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbCancelar;
-    private javax.swing.JButton jbExcluir;
     private javax.swing.JButton jbNivel;
     private javax.swing.JButton jbPesquisar;
+    private javax.swing.JButton jbRemover;
     private javax.swing.JButton jbVisualizar;
     private javax.swing.JFormattedTextField jftCPF;
     private javax.swing.JLabel jlCPF;

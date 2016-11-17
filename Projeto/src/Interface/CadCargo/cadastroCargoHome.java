@@ -32,6 +32,7 @@ public class cadastroCargoHome extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         this.setTitle("Consulta de Departamento");
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+        popularTabela();
     }
 
     public static cadastroCargoHome getInstancia() {
@@ -80,11 +81,11 @@ public class cadastroCargoHome extends javax.swing.JFrame {
     public void popularTabela() {
         DepartamentoDAO departamentoDAO = new DepartamentoDAO();
         List<Departamento> listaDepartamento = departamentoDAO.getAll();
-         jtDepartamento.setModel(new DepartamentoTableModel(listaDepartamento));
-        
+        jtDepartamento.setModel(new DepartamentoTableModel(listaDepartamento));
+
         CargoDAO cargoDAO = new CargoDAO();
         List<Cargo> listaCargos = cargoDAO.getAll();
-         jtDepartamento.setModel(new CargoTableModel(listaCargos));
+        jtCargo.setModel(new CargoTableModel(listaCargos));
 
     }
 
@@ -145,12 +146,22 @@ public class cadastroCargoHome extends javax.swing.JFrame {
         jbVisualizarCargo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbVisualizarCargo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
         jbVisualizarCargo.setText("<html><center>Visualizar<br>Cargo</center></html>");
+        jbVisualizarCargo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbVisualizarCargoMousePressed(evt);
+            }
+        });
         getContentPane().add(jbVisualizarCargo);
         jbVisualizarCargo.setBounds(790, 50, 140, 70);
 
         jbRemoverCargo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbRemoverCargo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
         jbRemoverCargo.setText("<html><center>Remover<br>Cargo</center></html>");
+        jbRemoverCargo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbRemoverCargoMousePressed(evt);
+            }
+        });
         getContentPane().add(jbRemoverCargo);
         jbRemoverCargo.setBounds(790, 130, 140, 70);
 
@@ -164,12 +175,22 @@ public class cadastroCargoHome extends javax.swing.JFrame {
         jbVisualizarDepartamento.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbVisualizarDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
         jbVisualizarDepartamento.setText("<html><center>Visualizar<br>Departamento</center></html>");
+        jbVisualizarDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbVisualizarDepartamentoMousePressed(evt);
+            }
+        });
         getContentPane().add(jbVisualizarDepartamento);
         jbVisualizarDepartamento.setBounds(790, 330, 140, 70);
 
         jbRemoverDepartamento.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbRemoverDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
         jbRemoverDepartamento.setText("<html><center>Remover<br>Departamento</center></html>");
+        jbRemoverDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbRemoverDepartamentoMousePressed(evt);
+            }
+        });
         getContentPane().add(jbRemoverDepartamento);
         jbRemoverDepartamento.setBounds(790, 410, 140, 70);
 
@@ -196,6 +217,11 @@ public class cadastroCargoHome extends javax.swing.JFrame {
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
+        jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbCancelarMousePressed(evt);
+            }
+        });
         getContentPane().add(jbCancelar);
         jbCancelar.setBounds(790, 570, 140, 70);
 
@@ -239,6 +265,81 @@ public class cadastroCargoHome extends javax.swing.JFrame {
     private void jtfCodigoCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodigoCargoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfCodigoCargoActionPerformed
+
+    private void jbCancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMousePressed
+        if (jbCancelar.isEnabled()) {
+            String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {
+                dispose();
+                encerrarInstancia();
+            }
+        }
+    }//GEN-LAST:event_jbCancelarMousePressed
+
+    private void jbVisualizarCargoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarCargoMousePressed
+        if (jbVisualizarCargo.isEnabled()) {
+            int linhaSelecionada = jtCargo.getSelectedRow();
+            if (linhaSelecionada == -1) {
+                return; //Nada selecionado
+            }
+            CargoTableModel cargoModel = (CargoTableModel) jtCargo.getModel();
+            Cargo cargoSelecionado = cargoModel.get(linhaSelecionada);
+            cadastroCargo.getInstancia().cargo = cargoSelecionado;
+            setLocationRelativeTo(this);
+            cadastroCargo.getInstancia().atualizaCargo(cargoSelecionado);
+            cadastroCargo.getInstancia().setVisible(true);
+            cadastroCargo.getInstancia().DisableEnable(false);
+            cadastroCargo.getInstancia().setLocationRelativeTo(this);
+            cadastroCargo.getInstancia().setAlwaysOnTop(true);
+        }
+    }//GEN-LAST:event_jbVisualizarCargoMousePressed
+
+    private void jbVisualizarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarDepartamentoMousePressed
+        if (jbVisualizarDepartamento.isEnabled()) {
+            int linhaSelecionada = jtDepartamento.getSelectedRow();
+            if (linhaSelecionada == -1) {
+                return; //Nada selecionado
+            }
+            DepartamentoTableModel departamentoModel = (DepartamentoTableModel) jtDepartamento.getModel();
+            Departamento departamentoSelecionado = departamentoModel.get(linhaSelecionada);
+            cadastroCargo.getInstancia().departamento = departamentoSelecionado;
+            setLocationRelativeTo(this);
+            cadastroCargo.getInstancia().atualizarDepartamento(departamentoSelecionado);
+            cadastroCargo.getInstancia().setVisible(true);
+            cadastroCargo.getInstancia().DisableEnable(false);
+            cadastroCargo.getInstancia().setLocationRelativeTo(this);
+            cadastroCargo.getInstancia().setAlwaysOnTop(true);
+        }
+    }//GEN-LAST:event_jbVisualizarDepartamentoMousePressed
+
+    private void jbRemoverCargoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemoverCargoMousePressed
+        if (jbRemoverCargo.isEnabled()) {
+            int linhaSelecionada = jtCargo.getSelectedRow();
+            if (linhaSelecionada == -1) {
+                return; //Nada selecionado
+            }
+            CargoTableModel cargoModel = (CargoTableModel) jtCargo.getModel();
+            Cargo cargoSelecionado = cargoModel.get(linhaSelecionada);
+            CargoDAO cargoDAO = new CargoDAO();
+            cargoDAO.removeById(cargoSelecionado.getIdCargo());
+            cargoModel.removeRow(linhaSelecionada);
+        } 
+    }//GEN-LAST:event_jbRemoverCargoMousePressed
+
+    private void jbRemoverDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemoverDepartamentoMousePressed
+        if (jbRemoverDepartamento.isEnabled()) {
+            int linhaSelecionada = jtDepartamento.getSelectedRow();
+            if (linhaSelecionada == -1) {
+                return; //Nada selecionado
+            }
+            DepartamentoTableModel departamentoModel = (DepartamentoTableModel) jtDepartamento.getModel();
+            Departamento departamentoSelecionado = departamentoModel.get(linhaSelecionada);
+            DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+            departamentoDAO.removeById(departamentoSelecionado.getIdDepartamento());
+            departamentoModel.removeRow(linhaSelecionada);
+        } 
+    }//GEN-LAST:event_jbRemoverDepartamentoMousePressed
 
     /**
      * @param args the command line arguments

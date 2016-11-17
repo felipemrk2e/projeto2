@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 import model.pessoa.Login;
 
 /**
@@ -22,6 +18,7 @@ import model.pessoa.Login;
  * @author Sala
  */
 public class TelaLogin extends javax.swing.JDialog {
+
     private static TelaLogin instancia;
     private String usuario;
 
@@ -40,11 +37,11 @@ public class TelaLogin extends javax.swing.JDialog {
         }
         return instancia;
     }
-    
-    public static void encerrarInstancia(){
+
+    public static void encerrarInstancia() {
         instancia = null;
     }
-    
+
     public String getUsuario() {
         return usuario;
     }
@@ -146,8 +143,8 @@ public class TelaLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_jbAcessarMousePressed
 
     public boolean verificaLogin() throws Exception {
-        MD5 md5 = new MD5();        
-        Sessao sessao = Sessao.getInstance();   
+        MD5 md5 = new MD5();
+        Sessao sessao = Sessao.getInstance();
         LoginDAO loginDAO = new LoginDAO();
         List<Login> logins = new ArrayList<Login>();
         logins = loginDAO.getAll();
@@ -155,7 +152,7 @@ public class TelaLogin extends javax.swing.JDialog {
         for (int i = 0; i < logins.size(); i++) {
             if (jtfUsuario.getText().equals(logins.get(i).getNomeUsuario()) && md5.gerarMD5(jpfSenha.getText()).equals(logins.get(i).getSenhaUsuario())) {
                 setUsuario(logins.get(i).getNomeUsuario());
-                 sessao.setUsuario(logins.get(i));
+                sessao.setUsuario(logins.get(i));                
                 return true;
             }
         }

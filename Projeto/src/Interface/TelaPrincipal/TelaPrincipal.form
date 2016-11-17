@@ -152,6 +152,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Logoff"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jmiLogoffMousePressed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

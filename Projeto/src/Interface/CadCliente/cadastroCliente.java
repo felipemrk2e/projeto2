@@ -106,7 +106,7 @@ public class cadastroCliente extends javax.swing.JFrame {
 
         //cad
         jbConfirmar.setEnabled(b);
-        jbEditar.setEnabled(b);
+        jbEditar.setEnabled(false);
         jtfNome.setEnabled(b);
         jftCPF.setEnabled(b);
         jtfRG.setEnabled(b);
