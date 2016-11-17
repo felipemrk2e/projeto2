@@ -530,24 +530,16 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftCEP.setText(pessoaFisica.getEndereco().getCep());
         jtfComplemento.setText(pessoaFisica.getEndereco().getComplemento());
 
-        if (pessoaFisica.getTelefone().get(0).getNumero().trim().length() == 13) {
-            jftTelefone.setText(pessoaFisica.getTelefone().get(0).getNumero());
-        } else {
-            jftTelefone.setText(null);
-        }
-
-        if (pessoaFisica.getTelefone().get(1).getNumero().trim().length() == 14) {
-            jftCelular.setText(pessoaFisica.getTelefone().get(1).getNumero());
-        } else {
-            jftCelular.setText(null);
-        }
-
-        if (pessoaFisica.getTelefone().get(2).getNumero().trim().length() == 13) {
-            jftComercial.setText(pessoaFisica.getTelefone().get(2).getNumero());
-        } else {
-            jftComercial.setText(null);
-        }
-//        
+        
+        for (int i = 0; i < pessoaFisica.getTelefone().size(); i++) {
+            if (i == 0) {
+                jftTelefone.setText(pessoaFisica.getTelefone().get(i).getNumero());
+            }else if (i == 1) {
+                 jftCelular.setText(pessoaFisica.getTelefone().get(i).getNumero());
+            }else if (i == 2) {
+                 jftComercial.setText(pessoaFisica.getTelefone().get(i).getNumero());
+            }
+        }  
 
         jtfEmail.setText(pessoaFisica.getEmail());
 
