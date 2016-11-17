@@ -92,7 +92,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                 DisableEnable(true);
                 break;
             case 2:
-                DisableEnable(true);                
+                DisableEnable(true);
                 break;
             case 3:
                 DisableEnable(false);
@@ -530,16 +530,15 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftCEP.setText(pessoaFisica.getEndereco().getCep());
         jtfComplemento.setText(pessoaFisica.getEndereco().getComplemento());
 
-        
         for (int i = 0; i < pessoaFisica.getTelefone().size(); i++) {
             if (i == 0) {
                 jftTelefone.setText(pessoaFisica.getTelefone().get(i).getNumero());
-            }else if (i == 1) {
-                 jftCelular.setText(pessoaFisica.getTelefone().get(i).getNumero());
-            }else if (i == 2) {
-                 jftComercial.setText(pessoaFisica.getTelefone().get(i).getNumero());
+            } else if (i == 1) {
+                jftCelular.setText(pessoaFisica.getTelefone().get(i).getNumero());
+            } else if (i == 2) {
+                jftComercial.setText(pessoaFisica.getTelefone().get(i).getNumero());
             }
-        }  
+        }
 
         jtfEmail.setText(pessoaFisica.getEmail());
 
@@ -601,22 +600,14 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftCEP.setText(pessoaJuridica.getEndereco().getCep());
         jtfComplemento.setText(pessoaJuridica.getEndereco().getComplemento());
 
-        if (pessoaJuridica.getTelefone().get(0).getNumero().trim().length() == 13) {
-            jftTelefone.setText(pessoaJuridica.getTelefone().get(0).getNumero());
-        } else {
-            jftTelefone.setText(null);
-        }
-
-        if (pessoaJuridica.getTelefone().get(1).getNumero().trim().length() == 14) {
-            jftCelular.setText(pessoaJuridica.getTelefone().get(1).getNumero());
-        } else {
-            jftCelular.setText(null);
-        }
-
-        if (pessoaJuridica.getTelefone().get(2).getNumero().trim().length() == 13) {
-            jftComercial.setText(pessoaJuridica.getTelefone().get(2).getNumero());
-        } else {
-            jftComercial.setText(null);
+        for (int i = 0; i < pessoaJuridica.getTelefone().size(); i++) {
+            if (i == 0) {
+                jftTelefone.setText(pessoaJuridica.getTelefone().get(i).getNumero());
+            } else if (i == 1) {
+                jftCelular.setText(pessoaJuridica.getTelefone().get(i).getNumero());
+            } else if (i == 2) {
+                jftComercial.setText(pessoaJuridica.getTelefone().get(i).getNumero());
+            }
         }
 //        
 
