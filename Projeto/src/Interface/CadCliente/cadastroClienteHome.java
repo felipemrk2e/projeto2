@@ -29,7 +29,7 @@ import model.pessoa.PessoaJuridica;
 public class cadastroClienteHome extends javax.swing.JFrame {
 
     private static cadastroClienteHome instancia;
-   
+
     /**
      * Creates new form cadastroClienteHome
      */
@@ -61,6 +61,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         switch (nivel) {
             case 1:
                 DisableEnable(true);
+
                 break;
             case 2:
                 DisableEnable(true);
@@ -380,7 +381,36 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             return; //Nada selecionado
         }
         if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
-
+            PessoaTableModel pessoaModel = (PessoaTableModel) jtClientes.getModel();
+            Pessoa pessoaSelecionada = pessoaModel.get(linhaSelecionada);
+            if (pessoaSelecionada.getPessoaFisica() != null) {
+                cadastroCliente.getInstancia().pessoaFisica = (PessoaFisica) pessoaSelecionada;
+                setLocationRelativeTo(this);
+                cadastroCliente.getInstancia().atualizarPessoaFisica((PessoaFisica) pessoaSelecionada);
+                cadastroCliente.getInstancia().setVisible(true);
+                cadastroCliente.getInstancia().DisableEnable(false);
+                cadastroCliente.getInstancia().setLocationRelativeTo(this);
+                cadastroCliente.getInstancia().setAlwaysOnTop(true);
+                cadastroCliente.getInstancia().jbEditar.setEnabled(true);
+            } else if (pessoaSelecionada.getPessoaJuridica() != null) {
+                cadastroCliente.getInstancia().pessoaJuridica = (PessoaJuridica) pessoaSelecionada;
+                setLocationRelativeTo(this);
+                cadastroCliente.getInstancia().atualizarPessoaJuridica((PessoaJuridica) pessoaSelecionada);
+                cadastroCliente.getInstancia().setVisible(true);
+                cadastroCliente.getInstancia().DisableEnable(false);
+                cadastroCliente.getInstancia().setLocationRelativeTo(this);
+                cadastroCliente.getInstancia().setAlwaysOnTop(true);
+                cadastroCliente.getInstancia().jbEditar.setEnabled(true);
+            } else {
+                cadastroCliente.getInstancia().pessoaFisica = (PessoaFisica) pessoaSelecionada;
+                setLocationRelativeTo(this);
+                cadastroCliente.getInstancia().atualizarPessoaFisica((PessoaFisica) pessoaSelecionada);
+                cadastroCliente.getInstancia().setVisible(true);
+                cadastroCliente.getInstancia().DisableEnable(false);
+                cadastroCliente.getInstancia().setLocationRelativeTo(this);
+                cadastroCliente.getInstancia().setAlwaysOnTop(true);
+                cadastroCliente.getInstancia().jbEditar.setEnabled(true);
+            }
         } else if (jcbPessoaFisica.isSelected()) {
             PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jtClientes.getModel();
             PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
@@ -392,6 +422,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             cadastroCliente.getInstancia().DisableEnable(false);
             cadastroCliente.getInstancia().setLocationRelativeTo(this);
             cadastroCliente.getInstancia().setAlwaysOnTop(true);
+            cadastroCliente.getInstancia().jbEditar.setEnabled(true);
 
         } else if (jcbPessoaJuridica.isSelected()) {
             PessoaJuridicaTableModel pessoaJuridicaModel = (PessoaJuridicaTableModel) jtClientes.getModel();
@@ -404,6 +435,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             cadastroCliente.getInstancia().DisableEnable(false);
             cadastroCliente.getInstancia().setLocationRelativeTo(this);
             cadastroCliente.getInstancia().setAlwaysOnTop(true);
+            cadastroCliente.getInstancia().jbEditar.setEnabled(true);
         }
 
 
