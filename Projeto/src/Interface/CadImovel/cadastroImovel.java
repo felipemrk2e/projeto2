@@ -42,9 +42,8 @@ public class cadastroImovel extends javax.swing.JFrame {
     ImovelDAO imovelDao = new ImovelDAO();
     List<Cidade> cidadeGlobal;
     List<Estado> estadoGlobal;
-    
-    // Imovel imovel = new Imovel();
 
+    // Imovel imovel = new Imovel();
     /**
      * Creates new form cadastroImovel2
      */
@@ -73,16 +72,17 @@ public class cadastroImovel extends javax.swing.JFrame {
     }
 
     public cadastroImovel(String idImovel) {
-        this.setUndecorated(true);
+        //this.setUndecorated(true);
         this.user = user;
 
         initComponents();
-        setAlwaysOnTop(true);
+        // setAlwaysOnTop(true);
+        ComboBox();
         fecharCadastro();
         removerTitleBar();
         Imovel imovel = imovelDao.getById(Long.valueOf(idImovel));
         popular(imovel);
-    //    verificaNivel();
+        //    verificaNivel();
 
     }
 
@@ -112,21 +112,21 @@ public class cadastroImovel extends javax.swing.JFrame {
         List<Status> status = new ArrayList<>();
         status = statusDao.getAll();
         List<String> StatusList = new ArrayList<String>();
-        for (int i = 0; i < status.size() - 1; i++) {
+        for (int i = 0; i < status.size(); i++) {
             StatusList.add(status.get(i).getStatus());
         }
         DefaultComboBoxModel defaultComboBox2 = new DefaultComboBoxModel(StatusList.toArray());
         jcbStatus.setModel(defaultComboBox2);
         jcbStatus.setSelectedIndex(0);
-        
+
         CidadeDAO cidadeDao = new CidadeDAO();
-       
+
         List<Cidade> cidadeTemp = new ArrayList<>();
-        cidadeTemp = cidadeDao.getWhereIdEstado((long)(jcbEstado.getSelectedIndex()+1));
-    
+        cidadeTemp = cidadeDao.getWhereIdEstado((long) (jcbEstado.getSelectedIndex() + 1));
+
         List<String> listaCidade = new ArrayList<String>();
         for (int i = 0; i < cidadeTemp.size(); i++) {
-          listaCidade.add(cidadeTemp.get(i).getNomeCidade());
+            listaCidade.add(cidadeTemp.get(i).getNomeCidade());
         }
         DefaultComboBoxModel defaultComboBox3 = new DefaultComboBoxModel(listaCidade.toArray());
         jcbCidade.setModel(defaultComboBox3);
@@ -199,7 +199,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtfLogradouro.setEnabled(b);
         jtfNumero.setEnabled(b);
         jtfComplemento.setEnabled(b);
-jtfBairro.setEnabled(b);
+        jtfBairro.setEnabled(b);
         jtCep.setEnabled(b);
         jtfReferencia.setEnabled(b);
         jtfZona.setEnabled(b);
@@ -275,21 +275,19 @@ jtfBairro.setEnabled(b);
         List<Status> status = new ArrayList<>();
         status = statusDao.getAll();
         List<String> StatusList = new ArrayList<String>();
-
-        if (status.size() < 3) {
-            for (int i = 0; i < status.size() - 1; i++) {
-                StatusList.add(status.get(i).getStatus());
-            }
-        } else {
+        int statusTemp = (int) imovel.getStatus().getIdStatus();
+        if (statusTemp > 3) {
             for (int i = 0; i < status.size(); i++) {
                 StatusList.add(status.get(i).getStatus());
             }
+        } else {
+            for (int i = 0; i < status.size() - 2; i++) {
+                StatusList.add(status.get(i).getStatus());
+            }
         }
-
         DefaultComboBoxModel defaultComboBox2 = new DefaultComboBoxModel(StatusList.toArray());
         jcbStatus.setModel(defaultComboBox2);
-        int statusTemp = (int) imovel.getStatus().getIdStatus();
-        System.out.println(statusTemp);
+
         jcbStatus.setSelectedIndex(statusTemp - 1);
 
         jcbStatus.setEnabled(false);
@@ -299,23 +297,23 @@ jtfBairro.setEnabled(b);
             Imovel_has_TipoContrato Imovel_tipoContrato = imovel.getTiposContratos().get(i);
             TipoContrato tipoContrato = Imovel_tipoContrato.getTipoContrato();
 
-            if (tipoContrato.getIdTipoContrato() == 1) {
+            if (tipoContrato.getIdTipoContrato() == 1 && Imovel_tipoContrato.getValor() != 0) {
                 jcbLocacao.setSelected(true);
                 jtValorLocacaoMes.setEnabled(true);
                 jtValorLocacaoMes.setText(String.valueOf(Imovel_tipoContrato.getValor()));
                 jtValorLocacaoMes.setEditable(true);
 
-            } else if (tipoContrato.getIdTipoContrato() == 2) {
+            } else if (tipoContrato.getIdTipoContrato() == 2 && Imovel_tipoContrato.getValor() != 0) {
                 jcbVenda.setSelected(true);
                 jtValorVenda.setEnabled(true);
                 jtValorVenda.setText(String.valueOf(Imovel_tipoContrato.getValor()));
                 jtValorVenda.setEditable(true);
-            } else if (tipoContrato.getIdTipoContrato() == 3) {
+            } else if (tipoContrato.getIdTipoContrato() == 3 && Imovel_tipoContrato.getValor() != 0) {
                 jcbTemporada.setSelected(true);
                 jtValorTemporada.setEnabled(true);
                 jtValorTemporada.setText(String.valueOf(Imovel_tipoContrato.getValor()));
                 jtValorTemporada.setEditable(true);
-            } else if (tipoContrato.getIdTipoContrato() == 4) {
+            } else if (tipoContrato.getIdTipoContrato() == 4 && Imovel_tipoContrato.getValor() != 0) {
                 jcbFesta.setSelected(true);
                 jtValorDiaria.setEnabled(true);
                 jtValorDiaria.setText(String.valueOf(Imovel_tipoContrato.getValor()));
@@ -337,25 +335,23 @@ jtfBairro.setEnabled(b);
         jtCodigo.setText(String.valueOf(imovel.getIdImovel()));
 
         // falta o atributo no sql status     
-    
-
         //Endereço parte obrigatoria
         jtfLogradouro.setText(imovel.getEndereco().getNomeEndereco());
         jtfNumero.setText(String.valueOf(imovel.getEndereco().getNumero()));
-   jtfBairro.setText(imovel.getEndereco().getBairro());
+        jtfBairro.setText(imovel.getEndereco().getBairro());
         jcbEstado.setSelectedIndex((int) imovel.getEndereco().getCidade().getEstado().getId() - 1);
 
-      CidadeDAO cidadeDao = new CidadeDAO();
-       
+        CidadeDAO cidadeDao = new CidadeDAO();
+
         List<Cidade> cidadeTemp = new ArrayList<>();
-        cidadeTemp = cidadeDao.getWhereIdEstado((long)(jcbEstado.getSelectedIndex()+1));
+        cidadeTemp = cidadeDao.getWhereIdEstado((long) (jcbEstado.getSelectedIndex() + 1));
         int index = 0;
         List<String> listaCidade = new ArrayList<String>();
         for (int i = 0; i < cidadeTemp.size(); i++) {
-          listaCidade.add(cidadeTemp.get(i).getNomeCidade());
-         if (cidadeTemp.get(i).getIdCidade() == imovelTemp.getEndereco().getCidade().getIdCidade()){
-             index = i;
-         }
+            listaCidade.add(cidadeTemp.get(i).getNomeCidade());
+            if (cidadeTemp.get(i).getIdCidade() == imovelTemp.getEndereco().getCidade().getIdCidade()) {
+                index = i;
+            }
         }
         DefaultComboBoxModel defaultComboBox3 = new DefaultComboBoxModel(listaCidade.toArray());
         jcbCidade.setModel(defaultComboBox3);
@@ -1587,14 +1583,13 @@ jtfBairro.setEnabled(b);
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
 
-
         if (jbConfirmar.isEnabled()) {
             int control = 0;
             boolean control2 = true;
 
             Imovel imovel;
             Status status;
-            Endereco endereco;            
+            Endereco endereco;
             Cidade cidade;
             Estado uf;
             Documentacao documentacao;
@@ -1691,10 +1686,9 @@ jtfBairro.setEnabled(b);
             } else {
                 imovel = imovelTemp;
                 status = imovel.getStatus();
-                endereco = imovel.getEndereco();                
+                endereco = imovel.getEndereco();
                 cidade = new Cidade();
-     
-        
+
                 documentacao = imovel.getDocumentacao();
                 terreno = imovel.getTerreno();
                 List<Imovel_has_TipoContrato> tipoContrato = imovel.getTiposContratos();
@@ -1706,23 +1700,30 @@ jtfBairro.setEnabled(b);
                 boolean venda = false;
                 boolean temporada = false;
                 boolean festa = false;
+                int locacao1 = 0;
+                int venda1 = 0;
+                int temporada1 = 0;
+                int festa1 = 0;
+
                 for (int i = 0; i < tipoContrato.size(); i++) {
                     if (tipoContrato.get(i).getTipoContrato().getIdTipoContrato() == 1) {
                         locacao = true;
+                        locacao1 = i;
 
                     } else if (tipoContrato.get(i).getTipoContrato().getIdTipoContrato() == 2) {
                         venda = true;
+                        venda1 = i;
 
                     } else if (tipoContrato.get(i).getTipoContrato().getIdTipoContrato() == 3) {
                         temporada = true;
-
+                        temporada1 = i;
                     } else if (tipoContrato.get(i).getTipoContrato().getIdTipoContrato() == 4) {
                         festa = true;
-
+                        festa1 = i;
                     }
 
                 }
-         
+
                 //  Fora das tabs..
                 if (jcbLocacao.isSelected()) {
                     if (jtValorLocacaoMes.getText().equals("")) {
@@ -1730,7 +1731,7 @@ jtfBairro.setEnabled(b);
                     } else if (!jtValorLocacaoMes.getText().equals("") && validacao.validaNumeros(jtValorLocacaoMes.getText())) {
 
                         if (locacao) {
-                            tipoContrato.get(0).setValor(Double.valueOf(jtValorLocacaoMes.getText()));
+                            tipoContrato.get(locacao1).setValor(Double.valueOf(jtValorLocacaoMes.getText()));
 
                         } else {
                             imovel.addTipoContrato(tipoContrato2.get(0), Double.valueOf(jtValorLocacaoMes.getText()));
@@ -1743,7 +1744,8 @@ jtfBairro.setEnabled(b);
                         jtValorLocacaoMes.setBackground(Color.red);
 
                     }
-                } else {
+                } else if (locacao) {
+                    tipoContrato.get(locacao1).setValor(0);
 
                 }
                 if (jcbVenda.isSelected()) {
@@ -1752,7 +1754,7 @@ jtfBairro.setEnabled(b);
                     } else if (!jtValorVenda.getText().equals("") && validacao.validaNumeros(jtValorVenda.getText())) {
 
                         if (venda) {
-                            tipoContrato.get(1).setValor(Double.valueOf(jtValorVenda.getText()));
+                            tipoContrato.get(venda1).setValor(Double.valueOf(jtValorVenda.getText()));
 
                         } else {
                             imovel.addTipoContrato(tipoContrato2.get(1), Double.valueOf(jtValorVenda.getText()));
@@ -1766,6 +1768,10 @@ jtfBairro.setEnabled(b);
 
                     }
                 } else {
+                    if(venda) {
+                          tipoContrato.get(venda1).setValor(0);
+                    }
+                      
 
                 }
 
@@ -1775,7 +1781,7 @@ jtfBairro.setEnabled(b);
                     } else if (!jtValorTemporada.getText().equals("") && validacao.validaNumeros(jtValorTemporada.getText())) {
 
                         if (temporada) {
-                            tipoContrato.get(2).setValor(Double.valueOf(jtValorTemporada.getText()));
+                            tipoContrato.get(temporada1).setValor(Double.valueOf(jtValorTemporada.getText()));
 
                         } else {
                             imovel.addTipoContrato(tipoContrato2.get(2), Double.valueOf(jtValorTemporada.getText()));
@@ -1789,7 +1795,10 @@ jtfBairro.setEnabled(b);
 
                     }
                 } else {
-
+ if(temporada){
+     tipoContrato.get(temporada1).setValor(0);
+     
+ }
                 }
 
                 if (jcbFesta.isSelected()) {
@@ -1799,7 +1808,7 @@ jtfBairro.setEnabled(b);
 
                     } else if (!jtValorDiaria.getText().equals("") && validacao.validaNumeros(jtValorDiaria.getText())) {
                         if (festa) {
-                            tipoContrato.get(3).setValor(Double.valueOf(jtValorDiaria.getText()));
+                            tipoContrato.get(festa1).setValor(Double.valueOf(jtValorDiaria.getText()));
 
                         } else {
                             imovel.addTipoContrato(tipoContrato2.get(3), Double.valueOf(jtValorDiaria.getText()));
@@ -1813,7 +1822,9 @@ jtfBairro.setEnabled(b);
 
                     }
                 } else {
-
+                        if(festa){
+                            tipoContrato.get(festa1).setValor(0);
+                        }
                 }
 
             }
@@ -1873,12 +1884,11 @@ jtfBairro.setEnabled(b);
 
             }
 
-               cidade.setIdCidade(cidadeGlobal.get(jcbCidade.getSelectedIndex()).getIdCidade());
+            cidade.setIdCidade(cidadeGlobal.get(jcbCidade.getSelectedIndex()).getIdCidade());
 
-              
-              control++;
-              control++;
-              
+            control++;
+            control++;
+
             if (!jtfBairro.getText().equals("") && validacao.validaLetras(jtfBairro.getText())) {
                 endereco.setBairro(jtfBairro.getText());
                 jtfBairro.setBackground(Color.white);
@@ -1887,8 +1897,6 @@ jtfBairro.setEnabled(b);
                 jtfBairro.setBackground(Color.red);
 
             }
-
-
 
 // Pricipal End
             if (jtCep.getText().equals("")) {
@@ -2275,7 +2283,7 @@ jtfBairro.setEnabled(b);
             } else if (!jtOutros.getText().equals("")) {
                 imovel.setOutrosItens(jtOutros.getText());
             }
-             
+
             imovel.setAtivo(true);
             //Descrição End
             if ((control == 6) && control2 == true && (!jtCodigo.getText().equals(""))) {
@@ -2327,7 +2335,6 @@ jtfBairro.setEnabled(b);
                     jlTipo.setForeground(Color.red);
                 }
 
-        
                 control = 0;
                 control2 = true;
                 JOptionPane.showMessageDialog(null, "Erro Verifique os campos !");
@@ -2352,16 +2359,15 @@ jtfBairro.setEnabled(b);
         jcbFesta.setSelected(false);
 
         jtCodigo.setText("");
-      
 
         //Endereço
         jtfLogradouro.setText("");
         jtfNumero.setText("");
         jtfComplemento.setText("");
-  
+
         jtfBairro.setText("");
         jcbEstado.setSelectedIndex(1);
-       
+
         jtCep.setText("");
         jtfReferencia.setText("");
         jtfZona.setText("");
@@ -2370,9 +2376,9 @@ jtfBairro.setEnabled(b);
         jtfLogradouro.setBackground(Color.white);
         jtfNumero.setBackground(Color.white);
         jtfComplemento.setBackground(Color.white);
-      
+
         jtfBairro.setBackground(Color.white);
-  
+
         jtCep.setBackground(Color.white);
         jtfReferencia.setBackground(Color.white);
         jtfZona.setBackground(Color.white);
@@ -2482,18 +2488,17 @@ jtfBairro.setEnabled(b);
 
     private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
         CidadeDAO cidadeDao = new CidadeDAO();
-       
+
         List<Cidade> cidadeTemp = new ArrayList<>();
-        cidadeTemp = cidadeDao.getWhereIdEstado((long)(jcbEstado.getSelectedIndex()+1));
-    
+        cidadeTemp = cidadeDao.getWhereIdEstado((long) (jcbEstado.getSelectedIndex() + 1));
+
         List<String> listaCidade = new ArrayList<String>();
         for (int i = 0; i < cidadeTemp.size(); i++) {
-          listaCidade.add(cidadeTemp.get(i).getNomeCidade());
+            listaCidade.add(cidadeTemp.get(i).getNomeCidade());
         }
         DefaultComboBoxModel defaultComboBox3 = new DefaultComboBoxModel(listaCidade.toArray());
-        jcbCidade.setModel(defaultComboBox3);       
-        
-        
+        jcbCidade.setModel(defaultComboBox3);
+
         cidadeGlobal = cidadeTemp;
 // TODO add your handling code here:
     }//GEN-LAST:event_jcbEstadoActionPerformed
