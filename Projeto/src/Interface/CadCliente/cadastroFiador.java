@@ -45,7 +45,7 @@ public class cadastroFiador extends javax.swing.JFrame {
     private static cadastroFiador instancia;
     private List<Cidade> listaCidadesGlobal;
     private int indexCidade;
-
+    
     public cadastroFiador() {
         this.setUndecorated(true);
         initComponents();
@@ -58,18 +58,18 @@ public class cadastroFiador extends javax.swing.JFrame {
         populaFiador();
 //        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
-
+    
     public static cadastroFiador getInstancia() {
         if (instancia == null) {
             instancia = new cadastroFiador();
         }
         return instancia;
     }
-
+    
     public static void encerrarInstancia() {
         instancia = null;
     }
-
+    
     public void acesso(int nivel) {
         DisableEnable(false);
         switch (nivel) {
@@ -88,7 +88,7 @@ public class cadastroFiador extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
-
+    
     public void DisableEnable(Boolean b) {
 
         //cad
@@ -119,9 +119,9 @@ public class cadastroFiador extends javax.swing.JFrame {
         jcbLocacao.setEnabled(b);
         jcbEstadoCivil.setEnabled(b);
         jcbEstado.setEnabled(b);
-
+        
     }
-
+    
     public void ZerarCampos() {
         jtfCodigoInterno.setText("");
         //cad
@@ -171,7 +171,7 @@ public class cadastroFiador extends javax.swing.JFrame {
         jtfEmail.setBackground(Color.white);
         // Fim
     }
-
+    
     public void cadastrarFiador() throws ParseException {
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
         PessoaFisica fiador = new PessoaFisica();
@@ -181,9 +181,9 @@ public class cadastroFiador extends javax.swing.JFrame {
         fiador.setRG(jtfRG.getText());
         Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataNascimento.getText());
         fiador.setDataNascimento(dataNascimento);
-
+        
         Cidade cidade = (Cidade) jcbCidade.getSelectedItem();
-
+        
         Endereco endereco = new Endereco();
         endereco.setBairro(jtfBairro.getText());
         endereco.setNomeEndereco(jtfEndereco.getText());
@@ -192,12 +192,12 @@ public class cadastroFiador extends javax.swing.JFrame {
         endereco.setComplemento(jtfComplemento.getText());
         endereco.setCidade(cidade);
         fiador.setEndereco(endereco);
-
+        
         List<Telefone> telefones = new ArrayList<Telefone>();
         Telefone telefone = new Telefone();
         Telefone celular = new Telefone();
         Telefone comercial = new Telefone();
-
+        
         telefone.setNumero(jftTelefone.getText());
         telefone.setPessoa(fiador);
         telefone.setOperadora("");
@@ -207,31 +207,31 @@ public class cadastroFiador extends javax.swing.JFrame {
         comercial.setNumero(jftComercial.getText());
         comercial.setPessoa(fiador);
         comercial.setOperadora("");
-
+        
         telefones.add(telefone);
         telefones.add(celular);
         telefones.add(comercial);
         fiador.setTelefone(telefones);
-
+        
         fiador.setEmail(jtfEmail.getText());
-
+        
         if (jrbMasculino.isSelected()) {
             fiador.setSexo('M');
         } else if (jrbFeminino.isSelected()) {
             fiador.setSexo('F');
         }
-
+        
         EstadoCivil estadoCivil = (EstadoCivil) jcbEstadoCivil.getSelectedItem();
         fiador.setEstadoCivil(estadoCivil);
-
+        
         fiador.setEstadoCivil(estadoCivil);
-
+        
         TipoContratoDAO tipoContratoDAO = new TipoContratoDAO();
         TipoContrato tipoContrato = new TipoContrato();
         List<TipoContrato> tiposContrato = new ArrayList<TipoContrato>();
         tiposContrato = tipoContratoDAO.getAll();
         List<TipoContrato> interesses = new ArrayList<TipoContrato>();
-
+        
         if (jcbLocacao.isSelected()) {
             interesses.add(tiposContrato.get(0));
         }
@@ -242,13 +242,13 @@ public class cadastroFiador extends javax.swing.JFrame {
             interesses.add(tiposContrato.get(2));
         }
         fiador.setInteresses(interesses);
-
+        
         pessoaFisicaDAO.persist(fiador);
-
+        
         cadastroCliente.getInstancia().fiadorGlobal = fiador;
         System.out.println("=================================================" + cadastroCliente.getInstancia().fiadorGlobal.getNomePessoa());
     }
-
+    
     public void populaFiador() {
         Pessoa pessoa = new Pessoa();
         jtfCodigoInterno.setText(pessoa.getIdPessoa() + "");
@@ -263,47 +263,47 @@ public class cadastroFiador extends javax.swing.JFrame {
         jtfNumero.setText("2025");
         jtfComplemento.setText("");
         jtfBairro.setText("Morro do Algodão");
-
+        
         jftCEP.setText("11.671-000");
         jcbCidade.setSelectedIndex(189);
-
+        
         jftTelefone.setText("1238875776");
         jftCelular.setText("12981097059");
         jftComercial.setText("");
         jtfEmail.setText("teste@teste");
     }
-
+    
     public void mascaraCPF() {
         try {
             jftCPF.setFormatterFactory(new DefaultFormatterFactory(
                     new MaskFormatter("###.###.###-##")));
-
+            
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
-
+    
     public void mascaraData() {
         try {
             jftDataNascimento.setFormatterFactory(new DefaultFormatterFactory(
                     new MaskFormatter("##/##/####")));
-
+            
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     public void mascaraCEP() {
         try {
             jftCEP.setFormatterFactory(new DefaultFormatterFactory(
                     new MaskFormatter("##.###-###")));
-
+            
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
-
+    
     public void mascaraTelefone() {
         try {
             jftTelefone.setFormatterFactory(new DefaultFormatterFactory(
@@ -314,7 +314,7 @@ public class cadastroFiador extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+    
     public void mascaraCelular() {
         try {
             jftCelular.setFormatterFactory(new DefaultFormatterFactory(
@@ -323,7 +323,7 @@ public class cadastroFiador extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+    
     public void configuraMascaras() {
         mascaraCelular();
         mascaraTelefone();
@@ -331,7 +331,7 @@ public class cadastroFiador extends javax.swing.JFrame {
         mascaraData();
         mascaraCPF();
     }
-
+    
     public boolean validaCampos(boolean valida) {
         //PESSOA        
         //Email
@@ -439,10 +439,10 @@ public class cadastroFiador extends javax.swing.JFrame {
             jcbEstadoCivil.setBackground(Color.red);
             valida = false;
         }
-
+        
         return valida;
     }
-
+    
     public void limpaCampos() {
         jtfNome.setText("");
         jtfNome.setBackground(Color.white);
@@ -471,7 +471,7 @@ public class cadastroFiador extends javax.swing.JFrame {
         jtfEmail.setText("");
         jtfEmail.setBackground(Color.white);
     }
-
+    
     public void carregaEstados() {
         EstadoDAO estadoDAO = new EstadoDAO();
         Estado estado = new Estado();
@@ -479,14 +479,14 @@ public class cadastroFiador extends javax.swing.JFrame {
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaEstados.toArray());
         jcbEstado.setModel(defaultComboBox);
     }
-
+    
     public void carregaCidades() {
         CidadeDAO cidadeDAO = new CidadeDAO();
         List<Cidade> listaCidades = cidadeDAO.getAll();
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaCidades.toArray());
         jcbCidade.setModel(defaultComboBox);
     }
-
+    
     public void carregaCidadeEstados() {
         Estado estado = (Estado) jcbEstado.getSelectedItem();
         CidadeDAO cidadeDAO = new CidadeDAO();
@@ -496,7 +496,7 @@ public class cadastroFiador extends javax.swing.JFrame {
         jcbCidade.setModel(defaultComboBox);
         listaCidadesGlobal = listaCidades;
     }
-
+    
     public void carregaEstadosCivis() {
         EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
         List<EstadoCivil> listaEstadoCivis = estadoCivilDAO.getAll();
@@ -735,7 +735,9 @@ public class cadastroFiador extends javax.swing.JFrame {
                     cadastrarFiador();
                     JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
                     ZerarCampos();
-                    cadastroCliente.getInstancia().populaFiador();
+                    cadastroCliente.getInstancia().carregaFiadores();
+                    cadastroCliente.getInstancia().jcbFiador.getModel().setSelectedItem(cadastroCliente.getInstancia().fiadorGlobal);
+//                    cadastroCliente.getInstancia().jtfNovoFiador.setText("");
                     cadastroFiador.getInstancia().dispose();
                     instancia = null;
                 } catch (ParseException ex) {
@@ -780,21 +782,21 @@ public class cadastroFiador extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(cadastroFiador.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(cadastroFiador.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(cadastroFiador.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(cadastroFiador.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);

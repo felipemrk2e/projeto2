@@ -9,6 +9,7 @@ import Interface.TelaPrincipal.Sessao;
 import dao.CidadeDAO;
 import dao.EstadoCivilDAO;
 import dao.EstadoDAO;
+import dao.PessoaDAO;
 import dao.PessoaFisicaDAO;
 import dao.PessoaJuridicaDAO;
 import dao.TipoContratoDAO;
@@ -266,9 +267,7 @@ public class cadastroCliente extends javax.swing.JFrame {
             pessoaFisica.setListaFiadores(pessoaFisicaDAO.getFiadores(fiador.getIdPessoa()));
         }
 
-        if (!jtfNovoFiador.getText().isEmpty() && jcbFiador.getSelectedItem() == null) {
-            cadastroFiador.getInstancia().setLocationRelativeTo(this);
-            cadastroFiador.getInstancia().setVisible(true);
+        if (!jtfNovoFiador.getText().isEmpty() && jcbFiador.getSelectedIndex() < 0) {
             pessoaFisica.setListaFiadores(pessoaFisicaDAO.getFiadores(fiadorGlobal.getIdPessoa()));
             jcbFiador.setSelectedItem(fiadorGlobal);
 
@@ -803,6 +802,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jrbPessoaJuridica = new javax.swing.JRadioButton();
         jcbAtivo = new javax.swing.JCheckBox();
         jlSituacao = new javax.swing.JLabel();
+        jlAddFiador = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -1046,6 +1046,14 @@ public class cadastroCliente extends javax.swing.JFrame {
         jlSituacao.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlSituacao.setText("Situação Cadastral:");
         getContentPane().add(jlSituacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, -1, 30));
+
+        jlAddFiador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add.png"))); // NOI18N
+        jlAddFiador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlAddFiadorMousePressed(evt);
+            }
+        });
+        getContentPane().add(jlAddFiador, new org.netbeans.lib.awtextra.AbsoluteConstraints(544, 170, -1, -1));
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 970, 580));
@@ -1536,6 +1544,13 @@ public class cadastroCliente extends javax.swing.JFrame {
         populaPessoaFisica();
     }//GEN-LAST:event_jrbPessoaFisicaMousePressed
 
+    private void jlAddFiadorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAddFiadorMousePressed
+        if (!jtfNovoFiador.getText().isEmpty() && jcbFiador.getSelectedItem() == null) {
+            cadastroFiador.getInstancia().setLocationRelativeTo(this);
+            cadastroFiador.getInstancia().setVisible(true);
+        }
+    }//GEN-LAST:event_jlAddFiadorMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -1601,6 +1616,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jftComercial;
     private javax.swing.JFormattedTextField jftDataNascimento;
     private javax.swing.JFormattedTextField jftTelefone;
+    private javax.swing.JLabel jlAddFiador;
     private javax.swing.JLabel jlBairro;
     private javax.swing.JLabel jlCEP;
     private javax.swing.JLabel jlCPFResponsavel;
