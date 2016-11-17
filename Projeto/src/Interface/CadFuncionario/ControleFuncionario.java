@@ -71,11 +71,10 @@ public class ControleFuncionario extends javax.swing.JFrame {
         switch (nivel) {
             case 1:
                 DisableEnable(true);
-                jbConfirmar.setEnabled(true);
-                jbEditar.setEnabled(true);
+
                 break;
             case 2:
-                DisableEnable(true);
+                DisableEnable(false);
                 break;
             case 3:
                 DisableEnable(false);
@@ -92,6 +91,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jpfNovaSenha2.setEnabled(b);
         jcbCargo.setEnabled(b);
         jcbDepartamento.setEnabled(b);
+        jbConfirmar.setEnabled(b);
+        jbEditar.setEnabled(b);
     }
 
     public void cadastrarSenha() throws Exception {
@@ -211,8 +212,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(departamentos.toArray());
         jcbDepartamento.setModel(defaultComboBox);
         jcbDepartamento.setSelectedIndex(-1);
-    }    
-   
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -6,7 +6,14 @@
 package Interface.CadCargo;
 
 import Interface.TelaPrincipal.Sessao;
+import dao.CargoDAO;
+import dao.DepartamentoDAO;
+import java.util.List;
 import javax.swing.JOptionPane;
+import model.TableModel.CargoTableModel;
+import model.TableModel.DepartamentoTableModel;
+import model.pessoa.Cargo;
+import model.pessoa.Departamento;
 
 /**
  *
@@ -14,12 +21,8 @@ import javax.swing.JOptionPane;
  */
 public class cadastroCargoHome extends javax.swing.JFrame {
 
-    
     private static cadastroCargoHome instancia;
-    
-     
-    
-    
+
     /**
      * Creates new form cadastroCargoHome
      */
@@ -28,10 +31,9 @@ public class cadastroCargoHome extends javax.swing.JFrame {
         initComponents();
         setAlwaysOnTop(true);
         this.setTitle("Consulta de Departamento");
-         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
-    
-    
+
     public static cadastroCargoHome getInstancia() {
         if (instancia == null) {
             instancia = new cadastroCargoHome();
@@ -42,12 +44,12 @@ public class cadastroCargoHome extends javax.swing.JFrame {
     public static void encerrarInstancia() {
         instancia = null;
     }
-    
-     public void acesso(int nivel) {
+
+    public void acesso(int nivel) {
         DisableEnable(false);
         switch (nivel) {
             case 1:
-                DisableEnable(true);               
+                DisableEnable(true);
                 break;
             case 2:
                 DisableEnable(false);
@@ -59,20 +61,33 @@ public class cadastroCargoHome extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
-     
-    public void DisableEnable(boolean b){ 
-        
+
+    public void DisableEnable(boolean b) {
+        jtfCodigoCargo.setEnabled(b);
+        jtfCodigoDepartamento.setEnabled(b);
+        jbVisualizarCargo.setEnabled(b);
+        jbRemoverCargo.setEnabled(b);
+        jbPesquisarCargo.setEnabled(b);
+        jbVisualizarDepartamento.setEnabled(b);
+        jbRemoverDepartamento.setEnabled(b);
+        jbPesquisarDepartamento.setEnabled(b);
+        jtfNomeCargo.setEnabled(b);
+        jtfNomeDepartamento.setEnabled(b);
+        jtDepartamento.setEnabled(b);
+        jtCargo.setEnabled(b);
     }
-    
-    public void popularTabela(){
+
+    public void popularTabela() {
+        DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+        List<Departamento> listaDepartamento = departamentoDAO.getAll();
+         jtDepartamento.setModel(new DepartamentoTableModel(listaDepartamento));
         
+        CargoDAO cargoDAO = new CargoDAO();
+        List<Cargo> listaCargos = cargoDAO.getAll();
+         jtDepartamento.setModel(new CargoTableModel(listaCargos));
+
     }
-    
-    
-    
-    
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,16 +96,21 @@ public class cadastroCargoHome extends javax.swing.JFrame {
         jtfCodigoCargo = new javax.swing.JTextField();
         jlCodigoDepartamento = new javax.swing.JLabel();
         jtfCodigoDepartamento = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jbVisualizarCargo = new javax.swing.JButton();
+        jbRemoverCargo = new javax.swing.JButton();
+        jbPesquisarCargo = new javax.swing.JButton();
+        jbVisualizarDepartamento = new javax.swing.JButton();
+        jbRemoverDepartamento = new javax.swing.JButton();
+        jbPesquisarDepartamento = new javax.swing.JButton();
+        jtfNomeCargo = new javax.swing.JTextField();
+        jtfNomeDepartamento = new javax.swing.JTextField();
+        jlNomeCargo = new javax.swing.JLabel();
+        jlNomeDepartamento = new javax.swing.JLabel();
+        jbCancelar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jtDepartamento = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jtCargo = new javax.swing.JTable();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
 
@@ -118,23 +138,68 @@ public class cadastroCargoHome extends javax.swing.JFrame {
         jlCodigoDepartamento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlCodigoDepartamento.setText("Código Departamento");
         getContentPane().add(jlCodigoDepartamento);
-        jlCodigoDepartamento.setBounds(60, 310, 140, 30);
+        jlCodigoDepartamento.setBounds(60, 300, 140, 30);
         getContentPane().add(jtfCodigoDepartamento);
-        jtfCodigoDepartamento.setBounds(60, 340, 140, 30);
-        getContentPane().add(jButton1);
-        jButton1.setBounds(790, 50, 140, 70);
-        getContentPane().add(jButton2);
-        jButton2.setBounds(790, 130, 140, 70);
-        getContentPane().add(jButton3);
-        jButton3.setBounds(790, 340, 140, 70);
-        getContentPane().add(jButton4);
-        jButton4.setBounds(790, 500, 140, 70);
-        getContentPane().add(jButton5);
-        jButton5.setBounds(790, 210, 140, 70);
-        getContentPane().add(jButton6);
-        jButton6.setBounds(790, 420, 140, 70);
+        jtfCodigoDepartamento.setBounds(60, 330, 140, 30);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jbVisualizarCargo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbVisualizarCargo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
+        jbVisualizarCargo.setText("<html><center>Visualizar<br>Cargo</center></html>");
+        getContentPane().add(jbVisualizarCargo);
+        jbVisualizarCargo.setBounds(790, 50, 140, 70);
+
+        jbRemoverCargo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbRemoverCargo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
+        jbRemoverCargo.setText("<html><center>Remover<br>Cargo</center></html>");
+        getContentPane().add(jbRemoverCargo);
+        jbRemoverCargo.setBounds(790, 130, 140, 70);
+
+        jbPesquisarCargo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbPesquisarCargo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/review.png"))); // NOI18N
+        jbPesquisarCargo.setText("<html><center>Pesquisar<br>Cargo</center></html>");
+        jbPesquisarCargo.setToolTipText("");
+        getContentPane().add(jbPesquisarCargo);
+        jbPesquisarCargo.setBounds(790, 210, 140, 70);
+
+        jbVisualizarDepartamento.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbVisualizarDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
+        jbVisualizarDepartamento.setText("<html><center>Visualizar<br>Departamento</center></html>");
+        getContentPane().add(jbVisualizarDepartamento);
+        jbVisualizarDepartamento.setBounds(790, 330, 140, 70);
+
+        jbRemoverDepartamento.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbRemoverDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
+        jbRemoverDepartamento.setText("<html><center>Remover<br>Departamento</center></html>");
+        getContentPane().add(jbRemoverDepartamento);
+        jbRemoverDepartamento.setBounds(790, 410, 140, 70);
+
+        jbPesquisarDepartamento.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbPesquisarDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/review.png"))); // NOI18N
+        jbPesquisarDepartamento.setText("<html><center>Pesquisar<br>Departamento</center></html>");
+        getContentPane().add(jbPesquisarDepartamento);
+        jbPesquisarDepartamento.setBounds(790, 490, 140, 70);
+        getContentPane().add(jtfNomeCargo);
+        jtfNomeCargo.setBounds(330, 240, 430, 30);
+        getContentPane().add(jtfNomeDepartamento);
+        jtfNomeDepartamento.setBounds(380, 520, 380, 30);
+
+        jlNomeCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNomeCargo.setText("Nome Cargo");
+        getContentPane().add(jlNomeCargo);
+        jlNomeCargo.setBounds(240, 240, 90, 30);
+
+        jlNomeDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlNomeDepartamento.setText("Nome Departamento");
+        getContentPane().add(jlNomeDepartamento);
+        jlNomeDepartamento.setBounds(240, 520, 130, 30);
+
+        jbCancelar.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
+        jbCancelar.setText("Cancelar");
+        getContentPane().add(jbCancelar);
+        jbCancelar.setBounds(790, 570, 140, 70);
+
+        jtDepartamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -142,12 +207,12 @@ public class cadastroCargoHome extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(jtDepartamento);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(230, 340, 530, 150);
+        jScrollPane3.setBounds(230, 330, 530, 150);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jtCargo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -155,7 +220,7 @@ public class cadastroCargoHome extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jtCargo);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(230, 50, 530, 150);
@@ -166,7 +231,7 @@ public class cadastroCargoHome extends javax.swing.JFrame {
 
         jSeparator3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa de Departamento", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator3);
-        jSeparator3.setBounds(210, 310, 740, 270);
+        jSeparator3.setBounds(210, 300, 740, 270);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -211,21 +276,26 @@ public class cadastroCargoHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbPesquisarCargo;
+    private javax.swing.JButton jbPesquisarDepartamento;
+    private javax.swing.JButton jbRemoverCargo;
+    private javax.swing.JButton jbRemoverDepartamento;
+    private javax.swing.JButton jbVisualizarCargo;
+    private javax.swing.JButton jbVisualizarDepartamento;
     private javax.swing.JLabel jlCodigoCargo;
     private javax.swing.JLabel jlCodigoDepartamento;
+    private javax.swing.JLabel jlNomeCargo;
+    private javax.swing.JLabel jlNomeDepartamento;
+    private javax.swing.JTable jtCargo;
+    private javax.swing.JTable jtDepartamento;
     private javax.swing.JTextField jtfCodigoCargo;
     private javax.swing.JTextField jtfCodigoDepartamento;
+    private javax.swing.JTextField jtfNomeCargo;
+    private javax.swing.JTextField jtfNomeDepartamento;
     // End of variables declaration//GEN-END:variables
 }

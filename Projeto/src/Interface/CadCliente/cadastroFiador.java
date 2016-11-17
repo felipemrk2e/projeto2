@@ -56,7 +56,7 @@ public class cadastroFiador extends javax.swing.JFrame {
         carregaCidades();
         carregaEstadosCivis();
         populaFiador();
-//        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
     
     public static cadastroFiador getInstancia() {
@@ -74,15 +74,14 @@ public class cadastroFiador extends javax.swing.JFrame {
         DisableEnable(false);
         switch (nivel) {
             case 1:
-                DisableEnable(true);
-                jbConfirmar.setEnabled(true);
+                DisableEnable(true);                
                 break;
             case 2:
-                DisableEnable(true);
-                jbConfirmar.setEnabled(true);
+                DisableEnable(true);                
                 break;
             case 3:
-                DisableEnable(false);
+                DisableEnable(true);
+                jbConfirmar.setEnabled(false);
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
@@ -119,6 +118,8 @@ public class cadastroFiador extends javax.swing.JFrame {
         jcbLocacao.setEnabled(b);
         jcbEstadoCivil.setEnabled(b);
         jcbEstado.setEnabled(b);
+        
+        jbConfirmar.setEnabled(b);
         
     }
     
@@ -550,7 +551,7 @@ public class cadastroFiador extends javax.swing.JFrame {
         jlCEP = new javax.swing.JLabel();
         jftCEP = new javax.swing.JFormattedTextField();
         jcbEstado = new javax.swing.JComboBox();
-        jcbCidade = new javax.swing.JComboBox<>();
+        jcbCidade = new javax.swing.JComboBox<String>();
         jtfComplemento = new javax.swing.JTextField();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCelular = new javax.swing.JFormattedTextField();
@@ -714,7 +715,7 @@ public class cadastroFiador extends javax.swing.JFrame {
         });
         getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, 70, 30));
 
-        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 190, 230, 30));
         getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 760, 30));
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 180, 30));

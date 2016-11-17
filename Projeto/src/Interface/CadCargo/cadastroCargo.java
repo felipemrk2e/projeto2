@@ -63,9 +63,6 @@ public class cadastroCargo extends javax.swing.JFrame {
         switch (nivel) {
             case 1:
                 DisableEnable(true);
-                jbCadastrarDepartamento.setEnabled(true);
-                jbCadastrarCargo.setEnabled(true);
-                jbEditar.setEnabled(true);
                 break;
             case 2:
                 DisableEnable(false);
@@ -87,6 +84,9 @@ public class cadastroCargo extends javax.swing.JFrame {
         jtNomeCargo.setEnabled(b);
         jtaDescricaoCargo.setEnabled(b);
         jlCargosList.setEnabled(b);
+        jbCadastrarDepartamento.setEnabled(b);
+        jbCadastrarCargo.setEnabled(b);
+        jbEditar.setEnabled(b);
     }
 
     public boolean validaCargo(boolean valida) {
@@ -143,7 +143,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         cargoDAO.persist(cargo);
         listModel.addElement(cargo);
         jlCargosList.setModel(listModel);
-        
+
     }
 
     public void cadastrarCargo(Cargo cargo, Departamento departamento) {
@@ -159,7 +159,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         Departamento departamento = new Departamento();
         departamento.setNomeDepartamento(jtfNomeDepartamento.getText());
         departamento.setRamal(jtfRamal.getText());
-        departamento.setTelefoneDepartamento(jftTelefone.getText());        
+        departamento.setTelefoneDepartamento(jftTelefone.getText());
         departamentoDAO.persist(departamento);
         this.departamento = departamento;
     }
@@ -191,24 +191,24 @@ public class cadastroCargo extends javax.swing.JFrame {
         jtaDescricaoCargo.setText(cargo.getDescricaoCargo());
     }
 
-    public void carregaListaCargos() {        
+    public void carregaListaCargos() {
         for (int i = 0; i < departamento.getCargo().size(); i++) {
             listModel.addElement(departamento.getCargo().get(i));
         }
         jlCargosList.setModel(listModel);
     }
-    
-    public void carregaDepartamentos(){
+
+    public void carregaDepartamentos() {
         DepartamentoDAO departamentoDAO = new DepartamentoDAO();
-         List<Departamento> listaDepartamentos = departamentoDAO.getAll();
+        List<Departamento> listaDepartamentos = departamentoDAO.getAll();
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaDepartamentos.toArray());
-        jcbDepartamentos.setModel(defaultComboBox);    
+        jcbDepartamentos.setModel(defaultComboBox);
     }
-    
+
     public void mascaraTelefone() {
         try {
             jftTelefone.setFormatterFactory(new DefaultFormatterFactory(
-                    new MaskFormatter("(##)####-####")));           
+                    new MaskFormatter("(##)####-####")));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -443,11 +443,11 @@ public class cadastroCargo extends javax.swing.JFrame {
                     if (cargo == null) {
                         cadastrarCargo(departamento);
                         JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
-                        ZerarCampos();                        
+                        ZerarCampos();
                     } else {
                         cadastrarCargo(departamento);
                         JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
-                        ZerarCampos();                       
+                        ZerarCampos();
                     }
                 } catch (Exception ex) {
                     Logger.getLogger(cadastroCargo.class.getName()).log(Level.SEVERE, null, ex);

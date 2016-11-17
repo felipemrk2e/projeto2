@@ -62,21 +62,16 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         switch (nivel) {
             case 1:
                 DisableEnable(true);
-                jbCadastrar.setEnabled(true);
-                jbVisualizar.setEnabled(true);
-                jbRemover.setEnabled(true);
-                jbPesquisar.setEnabled(true);
                 break;
             case 2:
                 DisableEnable(true);
-                jbCadastrar.setEnabled(true);
-                jbVisualizar.setEnabled(true);
-                jbRemover.setEnabled(true);
-                jbPesquisar.setEnabled(true);
+                jbRemover.setEnabled(false);
                 break;
             case 3:
-                DisableEnable(false);
-                jbPesquisar.setEnabled(true);
+                DisableEnable(true);
+                jbCadastrar.setEnabled(false);
+                jbVisualizar.setEnabled(false);
+                jbRemover.setEnabled(false);
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
@@ -84,6 +79,12 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     }
 
     public void DisableEnable(Boolean b) {
+        jtClientes.setEnabled(b);
+        jcbPessoaFisica.setEnabled(b);
+        jcbPessoaJuridica.setEnabled(b);
+        jtNome.setEnabled(b);
+        jftTelefone.setEnabled(b);
+        jftCPF.setEnabled(b);
         jbCadastrar.setEnabled(b);
         jbVisualizar.setEnabled(b);
         jbRemover.setEnabled(b);
@@ -378,9 +379,9 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         int linhaSelecionada = jtClientes.getSelectedRow();
         if (linhaSelecionada == -1) {
             return; //Nada selecionado
-        }        
+        }
         if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
-            
+
         } else if (jcbPessoaFisica.isSelected()) {
             PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jtClientes.getModel();
             PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);

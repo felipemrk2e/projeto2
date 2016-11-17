@@ -5,8 +5,8 @@
  */
 package Interface.CadImovel;
 
+import Interface.TelaPrincipal.Sessao;
 import global.model.Estado;
-import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import dao.CidadeDAO;
 import dao.EstadoDAO;
 import dao.ImovelDAO;
@@ -15,7 +15,6 @@ import dao.TipoContratoDAO;
 import dao.TipoImovelDAO;
 import global.model.Cidade;
 import global.model.Endereco;
-import global.model.Login.DialogLogin;
 import global.model.Status;
 import imovel.model.Documentacao;
 import imovel.model.Imovel;
@@ -26,9 +25,7 @@ import imovel.model.TipoImovel;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -55,6 +52,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         removerTitleBar();
         ComboBox();
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 //
 //        Imovel imovel = imovelDao.getById(Long.parseLong("7"));
 //        popular(imovel);
@@ -68,6 +66,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         fecharCadastro();
         removerTitleBar();
         verificaNivel0();
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 
     }
 
@@ -83,6 +82,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         Imovel imovel = imovelDao.getById(Long.valueOf(idImovel));
         popular(imovel);
         //    verificaNivel();
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 
     }
 
@@ -95,6 +95,27 @@ public class cadastroImovel extends javax.swing.JFrame {
 
     public static void encerrarInstancia() {
         instancia = null;
+    }
+    
+    public void acesso(int nivel) {
+        DisableEnable(false);
+        switch (nivel) {
+            case 1:
+                DisableEnable(true);
+                jbConfirmar.setEnabled(true);
+                jbEditar.setEnabled(true);
+                break;
+            case 2:
+                DisableEnable(true);
+                jbConfirmar.setEnabled(true);
+                jbEditar.setEnabled(true);
+                break;
+            case 3:
+                DisableEnable(false);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
+        }
     }
 
     public void ComboBox() {

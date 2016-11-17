@@ -5,7 +5,9 @@
  */
 package Interface.Locacao;
 
+import Interface.TelaPrincipal.Sessao;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import validacao.validacao;
 
 /**
@@ -24,6 +26,7 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         this.setUndecorated(true);
         initComponents();
         setAlwaysOnTop(true);
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
 
     public CadLocacaoHome(int user) {
@@ -32,6 +35,7 @@ public class CadLocacaoHome extends javax.swing.JFrame {
 
         initComponents();
         setAlwaysOnTop(true);
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 
         verificaNivel();
     }
@@ -42,9 +46,45 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         }
         return instancia;
     }
-    
-    public static void encerrarInstancia(){
+
+    public static void encerrarInstancia() {
         instancia = null;
+    }
+
+    public void acesso(int nivel) {
+        DisableEnable(false);
+        switch (nivel) {
+            case 1:
+                DisableEnable(true);
+                break;
+            case 2:
+                DisableEnable(true);
+                break;
+            case 3:
+                DisableEnable(true);
+                jbVisualizar.setEnabled(false);
+                jbCadastrar.setEnabled(false);
+                jbControle.setEnabled(false);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
+        }
+    }
+
+    public void DisableEnable(boolean b) {
+        jTable1.setEnabled(b);
+        jbVisualizar.setEnabled(b);
+        jbCadastrar.setEnabled(b);
+        jbPesquisar.setEnabled(b);
+        jbControle.setEnabled(b);
+        jtNomeInquilino.setEnabled(b);
+        jtNomeProprietario.setEnabled(b);
+        jtIdImovel.setEnabled(b);
+        jtRua.setEnabled(b);
+        jtBairro.setEnabled(b);
+        jtCep.setEnabled(b);
+        jcbEstado.setEnabled(b);
+        jtCidade.setEnabled(b);
     }
 
     public void verificaNivel() {

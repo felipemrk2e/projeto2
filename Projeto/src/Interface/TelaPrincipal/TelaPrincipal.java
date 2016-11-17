@@ -98,6 +98,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbConsultarLocacao.setEnabled(ativo);
         jbFuncionario.setEnabled(ativo);
         jbConsultarFuncionario.setEnabled(ativo);
+        jbCadastrarDepartamento.setEnabled(ativo);
+        jbConsultarDepartamento.setEnabled(ativo);
 
         jmCadastrar.setEnabled(ativo);
         jmiCadastrarCliente.setEnabled(ativo);
@@ -116,6 +118,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmiCadastrarFuncionario.setEnabled(ativo);
         jmiConsultarFuncionario.setEnabled(ativo);
         jmiControleFuncionario.setEnabled(ativo);
+
+        jmDepartamento.setEnabled(ativo);
+        jmiCadastrarDepartamento.setEnabled(ativo);
+        jmiConsultarDepartamento.setEnabled(ativo);
 
         jmSessao.setEnabled(ativo);
         jmiTrocarUsuario.setEnabled(ativo);
@@ -917,11 +923,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jbConsultarFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarFuncionarioMousePressed
         if (jbConsultarFuncionario.isEnabled()) {
-        finalizarInstancias();
-        CadFuncionarioHome cadFuncionarioHome = CadFuncionarioHome.getInstancia();
-        cadFuncionarioHome.setLocationRelativeTo(jSeparator2);
-        cadFuncionarioHome.setAlwaysOnTop(true);
-        cadFuncionarioHome.setVisible(true);
+            finalizarInstancias();
+            CadFuncionarioHome cadFuncionarioHome = CadFuncionarioHome.getInstancia();
+            cadFuncionarioHome.setLocationRelativeTo(jSeparator2);
+            cadFuncionarioHome.setAlwaysOnTop(true);
+            cadFuncionarioHome.setVisible(true);
         }
     }//GEN-LAST:event_jbConsultarFuncionarioMousePressed
 
@@ -934,7 +940,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiTrocarUsuarioMousePressed
 
     private void jbCadastrarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarDepartamentoMousePressed
-       if (jbCadastrarDepartamento.isEnabled()) {
+        if (jbCadastrarDepartamento.isEnabled()) {
             finalizarInstancias();
             cadastroCargo cadCargo = cadastroCargo.getInstancia();
             cadCargo.setLocationRelativeTo(jSeparator2);
@@ -944,16 +950,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jbConsultarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarDepartamentoMousePressed
         if (jbConsultarDepartamento.isEnabled()) {
-        finalizarInstancias();
-        cadastroCargoHome cadCargoHome = cadastroCargoHome.getInstancia();
-        cadCargoHome.setLocationRelativeTo(jSeparator2);
-        cadCargoHome.setAlwaysOnTop(true);
-        cadCargoHome.setVisible(true);
+            finalizarInstancias();
+            cadastroCargoHome cadCargoHome = cadastroCargoHome.getInstancia();
+            cadCargoHome.setLocationRelativeTo(jSeparator2);
+            cadCargoHome.setAlwaysOnTop(true);
+            cadCargoHome.setVisible(true);
         }
     }//GEN-LAST:event_jbConsultarDepartamentoMousePressed
 
     private void jmiCadastrarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarDepartamentoMousePressed
-       if (jmiCadastrarDepartamento.isEnabled()) {
+        if (jmiCadastrarDepartamento.isEnabled()) {
             finalizarInstancias();
             cadastroCargo cadCargo = cadastroCargo.getInstancia();
             cadCargo.setLocationRelativeTo(jSeparator2);
@@ -963,11 +969,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jmiConsultarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarDepartamentoMousePressed
         if (jmiConsultarDepartamento.isEnabled()) {
-        finalizarInstancias();
-        cadastroCargoHome cadCargoHome = cadastroCargoHome.getInstancia();
-        cadCargoHome.setLocationRelativeTo(jSeparator2);
-        cadCargoHome.setAlwaysOnTop(true);
-        cadCargoHome.setVisible(true);
+            finalizarInstancias();
+            cadastroCargoHome cadCargoHome = cadastroCargoHome.getInstancia();
+            cadCargoHome.setLocationRelativeTo(jSeparator2);
+            cadCargoHome.setAlwaysOnTop(true);
+            cadCargoHome.setVisible(true);
         }
     }//GEN-LAST:event_jmiConsultarDepartamentoMousePressed
 

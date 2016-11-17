@@ -90,13 +90,9 @@ public class cadastroCliente extends javax.swing.JFrame {
         switch (nivel) {
             case 1:
                 DisableEnable(true);
-                jbConfirmar.setEnabled(true);
-                jbEditar.setEnabled(true);
                 break;
             case 2:
-                DisableEnable(true);
-                jbConfirmar.setEnabled(true);
-                jbEditar.setEnabled(true);
+                DisableEnable(true);                
                 break;
             case 3:
                 DisableEnable(false);
@@ -109,6 +105,8 @@ public class cadastroCliente extends javax.swing.JFrame {
     public void DisableEnable(Boolean b) {
 
         //cad
+        jbConfirmar.setEnabled(b);
+        jbEditar.setEnabled(b);
         jtfNome.setEnabled(b);
         jftCPF.setEnabled(b);
         jtfRG.setEnabled(b);

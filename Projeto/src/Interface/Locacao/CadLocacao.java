@@ -5,7 +5,9 @@
  */
 package Interface.Locacao;
 
+import Interface.TelaPrincipal.Sessao;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import validacao.validacao;
 
 /**
@@ -13,6 +15,7 @@ import validacao.validacao;
  * @author user
  */
 public class CadLocacao extends javax.swing.JFrame {
+
     private static CadLocacao instancia;
     int user;
 
@@ -27,30 +30,72 @@ public class CadLocacao extends javax.swing.JFrame {
 
     public CadLocacao(int user) {
         this.setUndecorated(true);
-                 this.user = user;
+        this.user = user;
 
         initComponents();
         setAlwaysOnTop(true);
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
 
     public CadLocacao(int user, String idlocacao) {
         this.setUndecorated(true);
-                 this.user = user;
-                 
+        this.user = user;
 
         initComponents();
         setAlwaysOnTop(true);
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
-    
+
     public static CadLocacao getInstancia() {
         if (instancia == null) {
             instancia = new CadLocacao();
         }
         return instancia;
     }
-    
-    public static void encerrarInstancia(){
+
+    public static void encerrarInstancia() {
         instancia = null;
+    }
+
+    public void acesso(int nivel) {
+        DisableEnable(false);
+        switch (nivel) {
+            case 1:
+                DisableEnable(true);
+                break;
+            case 2:
+                DisableEnable(true);
+                break;
+            case 3:
+                DisableEnable(true);
+                jbPesquisarCliente.setEnabled(false);
+                jbPesquisarImovel.setEnabled(false);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
+        }
+    }
+
+    public void DisableEnable(boolean b) {
+        jtCliente.setEnabled(b);
+        jtImovel.setEnabled(b);
+        jbPesquisarImovel.setEnabled(b);
+        jtImovelSelecionado.setEnabled(b);
+        jtClienteSelecionado.setEnabled(b);
+        jbSelecionarImovel.setEnabled(b);
+        jtIdCliente.setEnabled(b);
+        jtNomeCliente.setEnabled(b);
+        jbPesquisarCliente.setEnabled(b);
+        jbSelecionarCliente.setEnabled(b);
+        jtDataInicio.setEnabled(b);
+        jtDataFim.setEnabled(b);
+        jtIdImovel.setEnabled(b);
+        jtNomeProprietario.setEnabled(b);
+        jtRua.setEnabled(b);
+        jtBairro.setEnabled(b);
+        jcbEstado.setEnabled(b);
+        jtCidade.setEnabled(b);
+        jbEfetuarLocacao.setEnabled(b);
     }
 
     /**
@@ -331,10 +376,9 @@ public class CadLocacao extends javax.swing.JFrame {
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
 
-        
         new CadLocacaoHome(user).setVisible(true);
         dispose();
- 
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
 
@@ -425,16 +469,15 @@ public class CadLocacao extends javax.swing.JFrame {
 
         boolean control = true;
 
-        if(jtIdCliente.getText().equals("")){
-            
+        if (jtIdCliente.getText().equals("")) {
+
         } else if (!jtIdCliente.getText().equals("") && validacao.validaNumeros(jtIdCliente.getText())) {
-           jtIdCliente.setBackground(Color.white);
+            jtIdCliente.setBackground(Color.white);
         } else {
-           jtIdCliente.setBackground(Color.red);
+            jtIdCliente.setBackground(Color.red);
             control = false;
         }
-        
-        
+
         if (jtNomeCliente.getText().equals("")) {
             jtNomeCliente.setBackground(Color.white);
         } else if (!jtNomeCliente.getText().equals("") && validacao.validaLetras(jtNomeCliente.getText())) {
@@ -443,8 +486,6 @@ public class CadLocacao extends javax.swing.JFrame {
             jtNomeCliente.setBackground(Color.red);
             control = false;
         }
-        
-        
 
         if (control) {
 

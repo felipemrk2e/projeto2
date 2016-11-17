@@ -39,6 +39,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         this.setTitle("Consulta de Funcionários");
         setAlwaysOnTop(true);
         popularTabela();
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
 
     public static CadFuncionarioHome getInstancia() {
@@ -50,6 +51,24 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
 
     public static void encerrarInstancia() {
         instancia = null;
+    }
+
+    public void acesso(int nivel) {
+        DisableEnable(false);
+
+        switch (nivel) {
+            case 1:
+                DisableEnable(true);                
+                break;
+            case 2:
+                DisableEnable(false);                
+                break;
+            case 3:
+                DisableEnable(false);
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "Acesso negado!\nNível de Acesso Inválido");
+        }
     }
 
     public void popularTabela() {
@@ -80,6 +99,18 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
             funcionarios = funcionarioDAO.getAll();
             jtFuncionarios.setModel(new FuncionarioTableModel(funcionarios));
         }
+    }
+
+    public void DisableEnable(boolean b) {
+        jbExcluir.setEnabled(b);
+        jbNivel.setEnabled(b);
+        jbVisualizar.setEnabled(b);
+        jbCadastrar.setEnabled(b);
+        jbPesquisar.setEnabled(b);
+
+        jtNomeFuncionario.setEnabled(b);
+        jtCargo.setEnabled(b);
+        jtDepartamento.setEnabled(b);
     }
 
     /**

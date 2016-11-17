@@ -6,14 +6,11 @@
 package Interface.CadFuncionario;
 
 import Interface.TelaPrincipal.Sessao;
-import Interface.TelaPrincipal.TelaPrincipal;
 import dao.CargoDAO;
 import dao.CidadeDAO;
-import dao.DepartamentoDAO;
 import dao.EstadoCivilDAO;
 import dao.EstadoDAO;
 import dao.FuncionarioDAO;
-import dao.PessoaFisicaDAO;
 import global.model.Cidade;
 import global.model.Endereco;
 import global.model.Estado;
@@ -21,7 +18,6 @@ import global.model.MD5;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import static java.awt.image.ImageObserver.WIDTH;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,12 +31,10 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import model.pessoa.Cargo;
-import model.pessoa.Departamento;
 import model.pessoa.EstadoCivil;
 import model.pessoa.Funcionario;
 import model.pessoa.Login;
 import model.pessoa.Pessoa;
-import model.pessoa.PessoaFisica;
 import model.pessoa.Telefone;
 import validacao.criaLogin;
 import validacao.validacao;
@@ -93,11 +87,9 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         switch (nivel) {
             case 1:
                 DisableEnable(true);
-                jbConfirmar.setEnabled(true);
-                jbEditar.setEnabled(true);
                 break;
             case 2:
-                DisableEnable(true);
+                DisableEnable(false);
                 break;
             case 3:
                 DisableEnable(false);
@@ -108,7 +100,9 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }
 
     public void DisableEnable(Boolean b) {
-        jtfCodigoInterno.setEnabled(false);
+        jbConfirmar.setEnabled(b);
+        jbEditar.setEnabled(b);
+        jtfCodigoInterno.setEnabled(b);
         //cad
         jtfNome.setEnabled(b);
         jftCPF.setEnabled(b);
@@ -299,13 +293,14 @@ public class cadastroFuncionario extends javax.swing.JFrame {
 
         Login login = new Login();
         login.setNivelAcesso(0);
-        login.setNomeUsuario(loginNovo.geraNovoUsuario(funcionario.getNomePessoa()));        String senha = loginNovo.gerarNovaSenha();
-        
+        login.setNomeUsuario(loginNovo.geraNovoUsuario(funcionario.getNomePessoa()));
+        String senha = loginNovo.gerarNovaSenha();
+
         login.setSenhaUsuario(md5.gerarMD5(senha));
         funcionario.setLogin(login);
 
         funcionarioDAO.persist(funcionario);
-        JOptionPane.showMessageDialog(this, "Senha gerada com sucesso!\nUsuário: "+funcionario.getNomePessoa()+"\nSenha: "+senha);
+        JOptionPane.showMessageDialog(this, "Senha gerada com sucesso!\nUsuário: " + funcionario.getNomePessoa() + "\nSenha: " + senha);
     }
 
     public void cadastrarFuncionario(Funcionario funcionario) throws ParseException {
@@ -790,7 +785,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jlCEP = new javax.swing.JLabel();
         jftCEP = new javax.swing.JFormattedTextField();
         jcbEstado = new javax.swing.JComboBox();
-        jcbCidade = new javax.swing.JComboBox<>();
+        jcbCidade = new javax.swing.JComboBox<String>();
         jtfComplemento = new javax.swing.JTextField();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCelular = new javax.swing.JFormattedTextField();
@@ -977,7 +972,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         });
         getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, 30));
 
-        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 140, 30));
         getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 270, 30));
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 210, 30));

@@ -5,7 +5,7 @@
  */
 package Interface.CadImovel;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
+import Interface.TelaPrincipal.Sessao;
 import dao.CidadeDAO;
 import dao.EstadoDAO;
 import dao.ImovelDAO;
@@ -46,6 +46,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         fechar();
         popularTable();
         ComboBox();
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
 
     public cadastroImovelHome(int user) {
@@ -62,7 +63,49 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             jbRemover.setEnabled(false);
             jbCadastrar.setEnabled(false);
         }
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 
+    }
+
+    public void acesso(int nivel) {
+        DisableEnable(false);
+        switch (nivel) {
+            case 1:
+                DisableEnable(true);
+                break;
+            case 2:
+                DisableEnable(true);
+                jbRemover.setEnabled(false);
+                break;
+            case 3:
+                DisableEnable(true);
+                jbRemover.setEnabled(false);
+                jbVisualisar.setEnabled(false);
+                jbCadastrar.setEnabled(false);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
+        }
+    }
+
+    public void DisableEnable(boolean b) {
+        jbRemover.setEnabled(b);
+        jbVisualisar.setEnabled(b);
+        jbCadastrar.setEnabled(b);
+        jbPesquisar.setEnabled(b);
+        jtNomeProprietario.setEnabled(b);
+        jtBairro.setEnabled(b);
+        jtRua.setEnabled(b);
+        jtQtdQuarto.setEnabled(b);
+        jtVagasGaragem.setEnabled(b);
+        jcbEstado.setEnabled(b);
+        jtImovel.setEnabled(b);
+        jcbCasa.setEnabled(b);
+        jcbApartamento.setEnabled(b);
+        jcbSalao.setEnabled(b);
+        jcbTemporario.setEnabled(b);
+        jcbComercio.setEnabled(b);
+        jcbCidade.setEnabled(b);
     }
 
     public void ComboBox() {
@@ -377,13 +420,11 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
     private void jbVisualisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualisarMouseClicked
         //Falta pegar a id da table;
-        if (jtImovel.getSelectedRow() != -1){
-            
-            
-               new cadastroImovel(String.valueOf(imovelGlobal.get(jtImovel.getSelectedRow()).getIdImovel())).setVisible(true);
-               dispose();
+        if (jtImovel.getSelectedRow() != -1) {
+
+            new cadastroImovel(String.valueOf(imovelGlobal.get(jtImovel.getSelectedRow()).getIdImovel())).setVisible(true);
+            dispose();
         }
-     
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jbVisualisarMouseClicked
@@ -396,7 +437,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private void jbPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarMouseClicked
         // Verificar campos antes de pesquisar 
         boolean control = true;
-        boolean controlTipo = false;        
+        boolean controlTipo = false;
 
         String Rua = "";
         String Bairro = "";
@@ -404,34 +445,34 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         int qtdQuartos = 0;
         int garagem = 0;
         List<Long> ids = new ArrayList<>();
-        
+
         if (jcbCasa.isSelected()) {
             ids.add(Long.valueOf("1"));
             controlTipo = true;
-               jlFiltro.setForeground(Color.black);
+            jlFiltro.setForeground(Color.black);
         }
 
         if (jcbApartamento.isSelected()) {
             ids.add(Long.valueOf("2"));
             controlTipo = true;
-       jlFiltro.setForeground(Color.black);
+            jlFiltro.setForeground(Color.black);
         }
 
         if (jcbSalao.isSelected()) {
             ids.add(Long.valueOf("3"));
             controlTipo = true;
-             jlFiltro.setForeground(Color.black);
+            jlFiltro.setForeground(Color.black);
         }
 
         if (jcbComercio.isSelected()) {
             ids.add(Long.valueOf("4"));
             controlTipo = true;
-              jlFiltro.setForeground(Color.black);
+            jlFiltro.setForeground(Color.black);
         }
         if (jcbTemporario.isSelected()) {
             ids.add(Long.valueOf("5"));
             controlTipo = true;
-              jlFiltro.setForeground(Color.black);
+            jlFiltro.setForeground(Color.black);
         }
 
         if (jtNomeProprietario.getText().equals("")) {
@@ -482,17 +523,15 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             jtBairro.setBackground(Color.red);
             control = false;
         }
-            
-      
-      
-        if (control& controlTipo) {
+
+        if (control & controlTipo) {
             ImovelDAO dao = new ImovelDAO();
             List<Imovel> imovel = dao.searchImovel(ids, Rua, Bairro, idcidade, qtdQuartos, garagem);
-           imovelGlobal = imovel;
+            imovelGlobal = imovel;
             jtImovel.setModel(new ImovelTableModel(imovel));
         } else {
-            if(!controlTipo){
-               jlFiltro.setForeground(Color.red);
+            if (!controlTipo) {
+                jlFiltro.setForeground(Color.red);
             }
             control = true;
         }
@@ -501,19 +540,18 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jbPesquisarMouseClicked
 
     private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
-           CidadeDAO cidadeDao = new CidadeDAO();
-       
+        CidadeDAO cidadeDao = new CidadeDAO();
+
         List<Cidade> cidadeTemp = new ArrayList<>();
-        cidadeTemp = cidadeDao.getWhereIdEstado((long)(jcbEstado.getSelectedIndex()+1));
-    
+        cidadeTemp = cidadeDao.getWhereIdEstado((long) (jcbEstado.getSelectedIndex() + 1));
+
         List<String> listaCidade = new ArrayList<String>();
         for (int i = 0; i < cidadeTemp.size(); i++) {
-          listaCidade.add(cidadeTemp.get(i).getNomeCidade());
+            listaCidade.add(cidadeTemp.get(i).getNomeCidade());
         }
         DefaultComboBoxModel defaultComboBox3 = new DefaultComboBoxModel(listaCidade.toArray());
-        jcbCidade.setModel(defaultComboBox3);       
-        
-        
+        jcbCidade.setModel(defaultComboBox3);
+
         cidadeGlobal = cidadeTemp; // TODO add your handling code here:
     }//GEN-LAST:event_jcbEstadoActionPerformed
 

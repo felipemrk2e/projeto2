@@ -5,14 +5,17 @@
  */
 package Interface.Locacao;
 
+import Interface.TelaPrincipal.Sessao;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author user
  */
 public class ControleLocacao extends javax.swing.JFrame {
+
     private static ControleLocacao instancia;
     int user;
 
@@ -23,25 +26,60 @@ public class ControleLocacao extends javax.swing.JFrame {
         this.setUndecorated(true);
         initComponents();
         setAlwaysOnTop(true);
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
 
     public ControleLocacao(int user, String IdLoccao) {
         this.setUndecorated(true);
-                 this.user = user;
-          initComponents();
-          setAlwaysOnTop(true);
+        this.user = user;
+        initComponents();
+        setAlwaysOnTop(true);
         popular();
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
-    
+
     public static ControleLocacao getInstancia() {
         if (instancia == null) {
             instancia = new ControleLocacao();
         }
         return instancia;
     }
-    
-    public static void encerrarInstancia(){
+
+    public static void encerrarInstancia() {
         instancia = null;
+    }
+
+    public void acesso(int nivel) {
+        DisableEnable(false);
+        switch (nivel) {
+            case 1:
+                DisableEnable(true);                
+                break;
+            case 2:
+                DisableEnable(true);
+                
+                break;
+            case 3:
+                DisableEnable(false);
+                
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
+        }
+    }
+
+    public void DisableEnable(boolean b) {
+        jtNomeLocatario.setEnabled(b);
+        jtNomeProprietario.setEnabled(b);
+        jtValor.setEnabled(b);
+        jtInicioContrato.setEnabled(b);
+        jtFimContrato.setEnabled(b);
+        jtNomeFiador.setEnabled(b);
+        jtIdImovel.setEnabled(b);
+        jbConfirmar.setEnabled(b);
+        jbCancelar.setEnabled(b);
+        jbEditar.setEnabled(b);
+        jbFinalizarContrato.setEnabled(b);
     }
 
     public void verificaNivel() {
@@ -254,28 +292,28 @@ public class ControleLocacao extends javax.swing.JFrame {
     }//GEN-LAST:event_jbEditarMouseClicked
 
     private void jbFinalizarContratoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbFinalizarContratoMouseClicked
-       if(jbFinalizarContrato.isEnabled()) {
-      // Finaliza...
-       }     
+        if (jbFinalizarContrato.isEnabled()) {
+            // Finaliza...
+        }
 // TODO add your handling code here:
     }//GEN-LAST:event_jbFinalizarContratoMouseClicked
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
-      if(jbConfirmar.isEnabled()){
-      
-      //Pegao IdLocacao e faz com isso
-       jtFimContrato.getText();
-      
-       // Depois volta para a home..
-       new CadLocacaoHome(user).setVisible(true);
-       dispose();
-      }
+        if (jbConfirmar.isEnabled()) {
+
+            //Pegao IdLocacao e faz com isso
+            jtFimContrato.getText();
+
+            // Depois volta para a home..
+            new CadLocacaoHome(user).setVisible(true);
+            dispose();
+        }
 // TODO add your handling code here:
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-          new CadLocacaoHome(user).setVisible(true);
-       dispose();  // TODO add your handling code here:
+        new CadLocacaoHome(user).setVisible(true);
+        dispose();  // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
 
     /**
