@@ -107,6 +107,22 @@ public class Pessoa {
         this.endereco = endereco;
         this.interesses = interesses;
     }
+
+    public PessoaJuridica getPessoaJuridica() {
+        return pessoaJuridica;
+    }
+
+    public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
+        this.pessoaJuridica = pessoaJuridica;
+    }
+
+    public PessoaFisica getPessoaFisica() {
+        return pessoaFisica;
+    }
+
+    public void setPessoaFisica(PessoaFisica pessoaFisica) {
+        this.pessoaFisica = pessoaFisica;
+    }    
     
     public long getIdPessoa() {
         return idPessoa;
