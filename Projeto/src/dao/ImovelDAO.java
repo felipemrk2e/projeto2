@@ -45,9 +45,10 @@ public class ImovelDAO extends DAO<Imovel>{
         * @param idCidade id da Cidade da tabela Endereco relacionado ao Imovel
         * @param qtdQuartos quantidade de quartos do Imovel
         * @param garagem quantidade de vagas da garagem em Imovel
+        * @param ativo filtra a pesquisa por ativo ou inativo
         * @return      lista de Imoveis ativos com base nas condições de pesquisa
         */
-    public List<Imovel> searchImovel(List<Long> idsTiposImovel, String rua, String bairro, long idCidade, int qtdQuartos, int garagem){
+    public List<Imovel> searchImovel(List<Long> idsTiposImovel, String rua, String bairro, long idCidade, int qtdQuartos, int garagem, int ativo){
         String query = "";
         String or = "";
         if(idsTiposImovel.size() > 0){
@@ -79,7 +80,11 @@ public class ImovelDAO extends DAO<Imovel>{
             query += or+"im.vagasGaragem >= "+garagem;
             or = " or ";
         }
-        return entityManager.createQuery("FROM Imovel im WHERE "+query+" and im.ativo = 1").getResultList();
+        
+        if(ativo == 3)
+            return entityManager.createQuery("FROM Imovel im WHERE "+query).getResultList();
+        
+        return entityManager.createQuery("FROM Imovel im WHERE "+query+" and im.ativo = "+ativo).getResultList();
     }
     
     /**
