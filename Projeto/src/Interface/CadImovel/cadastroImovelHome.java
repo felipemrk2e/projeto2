@@ -562,7 +562,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
         if (control & controlTipo) {
             //   ImovelDAO dao = new ImovelDAO();
-            imovel = dao.searchImovel(ids, Rua, Bairro, idcidade, qtdQuartos, garagem);
+            imovel = dao.searchImovel(ids, Rua, Bairro, idcidade, qtdQuartos, garagem, ativo);
             imovelGlobal = imovel;
             jtImovel.setModel(new ImovelTableModel2(imovel));
         } else {
