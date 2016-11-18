@@ -81,6 +81,16 @@ public abstract class DAO<E> {
         return result;
     }
     
+    /**
+    *  Verifica se a sessão está fechada.
+    *  @return boolean
+    */
+    public boolean isClosed(){
+        if(this.entityManager.isOpen())
+            return false;
+        return true;
+    }
+    
     public abstract E getById(final Long id);
     
     public abstract boolean removeById(final Long id);
