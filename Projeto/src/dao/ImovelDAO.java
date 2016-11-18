@@ -84,7 +84,7 @@ public class ImovelDAO extends DAO<Imovel>{
         if(ativo == 3)
             return entityManager.createQuery("FROM Imovel im WHERE "+query).getResultList();
         
-        return entityManager.createQuery("FROM Imovel im WHERE "+query+" and im.ativo = "+ativo).getResultList();
+        return entityManager.createQuery("FROM Imovel im WHERE ("+query+") and im.ativo = "+ativo).getResultList();
     }
     
     /**
