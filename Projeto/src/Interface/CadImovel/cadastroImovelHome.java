@@ -443,8 +443,12 @@ public class cadastroImovelHome extends javax.swing.JFrame {
                 //    ImovelDAO dao = new ImovelDAO();
                 dao.merge(imovelGlobal.get(jtImovel.getSelectedRow()));
                 dao = new ImovelDAO();
+                if(imovelGlobal.get(jtImovel.getSelectedRow()).getAtivo() == true){
+                    JOptionPane.showMessageDialog(null, "Imovel ativado com Sucesso !");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Imovel desativado com Sucesso !");
+                }
                 popularTable();
-                JOptionPane.showMessageDialog(null, "Cadastro desativado com Sucesso !");
             }
         }
 // TODO add your handling code here:
