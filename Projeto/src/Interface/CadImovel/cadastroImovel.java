@@ -53,6 +53,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         removerTitleBar();
         ComboBox();
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+      
 //
 //        Imovel imovel = imovelDao.getById(Long.parseLong("7"));
 //        popular(imovel);
@@ -82,7 +83,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         Imovel imovel = imovelDao.getById(Long.valueOf(idImovel));
         popular(imovel);
         //    verificaNivel();
-        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+          acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 
     }
 
@@ -96,22 +97,41 @@ public class cadastroImovel extends javax.swing.JFrame {
     public static void encerrarInstancia() {
         instancia = null;
     }
-    
+
     public void acesso(int nivel) {
+
         DisableEnable(false);
+
         switch (nivel) {
             case 1:
-                DisableEnable(true);
-                jbConfirmar.setEnabled(true);
-                jbEditar.setEnabled(true);
+                if (imovelTemp == null) {
+                    DisableEnable(true);
+                    jbConfirmar.setEnabled(true);
+                    jbEditar.setEnabled(false);
+                } else {
+                    DisableEnable(false);
+                    jbConfirmar.setEnabled(false);
+                    jbEditar.setEnabled(true);
+                }
+
                 break;
             case 2:
-                DisableEnable(true);
-                jbConfirmar.setEnabled(true);
-                jbEditar.setEnabled(true);
+
+                if (imovelTemp == null) {
+                    DisableEnable(true);
+                    jbConfirmar.setEnabled(true);
+                    jbEditar.setEnabled(false);
+                } else {
+                    DisableEnable(false);
+                    jbConfirmar.setEnabled(false);
+                    jbEditar.setEnabled(true);
+                }
                 break;
             case 3:
                 DisableEnable(false);
+                jbConfirmar.setEnabled(false);
+                jbEditar.setEnabled(false);
+
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
@@ -208,13 +228,16 @@ public class cadastroImovel extends javax.swing.JFrame {
         jcbVenda.setEnabled(b);
         jcbFesta.setEnabled(b);
 
-        if (b && imovelTemp.getStatus().getIdStatus() != 4) {
-            jcbStatus.setEnabled(true);
-        } else if (b && imovelTemp.getStatus().getIdStatus() == 4) {
-            jcbStatus.setEnabled(false);
-        } else {
-            jcbStatus.setEnabled(false);
-        };
+        if (imovelTemp != null) {
+            if (b && imovelTemp.getStatus().getIdStatus() != 4) {
+                jcbStatus.setEnabled(true);
+            } else if (b && imovelTemp.getStatus().getIdStatus() == 4) {
+                jcbStatus.setEnabled(false);
+            } else {
+                jcbStatus.setEnabled(false);
+            };
+
+        }
 
         //Endereço
         jtfLogradouro.setEnabled(b);
@@ -225,6 +248,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jtfReferencia.setEnabled(b);
         jtfZona.setEnabled(b);
         jtfCondominio.setEnabled(b);
+        jcbCidade.setEnabled(b);
         jcbEstado.setEnabled(b);
         jcbStatus.setEnabled(b);
 
@@ -1788,12 +1812,8 @@ public class cadastroImovel extends javax.swing.JFrame {
                         jtValorVenda.setBackground(Color.red);
 
                     }
-                } else {
-                    if(venda) {
-                          tipoContrato.get(venda1).setValor(0);
-                    }
-                      
-
+                } else if (venda) {
+                    tipoContrato.get(venda1).setValor(0);
                 }
 
                 if (jcbTemporada.isSelected()) {
@@ -1815,11 +1835,9 @@ public class cadastroImovel extends javax.swing.JFrame {
                         jtValorTemporada.setBackground(Color.red);
 
                     }
-                } else {
- if(temporada){
-     tipoContrato.get(temporada1).setValor(0);
-     
- }
+                } else if (temporada) {
+                    tipoContrato.get(temporada1).setValor(0);
+
                 }
 
                 if (jcbFesta.isSelected()) {
@@ -1842,10 +1860,8 @@ public class cadastroImovel extends javax.swing.JFrame {
                         jtValorDiaria.setBackground(Color.red);
 
                     }
-                } else {
-                        if(festa){
-                            tipoContrato.get(festa1).setValor(0);
-                        }
+                } else if (festa) {
+                    tipoContrato.get(festa1).setValor(0);
                 }
 
             }
@@ -2499,7 +2515,7 @@ public class cadastroImovel extends javax.swing.JFrame {
     private void jbEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseClicked
         if (jbEditar.isEnabled()) {
             DisableEnable(true);
-
+            jbConfirmar.setEnabled(true);
         }
     }//GEN-LAST:event_jbEditarMouseClicked
 
