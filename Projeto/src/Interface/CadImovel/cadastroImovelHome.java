@@ -34,6 +34,8 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     List<Estado> estadoGlobal;
     List<Cidade> cidadeGlobal;
     List<Imovel> imovelGlobal;
+    ImovelDAO dao = new ImovelDAO();
+    List<Imovel> imovel = new ArrayList<>();
 
     /**
      * Creates new form cadastroImovelHome
@@ -143,8 +145,8 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     }
 
     public void popularTable() {
-        List<Imovel> imovel = new ArrayList<>();
-        ImovelDAO dao = new ImovelDAO();
+
+        //ImovelDAO dao = new ImovelDAO();
         imovel = dao.getAll();
         imovelGlobal = imovel;
         //  ImovelTableModel test = new ImovelTableModel(imovel);
@@ -210,6 +212,8 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jbCancelar = new javax.swing.JButton();
         separador = new javax.swing.JSeparator();
         jcbCidade = new javax.swing.JComboBox();
+        jcbAtivo = new javax.swing.JCheckBox();
+        jcbInativo = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
@@ -241,7 +245,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
         jbRemover.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
-        jbRemover.setText("Remover");
+        jbRemover.setText("<html><center>Desativar / <br/>Ativar</html>");
         jbRemover.setEnabled(false);
         jbRemover.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -302,9 +306,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jbPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbPesquisarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jbPesquisarMouseEntered(evt);
             }
         });
         getContentPane().add(jbPesquisar);
@@ -385,6 +386,11 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
+        jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbCancelarMouseClicked(evt);
+            }
+        });
         getContentPane().add(jbCancelar);
         jbCancelar.setBounds(860, 470, 140, 70);
 
@@ -396,6 +402,24 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbCidade);
         jcbCidade.setBounds(520, 470, 190, 30);
+
+        jcbAtivo.setText("Ativo");
+        jcbAtivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbAtivoMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jcbAtivo);
+        jcbAtivo.setBounds(680, 350, 51, 23);
+
+        jcbInativo.setText("Inativo");
+        jcbInativo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbInativoMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jcbInativo);
+        jcbInativo.setBounds(780, 350, 59, 23);
 
         pack();
         setLocationRelativeTo(null);
@@ -413,7 +437,15 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private void jbRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemoverMouseClicked
 
         if (jbRemover.isEnabled()) {
+            if (jtImovel.getSelectedRow() != -1) {
 
+                imovelGlobal.get(jtImovel.getSelectedRow()).mudaAtivo();
+                //    ImovelDAO dao = new ImovelDAO();
+                dao.merge(imovelGlobal.get(jtImovel.getSelectedRow()));
+                dao = new ImovelDAO();
+                popularTable();
+                JOptionPane.showMessageDialog(null, "Cadastro desativado com Sucesso !");
+            }
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_jbRemoverMouseClicked
@@ -429,11 +461,6 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_jbVisualisarMouseClicked
 
-    private void jbPesquisarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarMouseEntered
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_jbPesquisarMouseEntered
-
     private void jbPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarMouseClicked
         // Verificar campos antes de pesquisar 
         boolean control = true;
@@ -445,6 +472,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         int qtdQuartos = 0;
         int garagem = 0;
         List<Long> ids = new ArrayList<>();
+        int ativo;
 
         if (jcbCasa.isSelected()) {
             ids.add(Long.valueOf("1"));
@@ -524,16 +552,25 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             control = false;
         }
 
+        if (jcbAtivo.isSelected()) {
+            ativo = 1;
+        } else if (jcbInativo.isSelected()) {
+            ativo = 0;
+        } else {
+            ativo = 3;
+        }
+
         if (control & controlTipo) {
-            ImovelDAO dao = new ImovelDAO();
-            List<Imovel> imovel = dao.searchImovel(ids, Rua, Bairro, idcidade, qtdQuartos, garagem);
+            //   ImovelDAO dao = new ImovelDAO();
+            imovel = dao.searchImovel(ids, Rua, Bairro, idcidade, qtdQuartos, garagem);
             imovelGlobal = imovel;
-            jtImovel.setModel(new ImovelTableModel(imovel));
+            jtImovel.setModel(new ImovelTableModel2(imovel));
         } else {
             if (!controlTipo) {
                 jlFiltro.setForeground(Color.red);
             }
             control = true;
+            JOptionPane.showMessageDialog(null, "Verifique os campos !");
         }
 
         // fim verificação   // TODO add your handling code here:
@@ -554,6 +591,38 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
         cidadeGlobal = cidadeTemp; // TODO add your handling code here:
     }//GEN-LAST:event_jcbEstadoActionPerformed
+
+    private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
+        popularTable();
+        JOptionPane.showMessageDialog(null, "Buscas Canceladas!");
+        jcbAtivo.setSelected(false);
+        jcbInativo.setSelected(false);
+        jcbCasa.setSelected(false);
+        jcbTemporario.setSelected(false);
+        jcbSalao.setSelected(false);
+        jcbApartamento.setSelected(false);
+        jcbComercio.setSelected(false);
+        jtNomeProprietario.setText("");
+        jtRua.setText("");
+        jtBairro.setText("");
+        jtQtdQuarto.setText("");
+        jtVagasGaragem.setText("");
+        ;// TODO add your handling code here:
+    }//GEN-LAST:event_jbCancelarMouseClicked
+
+    private void jcbAtivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbAtivoMouseClicked
+        if (jcbInativo.isSelected()) {
+            jcbInativo.setSelected(false);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbAtivoMouseClicked
+
+    private void jcbInativoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbInativoMouseClicked
+        if (jcbAtivo.isSelected()) {
+            jcbAtivo.setSelected(false);
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_jcbInativoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -598,10 +667,12 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JButton jbRemover;
     private javax.swing.JButton jbVisualisar;
     private javax.swing.JCheckBox jcbApartamento;
+    private javax.swing.JCheckBox jcbAtivo;
     private javax.swing.JCheckBox jcbCasa;
     private javax.swing.JComboBox jcbCidade;
     private javax.swing.JCheckBox jcbComercio;
     private javax.swing.JComboBox jcbEstado;
+    private javax.swing.JCheckBox jcbInativo;
     private javax.swing.JCheckBox jcbSalao;
     private javax.swing.JCheckBox jcbTemporario;
     private javax.swing.JLabel jlBairro;

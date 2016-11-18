@@ -2516,6 +2516,9 @@ public class cadastroImovel extends javax.swing.JFrame {
         if (jbEditar.isEnabled()) {
             DisableEnable(true);
             jbConfirmar.setEnabled(true);
+            if(jbConfirmar.isEnabled()){
+                jbEditar.setEnabled(false);
+            }
         }
     }//GEN-LAST:event_jbEditarMouseClicked
 
