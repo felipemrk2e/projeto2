@@ -244,10 +244,10 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jpfNovaSenha1 = new javax.swing.JPasswordField();
         jpfNovaSenha2 = new javax.swing.JPasswordField();
         jlNomeUsuario = new javax.swing.JLabel();
-        jcbNivelAcesso = new javax.swing.JComboBox<String>();
+        jcbNivelAcesso = new javax.swing.JComboBox<>();
         jlFuncionarios = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jcbFuncionarios = new javax.swing.JComboBox<String>();
+        jcbFuncionarios = new javax.swing.JComboBox<>();
         jbCarregar = new javax.swing.JButton();
         jcbDepartamento = new javax.swing.JComboBox();
         jcbCargo = new javax.swing.JComboBox();
@@ -377,14 +377,14 @@ public class ControleFuncionario extends javax.swing.JFrame {
         getContentPane().add(jlNomeUsuario);
         jlNomeUsuario.setBounds(240, 200, 120, 30);
 
-        jcbNivelAcesso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbNivelAcesso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbNivelAcesso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbNivelAcessoActionPerformed(evt);
             }
         });
         getContentPane().add(jcbNivelAcesso);
-        jcbNivelAcesso.setBounds(370, 160, 64, 30);
+        jcbNivelAcesso.setBounds(370, 160, 56, 30);
 
         jlFuncionarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlFuncionarios.setText("Funcionários");
@@ -396,7 +396,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jSeparator1.setBounds(210, 10, 760, 400);
 
         jcbFuncionarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jcbFuncionarios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbFuncionarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbFuncionarios);
         jcbFuncionarios.setBounds(20, 90, 180, 30);
 
@@ -524,7 +524,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbCarregar;
     private javax.swing.JButton jbConfirmar;
-    private javax.swing.JButton jbEditar;
+    public static javax.swing.JButton jbEditar;
     private javax.swing.JComboBox jcbCargo;
     private javax.swing.JComboBox jcbDepartamento;
     private javax.swing.JComboBox<String> jcbFuncionarios;

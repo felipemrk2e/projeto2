@@ -297,6 +297,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         ControleFuncionario.getInstancia().DisableEnable(false);
         ControleFuncionario.getInstancia().setLocationRelativeTo(this);
         ControleFuncionario.getInstancia().setAlwaysOnTop(true);
+        ControleFuncionario.getInstancia().jbEditar.setEnabled(true);
     }//GEN-LAST:event_jbNivelMouseClicked
 
     private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
@@ -336,7 +337,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         cadastroFuncionario.getInstancia().DisableEnable(false);
         cadastroFuncionario.getInstancia().setLocationRelativeTo(this);
         cadastroFuncionario.getInstancia().setAlwaysOnTop(true);
-         cadastroFuncionario.getInstancia().jbEditar.setEnabled(true);
+        cadastroFuncionario.getInstancia().jbEditar.setEnabled(true);
     }//GEN-LAST:event_jbVisualizarMousePressed
 
     /**

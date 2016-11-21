@@ -289,8 +289,7 @@ public class cadastroCliente extends javax.swing.JFrame {
             interesses.add(tiposContrato.get(2));
         }
         pessoaFisica.setInteresses(interesses);
-        pessoaFisicaDAO.persist(pessoaFisica);
-        fiadorGlobal = null;
+        pessoaFisicaDAO.persist(pessoaFisica);       
 
     }
 
