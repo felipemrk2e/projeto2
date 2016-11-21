@@ -244,7 +244,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jbVisualisar.setBounds(710, 240, 140, 70);
 
         jbRemover.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jbRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
+        jbRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/troca.png"))); // NOI18N
         jbRemover.setText("<html><center>Desativar / <br/>Ativar</html>");
         jbRemover.setEnabled(false);
         jbRemover.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -410,7 +410,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jcbAtivo);
-        jcbAtivo.setBounds(680, 350, 51, 23);
+        jcbAtivo.setBounds(680, 350, 80, 30);
 
         jcbInativo.setText("Inativo");
         jcbInativo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -419,7 +419,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jcbInativo);
-        jcbInativo.setBounds(780, 350, 59, 23);
+        jcbInativo.setBounds(780, 350, 80, 30);
 
         pack();
         setLocationRelativeTo(null);
