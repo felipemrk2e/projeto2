@@ -101,7 +101,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
 
     public void DisableEnable(Boolean b) {
         jbConfirmar.setEnabled(b);
-        jbEditar.setEnabled(b);
+        jbEditar.setEnabled(false);
         jtfCodigoInterno.setEnabled(b);
         //cad
         jtfNome.setEnabled(b);
@@ -1227,7 +1227,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbConfirmar;
-    private javax.swing.JButton jbEditar;
+    public static javax.swing.JButton jbEditar;
     private javax.swing.JComboBox jcbCargo;
     private javax.swing.JComboBox<String> jcbCidade;
     private javax.swing.JComboBox jcbEstado;

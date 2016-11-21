@@ -313,6 +313,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         telaLogin.limpaCampos();
                         JOptionPane.showMessageDialog(null, "Sistema Bloquado!");
                     }
+                    if (telaLogin.verificaLogin()) {
+                        JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
+                        setLogado(true);
+                        jlLogoff.setEnabled(true);
+                        jlTroca.setEnabled(true);
+                        acesso();
+                    }
                 }
             }
         }
@@ -343,6 +350,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 if (tentativas == 5) {
                     telaLogin.limpaCampos();
                     JOptionPane.showMessageDialog(telaLogin, "Sistema Bloquado!");
+                    ocultaFuncoes(false);
                 }
             }
         }
@@ -353,90 +361,150 @@ public class TelaPrincipal extends javax.swing.JFrame {
             case 1:
                 break;
             case 2:
-                if (cadastroFuncionario.getInstancia() != null) {
-                    cadastroFuncionario.getInstancia().setVisible(false);
-                    cadastroFuncionario.getInstancia().setAlwaysOnTop(false);
-                    cadastroFuncionario.getInstancia().encerrarInstancia();
+                switch (instanciaAberta) {
+                    case 9:
+                        cadastroFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 10:
+                        ControleFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 11:
+                        CadFuncionarioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 12:
+                        cadastroCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 13:
+                        cadastroCargoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    default:
+                        System.out.println("=====================================================Não existem instancias abertas!!!");
                 }
-                if (ControleFuncionario.getInstancia() != null) {
-                    ControleFuncionario.getInstancia().setVisible(false);
-                    ControleFuncionario.getInstancia().setAlwaysOnTop(false);
-                    ControleFuncionario.getInstancia().encerrarInstancia();
-                }
-                if (CadFuncionarioHome.getInstancia() != null) {
-                    CadFuncionarioHome.getInstancia().setVisible(false);
-                    CadFuncionarioHome.getInstancia().setAlwaysOnTop(false);
-                    CadFuncionarioHome.getInstancia().encerrarInstancia();
-                }
-                if (cadastroCargo.getInstancia() != null) {
-                    cadastroCargo.getInstancia().setVisible(false);
-                    cadastroCargo.getInstancia().setAlwaysOnTop(false);
-                    cadastroCargo.getInstancia().encerrarInstancia();
-                }
-                if (cadastroCargoHome.getInstancia() != null) {
-                    cadastroCargoHome.getInstancia().setVisible(false);
-                    cadastroCargoHome.getInstancia().setAlwaysOnTop(false);
-                    cadastroCargoHome.getInstancia().encerrarInstancia();
-                }
+
+//                if (cadastroFuncionario.getInstancia() != null) {
+//                    cadastroFuncionario.getInstancia().setVisible(false);
+//                    cadastroFuncionario.getInstancia().setAlwaysOnTop(false);
+//                    cadastroFuncionario.getInstancia().encerrarInstancia();
+//                }
+//                if (ControleFuncionario.getInstancia() != null) {
+//                    ControleFuncionario.getInstancia().setVisible(false);
+//                    ControleFuncionario.getInstancia().setAlwaysOnTop(false);
+//                    ControleFuncionario.getInstancia().encerrarInstancia();
+//                }
+//                if (CadFuncionarioHome.getInstancia() != null) {
+//                    CadFuncionarioHome.getInstancia().setVisible(false);
+//                    CadFuncionarioHome.getInstancia().setAlwaysOnTop(false);
+//                    CadFuncionarioHome.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroCargo.getInstancia() != null) {
+//                    cadastroCargo.getInstancia().setVisible(false);
+//                    cadastroCargo.getInstancia().setAlwaysOnTop(false);
+//                    cadastroCargo.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroCargoHome.getInstancia() != null) {
+//                    cadastroCargoHome.getInstancia().setVisible(false);
+//                    cadastroCargoHome.getInstancia().setAlwaysOnTop(false);
+//                    cadastroCargoHome.getInstancia().encerrarInstancia();
+//                }
                 break;
             case 3:
-                if (cadastroCliente.getInstancia() != null) {
-                    cadastroCliente.getInstancia().setVisible(false);
-                    cadastroCliente.getInstancia().setAlwaysOnTop(false);
-                    cadastroCliente.getInstancia().encerrarInstancia();
-                }
-                if (cadastroFiador.getInstancia() != null) {
-                    cadastroFiador.getInstancia().setVisible(false);
-                    cadastroFiador.getInstancia().setAlwaysOnTop(false);
-                    cadastroFiador.getInstancia().encerrarInstancia();
-                }
-                if (cadastroImovel.getInstancia() != null) {
-                    cadastroImovel.getInstancia().setVisible(false);
-                    cadastroImovel.getInstancia().setAlwaysOnTop(false);
-                    cadastroImovel.getInstancia().encerrarInstancia();
-                }
-                if (CadLocacao.getInstancia() != null) {
-                    CadLocacao.getInstancia().setVisible(false);
-                    CadLocacao.getInstancia().setAlwaysOnTop(false);
-                    CadLocacao.getInstancia().encerrarInstancia();
-                }
-                if (ControleLocacao.getInstancia() != null) {
-                    ControleLocacao.getInstancia().setVisible(false);
-                    ControleLocacao.getInstancia().setAlwaysOnTop(false);
-                    ControleLocacao.getInstancia().encerrarInstancia();
-                }
-                if (cadastroFuncionario.getInstancia() != null) {
-                    cadastroFuncionario.getInstancia().setVisible(false);
-                    cadastroFuncionario.getInstancia().setAlwaysOnTop(false);
-                    cadastroFuncionario.getInstancia().encerrarInstancia();
-                }
-                if (ControleFuncionario.getInstancia() != null) {
-                    ControleFuncionario.getInstancia().setVisible(false);
-                    ControleFuncionario.getInstancia().setAlwaysOnTop(false);
-                    ControleFuncionario.getInstancia().encerrarInstancia();
-                }
-                if (CadFuncionarioHome.getInstancia() != null) {
-                    CadFuncionarioHome.getInstancia().setVisible(false);
-                    CadFuncionarioHome.getInstancia().setAlwaysOnTop(false);
-                    CadFuncionarioHome.getInstancia().encerrarInstancia();
-                }
-                if (cadastroCargo.getInstancia() != null) {
-                    cadastroCargo.getInstancia().setVisible(false);
-                    cadastroCargo.getInstancia().setAlwaysOnTop(false);
-                    cadastroCargo.getInstancia().encerrarInstancia();
-                }
-                if (cadastroCargoHome.getInstancia() != null) {
-                    cadastroCargoHome.getInstancia().setVisible(false);
-                    cadastroCargoHome.getInstancia().setAlwaysOnTop(false);
-                    cadastroCargoHome.getInstancia().encerrarInstancia();
+                switch (instanciaAberta) {
+                    case 1:
+                        cadastroCliente.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 2:
+                        cadastroFiador.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 4:
+                        cadastroImovel.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 6:
+                        CadLocacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 7:
+                        ControleLocacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 8:
+                        CadLocacaoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 9:
+                        cadastroFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 10:
+                        ControleFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 11:
+                        CadFuncionarioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 12:
+                        cadastroCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 13:
+                        cadastroCargoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    default:
+                        System.out.println("=====================================================Não existem instancias abertas!!!");
                 }
                 break;
+
+//                
+//                if (cadastroCliente.getInstancia() != null) {
+//                    cadastroCliente.getInstancia().setVisible(false);
+//                    cadastroCliente.getInstancia().setAlwaysOnTop(false);
+//                    cadastroCliente.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroFiador.getInstancia() != null) {
+//                    cadastroFiador.getInstancia().setVisible(false);
+//                    cadastroFiador.getInstancia().setAlwaysOnTop(false);
+//                    cadastroFiador.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroImovel.getInstancia() != null) {
+//                    cadastroImovel.getInstancia().setVisible(false);
+//                    cadastroImovel.getInstancia().setAlwaysOnTop(false);
+//                    cadastroImovel.getInstancia().encerrarInstancia();
+//                }
+//                if (CadLocacao.getInstancia() != null) {
+//                    CadLocacao.getInstancia().setVisible(false);
+//                    CadLocacao.getInstancia().setAlwaysOnTop(false);
+//                    CadLocacao.getInstancia().encerrarInstancia();
+//                }
+//                if (ControleLocacao.getInstancia() != null) {
+//                    ControleLocacao.getInstancia().setVisible(false);
+//                    ControleLocacao.getInstancia().setAlwaysOnTop(false);
+//                    ControleLocacao.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroFuncionario.getInstancia() != null) {
+//                    cadastroFuncionario.getInstancia().setVisible(false);
+//                    cadastroFuncionario.getInstancia().setAlwaysOnTop(false);
+//                    cadastroFuncionario.getInstancia().encerrarInstancia();
+//                }
+//                if (ControleFuncionario.getInstancia() != null) {
+//                    ControleFuncionario.getInstancia().setVisible(false);
+//                    ControleFuncionario.getInstancia().setAlwaysOnTop(false);
+//                    ControleFuncionario.getInstancia().encerrarInstancia();
+//                }
+//                if (CadFuncionarioHome.getInstancia() != null) {
+//                    CadFuncionarioHome.getInstancia().setVisible(false);
+//                    CadFuncionarioHome.getInstancia().setAlwaysOnTop(false);
+//                    CadFuncionarioHome.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroCargo.getInstancia() != null) {
+//                    cadastroCargo.getInstancia().setVisible(false);
+//                    cadastroCargo.getInstancia().setAlwaysOnTop(false);
+//                    cadastroCargo.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroCargoHome.getInstancia() != null) {
+//                    cadastroCargoHome.getInstancia().setVisible(false);
+//                    cadastroCargoHome.getInstancia().setAlwaysOnTop(false);
+//                    cadastroCargoHome.getInstancia().encerrarInstancia();
+//                }
+//                break;
             default:
                 JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
 
-    public void finalizarInstancias() {        
+    public void finalizarInstancias() {
         switch (instanciaAberta) {
             case 1:
                 cadastroCliente.getInstancia().setVisible(false);

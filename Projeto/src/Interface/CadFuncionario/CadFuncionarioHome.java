@@ -336,6 +336,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         cadastroFuncionario.getInstancia().DisableEnable(false);
         cadastroFuncionario.getInstancia().setLocationRelativeTo(this);
         cadastroFuncionario.getInstancia().setAlwaysOnTop(true);
+         cadastroFuncionario.getInstancia().jbEditar.setEnabled(true);
     }//GEN-LAST:event_jbVisualizarMousePressed
 
     /**
