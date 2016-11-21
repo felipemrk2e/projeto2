@@ -563,7 +563,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         } else {
             ativo = 3;
         }
-
+        idcidade =(cidadeGlobal.get(jcbCidade.getSelectedIndex()).getIdCidade());
         if (control & controlTipo) {
             //   ImovelDAO dao = new ImovelDAO();
             imovel = dao.searchImovel(ids, Rua, Bairro, idcidade, qtdQuartos, garagem, ativo);
