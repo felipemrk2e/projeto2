@@ -7,19 +7,21 @@ import javax.persistence.Persistence;
 
 public abstract class DAO<E> {
 	
-	protected EntityManager entityManager;
+	protected static EntityManager entityManager = DAO.getEntityManager();
 	
 
 	public DAO() {
-            entityManager = getEntityManager(); 
+            //entityManager = getEntityManager(); 
 	}
 
-	private EntityManager getEntityManager () {
+	private static EntityManager getEntityManager () {
 		
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ProjetoPU");
+            EntityManager entityManager = DAO.getEntityManager();
 		
-            if (entityManager == null)
+            if (entityManager == null){
+                EntityManagerFactory factory = Persistence.createEntityManagerFactory("ProjetoPU");   
 		entityManager = factory.createEntityManager();
+            }
 		
             return entityManager;
 			
