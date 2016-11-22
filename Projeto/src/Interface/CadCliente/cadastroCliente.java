@@ -151,7 +151,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jftCPF.setText("");
         jtfRG.setText("");
         jftDataNascimento.setText("");
-        jtfNovoFiador.setText("");
+//        jtfNovoFiador.setText("");
         jtfNomeFantasia.setText("");
         jtfNomeResponsavel.setText("");
         jtfEndereco.setText("");
@@ -263,6 +263,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         if (jcbFiador.getSelectedIndex() >= 0) {
             PessoaFisica fiador = (PessoaFisica) jcbFiador.getSelectedItem();
             pessoaFisica.setListaFiadores(pessoaFisicaDAO.getFiadores(fiador.getIdPessoa()));
+            jtfNovoFiador.setText("");
         }
 
         if (!jtfNovoFiador.getText().isEmpty() && jcbFiador.getSelectedIndex() < 0) {
@@ -289,7 +290,7 @@ public class cadastroCliente extends javax.swing.JFrame {
             interesses.add(tiposContrato.get(2));
         }
         pessoaFisica.setInteresses(interesses);
-        pessoaFisicaDAO.persist(pessoaFisica);       
+        pessoaFisicaDAO.persist(pessoaFisica);
 
     }
 
@@ -689,28 +690,6 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfEmail.setText("teste@teste");
     }
 
-    public void populaFiador() {
-        jftCPF.setText("38933784802");
-        jtfRG.setText("RG");
-        jftDataNascimento.setText("25/08/1991");
-        jtaObs.setText("Qualquer OBS");
-
-        jcbEstadoCivil.setSelectedIndex(0);
-        jtfEndereco.setText("Av. Guilherme de Almeida");
-        jtfNumero.setText("2025");
-        jtfComplemento.setText("");
-        jtfBairro.setText("Morro do Algodão");
-
-        jftCEP.setText("11.671-000");
-        jcbCidade.setSelectedIndex(189);
-
-        jftTelefone.setText("1238875776");
-        jftCelular.setText("12981097059");
-        jftComercial.setText("");
-        jtfEmail.setText("teste@teste");
-
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -979,6 +958,11 @@ public class cadastroCliente extends javax.swing.JFrame {
         getContentPane().add(jftCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 110, 30));
 
         jcbFiador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbFiador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbFiadorActionPerformed(evt);
+            }
+        });
         getContentPane().add(jcbFiador, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 350, 30));
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -1138,6 +1122,8 @@ public class cadastroCliente extends javax.swing.JFrame {
         jrbMasculino.setVisible(ativo);
         jrbFeminino.setEnabled(ativo);
         jrbMasculino.setEnabled(ativo);
+        jlAddFiador.setEnabled(ativo);
+        jlAddFiador.setVisible(ativo);
 
         //Passando False Pessoa Juridica
         jtfNomeResponsavel.setVisible(!ativo);
@@ -1325,6 +1311,12 @@ public class cadastroCliente extends javax.swing.JFrame {
                 jcbEstadoCivil.setBackground(Color.white);
             } else {
                 jcbEstadoCivil.setBackground(Color.red);
+                valida = false;
+            }
+            if (jtfNovoFiador.getText().isEmpty() && fiadorGlobal == null) {
+                jtfNovoFiador.setBackground(Color.white);
+            } else {
+                jtfNovoFiador.setBackground(Color.red);
                 valida = false;
             }
             //PESSOA JURÍDICA
@@ -1530,6 +1522,13 @@ public class cadastroCliente extends javax.swing.JFrame {
             cadastroFiador.getInstancia().setVisible(true);
         }
     }//GEN-LAST:event_jlAddFiadorMousePressed
+
+    private void jcbFiadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbFiadorActionPerformed
+        if (jcbFiador.getSelectedItem() != null) {
+            jtfNovoFiador.setText("");
+            fiadorGlobal = null;
+        }
+    }//GEN-LAST:event_jcbFiadorActionPerformed
 
     /**
      * @param args the command line arguments
