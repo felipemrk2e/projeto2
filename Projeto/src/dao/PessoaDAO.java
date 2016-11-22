@@ -71,26 +71,39 @@ public class PessoaDAO extends DAO<Pessoa> {
         return entityManager.createQuery("FROM Pessoa AS p INNER JOIN p.PessoaFisica").getResultList();
     }
     
-    public List<Pessoa> searchPessoa(String nome, String telefone, String cpf){
+    public List<Pessoa> searchPessoa(String nome, String telefone, String cpf, String cnpj, int tipoPessoa){
         String query = "";
         String or = "";
         
-        if(nome != ""){
-            query += "pe.nomePessoa LIKE '%"+nome+"%'";
-            or = " or ";
+        //pessoaFisica == 1
+        if(tipoPessoa == 1){
+            if(nome != ""){
+                query += "pe.nomePessoa LIKE '%"+nome+"%'";
+                or = " or ";
+            }
+            if(cpf != ""){
+                query += or+"pe.pessoaFisica.CPF LIKE '%"+cpf+"%'";
+                or = " or ";
+            }
+        }
+        //pessoaJuridica
+        if(tipoPessoa == 2){
+            if(nome != ""){
+                query += "pe.nomePessoa LIKE '%"+nome+"%'";
+                or = " or ";
+            }
+            if(cnpj != ""){
+                query += or+"pe.pessoaJuridica.cnpj LIKE '%"+cnpj+"%'";
+                or = " or ";
+            }
         }
         
-//        if(telefone != ""){
-//            query += "pe.telefone.numero LIKE '%"+telefone+"%'";
-//            or = " or ";
-//        }
-        
-        if(cpf != ""){
-            query += or+"pe.pessoaFisica.CPF LIKE '%"+cpf+"%'";
-            or = " or ";
-        }
-        
+        if(query != "")
+            return entityManager.createQuery("FROM Pessoa pe WHERE "+query).getResultList();
         return entityManager.createQuery("FROM Pessoa pe WHERE "+query).getResultList();
+        
+        
+        
     }
 
 }
