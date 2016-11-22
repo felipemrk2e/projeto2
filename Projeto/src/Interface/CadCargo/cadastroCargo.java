@@ -135,18 +135,22 @@ public class cadastroCargo extends javax.swing.JFrame {
     }
 
     public void cadastrarCargo(Departamento departamento) {
-        Cargo cargo = new Cargo();
+        
         CargoDAO cargoDAO = new CargoDAO();
         cargo.setNomeCargo(jtNomeCargo.getText());
         cargo.setDescricaoCargo(jtaDescricaoCargo.getText());
-         if(departamento !=null){
-            cargo.setDepartamento(departamento);
-            cargoDAO.persist(cargo); 
-           
-        listModel.addElement(cargo);
-        jlCargosList.setModel(listModel);
-            
-         }
+        cargoDAO.merge(cargo);
+        departamento = null;
+        cargo =null;
+        
+//         if(departamento !=null){
+//            cargo.setDepartamento(departamento);
+//            cargoDAO.persist(cargo); 
+//           
+//        listModel.addElement(cargo);
+//        jlCargosList.setModel(listModel);
+//            
+//         }
        
       
 
@@ -158,6 +162,9 @@ public class cadastroCargo extends javax.swing.JFrame {
         cargo.setDescricaoCargo(jtaDescricaoCargo.getText());
         cargo.setDepartamento(departamento);
         cargoDAO.merge(cargo);
+        departamento = null;
+        cargo =null;
+
     }
 
     public void cadastrarDepartamento() {
@@ -452,27 +459,32 @@ public class cadastroCargo extends javax.swing.JFrame {
     private void jbCadastrarCargoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarCargoMousePressed
         if (jbCadastrarCargo.isEnabled()) {
               if(departamento != null){
-                if (validaCargo(true)) {
-                try {
-                    if (cargo == null) {
-                        cadastrarCargo(departamento);
+                   try {
+            if (validaCargo(true)) {
+               if (cargo == null) {
+                   cargo = new Cargo();
+                      cadastrarCargo(cargo,departamento);
                         JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
                         ZerarCampos();
-                    } else {
+               }
+                else {
                         cadastrarCargo(departamento);
                         JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
                         ZerarCampos();
                     }
-                } catch (Exception ex) {
+
+              }
+              
+              }catch (Exception ex) {
                     Logger.getLogger(cadastroCargo.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Verifique os campos obrigatórios!");
             }  
-              }
-            
 
-        }
+    }
+
+
     }//GEN-LAST:event_jbCadastrarCargoMousePressed
 
     private void jbEditarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMousePressed
