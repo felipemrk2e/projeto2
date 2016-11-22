@@ -27,9 +27,9 @@ public class cadastroCargoHome extends javax.swing.JFrame {
      * Creates new form cadastroCargoHome
      */
     public cadastroCargoHome() {
-        this.setUndecorated(true);
+      //  this.setUndecorated(true);
         initComponents();
-        setAlwaysOnTop(true);
+      //  setAlwaysOnTop(true);
         this.setTitle("Consulta de Departamento");
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
         popularTabela();
@@ -286,10 +286,13 @@ public class cadastroCargoHome extends javax.swing.JFrame {
             CargoTableModel cargoModel = (CargoTableModel) jtCargo.getModel();
             Cargo cargoSelecionado = cargoModel.get(linhaSelecionada);
             cadastroCargo.getInstancia().cargo = cargoSelecionado;
+            cadastroCargo.getInstancia().departamento = cargoSelecionado.getDepartamento();
             setLocationRelativeTo(this);
+            cadastroCargo.getInstancia().atualizarDepartamento(cargoSelecionado.getDepartamento());
             cadastroCargo.getInstancia().atualizaCargo(cargoSelecionado);
             cadastroCargo.getInstancia().setVisible(true);
-            cadastroCargo.getInstancia().DisableEnable(false);
+            cadastroCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+          //  cadastroCargo.getInstancia().DisableEnable(false);
             cadastroCargo.getInstancia().setLocationRelativeTo(this);
             cadastroCargo.getInstancia().setAlwaysOnTop(true);
         }
@@ -306,8 +309,10 @@ public class cadastroCargoHome extends javax.swing.JFrame {
             cadastroCargo.getInstancia().departamento = departamentoSelecionado;
             setLocationRelativeTo(this);
             cadastroCargo.getInstancia().atualizarDepartamento(departamentoSelecionado);
+            cadastroCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            cadastroCargo.getInstancia().jcbDepartamentos.setEnabled(false);
             cadastroCargo.getInstancia().setVisible(true);
-            cadastroCargo.getInstancia().DisableEnable(false);
+           // cadastroCargo.getInstancia().DisableEnable(false);
             cadastroCargo.getInstancia().setLocationRelativeTo(this);
             cadastroCargo.getInstancia().setAlwaysOnTop(true);
         }

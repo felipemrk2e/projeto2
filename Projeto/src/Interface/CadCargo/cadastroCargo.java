@@ -37,9 +37,9 @@ public class cadastroCargo extends javax.swing.JFrame {
      * Creates new form cadastrarCargo
      */
     public cadastroCargo() {
-        this.setUndecorated(true);
+       // this.setUndecorated(true);
         initComponents();
-        setAlwaysOnTop(true);
+     //   setAlwaysOnTop(true);
         this.setTitle("Cadastro de Departamento");
         mascaraTelefone();
         carregaDepartamentos();
@@ -139,10 +139,16 @@ public class cadastroCargo extends javax.swing.JFrame {
         CargoDAO cargoDAO = new CargoDAO();
         cargo.setNomeCargo(jtNomeCargo.getText());
         cargo.setDescricaoCargo(jtaDescricaoCargo.getText());
-        cargo.setDepartamento(departamento);
-        cargoDAO.persist(cargo);
+         if(departamento !=null){
+            cargo.setDepartamento(departamento);
+            cargoDAO.persist(cargo); 
+           
         listModel.addElement(cargo);
         jlCargosList.setModel(listModel);
+            
+         }
+       
+      
 
     }
 
@@ -169,7 +175,10 @@ public class cadastroCargo extends javax.swing.JFrame {
         departamento.setNomeDepartamento(jtfNomeDepartamento.getText());
         departamento.setRamal(jtfRamal.getText());
         departamento.setTelefoneDepartamento(jftTelefone.getText());
-        departamento.setCargo((List<Cargo>) jlCargosList.getModel());
+        if(jlCargosList.getModel()!= null){
+          // departamento.setCargo((List<Cargo>) jlCargosList.getModel());  
+        }
+       
         departamentoDAO.merge(departamento);
     }
 
@@ -412,12 +421,15 @@ public class cadastroCargo extends javax.swing.JFrame {
                     if (departamento == null) {
                         cadastrarDepartamento();
                         JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
-//                        ZerarCampos();
-//                        encerrarInstancia();
-//                        cadastroCargoHome.getInstancia().setVisible(true);
-//                        cadastroCargoHome.getInstancia().setLocationRelativeTo(this);
-//                        cadastroCargoHome.getInstancia().popularTabela();
-//                        dispose();
+                        ZerarCampos();
+                        encerrarInstancia();
+                         dispose();
+                        departamento = null;
+                        cadastroCargoHome.getInstancia().setVisible(true);
+                        cadastroCargoHome.getInstancia().setLocationRelativeTo(this);
+                        cadastroCargoHome.getInstancia().popularTabela();
+                        
+                          
                     } else {
                         cadastrarDepartamento(departamento);
                         JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
@@ -428,6 +440,8 @@ public class cadastroCargo extends javax.swing.JFrame {
                     }
                 } catch (Exception ex) {
                     Logger.getLogger(cadastroCargo.class.getName()).log(Level.SEVERE, null, ex);
+                     JOptionPane.showMessageDialog(this, "Pruu pruuu");
+                    
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Verifique os campos obrigatórios!");
@@ -437,8 +451,8 @@ public class cadastroCargo extends javax.swing.JFrame {
 
     private void jbCadastrarCargoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarCargoMousePressed
         if (jbCadastrarCargo.isEnabled()) {
-
-            if (validaCargo(true)) {
+              if(departamento != null){
+                if (validaCargo(true)) {
                 try {
                     if (cargo == null) {
                         cadastrarCargo(departamento);
@@ -454,7 +468,9 @@ public class cadastroCargo extends javax.swing.JFrame {
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Verifique os campos obrigatórios!");
-            }
+            }  
+              }
+            
 
         }
     }//GEN-LAST:event_jbCadastrarCargoMousePressed
@@ -538,7 +554,7 @@ public class cadastroCargo extends javax.swing.JFrame {
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbCancelarDepartamento;
     private javax.swing.JButton jbEditar;
-    private javax.swing.JComboBox<String> jcbDepartamentos;
+    public javax.swing.JComboBox<String> jcbDepartamentos;
     private javax.swing.JFormattedTextField jftTelefone;
     private javax.swing.JLabel jlCargosDepartamento;
     private javax.swing.JList<String> jlCargosList;
