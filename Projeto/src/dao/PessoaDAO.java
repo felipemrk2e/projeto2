@@ -75,35 +75,52 @@ public class PessoaDAO extends DAO<Pessoa> {
         String query = "";
         String or = "";
         
+        //fisica+juridica == 0
+        if(tipoPessoa == 0){
+            if(nome != ""){
+                query += "pe.nomePessoa LIKE '%"+nome+"%'";
+                or = " or ";
+            }
+            if(query != "")
+                return entityManager.createQuery("select distinct pe from Pessoa pe where "+query).getResultList();
+        }
+        
         //pessoaFisica == 1
         if(tipoPessoa == 1){
             if(nome != ""){
-                query += "pe.nomePessoa LIKE '%"+nome+"%'";
+                query += "pf.nomePessoa LIKE '%"+nome+"%'";
                 or = " or ";
             }
             if(cpf != ""){
-                query += or+"pe.pessoaFisica.CPF LIKE '%"+cpf+"%'";
+                query += or+"pf.pessoaFisica.CPF LIKE '%"+cpf+"%'";
                 or = " or ";
             }
+            
+            if(query != "")
+                return entityManager.createQuery("select distinct pe from Pessoa pe " +
+                "join pe.pessoaFisica pf where "+query).getResultList();
+            return entityManager.createQuery("select distinct pe from Pessoa pe join pe.pessoaFisica pf").getResultList();
         }
-        //pessoaJuridica
+        
+        //pessoaJuridica == 2
         if(tipoPessoa == 2){
             if(nome != ""){
-                query += "pe.nomePessoa LIKE '%"+nome+"%'";
+                query += "pj.nomePessoa LIKE '%"+nome+"%'";
                 or = " or ";
             }
             if(cnpj != ""){
-                query += or+"pe.pessoaJuridica.cnpj LIKE '%"+cnpj+"%'";
+                query += or+"pj.pessoaJuridica.cnpj LIKE '%"+cnpj+"%'";
                 or = " or ";
             }
+//            if(query != "")
+//                return entityManager.createQuery("FROM Pessoa.pessoaJuridica pj WHERE "+query).getResultList();
+            if(query != "")
+                return entityManager.createQuery("select distinct pe from Pessoa pe " +
+                "join pe.pessoaJuridica pj where "+query).getResultList();
+            return entityManager.createQuery("select distinct pe from Pessoa pe join pe.pessoaJuridica pj").getResultList();
         }
         
-        if(query != "")
-            return entityManager.createQuery("FROM Pessoa pe WHERE "+query).getResultList();
-        return entityManager.createQuery("FROM Pessoa pe WHERE "+query).getResultList();
-        
-        
-        
+        return entityManager.createQuery("FROM Pessoa pe").getResultList();
     }
 
 }
