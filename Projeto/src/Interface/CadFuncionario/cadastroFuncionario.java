@@ -6,21 +6,18 @@
 package Interface.CadFuncionario;
 
 import Interface.TelaPrincipal.Sessao;
-import Interface.TelaPrincipal.TelaPrincipal;
 import dao.CargoDAO;
-import dao.DepartamentoDAO;
+import dao.CidadeDAO;
 import dao.EstadoCivilDAO;
 import dao.EstadoDAO;
 import dao.FuncionarioDAO;
-import dao.PessoaFisicaDAO;
-import global.model.Bairro;
 import global.model.Cidade;
 import global.model.Endereco;
 import global.model.Estado;
+import global.model.MD5;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import static java.awt.image.ImageObserver.WIDTH;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,15 +28,16 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import model.pessoa.Cargo;
-import model.pessoa.Departamento;
 import model.pessoa.EstadoCivil;
 import model.pessoa.Funcionario;
 import model.pessoa.Login;
 import model.pessoa.Pessoa;
-import model.pessoa.PessoaFisica;
 import model.pessoa.Telefone;
 import validacao.criaLogin;
+import validacao.validacao;
 
 /**
  *
@@ -48,7 +46,10 @@ import validacao.criaLogin;
 public class cadastroFuncionario extends javax.swing.JFrame {
 
     private static cadastroFuncionario instancia;
-    int user = Sessao.getInstance().getUsuario().getNivelAcesso();
+
+    public static Funcionario funcionario = null;
+    private List<Cidade> listaCidadesGlobal;
+    private int indexCidade;
 
     /**
      * Creates new form cadastroFuncionario
@@ -56,10 +57,17 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     public cadastroFuncionario() {
         this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
+        this.setTitle("Cadastro de Funcionários");
+        configuraMascaras();
         carregaCargos();
         carregaEstados();
+        carregaCidades();
         carregaEstadosCivis();
-        populaFuncionario();
+        if (funcionario == null) {
+//            populaFuncionario();
+        }
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 
     }
 
@@ -73,31 +81,28 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     public static void encerrarInstancia() {
         instancia = null;
     }
-    
+
     public void acesso(int nivel) {
-        System.out.println("====================================================Nível de Acesso: " + nivel);
         DisableEnable(false);
         switch (nivel) {
             case 1:
                 DisableEnable(true);
-                jbConfirmar.setEnabled(true);
-                jbEditar.setEnabled(true);
                 break;
             case 2:
-                DisableEnable(true);
+                DisableEnable(false);
                 break;
             case 3:
-                DisableEnable(false);                
+                DisableEnable(false);
                 break;
             default:
-                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
+                JOptionPane.showMessageDialog(this, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
 
-    
-
     public void DisableEnable(Boolean b) {
-
+        jbConfirmar.setEnabled(b);
+        jbEditar.setEnabled(false);
+        jtfCodigoInterno.setEnabled(b);
         //cad
         jtfNome.setEnabled(b);
         jftCPF.setEnabled(b);
@@ -107,7 +112,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfNumero.setEnabled(b);
         jtfBairro.setEnabled(b);
         jftCEP.setEnabled(b);
-        jtfCidade.setEnabled(b);
         jtfComplemento.setEnabled(b);
         jftTelefone.setEnabled(b);
         jftCelular.setEnabled(b);
@@ -126,6 +130,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfSerieCTPS.setEnabled(b);
         jtfCargaHoraria.setEnabled(b);
         jftDataAdmissao.setEnabled(b);
+        jtfSalario.setEnabled(b);
 
         //cad Fim 
         // JRB
@@ -136,6 +141,8 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         // jcb     
         jcbEstadoCivil.setEnabled(b);
         jcbEstado.setEnabled(b);
+        jcbCidade.setEnabled(b);
+        jcbCargo.setEnabled(b);
     }
 
     public void ZerarCampos() {
@@ -149,7 +156,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfNumero.setText("");
         jtfBairro.setText("");
         jftCEP.setText("");
-        jtfCidade.setText("");
         jtfComplemento.setText("");
         jftTelefone.setText("");
         jftCelular.setText("");
@@ -157,6 +163,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfEmail.setText("");
         jtaObs.setText("");
 
+        jtfSalario.setText("");
         jtfEscolaridade.setText("");
         jtfDependentes.setText("");
         jtfBanco.setText("");
@@ -178,6 +185,8 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         // jcb     
         jcbEstadoCivil.setSelectedIndex(-1);
         jcbEstado.setSelectedIndex(-1);
+        jcbCidade.setSelectedIndex(-1);
+        jcbCargo.setSelectedIndex(-1);
 
         // jcb fim
         //Tirando os alertas
@@ -185,7 +194,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jftCPF.setBackground(Color.white);
         jtfEndereco.setBackground(Color.white);
         jtfBairro.setBackground(Color.white);
-        jtfCidade.setBackground(Color.white);
+        jcbCidade.setBackground(Color.white);
         jftDataNascimento.setBackground(Color.white);
         jtfNumero.setBackground(Color.white);
         jcbEstado.setBackground(Color.white);
@@ -210,78 +219,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         // Fim
     }
 
-    public void popular() {
-        //nivel usuario
-        if (true) {
-            jbConfirmar.setEnabled(true);
-            jbEditar.setEnabled(true);
-        } else {
-            jbConfirmar.setEnabled(false);
-            jbEditar.setEnabled(false);
-        }
-
-        jtfCodigoInterno.setText(null);
-        //cad
-
-        jtfNome.setText(null);
-        jftCPF.setText(null);
-        jtfRG.setText(null);
-        jftDataNascimento.setText(null);
-
-        jtfEndereco.setText(null);
-        jtfNumero.setText(null);
-        jtfBairro.setText(null);
-        jftCEP.setText(null);
-        jtfCidade.setText(null);
-        jtfComplemento.setText(null);
-        jftTelefone.setText(null);
-        jftCelular.setText(null);
-        jftComercial.setText(null);
-        jtfEmail.setText(null);
-        jtaObs.setText(null);
-
-        jtfEscolaridade.setText(null);
-        jtfDependentes.setText(null);
-        jtfBanco.setText(null);
-        jtfTipoConta.setText(null);
-        jtfNConta.setText(null);
-        jtfAgencia.setText(null);
-        jtfAgencia.setText(null);
-        jtfNCTPS.setText(null);
-        jtfSerieCTPS.setText(null);
-        jtfCargaHoraria.setText(null);
-        jftDataAdmissao.setText(null);
-
-        //cad Fim 
-        // JRB
-        if (true) {
-            jrbMasculino.setSelected(true);
-
-        } else if (true) {
-            jrbFeminino.setSelected(true);
-        }
-        // jrb fim
-
-        // jcb     // falta arrumar o estado pois muda bem a logica..
-        if (true) {
-            jcbEstadoCivil.setSelectedIndex(0);
-        } else if (true) {
-            jcbEstadoCivil.setSelectedIndex(1);
-        } else if (true) {
-            jcbEstadoCivil.setSelectedIndex(2);
-        } else if (true) {
-            jcbEstadoCivil.setSelectedIndex(3);
-        }
-
-        // Estado vai ser necessario elaborar mais isso..
-        if (true) {
-            jcbEstado.setSelectedIndex(WIDTH);
-        }
-        // jcb fim
-
-    }
-
-    public void cadastrarFuncionario() throws ParseException {
+    public void cadastrarFuncionario() throws ParseException, Exception {
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         Funcionario funcionario = new Funcionario();
         funcionario.setNomePessoa(jtfNome.getText());
@@ -291,24 +229,15 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         funcionario.setDataNascimento(dataNascimento);
         funcionario.setObservacoes(jtaObs.getText());
 
-        EstadoDAO estadoDAO = new EstadoDAO();
-        Estado estado = new Estado();
-        estado = estadoDAO.getById((long) jcbEstado.getSelectedIndex() + 1);
-
-        Cidade cidade = new Cidade();
-        cidade.setNomeCidade(jtfCidade.getText());
-        cidade.setEstado(estado);
-
-        Bairro bairro = new Bairro();
-        bairro.setNomeBairro(jtfBairro.getText());
-        bairro.setCidade(cidade);
+        Cidade cidade = (Cidade) jcbCidade.getSelectedItem();
 
         Endereco endereco = new Endereco();
         endereco.setNomeEndereco(jtfEndereco.getText());
         endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
         endereco.setCep(jftCEP.getText());
         endereco.setComplemento(jtfComplemento.getText());
-        endereco.setBairro(bairro);
+        endereco.setBairro(jtfBairro.getText());
+        endereco.setCidade(cidade);
         funcionario.setEndereco(endereco);
 
         List<Telefone> telefones = new ArrayList<Telefone>();
@@ -339,14 +268,10 @@ public class cadastroFuncionario extends javax.swing.JFrame {
             funcionario.setSexo('F');
         }
 
-        EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
-        EstadoCivil estadoCivil = new EstadoCivil();
-        estadoCivil = estadoCivilDAO.getById((long) jcbEstadoCivil.getSelectedIndex() + 1);
+        EstadoCivil estadoCivil = (EstadoCivil) jcbEstadoCivil.getSelectedItem();
         funcionario.setEstadoCivil(estadoCivil);
 
-        CargoDAO cargoDAO = new CargoDAO();
-        Cargo cargo = new Cargo();
-        cargo = cargoDAO.getById((long) jcbCargo.getSelectedIndex() + 1);
+        Cargo cargo = (Cargo) jcbCargo.getSelectedItem();
         funcionario.setCargo(cargo);
 
         funcionario.setDependentes(Integer.parseInt(jtfDependentes.getText()));
@@ -364,14 +289,149 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         funcionario.setDataAdmissao(admissao);
 
         criaLogin loginNovo = new criaLogin();
+        MD5 md5 = new MD5();
 
         Login login = new Login();
         login.setNivelAcesso(0);
         login.setNomeUsuario(loginNovo.geraNovoUsuario(funcionario.getNomePessoa()));
-        login.setSenhaUsuario(loginNovo.gerarNovaSenha());
+        String senha = loginNovo.gerarNovaSenha();
+
+        login.setSenhaUsuario(md5.gerarMD5(senha));
         funcionario.setLogin(login);
 
         funcionarioDAO.persist(funcionario);
+        JOptionPane.showMessageDialog(this, "Senha gerada com sucesso!\nUsuário: " + funcionario.getNomePessoa() + "\nSenha: " + senha);
+    }
+
+    public void cadastrarFuncionario(Funcionario funcionario) throws ParseException {
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        funcionario.setNomePessoa(jtfNome.getText());
+        funcionario.setCPF(jftCPF.getText());
+        funcionario.setRG(jtfRG.getText());
+        Date dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataNascimento.getText());
+        funcionario.setDataNascimento(dataNascimento);
+        funcionario.setObservacoes(jtaObs.getText());
+
+        Cidade cidade = (Cidade) jcbCidade.getSelectedItem();
+
+        Endereco endereco = new Endereco();
+        endereco.setNomeEndereco(jtfEndereco.getText());
+        endereco.setNumero(Integer.parseInt(jtfNumero.getText()));
+        endereco.setCep(jftCEP.getText());
+        endereco.setComplemento(jtfComplemento.getText());
+        endereco.setBairro(jtfBairro.getText());
+        endereco.setCidade(cidade);
+        funcionario.setEndereco(endereco);
+
+        List<Telefone> telefones = new ArrayList<Telefone>();
+        Telefone telefone = new Telefone();
+        Telefone celular = new Telefone();
+        Telefone comercial = new Telefone();
+
+        telefone.setNumero(jftTelefone.getText());
+        telefone.setPessoa(funcionario);
+        telefone.setOperadora("");
+        celular.setNumero(jftCelular.getText());
+        celular.setPessoa(funcionario);
+        celular.setOperadora("");
+        comercial.setNumero(jftComercial.getText());
+        comercial.setPessoa(funcionario);
+        comercial.setOperadora("");
+
+        telefones.add(telefone);
+        telefones.add(celular);
+        telefones.add(comercial);
+        funcionario.setTelefone(telefones);
+
+        funcionario.setEmail(jtfEmail.getText());
+
+        if (jrbMasculino.isSelected()) {
+            funcionario.setSexo('M');
+        } else if (jrbFeminino.isSelected()) {
+            funcionario.setSexo('F');
+        }
+
+        EstadoCivil estadoCivil = (EstadoCivil) jcbEstadoCivil.getSelectedItem();
+        funcionario.setEstadoCivil(estadoCivil);
+
+        Cargo cargo = (Cargo) jcbCargo.getSelectedItem();
+        funcionario.setCargo(cargo);
+
+        funcionario.setDependentes(Integer.parseInt(jtfDependentes.getText()));
+        funcionario.setEscolaridade(jtfEscolaridade.getText());
+
+        funcionario.setBanco(jtfBanco.getText());
+        funcionario.setTipoConta(jtfTipoConta.getText());
+        funcionario.setConta(jtfNConta.getText());
+        funcionario.setAgencia(jtfNConta.getText());
+        funcionario.setSalario(Double.parseDouble(jtfSalario.getText()));
+        funcionario.setCtps(jtfNCTPS.getText());
+        funcionario.setSerieCtps(jtfSerieCTPS.getText());
+        funcionario.setCargaHoraria(jtfCargaHoraria.getText());
+        Date admissao = new SimpleDateFormat("dd/MM/yyyy").parse(jftDataAdmissao.getText());
+        funcionario.setDataAdmissao(admissao);
+
+        funcionarioDAO.merge(funcionario);
+    }
+
+    public void atualizarFuncionario(Funcionario funcionario) {
+        jtfCodigoInterno.setText("" + funcionario.getIdPessoa());
+        jtfNome.setText(funcionario.getNomePessoa());
+        jftCPF.setText(funcionario.getCPF());
+        jtfRG.setText(funcionario.getRG());
+        String dataString = new SimpleDateFormat("dd/MM/yyyy").format(funcionario.getDataNascimento());
+        jftDataNascimento.setText(dataString);
+        jtaObs.setText(funcionario.getObservacoes());
+
+        jcbEstado.setSelectedIndex((int) funcionario.getEndereco().getCidade().getEstado().getId() - 1);
+
+        for (int i = 0; i < listaCidadesGlobal.size(); i++) {
+            if (listaCidadesGlobal.get(i).getIdCidade() == funcionario.getEndereco().getCidade().getIdCidade()) {
+                indexCidade = i;
+            }
+        }
+        jcbCidade.setSelectedIndex(indexCidade);
+
+        jtfBairro.setText(funcionario.getEndereco().getBairro());
+
+        jtfEndereco.setText(funcionario.getEndereco().getNomeEndereco());
+        jtfNumero.setText("" + funcionario.getEndereco().getNumero());
+        jftCEP.setText(funcionario.getEndereco().getCep());
+        jtfComplemento.setText(funcionario.getEndereco().getComplemento());
+
+        for (int i = 0; i < funcionario.getTelefone().size(); i++) {
+            if (i == 0) {
+                jftTelefone.setText(funcionario.getTelefone().get(i).getNumero());
+            } else if (i == 1) {
+                jftCelular.setText(funcionario.getTelefone().get(i).getNumero());
+            } else if (i == 2) {
+                jftComercial.setText(funcionario.getTelefone().get(i).getNumero());
+            }
+        }
+
+        jtfEmail.setText(funcionario.getEmail());
+
+        if (funcionario.getSexo() == 'M') {
+            jrbMasculino.setSelected(true);
+        }
+        if (funcionario.getSexo() == 'F') {
+            jrbFeminino.setSelected(true);
+        }
+        jcbEstadoCivil.setSelectedIndex((int) funcionario.getEstadoCivil().getIdEstadoCivil() - 1);
+
+        jtfDependentes.setText("" + funcionario.getDependentes());
+        jtfEscolaridade.setText(funcionario.getEscolaridade());
+        jtfBanco.setText(funcionario.getBanco());
+        jtfAgencia.setText(funcionario.getAgencia());
+        jtfTipoConta.setText(funcionario.getTipoConta());
+        jtfNConta.setText(funcionario.getConta());
+        jtfSalario.setText("" + funcionario.getSalario());
+        jtfNCTPS.setText(funcionario.getCtps());
+        jtfSerieCTPS.setText(funcionario.getSerieCtps());
+        jtfCargaHoraria.setText(funcionario.getCargaHoraria());
+        String dataAdmissao = new SimpleDateFormat("dd/MM/yyyy").format(funcionario.getDataAdmissao());
+        jftDataAdmissao.setText(dataAdmissao);
+        jcbCargo.setSelectedIndex((int) funcionario.getCargo().getIdCargo() - 1);
     }
 
     public void populaFuncionario() {
@@ -379,7 +439,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfCodigoInterno.setText(pessoa.getIdPessoa() + "");
         jtfNome.setText("Jean Felipe");
         jftCPF.setText("38933784802");
-        System.out.println("Aqui CPF" + jftCPF.getText());
         jtfRG.setText("RG");
         jftDataNascimento.setText("25/08/1991");
         jtaObs.setText("Qualquer OBS");
@@ -391,7 +450,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfBairro.setText("Morro do Algodão");
 
         jftCEP.setText("11.671-000");
-        jtfCidade.setText("Caraguatatuba");
+        jcbCidade.setSelectedIndex(1);
 
         jcbEstado.setSelectedIndex(25);
 
@@ -416,6 +475,260 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jcbCargo.setSelectedIndex(0);
     }
 
+    public boolean validaCampos(boolean valida) {
+        //PESSOA        
+        //Email
+        if (!jtfEmail.getText().equals("")) {
+            jtfEmail.setBackground(Color.white);
+        } else {
+            jtfEmail.setBackground(Color.red);
+            valida = false;
+        }
+        //Endereço
+        if (!jtfEndereco.getText().equals("")) {
+            jtfEndereco.setBackground(Color.white);
+        } else {
+            jtfEndereco.setBackground(Color.red);
+            valida = false;
+        }
+        //Número
+        if (!jtfNumero.getText().equals("") && validacao.validaNumeros(jtfNumero.getText())) {
+            jtfNumero.setBackground(Color.white);
+        } else {
+            jtfNumero.setBackground(Color.red);
+            valida = false;
+        }
+        //Bairro
+        if (!jtfBairro.getText().equals("") && validacao.validaLetras(jtfBairro.getText())) {
+            jtfBairro.setBackground(Color.white);
+        } else {
+            jtfBairro.setBackground(Color.red);
+            valida = false;
+        }
+        //Cidade
+        if (jcbCidade.getSelectedItem() != null) {
+            jcbCidade.setBackground(Color.white);
+        } else {
+            jcbCidade.setBackground(Color.red);
+            valida = false;
+        }
+        //Estado
+        if (jcbEstado.getSelectedItem() != null) {
+            jcbEstado.setBackground(Color.white);
+        } else {
+            jcbEstado.setBackground(Color.red);
+            valida = false;
+        }
+        //CEP
+        if (jftCEP.getText().trim().length() == 10) {
+            jftCEP.setBackground(Color.white);
+        } else {
+            jftCEP.setBackground(Color.red);
+            valida = false;
+        }
+        //Data Nascimento
+        if (jftDataNascimento.getText().trim().length() == 10) {
+            jftDataNascimento.setBackground(Color.white);
+        } else {
+            jftDataNascimento.setBackground(Color.red);
+            valida = false;
+        }
+        //Telefone
+        if (jftTelefone.getText().trim().length() == 13 || jftCelular.getText().trim().length() == 14 || jftComercial.getText().trim().length() == 13) {
+            jftTelefone.setBackground(Color.white);
+            jftCelular.setBackground(Color.white);
+            jftComercial.setBackground(Color.white);
+        } else {
+            jftTelefone.setBackground(Color.red);
+            jftCelular.setBackground(Color.red);
+            jftComercial.setBackground(Color.red);
+            valida = false;
+        }
+        //Nome
+        if (!jtfNome.getText().equals("") && validacao.validaLetras(jtfNome.getText())) {
+            jtfNome.setBackground(Color.white);
+        } else {
+            jtfNome.setBackground(Color.red);
+            valida = false;
+        }
+        //CPF
+        if (jftCPF.getText().trim().length() == 14) {
+            jftCPF.setBackground(Color.white);
+        } else {
+            jftCPF.setBackground(Color.red);
+            valida = false;
+        }
+        if (!jtfRG.getText().isEmpty()) {
+            jtfRG.setBackground(Color.white);
+        } else {
+            jtfRG.setBackground(Color.red);
+            valida = false;
+        }
+        //Sexo
+        if (jrbMasculino.isSelected() || jrbFeminino.isSelected()) {
+            jrbMasculino.setBackground(Color.white);
+            jrbFeminino.setBackground(Color.white);
+        } else {
+            jrbMasculino.setBackground(Color.red);
+            jrbFeminino.setBackground(Color.red);
+            valida = false;
+        }
+        //Estado Cívil
+        if (jcbEstadoCivil.getSelectedItem() != null) {
+            jcbEstadoCivil.setBackground(Color.white);
+        } else {
+            jcbEstadoCivil.setBackground(Color.red);
+            valida = false;
+        }
+        //Salário
+        if (!jtfSalario.getText().equals("") && validacao.validaNumeros(jtfSalario.getText())) {
+            jtfSalario.setBackground(Color.white);
+        } else {
+            jtfSalario.setBackground(Color.red);
+            valida = false;
+        }
+        //Banco
+        if (!jtfBanco.getText().isEmpty()) {
+            jtfBanco.setBackground(Color.white);
+        } else {
+            jtfBanco.setBackground(Color.red);
+            valida = false;
+        }
+        //Tipo Conta
+        if (!jtfTipoConta.getText().isEmpty()) {
+            jtfTipoConta.setBackground(Color.white);
+        } else {
+            jtfTipoConta.setBackground(Color.red);
+            valida = false;
+        }
+        //Conta
+        if (!jtfNConta.getText().isEmpty()) {
+            jtfNConta.setBackground(Color.white);
+        } else {
+            jtfNConta.setBackground(Color.red);
+            valida = false;
+        }
+        //Agencia
+        if (!jtfAgencia.getText().isEmpty()) {
+            jtfAgencia.setBackground(Color.white);
+        } else {
+            jtfAgencia.setBackground(Color.red);
+            valida = false;
+        }
+        //CTPS
+        if (!jtfNCTPS.getText().isEmpty()) {
+            jtfNCTPS.setBackground(Color.white);
+        } else {
+            jtfNCTPS.setBackground(Color.red);
+            valida = false;
+        }
+        //Serie CTPS
+        if (!jtfSerieCTPS.getText().isEmpty()) {
+            jtfSerieCTPS.setBackground(Color.white);
+        } else {
+            jtfSerieCTPS.setBackground(Color.red);
+            valida = false;
+        }
+        //Data Admissão
+        if (jftDataAdmissao.getText().trim().length() == 10) {
+            jftDataAdmissao.setBackground(Color.white);
+        } else {
+            jftDataAdmissao.setBackground(Color.red);
+            valida = false;
+        }
+        //Carga Horária
+        if (!jtfCargaHoraria.getText().isEmpty()) {
+            jtfCargaHoraria.setBackground(Color.white);
+        } else {
+            jtfCargaHoraria.setBackground(Color.red);
+            valida = false;
+        }
+        //Escolaridade
+        if (!jtfEscolaridade.getText().isEmpty()) {
+            jtfEscolaridade.setBackground(Color.white);
+        } else {
+            jtfEscolaridade.setBackground(Color.red);
+            valida = false;
+        }
+        //Dependentes
+        if (!jtfDependentes.getText().isEmpty() && validacao.validaNumeros(jtfDependentes.getText())) {
+            jtfDependentes.setBackground(Color.white);
+        } else {
+            jtfDependentes.setBackground(Color.red);
+            valida = false;
+        }
+        //Cargo
+        if (jcbCargo.getSelectedItem() != null) {
+            jcbCargo.setBackground(Color.white);
+        } else {
+            jcbCargo.setBackground(Color.red);
+            valida = false;
+        }
+
+        return valida;
+    }
+
+    public void mascaraCPF() {
+        try {
+            jftCPF.setFormatterFactory(new DefaultFormatterFactory(
+                    new MaskFormatter("###.###.###-##")));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void mascaraData() {
+        try {
+            jftDataNascimento.setFormatterFactory(new DefaultFormatterFactory(
+                    new MaskFormatter("##/##/####")));
+            jftDataAdmissao.setFormatterFactory(new DefaultFormatterFactory(
+                    new MaskFormatter("##/##/####")));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void mascaraCEP() {
+        try {
+            jftCEP.setFormatterFactory(new DefaultFormatterFactory(
+                    new MaskFormatter("##.###-###")));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void mascaraTelefone() {
+        try {
+            jftTelefone.setFormatterFactory(new DefaultFormatterFactory(
+                    new MaskFormatter("(##)####-####")));
+            jftComercial.setFormatterFactory(new DefaultFormatterFactory(
+                    new MaskFormatter("(##)####-####")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void mascaraCelular() {
+        try {
+            jftCelular.setFormatterFactory(new DefaultFormatterFactory(
+                    new MaskFormatter("(##)#####-####")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void configuraMascaras() {
+        mascaraCelular();
+        mascaraTelefone();
+        mascaraCEP();
+        mascaraData();
+        mascaraCPF();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -438,7 +751,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jtfRG = new javax.swing.JTextField();
         jtfNome = new javax.swing.JTextField();
         jtfBairro = new javax.swing.JTextField();
-        jtfCidade = new javax.swing.JTextField();
         jtfEndereco = new javax.swing.JTextField();
         jrbMasculino = new javax.swing.JRadioButton();
         jrbFeminino = new javax.swing.JRadioButton();
@@ -465,6 +777,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jlCEP = new javax.swing.JLabel();
         jftCEP = new javax.swing.JFormattedTextField();
         jcbEstado = new javax.swing.JComboBox();
+        jcbCidade = new javax.swing.JComboBox<>();
         jtfComplemento = new javax.swing.JTextField();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCelular = new javax.swing.JFormattedTextField();
@@ -524,6 +837,11 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jbEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/editar2.png"))); // NOI18N
         jbEditar.setText("Editar");
+        jbEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbEditarMousePressed(evt);
+            }
+        });
         getContentPane().add(jbEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 480, 140, 70));
 
         jlCodigoInterno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -549,7 +867,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         getContentPane().add(jtfRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 150, 30));
         getContentPane().add(jtfNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 490, 30));
         getContentPane().add(jtfBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 200, 140, 30));
-        getContentPane().add(jtfCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 140, 30));
         getContentPane().add(jtfEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 400, 30));
 
         bgSexo.add(jrbMasculino);
@@ -601,7 +918,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
 
         jlComplemento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlComplemento.setText("Complemento:");
-        getContentPane().add(jlComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, -1, 30));
+        getContentPane().add(jlComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 240, -1, 30));
 
         jlObs.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlObs.setText("Observações:");
@@ -640,8 +957,16 @@ public class cadastroFuncionario extends javax.swing.JFrame {
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEstadoActionPerformed(evt);
+            }
+        });
         getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, 30));
-        getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 240, 330, 30));
+
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 140, 30));
+        getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 270, 30));
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 210, 30));
         getContentPane().add(jftCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, 180, 30));
         getContentPane().add(jftComercial, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 280, 180, 30));
@@ -721,59 +1046,113 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConfirmarMouseClicked
-        try {
-            cadastrarFuncionario();
-        } catch (ParseException ex) {
-            Logger.getLogger(cadastroFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        if (jbConfirmar.isEnabled()) {
+            if (validaCampos(true)) {
+                try {
+                    if (funcionario == null) {
+                        cadastrarFuncionario();
+                        JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
+                        ZerarCampos();
+                        funcionario = null;
+                        encerrarInstancia();
+                        CadFuncionarioHome homeFuncionario = CadFuncionarioHome.getInstancia();
+                        CadFuncionarioHome.getInstancia().setVisible(true);
+                        CadFuncionarioHome.getInstancia().setLocationRelativeTo(this);
+                        CadFuncionarioHome.getInstancia().popularTabela();
+                        dispose();
+                    } else {
+                        cadastrarFuncionario(funcionario);
+                        JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
+                        ZerarCampos();
+                        funcionario = null;
+                        encerrarInstancia();
+                        dispose();
+                    }
+
+                } catch (ParseException ex) {
+                    Logger.getLogger(cadastroFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(cadastroFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Verifique os campos obrigatórios!");
+            }
+
         }
+
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-//        new CadFuncionarioHome(user).setVisible(true);
-//        dispose();    // TODO add your handling code here:
+        if (jbCancelar.isEnabled()) {//                   
+            String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {
+                CadFuncionarioHome homeFuncionario = CadFuncionarioHome.getInstancia();
+                CadFuncionarioHome.getInstancia().setVisible(true);
+                CadFuncionarioHome.getInstancia().setLocationRelativeTo(this);
+                CadFuncionarioHome.getInstancia().popularTabela();
+                dispose();
+                encerrarInstancia();
+            }
+        }
     }//GEN-LAST:event_jbCancelarMouseClicked
 
     private void jlAddCargoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAddCargoMousePressed
         //add cargo
     }//GEN-LAST:event_jlAddCargoMousePressed
 
+    private void jbEditarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMousePressed
+        if (jbEditar.isEnabled()) {
+            cadastroFuncionario.getInstancia().DisableEnable(true);
+            JOptionPane.showMessageDialog(this, "Campos abertos para edição!");
+        }
+    }//GEN-LAST:event_jbEditarMousePressed
+
+    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
+        if (jcbEstado.getSelectedIndex() > -1) {
+            carregaCidadeEstados();
+        }
+    }//GEN-LAST:event_jcbEstadoActionPerformed
+
     public void carregaEstados() {
         EstadoDAO estadoDAO = new EstadoDAO();
         Estado estado = new Estado();
-        List<Estado> listaEstados = new ArrayList<Estado>();
-        List<String> listaSigla = new ArrayList<String>();
-        listaEstados = estadoDAO.getAll();
-        for (int i = 0; i < listaEstados.size(); i++) {
-            listaSigla.add(listaEstados.get(i).getSigla());
-        }
-        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaSigla.toArray());
+        List<Estado> listaEstados = estadoDAO.getAll();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaEstados.toArray());
         jcbEstado.setModel(defaultComboBox);
+    }
+
+    public void carregaCidades() {
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        List<Cidade> listaCidades = cidadeDAO.getAll();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaCidades.toArray());
+        jcbCidade.setModel(defaultComboBox);
+    }
+
+    public void carregaCidadeEstados() {
+        Estado estado = (Estado) jcbEstado.getSelectedItem();
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        List<Cidade> listaCidades = cidadeDAO.getWhereIdEstado(estado.getId());
+        jcbCidade.removeAllItems();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaCidades.toArray());
+        jcbCidade.setModel(defaultComboBox);
+        listaCidadesGlobal = listaCidades;
+
     }
 
     public void carregaEstadosCivis() {
         EstadoCivilDAO estadoCivilDAO = new EstadoCivilDAO();
-        EstadoCivil estadoCivil = new EstadoCivil();
-        List<EstadoCivil> listaEstadoCivis = new ArrayList<EstadoCivil>();
-        List<String> listaNomeEstadoCivis = new ArrayList<String>();
-        listaEstadoCivis = estadoCivilDAO.getAll();
-        for (int i = 0; i < listaEstadoCivis.size(); i++) {
-            listaNomeEstadoCivis.add(listaEstadoCivis.get(i).getNomeEstadoCivil());
-        }
-        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeEstadoCivis.toArray());
+        List<EstadoCivil> listaEstadoCivis = estadoCivilDAO.getAll();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaEstadoCivis.toArray());
         jcbEstadoCivil.setModel(defaultComboBox);
     }
 
     public void carregaCargos() {
         CargoDAO cargoDAO = new CargoDAO();
-        Cargo cargo = new Cargo();
-        List<Cargo> listaCargos = new ArrayList<Cargo>();
-        List<String> listaNomeCargos = new ArrayList<String>();
-        listaCargos = cargoDAO.getAll();
-        for (int i = 0; i < listaCargos.size(); i++) {
-            listaNomeCargos.add(listaCargos.get(i).getNomeCargo());
-        }
-        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaNomeCargos.toArray());
+        List<Cargo> cargos = cargoDAO.getAll();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(cargos.toArray());
         jcbCargo.setModel(defaultComboBox);
+        jcbCargo.setSelectedIndex(-1);
     }
 
     public void fecharCadastro() {
@@ -848,8 +1227,9 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbConfirmar;
-    private javax.swing.JButton jbEditar;
+    public static javax.swing.JButton jbEditar;
     private javax.swing.JComboBox jcbCargo;
+    private javax.swing.JComboBox<String> jcbCidade;
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JComboBox jcbEstadoCivil;
     private javax.swing.JFormattedTextField jftCEP;
@@ -899,7 +1279,6 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField jtfBairro;
     private javax.swing.JTextField jtfBanco;
     private javax.swing.JTextField jtfCargaHoraria;
-    private javax.swing.JTextField jtfCidade;
     private javax.swing.JTextField jtfCodigoInterno;
     private javax.swing.JTextField jtfComplemento;
     private javax.swing.JTextField jtfDependentes;

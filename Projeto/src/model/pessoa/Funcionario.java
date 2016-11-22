@@ -266,5 +266,9 @@ public class Funcionario extends PessoaFisica {
     public void setLogin(Login login) {
         this.login = login;
     }
+    
+    public String toString(){
+        return this.getNomePessoa();
+    }
 
 }

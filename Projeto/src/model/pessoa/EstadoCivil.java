@@ -63,5 +63,9 @@ public class EstadoCivil {
 	this.pessoasFisicas.add(pessoaFisica);
     }
     
+    @Override
+    public String toString() {
+        return nomeEstadoCivil;
+    }
     
 }

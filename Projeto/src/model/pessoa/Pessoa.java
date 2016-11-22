@@ -6,6 +6,8 @@
 package model.pessoa;
 
 import global.model.Endereco;
+import global.model.Locacao;
+import imovel.model.Imovel;
 import imovel.model.TipoContrato;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +26,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 /**
  *
@@ -50,6 +53,7 @@ public class Pessoa {
     @Column
     private Date dataNascimento;
     
+    @Transient
     private boolean tipoPessoa;
     
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -70,11 +74,18 @@ public class Pessoa {
     @JoinColumn(name = "idPessoa", nullable = true)
     private PessoaFisica pessoaFisica;
     
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @JoinTable(name = "Pessoa_has_Interesse", 
     joinColumns = { @JoinColumn(name = "idPessoa") }, 
     inverseJoinColumns = { @JoinColumn(name = "idTipoContrato") })
     private List<TipoContrato> interesses = new ArrayList<TipoContrato>();
+    
+    @OneToMany(
+            mappedBy = "pessoa", 
+            targetEntity = Locacao.class, 
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    private List<Locacao> imoveisLocados =  new ArrayList<>();
 
     public Pessoa() {
 
@@ -96,6 +107,22 @@ public class Pessoa {
         this.endereco = endereco;
         this.interesses = interesses;
     }
+
+    public PessoaJuridica getPessoaJuridica() {
+        return pessoaJuridica;
+    }
+
+    public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
+        this.pessoaJuridica = pessoaJuridica;
+    }
+
+    public PessoaFisica getPessoaFisica() {
+        return pessoaFisica;
+    }
+
+    public void setPessoaFisica(PessoaFisica pessoaFisica) {
+        this.pessoaFisica = pessoaFisica;
+    }    
     
     public long getIdPessoa() {
         return idPessoa;
@@ -177,6 +204,30 @@ public class Pessoa {
         this.tipoPessoa = tipoPessoa;
     }
     
+    public List<Locacao> getImoveisLocados(){
+        return this.imoveisLocados;
+    }
     
+    public void addImovelLocado(Imovel imovel, String dataInicio, String dataFim){
+        Locacao locacao = new Locacao(imovel, this, dataInicio, dataFim);
+        this.imoveisLocados.add(locacao);
+        imovel.setLocacao(locacao);
+    }
+    
+//    public void removeLocacao(Imovel imovel) {
+//    	Locacao locacao = new Locacao(imovel, this, "", "");
+//        imovel.removeLocacao();
+//        imoveisLocados.remove(locacao);
+//        locacao.setImovel(null);
+//        locacao.setPessoa(null);
+//        locacao.setDataInicio(null);
+//        locacao.setDataFim(null);
+//    }
+    
+    
+    @Override
+    public String toString() {
+        return nomePessoa;
+    }
 
 }

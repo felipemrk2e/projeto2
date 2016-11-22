@@ -50,8 +50,7 @@ public class PessoaFisica extends Pessoa {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "idEstadoCivil", nullable = false)
     private EstadoCivil estadoCivil;
-    
-    
+
 //    Outro exemplo autorelacionamento
 //    @ManyToMany(cascade = {CascadeType.ALL})
 //    @JoinTable(name = "fiadorDe",
@@ -60,10 +59,8 @@ public class PessoaFisica extends Pessoa {
 //            inverseJoinColumns = {
 //                @JoinColumn(name = "idFiador")})
 //    private List<PessoaFisica> pessoas;
-    
 //    @ManyToMany(mappedBy = "pessoas")
 //    private List<PessoaFisica> fiadores;
-    
     @OneToMany
     @JoinTable(name = "fiadorDe", joinColumns = @JoinColumn(name = "idPessoa"), inverseJoinColumns = @JoinColumn(name = "idFiador"))
     private List<PessoaFisica> listaFiadores;
@@ -139,4 +136,8 @@ public class PessoaFisica extends Pessoa {
         this.listaFiadores = listaFiadores;
     }
 
+    @Override
+    public String toString() {
+        return getNomePessoa();
+    }
 }

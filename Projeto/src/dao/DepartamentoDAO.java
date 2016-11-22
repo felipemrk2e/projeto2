@@ -46,4 +46,8 @@ public class DepartamentoDAO extends DAO<Departamento> {
         return entityManager.createQuery("FROM Departamento").getResultList();
     }
     
+    public List<Departamento> getNomeDepartamento(String nome){
+         return entityManager.createQuery("FROM Departamento WHERE nomeDepartamento = '"+nome+"'").getResultList();
+    }
+    
 }

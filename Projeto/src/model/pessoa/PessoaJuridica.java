@@ -117,4 +117,10 @@ public class PessoaJuridica extends Pessoa {
     public void setCpfResponsavel(String cpfResponsavel) {
         this.cpfResponsavel = cpfResponsavel;
     }
+    
+    @Override
+    public String toString() {
+        return getNomePessoa();
+    }
+    
 }

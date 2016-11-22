@@ -6,12 +6,11 @@
 package Interface.TelaPrincipal;
 
 import dao.LoginDAO;
+import global.model.MD5;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.pessoa.Login;
 
 /**
@@ -19,6 +18,7 @@ import model.pessoa.Login;
  * @author Sala
  */
 public class TelaLogin extends javax.swing.JDialog {
+
     private static TelaLogin instancia;
     private String usuario;
 
@@ -37,11 +37,11 @@ public class TelaLogin extends javax.swing.JDialog {
         }
         return instancia;
     }
-    
-    public static void encerrarInstancia(){
+
+    public static void encerrarInstancia() {
         instancia = null;
     }
-    
+
     public String getUsuario() {
         return usuario;
     }
@@ -74,50 +74,57 @@ public class TelaLogin extends javax.swing.JDialog {
         jlTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(704, 460));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jlImagem.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jlImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/corretagem_imob3.png"))); // NOI18N
-        getContentPane().add(jlImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 200, 350));
+        getContentPane().add(jlImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 200, 340));
 
         jlUsuario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jlUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/usuario.png"))); // NOI18N
         jlUsuario.setText("Usuário:");
-        getContentPane().add(jlUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, -1, -1));
+        getContentPane().add(jlUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 150, 40));
 
         jlSenha.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jlSenha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/password3.png"))); // NOI18N
         jlSenha.setText("  Senha:");
-        getContentPane().add(jlSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, -1, -1));
+        getContentPane().add(jlSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 150, 40));
 
+        jtfUsuario.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jtfUsuario.setText("teste");
-        getContentPane().add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 190, -1));
-        getContentPane().add(jpfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 190, -1));
+        getContentPane().add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 190, 40));
+
+        jpfSenha.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        getContentPane().add(jpfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 190, 40));
 
         jbAcessar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbAcessar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Ok.png"))); // NOI18N
-        jbAcessar.setText("Acessar");
+        jbAcessar.setText("<html><center>Acessar<br/></html>");
         jbAcessar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbAcessarMousePressed(evt);
             }
         });
-        getContentPane().add(jbAcessar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, -1, -1));
+        getContentPane().add(jbAcessar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, 140, 70));
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
-        jbCancelar.setText("Cancelar");
+        jbCancelar.setText("<html><center>Cancelar<br/></html>");
         jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbCancelarMousePressed(evt);
             }
         });
-        getContentPane().add(jbCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, -1, -1));
+        getContentPane().add(jbCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 140, 70));
 
-        jlTitulo.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
+        jlTitulo.setFont(new java.awt.Font("Arial", 0, 44)); // NOI18N
+        jlTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlTitulo.setText("Sistema de Cadastro de Imóveis");
-        getContentPane().add(jlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        getContentPane().add(jlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 650, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -127,20 +134,25 @@ public class TelaLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_jbCancelarMousePressed
 
     private void jbAcessarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAcessarMousePressed
-        verificaLogin();
+        try {
+            verificaLogin();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_jbAcessarMousePressed
 
-    public boolean verificaLogin() {
-        Sessao sessao = Sessao.getInstance();   
+    public boolean verificaLogin() throws Exception {
+        MD5 md5 = new MD5();
+        Sessao sessao = Sessao.getInstance();
         LoginDAO loginDAO = new LoginDAO();
         List<Login> logins = new ArrayList<Login>();
         logins = loginDAO.getAll();
 
         for (int i = 0; i < logins.size(); i++) {
-            if (jtfUsuario.getText().equals(logins.get(i).getNomeUsuario()) && jpfSenha.getText().equals(logins.get(i).getSenhaUsuario())) {
+            if (jtfUsuario.getText().equals(logins.get(i).getNomeUsuario()) && md5.gerarMD5(jpfSenha.getText()).equals(logins.get(i).getSenhaUsuario())) {
                 setUsuario(logins.get(i).getNomeUsuario());
-                 sessao.setUsuario(logins.get(i));
+                sessao.setUsuario(logins.get(i));                
                 return true;
             }
         }

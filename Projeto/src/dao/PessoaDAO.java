@@ -14,6 +14,19 @@ import java.util.List;
  */
 public class PessoaDAO extends DAO<Pessoa> {
 
+    private static PessoaDAO instancia;
+
+    public static PessoaDAO getInstancia() {
+        if (instancia == null) {
+            instancia = new PessoaDAO();
+        }
+        return instancia;
+    }
+
+    public static void encerrarInstancia() {
+        instancia = null;
+    }
+
     @Override
     public Pessoa getById(Long id) {
         Pessoa pessoa = null;
@@ -48,6 +61,66 @@ public class PessoaDAO extends DAO<Pessoa> {
 
     public List<Pessoa> getQuery(String query) {
         return entityManager.createQuery("FROM Pessoa " + query).getResultList();
+    }
+
+    public List<Pessoa> getPorTelefone(String tel) {
+        return entityManager.createQuery("FROM Pessoa p JOIN FETCH p.telefone tel WHERE tel.numero = '" + tel + "'").getResultList();
+    }
+
+    public List<Pessoa> getCliente() {
+        return entityManager.createQuery("FROM Pessoa AS p INNER JOIN p.PessoaFisica").getResultList();
+    }
+    
+    public List<Pessoa> searchPessoa(String nome, String telefone, String cpf, String cnpj, int tipoPessoa){
+        String query = "";
+        String or = "";
+        
+        //fisica+juridica == 0
+        if(tipoPessoa == 0){
+            if(nome != ""){
+                query += "pe.nomePessoa LIKE '%"+nome+"%'";
+                or = " or ";
+            }
+            if(query != "")
+                return entityManager.createQuery("select distinct pe from Pessoa pe where "+query).getResultList();
+        }
+        
+        //pessoaFisica == 1
+        if(tipoPessoa == 1){
+            if(nome != ""){
+                query += "pf.nomePessoa LIKE '%"+nome+"%'";
+                or = " or ";
+            }
+            if(cpf != ""){
+                query += or+"pf.pessoaFisica.CPF LIKE '%"+cpf+"%'";
+                or = " or ";
+            }
+            
+            if(query != "")
+                return entityManager.createQuery("select distinct pe from Pessoa pe " +
+                "join pe.pessoaFisica pf where "+query).getResultList();
+            return entityManager.createQuery("select distinct pe from Pessoa pe join pe.pessoaFisica pf").getResultList();
+        }
+        
+        //pessoaJuridica == 2
+        if(tipoPessoa == 2){
+            if(nome != ""){
+                query += "pj.nomePessoa LIKE '%"+nome+"%'";
+                or = " or ";
+            }
+            if(cnpj != ""){
+                query += or+"pj.pessoaJuridica.cnpj LIKE '%"+cnpj+"%'";
+                or = " or ";
+            }
+//            if(query != "")
+//                return entityManager.createQuery("FROM Pessoa.pessoaJuridica pj WHERE "+query).getResultList();
+            if(query != "")
+                return entityManager.createQuery("select distinct pe from Pessoa pe " +
+                "join pe.pessoaJuridica pj where "+query).getResultList();
+            return entityManager.createQuery("select distinct pe from Pessoa pe join pe.pessoaJuridica pj").getResultList();
+        }
+        
+        return entityManager.createQuery("FROM Pessoa pe").getResultList();
     }
 
 }

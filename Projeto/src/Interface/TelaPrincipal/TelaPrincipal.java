@@ -5,8 +5,11 @@
  */
 package Interface.TelaPrincipal;
 
+import Interface.CadCargo.cadastroCargo;
+import Interface.CadCargo.cadastroCargoHome;
 import Interface.CadCliente.cadastroCliente;
 import Interface.CadCliente.cadastroClienteHome;
+import Interface.CadCliente.cadastroFiador;
 import Interface.CadFuncionario.CadFuncionarioHome;
 import Interface.CadFuncionario.ControleFuncionario;
 import Interface.CadFuncionario.cadastroFuncionario;
@@ -15,8 +18,9 @@ import Interface.CadImovel.cadastroImovelHome;
 import Interface.Locacao.CadLocacao;
 import Interface.Locacao.CadLocacaoHome;
 import Interface.Locacao.ControleLocacao;
-import java.awt.Component;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
@@ -24,22 +28,29 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
  *
  * @author Sala
  */
+//Cursor WAIT
+//Cursor cursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+//        this.setCursor(cursor);    
+//		//CÓDIGO
+//cursor = Cursor.getDefaultCursor();
+//        this.setCursor(cursor);
 public class TelaPrincipal extends javax.swing.JFrame {
 
     private static TelaPrincipal instancia;
     private int tentativas = 0;
     private boolean logado = false;
+    private int instanciaAberta;
 
     /**
      * Creates new form TelaPrincipal
      */
-    public TelaPrincipal() {
+    public TelaPrincipal() throws Exception {
         initComponents();
         carregarPrincipal();
 
     }
 
-    public static TelaPrincipal getInstancia() {
+    public static TelaPrincipal getInstancia() throws Exception {
         if (instancia == null) {
             instancia = new TelaPrincipal();
         }
@@ -54,7 +65,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.logado = logado;
     }
 
-    public void carregarPrincipal() {
+    public void carregarPrincipal() throws Exception {
         this.setTitle("Sistema de Cadastro de Imóveis");
         this.setExtendedState(MAXIMIZED_BOTH);
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -72,7 +83,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jlSair.setLocation(xSize - 100, ySize - 100);
         jlLogoff.repaint();
 
-        jSeparator1.setSize(180, ySize);
+//        jSeparator1.setSize(180, ySize);
         jScrollPane1.setSize(180, ySize - 80);
 
         jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
@@ -94,6 +105,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbConsultarLocacao.setEnabled(ativo);
         jbFuncionario.setEnabled(ativo);
         jbConsultarFuncionario.setEnabled(ativo);
+        jbCadastrarDepartamento.setEnabled(ativo);
+        jbConsultarDepartamento.setEnabled(ativo);
 
         jmCadastrar.setEnabled(ativo);
         jmiCadastrarCliente.setEnabled(ativo);
@@ -112,6 +125,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmiCadastrarFuncionario.setEnabled(ativo);
         jmiConsultarFuncionario.setEnabled(ativo);
         jmiControleFuncionario.setEnabled(ativo);
+
+        jmDepartamento.setEnabled(ativo);
+        jmiCadastrarDepartamento.setEnabled(ativo);
+        jmiConsultarDepartamento.setEnabled(ativo);
 
         jmSessao.setEnabled(ativo);
         jmiTrocarUsuario.setEnabled(ativo);
@@ -183,7 +200,92 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
-    public void Login() {
+    public void acessoInstancias() {
+        switch (instanciaAberta) {
+            case 1:
+                cadastroCliente.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
+            case 2:
+                cadastroFiador.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
+            case 3:
+                cadastroClienteHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
+            case 4:
+                cadastroImovel.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
+            case 5:
+                cadastroImovelHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
+            case 6:
+                CadLocacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
+            case 7:
+                ControleLocacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
+            case 8:
+                CadLocacaoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
+            case 9:
+                cadastroFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
+            case 10:
+                ControleFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
+            case 11:
+                CadFuncionarioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
+            case 12:
+                cadastroCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
+            case 13:
+                cadastroCargoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
+            default:
+                System.out.println("=====================================================Não existem instancias abertas!!!");
+        }
+//        if (cadastroCargo.getInstancia() != null) {
+//            cadastroCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        }
+//        if (cadastroCargoHome.getInstancia() != null) {
+//            cadastroCargoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        }
+//        if (cadastroCliente.getInstancia() != null) {
+//            cadastroCliente.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        }
+//        if (cadastroClienteHome.getInstancia() != null) {
+//            cadastroClienteHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        }
+//        if (cadastroFiador.getInstancia() != null) {
+//            cadastroFiador.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        }
+//        if (CadFuncionarioHome.getInstancia() != null) {
+//            CadFuncionarioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        }
+//        if (ControleFuncionario.getInstancia() != null) {
+//            ControleFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        }
+//        if (cadastroImovel.getInstancia() != null) {
+//            cadastroImovel.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        }
+//        if (cadastroImovelHome.getInstancia() != null) {
+//            cadastroImovelHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        }
+//        if (CadLocacao.getInstancia() != null) {
+//            CadLocacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        }
+//        if (CadLocacaoHome.getInstancia() != null) {
+//            CadLocacaoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        }
+//        if (ControleLocacao.getInstancia() != null) {
+//            ControleLocacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        }
+//        if (cadastroFuncionario.getInstancia() != null) {
+//            cadastroFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+//        }
+    }
+
+    public void Login() throws Exception {
         if (!isLogado()) {
             TelaLogin telaLogin = new TelaLogin(new javax.swing.JFrame(), true);
             telaLogin.setLocationRelativeTo(jSeparator2);
@@ -211,12 +313,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         telaLogin.limpaCampos();
                         JOptionPane.showMessageDialog(null, "Sistema Bloquado!");
                     }
+                    if (telaLogin.verificaLogin()) {
+                        JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
+                        setLogado(true);
+                        jlLogoff.setEnabled(true);
+                        jlTroca.setEnabled(true);
+                        acesso();
+                    }
                 }
             }
         }
     }
 
-    public void trocarUsuario() {
+    public void trocarUsuario() throws Exception {
         TelaLogin telaLogin = new TelaLogin(new javax.swing.JFrame(), true);
         telaLogin.setLocationRelativeTo(this);
         telaLogin.setAlwaysOnTop(true);
@@ -226,21 +335,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
             setLogado(true);
             acesso();
             finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
+            acessoInstancias();
         } else {
             JOptionPane.showMessageDialog(telaLogin, "Acesso negado!\nUsuário ou Senha Incorretos");
             telaLogin.limpaCampos();
-            while (!telaLogin.verificaLogin() && tentativas < 2) {
+            while (!telaLogin.verificaLogin() && tentativas < 5) {
                 telaLogin.setVisible(true);
                 tentativas++;
-
-                if (!telaLogin.verificaLogin() && tentativas < 2) {
+                if (!telaLogin.verificaLogin() && tentativas < 5) {
                     telaLogin.limpaCampos();
                     JOptionPane.showMessageDialog(telaLogin, "Acesso negado!\nUsuário ou Senha Incorretos");
                     JOptionPane.showMessageDialog(telaLogin, "Você possui mais " + (5 - tentativas) + " tentativas!");
                 }
-                if (tentativas == 2) {
+                if (tentativas == 5) {
                     telaLogin.limpaCampos();
                     JOptionPane.showMessageDialog(telaLogin, "Sistema Bloquado!");
+                    ocultaFuncoes(false);
                 }
             }
         }
@@ -251,76 +361,298 @@ public class TelaPrincipal extends javax.swing.JFrame {
             case 1:
                 break;
             case 2:
-                if (cadastroFuncionario.getInstancia() != null) {
-                    cadastroFuncionario.getInstancia().setAlwaysOnTop(false);
-                    cadastroFuncionario.getInstancia().encerrarInstancia();
-                }
-                if (ControleFuncionario.getInstancia() != null) {
-                    ControleFuncionario.getInstancia().setAlwaysOnTop(false);
-                    ControleFuncionario.getInstancia().encerrarInstancia();
-                }
-                break;
-            case 3:
-                if (cadastroCliente.getInstancia() != null) {
-                    System.out.println("Encerrou Instancia Cliente por Nível ===================================");
-                    cadastroCliente.getInstancia().setVisible(false);
-                    cadastroCliente.getInstancia().setAlwaysOnTop(false);
-                    cadastroCliente.getInstancia().encerrarInstancia();
-                }
-//        if (cadastroImovel.getInstancia() != null) {
-//            cadastroImovel.getInstancia().setAlwaysOnTop(false);
-//            cadastroImovel.getInstancia().encerrarInstancia();
-//        }
-                if (CadLocacao.getInstancia() != null) {
-                    CadLocacao.getInstancia().setAlwaysOnTop(false);
-                    CadLocacao.getInstancia().encerrarInstancia();
-                }
-                if (ControleLocacao.getInstancia() != null) {
-                    ControleLocacao.getInstancia().setAlwaysOnTop(false);
-                    ControleLocacao.getInstancia().encerrarInstancia();
+                switch (instanciaAberta) {
+                    case 9:
+                        cadastroFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 10:
+                        ControleFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 11:
+                        CadFuncionarioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 12:
+                        cadastroCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 13:
+                        cadastroCargoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    default:
+                        System.out.println("=====================================================Não existem instancias abertas!!!");
                 }
 
+//                if (cadastroFuncionario.getInstancia() != null) {
+//                    cadastroFuncionario.getInstancia().setVisible(false);
+//                    cadastroFuncionario.getInstancia().setAlwaysOnTop(false);
+//                    cadastroFuncionario.getInstancia().encerrarInstancia();
+//                }
+//                if (ControleFuncionario.getInstancia() != null) {
+//                    ControleFuncionario.getInstancia().setVisible(false);
+//                    ControleFuncionario.getInstancia().setAlwaysOnTop(false);
+//                    ControleFuncionario.getInstancia().encerrarInstancia();
+//                }
+//                if (CadFuncionarioHome.getInstancia() != null) {
+//                    CadFuncionarioHome.getInstancia().setVisible(false);
+//                    CadFuncionarioHome.getInstancia().setAlwaysOnTop(false);
+//                    CadFuncionarioHome.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroCargo.getInstancia() != null) {
+//                    cadastroCargo.getInstancia().setVisible(false);
+//                    cadastroCargo.getInstancia().setAlwaysOnTop(false);
+//                    cadastroCargo.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroCargoHome.getInstancia() != null) {
+//                    cadastroCargoHome.getInstancia().setVisible(false);
+//                    cadastroCargoHome.getInstancia().setAlwaysOnTop(false);
+//                    cadastroCargoHome.getInstancia().encerrarInstancia();
+//                }
                 break;
+            case 3:
+                switch (instanciaAberta) {
+                    case 1:
+                        cadastroCliente.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 2:
+                        cadastroFiador.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 4:
+                        cadastroImovel.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 6:
+                        CadLocacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 7:
+                        ControleLocacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 8:
+                        CadLocacaoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 9:
+                        cadastroFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 10:
+                        ControleFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 11:
+                        CadFuncionarioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 12:
+                        cadastroCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 13:
+                        cadastroCargoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    default:
+                        System.out.println("=====================================================Não existem instancias abertas!!!");
+                }
+                break;
+
+//                
+//                if (cadastroCliente.getInstancia() != null) {
+//                    cadastroCliente.getInstancia().setVisible(false);
+//                    cadastroCliente.getInstancia().setAlwaysOnTop(false);
+//                    cadastroCliente.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroFiador.getInstancia() != null) {
+//                    cadastroFiador.getInstancia().setVisible(false);
+//                    cadastroFiador.getInstancia().setAlwaysOnTop(false);
+//                    cadastroFiador.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroImovel.getInstancia() != null) {
+//                    cadastroImovel.getInstancia().setVisible(false);
+//                    cadastroImovel.getInstancia().setAlwaysOnTop(false);
+//                    cadastroImovel.getInstancia().encerrarInstancia();
+//                }
+//                if (CadLocacao.getInstancia() != null) {
+//                    CadLocacao.getInstancia().setVisible(false);
+//                    CadLocacao.getInstancia().setAlwaysOnTop(false);
+//                    CadLocacao.getInstancia().encerrarInstancia();
+//                }
+//                if (ControleLocacao.getInstancia() != null) {
+//                    ControleLocacao.getInstancia().setVisible(false);
+//                    ControleLocacao.getInstancia().setAlwaysOnTop(false);
+//                    ControleLocacao.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroFuncionario.getInstancia() != null) {
+//                    cadastroFuncionario.getInstancia().setVisible(false);
+//                    cadastroFuncionario.getInstancia().setAlwaysOnTop(false);
+//                    cadastroFuncionario.getInstancia().encerrarInstancia();
+//                }
+//                if (ControleFuncionario.getInstancia() != null) {
+//                    ControleFuncionario.getInstancia().setVisible(false);
+//                    ControleFuncionario.getInstancia().setAlwaysOnTop(false);
+//                    ControleFuncionario.getInstancia().encerrarInstancia();
+//                }
+//                if (CadFuncionarioHome.getInstancia() != null) {
+//                    CadFuncionarioHome.getInstancia().setVisible(false);
+//                    CadFuncionarioHome.getInstancia().setAlwaysOnTop(false);
+//                    CadFuncionarioHome.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroCargo.getInstancia() != null) {
+//                    cadastroCargo.getInstancia().setVisible(false);
+//                    cadastroCargo.getInstancia().setAlwaysOnTop(false);
+//                    cadastroCargo.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroCargoHome.getInstancia() != null) {
+//                    cadastroCargoHome.getInstancia().setVisible(false);
+//                    cadastroCargoHome.getInstancia().setAlwaysOnTop(false);
+//                    cadastroCargoHome.getInstancia().encerrarInstancia();
+//                }
+//                break;
             default:
                 JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
 
     public void finalizarInstancias() {
-        if (cadastroCliente.getInstancia() != null) {
-            cadastroCliente.getInstancia().setVisible(false);
-            cadastroCliente.getInstancia().setAlwaysOnTop(false);
-            cadastroCliente.getInstancia().encerrarInstancia();
-        }
-//        if (cadastroImovel.getInstancia() != null) {
-//            cadastroImovel.getInstancia().setAlwaysOnTop(false);
-//            cadastroImovel.getInstancia().encerrarInstancia();
-//        }
-        if (cadastroImovelHome.getInstancia() != null) {
-            cadastroImovelHome.getInstancia().setAlwaysOnTop(false);
-            cadastroImovelHome.getInstancia().encerrarInstancia();
-        }
-        if (CadLocacao.getInstancia() != null) {
-            CadLocacao.getInstancia().setAlwaysOnTop(false);
-            CadLocacao.getInstancia().encerrarInstancia();
-        }
-        if (ControleLocacao.getInstancia() != null) {
-            ControleLocacao.getInstancia().setAlwaysOnTop(false);
-            ControleLocacao.getInstancia().encerrarInstancia();
-        }
-        if (cadastroFuncionario.getInstancia() != null) {
-            cadastroFuncionario.getInstancia().setAlwaysOnTop(false);
-            cadastroFuncionario.getInstancia().encerrarInstancia();
-        }
-        if (ControleFuncionario.getInstancia() != null) {
-            ControleFuncionario.getInstancia().setAlwaysOnTop(false);
-            ControleFuncionario.getInstancia().encerrarInstancia();
+        switch (instanciaAberta) {
+            case 1:
+                cadastroCliente.getInstancia().setVisible(false);
+                cadastroCliente.getInstancia().setAlwaysOnTop(false);
+                cadastroCliente.getInstancia().encerrarInstancia();
+                cadastroCliente.getInstancia().dispose();
+                break;
+            case 2:
+                cadastroFiador.getInstancia().setVisible(false);
+                cadastroFiador.getInstancia().setAlwaysOnTop(false);
+                cadastroFiador.getInstancia().encerrarInstancia();
+                cadastroFiador.getInstancia().dispose();
+                break;
+            case 3:
+                cadastroClienteHome.getInstancia().setVisible(false);
+                cadastroClienteHome.getInstancia().setAlwaysOnTop(false);
+                cadastroClienteHome.getInstancia().encerrarInstancia();
+                cadastroClienteHome.getInstancia().dispose();
+                break;
+            case 4:
+                cadastroImovel.getInstancia().setVisible(false);
+                cadastroImovel.getInstancia().setAlwaysOnTop(false);
+                cadastroImovel.getInstancia().encerrarInstancia();
+                cadastroImovel.getInstancia().dispose();
+                break;
+            case 5:
+                cadastroImovelHome.getInstancia().setVisible(false);
+                cadastroImovelHome.getInstancia().setAlwaysOnTop(false);
+                cadastroImovelHome.getInstancia().encerrarInstancia();
+                cadastroImovelHome.getInstancia().dispose();
+                break;
+            case 6:
+                CadLocacao.getInstancia().setVisible(false);
+                CadLocacao.getInstancia().setAlwaysOnTop(false);
+                CadLocacao.getInstancia().encerrarInstancia();
+                CadLocacao.getInstancia().dispose();
+                break;
+            case 7:
+                ControleLocacao.getInstancia().setVisible(false);
+                ControleLocacao.getInstancia().setAlwaysOnTop(false);
+                ControleLocacao.getInstancia().encerrarInstancia();
+                ControleLocacao.getInstancia().dispose();
+                break;
+            case 8:
+                CadLocacaoHome.getInstancia().setVisible(false);
+                CadLocacaoHome.getInstancia().setAlwaysOnTop(false);
+                CadLocacaoHome.getInstancia().encerrarInstancia();
+                CadLocacaoHome.getInstancia().dispose();
+                break;
+            case 9:
+                cadastroFuncionario.getInstancia().setVisible(false);
+                cadastroFuncionario.getInstancia().setAlwaysOnTop(false);
+                cadastroFuncionario.getInstancia().encerrarInstancia();
+                cadastroFuncionario.getInstancia().dispose();
+                break;
+            case 10:
+                ControleFuncionario.getInstancia().setVisible(false);
+                ControleFuncionario.getInstancia().setAlwaysOnTop(false);
+                ControleFuncionario.getInstancia().encerrarInstancia();
+                ControleFuncionario.getInstancia().dispose();
+                break;
+            case 11:
+                CadFuncionarioHome.getInstancia().setVisible(false);
+                CadFuncionarioHome.getInstancia().setAlwaysOnTop(false);
+                CadFuncionarioHome.getInstancia().encerrarInstancia();
+                CadFuncionarioHome.getInstancia().dispose();
+                break;
+            case 12:
+                cadastroCargo.getInstancia().setVisible(false);
+                cadastroCargo.getInstancia().setAlwaysOnTop(false);
+                cadastroCargo.getInstancia().encerrarInstancia();
+                cadastroCargo.getInstancia().dispose();
+                break;
+            case 13:
+                cadastroCargoHome.getInstancia().setVisible(false);
+                cadastroCargoHome.getInstancia().setAlwaysOnTop(false);
+                cadastroCargoHome.getInstancia().encerrarInstancia();
+                cadastroCargoHome.getInstancia().dispose();
+                break;
+            default:
+                System.out.println("=====================================================Não existem instancias abertas!!!");
         }
 
-    }
-
-    public Component getPosition() {
-        return jSeparator2;
+//                if (cadastroCliente.getInstancia() != null) {
+//                    cadastroCliente.getInstancia().setVisible(false);
+//                    cadastroCliente.getInstancia().setAlwaysOnTop(false);
+//                    cadastroCliente.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroFiador.getInstancia() != null) {
+//                    cadastroFiador.getInstancia().setVisible(false);
+//                    cadastroFiador.getInstancia().setAlwaysOnTop(false);
+//                    cadastroFiador.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroClienteHome.getInstancia() != null) {
+//                    cadastroClienteHome.getInstancia().setVisible(false);
+//                    cadastroClienteHome.getInstancia().setAlwaysOnTop(false);
+//                    cadastroClienteHome.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroImovel.getInstancia() != null) {
+//                    cadastroImovel.getInstancia().setVisible(false);
+//                    cadastroImovel.getInstancia().setAlwaysOnTop(false);
+//                    cadastroImovel.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroImovelHome.getInstancia() != null) {
+//                    cadastroImovelHome.getInstancia().setVisible(false);
+//                    cadastroImovelHome.getInstancia().setAlwaysOnTop(false);
+//                    cadastroImovelHome.getInstancia().encerrarInstancia();
+//                }
+//                if (CadLocacao.getInstancia() != null) {
+//                    CadLocacao.getInstancia().setVisible(false);
+//                    CadLocacao.getInstancia().setAlwaysOnTop(false);
+//                    CadLocacao.getInstancia().encerrarInstancia();
+//                }
+//                if (ControleLocacao.getInstancia() != null) {
+//                    ControleLocacao.getInstancia().setVisible(false);
+//                    ControleLocacao.getInstancia().setAlwaysOnTop(false);
+//                    ControleLocacao.getInstancia().encerrarInstancia();
+//                }
+//                if (CadLocacaoHome.getInstancia() != null) {
+//                    CadLocacaoHome.getInstancia().setVisible(false);
+//                    CadLocacaoHome.getInstancia().setAlwaysOnTop(false);
+//                    CadLocacaoHome.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroFuncionario.getInstancia() != null) {
+//                    cadastroFuncionario.getInstancia().setVisible(false);
+//                    cadastroFuncionario.getInstancia().setAlwaysOnTop(false);
+//                    cadastroFuncionario.getInstancia().encerrarInstancia();
+//                }
+//                if (ControleFuncionario.getInstancia() != null) {
+//                    ControleFuncionario.getInstancia().setVisible(false);
+//                    ControleFuncionario.getInstancia().setAlwaysOnTop(false);
+//                    ControleFuncionario.getInstancia().encerrarInstancia();
+//                }
+//                if (CadFuncionarioHome.getInstancia() != null) {
+//                    CadFuncionarioHome.getInstancia().setVisible(false);
+//                    CadFuncionarioHome.getInstancia().setAlwaysOnTop(false);
+//                    CadFuncionarioHome.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroCargo.getInstancia() != null) {
+//                    cadastroCargo.getInstancia().setVisible(false);
+//                    cadastroCargo.getInstancia().setAlwaysOnTop(false);
+//                    cadastroCargo.getInstancia().encerrarInstancia();
+//                }
+//                if (cadastroCargoHome.getInstancia() != null) {
+//                    cadastroCargoHome.getInstancia().setVisible(false);
+//                    cadastroCargoHome.getInstancia().setAlwaysOnTop(false);
+//                    cadastroCargoHome.getInstancia().encerrarInstancia();
+//                }
     }
 
     /**
@@ -347,7 +679,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbConsultarLocacao = new javax.swing.JButton();
         jbFuncionario = new javax.swing.JButton();
         jbConsultarFuncionario = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
+        jbCadastrarDepartamento = new javax.swing.JButton();
+        jbConsultarDepartamento = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jmBarraMenu = new javax.swing.JMenuBar();
         jmCadastrar = new javax.swing.JMenu();
@@ -364,6 +697,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmiCadastrarFuncionario = new javax.swing.JMenuItem();
         jmiConsultarFuncionario = new javax.swing.JMenuItem();
         jmiControleFuncionario = new javax.swing.JMenuItem();
+        jmDepartamento = new javax.swing.JMenu();
+        jmiCadastrarDepartamento = new javax.swing.JMenuItem();
+        jmiConsultarDepartamento = new javax.swing.JMenuItem();
         jmSessao = new javax.swing.JMenu();
         jmiTrocarUsuario = new javax.swing.JMenuItem();
         jmiLogoff = new javax.swing.JMenuItem();
@@ -496,30 +832,57 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jbCadastrarDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCadastrarDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/chart_organisation_add.png"))); // NOI18N
+        jbCadastrarDepartamento.setText("<html><center>Cadastrar<br/>Departamento</html>");
+        jbCadastrarDepartamento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbCadastrarDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbCadastrarDepartamentoMousePressed(evt);
+            }
+        });
+
+        jbConsultarDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbConsultarDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Farm-Fresh_smartart_organization_chart_rh.png"))); // NOI18N
+        jbConsultarDepartamento.setText("<html><center>Consultar<br/>Departamento</html>");
+        jbConsultarDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbConsultarDepartamentoMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 1, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbControleLocacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbConsultarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbCadastrarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbConsultarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbControleCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbControleImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbCadastrarLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbCadastrarImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbControleFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbConsultarLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 1, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jbControleLocacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jbConsultarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbControleCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbControleImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbCadastrarLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbCadastrarImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbControleFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbConsultarLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(28, 28, 28))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -544,17 +907,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(jbConsultarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbControleFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jbCadastrarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbConsultarDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        jbCadastrarDepartamento.getAccessibleContext().setAccessibleName("jbCadastrarCargo");
 
         jScrollPane1.setViewportView(jPanel1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(0, 20, 180, 550);
-
-        jSeparator1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(0, 0, 180, 750);
+        jScrollPane1.setBounds(0, 0, 180, 620);
 
         jSeparator2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(jSeparator2);
@@ -656,6 +1021,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jmBarraMenu.add(jmFuncionario);
 
+        jmDepartamento.setText("Departamento");
+
+        jmiCadastrarDepartamento.setText("Cadastrar Departamento");
+        jmiCadastrarDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiCadastrarDepartamentoMousePressed(evt);
+            }
+        });
+        jmDepartamento.add(jmiCadastrarDepartamento);
+
+        jmiConsultarDepartamento.setText("Consultar Departamento");
+        jmiConsultarDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiConsultarDepartamentoMousePressed(evt);
+            }
+        });
+        jmDepartamento.add(jmiConsultarDepartamento);
+
+        jmBarraMenu.add(jmDepartamento);
+
         jmSessao.setText("Sessão");
 
         jmiTrocarUsuario.setText("Trocar Usuário");
@@ -667,6 +1052,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jmSessao.add(jmiTrocarUsuario);
 
         jmiLogoff.setText("Logoff");
+        jmiLogoff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmiLogoffMousePressed(evt);
+            }
+        });
         jmSessao.add(jmiLogoff);
 
         jmBarraMenu.add(jmSessao);
@@ -689,13 +1079,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
             ocultaFuncoes(false);
             finalizarInstancias();
             setLogado(false);
-            Login();
+            try {
+                Login();
+            } catch (Exception ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jlLogoffMousePressed
 
     private void jbCadastrarClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarClienteMousePressed
         if (jbCadastrarCliente.isEnabled()) {
             finalizarInstancias();
+            instanciaAberta = 1;
             cadastroCliente cliente = cadastroCliente.getInstancia();
             cliente.setLocationRelativeTo(jSeparator2);
             cliente.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
@@ -706,8 +1101,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbCadastrarImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarImovelMousePressed
         if (jbCadastrarImovel.isEnabled()) {
             finalizarInstancias();
+            instanciaAberta = 4;
             cadastroImovel imovel = cadastroImovel.getInstancia();
             imovel.setLocationRelativeTo(jSeparator2);
+            imovel.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
             imovel.setVisible(true);
         }
     }//GEN-LAST:event_jbCadastrarImovelMousePressed
@@ -715,8 +1112,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbControleClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleClienteMousePressed
         if (jbControleCliente.isEnabled()) {
             finalizarInstancias();
+            instanciaAberta = 3;
             cadastroClienteHome clienteHome = cadastroClienteHome.getInstancia();
             clienteHome.setLocationRelativeTo(jSeparator2);
+            clienteHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
             clienteHome.setVisible(true);
         }
     }//GEN-LAST:event_jbControleClienteMousePressed
@@ -724,8 +1123,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbControleImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleImovelMousePressed
         if (jbControleImovel.isEnabled()) {
             finalizarInstancias();
+            instanciaAberta = 5;
             cadastroImovelHome imovelHome = cadastroImovelHome.getInstancia();
             imovelHome.setLocationRelativeTo(jSeparator2);
+            imovelHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
             imovelHome.setVisible(true);
         }
     }//GEN-LAST:event_jbControleImovelMousePressed
@@ -733,8 +1134,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbCadastrarLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarLocacaoMousePressed
         if (jbCadastrarLocacao.isEnabled()) {
             finalizarInstancias();
+            instanciaAberta = 6;
             CadLocacao locacao = CadLocacao.getInstancia();
             locacao.setLocationRelativeTo(jSeparator2);
+            locacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
             locacao.setVisible(true);
         }
     }//GEN-LAST:event_jbCadastrarLocacaoMousePressed
@@ -742,8 +1145,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbControleLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleLocacaoMousePressed
         if (jbControleLocacao.isEnabled()) {
             finalizarInstancias();
+            instanciaAberta = 7;
             ControleLocacao controleLocacao = ControleLocacao.getInstancia();
             controleLocacao.setLocationRelativeTo(jSeparator2);
+            controleLocacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
             controleLocacao.setVisible(true);
         }
     }//GEN-LAST:event_jbControleLocacaoMousePressed
@@ -751,8 +1156,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbFuncionarioMousePressed
         if (jbFuncionario.isEnabled()) {
             finalizarInstancias();
+            instanciaAberta = 9;
             cadastroFuncionario funcionario = cadastroFuncionario.getInstancia();
             funcionario.setLocationRelativeTo(jSeparator2);
+            funcionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
             funcionario.setVisible(true);
         }
     }//GEN-LAST:event_jbFuncionarioMousePressed
@@ -760,8 +1167,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbControleFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleFuncionarioMousePressed
         if (jbControleFuncionario.isEnabled()) {
             finalizarInstancias();
+            instanciaAberta = 10;
             ControleFuncionario controleFuncionario = ControleFuncionario.getInstancia();
             controleFuncionario.setLocationRelativeTo(jSeparator2);
+            controleFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
             controleFuncionario.setVisible(true);
         }
     }//GEN-LAST:event_jbControleFuncionarioMousePressed
@@ -769,99 +1178,169 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbConsultarLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarLocacaoMousePressed
         if (jbConsultarLocacao.isEnabled()) {
             finalizarInstancias();
+            instanciaAberta = 8;
             CadLocacaoHome cadLocacaoHome = CadLocacaoHome.getInstancia();
             cadLocacaoHome.setLocationRelativeTo(jSeparator2);
+            cadLocacaoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
             cadLocacaoHome.setVisible(true);
         }
 
     }//GEN-LAST:event_jbConsultarLocacaoMousePressed
 
     private void jlTrocaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlTrocaMousePressed
-        trocarUsuario();
+        try {
+            trocarUsuario();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jlTrocaMousePressed
 
     private void jmiCadastrarClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarClienteMousePressed
-        finalizarInstancias();
+        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
         cadastroCliente cliente = cadastroCliente.getInstancia();
         cliente.setLocationRelativeTo(jSeparator2);
         cliente.setVisible(true);
     }//GEN-LAST:event_jmiCadastrarClienteMousePressed
 
     private void jmiCadastrarImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarImovelMousePressed
-        finalizarInstancias();
+        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
         cadastroImovel imovel = cadastroImovel.getInstancia();
         imovel.setLocationRelativeTo(jSeparator2);
         imovel.setVisible(true);
     }//GEN-LAST:event_jmiCadastrarImovelMousePressed
 
     private void jmiCadastrarFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarFuncionarioMousePressed
-        finalizarInstancias();
+        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
         cadastroFuncionario funcionario = cadastroFuncionario.getInstancia();
         funcionario.setLocationRelativeTo(jSeparator2);
         funcionario.setVisible(true);
     }//GEN-LAST:event_jmiCadastrarFuncionarioMousePressed
 
     private void jmiConsultarClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarClienteMousePressed
-        finalizarInstancias();
+        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
         cadastroClienteHome clienteHome = cadastroClienteHome.getInstancia();
         clienteHome.setLocationRelativeTo(jSeparator2);
         clienteHome.setVisible(true);
     }//GEN-LAST:event_jmiConsultarClienteMousePressed
 
     private void jmiConsultarImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarImovelMousePressed
-        finalizarInstancias();
+        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
         cadastroImovelHome imovelHome = cadastroImovelHome.getInstancia();
         imovelHome.setLocationRelativeTo(jSeparator2);
         imovelHome.setVisible(true);
     }//GEN-LAST:event_jmiConsultarImovelMousePressed
 
     private void jmiConsultarFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarFuncionarioMousePressed
-        finalizarInstancias();
+        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
         CadFuncionarioHome cadFuncionarioHome = CadFuncionarioHome.getInstancia();
         cadFuncionarioHome.setLocationRelativeTo(jSeparator2);
         cadFuncionarioHome.setVisible(true);
     }//GEN-LAST:event_jmiConsultarFuncionarioMousePressed
 
     private void jmiControleFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiControleFuncionarioMousePressed
-        finalizarInstancias();
+        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
         ControleFuncionario controleFuncionario = ControleFuncionario.getInstancia();
         controleFuncionario.setLocationRelativeTo(jSeparator2);
         controleFuncionario.setVisible(true);
     }//GEN-LAST:event_jmiControleFuncionarioMousePressed
 
     private void jmiCadastrarLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarLocacaoMousePressed
-        finalizarInstancias();
+        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
         CadLocacao locacao = CadLocacao.getInstancia();
         locacao.setLocationRelativeTo(jSeparator2);
         locacao.setVisible(true);
     }//GEN-LAST:event_jmiCadastrarLocacaoMousePressed
 
     private void jmiConsultarLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarLocacaoMousePressed
-        finalizarInstancias();
+        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
         CadLocacaoHome cadLocacaoHome = CadLocacaoHome.getInstancia();
         cadLocacaoHome.setLocationRelativeTo(jSeparator2);
         cadLocacaoHome.setVisible(true);
     }//GEN-LAST:event_jmiConsultarLocacaoMousePressed
 
     private void jmiControleLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiControleLocacaoMousePressed
-        finalizarInstancias();
+        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
         ControleLocacao controleLocacao = ControleLocacao.getInstancia();
         controleLocacao.setLocationRelativeTo(jSeparator2);
+        controleLocacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
         controleLocacao.setVisible(true);
     }//GEN-LAST:event_jmiControleLocacaoMousePressed
 
     private void jbConsultarFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarFuncionarioMousePressed
         if (jbConsultarFuncionario.isEnabled()) {
-        finalizarInstancias();
-        CadFuncionarioHome cadFuncionarioHome = CadFuncionarioHome.getInstancia();
-        cadFuncionarioHome.setLocationRelativeTo(jSeparator2);
-        cadFuncionarioHome.setVisible(true);
+            finalizarInstancias();
+            instanciaAberta = 11;
+            CadFuncionarioHome cadFuncionarioHome = CadFuncionarioHome.getInstancia();
+            cadFuncionarioHome.setLocationRelativeTo(jSeparator2);
+            cadFuncionarioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            cadFuncionarioHome.setVisible(true);
         }
     }//GEN-LAST:event_jbConsultarFuncionarioMousePressed
 
     private void jmiTrocarUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiTrocarUsuarioMousePressed
-        trocarUsuario();
+        try {
+            trocarUsuario();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jmiTrocarUsuarioMousePressed
+
+    private void jbCadastrarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarDepartamentoMousePressed
+        if (jbCadastrarDepartamento.isEnabled()) {
+            finalizarInstancias();
+            instanciaAberta = 12;
+            cadastroCargo cadCargo = cadastroCargo.getInstancia();
+            cadCargo.setLocationRelativeTo(jSeparator2);
+            cadCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            cadCargo.setVisible(true);
+        }
+    }//GEN-LAST:event_jbCadastrarDepartamentoMousePressed
+
+    private void jbConsultarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarDepartamentoMousePressed
+        if (jbConsultarDepartamento.isEnabled()) {
+            finalizarInstancias();
+            instanciaAberta = 13;
+            cadastroCargoHome cadCargoHome = cadastroCargoHome.getInstancia();
+            cadCargoHome.setLocationRelativeTo(jSeparator2);
+            cadCargoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            cadCargoHome.setVisible(true);
+        }
+    }//GEN-LAST:event_jbConsultarDepartamentoMousePressed
+
+    private void jmiCadastrarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarDepartamentoMousePressed
+        if (jmiCadastrarDepartamento.isEnabled()) {
+            finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
+            cadastroCargo cadCargo = cadastroCargo.getInstancia();
+            cadCargo.setLocationRelativeTo(jSeparator2);
+            cadCargo.setVisible(true);
+        }
+    }//GEN-LAST:event_jmiCadastrarDepartamentoMousePressed
+
+    private void jmiConsultarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarDepartamentoMousePressed
+        if (jmiConsultarDepartamento.isEnabled()) {
+            finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
+            cadastroCargoHome cadCargoHome = cadastroCargoHome.getInstancia();
+            cadCargoHome.setLocationRelativeTo(jSeparator2);
+            cadCargoHome.setAlwaysOnTop(true);
+            cadCargoHome.setVisible(true);
+        }
+    }//GEN-LAST:event_jmiConsultarDepartamentoMousePressed
+
+    private void jmiLogoffMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiLogoffMousePressed
+        if (!isLogado()) {
+            jlLogoff.setEnabled(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Logoff efetuado com sucesso!");
+            ocultaFuncoes(false);
+            finalizarInstancias();
+            setLogado(false);
+            try {
+                Login();
+            } catch (Exception ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jmiLogoffMousePressed
 
     /**
      * @param args the command line arguments
@@ -901,7 +1380,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPrincipal().setVisible(true);
+                try {
+                    new TelaPrincipal().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -909,11 +1392,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbCadastrarCliente;
+    private javax.swing.JButton jbCadastrarDepartamento;
     private javax.swing.JButton jbCadastrarImovel;
     private javax.swing.JButton jbCadastrarLocacao;
+    private javax.swing.JButton jbConsultarDepartamento;
     private javax.swing.JButton jbConsultarFuncionario;
     private javax.swing.JButton jbConsultarLocacao;
     private javax.swing.JButton jbControleCliente;
@@ -927,14 +1411,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jmBarraMenu;
     private javax.swing.JMenu jmCadastrar;
     private javax.swing.JMenu jmConsultar;
+    private javax.swing.JMenu jmDepartamento;
     private javax.swing.JMenu jmFuncionario;
     private javax.swing.JMenu jmLocacao;
     private javax.swing.JMenu jmSessao;
     private javax.swing.JMenuItem jmiCadastrarCliente;
+    private javax.swing.JMenuItem jmiCadastrarDepartamento;
     private javax.swing.JMenuItem jmiCadastrarFuncionario;
     private javax.swing.JMenuItem jmiCadastrarImovel;
     private javax.swing.JMenuItem jmiCadastrarLocacao;
     private javax.swing.JMenuItem jmiConsultarCliente;
+    private javax.swing.JMenuItem jmiConsultarDepartamento;
     private javax.swing.JMenuItem jmiConsultarFuncionario;
     private javax.swing.JMenuItem jmiConsultarImovel;
     private javax.swing.JMenuItem jmiConsultarLocacao;

@@ -112,6 +112,29 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jmDepartamento">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Departamento"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiCadastrarDepartamento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastrar Departamento"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jmiCadastrarDepartamentoMousePressed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiConsultarDepartamento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Consultar Departamento"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jmiConsultarDepartamentoMousePressed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="jmSessao">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sess&#xe3;o"/>
@@ -129,6 +152,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Logoff"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jmiLogoffMousePressed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -224,7 +250,7 @@
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="20" width="180" height="550"/>
+          <AbsoluteConstraints x="0" y="0" width="180" height="620"/>
         </Constraint>
       </Constraints>
 
@@ -236,30 +262,42 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jbControleLocacao" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="jbFuncionario" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jbConsultarDepartamento" min="-2" pref="140" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jbCadastrarDepartamento" min="-2" pref="140" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jbConsultarFuncionario" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="jbCadastrarCliente" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="jbControleCliente" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="jbControleImovel" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="jbCadastrarLocacao" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="jbCadastrarImovel" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="jbControleFuncionario" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="jbConsultarLocacao" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jbControleLocacao" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="jbFuncionario" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jbConsultarFuncionario" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="jbCadastrarCliente" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="jbControleCliente" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="jbControleImovel" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="jbCadastrarLocacao" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="jbCadastrarImovel" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="jbControleFuncionario" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="jbConsultarLocacao" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -286,7 +324,11 @@
                       <Component id="jbConsultarFuncionario" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jbControleFuncionario" min="-2" pref="70" max="-2" attributes="0"/>
-                      <EmptySpace pref="25" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jbCadastrarDepartamento" min="-2" pref="70" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jbConsultarDepartamento" pref="70" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -432,24 +474,42 @@
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbConsultarFuncionarioMousePressed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JButton" name="jbCadastrarDepartamento">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/image/chart_organisation_add.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Cadastrar&lt;br/&gt;Departamento&lt;/html&gt;"/>
+                <Property name="horizontalAlignment" type="int" value="2"/>
+              </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="jbCadastrarCargo"/>
+              </AccessibilityProperties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbCadastrarDepartamentoMousePressed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbConsultarDepartamento">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/image/Farm-Fresh_smartart_organization_chart_rh.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Consultar&lt;br/&gt;Departamento&lt;/html&gt;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbConsultarDepartamentoMousePressed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JSeparator" name="jSeparator1">
-      <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-            <EtchetBorder/>
-          </Border>
-        </Property>
-      </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="0" width="180" height="750"/>
-        </Constraint>
-      </Constraints>
-    </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
