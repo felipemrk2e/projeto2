@@ -120,6 +120,24 @@ public class PessoaDAO extends DAO<Pessoa> {
             return entityManager.createQuery("select distinct pe from Pessoa pe join pe.pessoaJuridica pj").getResultList();
         }
         
+        //pessoaJuridica == 3
+        if(tipoPessoa == 3){
+            if(nome != ""){
+                query += "pff.nomePessoa LIKE '%"+nome+"%'";
+                or = " or ";
+            }
+            if(cpf != ""){
+                query += or+"pff.pessoaFisica.CPF LIKE '%"+cpf+"%'";
+                or = " or ";
+            }
+//            if(query != "")
+//                return entityManager.createQuery("FROM Pessoa.pessoaJuridica pj WHERE "+query).getResultList();
+            if(query != "")
+                return entityManager.createQuery("select distinct pe from Pessoa pe " +
+                "join pe.pessoaFisica pf join pf.funcionario pff where "+query).getResultList();
+            return entityManager.createQuery("select distinct pe from Pessoa pe join pe.pessoaFisica pf join pf.funcionario pff").getResultList();
+        }
+        
         return entityManager.createQuery("FROM Pessoa pe").getResultList();
     }
 
