@@ -651,7 +651,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
             valida = false;
         }
         //Dependentes
-        if (!jtfDependentes.getText().isEmpty()) {
+        if (!jtfDependentes.getText().isEmpty() && validacao.validaNumeros(jtfDependentes.getText())) {
             jtfDependentes.setBackground(Color.white);
         } else {
             jtfDependentes.setBackground(Color.red);
