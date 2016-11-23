@@ -102,5 +102,13 @@ public class ImovelDAO extends DAO<Imovel>{
     public List<Imovel> getInativos(){
         return entityManager.createQuery("FROM Imovel im WHERE im.ativo = 0").getResultList();
     }
+    
+    /**
+        * Retorna apenas Imoveis ativos de uma cidade.
+        * @return      lista de Imoveis.
+    */
+    public List<Imovel> ativosPorCidade(long idCidade){
+        return entityManager.createQuery("FROM Imovel im WHERE im.endereco.cidade.idCidade = "+idCidade+" and im.ativo = 1").getResultList();
+    }
 
 }
