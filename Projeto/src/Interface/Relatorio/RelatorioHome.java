@@ -33,11 +33,11 @@ public class RelatorioHome extends javax.swing.JFrame {
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
         jRadioButton5 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
+        jbSalvarRelatorio = new javax.swing.JButton();
+        jbCancelar = new javax.swing.JButton();
+        jbImprimirRelatorio = new javax.swing.JButton();
+        jlTipoRelatório = new javax.swing.JLabel();
+        jsRelatorio = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1024, 640));
@@ -47,57 +47,60 @@ public class RelatorioHome extends javax.swing.JFrame {
 
         btgRelatotio.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jRadioButton1.setText("jRadioButton1");
+        jRadioButton1.setText("Imóveis Ativos");
         getContentPane().add(jRadioButton1);
-        jRadioButton1.setBounds(70, 90, 127, 27);
+        jRadioButton1.setBounds(50, 100, 160, 30);
 
         btgRelatotio.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jRadioButton2.setText("jRadioButton2");
         getContentPane().add(jRadioButton2);
-        jRadioButton2.setBounds(70, 140, 127, 27);
+        jRadioButton2.setBounds(50, 140, 160, 30);
 
         btgRelatotio.add(jRadioButton3);
         jRadioButton3.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jRadioButton3.setText("jRadioButton3");
         getContentPane().add(jRadioButton3);
-        jRadioButton3.setBounds(70, 190, 127, 27);
+        jRadioButton3.setBounds(50, 180, 160, 30);
 
         btgRelatotio.add(jRadioButton4);
         jRadioButton4.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jRadioButton4.setText("jRadioButton4");
         getContentPane().add(jRadioButton4);
-        jRadioButton4.setBounds(70, 230, 127, 27);
+        jRadioButton4.setBounds(50, 220, 160, 30);
 
         btgRelatotio.add(jRadioButton5);
         jRadioButton5.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jRadioButton5.setText("jRadioButton5");
         getContentPane().add(jRadioButton5);
-        jRadioButton5.setBounds(70, 270, 127, 27);
+        jRadioButton5.setBounds(50, 260, 160, 30);
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/pdf.png"))); // NOI18N
-        jButton1.setText("<html><center>Salvar<br/>Relatório</html>");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(610, 280, 140, 70);
+        jbSalvarRelatorio.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbSalvarRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/pdf.png"))); // NOI18N
+        jbSalvarRelatorio.setText("<html><center>Salvar<br/>Relatório</html>");
+        getContentPane().add(jbSalvarRelatorio);
+        jbSalvarRelatorio.setBounds(600, 170, 140, 70);
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
-        jButton2.setText("Cancelar");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(610, 370, 140, 70);
+        jbCancelar.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
+        jbCancelar.setText("Cancelar");
+        getContentPane().add(jbCancelar);
+        jbCancelar.setBounds(600, 250, 140, 70);
 
-        jButton3.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/imprimir.png"))); // NOI18N
-        jButton3.setText("<html><center>Imprimir<br/>Relatório</html>");
-        getContentPane().add(jButton3);
-        jButton3.setBounds(610, 190, 140, 70);
-        getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(40, 30, 710, 470);
+        jbImprimirRelatorio.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbImprimirRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/imprimir.png"))); // NOI18N
+        jbImprimirRelatorio.setText("<html><center>Imprimir<br/>Relatório</html>");
+        getContentPane().add(jbImprimirRelatorio);
+        jbImprimirRelatorio.setBounds(600, 90, 140, 70);
 
-        jLabel1.setText("Selecionar Tipo de Relatório");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(90, 60, 210, 16);
+        jlTipoRelatório.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlTipoRelatório.setText("Selecionar Tipo de Relatório");
+        getContentPane().add(jlTipoRelatório);
+        jlTipoRelatório.setBounds(40, 50, 210, 30);
+
+        jsRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gerar Relatório", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        getContentPane().add(jsRelatorio);
+        jsRelatorio.setBounds(20, 20, 740, 330);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -139,15 +142,15 @@ public class RelatorioHome extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgRelatotio;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbImprimirRelatorio;
+    private javax.swing.JButton jbSalvarRelatorio;
+    private javax.swing.JLabel jlTipoRelatório;
+    private javax.swing.JSeparator jsRelatorio;
     // End of variables declaration//GEN-END:variables
 }
