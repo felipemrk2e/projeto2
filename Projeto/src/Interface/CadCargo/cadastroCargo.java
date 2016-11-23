@@ -86,7 +86,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         jtfNomeDepartamento.setEnabled(b);
         jftTelefone.setEnabled(b);
         jtfRamal.setEnabled(b);
-        jtfCodigoCargo.setEnabled(b);
+        jtfCodigoCargo.setEnabled(false);
         jtNomeCargo.setEnabled(b);
         jtaDescricaoCargo.setEnabled(b);
         jlCargosList.setEnabled(b);
@@ -225,7 +225,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         DepartamentoDAO departamentoDAO = new DepartamentoDAO();
         List<Departamento> listaDepartamentos = departamentoDAO.getAll();
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaDepartamentos.toArray());
-        jcbDepartamentos.setModel(defaultComboBox);
+       
     }
 
     public void mascaraTelefone() {
@@ -269,8 +269,6 @@ public class cadastroCargo extends javax.swing.JFrame {
         jbCadastrarCargo = new javax.swing.JButton();
         jlCargosDepartamento = new javax.swing.JLabel();
         jbCancelarDepartamento = new javax.swing.JButton();
-        jlDepartamento = new javax.swing.JLabel();
-        jcbDepartamentos = new javax.swing.JComboBox<>();
         jsCadastrarCargo = new javax.swing.JSeparator();
         jsCadastrarDepartamento = new javax.swing.JSeparator();
 
@@ -412,14 +410,6 @@ public class cadastroCargo extends javax.swing.JFrame {
         });
         getContentPane().add(jbCancelarDepartamento);
         jbCancelarDepartamento.setBounds(570, 160, 140, 70);
-
-        jlDepartamento.setText("Departamento");
-        getContentPane().add(jlDepartamento);
-        jlDepartamento.setBounds(40, 390, 110, 14);
-
-        jcbDepartamentos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jcbDepartamentos);
-        jcbDepartamentos.setBounds(40, 410, 170, 20);
 
         jsCadastrarCargo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar Cargo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jsCadastrarCargo);
@@ -591,14 +581,12 @@ public class cadastroCargo extends javax.swing.JFrame {
     private javax.swing.JButton jbCadastrarDepartamento;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbCancelarDepartamento;
-    private javax.swing.JButton jbEditar;
-    public javax.swing.JComboBox<String> jcbDepartamentos;
+    public static javax.swing.JButton jbEditar;
     private javax.swing.JFormattedTextField jftTelefone;
     private javax.swing.JLabel jlCargosDepartamento;
     private javax.swing.JList<String> jlCargosList;
     private javax.swing.JLabel jlCodigoCargo;
     private javax.swing.JLabel jlCodigoDepartamento;
-    private javax.swing.JLabel jlDepartamento;
     private javax.swing.JLabel jlDescricaoCargo;
     private javax.swing.JLabel jlNomeCargo;
     private javax.swing.JLabel jlNomeDepartamento;

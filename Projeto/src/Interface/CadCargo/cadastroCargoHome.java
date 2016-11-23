@@ -279,6 +279,7 @@ public class cadastroCargoHome extends javax.swing.JFrame {
 
     private void jbVisualizarCargoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarCargoMousePressed
         if (jbVisualizarCargo.isEnabled()) {
+             cadastroCargo.getInstancia().encerrarInstancia();
             int linhaSelecionada = jtCargo.getSelectedRow();
             if (linhaSelecionada == -1) {
                 return; //Nada selecionado
@@ -292,7 +293,8 @@ public class cadastroCargoHome extends javax.swing.JFrame {
             cadastroCargo.getInstancia().atualizaCargo(cargoSelecionado);
             cadastroCargo.getInstancia().setVisible(true);
             cadastroCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
-          //  cadastroCargo.getInstancia().DisableEnable(false);
+            //cadastroCargo.getInstancia().DisableEnable(false);
+            cadastroCargo.getInstancia().jbEditar.setEnabled(false);
             cadastroCargo.getInstancia().setLocationRelativeTo(this);
             cadastroCargo.getInstancia().setAlwaysOnTop(true);
         }
@@ -300,6 +302,7 @@ public class cadastroCargoHome extends javax.swing.JFrame {
 
     private void jbVisualizarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbVisualizarDepartamentoMousePressed
         if (jbVisualizarDepartamento.isEnabled()) {
+            cadastroCargo.getInstancia().encerrarInstancia();
             int linhaSelecionada = jtDepartamento.getSelectedRow();
             if (linhaSelecionada == -1) {
                 return; //Nada selecionado
@@ -310,9 +313,9 @@ public class cadastroCargoHome extends javax.swing.JFrame {
             setLocationRelativeTo(this);
             cadastroCargo.getInstancia().atualizarDepartamento(departamentoSelecionado);
             cadastroCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
-            cadastroCargo.getInstancia().jcbDepartamentos.setEnabled(false);
             cadastroCargo.getInstancia().setVisible(true);
            // cadastroCargo.getInstancia().DisableEnable(false);
+            cadastroCargo.getInstancia().jbEditar.setEnabled(false);
             cadastroCargo.getInstancia().setLocationRelativeTo(this);
             cadastroCargo.getInstancia().setAlwaysOnTop(true);
         }

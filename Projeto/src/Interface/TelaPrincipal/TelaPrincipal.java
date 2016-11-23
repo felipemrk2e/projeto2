@@ -1311,6 +1311,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jbConsultarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarDepartamentoMousePressed
         if (jbConsultarDepartamento.isEnabled()) {
+             cadastroCargo.getInstancia().encerrarInstancia();
             finalizarInstancias();
             instanciaAberta = 13;
             cadastroCargoHome cadCargoHome = cadastroCargoHome.getInstancia();
@@ -1322,6 +1323,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jmiCadastrarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarDepartamentoMousePressed
         if (jmiCadastrarDepartamento.isEnabled()) {
+             cadastroCargo.getInstancia().encerrarInstancia();
             finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
             cadastroCargo cadCargo = cadastroCargo.getInstancia();
             cadCargo.setLocationRelativeTo(jSeparator2);
@@ -1331,6 +1333,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jmiConsultarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarDepartamentoMousePressed
         if (jmiConsultarDepartamento.isEnabled()) {
+             cadastroCargo.getInstancia().encerrarInstancia();
             finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
             cadastroCargoHome cadCargoHome = cadastroCargoHome.getInstancia();
             cadCargoHome.setLocationRelativeTo(jSeparator2);
