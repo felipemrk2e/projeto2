@@ -46,7 +46,13 @@ public class cadastroCargo extends javax.swing.JFrame {
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 
     }
-
+  public void zeraAtributosCargoDepartamento(){
+      cargo = null;
+      departamento =null;
+      listModel = null;
+      
+      
+  }
     public static cadastroCargo getInstancia() {
         if (instancia == null) {
             instancia = new cadastroCargo();
@@ -124,10 +130,10 @@ public class cadastroCargo extends javax.swing.JFrame {
     }
 
     public void ZerarCampos() {
-        jtfCodigoDepartamento.setText("");
-        jtfNomeDepartamento.setText("");
-        jftTelefone.setText("");
-        jtfRamal.setText("");
+//        jtfCodigoDepartamento.setText("");
+//        jtfNomeDepartamento.setText("");
+//        jftTelefone.setText("");
+//        jtfRamal.setText("");
         jtfCodigoCargo.setText("");
         jtNomeCargo.setText("");
         jtaDescricaoCargo.setText("");
@@ -142,18 +148,9 @@ public class cadastroCargo extends javax.swing.JFrame {
         cargoDAO.merge(cargo);
         departamento = null;
         cargo =null;
-        
-//         if(departamento !=null){
-//            cargo.setDepartamento(departamento);
-//            cargoDAO.persist(cargo); 
-//           
-//        listModel.addElement(cargo);
-//        jlCargosList.setModel(listModel);
-//            
-//         }
-       
-      
+        carregaListaCargos();
 
+       
     }
 
     public void cadastrarCargo(Cargo cargo, Departamento departamento) {
@@ -164,6 +161,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         cargoDAO.merge(cargo);
         departamento = null;
         cargo =null;
+        carregaListaCargos();
 
     }
 
@@ -175,6 +173,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         departamento.setTelefoneDepartamento(jftTelefone.getText());
         departamentoDAO.persist(departamento);
         this.departamento = departamento;
+        
     }
 
     public void cadastrarDepartamento(Departamento departamento) {
@@ -187,6 +186,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         }
        
         departamentoDAO.merge(departamento);
+        carregaListaCargos();
     }
 
     public void atualizarDepartamento(Departamento departamento) {
@@ -208,10 +208,17 @@ public class cadastroCargo extends javax.swing.JFrame {
     }
 
     public void carregaListaCargos() {
+        DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+        if(departamento !=null){
+            listModel = null;
+            listModel = new DefaultListModel();
+        departamento = departamentoDAO.getById(departamento.getIdDepartamento());
         for (int i = 0; i < departamento.getCargo().size(); i++) {
             listModel.addElement(departamento.getCargo().get(i));
         }
         jlCargosList.setModel(listModel);
+        }
+        
     }
 
     public void carregaDepartamentos() {
@@ -368,6 +375,11 @@ public class cadastroCargo extends javax.swing.JFrame {
 
         jlCargosList.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCargosList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jlCargosList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jlCargosListValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(jlCargosList);
 
         getContentPane().add(jScrollPane2);
@@ -442,6 +454,7 @@ public class cadastroCargo extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
                         ZerarCampos();
                         departamento = null;
+                        cadastroCargoHome.getInstancia().popularTabela();
                         encerrarInstancia();
                         dispose();
                     }
@@ -465,11 +478,13 @@ public class cadastroCargo extends javax.swing.JFrame {
                    cargo = new Cargo();
                       cadastrarCargo(cargo,departamento);
                         JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
-                        ZerarCampos();
+                         cadastroCargoHome.getInstancia().popularTabela();
+                         ZerarCampos();
                }
                 else {
                         cadastrarCargo(departamento);
                         JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
+                        cadastroCargoHome.getInstancia().popularTabela();
                         ZerarCampos();
                     }
 
@@ -521,6 +536,17 @@ public class cadastroCargo extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jbCancelarMousePressed
+
+    private void jlCargosListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlCargosListValueChanged
+        System.out.println(jlCargosList.getSelectedIndex()); 
+        if(jlCargosList.getSelectedIndex() >=0){
+             cargo = departamento.getCargo().get(jlCargosList.getSelectedIndex());
+             atualizaCargo(cargo);
+        }
+       
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_jlCargosListValueChanged
 
     /**
      * @param args the command line arguments

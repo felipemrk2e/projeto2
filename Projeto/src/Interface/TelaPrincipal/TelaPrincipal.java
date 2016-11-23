@@ -1287,6 +1287,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jbCadastrarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarDepartamentoMousePressed
         if (jbCadastrarDepartamento.isEnabled()) {
+            cadastroCargo.getInstancia().encerrarInstancia();
+            cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
             finalizarInstancias();
             instanciaAberta = 12;
             cadastroCargo cadCargo = cadastroCargo.getInstancia();
