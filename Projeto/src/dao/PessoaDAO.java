@@ -71,6 +71,18 @@ public class PessoaDAO extends DAO<Pessoa> {
         return entityManager.createQuery("FROM Pessoa AS p INNER JOIN p.PessoaFisica").getResultList();
     }
     
+    /**
+        * Retorna uma lista de Pessoas de acordo com a pesquisa.
+        * @param  nome String com o nome da Pessoa
+        * @param telefone String com o telefone
+        * @param cpf String com o cpf (com máscara)
+        * @param cnpj String com o cnpj (com máscara)
+        * @param tipoPessoa inteiro que controla o tipo de Pessoa (Fisica, Juridica)
+        *   0 == pessoaFisica e pessoaJuridica
+        *   1 == pessoaFisica
+        *   2 == pessoaJuridica
+        * @return      lista de Pessoas com base nas condições de pesquisa
+        */
     public List<Pessoa> searchPessoa(String nome, String telefone, String cpf, String cnpj, int tipoPessoa){
         String query = "";
         String or = "";
