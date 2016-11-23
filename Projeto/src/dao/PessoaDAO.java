@@ -112,15 +112,14 @@ public class PessoaDAO extends DAO<Pessoa> {
                 query += or+"pj.pessoaJuridica.cnpj LIKE '%"+cnpj+"%'";
                 or = " or ";
             }
-//            if(query != "")
-//                return entityManager.createQuery("FROM Pessoa.pessoaJuridica pj WHERE "+query).getResultList();
+            
             if(query != "")
                 return entityManager.createQuery("select distinct pe from Pessoa pe " +
                 "join pe.pessoaJuridica pj where "+query).getResultList();
             return entityManager.createQuery("select distinct pe from Pessoa pe join pe.pessoaJuridica pj").getResultList();
         }
         
-        //pessoaJuridica == 3
+        //funcionario == 3
         if(tipoPessoa == 3){
             if(nome != ""){
                 query += "pff.nomePessoa LIKE '%"+nome+"%'";
@@ -130,8 +129,7 @@ public class PessoaDAO extends DAO<Pessoa> {
                 query += or+"pff.pessoaFisica.CPF LIKE '%"+cpf+"%'";
                 or = " or ";
             }
-//            if(query != "")
-//                return entityManager.createQuery("FROM Pessoa.pessoaJuridica pj WHERE "+query).getResultList();
+            
             if(query != "")
                 return entityManager.createQuery("select distinct pe from Pessoa pe " +
                 "join pe.pessoaFisica pf join pf.funcionario pff where "+query).getResultList();
