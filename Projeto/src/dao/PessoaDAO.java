@@ -74,7 +74,6 @@ public class PessoaDAO extends DAO<Pessoa> {
     /**
         * Retorna uma lista de Pessoas de acordo com a pesquisa.
         * @param  nome String com o nome da Pessoa
-        * @param telefone String com o telefone
         * @param cpf String com o cpf (com máscara)
         * @param cnpj String com o cnpj (com máscara)
         * @param tipoPessoa inteiro que controla o tipo de Pessoa (Fisica, Juridica)
@@ -83,7 +82,7 @@ public class PessoaDAO extends DAO<Pessoa> {
         *   2 == pessoaJuridica
         * @return      lista de Pessoas com base nas condições de pesquisa
         */
-    public List<Pessoa> searchPessoa(String nome, String telefone, String cpf, String cnpj, int tipoPessoa){
+    public List<Pessoa> searchPessoa(String nome, String cpf, String cnpj, int tipoPessoa){
         String query = "";
         String or = "";
         
