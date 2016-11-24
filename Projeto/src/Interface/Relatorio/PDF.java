@@ -37,7 +37,8 @@ import javax.print.PrintServiceLookup;
 import javax.print.SimpleDoc;
 
 public class PDF {
-    private static PrintService impressora; 
+
+    private static PrintService impressora;
     Document doc = null;
     OutputStream os = null;
 
@@ -76,7 +77,7 @@ public class PDF {
     }
 
     public void addTituloPDF(String titulo) throws DocumentException {
-        abrePDF();
+//        abrePDF();
         Font f = new Font(FontFamily.COURIER, 20, Font.BOLD);
         Paragraph p1 = new Paragraph(titulo, f);
         p1.setAlignment(Element.ALIGN_CENTER);
@@ -85,20 +86,21 @@ public class PDF {
     }
 
     public void addLinhaPDF(String linha) throws DocumentException {
-        abrePDF();
+//        abrePDF();
         Paragraph p1 = new Paragraph(linha);
         doc.add(p1);
     }
 
     public void addImagemPDF(String pathImagem) throws BadElementException, IOException, DocumentException {
-        abrePDF();
+//        abrePDF();
         Image img = Image.getInstance(pathImagem);
         img.setAlignment(Element.ALIGN_CENTER);
+//        img.scaleToFit(826, 1100);
         doc.add(img);
     }
 
-    public void addTabela(String[] tabela, String titulo, int colunas) throws DocumentException {
-        abrePDF();
+    public void addTabela(String[] tabela) throws DocumentException {
+//        abrePDF();
         //Edição largura das colunas
         //PdfPTable table = new PdfPTable(new float[] { 0.2f, 0.2f, 0.6f });
 
@@ -110,14 +112,18 @@ public class PDF {
 //        header.setBorderWidthBottom(2.0f);
 //        header.setBorderColorBottom(BaseColor.BLUE);
 //        header.setBorder(Rectangle.BOTTOM);
-        PdfPTable table = new PdfPTable(colunas);
-        PdfPCell header = new PdfPCell(new Paragraph(titulo));
-        header.setColspan(colunas);
-        table.addCell(header);
+        
+        PdfPTable table = new PdfPTable(new float[]{0.2f,0.6f, 0.2f, 0.6f, 0.6f});
+//        
         for (int i = 0; i < tabela.length; i++) {
             table.addCell(tabela[i]);
         }
         doc.add(table);
+    }
+
+    public void addHeaderTabela(String titulo, int colunas) {
+        PdfPCell header = new PdfPCell(new Paragraph(titulo));
+        header.setColspan(colunas);
     }
 
     public void carregaPDF(String path) throws IOException {
@@ -132,15 +138,6 @@ public class PDF {
         path = new File("C:\\Users\\" + user + "\\Documents\\NetBeansProjects\\projeto2\\Projeto\\Relatório.pdf");
         try {
             DocFlavor dflavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
-//            PrintService[] impressoras = PrintServiceLookup.lookupPrintServices(dflavor, null);
-//            for (PrintService ps : impressoras) {
-//                System.out.println("Impressora Encontrada: " + ps.getName());
-//                if (ps.getName().contains("printer001")) {
-//                    System.out.println("Impressora Selecionada: " + ps.getName());
-//                    impressora = ps;
-//                    break;
-//                }
-//            }
             impressora = PrintServiceLookup.lookupDefaultPrintService();
             DocPrintJob dpj = impressora.createPrintJob();
             FileInputStream fis = new FileInputStream(path);
@@ -159,5 +156,4 @@ public class PDF {
             e.printStackTrace();
         }
     }
-
 }
