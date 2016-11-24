@@ -1305,12 +1305,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             cadastroCargo cadCargo = cadastroCargo.getInstancia();
             cadCargo.setLocationRelativeTo(jSeparator2);
             cadCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            cadCargo.getInstancia().DisableDep();
             cadCargo.setVisible(true);
         }
     }//GEN-LAST:event_jbCadastrarDepartamentoMousePressed
 
     private void jbConsultarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarDepartamentoMousePressed
         if (jbConsultarDepartamento.isEnabled()) {
+             cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
              cadastroCargo.getInstancia().encerrarInstancia();
             finalizarInstancias();
             instanciaAberta = 13;
@@ -1323,16 +1325,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jmiCadastrarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarDepartamentoMousePressed
         if (jmiCadastrarDepartamento.isEnabled()) {
+             cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
              cadastroCargo.getInstancia().encerrarInstancia();
             finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
             cadastroCargo cadCargo = cadastroCargo.getInstancia();
             cadCargo.setLocationRelativeTo(jSeparator2);
+            cadCargo.getInstancia().DisableDep();
             cadCargo.setVisible(true);
         }
     }//GEN-LAST:event_jmiCadastrarDepartamentoMousePressed
 
     private void jmiConsultarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarDepartamentoMousePressed
         if (jmiConsultarDepartamento.isEnabled()) {
+             cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
              cadastroCargo.getInstancia().encerrarInstancia();
             finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
             cadastroCargoHome cadCargoHome = cadastroCargoHome.getInstancia();

@@ -294,7 +294,19 @@ public class cadastroCargoHome extends javax.swing.JFrame {
             cadastroCargo.getInstancia().setVisible(true);
             cadastroCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
             //cadastroCargo.getInstancia().DisableEnable(false);
-            cadastroCargo.getInstancia().jbEditar.setEnabled(false);
+            
+            if(Sessao.getInstance().getUsuario().getNivelAcesso() <=2){
+                cadastroCargo.getInstancia().jbCadastrarDepartamento.setEnabled(true);
+                cadastroCargo.getInstancia().jbCadastrarDepartamento.setText("Editar");
+                cadastroCargo.getInstancia().jbCadastrarCargo.setEnabled(false);
+                cadastroCargo.getInstancia().jbEditar.setEnabled(true);
+            }
+            else{
+             cadastroCargo.getInstancia().jbCadastrarDepartamento.setEnabled(false);
+             cadastroCargo.getInstancia().jbEditar.setEnabled(false);
+             cadastroCargo.getInstancia().jbCadastrarCargo.setEnabled(false);
+        }
+            
             cadastroCargo.getInstancia().setLocationRelativeTo(this);
             cadastroCargo.getInstancia().setAlwaysOnTop(true);
         }
@@ -315,6 +327,13 @@ public class cadastroCargoHome extends javax.swing.JFrame {
             cadastroCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
             cadastroCargo.getInstancia().setVisible(true);
            // cadastroCargo.getInstancia().DisableEnable(false);
+            if(Sessao.getInstance().getUsuario().getNivelAcesso() <=2){
+                cadastroCargo.getInstancia().jbCadastrarDepartamento.setEnabled(true);
+                cadastroCargo.getInstancia().jbCadastrarDepartamento.setText("Editar");
+            }
+            else{
+             cadastroCargo.getInstancia().jbCadastrarDepartamento.setEnabled(false);
+        }
             cadastroCargo.getInstancia().jbEditar.setEnabled(false);
             cadastroCargo.getInstancia().setLocationRelativeTo(this);
             cadastroCargo.getInstancia().setAlwaysOnTop(true);
