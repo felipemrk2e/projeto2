@@ -18,6 +18,7 @@ import Interface.CadImovel.cadastroImovelHome;
 import Interface.Locacao.CadLocacao;
 import Interface.Locacao.CadLocacaoHome;
 import Interface.Locacao.ControleLocacao;
+import Interface.Relatorio.RelatorioHome;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -241,6 +242,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             case 13:
                 cadastroCargoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
                 break;
+            case 14:
+                RelatorioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
             default:
                 System.out.println("=====================================================Não existem instancias abertas!!!");
         }
@@ -441,6 +445,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         break;
                     case 13:
                         cadastroCargoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 14:
+                        RelatorioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
                         break;
                     default:
                         System.out.println("=====================================================Não existem instancias abertas!!!");
@@ -681,7 +688,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbConsultarFuncionario = new javax.swing.JButton();
         jbCadastrarDepartamento = new javax.swing.JButton();
         jbConsultarDepartamento = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jbRelatorios = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jmBarraMenu = new javax.swing.JMenuBar();
         jmCadastrar = new javax.swing.JMenu();
@@ -852,9 +859,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/relatórios.png"))); // NOI18N
-        jButton1.setText("<html><center>Emitir<br/>Relatórios</html>");
+        jbRelatorios.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/relatórios.png"))); // NOI18N
+        jbRelatorios.setText("<html><center>Emitir<br/>Relatórios</html>");
+        jbRelatorios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbRelatoriosMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -890,7 +902,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(28, 28, 28))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -921,7 +933,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jbConsultarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -1312,8 +1324,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jbConsultarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarDepartamentoMousePressed
         if (jbConsultarDepartamento.isEnabled()) {
-             cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
-             cadastroCargo.getInstancia().encerrarInstancia();
+            cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
+            cadastroCargo.getInstancia().encerrarInstancia();
             finalizarInstancias();
             instanciaAberta = 13;
             cadastroCargoHome cadCargoHome = cadastroCargoHome.getInstancia();
@@ -1325,8 +1337,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jmiCadastrarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarDepartamentoMousePressed
         if (jmiCadastrarDepartamento.isEnabled()) {
-             cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
-             cadastroCargo.getInstancia().encerrarInstancia();
+            cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
+            cadastroCargo.getInstancia().encerrarInstancia();
             finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
             cadastroCargo cadCargo = cadastroCargo.getInstancia();
             cadCargo.setLocationRelativeTo(jSeparator2);
@@ -1337,8 +1349,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jmiConsultarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarDepartamentoMousePressed
         if (jmiConsultarDepartamento.isEnabled()) {
-             cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
-             cadastroCargo.getInstancia().encerrarInstancia();
+            cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
+            cadastroCargo.getInstancia().encerrarInstancia();
             finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
             cadastroCargoHome cadCargoHome = cadastroCargoHome.getInstancia();
             cadCargoHome.setLocationRelativeTo(jSeparator2);
@@ -1362,6 +1374,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jmiLogoffMousePressed
+
+    private void jbRelatoriosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRelatoriosMouseClicked
+        if (jbRelatorios.isEnabled()) {
+            finalizarInstancias();
+            instanciaAberta = 14;
+           RelatorioHome relaotioHome = RelatorioHome.getInstancia();
+            relaotioHome.setLocationRelativeTo(jSeparator2);
+            relaotioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            relaotioHome.setVisible(true);
+        }
+    }//GEN-LAST:event_jbRelatoriosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1411,7 +1434,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
@@ -1427,6 +1449,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jbControleImovel;
     private javax.swing.JButton jbControleLocacao;
     private javax.swing.JButton jbFuncionario;
+    private javax.swing.JButton jbRelatorios;
     private javax.swing.JLabel jlLogoff;
     private javax.swing.JLabel jlSair;
     private javax.swing.JLabel jlTroca;

@@ -5,10 +5,15 @@
  */
 package Interface.Relatorio;
 
+import Interface.TelaPrincipal.Sessao;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.DocumentException;
+import dao.CidadeDAO;
+import dao.EstadoDAO;
 import dao.ImovelDAO;
 import dao.PessoaDAO;
+import global.model.Cidade;
+import global.model.Estado;
 import imovel.model.Imovel;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import model.pessoa.Pessoa;
 
 /**
@@ -27,37 +34,93 @@ public class RelatorioHome extends javax.swing.JFrame {
     /**
      * Creates new form RelatorioHome
      */
+    private static RelatorioHome instancia;
+
+    private List<Cidade> listaCidadesGlobal;
+    private int indexCidade;
+
     public RelatorioHome() {
+        this.setUndecorated(true);
         initComponents();
+        setAlwaysOnTop(true);
+        this.setTitle("Relatórios");
+        carregaEstados();
+        carregaCidades();
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
     }
 
-    public void gerarPDFImoveisAtivos() throws FileNotFoundException, DocumentException, BadElementException, IOException {
+    public static RelatorioHome getInstancia() {
+        if (instancia == null) {
+            instancia = new RelatorioHome();
+        }
+        return instancia;
+    }
+
+    public static void encerrarInstancia() {
+        instancia = null;
+    }
+
+    public void acesso(int nivel) {
+        DisableEnable(false);
+        switch (nivel) {
+            case 1:
+                DisableEnable(true);
+                break;
+            case 2:
+                DisableEnable(true);
+                break;
+            case 3:
+                DisableEnable(true);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
+        }
+    }
+
+    public void DisableEnable(boolean b) {
+        jrbAtivos.setEnabled(b);
+        jrbInteresseCompra.setEnabled(b);
+        jrbInteresseLocar.setEnabled(b);
+        jrbInteresseTemporada.setEnabled(b);
+        jrbrLocados.setEnabled(b);
+        jcbEstado.setEnabled(b);
+        jcbCidade.setEnabled(b);
+        jbImprimirRelatorio.setEnabled(b);
+        jbSalvarRelatorio.setEnabled(b);
+    }
+
+    public void gerarPDFImoveisAtivos(long idCidade) throws FileNotFoundException, DocumentException, BadElementException, IOException {
         String user = System.getProperty("user.name");
 
         ImovelDAO imovelDAO = new ImovelDAO();
-        List<Imovel> imoveisAtivos = imovelDAO.ativosPorCidade(8797);
+        List<Imovel> imoveisAtivos = imovelDAO.ativosPorCidade(idCidade);
 
-        PDF pdf = new PDF();
-        pdf.criaPDF();
-        pdf.abrePDF();
+        if (imoveisAtivos.size() > 0) {
+            PDF pdf = new PDF();
+            pdf.criaPDF();
+            pdf.abrePDF();
 
-        pdf.addTituloPDF("Relatório de Imoveis Ativos na Cidade de " + imoveisAtivos.get(0).getEndereco().getCidade().getNomeCidade());
-        pdf.addLinhaPDF("");
-        pdf.addLinhaPDF("");
-        pdf.addImagemPDF("C:\\Users\\" + user + "\\Documents\\NetBeansProjects\\projeto2\\Projeto\\src\\image\\locacao.png");
+            pdf.addTituloPDF("Relatório de Imoveis Ativos na Cidade de " + imoveisAtivos.get(0).getEndereco().getCidade().getNomeCidade());
+            pdf.addLinhaPDF("");
+            pdf.addLinhaPDF("");
+            pdf.addImagemPDF("C:\\Users\\" + user + "\\Documents\\NetBeansProjects\\projeto2\\Projeto\\src\\image\\locacao.png");
 
-        pdf.addLinhaPDF("");
-        pdf.addLinhaPDF("");
-        pdf.addLinhaPDF("Quantidade de Registros: " + imoveisAtivos.size());
-        pdf.addLinhaPDF("");
-        pdf.addLinhaPDF("\n");
-        pdf.addTabela(new String[]{"ID", "Status", "Ano", "Endereço", "Bairro"});
-        for (int i = 0; i < imoveisAtivos.size(); i++) {
-            pdf.addTabela(new String[]{Long.toString(imoveisAtivos.get(i).getIdImovel()), imoveisAtivos.get(i).getStatus().getStatus(), Integer.toString(imoveisAtivos.get(i).getAnoConstrucao()), imoveisAtivos.get(i).getEndereco().getNomeEndereco(), imoveisAtivos.get(i).getEndereco().getBairro()});
+            pdf.addLinhaPDF("");
+            pdf.addLinhaPDF("");
+            pdf.addLinhaPDF("Quantidade de Registros: " + imoveisAtivos.size());
+            pdf.addLinhaPDF("");
+            pdf.addLinhaPDF("\n");
+            pdf.addTabela(new String[]{"ID", "Status", "Ano", "Endereço", "Bairro"});
+            for (int i = 0; i < imoveisAtivos.size(); i++) {
+                pdf.addTabela(new String[]{Long.toString(imoveisAtivos.get(i).getIdImovel()), imoveisAtivos.get(i).getStatus().getStatus(), Integer.toString(imoveisAtivos.get(i).getAnoConstrucao()), imoveisAtivos.get(i).getEndereco().getNomeEndereco(), imoveisAtivos.get(i).getEndereco().getBairro()});
+            }
+            pdf.fechaPDF();
+            System.out.println("=========================================================================================");
+            pdf.carregaPDF(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Não há itens para essa pesquisa!");
         }
-        pdf.fechaPDF();
-        System.out.println("=========================================================================================");
-        pdf.carregaPDF(null);
+
     }
 
     public void gerarPDFInteresseCompra() throws FileNotFoundException, DocumentException, BadElementException, IOException {
@@ -186,6 +249,31 @@ public class RelatorioHome extends javax.swing.JFrame {
         return "Sem Telefone";
     }
 
+    public void carregaEstados() {
+        EstadoDAO estadoDAO = new EstadoDAO();
+        Estado estado = new Estado();
+        List<Estado> listaEstados = estadoDAO.getAll();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaEstados.toArray());
+        jcbEstado.setModel(defaultComboBox);
+    }
+
+    public void carregaCidades() {
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        List<Cidade> listaCidades = cidadeDAO.getAll();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaCidades.toArray());
+        jcbCidade.setModel(defaultComboBox);
+    }
+
+    public void carregaCidadeEstados() {
+        Estado estado = (Estado) jcbEstado.getSelectedItem();
+        CidadeDAO cidadeDAO = new CidadeDAO();
+        List<Cidade> listaCidades = cidadeDAO.getWhereIdEstado(estado.getId());
+        jcbCidade.removeAllItems();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaCidades.toArray());
+        jcbCidade.setModel(defaultComboBox);
+        listaCidadesGlobal = listaCidades;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -205,8 +293,8 @@ public class RelatorioHome extends javax.swing.JFrame {
         jbCancelar = new javax.swing.JButton();
         jbImprimirRelatorio = new javax.swing.JButton();
         jlTipoRelatório = new javax.swing.JLabel();
-        jcbEstado = new javax.swing.JComboBox<>();
-        jcbCidade = new javax.swing.JComboBox<>();
+        jcbEstado = new javax.swing.JComboBox<String>();
+        jcbCidade = new javax.swing.JComboBox<String>();
         jlEstado = new javax.swing.JLabel();
         jlCidade = new javax.swing.JLabel();
         jsRelatorio = new javax.swing.JSeparator();
@@ -220,55 +308,30 @@ public class RelatorioHome extends javax.swing.JFrame {
         btgRelatotio.add(jrbAtivos);
         jrbAtivos.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jrbAtivos.setText("Relatório de Imóveis Ativos por Cidade");
-        jrbAtivos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jrbAtivosMouseClicked(evt);
-            }
-        });
         getContentPane().add(jrbAtivos);
-        jrbAtivos.setBounds(50, 100, 340, 30);
+        jrbAtivos.setBounds(50, 100, 310, 30);
 
         btgRelatotio.add(jrbInteresseCompra);
         jrbInteresseCompra.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jrbInteresseCompra.setText("Relatório de Clientes Interessados em Comprar Imóveis");
-        jrbInteresseCompra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jrbInteresseCompraMouseClicked(evt);
-            }
-        });
         getContentPane().add(jrbInteresseCompra);
         jrbInteresseCompra.setBounds(50, 140, 510, 30);
 
         btgRelatotio.add(jrbInteresseLocar);
         jrbInteresseLocar.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jrbInteresseLocar.setText("Relatório de Clientes Interessados em Locar Imóveis");
-        jrbInteresseLocar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jrbInteresseLocarMouseClicked(evt);
-            }
-        });
         getContentPane().add(jrbInteresseLocar);
         jrbInteresseLocar.setBounds(50, 180, 420, 30);
 
         btgRelatotio.add(jrbInteresseTemporada);
         jrbInteresseTemporada.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jrbInteresseTemporada.setText("Relatório de Clientes Interessados em Imóveis para Temporada");
-        jrbInteresseTemporada.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jrbInteresseTemporadaMouseClicked(evt);
-            }
-        });
         getContentPane().add(jrbInteresseTemporada);
         jrbInteresseTemporada.setBounds(50, 220, 480, 30);
 
         btgRelatotio.add(jrbrLocados);
         jrbrLocados.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jrbrLocados.setText("Relatório de Imóveis Locados");
-        jrbrLocados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jrbrLocadosMouseClicked(evt);
-            }
-        });
         getContentPane().add(jrbrLocados);
         jrbrLocados.setBounds(50, 260, 250, 30);
 
@@ -311,12 +374,17 @@ public class RelatorioHome extends javax.swing.JFrame {
         jlTipoRelatório.setBounds(40, 50, 250, 30);
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jcbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEstadoActionPerformed(evt);
+            }
+        });
         getContentPane().add(jcbEstado);
         jcbEstado.setBounds(370, 100, 160, 30);
 
         jcbCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbCidade);
         jcbCidade.setBounds(540, 100, 140, 30);
 
@@ -337,35 +405,63 @@ public class RelatorioHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jrbAtivosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbAtivosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbAtivosMouseClicked
-
-    private void jrbInteresseCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbInteresseCompraMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbInteresseCompraMouseClicked
-
-    private void jrbInteresseLocarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbInteresseLocarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbInteresseLocarMouseClicked
-
-    private void jrbInteresseTemporadaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbInteresseTemporadaMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbInteresseTemporadaMouseClicked
-
-    private void jrbrLocadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbrLocadosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbrLocadosMouseClicked
-
     private void jbImprimirRelatorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbImprimirRelatorioMouseClicked
-        // TODO add your handling code here:
+        if (jbImprimirRelatorio.isEnabled()) {
+            PDF pdf = new PDF();
+            if (jrbAtivos.isSelected()) {
+                try {
+                    Cidade cidadeSelecionada = (Cidade) jcbCidade.getSelectedItem();
+                    gerarPDFImoveisAtivos(cidadeSelecionada.getIdCidade());
+                    pdf.imprimePDF(null);
+                } catch (DocumentException ex) {
+                    Logger.getLogger(RelatorioHome.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(RelatorioHome.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (jrbInteresseCompra.isSelected()) {
+                try {
+                    gerarPDFInteresseCompra();
+                    pdf.imprimePDF(null);
+                } catch (DocumentException ex) {
+                    Logger.getLogger(RelatorioHome.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(RelatorioHome.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (jrbrLocados.isSelected()) {
+                gerarPDFImoveisLocados();
+                pdf.imprimePDF(null);
+            } else if (jrbInteresseLocar.isSelected()) {
+                try {
+                    gerarPDFInteresseLocacao();
+                    pdf.imprimePDF(null);
+                } catch (DocumentException ex) {
+                    Logger.getLogger(RelatorioHome.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(RelatorioHome.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (jrbInteresseTemporada.isSelected()) {
+                try {
+                    gerarPDFInteresseTemporada();
+                    pdf.imprimePDF(null);
+                } catch (DocumentException ex) {
+                    Logger.getLogger(RelatorioHome.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(RelatorioHome.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione o tipo de Relatório!");
+            }
+            RelatorioHome.getInstancia().encerrarInstancia();
+            dispose();
+        }
     }//GEN-LAST:event_jbImprimirRelatorioMouseClicked
 
     private void jbSalvarRelatorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSalvarRelatorioMouseClicked
         if (jbSalvarRelatorio.isEnabled()) {
             if (jrbAtivos.isSelected()) {
                 try {
-                    gerarPDFImoveisAtivos();
+                    Cidade cidadeSelecionada = (Cidade) jcbCidade.getSelectedItem();
+                    gerarPDFImoveisAtivos(cidadeSelecionada.getIdCidade());
                 } catch (DocumentException ex) {
                     Logger.getLogger(RelatorioHome.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
@@ -397,13 +493,23 @@ public class RelatorioHome extends javax.swing.JFrame {
                 } catch (IOException ex) {
                     Logger.getLogger(RelatorioHome.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione o tipo de Relatório!");
             }
+            RelatorioHome.getInstancia().encerrarInstancia();
+            dispose();
         }
     }//GEN-LAST:event_jbSalvarRelatorioMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
+
+    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
+        if (jcbEstado.getSelectedIndex() > -1) {
+            carregaCidadeEstados();
+        }
+    }//GEN-LAST:event_jcbEstadoActionPerformed
 
     /**
      * @param args the command line arguments
