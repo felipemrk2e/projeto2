@@ -293,8 +293,8 @@ public class RelatorioHome extends javax.swing.JFrame {
         jbCancelar = new javax.swing.JButton();
         jbImprimirRelatorio = new javax.swing.JButton();
         jlTipoRelatório = new javax.swing.JLabel();
-        jcbEstado = new javax.swing.JComboBox<String>();
-        jcbCidade = new javax.swing.JComboBox<String>();
+        jcbEstado = new javax.swing.JComboBox<>();
+        jcbCidade = new javax.swing.JComboBox<>();
         jlEstado = new javax.swing.JLabel();
         jlCidade = new javax.swing.JLabel();
         jsRelatorio = new javax.swing.JSeparator();
@@ -374,7 +374,7 @@ public class RelatorioHome extends javax.swing.JFrame {
         jlTipoRelatório.setBounds(40, 50, 250, 30);
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbEstadoActionPerformed(evt);
@@ -384,7 +384,7 @@ public class RelatorioHome extends javax.swing.JFrame {
         jcbEstado.setBounds(370, 100, 160, 30);
 
         jcbCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbCidade);
         jcbCidade.setBounds(540, 100, 140, 30);
 

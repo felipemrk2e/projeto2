@@ -40,7 +40,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private static TelaPrincipal instancia;
     private int tentativas = 0;
     private boolean logado = false;
-    private int instanciaAberta;
+    public int instanciaAberta;
 
     /**
      * Creates new form TelaPrincipal
@@ -1379,7 +1379,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         if (jbRelatorios.isEnabled()) {
             finalizarInstancias();
             instanciaAberta = 14;
-           RelatorioHome relaotioHome = RelatorioHome.getInstancia();
+            RelatorioHome relaotioHome = RelatorioHome.getInstancia();
             relaotioHome.setLocationRelativeTo(jSeparator2);
             relaotioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
             relaotioHome.setVisible(true);

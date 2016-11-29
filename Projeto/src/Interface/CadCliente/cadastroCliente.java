@@ -6,6 +6,7 @@
 package Interface.CadCliente;
 
 import Interface.TelaPrincipal.Sessao;
+import Interface.TelaPrincipal.TelaPrincipal;
 import dao.CidadeDAO;
 import dao.EstadoCivilDAO;
 import dao.EstadoDAO;
@@ -52,6 +53,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     public static PessoaFisica fiadorGlobal = null;
     private List<Cidade> listaCidadesGlobal;
     private int indexCidade;
+    
 
     /**
      * Creates new form cadastroCliente
@@ -1042,6 +1044,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                             cadastroClienteHome.getInstancia().setVisible(true);
                             cadastroClienteHome.getInstancia().setLocationRelativeTo(this);
                             cadastroClienteHome.getInstancia().popularTabela();
+                            instanciaAberta = 3;
                             dispose();
                         } else {
                             cadastrarPessoaFisica(pessoaFisica);
@@ -1070,6 +1073,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                             cadastroClienteHome.getInstancia().setVisible(true);
                             cadastroClienteHome.getInstancia().setLocationRelativeTo(this);
                             cadastroClienteHome.getInstancia().popularTabela();
+                            instanciaAberta = 3;
                             dispose();
                         } else {
                             cadastrarPessoaJuridica(pessoaJuridica);

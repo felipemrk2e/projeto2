@@ -13,6 +13,7 @@ import model.pessoa.Login;
  */
 public class Sessao{
    private static Sessao instance = null;
+   public int instanciaAberta;
    private Login usuario;
    private Sessao(){
    }
