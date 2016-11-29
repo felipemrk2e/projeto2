@@ -242,59 +242,59 @@ public class cadastroImovel extends javax.swing.JFrame {
 
         //Endereço
         jtfLogradouro.setEditable(b);
-        jtfNumero.setEnabled(b);
-        jtfComplemento.setEnabled(b);
-        jtfBairro.setEnabled(b);
-        jtCep.setEnabled(b);
-        jtfReferencia.setEnabled(b);
-        jtfZona.setEnabled(b);
-        jtfCondominio.setEnabled(b);
-        jcbCidade.setEnabled(b);
-        jcbEstado.setEnabled(b);
-        jcbStatus.setEnabled(b);
+        jtfNumero.setEditable(b);
+        jtfComplemento.setEditable(b);
+        jtfBairro.setEditable(b);
+        jtCep.setEditable(b);
+        jtfReferencia.setEditable(b);
+        jtfZona.setEditable(b);
+        jtfCondominio.setEditable(b);
+        jcbCidade.setEditable(b);
+        jcbEstado.setEditable(b);
+        jcbStatus.setEditable(b);
 
         //valores
-        jtValorLocacaoMes.setEnabled(b);
-        jtValorVenda.setEnabled(b);
-        jtValorTemporada.setEnabled(b);
-        jtValorIptu.setEnabled(b);
-        jtValorCondominio.setEnabled(b);
-        jtValorDiaria.setEnabled(b);
+        jtValorLocacaoMes.setEditable(b);
+        jtValorVenda.setEditable(b);
+        jtValorTemporada.setEditable(b);
+        jtValorIptu.setEditable(b);
+        jtValorCondominio.setEditable(b);
+        jtValorDiaria.setEditable(b);
 
         //Outros 
-        jtMatriculo.setEnabled(b);
-        jtContaAgua.setEnabled(b);
-        jtContaLuz.setEnabled(b);
-        jtIptu.setEnabled(b);
-        jtContrato.setEnabled(b);
-        jtCartorio.setEnabled(b);
-        jtSituacaoEscritura.setEnabled(b);
+        jtMatriculo.setEditable(b);
+        jtContaAgua.setEditable(b);
+        jtContaLuz.setEditable(b);
+        jtIptu.setEditable(b);
+        jtContrato.setEditable(b);
+        jtCartorio.setEditable(b);
+        jtSituacaoEscritura.setEditable(b);
 
-        jtLargura.setEnabled(b);
-        jtComprimento.setEnabled(b);
-        jtAreaConstruida.setEnabled(b);
+        jtLargura.setEditable(b);
+        jtComprimento.setEditable(b);
+        jtAreaConstruida.setEditable(b);
 
-        jtMobilia.setEnabled(b);
-        jtChaves.setEnabled(b);
-        jtObservacao.setEnabled(b);
+        jtMobilia.setEditable(b);
+        jtChaves.setEditable(b);
+        jtObservacao.setEditable(b);
 
         //Descrição  
-        jtQuartos.setEnabled(b);
-        jtSuites.setEnabled(b);
-        jtSalas.setEnabled(b);
-        jtBanheiros.setEnabled(b);
-        jtLavados.setEnabled(b);
-        jtAreaServico.setEnabled(b);
-        jtLavanderia.setEnabled(b);
-        jtPisos.setEnabled(b);
-        jtIdadeImovel.setEnabled(b);
-        jtPscina.setEnabled(b);
-        jtVagasGaragem.setEnabled(b);
-        jtDepEmpregada.setEnabled(b);
-        jtTipoImovel.setEnabled(b);
-        jtAreaExterna.setEnabled(b);
-        jtAcabamento.setEnabled(b);
-        jtOutros.setEnabled(b);
+        jtQuartos.setEditable(b);
+        jtSuites.setEditable(b);
+        jtSalas.setEditable(b);
+        jtBanheiros.setEditable(b);
+        jtLavados.setEditable(b);
+        jtAreaServico.setEditable(b);
+        jtLavanderia.setEditable(b);
+        jtPisos.setEditable(b);
+        jtIdadeImovel.setEditable(b);
+        jtPscina.setEditable(b);
+        jtVagasGaragem.setEditable(b);
+        jtDepEmpregada.setEditable(b);
+        jtTipoImovel.setEditable(b);
+        jtAreaExterna.setEditable(b);
+        jtAcabamento.setEditable(b);
+        jtOutros.setEditable(b);
 
     }
 
@@ -2340,7 +2340,8 @@ public class cadastroImovel extends javax.swing.JFrame {
                 if (imovelDao.persist(imovel)) {
                     JOptionPane.showMessageDialog(this, "Atualização Efetuado com Sucesso !");
 
-                    new cadastroImovelHome().setVisible(true);
+                    cadastroImovelHome.getInstancia().setLocationRelativeTo(this);
+                    cadastroImovelHome.getInstancia().setVisible(true);
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Erro durante a Atualização !");
@@ -2364,7 +2365,8 @@ public class cadastroImovel extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Cadastro Efetuado com Sucesso !");
                 System.out.println("Cadastro Efetuado");
 
-                new cadastroImovelHome().setVisible(true);
+                cadastroImovelHome.getInstancia().setLocationRelativeTo(this);
+                cadastroImovelHome.getInstancia().setVisible(true);
                 dispose();
             } else {
 
