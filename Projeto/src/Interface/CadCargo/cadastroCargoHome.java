@@ -27,9 +27,9 @@ public class cadastroCargoHome extends javax.swing.JFrame {
      * Creates new form cadastroCargoHome
      */
     public cadastroCargoHome() {
-      //  this.setUndecorated(true);
+     this.setUndecorated(true);
         initComponents();
-      //  setAlwaysOnTop(true);
+      setAlwaysOnTop(true);
         this.setTitle("Consulta de Departamento");
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
         popularTabela();
