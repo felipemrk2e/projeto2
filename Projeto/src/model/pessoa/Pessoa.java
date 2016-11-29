@@ -42,6 +42,9 @@ public class Pessoa {
     private long idPessoa;
 
     @Column
+    private boolean ativo;
+
+    @Column
     private String nomePessoa;
 
     @Column
@@ -52,10 +55,10 @@ public class Pessoa {
 
     @Column
     private Date dataNascimento;
-    
+
     @Transient
     private boolean tipoPessoa;
-    
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idEndereco", nullable = true)
     private Endereco endereco;
@@ -73,19 +76,21 @@ public class Pessoa {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idPessoa", nullable = true)
     private PessoaFisica pessoaFisica;
-    
+
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinTable(name = "Pessoa_has_Interesse", 
-    joinColumns = { @JoinColumn(name = "idPessoa") }, 
-    inverseJoinColumns = { @JoinColumn(name = "idTipoContrato") })
+    @JoinTable(name = "Pessoa_has_Interesse",
+            joinColumns = {
+                @JoinColumn(name = "idPessoa")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "idTipoContrato")})
     private List<TipoContrato> interesses = new ArrayList<TipoContrato>();
-    
+
     @OneToMany(
-            mappedBy = "pessoa", 
-            targetEntity = Locacao.class, 
+            mappedBy = "pessoa",
+            targetEntity = Locacao.class,
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    private List<Locacao> imoveisLocados =  new ArrayList<>();
+    private List<Locacao> imoveisLocados = new ArrayList<>();
 
     public Pessoa() {
 
@@ -122,8 +127,8 @@ public class Pessoa {
 
     public void setPessoaFisica(PessoaFisica pessoaFisica) {
         this.pessoaFisica = pessoaFisica;
-    }    
-    
+    }
+
     public long getIdPessoa() {
         return idPessoa;
     }
@@ -132,6 +137,16 @@ public class Pessoa {
         this.idPessoa = idPessoa;
     }
 
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    
+    
     public String getNomePessoa() {
         return nomePessoa;
     }
@@ -191,7 +206,7 @@ public class Pessoa {
     public void setInteresses(List<TipoContrato> interesses) {
         this.interesses = interesses;
     }
-       
+
     public void addInteresse(TipoContrato interesse) {
         this.interesses.add(interesse);
     }
@@ -203,17 +218,17 @@ public class Pessoa {
     public void setTipoPessoa(boolean tipoPessoa) {
         this.tipoPessoa = tipoPessoa;
     }
-    
-    public List<Locacao> getImoveisLocados(){
+
+    public List<Locacao> getImoveisLocados() {
         return this.imoveisLocados;
     }
-    
-    public void addImovelLocado(Imovel imovel, String dataInicio, String dataFim){
+
+    public void addImovelLocado(Imovel imovel, String dataInicio, String dataFim) {
         Locacao locacao = new Locacao(imovel, this, dataInicio, dataFim);
         this.imoveisLocados.add(locacao);
         imovel.setLocacao(locacao);
     }
-    
+
 //    public void removeLocacao(Imovel imovel) {
 //    	Locacao locacao = new Locacao(imovel, this, "", "");
 //        imovel.removeLocacao();
@@ -223,8 +238,6 @@ public class Pessoa {
 //        locacao.setDataInicio(null);
 //        locacao.setDataFim(null);
 //    }
-    
-    
     @Override
     public String toString() {
         return nomePessoa;

@@ -74,7 +74,16 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     public void popularTabela() {
         List<Funcionario> funcionarios = new ArrayList<Funcionario>();
         funcionarios = FuncionarioDAO.getInstancia().getAll();
-        jtFuncionarios.setModel(new FuncionarioTableModel(funcionarios));
+        List<Funcionario> funcionariosAtivos = new ArrayList<Funcionario>();
+        
+        for (int i = 0; i < funcionarios.size(); i++) {           
+            if (funcionarios.get(i).isAtivo()) {
+                funcionariosAtivos.add(funcionarios.get(i));
+            }
+        }
+        if (funcionariosAtivos != null) {
+            jtFuncionarios.setModel(new FuncionarioTableModel(funcionariosAtivos));
+        }
     }
 
     public void popularTabelaQuery() {
@@ -276,8 +285,9 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
             }
             FuncionarioTableModel funcionarioModel = (FuncionarioTableModel) jtFuncionarios.getModel();
             Funcionario funcionarioSelecionado = funcionarioModel.get(linhaSelecionada);
+            funcionarioSelecionado.setAtivo(false);
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-            funcionarioDAO.removeById(funcionarioSelecionado.getIdPessoa());
+            funcionarioDAO.merge(funcionarioSelecionado);
             funcionarioModel.removeRow(linhaSelecionada);
         } // TODO add your handling code here:
     }//GEN-LAST:event_jbRemoverMouseClicked

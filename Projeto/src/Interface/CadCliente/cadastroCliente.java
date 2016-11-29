@@ -211,6 +211,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
         PessoaFisica pessoaFisica = new PessoaFisica();
         pessoaFisica.setTipoPessoa(true);
+        pessoaFisica.setAtivo(true);
         pessoaFisica.setNomePessoa(jtfNome.getText());
         pessoaFisica.setCPF(jftCPF.getText());
         pessoaFisica.setRG(jtfRG.getText());
@@ -372,6 +373,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
         PessoaJuridica pessoaJuridica = new PessoaJuridica();
         pessoaJuridica.setTipoPessoa(false);
+        pessoaJuridica.setAtivo(true);
         pessoaJuridica.setNomePessoa(jtfNome.getText());
         pessoaJuridica.setCnpj(jftCPF.getText());
         pessoaJuridica.setInscricaoEstadual(jtfRG.getText());
