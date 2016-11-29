@@ -205,6 +205,7 @@ public class Teste {
 
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         Funcionario funcionario = new Funcionario();
+        funcionario.setAtivo(true);
         funcionario.setNomePessoa("Nome Funcionario");
         funcionario.setEmail("email@");
         funcionario.setObservacoes("xxxxx");

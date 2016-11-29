@@ -65,4 +65,8 @@ public class PessoaJuridicaDAO extends DAO<PessoaJuridica>{
     public  List<PessoaJuridica> getPorCNPJ(String cnpj){
          return entityManager.createQuery("FROM Pessoa WHERE cnpj = '"+cnpj+"'").getResultList();
     }
+    
+    public List<PessoaJuridica> getAtivos(){
+        return entityManager.createQuery("FROM PessoaJuridica p WHERE p.ativo = 1").getResultList();
+    }
 }

@@ -71,6 +71,10 @@ public class PessoaDAO extends DAO<Pessoa> {
         return entityManager.createQuery("FROM Pessoa AS p INNER JOIN p.PessoaFisica").getResultList();
     }
     
+    public List<Pessoa> getAtivos(){
+        return entityManager.createQuery("FROM Pessoa p WHERE p.ativo = 1").getResultList();
+    }
+    
     /**
         * Retorna uma lista de Pessoas de acordo com a pesquisa.
         * @param  nome String com o nome da Pessoa

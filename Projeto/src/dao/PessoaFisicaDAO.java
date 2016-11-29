@@ -70,4 +70,8 @@ public class PessoaFisicaDAO extends DAO<PessoaFisica> {
     public List<PessoaFisica> getPorCPF(String cpf) {
         return entityManager.createQuery("FROM PessoaFisica WHERE cpf = '" + cpf + "'").getResultList();
     }
+    
+    public List<PessoaFisica> getAtivos(){
+        return entityManager.createQuery("FROM PessoaFisica p WHERE p.ativo = 1").getResultList();
+    }
 }

@@ -292,17 +292,10 @@ public class cadastroClienteHome extends javax.swing.JFrame {
 
             PessoaDAO pessoaDAO = new PessoaDAO();
             List<Pessoa> pessoas = new ArrayList<Pessoa>();
-            pessoas = pessoaDAO.getAll();
+            pessoas = pessoaDAO.getAtivos();
 
-            List<Pessoa> pessoasAtivas = new ArrayList<Pessoa>();
-
-            for (int i = 0; i < pessoas.size(); i++) {
-                if (pessoas.get(i).isAtivo()) {
-                    pessoasAtivas.add(pessoas.get(i));
-                }
-            }
-            if (pessoasAtivas != null) {
-                jtClientes.setModel(new PessoaTableModel(pessoasAtivas));
+            if (pessoas != null) {
+                jtClientes.setModel(new PessoaTableModel(pessoas));
             }
         } else if (jcbPessoaFisica.isSelected()) {
             jlCPF.setVisible(true);
@@ -313,16 +306,10 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             mascaraCPF_CNPJ(true);
             PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
             List<PessoaFisica> pessoasFisicas = new ArrayList<PessoaFisica>();
-            pessoasFisicas = pessoaFisicaDAO.getAll();
-            List<PessoaFisica> pessoasFisicasAtivas = new ArrayList<PessoaFisica>();
+            pessoasFisicas = pessoaFisicaDAO.getAtivos();
 
-            for (int i = 0; i < pessoasFisicas.size(); i++) {
-                if (pessoasFisicas.get(i).isAtivo()) {
-                    pessoasFisicasAtivas.add(pessoasFisicas.get(i));
-                }
-            }
-            if (pessoasFisicasAtivas != null) {
-                jtClientes.setModel(new PessoaFisicaTableModel(pessoasFisicasAtivas));
+            if (pessoasFisicas != null) {
+                jtClientes.setModel(new PessoaFisicaTableModel(pessoasFisicas));
             }
         } else if (jcbPessoaJuridica.isSelected()) {
             jlCPF.setVisible(true);
@@ -333,16 +320,10 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             mascaraCPF_CNPJ(false);
             PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
             List<PessoaJuridica> pessoasJuridicas = new ArrayList<PessoaJuridica>();
-            pessoasJuridicas = pessoaJuridicaDAO.getAll();
-            List<PessoaJuridica> pessoasJuridicasAtivas = new ArrayList<PessoaJuridica>();
+            pessoasJuridicas = pessoaJuridicaDAO.getAtivos();
 
-            for (int i = 0; i < pessoasJuridicas.size(); i++) {
-                if (pessoasJuridicas.get(i).isAtivo()) {
-                    pessoasJuridicasAtivas.add(pessoasJuridicas.get(i));
-                }
-            }
-            if (pessoasJuridicasAtivas != null) {
-                jtClientes.setModel(new PessoaJuridicaTableModel(pessoasJuridicasAtivas));
+            if (pessoasJuridicas != null) {
+                jtClientes.setModel(new PessoaJuridicaTableModel(pessoasJuridicas));
             }
 
         } else {
@@ -477,28 +458,41 @@ public class cadastroClienteHome extends javax.swing.JFrame {
                 return; //Nada selecionado
             }
             if (jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
-                PessoaTableModel pessoaModel = (PessoaTableModel) jtClientes.getModel();
-                Pessoa pessoaSelecionada = pessoaModel.get(linhaSelecionada);
-                PessoaDAO pessoaDAO = new PessoaDAO();
-                pessoaSelecionada.setAtivo(false);
-                pessoaDAO.merge(pessoaSelecionada);
-                pessoaModel.removeRow(linhaSelecionada);
-
+                String ObjButtons[] = {"Sim", "Não"};
+                int PromptResult = JOptionPane.showOptionDialog(this, "Tem certeza que deseja remover esse registro?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                    PessoaTableModel pessoaModel = (PessoaTableModel) jtClientes.getModel();
+                    Pessoa pessoaSelecionada = pessoaModel.get(linhaSelecionada);
+                    PessoaDAO pessoaDAO = new PessoaDAO();
+                    pessoaSelecionada.setAtivo(false);
+                    pessoaDAO.merge(pessoaSelecionada);
+                    pessoaModel.removeRow(linhaSelecionada);
+                    JOptionPane.showMessageDialog(this, "Remoção efetuada com sucesso!");
+                }
             } else if (jcbPessoaFisica.isSelected()) {
-                PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jtClientes.getModel();
-                PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
-                PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-                pessoaFisicaSelecionada.setAtivo(false);
-                pessoaFisicaDAO.merge(pessoaFisicaSelecionada);
-                pessoaFisicaModel.removeRow(linhaSelecionada);
-
+                String ObjButtons[] = {"Sim", "Não"};
+                int PromptResult = JOptionPane.showOptionDialog(this, "Tem certeza que deseja remover esse registro?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                    PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jtClientes.getModel();
+                    PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
+                    PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+                    pessoaFisicaSelecionada.setAtivo(false);
+                    pessoaFisicaDAO.merge(pessoaFisicaSelecionada);
+                    pessoaFisicaModel.removeRow(linhaSelecionada);
+                    JOptionPane.showMessageDialog(this, "Remoção efetuada com sucesso!");
+                }
             } else if (jcbPessoaJuridica.isSelected()) {
-                PessoaJuridicaTableModel pessoaJuridicaModel = (PessoaJuridicaTableModel) jtClientes.getModel();
-                PessoaJuridica pessoaJuridicaSelecionada = pessoaJuridicaModel.get(linhaSelecionada);
-                PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
-                pessoaJuridicaSelecionada.setAtivo(false);
-                pessoaJuridicaDAO.merge(pessoaJuridicaSelecionada);
-                pessoaJuridicaModel.removeRow(linhaSelecionada);
+                String ObjButtons[] = {"Sim", "Não"};
+                int PromptResult = JOptionPane.showOptionDialog(this, "Tem certeza que deseja remover esse registro?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                    PessoaJuridicaTableModel pessoaJuridicaModel = (PessoaJuridicaTableModel) jtClientes.getModel();
+                    PessoaJuridica pessoaJuridicaSelecionada = pessoaJuridicaModel.get(linhaSelecionada);
+                    PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
+                    pessoaJuridicaSelecionada.setAtivo(false);
+                    pessoaJuridicaDAO.merge(pessoaJuridicaSelecionada);
+                    pessoaJuridicaModel.removeRow(linhaSelecionada);
+                    JOptionPane.showMessageDialog(this, "Remoção efetuada com sucesso!");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Nenhum campo foi selecionado!");
             }
