@@ -37,9 +37,9 @@ public class cadastroCargo extends javax.swing.JFrame {
      * Creates new form cadastrarCargo
      */
     public cadastroCargo() {
-       // this.setUndecorated(true);
+        this.setUndecorated(true);
         initComponents();
-     //   setAlwaysOnTop(true);
+       setAlwaysOnTop(true);
         this.setTitle("Cadastro de Departamento");
         mascaraTelefone();
         carregaDepartamentos();

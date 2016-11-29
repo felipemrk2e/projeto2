@@ -45,7 +45,7 @@ public class cadastroImovel extends javax.swing.JFrame {
      * Creates new form cadastroImovel2
      */
     public cadastroImovel() {
-        //   this.setUndecorated(true);
+        this.setUndecorated(true);
         initComponents();
         fecharCadastro();
         //Alterado system.exit(), para dispose()
@@ -53,7 +53,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         removerTitleBar();
         ComboBox();
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
-      
+
 //
 //        Imovel imovel = imovelDao.getById(Long.parseLong("7"));
 //        popular(imovel);
@@ -63,6 +63,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         this.setUndecorated(true);
         this.user = user;
         initComponents();
+        ComboBox();
         setAlwaysOnTop(true);
         fecharCadastro();
         removerTitleBar();
@@ -72,18 +73,18 @@ public class cadastroImovel extends javax.swing.JFrame {
     }
 
     public cadastroImovel(String idImovel) {
-        //this.setUndecorated(true);
+        this.setUndecorated(true);
         this.user = user;
 
         initComponents();
-        // setAlwaysOnTop(true);
+        setAlwaysOnTop(true);
         ComboBox();
         fecharCadastro();
         removerTitleBar();
         Imovel imovel = imovelDao.getById(Long.valueOf(idImovel));
         popular(imovel);
         //    verificaNivel();
-          acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 
     }
 
@@ -134,7 +135,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
                 break;
             default:
-                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
+                JOptionPane.showMessageDialog(this, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
 
@@ -240,60 +241,60 @@ public class cadastroImovel extends javax.swing.JFrame {
         }
 
         //Endereço
-        jtfLogradouro.setEnabled(b);
-        jtfNumero.setEnabled(b);
-        jtfComplemento.setEnabled(b);
-        jtfBairro.setEnabled(b);
-        jtCep.setEnabled(b);
-        jtfReferencia.setEnabled(b);
-        jtfZona.setEnabled(b);
-        jtfCondominio.setEnabled(b);
-        jcbCidade.setEnabled(b);
-        jcbEstado.setEnabled(b);
-        jcbStatus.setEnabled(b);
+        jtfLogradouro.setEditable(b);
+        jtfNumero.setEditable(b);
+        jtfComplemento.setEditable(b);
+        jtfBairro.setEditable(b);
+        jtCep.setEditable(b);
+        jtfReferencia.setEditable(b);
+        jtfZona.setEditable(b);
+        jtfCondominio.setEditable(b);
+        jcbCidade.setEditable(b);
+        jcbEstado.setEditable(b);
+        jcbStatus.setEditable(b);
 
         //valores
-        jtValorLocacaoMes.setEnabled(b);
-        jtValorVenda.setEnabled(b);
-        jtValorTemporada.setEnabled(b);
-        jtValorIptu.setEnabled(b);
-        jtValorCondominio.setEnabled(b);
-        jtValorDiaria.setEnabled(b);
+        jtValorLocacaoMes.setEditable(b);
+        jtValorVenda.setEditable(b);
+        jtValorTemporada.setEditable(b);
+        jtValorIptu.setEditable(b);
+        jtValorCondominio.setEditable(b);
+        jtValorDiaria.setEditable(b);
 
         //Outros 
-        jtMatriculo.setEnabled(b);
-        jtContaAgua.setEnabled(b);
-        jtContaLuz.setEnabled(b);
-        jtIptu.setEnabled(b);
-        jtContrato.setEnabled(b);
-        jtCartorio.setEnabled(b);
-        jtSituacaoEscritura.setEnabled(b);
+        jtMatriculo.setEditable(b);
+        jtContaAgua.setEditable(b);
+        jtContaLuz.setEditable(b);
+        jtIptu.setEditable(b);
+        jtContrato.setEditable(b);
+        jtCartorio.setEditable(b);
+        jtSituacaoEscritura.setEditable(b);
 
-        jtLargura.setEnabled(b);
-        jtComprimento.setEnabled(b);
-        jtAreaConstruida.setEnabled(b);
+        jtLargura.setEditable(b);
+        jtComprimento.setEditable(b);
+        jtAreaConstruida.setEditable(b);
 
-        jtMobilia.setEnabled(b);
-        jtChaves.setEnabled(b);
-        jtObservacao.setEnabled(b);
+        jtMobilia.setEditable(b);
+        jtChaves.setEditable(b);
+        jtObservacao.setEditable(b);
 
         //Descrição  
-        jtQuartos.setEnabled(b);
-        jtSuites.setEnabled(b);
-        jtSalas.setEnabled(b);
-        jtBanheiros.setEnabled(b);
-        jtLavados.setEnabled(b);
-        jtAreaServico.setEnabled(b);
-        jtLavanderia.setEnabled(b);
-        jtPisos.setEnabled(b);
-        jtIdadeImovel.setEnabled(b);
-        jtPscina.setEnabled(b);
-        jtVagasGaragem.setEnabled(b);
-        jtDepEmpregada.setEnabled(b);
-        jtTipoImovel.setEnabled(b);
-        jtAreaExterna.setEnabled(b);
-        jtAcabamento.setEnabled(b);
-        jtOutros.setEnabled(b);
+        jtQuartos.setEditable(b);
+        jtSuites.setEditable(b);
+        jtSalas.setEditable(b);
+        jtBanheiros.setEditable(b);
+        jtLavados.setEditable(b);
+        jtAreaServico.setEditable(b);
+        jtLavanderia.setEditable(b);
+        jtPisos.setEditable(b);
+        jtIdadeImovel.setEditable(b);
+        jtPscina.setEditable(b);
+        jtVagasGaragem.setEditable(b);
+        jtDepEmpregada.setEditable(b);
+        jtTipoImovel.setEditable(b);
+        jtAreaExterna.setEditable(b);
+        jtAcabamento.setEditable(b);
+        jtOutros.setEditable(b);
 
     }
 
@@ -801,6 +802,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         jsTipo = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(1024, 640));
         setResizable(false);
         getContentPane().setLayout(null);
@@ -1571,7 +1573,8 @@ public class cadastroImovel extends javax.swing.JFrame {
     }//GEN-LAST:event_jrbComercioActionPerformed
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-        new cadastroImovelHome().setVisible(true);
+        cadastroImovelHome.getInstancia().setLocationRelativeTo(this);
+        cadastroImovelHome.getInstancia().setVisible(true);
         dispose();    // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
 
@@ -2335,12 +2338,13 @@ public class cadastroImovel extends javax.swing.JFrame {
 
                 //        conexao banco;  
                 if (imovelDao.persist(imovel)) {
-                    JOptionPane.showMessageDialog(null, "Atualização Efetuado com Sucesso !");
+                    JOptionPane.showMessageDialog(this, "Atualização Efetuado com Sucesso !");
 
-                    new cadastroImovelHome().setVisible(true);
+                    cadastroImovelHome.getInstancia().setLocationRelativeTo(this);
+                    cadastroImovelHome.getInstancia().setVisible(true);
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Erro durante a Atualização !");
+                    JOptionPane.showMessageDialog(this, "Erro durante a Atualização !");
 
                 }
 
@@ -2358,10 +2362,11 @@ public class cadastroImovel extends javax.swing.JFrame {
                 //        conexao banco;  
                 imovelDao.persist(imovel);
 
-                JOptionPane.showMessageDialog(null, "Cadastro Efetuado com Sucesso !");
+                JOptionPane.showMessageDialog(this, "Cadastro Efetuado com Sucesso !");
                 System.out.println("Cadastro Efetuado");
 
-                new cadastroImovelHome().setVisible(true);
+                cadastroImovelHome.getInstancia().setLocationRelativeTo(this);
+                cadastroImovelHome.getInstancia().setVisible(true);
                 dispose();
             } else {
 
@@ -2374,7 +2379,7 @@ public class cadastroImovel extends javax.swing.JFrame {
 
                 control = 0;
                 control2 = true;
-                JOptionPane.showMessageDialog(null, "Erro Verifique os campos !");
+                JOptionPane.showMessageDialog(this, "Erro Verifique os campos !");
                 System.out.println("Erro Verifique os campos");
             }
 
@@ -2516,7 +2521,7 @@ public class cadastroImovel extends javax.swing.JFrame {
         if (jbEditar.isEnabled()) {
             DisableEnable(true);
             jbConfirmar.setEnabled(true);
-            if(jbConfirmar.isEnabled()){
+            if (jbConfirmar.isEnabled()) {
                 jbEditar.setEnabled(false);
             }
         }
