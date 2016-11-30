@@ -337,28 +337,94 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     }
 
     public void popularTabelaQuery() {
-        if (!jtNome.getText().isEmpty()) {
-            PessoaDAO pessoaDAO = new PessoaDAO();
-            List<Pessoa> pessoas = new ArrayList<Pessoa>();
-            pessoas = pessoaDAO.getQuery("WHERE nomePessoa LIKE '%" + jtNome.getText() + "%'");
-            jtClientes.setModel(new PessoaTableModel(pessoas));
-        } else if (!jftTelefone.getText().isEmpty() && jftTelefone.getText().trim().length() == 13) {
-            PessoaDAO pessoaDAO = new PessoaDAO();
-            List<Pessoa> pessoas = new ArrayList<Pessoa>();
-            pessoas = pessoaDAO.getPorTelefone(jftTelefone.getText());
-            jtClientes.setModel(new PessoaTableModel(pessoas));
-        } else if (jcbPessoaJuridica.isSelected() && jftCPF.getText().trim().length() == 18) {
-            PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
-            List<PessoaJuridica> pessoasJuridicas = new ArrayList<PessoaJuridica>();
-            pessoasJuridicas = pessoaJuridicaDAO.getPorCNPJ(jftCPF.getText());
-            jtClientes.setModel(new PessoaJuridicaTableModel(pessoasJuridicas));
-
-        } else if (jcbPessoaFisica.isSelected() && jftCPF.getText().trim().length() == 14) {
-            PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-            List<PessoaFisica> pessoasFisicas = new ArrayList<PessoaFisica>();
-            pessoasFisicas = pessoaFisicaDAO.getPorCPF(jftCPF.getText());
-            jtClientes.setModel(new PessoaFisicaTableModel(pessoasFisicas));
+//        if (!jtNome.getText().isEmpty()) {
+//            PessoaDAO pessoaDAO = new PessoaDAO();
+//            List<Pessoa> pessoas = new ArrayList<Pessoa>();
+//            pessoas = pessoaDAO.getQuery("WHERE nomePessoa LIKE '%" + jtNome.getText() + "%'");
+//            List<Pessoa> pessoasAtivas = new ArrayList<Pessoa>();
+//            for (int i = 0; i < pessoas.size(); i++) {
+//                if (pessoas.get(i).isAtivo()) {
+//                    pessoasAtivas.add(pessoas.get(i));
+//                }
+//            }
+//            if (pessoasAtivas != null) {
+//                jtClientes.setModel(new PessoaTableModel(pessoasAtivas));
+//            }
+//        } else if (!jftTelefone.getText().isEmpty() && jftTelefone.getText().trim().length() == 13) {
+//            PessoaDAO pessoaDAO = new PessoaDAO();
+//            List<Pessoa> pessoas = new ArrayList<Pessoa>();
+//            pessoas = pessoaDAO.getPorTelefone(jftTelefone.getText());
+//            List<Pessoa> pessoasAtivas = new ArrayList<Pessoa>();
+//            for (int i = 0; i < pessoas.size(); i++) {
+//                if (pessoas.get(i).isAtivo()) {
+//                    pessoasAtivas.add(pessoas.get(i));
+//                }
+//            }
+//            if (pessoasAtivas != null) {
+//                jtClientes.setModel(new PessoaTableModel(pessoasAtivas));
+//            }
+//        } else if (jcbPessoaJuridica.isSelected() && jftCPF.getText().trim().length() == 18) {
+//            PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
+//            List<PessoaJuridica> pessoasJuridicas = new ArrayList<PessoaJuridica>();
+//            pessoasJuridicas = pessoaJuridicaDAO.getPorCNPJ(jftCPF.getText());
+//            jtClientes.setModel(new PessoaJuridicaTableModel(pessoasJuridicas));
+//            
+//            List<Pessoa> pessoasAtivas = new ArrayList<Pessoa>();
+//            for (int i = 0; i < pessoas.size(); i++) {
+//                if (pessoas.get(i).isAtivo()) {
+//                    pessoasAtivas.add(pessoas.get(i));
+//                }
+//            }
+//            if (pessoasAtivas != null) {
+//                jtClientes.setModel(new PessoaTableModel(pessoasAtivas));
+//            }
+//
+//        } else if (jcbPessoaFisica.isSelected() && jftCPF.getText().trim().length() == 14) {
+//            PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+//            List<PessoaFisica> pessoasFisicas = new ArrayList<PessoaFisica>();
+//            pessoasFisicas = pessoaFisicaDAO.getPorCPF(jftCPF.getText());
+//            jtClientes.setModel(new PessoaFisicaTableModel(pessoasFisicas));
+//        }
+        PessoaDAO pessoaDAO = new PessoaDAO();
+        if (jcbPessoaFisica.isSelected() && jftCPF.getText().trim().length() == 14) {
+            List<Pessoa> pessoas = pessoaDAO.searchPessoa(jtNome.getText(), "", jftCPF.getText(), 1);
+            List<PessoaFisica> pessoasAtivas = new ArrayList<PessoaFisica>();
+            for (int i = 0; i < pessoas.size(); i++) {
+                if (pessoas.get(i).isAtivo()) {
+                    pessoasAtivas.add((PessoaFisica) pessoas.get(i));
+                }
+            }
+            if (pessoasAtivas != null) {
+                jtClientes.setModel(new PessoaFisicaTableModel(pessoasAtivas));
+            }
         }
+        if (jcbPessoaJuridica.isSelected() && jftCPF.getText().trim().length() == 18) {
+            List<Pessoa> pessoas = pessoaDAO.searchPessoa(jtNome.getText(), jftCPF.getText(), "", 2);
+            List<PessoaJuridica> pessoasAtivas = new ArrayList<PessoaJuridica>();
+            for (int i = 0; i < pessoas.size(); i++) {
+                if (pessoas.get(i).isAtivo()) {
+                    pessoasAtivas.add((PessoaJuridica) pessoas.get(i));
+                }
+            }
+            if (pessoasAtivas != null) {
+                jtClientes.setModel(new PessoaJuridicaTableModel(pessoasAtivas));
+            }
+        }
+        if (rootPaneCheckingEnabled) {
+            List<Pessoa> pessoas = pessoaDAO.searchPessoa(jtNome.getText(), "", "", 0);
+            List<Pessoa> pessoasAtivas = new ArrayList<Pessoa>();
+            for (int i = 0; i < pessoas.size(); i++) {
+                if (pessoas.get(i).isAtivo()) {
+                    pessoasAtivas.add(pessoas.get(i));
+                }
+            }
+            if (pessoasAtivas != null) {
+                jtClientes.setModel(new PessoaTableModel(pessoasAtivas));
+            }
+        }
+
+        
+
     }
 
     public void mascaraTelefone() {

@@ -101,6 +101,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }
 
     public void DisableEnable(Boolean b) {
+        jtfCodigoInterno.setEnabled(false);
         jbConfirmar.setEnabled(b);
         jbEditar.setEnabled(false);
         jtfCodigoInterno.setEnabled(b);
@@ -437,8 +438,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }
 
     public void populaFuncionario() {
-        Pessoa pessoa = new Pessoa();
-        jtfCodigoInterno.setText(pessoa.getIdPessoa() + "");
+        Pessoa pessoa = new Pessoa();       
         jtfNome.setText("Jean Felipe");
         jftCPF.setText("38933784802");
         jtfRG.setText("RG");
@@ -849,6 +849,8 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jlCodigoInterno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCodigoInterno.setText("Código Interno");
         getContentPane().add(jlCodigoInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 100, 30));
+
+        jtfCodigoInterno.setEditable(false);
         getContentPane().add(jtfCodigoInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 100, 30));
 
         jlNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N

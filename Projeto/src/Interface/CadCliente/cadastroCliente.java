@@ -509,6 +509,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     }
 
     public void atualizarPessoaFisica(PessoaFisica pessoaFisica) {
+        jtfCodigoInterno.setText("" + pessoaFisica.getIdPessoa());
         jtfNome.setText(pessoaFisica.getNomePessoa());
         jftCPF.setText(pessoaFisica.getCPF());
         jtfRG.setText(pessoaFisica.getRG());
@@ -579,6 +580,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     }
 
     public void atualizarPessoaJuridica(PessoaJuridica pessoaJuridica) {
+        jtfCodigoInterno.setText("" + pessoaJuridica.getIdPessoa());
         jtfNome.setText(pessoaJuridica.getNomePessoa());
         jftCPF.setText(pessoaJuridica.getCnpj());
         jtfRG.setText(pessoaJuridica.getInscricaoEstadual());
@@ -1049,7 +1051,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                             cadastrarPessoaFisica(pessoaFisica);
                             JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
                             ZerarCampos();
-                            pessoaFisica = null;                            
+                            pessoaFisica = null;
                             cadastroClienteHome.getInstancia().popularTabela();
                             encerrarInstancia();
                             dispose();
@@ -1078,7 +1080,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                             cadastrarPessoaJuridica(pessoaJuridica);
                             JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
                             ZerarCampos();
-                            pessoaJuridica = null;                            
+                            pessoaJuridica = null;
                             cadastroClienteHome.getInstancia().popularTabela();
                             encerrarInstancia();
                             dispose();
