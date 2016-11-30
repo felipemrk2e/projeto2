@@ -5,6 +5,7 @@
  */
 package Interface.CadFuncionario;
 
+import Interface.CadCargo.cadastroCargo;
 import Interface.TelaPrincipal.Sessao;
 import dao.CargoDAO;
 import dao.CidadeDAO;
@@ -1060,6 +1061,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
                         CadFuncionarioHome.getInstancia().setVisible(true);
                         CadFuncionarioHome.getInstancia().setLocationRelativeTo(this);
                         CadFuncionarioHome.getInstancia().popularTabela();
+                        Sessao.getInstance().setInstanciaAberta(11);
                         dispose();
                     } else {
                         cadastrarFuncionario(funcionario);
@@ -1067,6 +1069,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
                         ZerarCampos();
                         funcionario = null;
                         encerrarInstancia();
+                        CadFuncionarioHome.getInstancia().popularTabela();
                         dispose();
                     }
 
@@ -1092,6 +1095,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
                 CadFuncionarioHome.getInstancia().setVisible(true);
                 CadFuncionarioHome.getInstancia().setLocationRelativeTo(this);
                 CadFuncionarioHome.getInstancia().popularTabela();
+                Sessao.getInstance().setInstanciaAberta(11);
                 dispose();
                 encerrarInstancia();
             }
@@ -1099,7 +1103,16 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jbCancelarMouseClicked
 
     private void jlAddCargoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAddCargoMousePressed
-        //add cargo
+        if (jlAddCargo.isEnabled()) {
+             cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
+            cadastroCargo.getInstancia().encerrarInstancia();          
+            cadastroCargo cadCargo = cadastroCargo.getInstancia();
+            cadCargo.setLocationRelativeTo(this);
+            cadCargo.getInstancia().DisableDep();
+            cadCargo.setVisible(true);
+            Sessao.getInstance().setInstanciaAberta(12);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jlAddCargoMousePressed
 
     private void jbEditarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMousePressed

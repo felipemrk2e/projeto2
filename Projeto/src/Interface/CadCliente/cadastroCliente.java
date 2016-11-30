@@ -53,7 +53,6 @@ public class cadastroCliente extends javax.swing.JFrame {
     public static PessoaFisica fiadorGlobal = null;
     private List<Cidade> listaCidadesGlobal;
     private int indexCidade;
-    
 
     /**
      * Creates new form cadastroCliente
@@ -1044,13 +1043,13 @@ public class cadastroCliente extends javax.swing.JFrame {
                             cadastroClienteHome.getInstancia().setVisible(true);
                             cadastroClienteHome.getInstancia().setLocationRelativeTo(this);
                             cadastroClienteHome.getInstancia().popularTabela();
-                            instanciaAberta = 3;
+                            Sessao.getInstance().setInstanciaAberta(3);
                             dispose();
                         } else {
                             cadastrarPessoaFisica(pessoaFisica);
                             JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
                             ZerarCampos();
-                            pessoaFisica = null;
+                            pessoaFisica = null;                            
                             cadastroClienteHome.getInstancia().popularTabela();
                             encerrarInstancia();
                             dispose();
@@ -1073,13 +1072,13 @@ public class cadastroCliente extends javax.swing.JFrame {
                             cadastroClienteHome.getInstancia().setVisible(true);
                             cadastroClienteHome.getInstancia().setLocationRelativeTo(this);
                             cadastroClienteHome.getInstancia().popularTabela();
-                            instanciaAberta = 3;
+                            Sessao.getInstance().setInstanciaAberta(3);
                             dispose();
                         } else {
                             cadastrarPessoaJuridica(pessoaJuridica);
                             JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
                             ZerarCampos();
-                            pessoaJuridica = null;
+                            pessoaJuridica = null;                            
                             cadastroClienteHome.getInstancia().popularTabela();
                             encerrarInstancia();
                             dispose();
@@ -1484,6 +1483,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                     cadastroClienteHome.getInstancia().setVisible(true);
                     cadastroClienteHome.getInstancia().setLocationRelativeTo(this);
                     cadastroClienteHome.getInstancia().popularTabela();
+                    Sessao.getInstance().setInstanciaAberta(3);
                     dispose();
                     encerrarInstancia();
                 }

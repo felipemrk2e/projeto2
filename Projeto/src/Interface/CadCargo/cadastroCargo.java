@@ -5,6 +5,7 @@
  */
 package Interface.CadCargo;
 
+import Interface.CadFuncionario.cadastroFuncionario;
 import Interface.TelaPrincipal.Sessao;
 import dao.CargoDAO;
 import dao.DepartamentoDAO;
@@ -458,6 +459,8 @@ public class cadastroCargo extends javax.swing.JFrame {
                         cadastroCargoHome.getInstancia().setVisible(true);
                         cadastroCargoHome.getInstancia().setLocationRelativeTo(this);
                         cadastroCargoHome.getInstancia().popularTabela();
+                        Sessao.getInstance().setInstanciaAberta(13);
+                        cadastroFuncionario.getInstancia().populaFuncionario();
                         
                           
                     } else {
