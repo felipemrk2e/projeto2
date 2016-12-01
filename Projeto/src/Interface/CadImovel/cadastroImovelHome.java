@@ -214,6 +214,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jcbInativo = new javax.swing.JCheckBox();
         separador = new javax.swing.JSeparator();
         jlFiltro1 = new javax.swing.JLabel();
+        jbCancelar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -386,7 +387,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
-        jbCancelar.setText("Cancelar");
+        jbCancelar.setText("<html><center>Cancelar<br/>Pesquisa</html>");
         jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbCancelarMouseClicked(evt);
@@ -435,6 +436,17 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jlFiltro1.setMinimumSize(new java.awt.Dimension(35, 18));
         getContentPane().add(jlFiltro1);
         jlFiltro1.setBounds(130, 350, 50, 30);
+
+        jbCancelar1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCancelar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
+        jbCancelar1.setText("Cancelar");
+        jbCancelar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbCancelar1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbCancelar1);
+        jbCancelar1.setBounds(410, 240, 140, 70);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -646,6 +658,10 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbInativoActionPerformed
 
+    private void jbCancelar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelar1MouseClicked
+       dispose();  // TODO add your handling code here:   // TODO add your handling code here:
+    }//GEN-LAST:event_jbCancelar1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -685,6 +701,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbCancelar1;
     private javax.swing.JButton jbPesquisar;
     private javax.swing.JButton jbRemover;
     private javax.swing.JButton jbVisualisar;
