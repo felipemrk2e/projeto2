@@ -300,7 +300,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             telaLogin.setLocationRelativeTo(jSeparator2);
             telaLogin.setVisible(true);
             if (telaLogin.verificaLogin()) {
-                jlUsuario.setText(Sessao.getInstance().getUsuario().getNomeUsuario());
+                jlUsuario.setText("<html><div style='padding-left: 7px;'>" + Sessao.getInstance().getUsuario().getNomeUsuario()+"</div></html>");
                 JOptionPane.showMessageDialog(this, "Login efetuado com sucesso!");
                 setLogado(true);
                 jlLogoff.setEnabled(true);
@@ -343,7 +343,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaLogin.setAlwaysOnTop(true);
         telaLogin.setVisible(true);
         if (telaLogin.verificaLogin()) {
-            jlUsuario.setText(Sessao.getInstance().getUsuario().getNomeUsuario());
+            jlUsuario.setText("<html><div style='padding-left: 7px;'>" + Sessao.getInstance().getUsuario().getNomeUsuario()+"</div></html>");
             JOptionPane.showMessageDialog(telaLogin, "Login efetuado com sucesso!");            
             setLogado(true);
             acesso();
@@ -740,7 +740,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jlLogoff.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlLogoff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logoff.png"))); // NOI18N
-        jlLogoff.setText("<html><center><br/>Logout</html>");
+        jlLogoff.setText("<html><div style=\"padding-left: 7px;\">Logout</div></html>");
         jlLogoff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jlLogoffMousePressed(evt);
@@ -760,7 +760,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jlTroca);
         jlTroca.setBounds(910, 100, 100, 40);
 
-        jlUsuario.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        jlUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/clientes.png"))); // NOI18N
         getContentPane().add(jlUsuario);
         jlUsuario.setBounds(910, 10, 100, 40);
@@ -1242,13 +1242,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cliente.setVisible(true);
     }//GEN-LAST:event_jmiCadastrarClienteMousePressed
 
-    private void jmiCadastrarImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarImovelMousePressed
-        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
-        cadastroImovel imovel = cadastroImovel.getInstancia();
-        imovel.setLocationRelativeTo(jSeparator2);
-        imovel.setVisible(true);
-    }//GEN-LAST:event_jmiCadastrarImovelMousePressed
-
     private void jmiCadastrarFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarFuncionarioMousePressed
         finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
         cadastroFuncionario funcionario = cadastroFuncionario.getInstancia();
@@ -1402,6 +1395,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             relaotioHome.setVisible(true);
         }
     }//GEN-LAST:event_jbRelatoriosMouseClicked
+
+    private void jmiCadastrarImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarImovelMousePressed
+        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
+        cadastroImovel imovel = cadastroImovel.getInstancia();
+        imovel.setLocationRelativeTo(jSeparator2);
+        imovel.setVisible(true);
+    }//GEN-LAST:event_jmiCadastrarImovelMousePressed
 
     /**
      * @param args the command line arguments

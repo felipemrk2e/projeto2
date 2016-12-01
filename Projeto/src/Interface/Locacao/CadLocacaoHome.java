@@ -267,17 +267,27 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
+        jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbCancelarMouseClicked(evt);
+            }
+        });
         getContentPane().add(jbCancelar);
         jbCancelar.setBounds(820, 480, 140, 70);
 
         jbCancelarTabela.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelarTabela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
         jbCancelarTabela.setText("Cancelar");
+        jbCancelarTabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbCancelarTabelaMouseClicked(evt);
+            }
+        });
         getContentPane().add(jbCancelarTabela);
         jbCancelarTabela.setBounds(370, 260, 140, 70);
 
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jSeparator4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisar Locação", 2, 0, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        jSeparator4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisar Locação", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jSeparator4);
         jSeparator4.setBounds(20, 360, 970, 210);
 
@@ -401,6 +411,24 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbPesquisarActionPerformed
+
+    private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
+         String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {                
+                dispose();
+                encerrarInstancia();
+            }
+    }//GEN-LAST:event_jbCancelarMouseClicked
+
+    private void jbCancelarTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarTabelaMouseClicked
+        String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {              
+                dispose();
+                encerrarInstancia();
+            }
+    }//GEN-LAST:event_jbCancelarTabelaMouseClicked
 
     /**
      * @param args the command line arguments

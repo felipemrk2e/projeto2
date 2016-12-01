@@ -53,15 +53,15 @@ public class ControleLocacao extends javax.swing.JFrame {
         DisableEnable(false);
         switch (nivel) {
             case 1:
-                DisableEnable(true);                
+                DisableEnable(true);
                 break;
             case 2:
                 DisableEnable(true);
-                
+
                 break;
             case 3:
                 DisableEnable(false);
-                
+
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
@@ -312,8 +312,15 @@ public class ControleLocacao extends javax.swing.JFrame {
     }//GEN-LAST:event_jbConfirmarMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-        new CadLocacaoHome(user).setVisible(true);
-        dispose();  // TODO add your handling code here:
+        String ObjButtons[] = {"Sim", "Não"};
+        int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+        if (PromptResult == JOptionPane.YES_OPTION) {
+            Sessao.getInstance().setInstanciaAberta(8);
+            CadLocacaoHome.getInstancia().setVisible(true);
+            CadLocacaoHome.getInstancia().setLocationRelativeTo(this);
+            dispose();
+            encerrarInstancia();
+        }
     }//GEN-LAST:event_jbCancelarMouseClicked
 
     /**

@@ -361,7 +361,7 @@ public class cadastroCargo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbEditar);
-        jbEditar.setBounds(570, 420, 140, 70);
+        jbEditar.setBounds(570, 390, 140, 70);
 
         jbCadastrarDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCadastrarDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
@@ -384,7 +384,7 @@ public class cadastroCargo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbCancelar);
-        jbCancelar.setBounds(570, 500, 140, 70);
+        jbCancelar.setBounds(570, 470, 140, 70);
 
         jtaDescricaoCargo.setColumns(20);
         jtaDescricaoCargo.setRows(5);
