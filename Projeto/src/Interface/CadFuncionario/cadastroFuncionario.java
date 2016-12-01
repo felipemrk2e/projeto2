@@ -303,7 +303,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         funcionario.setLogin(login);
 
         funcionarioDAO.persist(funcionario);
-        JOptionPane.showMessageDialog(this, "Senha gerada com sucesso!\nUsuário: " + funcionario.getNomePessoa() + "\nSenha: " + senha);
+        JOptionPane.showMessageDialog(this, "Login Criado com Sucesso!\nUsuário: " + funcionario.getLogin().getNomeUsuario() + "\nSenha: " + senha);
     }
 
     public void cadastrarFuncionario(Funcionario funcionario) throws ParseException {

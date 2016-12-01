@@ -74,14 +74,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
 //       
         jSeparator2.setSize(xSize - 300, ySize);
         jSeparator2.setLocation(180, 0);
-        jlLogoff.setLocation(xSize - 100, 30);
+        jlUsuario.setLocation(xSize - 100, 20);
+        jlUsuario.repaint();
+
+        jlLogoff.setLocation(xSize - 100, 70);
         jlLogoff.repaint();
 
-        jlTroca.setLocation(xSize - 100, 80);
+        jlTroca.setLocation(xSize - 100, 120);
         jlTroca.repaint();
 
         jlSair.setLocation(xSize - 100, ySize - 100);
-        jlLogoff.repaint();
+        jlSair.repaint();
 
 //        jSeparator1.setSize(180, ySize);
         jScrollPane1.setSize(180, ySize - 80);
@@ -136,6 +139,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jlTroca.setEnabled(ativo);
         jlLogoff.setEnabled(ativo);
+        jlUsuario.setEnabled(ativo);
     }
 
     public void acesso() {
@@ -174,6 +178,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             jlTroca.setEnabled(true);
             jlLogoff.setEnabled(true);
+            jlUsuario.setEnabled(true);
         } else if (nivelAcesso == 3) {
             ocultaFuncoes(false);
             System.out.println("Reduzido");
@@ -194,8 +199,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             jlTroca.setEnabled(true);
             jlLogoff.setEnabled(true);
+            jlUsuario.setEnabled(true);
         } else {
-            JOptionPane.showMessageDialog(null, "Nível de acesso não encontrado");
+            JOptionPane.showMessageDialog(this, "Nível de acesso não encontrado");
             ocultaFuncoes(false);
         }
     }
@@ -294,13 +300,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             telaLogin.setLocationRelativeTo(jSeparator2);
             telaLogin.setVisible(true);
             if (telaLogin.verificaLogin()) {
-                JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
+                jlUsuario.setText(Sessao.getInstance().getUsuario().getNomeUsuario());
+                JOptionPane.showMessageDialog(this, "Login efetuado com sucesso!");
                 setLogado(true);
                 jlLogoff.setEnabled(true);
                 jlTroca.setEnabled(true);
+                jlUsuario.setEnabled(true);
                 acesso();
             } else {
-                JOptionPane.showMessageDialog(null, "Acesso negado!\nUsuário ou Senha Incorretos");
+                JOptionPane.showMessageDialog(this, "Acesso negado!\nUsuário ou Senha Incorretos");
                 telaLogin.limpaCampos();
                 while (!telaLogin.verificaLogin() && tentativas < 5) {
                     telaLogin.setLocationRelativeTo(jSeparator2);
@@ -309,18 +317,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
                     if (!telaLogin.verificaLogin() && tentativas < 5) {
                         telaLogin.limpaCampos();
-                        JOptionPane.showMessageDialog(null, "Acesso negado!\nUsuário ou Senha Incorretos");
-                        JOptionPane.showMessageDialog(null, "Você possui mais " + (5 - tentativas) + " tentativas!");
+                        JOptionPane.showMessageDialog(this, "Acesso negado!\nUsuário ou Senha Incorretos");
+                        JOptionPane.showMessageDialog(this, "Você possui mais " + (5 - tentativas) + " tentativas!");
                     }
                     if (tentativas == 5) {
                         telaLogin.limpaCampos();
-                        JOptionPane.showMessageDialog(null, "Sistema Bloquado!");
+                        JOptionPane.showMessageDialog(this, "Sistema Bloquado!");
                     }
                     if (telaLogin.verificaLogin()) {
-                        JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
+                        JOptionPane.showMessageDialog(this, "Login efetuado com sucesso!");
                         setLogado(true);
                         jlLogoff.setEnabled(true);
                         jlTroca.setEnabled(true);
+                        jlUsuario.setEnabled(true);
                         acesso();
                     }
                 }
@@ -334,7 +343,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaLogin.setAlwaysOnTop(true);
         telaLogin.setVisible(true);
         if (telaLogin.verificaLogin()) {
-            JOptionPane.showMessageDialog(telaLogin, "Login efetuado com sucesso!");
+            jlUsuario.setText(Sessao.getInstance().getUsuario().getNomeUsuario());
+            JOptionPane.showMessageDialog(telaLogin, "Login efetuado com sucesso!");            
             setLogado(true);
             acesso();
             finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
@@ -506,7 +516,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 //                }
 //                break;
             default:
-                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
+                JOptionPane.showMessageDialog(this, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
 
@@ -673,6 +683,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jlSair = new javax.swing.JLabel();
         jlLogoff = new javax.swing.JLabel();
         jlTroca = new javax.swing.JLabel();
+        jlUsuario = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jbCadastrarCliente = new javax.swing.JButton();
@@ -736,7 +747,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jlLogoff);
-        jlLogoff.setBounds(920, 0, 120, 40);
+        jlLogoff.setBounds(910, 50, 100, 40);
 
         jlTroca.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlTroca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/kabinet.png"))); // NOI18N
@@ -747,7 +758,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jlTroca);
-        jlTroca.setBounds(920, 50, 100, 40);
+        jlTroca.setBounds(910, 100, 100, 40);
+
+        jlUsuario.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        jlUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/clientes.png"))); // NOI18N
+        getContentPane().add(jlUsuario);
+        jlUsuario.setBounds(910, 10, 100, 40);
 
         jbCadastrarCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbCadastrarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/usuarioadd.png"))); // NOI18N
@@ -1096,10 +1112,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jlLogoffMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlLogoffMousePressed
         if (!isLogado()) {
             jlLogoff.setEnabled(false);
+            jlUsuario.setEnabled(false);
         } else {
-            JOptionPane.showMessageDialog(null, "Logoff efetuado com sucesso!");
-            ocultaFuncoes(false);
             finalizarInstancias();
+            JOptionPane.showMessageDialog(this, "Logoff efetuado com sucesso!");
+            jlUsuario.setText("");
+            ocultaFuncoes(false);
             setLogado(false);
             try {
                 Login();
@@ -1362,7 +1380,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         if (!isLogado()) {
             jlLogoff.setEnabled(false);
         } else {
-            JOptionPane.showMessageDialog(null, "Logoff efetuado com sucesso!");
+            JOptionPane.showMessageDialog(this, "Logoff efetuado com sucesso!");
             ocultaFuncoes(false);
             finalizarInstancias();
             setLogado(false);
@@ -1452,6 +1470,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jlLogoff;
     private javax.swing.JLabel jlSair;
     private javax.swing.JLabel jlTroca;
+    public static javax.swing.JLabel jlUsuario;
     private javax.swing.JMenuBar jmBarraMenu;
     private javax.swing.JMenu jmCadastrar;
     private javax.swing.JMenu jmConsultar;

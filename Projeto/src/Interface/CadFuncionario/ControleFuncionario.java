@@ -116,7 +116,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
         jtfRG.setText(funcionario.getRG());
         jcbCargo.setSelectedIndex((int) funcionario.getCargo().getIdCargo() - 1);
         jcbDepartamento.setSelectedIndex((int) funcionario.getCargo().getDepartamento().getIdDepartamento());
-        jcbNivelAcesso.setSelectedIndex(funcionario.getLogin().getNivelAcesso() - 1);
+        jcbNivelAcesso.setSelectedIndex(funcionario.getLogin().getNivelAcesso()-1);
         jtUser.setText(funcionario.getLogin().getNomeUsuario());
     }
 
@@ -192,7 +192,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
     public void carregarFuncionarios() {
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        List<Funcionario> funcionarios = funcionarioDAO.getAll();
+        List<Funcionario> funcionarios = funcionarioDAO.getAtivos();
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(funcionarios.toArray());
         jcbFuncionarios.setModel(defaultComboBox);
         jcbFuncionarios.setSelectedIndex(-1);
@@ -479,6 +479,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
             ControleFuncionario.getInstancia().atualizarSenha(cadastroFuncionario.getInstancia().funcionario);
             ControleFuncionario.getInstancia().setVisible(true);
             ControleFuncionario.getInstancia().DisableEnable(false);
+            ControleFuncionario.getInstancia().jbEditar.setEnabled(true);
             ControleFuncionario.getInstancia().setLocationRelativeTo(this);
             ControleFuncionario.getInstancia().setAlwaysOnTop(true);
         }

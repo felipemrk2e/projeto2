@@ -198,12 +198,6 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jcbPessoaJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, 140, 30));
-
-        jtNome.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtNomeKeyReleased(evt);
-            }
-        });
         getContentPane().add(jtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 690, 30));
 
         jlNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -215,12 +209,6 @@ public class cadastroClienteHome extends javax.swing.JFrame {
         jlTelefone.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlTelefone.setText("Telefone:");
         getContentPane().add(jlTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, 30));
-
-        jftTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jftTelefoneKeyPressed(evt);
-            }
-        });
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 450, 690, 30));
 
         jlCPF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -256,23 +244,16 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jbCadastrarMouseClicked
 
     private void jbPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarMouseClicked
-        // Verificação do pesquisar   // falta tudo !
-//        if (!jtNome.getText().equals("") && validacao.validaLetras(jtNome.getText())) {
-//            jtNome.setBackground(Color.white);
-        popularTabelaQuery();
-//        } else {
-//            jtNome.setBackground(Color.red);
-//        }
-// arrumar a validacao...
+        if (jbPesquisar.isEnabled()) {
+            if (jtNome.getText().isEmpty() && jftTelefone.getText().trim().length() != 13) {
+                popularTabela();
+            } else {
+                popularTabelaQuery();
+            }
+            jftTelefone.setText("");
+            jftCPF.setText("");
+        }
 
-//        if (jtTelefone.getText().equals("")) {
-//            jtTelefone.setBackground(Color.white);
-//        } else if (!jtTelefone.getText().equals("") && validaAlgo......) {
-//            jtTelefone.setBackground(Color.white);
-//        } else {
-//            jtTelefone.setBackground(Color.red);
-//            control = false;
-//        }
         if (jcbPessoaFisica.isSelected()) {
 
         }
@@ -297,7 +278,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             if (pessoas != null) {
                 jtClientes.setModel(new PessoaTableModel(pessoas));
             }
-        } else if (jcbPessoaFisica.isSelected()) {
+        } else if (jcbPessoaFisica.isSelected() && !jcbPessoaJuridica.isSelected()) {
             jlCPF.setVisible(true);
             jlCPF.setEnabled(true);
             jftCPF.setVisible(true);
@@ -311,7 +292,7 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             if (pessoasFisicas != null) {
                 jtClientes.setModel(new PessoaFisicaTableModel(pessoasFisicas));
             }
-        } else if (jcbPessoaJuridica.isSelected()) {
+        } else if (!jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected()) {
             jlCPF.setVisible(true);
             jlCPF.setEnabled(true);
             jftCPF.setVisible(true);
@@ -337,15 +318,24 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     }
 
     public void popularTabelaQuery() {
-        
+
         if (!jtNome.getText().isEmpty()) {
             PessoaDAO pessoaDAO = new PessoaDAO();
             List<Pessoa> pessoas = new ArrayList<Pessoa>();
             pessoas = pessoaDAO.getQuery("WHERE nomePessoa LIKE '%" + jtNome.getText() + "%'");
             List<Pessoa> pessoasAtivas = new ArrayList<Pessoa>();
-            for (int i = 0; i < pessoas.size(); i++) {
-                if (pessoas.get(i).isAtivo()) {
-                    pessoasAtivas.add(pessoas.get(i));
+            if (jcbPessoaFisica.isSelected()) {
+                for (int i = 0; i < pessoas.size(); i++) {
+                    if (pessoas.get(i).isAtivo() && pessoas.get(i).getPessoaFisica() != null) {
+                        pessoasAtivas.add(pessoas.get(i));
+                    }
+                }
+            }
+            if (jcbPessoaJuridica.isSelected()) {
+                for (int i = 0; i < pessoas.size(); i++) {
+                    if (pessoas.get(i).isAtivo() && pessoas.get(i).getPessoaJuridica() != null) {
+                        pessoasAtivas.add(pessoas.get(i));
+                    }
                 }
             }
             if (pessoasAtivas != null) {
@@ -356,19 +346,28 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             List<Pessoa> pessoas = new ArrayList<Pessoa>();
             pessoas = pessoaDAO.getPorTelefone(jftTelefone.getText());
             List<Pessoa> pessoasAtivas = new ArrayList<Pessoa>();
-            for (int i = 0; i < pessoas.size(); i++) {
-                if (pessoas.get(i).isAtivo()) {
-                    pessoasAtivas.add(pessoas.get(i));
+            if (jcbPessoaFisica.isSelected()) {
+                for (int i = 0; i < pessoas.size(); i++) {
+                    if (pessoas.get(i).isAtivo() && pessoas.get(i).getPessoaFisica() != null) {
+                        pessoasAtivas.add(pessoas.get(i));
+                    }
+                }
+            }
+            if (jcbPessoaJuridica.isSelected()) {
+                for (int i = 0; i < pessoas.size(); i++) {
+                    if (pessoas.get(i).isAtivo() && pessoas.get(i).getPessoaJuridica() != null) {
+                        pessoasAtivas.add(pessoas.get(i));
+                    }
                 }
             }
             if (pessoasAtivas != null) {
                 jtClientes.setModel(new PessoaTableModel(pessoasAtivas));
             }
-        } else if (jcbPessoaJuridica.isSelected() && jftCPF.getText().trim().length() == 18) {
+        } else if (!jcbPessoaFisica.isSelected() && jcbPessoaJuridica.isSelected() && jftCPF.getText().trim().length() == 18) {
             PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
             List<PessoaJuridica> pessoasJuridicas = new ArrayList<PessoaJuridica>();
             pessoasJuridicas = pessoaJuridicaDAO.getPorCNPJ(jftCPF.getText());
-            
+
             List<PessoaJuridica> pessoasJuridicasAtivas = new ArrayList<PessoaJuridica>();
             for (int i = 0; i < pessoasJuridicas.size(); i++) {
                 if (pessoasJuridicas.get(i).isAtivo()) {
@@ -378,11 +377,12 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             if (pessoasJuridicasAtivas != null) {
                 jtClientes.setModel(new PessoaJuridicaTableModel(pessoasJuridicasAtivas));
             }
-        } else if (jcbPessoaFisica.isSelected() && jftCPF.getText().trim().length() == 14) {
+        } else if (jcbPessoaFisica.isSelected() && !jcbPessoaJuridica.isSelected() && jftCPF.getText().trim().length() == 14) {
+            System.out.println("===========================================================Entrou pesquisa CPF");
             PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
             List<PessoaFisica> pessoasFisicas = new ArrayList<PessoaFisica>();
             pessoasFisicas = pessoaFisicaDAO.getPorCPF(jftCPF.getText());
-            
+
             List<PessoaFisica> pessoasFisicasAtivas = new ArrayList<PessoaFisica>();
             for (int i = 0; i < pessoasFisicas.size(); i++) {
                 if (pessoasFisicas.get(i).isAtivo()) {
@@ -390,9 +390,10 @@ public class cadastroClienteHome extends javax.swing.JFrame {
                 }
             }
             if (pessoasFisicasAtivas != null) {
-               jtClientes.setModel(new PessoaFisicaTableModel(pessoasFisicasAtivas));
-            }         
+                jtClientes.setModel(new PessoaFisicaTableModel(pessoasFisicasAtivas));
+            }           
         }
+        System.out.println("=======================================================CPF"+jftCPF.getText().length());
 //        PessoaDAO pessoaDAO = new PessoaDAO();
 //        if (jcbPessoaFisica.isSelected() && jftCPF.getText().trim().length() == 14) {
 //            List<Pessoa> pessoas = pessoaDAO.searchPessoa(jtNome.getText(), "", jftCPF.getText(), 1);
@@ -476,15 +477,16 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             } else if (pessoaSelecionada.getPessoaJuridica() != null) {
                 cadastroCliente.getInstancia().pessoaJuridica = (PessoaJuridica) pessoaSelecionada;
                 setLocationRelativeTo(this);
-                cadastroCliente.getInstancia().atualizarPessoaJuridica((PessoaJuridica) pessoaSelecionada);
+                cadastroCliente.getInstancia().jrbPessoaJuridica.setSelected(true);
                 cadastroCliente.getInstancia().ativaPessoa(false);
                 cadastroCliente.getInstancia().mascaraCPF_CNPJ(false);
+                cadastroCliente.getInstancia().atualizarPessoaJuridica((PessoaJuridica) pessoaSelecionada);
                 cadastroCliente.getInstancia().setVisible(true);
                 cadastroCliente.getInstancia().DisableEnable(false);
                 cadastroCliente.getInstancia().setLocationRelativeTo(this);
                 cadastroCliente.getInstancia().setAlwaysOnTop(true);
                 cadastroCliente.getInstancia().jbEditar.setEnabled(true);
-            } else {                
+            } else {
                 cadastroCliente.getInstancia().pessoaFisica = (PessoaFisica) pessoaSelecionada;
                 setLocationRelativeTo(this);
                 cadastroCliente.getInstancia().atualizarPessoaFisica((PessoaFisica) pessoaSelecionada);
@@ -513,9 +515,10 @@ public class cadastroClienteHome extends javax.swing.JFrame {
             PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
             cadastroCliente.getInstancia().pessoaJuridica = pessoaJuridicaSelecionada;
             setLocationRelativeTo(this);
-            cadastroCliente.getInstancia().atualizarPessoaJuridica(pessoaJuridicaSelecionada);
+            cadastroCliente.getInstancia().jrbPessoaJuridica.setSelected(true);
             cadastroCliente.getInstancia().ativaPessoa(false);
             cadastroCliente.getInstancia().mascaraCPF_CNPJ(false);
+            cadastroCliente.getInstancia().atualizarPessoaJuridica(pessoaJuridicaSelecionada);
             cadastroCliente.getInstancia().setVisible(true);
             cadastroCliente.getInstancia().DisableEnable(false);
             cadastroCliente.getInstancia().setLocationRelativeTo(this);
@@ -539,10 +542,15 @@ public class cadastroClienteHome extends javax.swing.JFrame {
                     PessoaTableModel pessoaModel = (PessoaTableModel) jtClientes.getModel();
                     Pessoa pessoaSelecionada = pessoaModel.get(linhaSelecionada);
                     PessoaDAO pessoaDAO = new PessoaDAO();
-                    pessoaSelecionada.setAtivo(false);
-                    pessoaDAO.merge(pessoaSelecionada);
-                    pessoaModel.removeRow(linhaSelecionada);
-                    JOptionPane.showMessageDialog(this, "Remoção efetuada com sucesso!");
+                    if (pessoaSelecionada.getPessoaFisica() != null || pessoaSelecionada.getPessoaJuridica() != null) {
+                        pessoaSelecionada.setAtivo(false);
+                        pessoaDAO.merge(pessoaSelecionada);
+                        pessoaModel.removeRow(linhaSelecionada);
+                        JOptionPane.showMessageDialog(this, "Remoção efetuada com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Não é possível remover um funcionário!");
+                    }
+
                 }
             } else if (jcbPessoaFisica.isSelected()) {
                 String ObjButtons[] = {"Sim", "Não"};
@@ -551,10 +559,14 @@ public class cadastroClienteHome extends javax.swing.JFrame {
                     PessoaFisicaTableModel pessoaFisicaModel = (PessoaFisicaTableModel) jtClientes.getModel();
                     PessoaFisica pessoaFisicaSelecionada = pessoaFisicaModel.get(linhaSelecionada);
                     PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-                    pessoaFisicaSelecionada.setAtivo(false);
-                    pessoaFisicaDAO.merge(pessoaFisicaSelecionada);
-                    pessoaFisicaModel.removeRow(linhaSelecionada);
-                    JOptionPane.showMessageDialog(this, "Remoção efetuada com sucesso!");
+                    if (pessoaFisicaSelecionada.getPessoaFisica() != null) {
+                        pessoaFisicaSelecionada.setAtivo(false);
+                        pessoaFisicaDAO.merge(pessoaFisicaSelecionada);
+                        pessoaFisicaModel.removeRow(linhaSelecionada);
+                        JOptionPane.showMessageDialog(this, "Remoção efetuada com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Não é possível remover um funcionário!");
+                    }
                 }
             } else if (jcbPessoaJuridica.isSelected()) {
                 String ObjButtons[] = {"Sim", "Não"};
@@ -575,34 +587,12 @@ public class cadastroClienteHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jbRemoverMouseClicked
 
     private void jcbPessoaFisicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbPessoaFisicaMouseClicked
-        popularTabela();
+        popularTabela();       
     }//GEN-LAST:event_jcbPessoaFisicaMouseClicked
 
     private void jcbPessoaJuridicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbPessoaJuridicaMouseClicked
-        popularTabela();
+        popularTabela();        
     }//GEN-LAST:event_jcbPessoaJuridicaMouseClicked
-
-    private void jftTelefoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jftTelefoneKeyPressed
-
-        jlCPF.setVisible(false);
-        jlCPF.setEnabled(false);
-        jftCPF.setVisible(false);
-        jftCPF.setEnabled(false);
-    }//GEN-LAST:event_jftTelefoneKeyPressed
-
-    private void jtNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNomeKeyReleased
-        if (jtNome.getText().length() == 0) {
-            jlCPF.setVisible(true);
-            jlCPF.setEnabled(true);
-            jftCPF.setVisible(true);
-            jftCPF.setEnabled(true);
-        } else {
-            jlCPF.setVisible(false);
-            jlCPF.setEnabled(false);
-            jftCPF.setVisible(false);
-            jftCPF.setEnabled(false);
-        }
-    }//GEN-LAST:event_jtNomeKeyReleased
 
     private void jbCancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMousePressed
         if (jbCancelar.isEnabled()) {
