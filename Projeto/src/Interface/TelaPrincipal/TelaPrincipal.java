@@ -18,6 +18,7 @@ import Interface.CadImovel.cadastroImovelHome;
 import Interface.Locacao.CadLocacao;
 import Interface.Locacao.CadLocacaoHome;
 import Interface.Locacao.ControleLocacao;
+import Interface.Relatorio.RelatorioHome;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,7 +40,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private static TelaPrincipal instancia;
     private int tentativas = 0;
     private boolean logado = false;
-    private int instanciaAberta;
 
     /**
      * Creates new form TelaPrincipal
@@ -201,7 +201,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     public void acessoInstancias() {
-        switch (instanciaAberta) {
+        switch (Sessao.getInstance().getInstanciaAberta()) {
             case 1:
                 cadastroCliente.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
                 break;
@@ -240,6 +240,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 break;
             case 13:
                 cadastroCargoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                break;
+            case 14:
+                RelatorioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
                 break;
             default:
                 System.out.println("=====================================================Não existem instancias abertas!!!");
@@ -361,7 +364,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             case 1:
                 break;
             case 2:
-                switch (instanciaAberta) {
+                switch (Sessao.getInstance().getInstanciaAberta()) {
                     case 9:
                         cadastroFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
                         break;
@@ -408,7 +411,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 //                }
                 break;
             case 3:
-                switch (instanciaAberta) {
+                switch (Sessao.getInstance().getInstanciaAberta()) {
                     case 1:
                         cadastroCliente.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
                         break;
@@ -441,6 +444,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         break;
                     case 13:
                         cadastroCargoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+                        break;
+                    case 14:
+                        RelatorioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
                         break;
                     default:
                         System.out.println("=====================================================Não existem instancias abertas!!!");
@@ -505,7 +511,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     public void finalizarInstancias() {
-        switch (instanciaAberta) {
+        switch (Sessao.getInstance().getInstanciaAberta()) {
             case 1:
                 cadastroCliente.getInstancia().setVisible(false);
                 cadastroCliente.getInstancia().setAlwaysOnTop(false);
@@ -681,6 +687,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbConsultarFuncionario = new javax.swing.JButton();
         jbCadastrarDepartamento = new javax.swing.JButton();
         jbConsultarDepartamento = new javax.swing.JButton();
+        jbRelatorios = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jmBarraMenu = new javax.swing.JMenuBar();
         jmCadastrar = new javax.swing.JMenu();
@@ -851,6 +858,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jbRelatorios.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jbRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/relatórios.png"))); // NOI18N
+        jbRelatorios.setText("<html><center>Emitir<br/>Relatórios</html>");
+        jbRelatorios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbRelatoriosMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -883,6 +899,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                                     .addComponent(jbConsultarLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(28, 28, 28))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -910,8 +930,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jbCadastrarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jbConsultarDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jbConsultarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jbCadastrarDepartamento.getAccessibleContext().setAccessibleName("jbCadastrarCargo");
@@ -1090,7 +1112,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbCadastrarClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarClienteMousePressed
         if (jbCadastrarCliente.isEnabled()) {
             finalizarInstancias();
-            instanciaAberta = 1;
+            Sessao.getInstance().setInstanciaAberta(1);
             cadastroCliente cliente = cadastroCliente.getInstancia();
             cliente.setLocationRelativeTo(jSeparator2);
             cliente.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
@@ -1101,7 +1123,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbCadastrarImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarImovelMousePressed
         if (jbCadastrarImovel.isEnabled()) {
             finalizarInstancias();
-            instanciaAberta = 4;
+            Sessao.getInstance().setInstanciaAberta(4);
             cadastroImovel imovel = cadastroImovel.getInstancia();
             imovel.setLocationRelativeTo(jSeparator2);
             imovel.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
@@ -1112,7 +1134,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbControleClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleClienteMousePressed
         if (jbControleCliente.isEnabled()) {
             finalizarInstancias();
-            instanciaAberta = 3;
+            Sessao.getInstance().setInstanciaAberta(3);
             cadastroClienteHome clienteHome = cadastroClienteHome.getInstancia();
             clienteHome.setLocationRelativeTo(jSeparator2);
             clienteHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
@@ -1123,7 +1145,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbControleImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleImovelMousePressed
         if (jbControleImovel.isEnabled()) {
             finalizarInstancias();
-            instanciaAberta = 5;
+            Sessao.getInstance().setInstanciaAberta(5);
             cadastroImovelHome imovelHome = cadastroImovelHome.getInstancia();
             imovelHome.setLocationRelativeTo(jSeparator2);
             imovelHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
@@ -1134,7 +1156,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbCadastrarLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarLocacaoMousePressed
         if (jbCadastrarLocacao.isEnabled()) {
             finalizarInstancias();
-            instanciaAberta = 6;
+            Sessao.getInstance().setInstanciaAberta(6);
             CadLocacao locacao = CadLocacao.getInstancia();
             locacao.setLocationRelativeTo(jSeparator2);
             locacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
@@ -1145,7 +1167,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbControleLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleLocacaoMousePressed
         if (jbControleLocacao.isEnabled()) {
             finalizarInstancias();
-            instanciaAberta = 7;
+            Sessao.getInstance().setInstanciaAberta(7);
             ControleLocacao controleLocacao = ControleLocacao.getInstancia();
             controleLocacao.setLocationRelativeTo(jSeparator2);
             controleLocacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
@@ -1156,7 +1178,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbFuncionarioMousePressed
         if (jbFuncionario.isEnabled()) {
             finalizarInstancias();
-            instanciaAberta = 9;
+            Sessao.getInstance().setInstanciaAberta(9);
             cadastroFuncionario funcionario = cadastroFuncionario.getInstancia();
             funcionario.setLocationRelativeTo(jSeparator2);
             funcionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
@@ -1167,7 +1189,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbControleFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleFuncionarioMousePressed
         if (jbControleFuncionario.isEnabled()) {
             finalizarInstancias();
-            instanciaAberta = 10;
+            Sessao.getInstance().setInstanciaAberta(10);
             ControleFuncionario controleFuncionario = ControleFuncionario.getInstancia();
             controleFuncionario.setLocationRelativeTo(jSeparator2);
             controleFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
@@ -1178,7 +1200,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbConsultarLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarLocacaoMousePressed
         if (jbConsultarLocacao.isEnabled()) {
             finalizarInstancias();
-            instanciaAberta = 8;
+            Sessao.getInstance().setInstanciaAberta(8);
             CadLocacaoHome cadLocacaoHome = CadLocacaoHome.getInstancia();
             cadLocacaoHome.setLocationRelativeTo(jSeparator2);
             cadLocacaoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
@@ -1269,7 +1291,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jbConsultarFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarFuncionarioMousePressed
         if (jbConsultarFuncionario.isEnabled()) {
             finalizarInstancias();
-            instanciaAberta = 11;
+            Sessao.getInstance().setInstanciaAberta(11);
             CadFuncionarioHome cadFuncionarioHome = CadFuncionarioHome.getInstancia();
             cadFuncionarioHome.setLocationRelativeTo(jSeparator2);
             cadFuncionarioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
@@ -1287,19 +1309,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jbCadastrarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarDepartamentoMousePressed
         if (jbCadastrarDepartamento.isEnabled()) {
+            cadastroCargo.getInstancia().encerrarInstancia();
+            cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
             finalizarInstancias();
-            instanciaAberta = 12;
+            Sessao.getInstance().setInstanciaAberta(12);
             cadastroCargo cadCargo = cadastroCargo.getInstancia();
             cadCargo.setLocationRelativeTo(jSeparator2);
             cadCargo.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            cadCargo.getInstancia().DisableDep();
             cadCargo.setVisible(true);
         }
     }//GEN-LAST:event_jbCadastrarDepartamentoMousePressed
 
     private void jbConsultarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarDepartamentoMousePressed
         if (jbConsultarDepartamento.isEnabled()) {
+            cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
+            cadastroCargo.getInstancia().encerrarInstancia();
             finalizarInstancias();
-            instanciaAberta = 13;
+            Sessao.getInstance().setInstanciaAberta(13);
             cadastroCargoHome cadCargoHome = cadastroCargoHome.getInstancia();
             cadCargoHome.setLocationRelativeTo(jSeparator2);
             cadCargoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
@@ -1309,15 +1336,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jmiCadastrarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarDepartamentoMousePressed
         if (jmiCadastrarDepartamento.isEnabled()) {
+            cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
+            cadastroCargo.getInstancia().encerrarInstancia();
             finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
             cadastroCargo cadCargo = cadastroCargo.getInstancia();
             cadCargo.setLocationRelativeTo(jSeparator2);
+            cadCargo.getInstancia().DisableDep();
             cadCargo.setVisible(true);
         }
     }//GEN-LAST:event_jmiCadastrarDepartamentoMousePressed
 
     private void jmiConsultarDepartamentoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarDepartamentoMousePressed
         if (jmiConsultarDepartamento.isEnabled()) {
+            cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
+            cadastroCargo.getInstancia().encerrarInstancia();
             finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
             cadastroCargoHome cadCargoHome = cadastroCargoHome.getInstancia();
             cadCargoHome.setLocationRelativeTo(jSeparator2);
@@ -1341,6 +1373,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jmiLogoffMousePressed
+
+    private void jbRelatoriosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRelatoriosMouseClicked
+        if (jbRelatorios.isEnabled()) {
+            finalizarInstancias();
+            Sessao.getInstance().setInstanciaAberta(14);
+            RelatorioHome relaotioHome = RelatorioHome.getInstancia();
+            relaotioHome.setLocationRelativeTo(jSeparator2);
+            relaotioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            relaotioHome.setVisible(true);
+        }
+    }//GEN-LAST:event_jbRelatoriosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1405,6 +1448,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jbControleImovel;
     private javax.swing.JButton jbControleLocacao;
     private javax.swing.JButton jbFuncionario;
+    private javax.swing.JButton jbRelatorios;
     private javax.swing.JLabel jlLogoff;
     private javax.swing.JLabel jlSair;
     private javax.swing.JLabel jlTroca;

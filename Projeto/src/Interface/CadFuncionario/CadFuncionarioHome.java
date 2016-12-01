@@ -72,9 +72,13 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     }
 
     public void popularTabela() {
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         List<Funcionario> funcionarios = new ArrayList<Funcionario>();
-        funcionarios = FuncionarioDAO.getInstancia().getAll();
-        jtFuncionarios.setModel(new FuncionarioTableModel(funcionarios));
+        funcionarios = funcionarioDAO.getAtivos();
+
+        if (funcionarios != null) {
+            jtFuncionarios.setModel(new FuncionarioTableModel(funcionarios));
+        }
     }
 
     public void popularTabelaQuery() {
@@ -270,15 +274,22 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
 
     private void jbRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbRemoverMouseClicked
         if (jbRemover.isEnabled()) {
-            int linhaSelecionada = jtFuncionarios.getSelectedRow();
-            if (linhaSelecionada == -1) {
-                return; //Nada selecionado
+            String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Tem certeza que deseja remover esse registro?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {
+
+                int linhaSelecionada = jtFuncionarios.getSelectedRow();
+                if (linhaSelecionada == -1) {
+                    return; //Nada selecionado
+                }
+                FuncionarioTableModel funcionarioModel = (FuncionarioTableModel) jtFuncionarios.getModel();
+                Funcionario funcionarioSelecionado = funcionarioModel.get(linhaSelecionada);
+                funcionarioSelecionado.setAtivo(false);
+                FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+                funcionarioDAO.merge(funcionarioSelecionado);
+                funcionarioModel.removeRow(linhaSelecionada);
+                JOptionPane.showMessageDialog(this, "Remoção efetuada com sucesso!");
             }
-            FuncionarioTableModel funcionarioModel = (FuncionarioTableModel) jtFuncionarios.getModel();
-            Funcionario funcionarioSelecionado = funcionarioModel.get(linhaSelecionada);
-            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-            funcionarioDAO.removeById(funcionarioSelecionado.getIdPessoa());
-            funcionarioModel.removeRow(linhaSelecionada);
         } // TODO add your handling code here:
     }//GEN-LAST:event_jbRemoverMouseClicked
 

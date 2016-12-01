@@ -6,6 +6,7 @@
 package Interface.CadCliente;
 
 import Interface.TelaPrincipal.Sessao;
+import Interface.TelaPrincipal.TelaPrincipal;
 import dao.CidadeDAO;
 import dao.EstadoCivilDAO;
 import dao.EstadoDAO;
@@ -211,6 +212,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
         PessoaFisica pessoaFisica = new PessoaFisica();
         pessoaFisica.setTipoPessoa(true);
+        pessoaFisica.setAtivo(true);
         pessoaFisica.setNomePessoa(jtfNome.getText());
         pessoaFisica.setCPF(jftCPF.getText());
         pessoaFisica.setRG(jtfRG.getText());
@@ -372,6 +374,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         PessoaJuridicaDAO pessoaJuridicaDAO = new PessoaJuridicaDAO();
         PessoaJuridica pessoaJuridica = new PessoaJuridica();
         pessoaJuridica.setTipoPessoa(false);
+        pessoaJuridica.setAtivo(true);
         pessoaJuridica.setNomePessoa(jtfNome.getText());
         pessoaJuridica.setCnpj(jftCPF.getText());
         pessoaJuridica.setInscricaoEstadual(jtfRG.getText());
@@ -506,6 +509,8 @@ public class cadastroCliente extends javax.swing.JFrame {
     }
 
     public void atualizarPessoaFisica(PessoaFisica pessoaFisica) {
+         System.out.println("====================================Entrou no atualiza fisica");
+        jtfCodigoInterno.setText("" + pessoaFisica.getIdPessoa());
         jtfNome.setText(pessoaFisica.getNomePessoa());
         jftCPF.setText(pessoaFisica.getCPF());
         jtfRG.setText(pessoaFisica.getRG());
@@ -557,25 +562,40 @@ public class cadastroCliente extends javax.swing.JFrame {
         tiposContrato = tipoContratoDAO.getAll();
         List<TipoContrato> interesses = new ArrayList<TipoContrato>();
 
-        if (jcbLocacao.isSelected()) {
-            interesses.add(tiposContrato.get(0));
-        }
-        if (jcbCompra.isSelected()) {
-            interesses.add(tiposContrato.get(1));
-        }
-        if (jcbTroca.isSelected()) {
-            interesses.add(tiposContrato.get(2));
-        }
-        pessoaFisica.setInteresses(interesses);
-
         if (pessoaFisica.getListaFiadores().size() > 0) {
             jcbFiador.getModel().setSelectedItem(pessoaFisica.getListaFiadores().get(0));
         } else {
             jcbFiador.setSelectedIndex(-1);
         }
+
+        for (int i = 0; i < pessoaFisica.getInteresses().size(); i++) {
+            if (i == 0) {
+                if (pessoaFisica.getInteresses().get(i) != null) {
+                    jcbLocacao.setSelected(true);
+                } else {
+                    jcbLocacao.setSelected(false);
+                }
+            } else if (i == 1) {
+                if (pessoaFisica.getInteresses().get(i) != null) {
+                    jcbTroca.setSelected(true);
+                } else {
+                    jcbTroca.setSelected(false);
+                }
+            } else if (i == 2) {
+                if (pessoaFisica.getInteresses().get(i) != null) {
+                    jcbCompra.setSelected(true);
+                } else {
+                    jcbCompra.setSelected(false);
+                }
+            }
+        }
+
     }
 
     public void atualizarPessoaJuridica(PessoaJuridica pessoaJuridica) {
+        
+        System.out.println("====================================Entrou no atualiza juridica");
+        jtfCodigoInterno.setText("" + pessoaJuridica.getIdPessoa());
         jtfNome.setText(pessoaJuridica.getNomePessoa());
         jftCPF.setText(pessoaJuridica.getCnpj());
         jtfRG.setText(pessoaJuridica.getInscricaoEstadual());
@@ -618,22 +638,27 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfNomeResponsavel.setText(pessoaJuridica.getNomeResponsavel());
         jcbAtivo.setSelected(pessoaJuridica.isCadastroAtivo());
 
-        TipoContratoDAO tipoContratoDAO = new TipoContratoDAO();
-        TipoContrato tipoContrato = new TipoContrato();
-        List<TipoContrato> tiposContrato = new ArrayList<TipoContrato>();
-        tiposContrato = tipoContratoDAO.getAll();
-        List<TipoContrato> interesses = new ArrayList<TipoContrato>();
-
-        if (jcbLocacao.isSelected()) {
-            interesses.add(tiposContrato.get(0));
+        for (int i = 0; i < pessoaJuridica.getInteresses().size(); i++) {
+            if (i == 0) {
+                if (pessoaJuridica.getInteresses().get(i) != null) {
+                    jcbLocacao.setSelected(true);
+                } else {
+                    jcbLocacao.setSelected(false);
+                }
+            } else if (i == 1) {
+                if (pessoaJuridica.getInteresses().get(i) != null) {
+                    jcbTroca.setSelected(true);
+                } else {
+                    jcbTroca.setSelected(false);
+                }
+            } else if (i == 2) {
+                if (pessoaJuridica.getInteresses().get(i) != null) {
+                    jcbCompra.setSelected(true);
+                } else {
+                    jcbCompra.setSelected(false);
+                }
+            }
         }
-        if (jcbCompra.isSelected()) {
-            interesses.add(tiposContrato.get(1));
-        }
-        if (jcbTroca.isSelected()) {
-            interesses.add(tiposContrato.get(2));
-        }
-        pessoaJuridica.setInteresses(interesses);
     }
 
     public void populaPessoaFisica() {
@@ -1040,6 +1065,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                             cadastroClienteHome.getInstancia().setVisible(true);
                             cadastroClienteHome.getInstancia().setLocationRelativeTo(this);
                             cadastroClienteHome.getInstancia().popularTabela();
+                            Sessao.getInstance().setInstanciaAberta(3);
                             dispose();
                         } else {
                             cadastrarPessoaFisica(pessoaFisica);
@@ -1068,6 +1094,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                             cadastroClienteHome.getInstancia().setVisible(true);
                             cadastroClienteHome.getInstancia().setLocationRelativeTo(this);
                             cadastroClienteHome.getInstancia().popularTabela();
+                            Sessao.getInstance().setInstanciaAberta(3);
                             dispose();
                         } else {
                             cadastrarPessoaJuridica(pessoaJuridica);
@@ -1478,6 +1505,7 @@ public class cadastroCliente extends javax.swing.JFrame {
                     cadastroClienteHome.getInstancia().setVisible(true);
                     cadastroClienteHome.getInstancia().setLocationRelativeTo(this);
                     cadastroClienteHome.getInstancia().popularTabela();
+                    Sessao.getInstance().setInstanciaAberta(3);
                     dispose();
                     encerrarInstancia();
                 }

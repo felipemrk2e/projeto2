@@ -5,6 +5,7 @@
  */
 package Interface.CadFuncionario;
 
+import Interface.CadCargo.cadastroCargo;
 import Interface.TelaPrincipal.Sessao;
 import dao.CargoDAO;
 import dao.CidadeDAO;
@@ -65,7 +66,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         carregaCidades();
         carregaEstadosCivis();
         if (funcionario == null) {
-//            populaFuncionario();
+            populaFuncionario();
         }
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 
@@ -100,6 +101,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }
 
     public void DisableEnable(Boolean b) {
+        jtfCodigoInterno.setEnabled(false);
         jbConfirmar.setEnabled(b);
         jbEditar.setEnabled(false);
         jtfCodigoInterno.setEnabled(b);
@@ -222,6 +224,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     public void cadastrarFuncionario() throws ParseException, Exception {
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         Funcionario funcionario = new Funcionario();
+        funcionario.setAtivo(true);
         funcionario.setNomePessoa(jtfNome.getText());
         funcionario.setCPF(jftCPF.getText());
         funcionario.setRG(jtfRG.getText());
@@ -435,8 +438,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }
 
     public void populaFuncionario() {
-        Pessoa pessoa = new Pessoa();
-        jtfCodigoInterno.setText(pessoa.getIdPessoa() + "");
+        Pessoa pessoa = new Pessoa();       
         jtfNome.setText("Jean Felipe");
         jftCPF.setText("38933784802");
         jtfRG.setText("RG");
@@ -777,7 +779,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jlCEP = new javax.swing.JLabel();
         jftCEP = new javax.swing.JFormattedTextField();
         jcbEstado = new javax.swing.JComboBox();
-        jcbCidade = new javax.swing.JComboBox<>();
+        jcbCidade = new javax.swing.JComboBox<String>();
         jtfComplemento = new javax.swing.JTextField();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCelular = new javax.swing.JFormattedTextField();
@@ -847,6 +849,8 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         jlCodigoInterno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCodigoInterno.setText("Código Interno");
         getContentPane().add(jlCodigoInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 100, 30));
+
+        jtfCodigoInterno.setEditable(false);
         getContentPane().add(jtfCodigoInterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 100, 30));
 
         jlNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -964,7 +968,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         });
         getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, 30));
 
-        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 140, 30));
         getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 270, 30));
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 210, 30));
@@ -1059,6 +1063,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
                         CadFuncionarioHome.getInstancia().setVisible(true);
                         CadFuncionarioHome.getInstancia().setLocationRelativeTo(this);
                         CadFuncionarioHome.getInstancia().popularTabela();
+                        Sessao.getInstance().setInstanciaAberta(11);
                         dispose();
                     } else {
                         cadastrarFuncionario(funcionario);
@@ -1066,6 +1071,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
                         ZerarCampos();
                         funcionario = null;
                         encerrarInstancia();
+                        CadFuncionarioHome.getInstancia().popularTabela();
                         dispose();
                     }
 
@@ -1091,6 +1097,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
                 CadFuncionarioHome.getInstancia().setVisible(true);
                 CadFuncionarioHome.getInstancia().setLocationRelativeTo(this);
                 CadFuncionarioHome.getInstancia().popularTabela();
+                Sessao.getInstance().setInstanciaAberta(11);
                 dispose();
                 encerrarInstancia();
             }
@@ -1098,7 +1105,16 @@ public class cadastroFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jbCancelarMouseClicked
 
     private void jlAddCargoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAddCargoMousePressed
-        //add cargo
+        if (jlAddCargo.isEnabled()) {
+             cadastroCargo.getInstancia().zeraAtributosCargoDepartamento();
+            cadastroCargo.getInstancia().encerrarInstancia();          
+            cadastroCargo cadCargo = cadastroCargo.getInstancia();
+            cadCargo.setLocationRelativeTo(this);
+            cadCargo.getInstancia().DisableDep();
+            cadCargo.setVisible(true);
+            Sessao.getInstance().setInstanciaAberta(12);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jlAddCargoMousePressed
 
     private void jbEditarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMousePressed

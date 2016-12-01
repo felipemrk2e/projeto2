@@ -5,6 +5,7 @@
  */
 package Interface.CadCargo;
 
+import Interface.CadFuncionario.cadastroFuncionario;
 import Interface.TelaPrincipal.Sessao;
 import dao.CargoDAO;
 import dao.DepartamentoDAO;
@@ -37,16 +38,22 @@ public class cadastroCargo extends javax.swing.JFrame {
      * Creates new form cadastrarCargo
      */
     public cadastroCargo() {
-       // this.setUndecorated(true);
+        this.setUndecorated(true);
         initComponents();
-     //   setAlwaysOnTop(true);
+       setAlwaysOnTop(true);
         this.setTitle("Cadastro de Departamento");
         mascaraTelefone();
         carregaDepartamentos();
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
 
     }
-
+  public void zeraAtributosCargoDepartamento(){
+      cargo = null;
+      departamento =null;
+      listModel = null;
+      
+      
+  }
     public static cadastroCargo getInstancia() {
         if (instancia == null) {
             instancia = new cadastroCargo();
@@ -74,13 +81,26 @@ public class cadastroCargo extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
-
+ public void DisableDep() {
+        jtfCodigoDepartamento.setEnabled(false);
+        jtfNomeDepartamento.setEnabled(true);
+        jftTelefone.setEnabled(true);
+        jtfRamal.setEnabled(true);
+        jtfCodigoCargo.setEnabled(false);
+        jtNomeCargo.setEnabled(false);
+        jtaDescricaoCargo.setEnabled(false);
+        jlCargosList.setEnabled(false);
+        jbCadastrarDepartamento.setEnabled(true);
+        jbCadastrarCargo.setEnabled(false);
+        jbEditar.setEnabled(false);
+        jbCancelar.setEnabled(false);
+    }
     public void DisableEnable(Boolean b) {
         jtfCodigoDepartamento.setEnabled(false);
         jtfNomeDepartamento.setEnabled(b);
         jftTelefone.setEnabled(b);
         jtfRamal.setEnabled(b);
-        jtfCodigoCargo.setEnabled(b);
+        jtfCodigoCargo.setEnabled(false);
         jtNomeCargo.setEnabled(b);
         jtaDescricaoCargo.setEnabled(b);
         jlCargosList.setEnabled(b);
@@ -124,10 +144,11 @@ public class cadastroCargo extends javax.swing.JFrame {
     }
 
     public void ZerarCampos() {
-        jtfCodigoDepartamento.setText("");
-        jtfNomeDepartamento.setText("");
-        jftTelefone.setText("");
-        jtfRamal.setText("");
+//        jtfCodigoDepartamento.setText("");
+//        jtfNomeDepartamento.setText("");
+//        jftTelefone.setText("");
+//        jtfRamal.setText("");
+        cargo = null;
         jtfCodigoCargo.setText("");
         jtNomeCargo.setText("");
         jtaDescricaoCargo.setText("");
@@ -142,18 +163,9 @@ public class cadastroCargo extends javax.swing.JFrame {
         cargoDAO.merge(cargo);
         departamento = null;
         cargo =null;
-        
-//         if(departamento !=null){
-//            cargo.setDepartamento(departamento);
-//            cargoDAO.persist(cargo); 
-//           
-//        listModel.addElement(cargo);
-//        jlCargosList.setModel(listModel);
-//            
-//         }
-       
-      
+        carregaListaCargos();
 
+       
     }
 
     public void cadastrarCargo(Cargo cargo, Departamento departamento) {
@@ -164,6 +176,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         cargoDAO.merge(cargo);
         departamento = null;
         cargo =null;
+        carregaListaCargos();
 
     }
 
@@ -175,6 +188,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         departamento.setTelefoneDepartamento(jftTelefone.getText());
         departamentoDAO.persist(departamento);
         this.departamento = departamento;
+        
     }
 
     public void cadastrarDepartamento(Departamento departamento) {
@@ -187,6 +201,7 @@ public class cadastroCargo extends javax.swing.JFrame {
         }
        
         departamentoDAO.merge(departamento);
+        carregaListaCargos();
     }
 
     public void atualizarDepartamento(Departamento departamento) {
@@ -208,17 +223,31 @@ public class cadastroCargo extends javax.swing.JFrame {
     }
 
     public void carregaListaCargos() {
+        DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+        if(departamento !=null){
+            listModel = null;
+            listModel = new DefaultListModel();
+            departamento = departamentoDAO.getById(departamento.getIdDepartamento());
         for (int i = 0; i < departamento.getCargo().size(); i++) {
             listModel.addElement(departamento.getCargo().get(i));
         }
+        if(departamento.getCargo().size() != 0){
+            
+        }
+        else{
+            
+        }
+        
         jlCargosList.setModel(listModel);
+        }
+        
     }
 
     public void carregaDepartamentos() {
         DepartamentoDAO departamentoDAO = new DepartamentoDAO();
         List<Departamento> listaDepartamentos = departamentoDAO.getAll();
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaDepartamentos.toArray());
-        jcbDepartamentos.setModel(defaultComboBox);
+       
     }
 
     public void mascaraTelefone() {
@@ -262,8 +291,6 @@ public class cadastroCargo extends javax.swing.JFrame {
         jbCadastrarCargo = new javax.swing.JButton();
         jlCargosDepartamento = new javax.swing.JLabel();
         jbCancelarDepartamento = new javax.swing.JButton();
-        jlDepartamento = new javax.swing.JLabel();
-        jcbDepartamentos = new javax.swing.JComboBox<>();
         jsCadastrarCargo = new javax.swing.JSeparator();
         jsCadastrarDepartamento = new javax.swing.JSeparator();
 
@@ -350,7 +377,7 @@ public class cadastroCargo extends javax.swing.JFrame {
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
-        jbCancelar.setText("<html><center>Cancelar<br/></html>");
+        jbCancelar.setText("Zerar");
         jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbCancelarMousePressed(evt);
@@ -368,6 +395,11 @@ public class cadastroCargo extends javax.swing.JFrame {
 
         jlCargosList.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCargosList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jlCargosList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jlCargosListValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(jlCargosList);
 
         getContentPane().add(jScrollPane2);
@@ -401,14 +433,6 @@ public class cadastroCargo extends javax.swing.JFrame {
         getContentPane().add(jbCancelarDepartamento);
         jbCancelarDepartamento.setBounds(570, 160, 140, 70);
 
-        jlDepartamento.setText("Departamento");
-        getContentPane().add(jlDepartamento);
-        jlDepartamento.setBounds(40, 390, 110, 14);
-
-        jcbDepartamentos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jcbDepartamentos);
-        jcbDepartamentos.setBounds(40, 410, 170, 20);
-
         jsCadastrarCargo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar Cargo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jsCadastrarCargo);
         jsCadastrarCargo.setBounds(10, 260, 720, 330);
@@ -435,6 +459,8 @@ public class cadastroCargo extends javax.swing.JFrame {
                         cadastroCargoHome.getInstancia().setVisible(true);
                         cadastroCargoHome.getInstancia().setLocationRelativeTo(this);
                         cadastroCargoHome.getInstancia().popularTabela();
+                        Sessao.getInstance().setInstanciaAberta(13);
+                        cadastroFuncionario.getInstancia().populaFuncionario();
                         
                           
                     } else {
@@ -442,6 +468,7 @@ public class cadastroCargo extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
                         ZerarCampos();
                         departamento = null;
+                        cadastroCargoHome.getInstancia().popularTabela();
                         encerrarInstancia();
                         dispose();
                     }
@@ -465,11 +492,13 @@ public class cadastroCargo extends javax.swing.JFrame {
                    cargo = new Cargo();
                       cadastrarCargo(cargo,departamento);
                         JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
-                        ZerarCampos();
+                         cadastroCargoHome.getInstancia().popularTabela();
+                         ZerarCampos();
                }
                 else {
                         cadastrarCargo(departamento);
                         JOptionPane.showMessageDialog(this, "Atualização efetuada com sucesso!");
+                        cadastroCargoHome.getInstancia().popularTabela();
                         ZerarCampos();
                     }
 
@@ -490,6 +519,8 @@ public class cadastroCargo extends javax.swing.JFrame {
     private void jbEditarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMousePressed
         if (jbEditar.isEnabled()) {
             cadastroCargoHome.getInstancia().DisableEnable(true);
+            jbEditar.setEnabled(false);
+            jbCadastrarCargo.setEnabled(true);
             JOptionPane.showMessageDialog(this, "Campos abertos para edição!");
         }
     }//GEN-LAST:event_jbEditarMousePressed
@@ -510,17 +541,37 @@ public class cadastroCargo extends javax.swing.JFrame {
 
     private void jbCancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMousePressed
         if (jbCancelar.isEnabled()) {
-            String ObjButtons[] = {"Sim", "Não"};
-            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
-            if (PromptResult == JOptionPane.YES_OPTION) {
-                cadastroCargoHome.getInstancia().setVisible(true);
-                cadastroCargoHome.getInstancia().setLocationRelativeTo(this);
-                cadastroCargoHome.getInstancia().popularTabela();
-                dispose();
-                encerrarInstancia();
+            
+             ZerarCampos();
+            jbEditar.setEnabled(false);
+            if(Sessao.getInstance().getUsuario().getNivelAcesso() <=2){
+               jbCadastrarCargo.setEnabled(true);  
             }
+           
+//            String ObjButtons[] = {"Sim", "Não"};
+//            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+//            if (PromptResult == JOptionPane.YES_OPTION) {
+//                cadastroCargoHome.getInstancia().setVisible(true);
+//                cadastroCargoHome.getInstancia().setLocationRelativeTo(this);
+//                cadastroCargoHome.getInstancia().popularTabela();
+//                dispose();
+//                encerrarInstancia();
+//            }
         }
     }//GEN-LAST:event_jbCancelarMousePressed
+
+    private void jlCargosListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlCargosListValueChanged
+        System.out.println(jlCargosList.getSelectedIndex()); 
+        if(jlCargosList.getSelectedIndex() >=0){
+             cargo = departamento.getCargo().get(jlCargosList.getSelectedIndex());
+             atualizaCargo(cargo);
+             jbEditar.setEnabled(true);
+             jbCadastrarCargo.setEnabled(false);
+        }
+       
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_jlCargosListValueChanged
 
     /**
      * @param args the command line arguments
@@ -561,18 +612,16 @@ public class cadastroCargo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton jbCadastrarCargo;
-    private javax.swing.JButton jbCadastrarDepartamento;
+    public static javax.swing.JButton jbCadastrarCargo;
+    public static javax.swing.JButton jbCadastrarDepartamento;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbCancelarDepartamento;
-    private javax.swing.JButton jbEditar;
-    public javax.swing.JComboBox<String> jcbDepartamentos;
+    public static javax.swing.JButton jbEditar;
     private javax.swing.JFormattedTextField jftTelefone;
     private javax.swing.JLabel jlCargosDepartamento;
     private javax.swing.JList<String> jlCargosList;
     private javax.swing.JLabel jlCodigoCargo;
     private javax.swing.JLabel jlCodigoDepartamento;
-    private javax.swing.JLabel jlDepartamento;
     private javax.swing.JLabel jlDescricaoCargo;
     private javax.swing.JLabel jlNomeCargo;
     private javax.swing.JLabel jlNomeDepartamento;

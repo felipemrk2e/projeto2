@@ -62,4 +62,7 @@ public class FuncionarioDAO extends DAO<Funcionario> {
         return entityManager.createQuery("FROM Funcionario").getResultList();
     }
 
+    public List<Funcionario> getAtivos(){
+        return entityManager.createQuery("FROM Funcionario p WHERE p.ativo = 1").getResultList();
+    }
 }

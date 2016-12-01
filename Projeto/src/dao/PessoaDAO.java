@@ -71,7 +71,22 @@ public class PessoaDAO extends DAO<Pessoa> {
         return entityManager.createQuery("FROM Pessoa AS p INNER JOIN p.PessoaFisica").getResultList();
     }
     
-    public List<Pessoa> searchPessoa(String nome, String telefone, String cpf, String cnpj, int tipoPessoa){
+    public List<Pessoa> getAtivos(){
+        return entityManager.createQuery("FROM Pessoa p WHERE p.ativo = 1").getResultList();
+    }
+    
+    /**
+        * Retorna uma lista de Pessoas de acordo com a pesquisa.
+        * @param  nome String com o nome da Pessoa
+        * @param cpf String com o cpf (com máscara)
+        * @param cnpj String com o cnpj (com máscara)
+        * @param tipoPessoa inteiro que controla o tipo de Pessoa (Fisica, Juridica)
+        *   0 == pessoaFisica e pessoaJuridica
+        *   1 == pessoaFisica
+        *   2 == pessoaJuridica
+        * @return      lista de Pessoas com base nas condições de pesquisa
+        */
+    public List<Pessoa> searchPessoa(String nome, String cpf, String cnpj, int tipoPessoa){
         String query = "";
         String or = "";
         
@@ -112,12 +127,28 @@ public class PessoaDAO extends DAO<Pessoa> {
                 query += or+"pj.pessoaJuridica.cnpj LIKE '%"+cnpj+"%'";
                 or = " or ";
             }
-//            if(query != "")
-//                return entityManager.createQuery("FROM Pessoa.pessoaJuridica pj WHERE "+query).getResultList();
+            
             if(query != "")
                 return entityManager.createQuery("select distinct pe from Pessoa pe " +
                 "join pe.pessoaJuridica pj where "+query).getResultList();
             return entityManager.createQuery("select distinct pe from Pessoa pe join pe.pessoaJuridica pj").getResultList();
+        }
+        
+        //funcionario == 3
+        if(tipoPessoa == 3){
+            if(nome != ""){
+                query += "pff.nomePessoa LIKE '%"+nome+"%'";
+                or = " or ";
+            }
+            if(cpf != ""){
+                query += or+"pff.pessoaFisica.CPF LIKE '%"+cpf+"%'";
+                or = " or ";
+            }
+            
+            if(query != "")
+                return entityManager.createQuery("select distinct pe from Pessoa pe " +
+                "join pe.pessoaFisica pf join pf.funcionario pff where "+query).getResultList();
+            return entityManager.createQuery("select distinct pe from Pessoa pe join pe.pessoaFisica pf join pf.funcionario pff").getResultList();
         }
         
         return entityManager.createQuery("FROM Pessoa pe").getResultList();

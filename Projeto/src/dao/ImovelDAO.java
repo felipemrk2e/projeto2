@@ -51,6 +51,7 @@ public class ImovelDAO extends DAO<Imovel>{
     public List<Imovel> searchImovel(List<Long> idsTiposImovel, String rua, String bairro, long idCidade, int qtdQuartos, int garagem, int ativo){
         String query = "";
         String or = "";
+        String cdd = "";
         if(idsTiposImovel.size() > 0){
             for (int i = 0; i < idsTiposImovel.size(); i++) {
                 if(i==1){
@@ -69,8 +70,7 @@ public class ImovelDAO extends DAO<Imovel>{
             or = " or ";
         }
         if(idCidade > 0){
-            query += or+"im.endereco.cidade.idCidade = "+idCidade;
-            or = " or ";
+            cdd += "and im.endereco.cidade.idCidade = "+idCidade;
         }
         if(qtdQuartos > 0){
             query += or+"im.qtdQuartos >= "+qtdQuartos;
@@ -84,7 +84,7 @@ public class ImovelDAO extends DAO<Imovel>{
         if(ativo == 3)
             return entityManager.createQuery("FROM Imovel im WHERE "+query).getResultList();
         
-        return entityManager.createQuery("FROM Imovel im WHERE ("+query+") and im.ativo = "+ativo).getResultList();
+        return entityManager.createQuery("FROM Imovel im WHERE ("+query+") and im.ativo = "+ativo+" "+cdd).getResultList();
     }
     
     /**
@@ -101,6 +101,14 @@ public class ImovelDAO extends DAO<Imovel>{
     */
     public List<Imovel> getInativos(){
         return entityManager.createQuery("FROM Imovel im WHERE im.ativo = 0").getResultList();
+    }
+    
+    /**
+        * Retorna apenas Imoveis ativos de uma cidade.
+        * @return      lista de Imoveis.
+    */
+    public List<Imovel> ativosPorCidade(long idCidade){
+        return entityManager.createQuery("FROM Imovel im WHERE im.endereco.cidade.idCidade = "+idCidade+" and im.ativo = 1").getResultList();
     }
 
 }

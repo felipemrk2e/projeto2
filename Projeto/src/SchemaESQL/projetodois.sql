@@ -156,6 +156,7 @@ CREATE TABLE Cargo(
 
 CREATE TABLE Pessoa(
     idPessoa INT AUTO_INCREMENT NOT NULL,
+    ativo BOOLEAN DEFAULT 1 NOT NULL,
     nomePessoa VARCHAR(45) NOT NULL,
     email VARCHAR(45) NOT NULL,
     observacoes VARCHAR(60),

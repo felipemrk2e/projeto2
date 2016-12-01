@@ -13,6 +13,7 @@ import model.pessoa.Login;
  */
 public class Sessao{
    private static Sessao instance = null;
+   private int instanciaAberta;
    private Login usuario;
    private Sessao(){
    }
@@ -28,4 +29,13 @@ public class Sessao{
          }
         return instance;
    }
+
+    public int getInstanciaAberta() {
+        return instanciaAberta;
+    }
+
+    public void setInstanciaAberta(int instanciaAberta) {
+        this.instanciaAberta = instanciaAberta;
+    }
+   
 }

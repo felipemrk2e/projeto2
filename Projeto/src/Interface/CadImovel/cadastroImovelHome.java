@@ -41,10 +41,9 @@ public class cadastroImovelHome extends javax.swing.JFrame {
      * Creates new form cadastroImovelHome
      */
     public cadastroImovelHome() {
-        //this.setUndecorated(true);
-
+       this.setUndecorated(true);
         initComponents();
-        //setAlwaysOnTop(true);
+        setAlwaysOnTop(true);
         fechar();
         popularTable();
         ComboBox();
@@ -86,7 +85,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
                 jbCadastrar.setEnabled(false);
                 break;
             default:
-                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
+                JOptionPane.showMessageDialog(this, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
 
@@ -214,9 +213,13 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jcbCidade = new javax.swing.JComboBox();
         jcbAtivo = new javax.swing.JCheckBox();
         jcbInativo = new javax.swing.JCheckBox();
+        jbCancelar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setMaximumSize(new java.awt.Dimension(1024, 640));
         setMinimumSize(new java.awt.Dimension(1024, 640));
+        setPreferredSize(new java.awt.Dimension(1024, 640));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -421,8 +424,18 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         getContentPane().add(jcbInativo);
         jcbInativo.setBounds(780, 350, 80, 30);
 
+        jbCancelar1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCancelar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
+        jbCancelar1.setText("Cancelar");
+        jbCancelar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbCancelar1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbCancelar1);
+        jbCancelar1.setBounds(410, 240, 140, 70);
+
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
@@ -444,9 +457,9 @@ public class cadastroImovelHome extends javax.swing.JFrame {
                 dao.merge(imovelGlobal.get(jtImovel.getSelectedRow()));
                 dao = new ImovelDAO();
                 if(imovelGlobal.get(jtImovel.getSelectedRow()).getAtivo() == true){
-                    JOptionPane.showMessageDialog(null, "Imovel ativado com Sucesso !");
+                    JOptionPane.showMessageDialog(this, "Imovel ativado com Sucesso !");
                 }else{
-                    JOptionPane.showMessageDialog(null, "Imovel desativado com Sucesso !");
+                    JOptionPane.showMessageDialog(this, "Imovel desativado com Sucesso !");
                 }
                 popularTable();
             }
@@ -574,7 +587,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
                 jlFiltro.setForeground(Color.red);
             }
             control = true;
-            JOptionPane.showMessageDialog(null, "Verifique os campos !");
+            JOptionPane.showMessageDialog(this, "Verifique os campos !");
         }
 
         // fim verificação   // TODO add your handling code here:
@@ -598,7 +611,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
         popularTable();
-        JOptionPane.showMessageDialog(null, "Buscas Canceladas!");
+        JOptionPane.showMessageDialog(this, "Buscas Canceladas!");
         jcbAtivo.setSelected(false);
         jcbInativo.setSelected(false);
         jcbCasa.setSelected(false);
@@ -627,6 +640,10 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_jcbInativoMouseClicked
+
+    private void jbCancelar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelar1MouseClicked
+      dispose();  // TODO add your handling code here:
+    }//GEN-LAST:event_jbCancelar1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -667,6 +684,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbCancelar1;
     private javax.swing.JButton jbPesquisar;
     private javax.swing.JButton jbRemover;
     private javax.swing.JButton jbVisualisar;
