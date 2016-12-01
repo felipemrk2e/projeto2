@@ -295,7 +295,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         MD5 md5 = new MD5();
 
         Login login = new Login();
-        login.setNivelAcesso(0);
+        login.setNivelAcesso(3);
         login.setNomeUsuario(loginNovo.geraNovoUsuario(funcionario.getNomePessoa()));
         String senha = loginNovo.gerarNovaSenha();
 
