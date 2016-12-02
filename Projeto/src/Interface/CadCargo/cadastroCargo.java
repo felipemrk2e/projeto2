@@ -293,9 +293,12 @@ public class cadastroCargo extends javax.swing.JFrame {
         jbCancelarDepartamento = new javax.swing.JButton();
         jsCadastrarCargo = new javax.swing.JSeparator();
         jsCadastrarDepartamento = new javax.swing.JSeparator();
+        jbCadastrarDepartamento1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(747, 640));
+        setMaximumSize(new java.awt.Dimension(1024, 640));
+        setMinimumSize(new java.awt.Dimension(1024, 640));
+        setPreferredSize(new java.awt.Dimension(1024, 640));
         getContentPane().setLayout(null);
         getContentPane().add(jtfCodigoCargo);
         jtfCodigoCargo.setBounds(160, 280, 80, 30);
@@ -361,7 +364,7 @@ public class cadastroCargo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbEditar);
-        jbEditar.setBounds(570, 390, 140, 70);
+        jbEditar.setBounds(570, 420, 140, 70);
 
         jbCadastrarDepartamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCadastrarDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
@@ -373,7 +376,7 @@ public class cadastroCargo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbCadastrarDepartamento);
-        jbCadastrarDepartamento.setBounds(570, 80, 140, 70);
+        jbCadastrarDepartamento.setBounds(570, 70, 140, 40);
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
@@ -384,7 +387,7 @@ public class cadastroCargo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbCancelar);
-        jbCancelar.setBounds(570, 470, 140, 70);
+        jbCancelar.setBounds(570, 500, 140, 70);
 
         jtaDescricaoCargo.setColumns(20);
         jtaDescricaoCargo.setRows(5);
@@ -431,7 +434,7 @@ public class cadastroCargo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbCancelarDepartamento);
-        jbCancelarDepartamento.setBounds(570, 160, 140, 70);
+        jbCancelarDepartamento.setBounds(570, 180, 140, 40);
 
         jsCadastrarCargo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar Cargo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jsCadastrarCargo);
@@ -439,7 +442,20 @@ public class cadastroCargo extends javax.swing.JFrame {
 
         jsCadastrarDepartamento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar Departamento", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
         getContentPane().add(jsCadastrarDepartamento);
-        jsCadastrarDepartamento.setBounds(10, 50, 720, 190);
+        jsCadastrarDepartamento.setBounds(0, 50, 720, 190);
+
+        jbCadastrarDepartamento1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbCadastrarDepartamento1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/salvar.png"))); // NOI18N
+        jbCadastrarDepartamento1.setText("Editar");
+        jbCadastrarDepartamento1.setEnabled(false);
+        jbCadastrarDepartamento1.setIconTextGap(0);
+        jbCadastrarDepartamento1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jbCadastrarDepartamento1MousePressed(evt);
+            }
+        });
+        getContentPane().add(jbCadastrarDepartamento1);
+        jbCadastrarDepartamento1.setBounds(570, 120, 140, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -573,6 +589,19 @@ public class cadastroCargo extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_jlCargosListValueChanged
 
+    private void jbCadastrarDepartamento1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarDepartamento1MousePressed
+if (jbCadastrarDepartamento1.isEnabled()){
+    
+    
+
+jbCadastrarDepartamento.setEnabled(true);
+jbCadastrarDepartamento1.setEnabled(false);
+
+
+}
+    // TODO add your handling code here:
+    }//GEN-LAST:event_jbCadastrarDepartamento1MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -614,6 +643,7 @@ public class cadastroCargo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JButton jbCadastrarCargo;
     public static javax.swing.JButton jbCadastrarDepartamento;
+    public static javax.swing.JButton jbCadastrarDepartamento1;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbCancelarDepartamento;
     public static javax.swing.JButton jbEditar;

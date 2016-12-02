@@ -1573,9 +1573,16 @@ public class cadastroImovel extends javax.swing.JFrame {
     }//GEN-LAST:event_jrbComercioActionPerformed
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-        cadastroImovelHome.getInstancia().setLocationRelativeTo(this);
-        cadastroImovelHome.getInstancia().setVisible(true);
-        dispose();    // TODO add your handling code here:
+        String ObjButtons[] = {"Sim", "Não"};
+        int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+        if (PromptResult == JOptionPane.YES_OPTION) {
+            cadastroImovelHome.getInstancia().setLocationRelativeTo(this);
+            cadastroImovelHome.getInstancia().setVisible(true);
+            dispose();
+
+        }
+
+        // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked
 
     private void jcbFestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbFestaMouseClicked

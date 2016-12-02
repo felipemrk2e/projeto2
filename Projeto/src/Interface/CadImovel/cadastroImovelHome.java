@@ -140,6 +140,8 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         if (instancia == null) {
             instancia = new cadastroImovelHome();
         }
+        
+        
         return instancia;
     }
 
@@ -193,7 +195,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jcbSalao = new javax.swing.JCheckBox();
         jcbTemporario = new javax.swing.JCheckBox();
         jcbComercio = new javax.swing.JCheckBox();
-        jlFiltro = new javax.swing.JLabel();
+        jlAtivo = new javax.swing.JLabel();
         jbPesquisar = new javax.swing.JButton();
         jlNomeProprietario = new javax.swing.JLabel();
         jtNomeProprietario = new javax.swing.JTextField();
@@ -213,7 +215,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jcbCidade = new javax.swing.JComboBox();
         jcbInativo = new javax.swing.JCheckBox();
         separador = new javax.swing.JSeparator();
-        jlFiltro1 = new javax.swing.JLabel();
+        jlFiltro = new javax.swing.JLabel();
         jbCancelar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -295,12 +297,12 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         getContentPane().add(jcbComercio);
         jcbComercio.setBounds(570, 350, 90, 30);
 
-        jlFiltro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlFiltro.setText("Atividade:");
-        jlFiltro.setMinimumSize(new java.awt.Dimension(35, 18));
-        getContentPane().add(jlFiltro);
-        jlFiltro.setBounds(110, 380, 70, 30);
+        jlAtivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlAtivo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlAtivo.setText("Atividade:");
+        jlAtivo.setMinimumSize(new java.awt.Dimension(35, 18));
+        getContentPane().add(jlAtivo);
+        jlAtivo.setBounds(110, 380, 70, 30);
 
         jbPesquisar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/review.png"))); // NOI18N
@@ -430,12 +432,12 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         getContentPane().add(separador);
         separador.setBounds(10, 330, 1010, 240);
 
-        jlFiltro1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlFiltro1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlFiltro1.setText("Filtros:");
-        jlFiltro1.setMinimumSize(new java.awt.Dimension(35, 18));
-        getContentPane().add(jlFiltro1);
-        jlFiltro1.setBounds(130, 350, 50, 30);
+        jlFiltro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlFiltro.setText("Filtros:");
+        jlFiltro.setMinimumSize(new java.awt.Dimension(35, 18));
+        getContentPane().add(jlFiltro);
+        jlFiltro.setBounds(130, 350, 50, 30);
 
         jbCancelar1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
@@ -454,6 +456,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
         if (jbCadastrar.isEnabled()) {
             new cadastroImovel(user).setVisible(true);     // TODO add your handling code here:
+            cadastroImovelHome.getInstancia().encerrarInstancia();
             dispose();
         }
 
@@ -485,6 +488,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         if (jtImovel.getSelectedRow() != -1) {
 
             new cadastroImovel(String.valueOf(imovelGlobal.get(jtImovel.getSelectedRow()).getIdImovel())).setVisible(true);
+            cadastroImovelHome.getInstancia().encerrarInstancia();
             dispose();
         }
 
@@ -507,30 +511,30 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         if (jcbCasa.isSelected()) {
             ids.add(Long.valueOf("1"));
             controlTipo = true;
-            jlFiltro.setForeground(Color.black);
+            jlAtivo.setForeground(Color.black);
         }
 
         if (jcbApartamento.isSelected()) {
             ids.add(Long.valueOf("2"));
             controlTipo = true;
-            jlFiltro.setForeground(Color.black);
+            jlAtivo.setForeground(Color.black);
         }
 
         if (jcbSalao.isSelected()) {
             ids.add(Long.valueOf("3"));
             controlTipo = true;
-            jlFiltro.setForeground(Color.black);
+            jlAtivo.setForeground(Color.black);
         }
 
         if (jcbComercio.isSelected()) {
             ids.add(Long.valueOf("4"));
             controlTipo = true;
-            jlFiltro.setForeground(Color.black);
+            jlAtivo.setForeground(Color.black);
         }
         if (jcbTemporario.isSelected()) {
             ids.add(Long.valueOf("5"));
             controlTipo = true;
-            jlFiltro.setForeground(Color.black);
+            jlAtivo.setForeground(Color.black);
         }
 
         if (jtNomeProprietario.getText().equals("")) {
@@ -594,7 +598,9 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             //   ImovelDAO dao = new ImovelDAO();
             imovel = dao.searchImovel(ids, Rua, Bairro, idcidade, qtdQuartos, garagem, ativo);
             imovelGlobal = imovel;
+            jlFiltro.setForeground(Color.black);
             jtImovel.setModel(new ImovelTableModel2(imovel));
+            
         } else {
             if (!controlTipo) {
                 jlFiltro.setForeground(Color.red);
@@ -659,7 +665,12 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbInativoActionPerformed
 
     private void jbCancelar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelar1MouseClicked
-       dispose();  // TODO add your handling code here:   // TODO add your handling code here:
+      String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {
+                dispose();
+              
+            } // TODO add your handling code here:   // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelar1MouseClicked
 
     /**
@@ -714,11 +725,11 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JCheckBox jcbInativo;
     private javax.swing.JCheckBox jcbSalao;
     private javax.swing.JCheckBox jcbTemporario;
+    private javax.swing.JLabel jlAtivo;
     private javax.swing.JLabel jlBairro;
     private javax.swing.JLabel jlCidade;
     private javax.swing.JLabel jlEstado;
     private javax.swing.JLabel jlFiltro;
-    private javax.swing.JLabel jlFiltro1;
     private javax.swing.JLabel jlNomeProprietario;
     private javax.swing.JLabel jlQuantidadeQuartos;
     private javax.swing.JLabel jlRua;

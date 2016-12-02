@@ -118,7 +118,7 @@ public class cadastroCargoHome extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1024, 640));
         setMinimumSize(new java.awt.Dimension(1024, 640));
-        setPreferredSize(new java.awt.Dimension(1024, 700));
+        setPreferredSize(new java.awt.Dimension(1024, 640));
         getContentPane().setLayout(null);
 
         jlCodigoCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -172,7 +172,7 @@ public class cadastroCargoHome extends javax.swing.JFrame {
         getContentPane().add(jbPesquisarCargo);
         jbPesquisarCargo.setBounds(790, 210, 140, 70);
 
-        jbVisualizarDepartamento.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        jbVisualizarDepartamento.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbVisualizarDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/view.png"))); // NOI18N
         jbVisualizarDepartamento.setText("<html><center>Visualizar<br>Departamento</center></html>");
         jbVisualizarDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -183,7 +183,7 @@ public class cadastroCargoHome extends javax.swing.JFrame {
         getContentPane().add(jbVisualizarDepartamento);
         jbVisualizarDepartamento.setBounds(790, 330, 140, 70);
 
-        jbRemoverDepartamento.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        jbRemoverDepartamento.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbRemoverDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove2.png"))); // NOI18N
         jbRemoverDepartamento.setText("<html><center>Remover<br>Departamento</center></html>");
         jbRemoverDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -194,7 +194,7 @@ public class cadastroCargoHome extends javax.swing.JFrame {
         getContentPane().add(jbRemoverDepartamento);
         jbRemoverDepartamento.setBounds(790, 410, 140, 70);
 
-        jbPesquisarDepartamento.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        jbPesquisarDepartamento.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbPesquisarDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/review.png"))); // NOI18N
         jbPesquisarDepartamento.setText("<html><center>Pesquisar<br>Departamento</center></html>");
         getContentPane().add(jbPesquisarDepartamento);
@@ -223,7 +223,7 @@ public class cadastroCargoHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbCancelar);
-        jbCancelar.setBounds(790, 580, 140, 70);
+        jbCancelar.setBounds(790, 570, 140, 70);
 
         jtDepartamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -296,8 +296,8 @@ public class cadastroCargoHome extends javax.swing.JFrame {
             //cadastroCargo.getInstancia().DisableEnable(false);
             
             if(Sessao.getInstance().getUsuario().getNivelAcesso() <=2){
-                cadastroCargo.getInstancia().jbCadastrarDepartamento.setEnabled(true);
-                cadastroCargo.getInstancia().jbCadastrarDepartamento.setText("Editar");
+                cadastroCargo.getInstancia().jbCadastrarDepartamento.setEnabled(false);
+                cadastroCargo.getInstancia().jbCadastrarDepartamento1.setEnabled(true);
                 cadastroCargo.getInstancia().jbCadastrarCargo.setEnabled(false);
                 cadastroCargo.getInstancia().jbEditar.setEnabled(true);
             }
@@ -328,11 +328,12 @@ public class cadastroCargoHome extends javax.swing.JFrame {
             cadastroCargo.getInstancia().setVisible(true);
            // cadastroCargo.getInstancia().DisableEnable(false);
             if(Sessao.getInstance().getUsuario().getNivelAcesso() <=2){
-                cadastroCargo.getInstancia().jbCadastrarDepartamento.setEnabled(true);
-                cadastroCargo.getInstancia().jbCadastrarDepartamento.setText("Editar");
+                cadastroCargo.getInstancia().jbCadastrarDepartamento.setEnabled(false);
+                cadastroCargo.getInstancia().jbCadastrarDepartamento1.setEnabled(true);
+             
             }
             else{
-             cadastroCargo.getInstancia().jbCadastrarDepartamento.setEnabled(false);
+             cadastroCargo.getInstancia().jbCadastrarDepartamento1.setEnabled(false);
         }
             cadastroCargo.getInstancia().jbEditar.setEnabled(false);
             cadastroCargo.getInstancia().setLocationRelativeTo(this);
