@@ -6,8 +6,6 @@
 package Interface.Locacao;
 
 import Interface.TelaPrincipal.Sessao;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,16 +25,7 @@ public class ControleLocacao extends javax.swing.JFrame {
         initComponents();
         setAlwaysOnTop(true);
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
-    }
-
-    public ControleLocacao(int user, String IdLoccao) {
-        this.setUndecorated(true);
-        this.user = user;
-        initComponents();
-        setAlwaysOnTop(true);
-        popular();
-        acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
-    }
+    }    
 
     public static ControleLocacao getInstancia() {
         if (instancia == null) {
@@ -64,7 +53,7 @@ public class ControleLocacao extends javax.swing.JFrame {
 
                 break;
             default:
-                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
+                JOptionPane.showMessageDialog(this, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
 
@@ -76,23 +65,9 @@ public class ControleLocacao extends javax.swing.JFrame {
         jtFimContrato.setEnabled(b);
         jtNomeFiador.setEnabled(b);
         jtIdImovel.setEnabled(b);
-        jbConfirmar.setEnabled(b);
-        jbCancelar.setEnabled(b);
+        jbConfirmar.setEnabled(b);       
         jbEditar.setEnabled(b);
         jbFinalizarContrato.setEnabled(b);
-    }
-
-    public void verificaNivel() {
-        if (user <= 2) {
-
-            jbEditar.setEnabled(true);
-            jbConfirmar.setEnabled(false);
-
-        } else {
-            jbEditar.setEnabled(false);
-            jbConfirmar.setEnabled(false);
-
-        }
     }
 
     public void popular() {
@@ -136,8 +111,7 @@ public class ControleLocacao extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setEnabled(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
         getContentPane().setLayout(null);
 
@@ -327,30 +301,6 @@ public class ControleLocacao extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Metal".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ControleLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ControleLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ControleLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ControleLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ControleLocacao().setVisible(true);

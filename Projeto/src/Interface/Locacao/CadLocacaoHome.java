@@ -137,7 +137,7 @@ public class CadLocacaoHome extends javax.swing.JFrame {
         jbCancelarTabela = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 640));
         getContentPane().setLayout(null);
 
@@ -400,10 +400,13 @@ public class CadLocacaoHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jbCadastrarMouseClicked
 
     private void jbControleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbControleMouseClicked
-        if (jbControle.isEnabled()) {
-            String idLocacao = "vazio no momento";
-            new ControleLocacao(user, idLocacao).setVisible(true);
-
+        if (jbControle.isEnabled()) {            
+            Sessao.getInstance().setInstanciaAberta(7);
+            ControleLocacao controleLocacao = ControleLocacao.getInstancia();
+            controleLocacao.setLocationRelativeTo(this);
+            controleLocacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            controleLocacao.setVisible(true);
+            dispose();
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jbControleMouseClicked
