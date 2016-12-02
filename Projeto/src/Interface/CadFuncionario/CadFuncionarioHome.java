@@ -11,9 +11,12 @@ import dao.FuncionarioDAO;
 import dao.PessoaDAO;
 import dao.PessoaFisicaDAO;
 import java.awt.Color;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import model.TableModel.FuncionarioTableModel;
 import model.TableModel.PessoaFisicaTableModel;
 import model.TableModel.PessoaTableModel;
@@ -40,6 +43,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         popularTabela();
         acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+        mascaraCPF();
     }
 
     public static CadFuncionarioHome getInstancia() {
@@ -83,25 +87,54 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
 
     public void popularTabelaQuery() {
         if (!jtNomeFuncionario.getText().isEmpty()) {
-            PessoaDAO pessoaDAO = new PessoaDAO();
-            List<Pessoa> pessoas = new ArrayList<Pessoa>();
-            pessoas = pessoaDAO.getQuery("WHERE nomePessoa LIKE '%" + jtNomeFuncionario.getText() + "%'");
-            jtFuncionarios.setModel(new PessoaTableModel(pessoas));
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+            List<Funcionario> funcionariosAtivos = funcionarioDAO.getAtivos();
+            List<Funcionario> funcionarios = new ArrayList<>();
+            for (int i = 0; i < funcionariosAtivos.size(); i++) {
+                if (funcionariosAtivos.get(i).getNomePessoa().toUpperCase().indexOf(jtNomeFuncionario.getText().toUpperCase()) >= 0) {
+                    funcionarios.add(funcionariosAtivos.get(i));
+                }
+            }
+            if (funcionarios != null) {
+                jtFuncionarios.setModel(new FuncionarioTableModel(funcionarios));
+            }
         } else if (!jtCargo.getText().isEmpty()) {
-            PessoaDAO pessoaDAO = new PessoaDAO();
-            List<Pessoa> pessoas = new ArrayList<Pessoa>();
-            pessoas = pessoaDAO.getPorTelefone(jtCargo.getText());
-            jtFuncionarios.setModel(new PessoaTableModel(pessoas));
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+            List<Funcionario> funcionariosAtivos = funcionarioDAO.getAtivos();
+            List<Funcionario> funcionarios = new ArrayList<>();
+            for (int i = 0; i < funcionariosAtivos.size(); i++) {
+                if (funcionariosAtivos.get(i).getCargo().getNomeCargo().toUpperCase().indexOf(jtCargo.getText().toUpperCase()) >= 0) {
+                    funcionarios.add(funcionariosAtivos.get(i));
+                }
+            }
+            if (funcionarios != null) {
+                jtFuncionarios.setModel(new FuncionarioTableModel(funcionarios));
+            }
+
         } else if (jftCPF.getText().trim().length() == 14) {
-            PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-            List<PessoaFisica> pessoasFisicas = new ArrayList<PessoaFisica>();
-            pessoasFisicas = pessoaFisicaDAO.getPorCPF(jftCPF.getText());
-            jtFuncionarios.setModel(new PessoaFisicaTableModel(pessoasFisicas));
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+            List<Funcionario> funcionariosAtivos = funcionarioDAO.getAtivos();
+            List<Funcionario> funcionarios = new ArrayList<>();
+            for (int i = 0; i < funcionariosAtivos.size(); i++) {
+                if (funcionariosAtivos.get(i).getCPF().equalsIgnoreCase(jftCPF.getText())) {
+                    funcionarios.add(funcionariosAtivos.get(i));
+                }
+            }
+            if (funcionarios != null) {
+                jtFuncionarios.setModel(new FuncionarioTableModel(funcionarios));
+            }
         } else if (jtDepartamento.getText().isEmpty()) {
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-            List<Funcionario> funcionarios = new ArrayList<Funcionario>();
-            funcionarios = funcionarioDAO.getAll();
-            jtFuncionarios.setModel(new FuncionarioTableModel(funcionarios));
+            List<Funcionario> funcionariosAtivos = funcionarioDAO.getAtivos();
+            List<Funcionario> funcionarios = new ArrayList<>();
+            for (int i = 0; i < funcionariosAtivos.size(); i++) {
+                if (funcionariosAtivos.get(i).getCargo().getDepartamento().getNomeDepartamento().toUpperCase().indexOf(jtDepartamento.getText().toUpperCase()) >= 0) {
+                    funcionarios.add(funcionariosAtivos.get(i));
+                }
+            }
+            if (funcionarios != null) {
+                jtFuncionarios.setModel(new FuncionarioTableModel(funcionarios));
+            }
         }
     }
 
@@ -115,6 +148,15 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
         jtNomeFuncionario.setEnabled(b);
         jtCargo.setEnabled(b);
         jtDepartamento.setEnabled(b);
+    }
+    
+    public void mascaraCPF() {
+        try {      
+                jftCPF.setFormatterFactory(new DefaultFormatterFactory(
+                        new MaskFormatter("###.###.###-##")));          
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -269,6 +311,7 @@ public class CadFuncionarioHome extends javax.swing.JFrame {
     private void jbPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPesquisarMouseClicked
         if (jbPesquisar.isEnabled()) {
             popularTabelaQuery();
+            jftCPF.setText("");
         }
     }//GEN-LAST:event_jbPesquisarMouseClicked
 
