@@ -46,7 +46,7 @@ import model.pessoa.Telefone;
  *
  * @author Rafael Brock
  */
-public class Teste {
+public class UsuarioSistema {
 
     /**
      * @param args the command line arguments
@@ -193,10 +193,10 @@ public class Teste {
 //        //Teste Funcionario
         System.out.println("===========================================FUNCIONÁRIO===================================================");
         Endereco enderecofuncionario = new Endereco();
-        enderecofuncionario.setNomeEndereco("Endereço Funcionario");
-        enderecofuncionario.setNumero(4);
-        enderecofuncionario.setCep("4");
-        enderecofuncionario.setBairro("Golfinho");
+        enderecofuncionario.setNomeEndereco("Adminstrador");
+        enderecofuncionario.setNumero(0);
+        enderecofuncionario.setCep("00.000-00");
+        enderecofuncionario.setBairro("Adminstrador");
 
         CidadeDAO cidadeFuncionarioDAO = new CidadeDAO();
         Cidade cidadeFuncionario = cidadeFuncionarioDAO.getById(Long.parseLong("8797"));
@@ -206,24 +206,24 @@ public class Teste {
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         Funcionario funcionario = new Funcionario();
         funcionario.setAtivo(true);
-        funcionario.setNomePessoa("Nome Funcionario");
-        funcionario.setEmail("email@");
-        funcionario.setObservacoes("xxxxx");
+        funcionario.setNomePessoa("Administrador");
+        funcionario.setEmail("adm@adm");
+        funcionario.setObservacoes("Esse é o usuário default do sistema");
         funcionario.setDataNascimento(data);
         funcionario.setEndereco(enderecofuncionario);
-        funcionario.setCPF("CPF");
-        funcionario.setRG("RG");
+        funcionario.setCPF("111.111.111-11");
+        funcionario.setRG("0");
         funcionario.setSexo('M');
         funcionario.setSalario(100.00);
-        funcionario.setBanco("Santander");
-        funcionario.setTipoConta("Normal");
-        funcionario.setConta("64545");
-        funcionario.setAgencia("515");
-        funcionario.setCtps("ctps");
-        funcionario.setSerieCtps("serie");
+        funcionario.setBanco(" ");
+        funcionario.setTipoConta(" ");
+        funcionario.setConta(" ");
+        funcionario.setAgencia(" ");
+        funcionario.setCtps(" ");
+        funcionario.setSerieCtps(" ");
         funcionario.setDataAdmissao(data);
-        funcionario.setCargaHoraria("20");
-        funcionario.setEscolaridade("Ensino Médio Completo");
+        funcionario.setCargaHoraria(" ");
+        funcionario.setEscolaridade(" ");
         funcionario.setDependentes(0);
 //        funcionario.setPIS(0);  
 

@@ -295,7 +295,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         MD5 md5 = new MD5();
 
         Login login = new Login();
-        login.setNivelAcesso(0);
+        login.setNivelAcesso(3);
         login.setNomeUsuario(loginNovo.geraNovoUsuario(funcionario.getNomePessoa()));
         String senha = loginNovo.gerarNovaSenha();
 
@@ -303,7 +303,7 @@ public class cadastroFuncionario extends javax.swing.JFrame {
         funcionario.setLogin(login);
 
         funcionarioDAO.persist(funcionario);
-        JOptionPane.showMessageDialog(this, "Senha gerada com sucesso!\nUsuário: " + funcionario.getNomePessoa() + "\nSenha: " + senha);
+        JOptionPane.showMessageDialog(this, "Login Criado com Sucesso!\nUsuário: " + funcionario.getLogin().getNomeUsuario() + "\nSenha: " + senha);
     }
 
     public void cadastrarFuncionario(Funcionario funcionario) throws ParseException {

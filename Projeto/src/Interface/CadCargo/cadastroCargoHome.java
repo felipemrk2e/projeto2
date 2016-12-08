@@ -296,8 +296,8 @@ public class cadastroCargoHome extends javax.swing.JFrame {
             //cadastroCargo.getInstancia().DisableEnable(false);
             
             if(Sessao.getInstance().getUsuario().getNivelAcesso() <=2){
-                cadastroCargo.getInstancia().jbCadastrarDepartamento.setEnabled(true);
-                cadastroCargo.getInstancia().jbCadastrarDepartamento.setText("Editar");
+                cadastroCargo.getInstancia().jbCadastrarDepartamento.setEnabled(false);
+                cadastroCargo.getInstancia().jbCadastrarDepartamento1.setEnabled(true);
                 cadastroCargo.getInstancia().jbCadastrarCargo.setEnabled(false);
                 cadastroCargo.getInstancia().jbEditar.setEnabled(true);
             }
@@ -328,11 +328,12 @@ public class cadastroCargoHome extends javax.swing.JFrame {
             cadastroCargo.getInstancia().setVisible(true);
            // cadastroCargo.getInstancia().DisableEnable(false);
             if(Sessao.getInstance().getUsuario().getNivelAcesso() <=2){
-                cadastroCargo.getInstancia().jbCadastrarDepartamento.setEnabled(true);
-                cadastroCargo.getInstancia().jbCadastrarDepartamento.setText("Editar");
+                cadastroCargo.getInstancia().jbCadastrarDepartamento.setEnabled(false);
+                cadastroCargo.getInstancia().jbCadastrarDepartamento1.setEnabled(true);
+             
             }
             else{
-             cadastroCargo.getInstancia().jbCadastrarDepartamento.setEnabled(false);
+             cadastroCargo.getInstancia().jbCadastrarDepartamento1.setEnabled(false);
         }
             cadastroCargo.getInstancia().jbEditar.setEnabled(false);
             cadastroCargo.getInstancia().setLocationRelativeTo(this);

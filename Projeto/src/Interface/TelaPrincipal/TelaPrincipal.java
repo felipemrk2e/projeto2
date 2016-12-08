@@ -74,14 +74,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
 //       
         jSeparator2.setSize(xSize - 300, ySize);
         jSeparator2.setLocation(180, 0);
-        jlLogoff.setLocation(xSize - 100, 30);
+        jlUsuario.setLocation(xSize - 100, 20);
+        jlUsuario.repaint();
+
+        jlLogoff.setLocation(xSize - 100, 70);
         jlLogoff.repaint();
 
-        jlTroca.setLocation(xSize - 100, 80);
+        jlTroca.setLocation(xSize - 100, 120);
         jlTroca.repaint();
 
         jlSair.setLocation(xSize - 100, ySize - 100);
-        jlLogoff.repaint();
+        jlSair.repaint();
 
 //        jSeparator1.setSize(180, ySize);
         jScrollPane1.setSize(180, ySize - 80);
@@ -136,6 +139,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jlTroca.setEnabled(ativo);
         jlLogoff.setEnabled(ativo);
+        jlUsuario.setEnabled(ativo);
     }
 
     public void acesso() {
@@ -174,6 +178,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             jlTroca.setEnabled(true);
             jlLogoff.setEnabled(true);
+            jlUsuario.setEnabled(true);
         } else if (nivelAcesso == 3) {
             ocultaFuncoes(false);
             System.out.println("Reduzido");
@@ -194,8 +199,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             jlTroca.setEnabled(true);
             jlLogoff.setEnabled(true);
+            jlUsuario.setEnabled(true);
         } else {
-            JOptionPane.showMessageDialog(null, "Nível de acesso não encontrado");
+            JOptionPane.showMessageDialog(this, "Nível de acesso não encontrado");
             ocultaFuncoes(false);
         }
     }
@@ -294,13 +300,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             telaLogin.setLocationRelativeTo(jSeparator2);
             telaLogin.setVisible(true);
             if (telaLogin.verificaLogin()) {
-                JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
+                jlUsuario.setText("<html><div style='padding-left: 7px;'>" + Sessao.getInstance().getUsuario().getNomeUsuario() + "</div></html>");
+                JOptionPane.showMessageDialog(this, "Login efetuado com sucesso!");
                 setLogado(true);
                 jlLogoff.setEnabled(true);
                 jlTroca.setEnabled(true);
+                jlUsuario.setEnabled(true);
                 acesso();
             } else {
-                JOptionPane.showMessageDialog(null, "Acesso negado!\nUsuário ou Senha Incorretos");
+                JOptionPane.showMessageDialog(this, "Acesso negado!\nUsuário ou Senha Incorretos");
                 telaLogin.limpaCampos();
                 while (!telaLogin.verificaLogin() && tentativas < 5) {
                     telaLogin.setLocationRelativeTo(jSeparator2);
@@ -309,18 +317,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
                     if (!telaLogin.verificaLogin() && tentativas < 5) {
                         telaLogin.limpaCampos();
-                        JOptionPane.showMessageDialog(null, "Acesso negado!\nUsuário ou Senha Incorretos");
-                        JOptionPane.showMessageDialog(null, "Você possui mais " + (5 - tentativas) + " tentativas!");
+                        JOptionPane.showMessageDialog(this, "Acesso negado!\nUsuário ou Senha Incorretos");
+                        JOptionPane.showMessageDialog(this, "Você possui mais " + (5 - tentativas) + " tentativas!");
                     }
                     if (tentativas == 5) {
                         telaLogin.limpaCampos();
-                        JOptionPane.showMessageDialog(null, "Sistema Bloquado!");
+                        JOptionPane.showMessageDialog(this, "Sistema Bloquado!");
                     }
                     if (telaLogin.verificaLogin()) {
-                        JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
+                        JOptionPane.showMessageDialog(this, "Login efetuado com sucesso!");
                         setLogado(true);
                         jlLogoff.setEnabled(true);
                         jlTroca.setEnabled(true);
+                        jlUsuario.setEnabled(true);
                         acesso();
                     }
                 }
@@ -334,6 +343,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaLogin.setAlwaysOnTop(true);
         telaLogin.setVisible(true);
         if (telaLogin.verificaLogin()) {
+            jlUsuario.setText("<html><div style='padding-left: 7px;'>" + Sessao.getInstance().getUsuario().getNomeUsuario() + "</div></html>");
             JOptionPane.showMessageDialog(telaLogin, "Login efetuado com sucesso!");
             setLogado(true);
             acesso();
@@ -506,7 +516,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 //                }
 //                break;
             default:
-                JOptionPane.showMessageDialog(null, "Acesso negado!\nNível de Acesso Inválido");
+                JOptionPane.showMessageDialog(this, "Acesso negado!\nNível de Acesso Inválido");
         }
     }
 
@@ -673,6 +683,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jlSair = new javax.swing.JLabel();
         jlLogoff = new javax.swing.JLabel();
         jlTroca = new javax.swing.JLabel();
+        jlUsuario = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jbCadastrarCliente = new javax.swing.JButton();
@@ -729,14 +740,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jlLogoff.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlLogoff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logoff.png"))); // NOI18N
-        jlLogoff.setText("<html><center><br/>Logout</html>");
+        jlLogoff.setText("<html><div style=\"padding-left: 7px;\">Logout</div></html>");
         jlLogoff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jlLogoffMousePressed(evt);
             }
         });
         getContentPane().add(jlLogoff);
-        jlLogoff.setBounds(920, 0, 120, 40);
+        jlLogoff.setBounds(910, 50, 100, 40);
 
         jlTroca.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlTroca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/kabinet.png"))); // NOI18N
@@ -747,7 +758,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jlTroca);
-        jlTroca.setBounds(920, 50, 100, 40);
+        jlTroca.setBounds(910, 100, 100, 40);
+
+        jlUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/clientes.png"))); // NOI18N
+        getContentPane().add(jlUsuario);
+        jlUsuario.setBounds(910, 10, 100, 40);
 
         jbCadastrarCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jbCadastrarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/usuarioadd.png"))); // NOI18N
@@ -1096,10 +1112,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jlLogoffMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlLogoffMousePressed
         if (!isLogado()) {
             jlLogoff.setEnabled(false);
+            jlUsuario.setEnabled(false);
         } else {
-            JOptionPane.showMessageDialog(null, "Logoff efetuado com sucesso!");
-            ocultaFuncoes(false);
             finalizarInstancias();
+            JOptionPane.showMessageDialog(this, "Logoff efetuado com sucesso!");
+            jlUsuario.setText("");
+            ocultaFuncoes(false);
             setLogado(false);
             try {
                 Login();
@@ -1218,74 +1236,102 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jlTrocaMousePressed
 
     private void jmiCadastrarClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarClienteMousePressed
-        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
-        cadastroCliente cliente = cadastroCliente.getInstancia();
-        cliente.setLocationRelativeTo(jSeparator2);
-        cliente.setVisible(true);
+        if (jmiCadastrarCliente.isEnabled()) {
+            finalizarInstancias();
+            Sessao.getInstance().setInstanciaAberta(1);
+            cadastroCliente cliente = cadastroCliente.getInstancia();
+            cliente.setLocationRelativeTo(jSeparator2);
+            cliente.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            cliente.setVisible(true);
+        }
     }//GEN-LAST:event_jmiCadastrarClienteMousePressed
 
-    private void jmiCadastrarImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarImovelMousePressed
-        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
-        cadastroImovel imovel = cadastroImovel.getInstancia();
-        imovel.setLocationRelativeTo(jSeparator2);
-        imovel.setVisible(true);
-    }//GEN-LAST:event_jmiCadastrarImovelMousePressed
-
     private void jmiCadastrarFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarFuncionarioMousePressed
-        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
-        cadastroFuncionario funcionario = cadastroFuncionario.getInstancia();
-        funcionario.setLocationRelativeTo(jSeparator2);
-        funcionario.setVisible(true);
+         if (jmiCadastrarFuncionario.isEnabled()) {
+            finalizarInstancias();
+            Sessao.getInstance().setInstanciaAberta(9);
+            cadastroFuncionario funcionario = cadastroFuncionario.getInstancia();
+            funcionario.setLocationRelativeTo(jSeparator2);
+            funcionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            funcionario.setVisible(true);
+        }
     }//GEN-LAST:event_jmiCadastrarFuncionarioMousePressed
 
     private void jmiConsultarClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarClienteMousePressed
-        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
-        cadastroClienteHome clienteHome = cadastroClienteHome.getInstancia();
-        clienteHome.setLocationRelativeTo(jSeparator2);
-        clienteHome.setVisible(true);
+        if (jmiConsultarCliente.isEnabled()) {
+            finalizarInstancias();
+            Sessao.getInstance().setInstanciaAberta(3);
+            cadastroClienteHome clienteHome = cadastroClienteHome.getInstancia();
+            clienteHome.setLocationRelativeTo(jSeparator2);
+            clienteHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            clienteHome.setVisible(true);
+        }
     }//GEN-LAST:event_jmiConsultarClienteMousePressed
 
     private void jmiConsultarImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarImovelMousePressed
-        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
-        cadastroImovelHome imovelHome = cadastroImovelHome.getInstancia();
-        imovelHome.setLocationRelativeTo(jSeparator2);
-        imovelHome.setVisible(true);
+         if (jmiConsultarImovel.isEnabled()) {
+            finalizarInstancias();
+            Sessao.getInstance().setInstanciaAberta(5);
+            cadastroImovelHome imovelHome = cadastroImovelHome.getInstancia();
+            imovelHome.setLocationRelativeTo(jSeparator2);
+            imovelHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            imovelHome.setVisible(true);
+        }
     }//GEN-LAST:event_jmiConsultarImovelMousePressed
 
     private void jmiConsultarFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarFuncionarioMousePressed
-        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
-        CadFuncionarioHome cadFuncionarioHome = CadFuncionarioHome.getInstancia();
-        cadFuncionarioHome.setLocationRelativeTo(jSeparator2);
-        cadFuncionarioHome.setVisible(true);
+        if (jmiConsultarFuncionario.isEnabled()) {
+            finalizarInstancias();
+            Sessao.getInstance().setInstanciaAberta(11);
+            CadFuncionarioHome cadFuncionarioHome = CadFuncionarioHome.getInstancia();
+            cadFuncionarioHome.setLocationRelativeTo(jSeparator2);
+            cadFuncionarioHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            cadFuncionarioHome.setVisible(true);
+        }
     }//GEN-LAST:event_jmiConsultarFuncionarioMousePressed
 
     private void jmiControleFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiControleFuncionarioMousePressed
-        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
-        ControleFuncionario controleFuncionario = ControleFuncionario.getInstancia();
-        controleFuncionario.setLocationRelativeTo(jSeparator2);
-        controleFuncionario.setVisible(true);
+        if (jmiControleFuncionario.isEnabled()) {
+            finalizarInstancias();
+            Sessao.getInstance().setInstanciaAberta(10);
+            ControleFuncionario controleFuncionario = ControleFuncionario.getInstancia();
+            controleFuncionario.setLocationRelativeTo(jSeparator2);
+            controleFuncionario.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            controleFuncionario.setVisible(true);
+        }
     }//GEN-LAST:event_jmiControleFuncionarioMousePressed
 
     private void jmiCadastrarLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarLocacaoMousePressed
-        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
-        CadLocacao locacao = CadLocacao.getInstancia();
-        locacao.setLocationRelativeTo(jSeparator2);
-        locacao.setVisible(true);
+        if (jmiCadastrarLocacao.isEnabled()) {
+            finalizarInstancias();
+            Sessao.getInstance().setInstanciaAberta(6);
+            CadLocacao locacao = CadLocacao.getInstancia();
+            locacao.setLocationRelativeTo(jSeparator2);
+            locacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            locacao.setVisible(true);
+        }
     }//GEN-LAST:event_jmiCadastrarLocacaoMousePressed
 
     private void jmiConsultarLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiConsultarLocacaoMousePressed
-        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
-        CadLocacaoHome cadLocacaoHome = CadLocacaoHome.getInstancia();
-        cadLocacaoHome.setLocationRelativeTo(jSeparator2);
-        cadLocacaoHome.setVisible(true);
+        if (jmiConsultarLocacao.isEnabled()) {
+            finalizarInstancias();
+            Sessao.getInstance().setInstanciaAberta(8);
+            CadLocacaoHome cadLocacaoHome = CadLocacaoHome.getInstancia();
+            cadLocacaoHome.setLocationRelativeTo(jSeparator2);
+            cadLocacaoHome.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            cadLocacaoHome.setVisible(true);
+        }
     }//GEN-LAST:event_jmiConsultarLocacaoMousePressed
 
     private void jmiControleLocacaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiControleLocacaoMousePressed
-        finalizaInstanciasNivel(Sessao.getInstance().getUsuario().getNivelAcesso());
-        ControleLocacao controleLocacao = ControleLocacao.getInstancia();
-        controleLocacao.setLocationRelativeTo(jSeparator2);
-        controleLocacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
-        controleLocacao.setVisible(true);
+        if (jmiControleLocacao.isEnabled()) {
+            finalizarInstancias();
+            Sessao.getInstance().setInstanciaAberta(7);
+            ControleLocacao controleLocacao = ControleLocacao.getInstancia();
+            controleLocacao.setLocationRelativeTo(jSeparator2);
+            controleLocacao.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            controleLocacao.setVisible(true);
+        }
     }//GEN-LAST:event_jmiControleLocacaoMousePressed
 
     private void jbConsultarFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultarFuncionarioMousePressed
@@ -1300,7 +1346,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbConsultarFuncionarioMousePressed
 
     private void jmiTrocarUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiTrocarUsuarioMousePressed
-        try {
+       try {
             trocarUsuario();
         } catch (Exception ex) {
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -1361,10 +1407,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jmiLogoffMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiLogoffMousePressed
         if (!isLogado()) {
             jlLogoff.setEnabled(false);
+            jlUsuario.setEnabled(false);
         } else {
-            JOptionPane.showMessageDialog(null, "Logoff efetuado com sucesso!");
-            ocultaFuncoes(false);
             finalizarInstancias();
+            JOptionPane.showMessageDialog(this, "Logoff efetuado com sucesso!");
+            jlUsuario.setText("");
+            ocultaFuncoes(false);
             setLogado(false);
             try {
                 Login();
@@ -1384,6 +1432,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
             relaotioHome.setVisible(true);
         }
     }//GEN-LAST:event_jbRelatoriosMouseClicked
+
+    private void jmiCadastrarImovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiCadastrarImovelMousePressed
+        if (jmiCadastrarImovel.isEnabled()) {
+            finalizarInstancias();
+            Sessao.getInstance().setInstanciaAberta(4);
+            cadastroImovel imovel = cadastroImovel.getInstancia();
+            imovel.setLocationRelativeTo(jSeparator2);
+            imovel.getInstancia().acesso(Sessao.getInstance().getUsuario().getNivelAcesso());
+            imovel.setVisible(true);
+        }
+    }//GEN-LAST:event_jmiCadastrarImovelMousePressed
 
     /**
      * @param args the command line arguments
@@ -1452,6 +1511,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jlLogoff;
     private javax.swing.JLabel jlSair;
     private javax.swing.JLabel jlTroca;
+    public static javax.swing.JLabel jlUsuario;
     private javax.swing.JMenuBar jmBarraMenu;
     private javax.swing.JMenu jmCadastrar;
     private javax.swing.JMenu jmConsultar;

@@ -115,6 +115,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfNovoFiador.setEnabled(b);
         jtfNomeFantasia.setEnabled(b);
         jtfNomeResponsavel.setEnabled(b);
+        jftCPFResponsavel.setEnabled(b);
         jtfEndereco.setEnabled(b);
         jtfNumero.setEnabled(b);
         jtfBairro.setEnabled(b);
@@ -774,9 +775,9 @@ public class cadastroCliente extends javax.swing.JFrame {
         jtfNumero = new javax.swing.JTextField();
         jlCEP = new javax.swing.JLabel();
         jftCEP = new javax.swing.JFormattedTextField();
-        jcbFiador = new javax.swing.JComboBox<>();
+        jcbFiador = new javax.swing.JComboBox<String>();
         jcbEstado = new javax.swing.JComboBox();
-        jcbCidade = new javax.swing.JComboBox<>();
+        jcbCidade = new javax.swing.JComboBox<String>();
         jtfComplemento = new javax.swing.JTextField();
         jftTelefone = new javax.swing.JFormattedTextField();
         jftCelular = new javax.swing.JFormattedTextField();
@@ -982,7 +983,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         getContentPane().add(jlCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 150, 30));
         getContentPane().add(jftCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 110, 30));
 
-        jcbFiador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbFiador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbFiador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbFiadorActionPerformed(evt);
@@ -999,7 +1000,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         });
         getContentPane().add(jcbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 320, 70, 30));
 
-        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 320, 230, 30));
         getContentPane().add(jtfComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 760, 30));
         getContentPane().add(jftTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, 180, 30));
@@ -1652,7 +1653,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     private javax.swing.JRadioButton jrbFeminino;
     private javax.swing.JRadioButton jrbMasculino;
     private javax.swing.JRadioButton jrbPessoaFisica;
-    private javax.swing.JRadioButton jrbPessoaJuridica;
+    public static javax.swing.JRadioButton jrbPessoaJuridica;
     private javax.swing.JScrollPane jspObs;
     private javax.swing.JTextArea jtaObs;
     private javax.swing.JTextField jtfBairro;

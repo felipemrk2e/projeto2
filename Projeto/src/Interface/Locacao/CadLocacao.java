@@ -5,6 +5,7 @@
  */
 package Interface.Locacao;
 
+import static Interface.Locacao.ControleLocacao.encerrarInstancia;
 import Interface.TelaPrincipal.Sessao;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -375,9 +376,15 @@ public class CadLocacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-
-        new CadLocacaoHome(user).setVisible(true);
-        dispose();
+        String ObjButtons[] = {"Sim", "Não"};
+        int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+        if (PromptResult == JOptionPane.YES_OPTION) {
+            Sessao.getInstance().setInstanciaAberta(8);
+            CadLocacaoHome.getInstancia().setVisible(true);
+            CadLocacaoHome.getInstancia().setLocationRelativeTo(this);
+            dispose();
+            encerrarInstancia();
+        }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarMouseClicked

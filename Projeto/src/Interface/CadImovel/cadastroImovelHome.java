@@ -140,6 +140,8 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         if (instancia == null) {
             instancia = new cadastroImovelHome();
         }
+        
+        
         return instancia;
     }
 
@@ -193,7 +195,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jcbSalao = new javax.swing.JCheckBox();
         jcbTemporario = new javax.swing.JCheckBox();
         jcbComercio = new javax.swing.JCheckBox();
-        jlFiltro = new javax.swing.JLabel();
+        jlAtivo = new javax.swing.JLabel();
         jbPesquisar = new javax.swing.JButton();
         jlNomeProprietario = new javax.swing.JLabel();
         jtNomeProprietario = new javax.swing.JTextField();
@@ -209,17 +211,16 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         jcbEstado = new javax.swing.JComboBox();
         jlCidade = new javax.swing.JLabel();
         jbCancelar = new javax.swing.JButton();
-        separador = new javax.swing.JSeparator();
-        jcbCidade = new javax.swing.JComboBox();
         jcbAtivo = new javax.swing.JCheckBox();
+        jcbCidade = new javax.swing.JComboBox();
         jcbInativo = new javax.swing.JCheckBox();
+        separador = new javax.swing.JSeparator();
+        jlFiltro = new javax.swing.JLabel();
         jbCancelar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
-        setMaximumSize(new java.awt.Dimension(1024, 640));
         setMinimumSize(new java.awt.Dimension(1024, 640));
-        setPreferredSize(new java.awt.Dimension(1024, 640));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -296,12 +297,12 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         getContentPane().add(jcbComercio);
         jcbComercio.setBounds(570, 350, 90, 30);
 
-        jlFiltro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jlFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlFiltro.setText("Filtros:");
-        jlFiltro.setMinimumSize(new java.awt.Dimension(35, 18));
-        getContentPane().add(jlFiltro);
-        jlFiltro.setBounds(130, 350, 50, 30);
+        jlAtivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlAtivo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlAtivo.setText("Atividade:");
+        jlAtivo.setMinimumSize(new java.awt.Dimension(35, 18));
+        getContentPane().add(jlAtivo);
+        jlAtivo.setBounds(110, 380, 70, 30);
 
         jbPesquisar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/review.png"))); // NOI18N
@@ -312,63 +313,63 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbPesquisar);
-        jbPesquisar.setBounds(860, 390, 140, 70);
+        jbPesquisar.setBounds(860, 410, 140, 70);
 
         jlNomeProprietario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlNomeProprietario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlNomeProprietario.setText("Nome do Proprietário:");
         getContentPane().add(jlNomeProprietario);
-        jlNomeProprietario.setBounds(20, 390, 160, 30);
+        jlNomeProprietario.setBounds(20, 410, 160, 30);
 
         jtNomeProprietario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         getContentPane().add(jtNomeProprietario);
-        jtNomeProprietario.setBounds(190, 390, 660, 30);
+        jtNomeProprietario.setBounds(190, 410, 660, 30);
 
         jlBairro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlBairro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlBairro.setText("Bairro:");
         getContentPane().add(jlBairro);
-        jlBairro.setBounds(120, 470, 60, 30);
+        jlBairro.setBounds(120, 490, 60, 30);
 
         jtBairro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         getContentPane().add(jtBairro);
-        jtBairro.setBounds(190, 470, 250, 30);
+        jtBairro.setBounds(190, 490, 250, 30);
 
         jlEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlEstado.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlEstado.setText("Estado:");
         getContentPane().add(jlEstado);
-        jlEstado.setBounds(710, 470, 60, 30);
+        jlEstado.setBounds(710, 490, 60, 30);
 
         jtRua.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         getContentPane().add(jtRua);
-        jtRua.setBounds(190, 430, 660, 30);
+        jtRua.setBounds(190, 450, 660, 30);
 
         jtQtdQuarto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         getContentPane().add(jtQtdQuarto);
-        jtQtdQuarto.setBounds(190, 510, 80, 30);
+        jtQtdQuarto.setBounds(190, 530, 80, 30);
 
         jtVagasGaragem.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         getContentPane().add(jtVagasGaragem);
-        jtVagasGaragem.setBounds(430, 510, 80, 30);
+        jtVagasGaragem.setBounds(430, 530, 80, 30);
 
         jlRua.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlRua.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlRua.setText("Rua:");
         getContentPane().add(jlRua);
-        jlRua.setBounds(120, 430, 60, 30);
+        jlRua.setBounds(120, 450, 60, 30);
 
         jlQuantidadeQuartos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlQuantidadeQuartos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlQuantidadeQuartos.setText("Quantidade de Quartos:");
         getContentPane().add(jlQuantidadeQuartos);
-        jlQuantidadeQuartos.setBounds(20, 510, 160, 30);
+        jlQuantidadeQuartos.setBounds(20, 530, 160, 30);
 
         jlVagasGaragem.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlVagasGaragem.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlVagasGaragem.setText("Vagas de Garagem:");
         getContentPane().add(jlVagasGaragem);
-        jlVagasGaragem.setBounds(280, 510, 140, 30);
+        jlVagasGaragem.setBounds(280, 530, 140, 30);
 
         jcbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -378,34 +379,26 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jcbEstado);
-        jcbEstado.setBounds(780, 470, 66, 30);
+        jcbEstado.setBounds(780, 490, 66, 30);
 
         jlCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jlCidade.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlCidade.setText("Cidade:");
         getContentPane().add(jlCidade);
-        jlCidade.setBounds(460, 470, 60, 30);
+        jlCidade.setBounds(450, 490, 60, 30);
 
         jbCancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
-        jbCancelar.setText("Cancelar");
+        jbCancelar.setText("<html><center>Cancelar<br/>Pesquisa</html>");
         jbCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbCancelarMouseClicked(evt);
             }
         });
         getContentPane().add(jbCancelar);
-        jbCancelar.setBounds(860, 470, 140, 70);
+        jbCancelar.setBounds(860, 490, 140, 70);
 
-        separador.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa de Imóvel", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
-        getContentPane().add(separador);
-        separador.setBounds(10, 330, 1010, 250);
-
-        jcbCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jcbCidade);
-        jcbCidade.setBounds(520, 470, 190, 30);
-
+        jcbAtivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbAtivo.setText("Ativo");
         jcbAtivo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -413,16 +406,38 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jcbAtivo);
-        jcbAtivo.setBounds(680, 350, 80, 30);
+        jcbAtivo.setBounds(190, 380, 70, 30);
 
+        jcbCidade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbCidade);
+        jcbCidade.setBounds(520, 490, 190, 30);
+
+        jcbInativo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jcbInativo.setText("Inativo");
         jcbInativo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jcbInativoMouseClicked(evt);
             }
         });
+        jcbInativo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbInativoActionPerformed(evt);
+            }
+        });
         getContentPane().add(jcbInativo);
-        jcbInativo.setBounds(780, 350, 80, 30);
+        jcbInativo.setBounds(260, 380, 80, 30);
+
+        separador.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisa de Imóvel", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        getContentPane().add(separador);
+        separador.setBounds(10, 330, 1010, 240);
+
+        jlFiltro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlFiltro.setText("Filtros:");
+        jlFiltro.setMinimumSize(new java.awt.Dimension(35, 18));
+        getContentPane().add(jlFiltro);
+        jlFiltro.setBounds(130, 350, 50, 30);
 
         jbCancelar1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbCancelar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Cancel.png"))); // NOI18N
@@ -441,6 +456,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private void jbCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarMouseClicked
         if (jbCadastrar.isEnabled()) {
             new cadastroImovel(user).setVisible(true);     // TODO add your handling code here:
+            cadastroImovelHome.getInstancia().encerrarInstancia();
             dispose();
         }
 
@@ -472,6 +488,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         if (jtImovel.getSelectedRow() != -1) {
 
             new cadastroImovel(String.valueOf(imovelGlobal.get(jtImovel.getSelectedRow()).getIdImovel())).setVisible(true);
+            cadastroImovelHome.getInstancia().encerrarInstancia();
             dispose();
         }
 
@@ -494,30 +511,30 @@ public class cadastroImovelHome extends javax.swing.JFrame {
         if (jcbCasa.isSelected()) {
             ids.add(Long.valueOf("1"));
             controlTipo = true;
-            jlFiltro.setForeground(Color.black);
+            jlAtivo.setForeground(Color.black);
         }
 
         if (jcbApartamento.isSelected()) {
             ids.add(Long.valueOf("2"));
             controlTipo = true;
-            jlFiltro.setForeground(Color.black);
+            jlAtivo.setForeground(Color.black);
         }
 
         if (jcbSalao.isSelected()) {
             ids.add(Long.valueOf("3"));
             controlTipo = true;
-            jlFiltro.setForeground(Color.black);
+            jlAtivo.setForeground(Color.black);
         }
 
         if (jcbComercio.isSelected()) {
             ids.add(Long.valueOf("4"));
             controlTipo = true;
-            jlFiltro.setForeground(Color.black);
+            jlAtivo.setForeground(Color.black);
         }
         if (jcbTemporario.isSelected()) {
             ids.add(Long.valueOf("5"));
             controlTipo = true;
-            jlFiltro.setForeground(Color.black);
+            jlAtivo.setForeground(Color.black);
         }
 
         if (jtNomeProprietario.getText().equals("")) {
@@ -581,7 +598,9 @@ public class cadastroImovelHome extends javax.swing.JFrame {
             //   ImovelDAO dao = new ImovelDAO();
             imovel = dao.searchImovel(ids, Rua, Bairro, idcidade, qtdQuartos, garagem, ativo);
             imovelGlobal = imovel;
+            jlFiltro.setForeground(Color.black);
             jtImovel.setModel(new ImovelTableModel2(imovel));
+            
         } else {
             if (!controlTipo) {
                 jlFiltro.setForeground(Color.red);
@@ -641,8 +660,17 @@ public class cadastroImovelHome extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_jcbInativoMouseClicked
 
+    private void jcbInativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbInativoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbInativoActionPerformed
+
     private void jbCancelar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelar1MouseClicked
-      dispose();  // TODO add your handling code here:
+      String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {
+                dispose();
+              
+            } // TODO add your handling code here:   // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelar1MouseClicked
 
     /**
@@ -697,6 +725,7 @@ public class cadastroImovelHome extends javax.swing.JFrame {
     private javax.swing.JCheckBox jcbInativo;
     private javax.swing.JCheckBox jcbSalao;
     private javax.swing.JCheckBox jcbTemporario;
+    private javax.swing.JLabel jlAtivo;
     private javax.swing.JLabel jlBairro;
     private javax.swing.JLabel jlCidade;
     private javax.swing.JLabel jlEstado;

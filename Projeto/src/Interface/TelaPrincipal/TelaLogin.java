@@ -7,10 +7,14 @@ package Interface.TelaPrincipal;
 
 import dao.LoginDAO;
 import global.model.MD5;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.pessoa.Login;
 
 /**
@@ -25,6 +29,7 @@ public class TelaLogin extends javax.swing.JDialog {
     public TelaLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fecharLogin();
 
     }
 
@@ -40,6 +45,16 @@ public class TelaLogin extends javax.swing.JDialog {
 
     public static void encerrarInstancia() {
         instancia = null;
+    }
+
+    public void fecharLogin() {
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                System.exit(0);
+            }
+        });
+
     }
 
     public String getUsuario() {
@@ -99,6 +114,11 @@ public class TelaLogin extends javax.swing.JDialog {
         getContentPane().add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 190, 40));
 
         jpfSenha.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jpfSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jpfSenhaKeyPressed(evt);
+            }
+        });
         getContentPane().add(jpfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 190, 40));
 
         jbAcessar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -107,6 +127,11 @@ public class TelaLogin extends javax.swing.JDialog {
         jbAcessar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jbAcessarMousePressed(evt);
+            }
+        });
+        jbAcessar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jbAcessarKeyPressed(evt);
             }
         });
         getContentPane().add(jbAcessar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, 140, 70));
@@ -142,6 +167,28 @@ public class TelaLogin extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jbAcessarMousePressed
 
+    private void jbAcessarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbAcessarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                verificaLogin();
+            } catch (Exception ex) {
+                Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.dispose();
+        }
+    }//GEN-LAST:event_jbAcessarKeyPressed
+
+    private void jpfSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpfSenhaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                verificaLogin();
+            } catch (Exception ex) {
+                Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.dispose();
+        }
+    }//GEN-LAST:event_jpfSenhaKeyPressed
+
     public boolean verificaLogin() throws Exception {
         MD5 md5 = new MD5();
         Sessao sessao = Sessao.getInstance();
@@ -152,7 +199,7 @@ public class TelaLogin extends javax.swing.JDialog {
         for (int i = 0; i < logins.size(); i++) {
             if (jtfUsuario.getText().equals(logins.get(i).getNomeUsuario()) && md5.gerarMD5(jpfSenha.getText()).equals(logins.get(i).getSenhaUsuario())) {
                 setUsuario(logins.get(i).getNomeUsuario());
-                sessao.setUsuario(logins.get(i));                
+                sessao.setUsuario(logins.get(i));
                 return true;
             }
         }

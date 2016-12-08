@@ -502,7 +502,14 @@ public class RelatorioHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jbSalvarRelatorioMouseClicked
 
     private void jbCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelarMouseClicked
-        // TODO add your handling code here:
+        if (jbCancelar.isEnabled()) {
+              String ObjButtons[] = {"Sim", "Não"};
+            int PromptResult = JOptionPane.showOptionDialog(this, "Esta certo que quer Fechar ?", "Verificação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[0]);
+            if (PromptResult == JOptionPane.YES_OPTION) {              
+                dispose();
+                encerrarInstancia();
+            }
+        }
     }//GEN-LAST:event_jbCancelarMouseClicked
 
     private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
